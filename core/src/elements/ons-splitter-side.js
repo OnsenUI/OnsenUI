@@ -140,7 +140,8 @@ class CollapseMode {
   }
 
   _onDragStart(event) {
-    this._ignoreDrag = event.consumed || !this._canConsumeGesture(event.gesture);
+    this._ignoreDrag = event.consumed || !(event.gesture && this._canConsumeGesture(event.gesture)
+      && (event.gesture.distance === 0 || event.gesture.deltaTime <= 100));
 
     if (!this._ignoreDrag) {
       event.consume && event.consume();

@@ -212,7 +212,8 @@ export default class SwipeReveal {
   onDragStart(event) {
     this._ignoreDrag = event.consumed;
 
-    if (event.gesture && !this._ignoreDrag) {
+    // distance and deltaTime filter some weird dragstart events that are not fired immediately
+    if (event.gesture && !this._ignoreDrag && (event.gesture.distance === 0 || event.gesture.deltaTime <= 100)) {
       const consume = event.consume;
       event.consume = () => { consume && consume(); this._ignoreDrag = true; };
       if (this._canConsumeGesture(event.gesture)) {

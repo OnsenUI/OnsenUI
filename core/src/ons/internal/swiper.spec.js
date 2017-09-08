@@ -218,6 +218,7 @@ describe('Swiper', () => {
       ev = new CustomEvent('drag');
       ev.gesture = {
         direction: 'left',
+        deltaTime: 50,
         deltaX: -10,
         velocityX: -10,
         preventDefault: () => {}
@@ -247,6 +248,7 @@ describe('Swiper', () => {
       ev = new CustomEvent('drag');
       ev.gesture = {
         direction: 'left',
+        deltaTime: 50,
         deltaX: 10,
         velocityX: 10,
         preventDefault: () => {}

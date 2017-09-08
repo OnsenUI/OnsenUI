@@ -107,6 +107,7 @@ describe('OnsSplitterSideElement', () => {
   describe('#handleGesture()', () => {
     const shouldIgnore = (gesture, value) => {
       gesture.center = gesture.center || {};
+      gesture.distance = 0;
       right._boundHandleGesture({type: 'dragstart', gesture});
       expect(!!right._collapseMode._ignoreDrag).to.equal(value);
     };
