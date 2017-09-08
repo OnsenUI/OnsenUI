@@ -23,6 +23,7 @@ dev
 
 ### Misc
 
+ * Updated type definitions.
  * `modifier` classes are restored when `class` attribute is modified.
 
 v2.5.3

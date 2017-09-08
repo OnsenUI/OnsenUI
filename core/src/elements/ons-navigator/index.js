@@ -406,9 +406,6 @@ export default class NavigatorElement extends BaseElement {
    * @param {String} [options.animationOptions]
    *   [en]Specify the animation's duration, delay and timing. E.g. `{duration: 0.2, delay: 0.4, timing: 'ease-in'}`.[/en]
    *   [ja]アニメーション時のduration, delay, timingを指定します。e.g. {duration: 0.2, delay: 0.4, timing: 'ease-in'}[/ja]
-   * @param {Boolean} [options.refresh]
-   *   [en]This option has been removed in Onsen UI 2.3.0. The previous page will be refreshed (destroyed and created again) before popPage action.[/en]
-   *   [ja]このオプションは Onsen UI 2.3.0 で削除されました。popPageする前に、前にあるページを生成しなおして更新する場合にtrueを指定します。[/ja]
    * @param {Function} [options.callback]
    *   [en]Function that is called when the transition has ended.[/en]
    *   [ja]このメソッドによる画面遷移が終了した際に呼び出される関数オブジェクトを指定します。[/ja]
@@ -968,14 +965,6 @@ export default class NavigatorElement extends BaseElement {
    *   [ja]このメソッドによる画面遷移が終了した際に呼び出される関数オブジェクトを指定します。[/ja]
    */
 
-  /**
-   * @property options.refresh
-   * @default  false
-   * @type {Boolean}
-   * @description
-   *   [en]This option has been removed in Onsen UI 2.3.0. If this parameter is `true`, the previous page will be refreshed (destroyed and created again) before `popPage()` action.[/en]
-   *   [ja]このオプションは Onsen UI 2.3.0 で削除されました。popPageする前に、前にあるページを生成しなおして更新する場合にtrueを指定します。[/ja]
-   */
   get options() {
     return this._options;
   }
