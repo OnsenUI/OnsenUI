@@ -195,13 +195,14 @@ export default class SwipeReveal {
   }
 
   _canConsumeGesture(gesture) {
-    const d = gesture.direction;
     const isFirst = this._scroll === 0 && !this.isOverScrollable();
     const isLast = this._scroll === this.maxScroll && !this.isOverScrollable();
 
-    return this.isVertical()
+    const validDrag = d => this.isVertical()
       ? ((d === 'down' && !isFirst) || (d === 'up' && !isLast))
       : ((d === 'right' && !isFirst) || (d === 'left' && !isLast));
+
+    return validDrag(gesture.direction) || validDrag(gesture.interimDirection);
   }
 
   onTouchMove(e) {
@@ -213,7 +214,7 @@ export default class SwipeReveal {
     this._ignoreDrag = event.consumed;
 
     // distance and deltaTime filter some weird dragstart events that are not fired immediately
-    if (event.gesture && !this._ignoreDrag && (event.gesture.distance === 0 || event.gesture.deltaTime <= 100)) {
+    if (event.gesture && !this._ignoreDrag && (event.gesture.distance <= 15 || event.gesture.deltaTime <= 100)) {
       const consume = event.consume;
       event.consume = () => { consume && consume(); this._ignoreDrag = true; };
       if (this._canConsumeGesture(event.gesture)) {
@@ -226,7 +227,7 @@ export default class SwipeReveal {
   }
 
   onDrag(event) {
-    if (!event.gesture || this._ignoreDrag || !this._canConsumeGesture(event.gesture) || !this._started) {
+    if (!event.gesture || this._ignoreDrag || !this._started) {
       return;
     }
 
