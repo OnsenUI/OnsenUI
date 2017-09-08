@@ -1,5 +1,10 @@
 <template>
-  <ons-tabbar :activeIndex="index" @postchange.self="$emit('update:index', $event.index)" v-on="unrecognizedListeners">
+  <ons-tabbar
+    :on-swipe.prop="onSwipe"
+    :activeIndex="index"
+    @postchange.self="$emit('update:index', $event.index)"
+    v-on="unrecognizedListeners"
+  >
     <div class="tabbar__content">
       <div>
         <slot name="pages">
@@ -32,6 +37,9 @@
         validator(value) {
           return value.every(tab => ['icon', 'label', 'page'].some(prop => !!Object.getOwnPropertyDescriptor(tab, prop)));
         }
+      },
+      onSwipe: {
+        type: Function
       }
     },
 
