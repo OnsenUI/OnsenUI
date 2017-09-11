@@ -56,6 +56,10 @@ declare namespace ons {
    */
   function disableAutoStatusBarFill(): void;
   /**
+   * @description Creates a static element similar to iOS status bar. Only useful for browser testing
+   */
+  function mockStatusBar(): void;
+  /**
    * @description Disable all animations. Could be handy for testing and older devices.
    */
   function disableAnimations(): void;

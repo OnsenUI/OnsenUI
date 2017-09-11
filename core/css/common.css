@@ -286,3 +286,15 @@ ons-carousel[disabled] {
 ons-carousel[fullscreen] {
   height: 100%;
 }
+
+.ons-status-bar-mock {
+  position: absolute;
+  width: 100%;
+  height: 20px;
+  z-index: 30000;
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  line-height: 20px;
+  font-family: Arial, Helvetica;
+}

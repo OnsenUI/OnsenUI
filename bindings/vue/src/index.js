@@ -50,6 +50,7 @@ const install = (Vue, params = {}) => {
       /^is/,
       /^disable/,
       /^enable/,
+      /^mock/,
       /^open/,
       /^set/,
       /animit/,

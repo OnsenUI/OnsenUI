@@ -160,7 +160,7 @@ ons.enableAutoStatusBarFill = () => {
   if (ons.isReady()) {
     throw new Error('This method must be called before ons.isReady() is true.');
   }
-  ons._internal.config.autoStatusBarFill = true;
+  internal.config.autoStatusBarFill = true;
 };
 
 /**
@@ -174,7 +174,30 @@ ons.disableAutoStatusBarFill = () => {
   if (ons.isReady()) {
     throw new Error('This method must be called before ons.isReady() is true.');
   }
-  ons._internal.config.autoStatusBarFill = false;
+  internal.config.autoStatusBarFill = false;
+};
+
+/**
+ * @method mockStatusBar
+ * @signature mockStatusBar()
+ * @description
+ *   [en]Creates a static element similar to iOS status bar. Only useful for browser testing.[/en]
+ *   [ja][/ja]
+ */
+ons.mockStatusBar = () => {
+  if (ons.isReady()) {
+    throw new Error('This method must be called before ons.isReady() is true.');
+  }
+
+  if (!document.body.children[0] || !document.body.children[0].classList.contains('ons-status-bar-mock')) {
+    document.body.insertBefore(util.createElement(`
+      <div class="ons-status-bar-mock">
+        <div style="padding-left: 5px">No SIM</div>
+        <div>12:28 PM</div>
+        <div style="padding-right: 15px">80%</div>
+      </div>
+    `), document.body.firstChild);
+  }
 };
 
 /**
@@ -185,7 +208,7 @@ ons.disableAutoStatusBarFill = () => {
  *   [ja]アニメーションを全て無効にします。テストの際に便利です。[/ja]
  */
 ons.disableAnimations = () => {
-  ons._internal.config.animationsDisabled = true;
+  internal.config.animationsDisabled = true;
 };
 
 /**
@@ -196,15 +219,15 @@ ons.disableAnimations = () => {
  *   [ja]アニメーションを有効にします。[/ja]
  */
 ons.enableAnimations = () => {
-  ons._internal.config.animationsDisabled = false;
+  internal.config.animationsDisabled = false;
 };
 
 ons._disableWarnings = () => {
-  ons._internal.config.warningsDisabled = true;
+  internal.config.warningsDisabled = true;
 };
 
 ons._enableWarnings = () => {
-  ons._internal.config.warningsDisabled = false;
+  internal.config.warningsDisabled = false;
 };
 
 /**
