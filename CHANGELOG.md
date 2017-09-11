@@ -9,17 +9,23 @@ dev
 
  * css-components: Reimplemented css-components previewer.
  * css-components: Changed color scheme to more iOS native-like.
+ * ons: Added `mockStatusBar` utility to create a fake iOS status bar for browser testing.
 
 ### Bug Fixes
 
+ * core: Device Back Button handler timing issue.
+ * templates: Fixed a bug where `script` tags might not be ready on time.
  * autoStyle: Fixed [#2171](https://github.com/OnsenUI/OnsenUI/issues/2171).
  * inputs: Accept `required` attr. Fixed [#2169](https://github.com/OnsenUI/OnsenUI/issues/2169).
  * ons-list-item: `nodivider` modifier should not hide `chevron`.
  * ons-list-item: Fixed [#2150](https://github.com/OnsenUI/OnsenUI/issues/2150).
- * templates: Fixed a bug where `script` tags might not be ready on time.
  * ons-navigator: Fixed [#2167](https://github.com/OnsenUI/OnsenUI/issues/2167).
+ * ons-navigator: iOS slide animation with transparent toolbars glitch.
  * ons-tabbar: Hide 1px line between toolbar and top tabbar in some Android devices.
  * ons-modal: Fixed [#2066](https://github.com/OnsenUI/OnsenUI/issues/2066).
+ * ons-toolbar: `cover-content` modifier works with iOS status bar.
+ * `modifier` classes are restored when `class` attribute is modified.
+ * ons-carousel: Fixed an animation glitch on iOS due to the cubic Bézier curve.
 
 ### Misc
 
