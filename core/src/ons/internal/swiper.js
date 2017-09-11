@@ -47,7 +47,6 @@ export default class SwipeReveal {
     this.onDragStart = this.onDragStart.bind(this);
     this.onDrag = this.onDrag.bind(this);
     this.onDragEnd = this.onDragEnd.bind(this);
-    this.onTouchMove = this.onTouchMove.bind(this);
     this.onResize = this.onResize.bind(this);
   }
 
@@ -173,7 +172,6 @@ export default class SwipeReveal {
       this._gestureDetector[action]('drag', this.onDrag);
       this._gestureDetector[action]('dragstart', this.onDragStart);
       this._gestureDetector[action]('dragend', this.onDragEnd);
-      this._gestureDetector[action]('touchmove', this.onTouchMove.bind(this));
     }
   }
 
@@ -205,11 +203,6 @@ export default class SwipeReveal {
     return validDrag(gesture.direction) || validDrag(gesture.interimDirection);
   }
 
-  onTouchMove(e) {
-    // Prevent scrolling when draging. Must be prevented before 'drag' event.
-    this._started && e.preventDefault();
-  }
-
   onDragStart(event) {
     this._ignoreDrag = event.consumed;
 
@@ -222,6 +215,7 @@ export default class SwipeReveal {
         event.consumed = true;
         this._started = true; // Avoid starting drag from outside
         this.toggleBlocker(true);
+        util.preventScroll(this._gestureDetector);
       }
     }
   }
@@ -243,9 +237,7 @@ export default class SwipeReveal {
       return;
     }
     this._continued = false;
-
     event.stopPropagation();
-    event.gesture.preventDefault();
 
     const scroll = this._scroll - this._getDelta(event);
     const normalizedScroll = this._normalizeScroll(scroll);
