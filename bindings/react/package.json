@@ -41,6 +41,7 @@
   "homepage": "https://onsen.io/react/",
   "devDependencies": {
     "babel-core": "^6.17.0",
+    "babel-eslint": "^7.2.3",
     "babel-loader": "^7",
     "babel-preset-env": "^1.4.0",
     "babel-preset-es2016": "^6.24.1",
