@@ -99,7 +99,7 @@ ons.isWebView = ons.platform.isWebView;
  * @signature ready(callback)
  * @description
  *   [ja]アプリの初期化に利用するメソッドです。渡された関数は、Onsen UIの初期化が終了している時点で必ず呼ばれます。[/ja]
- *   [en]Method used to wait for app initialization. The callback will not be executed until Onsen UI has been completely initialized.[/en]
+ *   [en]Method used to wait for app initialization. Waits for `DOMContentLoaded` and `deviceready`, when necessary, before executing the callback.[/en]
  * @param {Function} callback
  *   [en]Function that executes after Onsen UI has been initialized.[/en]
  *   [ja]Onsen UIが初期化が完了した後に呼び出される関数オブジェクトを指定します。[/ja]
@@ -116,13 +116,16 @@ ons.ready = callback => {
  * @method setDefaultDeviceBackButtonListener
  * @signature setDefaultDeviceBackButtonListener(listener)
  * @param {Function} listener
- *   [en]Function that executes when device back button is pressed.[/en]
+ *   [en]Function that executes when device back button is pressed. Must be called on `ons.ready`.[/en]
  *   [ja]デバイスのバックボタンが押された時に実行される関数オブジェクトを指定します。[/ja]
  * @description
  *   [en]Set default handler for device back button.[/en]
  *   [ja]デバイスのバックボタンのためのデフォルトのハンドラを設定します。[/ja]
  */
 ons.setDefaultDeviceBackButtonListener = function(listener) {
+  if (!ons.isReady()) {
+    throw new Error('This method must be called after ons.isReady() is true.');
+  }
   ons._defaultDeviceBackButtonHandler.setListener(listener);
 };
 
@@ -130,10 +133,13 @@ ons.setDefaultDeviceBackButtonListener = function(listener) {
  * @method disableDeviceBackButtonHandler
  * @signature disableDeviceBackButtonHandler()
  * @description
- * [en]Disable device back button event handler.[/en]
+ * [en]Disable device back button event handler. Must be called on `ons.ready`.[/en]
  * [ja]デバイスのバックボタンのイベントを受け付けないようにします。[/ja]
  */
 ons.disableDeviceBackButtonHandler = function() {
+  if (!ons.isReady()) {
+    throw new Error('This method must be called after ons.isReady() is true.');
+  }
   ons._deviceBackButtonDispatcher.disable();
 };
 
@@ -141,10 +147,13 @@ ons.disableDeviceBackButtonHandler = function() {
  * @method enableDeviceBackButtonHandler
  * @signature enableDeviceBackButtonHandler()
  * @description
- * [en]Enable device back button event handler.[/en]
+ * [en]Enable device back button event handler. Must be called on `ons.ready`.[/en]
  * [ja]デバイスのバックボタンのイベントを受け付けるようにします。[/ja]
  */
 ons.enableDeviceBackButtonHandler = function() {
+  if (!ons.isReady()) {
+    throw new Error('This method must be called after ons.isReady() is true.');
+  }
   ons._deviceBackButtonDispatcher.enable();
 };
 
@@ -153,7 +162,7 @@ ons.enableDeviceBackButtonHandler = function() {
  * @method enableAutoStatusBarFill
  * @signature enableAutoStatusBarFill()
  * @description
- *   [en]Enable status bar fill feature on iOS7 and above.[/en]
+ *   [en]Enable status bar fill feature on iOS7 and above. Must be called before `ons.ready`.[/en]
  *   [ja]iOS7以上で、ステータスバー部分の高さを自動的に埋める処理を有効にします。[/ja]
  */
 ons.enableAutoStatusBarFill = () => {
@@ -167,7 +176,7 @@ ons.enableAutoStatusBarFill = () => {
  * @method disableAutoStatusBarFill
  * @signature disableAutoStatusBarFill()
  * @description
- *   [en]Disable status bar fill feature on iOS7 and above.[/en]
+ *   [en]Disable status bar fill feature on iOS7 and above. Must be called before `ons.ready`.[/en]
  *   [ja]iOS7以上で、ステータスバー部分の高さを自動的に埋める処理を無効にします。[/ja]
  */
 ons.disableAutoStatusBarFill = () => {
@@ -181,7 +190,7 @@ ons.disableAutoStatusBarFill = () => {
  * @method mockStatusBar
  * @signature mockStatusBar()
  * @description
- *   [en]Creates a static element similar to iOS status bar. Only useful for browser testing.[/en]
+ *   [en]Creates a static element similar to iOS status bar. Only useful for browser testing. Must be called before `ons.ready`.[/en]
  *   [ja][/ja]
  */
 ons.mockStatusBar = () => {
@@ -252,7 +261,7 @@ ons.enableAutoStyling = ons._autoStyle.enable;
  * @method forcePlatformStyling
  * @signature forcePlatformStyling(platform)
  * @description
- *   [en]Refresh styling for the given platform. Only useful for demos. Use `ons.platform.select(...)` for development and production.[/en]
+ *   [en]Refresh styling for the given platform. Only useful for demos. Use `ons.platform.select(...)` instead for development and production.[/en]
  *   [ja][/ja]
  * @param {string} platform New platform to style the elements.
  */
