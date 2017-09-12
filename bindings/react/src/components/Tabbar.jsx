@@ -54,6 +54,7 @@ class Tabbar extends BasicComponent {
     node.addEventListener('prechange', this.onPreChange);
     node.addEventListener('postchange', this.onPostChange);
     node.addEventListener('reactive', this.onReactive);
+    node.onSwipe = this.props.onSwipe || null;
   }
 
   componentWillUnmount() {
@@ -68,6 +69,9 @@ class Tabbar extends BasicComponent {
     const node = this._tabbar;
     if (this.props.index !== node.getActiveTabIndex()) {
       node.setActiveTab(this.props.index);
+    }
+    if (this.props.onSwipe !== prevProps.onSwipe) {
+      node.onSwipe = this.props.onSwipe;
     }
   }
 
@@ -195,7 +199,16 @@ Tabbar.propTypes = {
    *  [en]Called if the already open tab is tapped again.[/en]
    *  [ja][/ja]
    */
-  onReactive: PropTypes.func
+  onReactive: PropTypes.func,
+
+  /**
+   * @name onSwipe
+   * @type function
+   * @description
+   *  [en]Hook called whenever the user slides the tabbar. It gets a decimal index and an animationOptions object as arguments.[/en]
+   *  [ja][/ja]
+   */
+  onSwipe: PropTypes.func,
 };
 
 Tabbar.defaultProps = {
