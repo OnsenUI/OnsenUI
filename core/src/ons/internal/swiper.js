@@ -193,14 +193,13 @@ export default class SwipeReveal {
   }
 
   _canConsumeGesture(gesture) {
+    const d = gesture.direction;
     const isFirst = this._scroll === 0 && !this.isOverScrollable();
     const isLast = this._scroll === this.maxScroll && !this.isOverScrollable();
 
-    const validDrag = d => this.isVertical()
+    return this.isVertical()
       ? ((d === 'down' && !isFirst) || (d === 'up' && !isLast))
       : ((d === 'right' && !isFirst) || (d === 'left' && !isLast));
-
-    return validDrag(gesture.direction) || validDrag(gesture.interimDirection);
   }
 
   onDragStart(event) {

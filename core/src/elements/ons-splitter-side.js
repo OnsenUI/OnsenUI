@@ -136,7 +136,7 @@ class CollapseMode {
     const distance = this._element._side === 'left' ? gesture.center.clientX : window.innerWidth - gesture.center.clientX;
     const area = this._element._swipeTargetWidth;
 
-    return (validDrag(gesture.direction) || validDrag(gesture.interimDirection)) && !(area && distance > area && !isOpen);
+    return validDrag(gesture.direction) && !(area && distance > area && !isOpen);
   }
 
   _onDragStart(event) {
