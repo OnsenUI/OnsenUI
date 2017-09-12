@@ -208,7 +208,7 @@ Tabbar.propTypes = {
    *  [en]Hook called whenever the user slides the tabbar. It gets a decimal index and an animationOptions object as arguments.[/en]
    *  [ja][/ja]
    */
-  onSwipe: PropTypes.func,
+  onSwipe: PropTypes.func
 };
 
 Tabbar.defaultProps = {
