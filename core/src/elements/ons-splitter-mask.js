@@ -41,6 +41,10 @@ export default class SplitterMaskElement extends BaseElement {
     event.stopPropagation();
   }
 
+  _preventScroll(e) {
+    e.cancelable && e.preventDefault(); // Fix for iOS. Prevents scrolling content behind mask.
+  }
+
   static get observedAttributes() {
     return [];
   }
@@ -50,10 +54,12 @@ export default class SplitterMaskElement extends BaseElement {
 
   connectedCallback() {
     this.addEventListener('click', this._boundOnClick);
+    this.addEventListener('touchmove', this._preventScroll);
   }
 
   disconnectedCallback() {
     this.removeEventListener('click', this._boundOnClick);
+    this.removeEventListener('touchmove', this._preventScroll);
   }
 }
 
