@@ -8,6 +8,7 @@ dev
 ### New Features
 
 * Components now update back button handler when prop changes.
+* PullHook: Added `onPull` prop.
 
 ### Bug Fixes
 

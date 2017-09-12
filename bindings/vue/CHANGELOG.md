@@ -4,6 +4,10 @@ CHANGELOG
 dev
 ----
 
+### New Features
+
+* VOnsPullHook: Added `onPull` prop.
+
 ### Bug Fixes
 
 * VOnsNavigator: Properly hide VOnsBackButton when replacing pages.
