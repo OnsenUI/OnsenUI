@@ -203,6 +203,8 @@ export default class PullHookElement extends BaseElement {
 
     const scroll = Math.max(event.gesture.deltaY - this._startScroll, 0);
 
+    this._onPull && this._onPull(scroll, (100 * scroll / this.height).toFixed(2));
+
     if (this._thresholdHeightEnabled() && scroll >= this.thresholdHeight) {
       event.gesture.stopDetect();
 
@@ -250,6 +252,24 @@ export default class PullHookElement extends BaseElement {
       throw new Error('onAction must be a function or null');
     }
     this._onAction = value;
+  }
+
+  /**
+   * @property onPull
+   * @type {Function}
+   * @description
+   *   [en]Hook called whenever the user pulls the element. It gets the scroll value in pixels and the pulled decimal percentage as arguments (>=100% means `preaction` state).[/en]
+   *   [ja][/ja]
+   */
+  get onPull() {
+    return this._onSwipe;
+  }
+
+  set onPull(value) {
+    if (value && !(value instanceof Function)) {
+      throw new Error(`'onPull' must be a function.`)
+    }
+    this._onPull = value;
   }
 
   _finish() {

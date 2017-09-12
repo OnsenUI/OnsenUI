@@ -483,6 +483,12 @@ declare namespace ons {
      */
     disabled: boolean;
     /**
+     * @param {Number} scroll Scroll value in pixels.
+     * @param {Object} pullPerc Pulled decimal percentage.
+     * @description Hook called whenever the user pulls the element.
+     **/
+    onPull?: Function;
+    /**
      * @description Define the function that will be called in the `"action"` state.
      */
     onAction?: Function;
@@ -718,7 +724,7 @@ declare namespace ons {
      * @param {Object} animationOptions Object containing duration and timing.
      * @description Hook called whenever the user slides the tabbar.
      **/
-    onSwipe: Function;
+    onSwipe?: Function;
   }
 
   /**

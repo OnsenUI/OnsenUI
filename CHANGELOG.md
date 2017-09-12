@@ -10,6 +10,7 @@ dev
  * css-components: Reimplemented css-components previewer.
  * css-components: Changed color scheme to more iOS native-like.
  * ons: Added `mockStatusBar` utility to create a fake iOS status bar for browser testing.
+ * ons-pull-hook: Added `onPull` property function that gets the pulled distance on drag.
 
 ### Bug Fixes
 
