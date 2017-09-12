@@ -5,13 +5,13 @@ import GestureDetector from '../gesture-detector';
 const directionMap = {
   vertical: {
     axis: 'Y',
-    size: 'height',
+    size: 'Height',
     dir: ['up', 'down'],
     t3d: ['0px, ', 'px, 0px']
   },
   horizontal: {
     axis: 'X',
-    size: 'width',
+    size: 'Width',
     dir: ['left', 'right'],
     t3d: ['', 'px, 0px, 0px']
   }
@@ -361,7 +361,7 @@ export default class SwipeReveal {
 
   get targetSize() {
     if (!this._targetSize) {
-      this._targetSize = this.target.getBoundingClientRect()[this.dM.size];
+      this._targetSize = this.target[`offset${this.dM.size}`];
     }
     return this._targetSize;
   }
@@ -383,7 +383,7 @@ export default class SwipeReveal {
     this.target.classList.toggle('ons-swiper-target--vertical', this.isVertical());
 
     for (let c = this.target.children[0]; c; c = c.nextElementSibling) {
-      c.style[this.dM.size] = this.itemSize;
+      c.style[this.dM.size.toLowerCase()] = this.itemSize;
     }
 
     if (this.isCentered()) {

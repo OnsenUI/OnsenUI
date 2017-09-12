@@ -203,11 +203,11 @@ describe('Swiper', () => {
 
     it('updates layout parameters on direction change', () => {
       expect(swiper.dM.axis).to.equal('X');
-      expect(swiper.dM.size).to.equal('width');
+      expect(swiper.dM.size).to.equal('Width');
       swiper.isVertical = TRUE;
       swiper.refresh();
       expect(swiper.dM.axis).to.equal('Y');
-      expect(swiper.dM.size).to.equal('height');
+      expect(swiper.dM.size).to.equal('Height');
     });
   });
 
