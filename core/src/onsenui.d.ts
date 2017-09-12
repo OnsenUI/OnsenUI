@@ -483,8 +483,8 @@ declare namespace ons {
      */
     disabled: boolean;
     /**
-     * @param {Number} scroll Scroll value in pixels.
-     * @param {Object} pullPerc Pulled decimal percentage.
+     * @param {Number} ratio Pulled ratio (scroll / height).
+     * @param {Object} animationOptions Object containing duration and timing.
      * @description Hook called whenever the user pulls the element.
      **/
     onPull?: Function;
