@@ -110,7 +110,10 @@ export default class SegmentElement extends BaseElement {
     this._segmentId = generateId();
     this._tabbar = null;
 
-    contentReady(this, () => this._compile());
+    contentReady(this, () => {
+      this._compile()
+      this._lastActiveIndex = this.getActiveButtonIndex();
+    });
   }
 
   _compile() {
@@ -219,7 +222,7 @@ export default class SegmentElement extends BaseElement {
       return this._tabbar.setActiveTab(index, options);
     } else {
       this._getSegmentInput(index).checked = true;
-      this._triggerPostChangeEvent(index);
+      this._postChange(index);
       return Promise.resolve(index);
     }
   }
@@ -251,14 +254,18 @@ export default class SegmentElement extends BaseElement {
     event.stopPropagation();
     this._tabbar
       ? this._tabbar.setActiveTab(parseInt(event.target.id.slice(-1)), { reject: false })
-      : this._triggerPostChangeEvent(event.target.id.slice(-1));
+      : this._postChange(event.target.id.slice(-1));
   }
 
-  _triggerPostChangeEvent(index) {
+  _postChange(index) {
+    index = parseInt(index, 10);
     util.triggerElementEvent(this, 'postchange', {
-      index: parseInt(index),
+      index,
+      activeIndex: index,
+      lastActiveIndex: this._lastActiveIndex,
       segmentItem: this.children[index]
     });
+    this._lastActiveIndex = index;
   }
 
   static get events() {
