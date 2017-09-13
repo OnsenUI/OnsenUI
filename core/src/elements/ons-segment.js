@@ -90,7 +90,7 @@ export default class SegmentElement extends BaseElement {
    * @initonly
    * @type {String}
    * @description
-   *  [en]ID of the `<ons-tabbar>` to "connect" to the segment.[/en]
+   *  [en]ID of the tabbar element to "connect" to the segment. Must be inside the same page.[/en]
    *  [ja][/ja]
    */
 
@@ -109,6 +109,8 @@ export default class SegmentElement extends BaseElement {
 
     this._segmentId = generateId();
     this._tabbar = null;
+    this._onChange = this._onChange.bind(this);
+    this._onTabbarPrechange = this._onTabbarPrechange.bind(this);
 
     contentReady(this, () => {
       this._compile()
@@ -118,13 +120,20 @@ export default class SegmentElement extends BaseElement {
 
   _compile() {
     autoStyle.prepare(this);
-
     this.classList.add(defaultClassName);
 
     for (let index = this.children.length - 1; index >= 0; index--) {
       const button = this.children[index];
+
+      // Only buttons or compiled items accepted
       if (button.tagName !== 'BUTTON') {
-        throw new Error('<ons-segment> error: all elements inside <ons-segment> should be <button> elements.');
+        if (button.classList.contains('segment__item')) {
+          const input = button.querySelector('input');
+          input && !input.name && input.setAttribute('name', this._segmentId);
+          continue;
+        } else {
+          throw new Error(`<ons-segment> child ${index} error: segment children must be <button> elements or compiled segment items.`);
+        }
       }
 
       const segmentItem = util.createElement(`
@@ -140,42 +149,39 @@ export default class SegmentElement extends BaseElement {
       segmentItem.appendChild(button);
     }
 
-    if (this.hasAttribute('tabbar-id')) {
-      this._tabbar = document.getElementById(this.getAttribute('tabbar-id'));
-      if (!this._tabbar) {
-        throw new Error(`<ons-segment> error: no tabbar with id ${this.getAttribute('tabbar-id')} was found.`);
-      }
-
-      this._tabbar.hide();
-      setImmediate(() => this._inputs[this._tabbar.getActiveTabIndex()].checked = true);
-
-      this._tabbar.addEventListener('prechange', e => setImmediate(() => {
-        if (!e.detail.canceled) {
-          this._inputs[e.index].checked = true;
-        }
-      }));
-    }
-
-    this.addEventListener('change', this._onChange.bind(this));
-
     ModifierUtil.initModifier(this, scheme);
   }
 
-  get _inputs() {
-    return Array.prototype.map.call(this.children, e => e.firstElementChild);
+  connectedCallback() {
+    if (this.hasAttribute('tabbar-id')) {
+      contentReady(this, () => {
+        const page = util.findParent(this, 'ons-page');
+        this._tabbar = page && page.querySelector('#' + this.getAttribute('tabbar-id'));
+        if (!this._tabbar || this._tabbar.tagName !== 'ONS-TABBAR') {
+          throw new Error(`<ons-segment> error: no tabbar with id ${this.getAttribute('tabbar-id')} was found.`);
+        }
+
+        this._tabbar.hide();
+        setImmediate(() => this._setChecked(this._tabbar.getActiveTabIndex()));
+
+        this._tabbar.addEventListener('prechange', this._onTabbarPrechange);
+      });
+    }
+
+    this.addEventListener('change', this._onChange);
   }
 
-  /**
-   * @property tabbar
-   * @readonly
-   * @default null
-   * @type {Element}
-   * @description
-   *   [en]<ons-tabbar> element connected to the <ons-segment>.[/en]
-   *   [ja]タブバーが見える場合に`true`。[/ja]
-   */
-  get tabbar() {
-    return this._tabbar;
+  disconnectedCallback() {
+    if (this._tabbar) {
+      this._tabbar.removeEventListener('prechange', this._onTabbarPrechange);
+      this._tabbar = null;
+    }
+
+    this.removeEventListener('change', this._onChange);
+  }
+
+  _setChecked(index) {
+    this.children[index].firstElementChild.checked = true;
   }
 
   /**
@@ -185,14 +191,8 @@ export default class SegmentElement extends BaseElement {
    *   [en]Button index.[/en]
    *   [ja][/ja]
    * @param {Object} [options]
-   *   [en]Parameter object, works only if there is no connected tabbar.[/en]
+   *   [en]Parameter object, works only if there is a connected tabbar. Supports the same options as `ons-tabbar`'s `setActiveTab` method.[/en]
    *   [ja][/ja]
-   * @param {String} [options.animation]
-   *   [en]Animation name. Available animations are `"fade"`, `"slide"` and `"none"`.[/en]
-   *   [ja]アニメーション名を指定します。`"fade"`、`"slide"`、`"none"`のいずれかを指定できます。[/ja]
-   * @param {String} [options.animationOptions]
-   *   [en]Specify the animation's duration, delay and timing. E.g. `{duration: 0.2, delay: 0.4, timing: 'ease-in'}`.[/en]
-   *   [ja]アニメーション時のduration, delay, timingを指定します。e.g. {duration: 0.2, delay: 0.4, timing: 'ease-in'}[/ja]
    * @description
    *   [en]Make button with the specified index active. If there is a connected tabbar it shows the corresponding tab page. In this case animations and their options can be specified by the second parameter.[/en]
    *   [ja][/ja]
@@ -200,12 +200,12 @@ export default class SegmentElement extends BaseElement {
    *   [en]Resolves to the selected index or to the new page element if there is a connected tabbar.[/en]
    *   [ja][/ja]
    */
-  setActiveButton(index, options = {}) {
+  setActiveButton(index, options) {
     if (this._tabbar) {
       return this._tabbar.setActiveTab(index, options);
     }
 
-    this._inputs[index].checked = true;
+    this._setChecked(index);
     this._postChange(index);
     return Promise.resolve(index);
   }
@@ -221,7 +221,7 @@ export default class SegmentElement extends BaseElement {
    *   [ja][/ja]
    */
   getActiveButtonIndex() {
-    return this._inputs.findIndex(i => i.checked);
+    return Array.prototype.findIndex.call(this.children, el => el.firstElementChild.checked);
   }
 
   _onChange(event) {
@@ -231,8 +231,11 @@ export default class SegmentElement extends BaseElement {
       : this._postChange(this.getActiveButtonIndex());
   }
 
+  _onTabbarPrechange(event) {
+    setImmediate(() => !event.detail.canceled && this._setChecked(event.index));
+  }
+
   _postChange(index) {
-    index = parseInt(index, 10);
     util.triggerElementEvent(this, 'postchange', {
       index,
       activeIndex: index,
