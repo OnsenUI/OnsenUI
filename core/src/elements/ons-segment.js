@@ -110,9 +110,7 @@ export default class SegmentElement extends BaseElement {
     this._segmentId = generateId();
     this._tabbar = null;
 
-    contentReady(this, () => {
-      this._compile();
-    });
+    contentReady(this, () => this._compile());
   }
 
   _compile() {
@@ -146,17 +144,13 @@ export default class SegmentElement extends BaseElement {
       this._tabbar = document.getElementById(this.getAttribute('tabbar-id'));
       if (!this._tabbar) {
         throw new Error(`<ons-segment> error: no tabbar with id ${this.getAttribute('tabbar-id')} was found.`);
-      }
-      else if (this._tabbar._getTabbarElement().children.length !== this.children.length) {
-        throw new Error(`<ons-segment> error: number of tabs must be the same as number of buttons.`);
-      }
-      else {
+      } else {
         this._tabbar.setTabbarVisibility(false);
         this._tabbar.addEventListener('postchange', event => {
           this._tabbar.setTabbarVisibility(false);
           this._getSegmentInput(event.index).checked = true;
           this._triggerPostChangeEvent(event.index);
-        })
+        });
       }
     }
 
@@ -258,7 +252,7 @@ export default class SegmentElement extends BaseElement {
   _onTabChange(event) {
     event.stopPropagation();
     if (this._tabbar) {
-      this._tabbar.setActiveTab(parseInt(event.target.id.slice(-1)));
+      this._tabbar.setActiveTab(parseInt(event.target.id.slice(-1)), { reject: false });
     }
     this._triggerPostChangeEvent(event.target.id.slice(-1));
   }
