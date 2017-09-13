@@ -13,7 +13,8 @@
         document.addEventListener('prechange', function(e) {
           console.log('prechange', e);
           if (e.activeIndex === 0) {
-            // console.log('Canceled in prechange.')
+            // console.log('Canceled in prechange', e.detail.canceled);
+            // setImmediate(() => console.log('Canceled in prechange', e.detail.canceled));
             // e.cancel();
           }
         });
