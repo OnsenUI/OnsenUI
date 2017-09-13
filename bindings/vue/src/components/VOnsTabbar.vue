@@ -2,7 +2,7 @@
   <ons-tabbar
     :on-swipe.prop="onSwipe"
     :activeIndex="index"
-    @postchange.self="$emit('update:index', $event.index)"
+    @prechange.self="$nextTick(() => !$event.detail.canceled && $emit('update:index', $event.index))"
     v-on="unrecognizedListeners"
   >
     <div class="tabbar__content">
