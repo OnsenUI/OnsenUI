@@ -270,6 +270,7 @@ class Navigator extends BasicComponent {
     node.addEventListener('prepop', this._prePop);
     node.addEventListener('postpop', this._postPop);
 
+    node.swipeMax = this.props.swipePop;
     node.onDeviceBackButton = this.props.onDeviceBackButton || this._onDeviceBackButton.bind(this);
 
     if (this.props.initialRoute && this.props.initialRouteStack) {
@@ -410,7 +411,30 @@ Navigator.propTypes = {
    *  [ja][/ja]
    */
   animationOptions: PropTypes.object,
+ 
+  /**
+   * @name swipeable
+   * @type bool|string
+   * @required false
+   * @description
+   *  [en]
+   *  Enables swipe-to-pop functionality for iOS.
+   *  [/en]
+   *  [ja][/ja]
+   */
+  swipeable: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
 
+  /**
+   * @name swipePop
+   * @type function
+   * @required false
+   * @description
+   *  [en]
+   *  Function called on swipe-to-pop. Must perform a popPage with the given options object.
+   *  [/en]
+   *  [ja][/ja]
+   */
+  swipePop: PropTypes.func,
   /**
    * @name onDeviceBackButton
    * @type function
