@@ -134,12 +134,12 @@ export default class SegmentElement extends BaseElement {
         const segmentInput = index === activeButtonIndex
           ? util.createElement(`<input type="radio" class="segment__input" name="${this._segmentId}" checked>`)
           : util.createElement(`<input type="radio" class="segment__input" name="${this._segmentId}">`);
-        segmentInput.id = this._segmentId + '-' + index;
+
         segmentItem.appendChild(segmentInput);
         item.classList.add('segment__button');
         segmentItem.appendChild(item);
         this.appendChild(segmentItem);
-        segmentInput.addEventListener('change', this._onTabChange.bind(this));
+        segmentInput.addEventListener('change', this._onChange.bind(this));
       });
     }
 
@@ -151,7 +151,7 @@ export default class SegmentElement extends BaseElement {
         this._tabbar.setTabbarVisibility(false);
         this._tabbar.addEventListener('prechange', e => setImmediate(() => {
           if (!e.detail.canceled) {
-            this._getSegmentInput(e.index).checked = true;
+            this._inputs[e.index].checked = true;
           }
         }));
       }
@@ -160,26 +160,8 @@ export default class SegmentElement extends BaseElement {
     ModifierUtil.initModifier(this, scheme);
   }
 
-  static get observedAttributes() {
-    return ['class', 'modifier'];
-  }
-
-  attributeChangedCallback(name, last, current) {
-    switch (name) {
-      case 'class':
-        util.restoreClass(this, defaultClassName, scheme);
-        break;
-      case 'modifier':
-        ModifierUtil.onModifierChanged(last, current, this, scheme);
-        break;
-    }
-  }
-
-  /**
-   * @return {String}
-   */
-  getSegmentId() {
-    return this._segmentId;
+  get _inputs() {
+    return Array.prototype.map.call(this.children, e => e.firstElementChild);
   }
 
   /**
@@ -220,11 +202,11 @@ export default class SegmentElement extends BaseElement {
   setActiveButton(index, options = {}) {
     if (this._tabbar) {
       return this._tabbar.setActiveTab(index, options);
-    } else {
-      this._getSegmentInput(index).checked = true;
-      this._postChange(index);
-      return Promise.resolve(index);
     }
+
+    this._inputs[index].checked = true;
+    this._postChange(index);
+    return Promise.resolve(index);
   }
 
   /**
@@ -238,23 +220,14 @@ export default class SegmentElement extends BaseElement {
    *   [ja][/ja]
    */
   getActiveButtonIndex() {
-    for (var i = 0; i < this.children.length; i++) {
-      if (this._getSegmentInput(i) && this._getSegmentInput(i).checked) {
-        return i;
-      }
-    }
-    return -1;
+    return this._inputs.findIndex(i => i.checked);
   }
 
-  _getSegmentInput(index) {
-    return this.querySelector('#' + this._segmentId + '-' + index);
-  }
-
-  _onTabChange(event) {
+  _onChange(event) {
     event.stopPropagation();
     this._tabbar
-      ? this._tabbar.setActiveTab(parseInt(event.target.id.slice(-1)), { reject: false })
-      : this._postChange(event.target.id.slice(-1));
+      ? this._tabbar.setActiveTab(this.getActiveButtonIndex(), { reject: false })
+      : this._postChange(this.getActiveButtonIndex());
   }
 
   _postChange(index) {
@@ -266,6 +239,21 @@ export default class SegmentElement extends BaseElement {
       segmentItem: this.children[index]
     });
     this._lastActiveIndex = index;
+  }
+
+  static get observedAttributes() {
+    return ['class', 'modifier'];
+  }
+
+  attributeChangedCallback(name, last, current) {
+    switch (name) {
+      case 'class':
+        util.restoreClass(this, defaultClassName, scheme);
+        break;
+      case 'modifier':
+        ModifierUtil.onModifierChanged(last, current, this, scheme);
+        break;
+    }
   }
 
   static get events() {
