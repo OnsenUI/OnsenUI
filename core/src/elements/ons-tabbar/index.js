@@ -246,11 +246,11 @@ export default class TabbarElement extends BaseElement {
 
   _onPreChange(event) {
     event = this._normalizeEvent(event);
+    event.cancel = () => event.canceled = true;
 
-    let canceled = false;
-    util.triggerElementEvent(this, 'prechange', { ...event, cancel: () => canceled = true });
+    util.triggerElementEvent(this, 'prechange', event);
 
-    if (!canceled) {
+    if (!event.canceled) {
       const { activeIndex, lastActiveIndex } = event;
       const tabs = this.tabs;
 
@@ -262,7 +262,7 @@ export default class TabbarElement extends BaseElement {
       }
     }
 
-    return canceled
+    return event.canceled
   }
 
   _onScroll(index, options = {}) {
