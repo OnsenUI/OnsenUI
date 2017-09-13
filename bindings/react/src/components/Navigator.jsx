@@ -361,7 +361,8 @@ Navigator.propTypes = {
    * @type function
    * @required false
    * @description
-   *  [en]Called just before a page is pushed.[/en]
+   *  [en]Called just before a page is pushed. It gets an event object with route information.[/en]
+   *  [ja][/ja]
    */
   onPrePush: PropTypes.func,
 
@@ -370,7 +371,8 @@ Navigator.propTypes = {
    * @type function
    * @required false
    * @description
-   *  [en]Called just after a page is pushed.[/en]
+   *  [en]Called just after a page is pushed. It gets an event object with route information.[/en]
+   *  [ja][/ja]
    */
   onPostPush: PropTypes.func,
 
@@ -379,7 +381,7 @@ Navigator.propTypes = {
    * @type function
    * @required false
    * @description
-   *  [en]Called just before a page is popped.[/en]
+   *  [en]Called just before a page is popped. It gets an event object with route information.[/en]
    */
   onPrePop: PropTypes.func,
 
@@ -388,7 +390,8 @@ Navigator.propTypes = {
    * @type function
    * @required false
    * @description
-   *  [en]Called just after a page is popped.[/en]
+   *  [en]Called just after a page is popped. It gets an event object with route information.[/en]
+   *  [ja][/ja]
    */
   onPostPop: PropTypes.func,
 
@@ -400,6 +403,7 @@ Navigator.propTypes = {
    *     Animation name. Available animations are `"slide"`, `"lift"`, `"fade"` and `"none"`.
    *     These are platform based animations. For fixed animations, add `"-ios"` or `"-md"` suffix to the animation name. E.g. `"lift-ios"`, `"lift-md"`. Defaults values are `"slide-ios"` and `"fade-md"`.
    *   [/en]
+   *   [ja][/ja]
    */
   animation: PropTypes.string,
 
@@ -411,15 +415,13 @@ Navigator.propTypes = {
    *  [ja][/ja]
    */
   animationOptions: PropTypes.object,
- 
+
   /**
    * @name swipeable
    * @type bool|string
    * @required false
    * @description
-   *  [en]
-   *  Enables swipe-to-pop functionality for iOS.
-   *  [/en]
+   *  [en]Enables swipe-to-pop functionality for iOS.[/en]
    *  [ja][/ja]
    */
   swipeable: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
@@ -429,9 +431,7 @@ Navigator.propTypes = {
    * @type function
    * @required false
    * @description
-   *  [en]
-   *  Function called on swipe-to-pop. Must perform a popPage with the given options object.
-   *  [/en]
+   *  [en]Optional function called on swipe-to-pop. If provided, must perform a popPage with the given options object.[/en]
    *  [ja][/ja]
    */
   swipePop: PropTypes.func,
@@ -440,9 +440,7 @@ Navigator.propTypes = {
    * @type function
    * @required false
    * @description
-   *  [en]
-   *  Custom handler for device back button.
-   *  [/en]
+   *  [en]Custom handler for device back button.[/en]
    *  [ja][/ja]
    */
   onDeviceBackButton: PropTypes.func
