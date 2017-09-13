@@ -15,6 +15,7 @@ dev
 ### Bug Fixes
 
 * Tabbar: `index` was trying to set active tab twice.
+* Navigator: Avoid rendering pages twice.
 
 ### BREAKING CHANGES
 
