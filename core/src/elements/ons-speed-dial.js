@@ -76,6 +76,13 @@ export default class SpeedDialElement extends BaseElement {
    */
 
   /**
+   * @attribute ripple
+   * @description
+   *  [en]If this attribute is defined, the button will have a ripple effect when tapped.[/en]
+   *  [ja][/ja]
+   */
+
+  /**
    * @attribute position
    * @type {String}
    * @description
@@ -141,9 +148,7 @@ export default class SpeedDialElement extends BaseElement {
   attributeChangedCallback(name, last, current) {
     switch (name) {
       case 'class':
-        if (!this.classList.contains(defaultClassName)) {
-          this.className = defaultClassName + ' ' + current;
-        }
+        util.restoreClass(this, defaultClassName, scheme);
         break;
       case 'modifier':
         ModifierUtil.onModifierChanged(last, current, this, scheme);

@@ -16,6 +16,7 @@ limitations under the License.
 */
 
 import util from '../util.js';
+import autoStyle from '../autostyle.js';
 
 export default class ModifierUtil {
   /**
@@ -59,11 +60,11 @@ export default class ModifierUtil {
   static applyDiffToClassList(diff, classList, template) {
     diff.added
       .map(modifier => template.replace(/\*/g, modifier))
-      .forEach(klass => classList.add(klass));
+      .forEach(klass => klass.split(/\s+/).forEach(k => classList.add(k)));
 
     diff.removed
       .map(modifier => template.replace(/\*/g, modifier))
-      .forEach(klass => classList.remove(klass));
+      .forEach(klass => klass.split(/\s+/).forEach(k => classList.remove(k)));
   }
 
   /**
@@ -74,14 +75,12 @@ export default class ModifierUtil {
    * @param {Object} scheme
    */
   static applyDiffToElement(diff, element, scheme) {
-    for (const selector in scheme) {
-      if (scheme.hasOwnProperty(selector)) {
-        const targetElements = !selector || util.match(element, selector) ? [element] : element.querySelectorAll(selector);
-        for (let i = 0; i < targetElements.length; i++) {
-          ModifierUtil.applyDiffToClassList(diff, targetElements[i].classList, scheme[selector]);
-        }
+    Object.keys(scheme).forEach(selector => {
+      const targetElements = !selector || util.match(element, selector) ? [element] : element.querySelectorAll(selector);
+      for (let i = 0; i < targetElements.length; i++) {
+        ModifierUtil.applyDiffToClassList(diff, targetElements[i].classList, scheme[selector]);
       }
-    }
+    });
   }
 
   /**
@@ -91,7 +90,12 @@ export default class ModifierUtil {
    * @param {Object} scheme
    */
   static onModifierChanged(last, current, element, scheme) {
-    return ModifierUtil.applyDiffToElement(ModifierUtil.diff(last, current), element, scheme);
+    ModifierUtil.applyDiffToElement(ModifierUtil.diff(last, current), element, scheme);
+    autoStyle.restoreModifier(element);
+  }
+
+  static refresh(element, scheme) {
+    ModifierUtil.applyDiffToElement(ModifierUtil.diff('', element.getAttribute('modifier') || ''), element, scheme);
   }
 
   /**

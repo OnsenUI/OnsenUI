@@ -1,6 +1,7 @@
 import ActionSheet from './components/ActionSheet.jsx';
 import ActionSheetButton from './components/ActionSheetButton.jsx';
 import AlertDialog from './components/AlertDialog.jsx';
+import AlertDialogButton from './components/AlertDialogButton.jsx';
 import BackButton from './components/BackButton.jsx';
 import BottomToolbar from './components/BottomToolbar.jsx';
 import Button from './components/Button.jsx';
@@ -40,8 +41,6 @@ import SplitterContent from './components/SplitterContent.jsx';
 import SplitterSide from './components/SplitterSide.jsx';
 import Switch from './components/Switch.jsx';
 import Tab from './components/Tab.jsx';
-import TabActive from './components/TabActive.jsx';
-import TabInactive from './components/TabInactive.jsx';
 import Tabbar from './components/Tabbar.jsx';
 import Toast from './components/Toast.jsx';
 import Toolbar from './components/Toolbar.jsx';
@@ -53,6 +52,7 @@ export {
   ActionSheet,
   ActionSheetButton,
   AlertDialog,
+  AlertDialogButton,
   BackButton,
   BottomToolbar,
   Button,
@@ -93,8 +93,6 @@ export {
   SplitterSide,
   Switch,
   Tab,
-  TabActive,
-  TabInactive,
   Tabbar,
   Toast,
   Toolbar,

@@ -6,67 +6,57 @@ import {
   Input,
   Output,
   EventEmitter,
-  OnChanges,
   OnDestroy,
-  SimpleChange
+  forwardRef
 } from '@angular/core';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import * as ons from 'onsenui';
 
 /**
  * @element ons-select
  * @directive OnsSelect
  * @selector ons-select
  * @description
- *   [en]Angular 2 directive for `<ons-select>` component.[/en]
- *   [ja]`<ons-select>`要素のAngular 2ディレクティブです。[/en]
+ *   [en]Angular directive for `<ons-select>` component.[/en]
+ *   [ja]`<ons-select>`要素のAngularディレクティブです。[/en]
  * @example
- *   <ons-select>
- *    <option value="basic">Basic</option>
- *    <option value="material">Material</option>
- *    <option value="underbar">Underbar</option>
- *   </ons-select><br>
+ *   <ons-select [(ngModel)]="selectedValue">
+ *     <option value="Item A">Item A</option>
+ *     <option value="Item B">Item B</option>
+ *     <option value="Item C">Item C</option>
+ *   </ons-select>
  */
 @Directive({
-  selector: 'ons-select'
+  selector: 'ons-select',
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => OnsSelect),
+      multi: true,
+    }
+  ]
 })
-export class OnsSelect implements OnChanges, OnDestroy {
+export class OnsSelect implements OnDestroy, ControlValueAccessor {
   private _element: any;
   private _boundOnChange: Function;
-
-  /**
-   * @input value
-   * @type {string}
-   * @desc
-   *   [en]Input value of the `<ons-select>` element..[/en]
-   *   [ja]`ons-select`要素に対する入力値を指定します。[/ja]
-   */
-  @Input('value') _value: string;
-
-  /**
-   * @output valueChange
-   * @type {string}
-   * @desc
-   *   [en]Triggers when the value is changed.[/en]
-   *   [ja]値が変更された時に発火します。[/ja]
-   */
-  @Output('valueChange') _valueChange: EventEmitter<string> = new EventEmitter<string>();
-
+  private _propagateChange = (_: any) => { };
+  
   constructor(private _elementRef: ElementRef) {
     this._boundOnChange = this._onChange.bind(this);
     this._element = _elementRef.nativeElement;
 
     this._element.addEventListener('change', this._boundOnChange);
   }
-
+  
   _onChange(event: any) {
-    this._valueChange.emit(this._element.value);
+    this._propagateChange(event.target.value);
   }
-
-  ngOnChanges(changeRecord: {[key: string]: SimpleChange;}) {
-    const value = changeRecord['_value'].currentValue;
-    this._element.value = value;
-  }
-
+  
   get element(): any {
+    return this._element;
+  }
+
+  get nativeElement(): any {
     return this._element;
   }
 
@@ -75,4 +65,18 @@ export class OnsSelect implements OnChanges, OnDestroy {
 
     this._element = null;
   }
+
+  writeValue(obj: any) {
+    // When this statement is first evaluated, the inner <select> element is not ready,
+    // so contentReady is required in this case
+    (<any>ons)._contentReady(this._element, () => {
+      this._element.value = obj;
+    });
+  }
+
+  registerOnChange(fn: any) {
+    this._propagateChange = fn;
+  }
+
+  registerOnTouched() { }
 }

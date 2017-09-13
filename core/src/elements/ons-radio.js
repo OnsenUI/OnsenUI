@@ -64,7 +64,7 @@ export default class RadioElement extends BaseCheckboxElement {
     return scheme;
   }
 
-  get _defaultElementClass() {
+  get _defaultClassName() {
     return 'radio-button';
   }
 

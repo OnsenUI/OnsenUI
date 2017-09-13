@@ -46,8 +46,11 @@ class Modal extends BasicComponent {
     this._update(this.props, false);
   }
 
-  componentWillReceiveProps(nextProps) {
-    this._update(nextProps, this.props.isOpen);
+  componentWillReceiveProps(newProps) {
+    this._update(newProps, this.props.isOpen);
+    if (newProps.onDeviceBackButton !== undefined) {
+      ReactDOM.findDOMNode(this).onDeviceBackButton = newProps.onDeviceBackButton;
+    }
   }
 
   _update(props, isOpen) {

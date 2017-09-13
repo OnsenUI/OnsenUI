@@ -23,7 +23,7 @@
     background-color: var(--range-thumb-background-color);
     border: none;
     box-shadow: 0 0 1px 0 rgba(0, 0, 0, 0.25), 0 3px 2px rgba(0, 0, 0, 0.25);
-    border-radius: var(--round-border);
+    border-radius: 50%;
     margin: 0;
     padding: 0;
   }
@@ -87,7 +87,7 @@
   border: none;
   background-color: var(--range-track-background-color);
   height: 0;
-  border-radius: var(--round-border);
+  border-radius: 50%;
 }
 
 .range__input::-webkit-slider-thumb {
@@ -183,7 +183,7 @@
   transition: opacity 0.25s ease-out, transform 0.25s ease-out;
 }
 
-:focus + .range--material__focus-ring::-webkit-slider-thumb {
+.range--material__input.range__input--active + .range--material__focus-ring::-webkit-slider-thumb {
   opacity: 0.2;
   transform: scale(1.5, 1.5, 1.5);
 }
@@ -203,7 +203,7 @@
 }
 
 .range--material__input[_zero]::-webkit-slider-thumb {
-  background-image: radial-gradient(circle cover, var(--material-range-zero-thumb-color) 0%, var(--material-range-zero-thumb-color) 4px, var(--material-range-track-color) 4.0px, var(--material-range-track-color) calc(var(--material-range-thumb-radius) - 0.6px), transparent calc(var(--material-range-thumb-radius)));
+  background-image: radial-gradient(circle cover, var(--material-range-zero-thumb-color) 0%, var(--material-range-zero-thumb-color) 4px, var(--material-range-track-color) 4px, var(--material-range-track-color) calc(var(--material-range-thumb-radius) - 0.6px), transparent calc(var(--material-range-thumb-radius)));
 }
 
 .range--material__input[_zero] + .range--material__focus-ring::-webkit-slider-thumb {

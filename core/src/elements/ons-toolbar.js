@@ -38,10 +38,13 @@ const scheme = {
  *   [en]Material Design toolbar.[/en]
  *   [ja][/ja]
  * @modifier transparent
- *   [en]Transparent toolbar[/en]
+ *   [en]Transparent toolbar.[/en]
  *   [ja]透明な背景を持つツールバーを表示します。[/ja]
+ * @modifier cover-content
+ *   [en]Displays the toolbar on top of the page's content. Should be combined with `transparent` modifier.[/en]
+ *   [ja][/ja]
  * @modifier noshadow
- *   [en]Toolbar without shadow[/en]
+ *   [en]Toolbar without shadow.[/en]
  *   [ja]ツールバーに影を付けずに表示します。[/ja]
  * @description
  *   [en]
@@ -116,9 +119,7 @@ export default class ToolbarElement extends BaseElement {
   attributeChangedCallback(name, last, current) {
     switch (name) {
       case 'class':
-        if (!this.classList.contains(defaultClassName)) {
-          this.className = defaultClassName + ' ' + current;
-        }
+        util.restoreClass(this, defaultClassName, scheme);
         break;
       case 'modifier':
         ModifierUtil.onModifierChanged(last, current, this, scheme);

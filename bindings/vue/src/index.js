@@ -24,7 +24,7 @@ const install = (Vue, params = {}) => {
    * Note: This affects every Vue instance only when warns
    * are allowed by Vue.
    */
-  if (!Vue.config.silent) {
+  if (Vue.config.devtools && !Vue.config.silent) {
     Vue.mixin({
       beforeCreate() {
         if (this.$options.template) {
@@ -47,8 +47,10 @@ const install = (Vue, params = {}) => {
    */
   Vue.prototype.$ons = Object.keys(ons)
     .filter(k => [
+      /^is/,
       /^disable/,
       /^enable/,
+      /^mock/,
       /^open/,
       /^set/,
       /animit/,

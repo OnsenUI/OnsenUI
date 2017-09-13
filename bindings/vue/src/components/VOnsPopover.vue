@@ -1,14 +1,14 @@
 <template>
-  <ons-popover>
+  <ons-popover v-on="unrecognizedListeners">
     <slot></slot>
   </ons-popover>
 </template>
 
 <script>
-  import { hidable, hasOptions, dialogCancel, modifier, deriveEvents, deriveDBB, portal } from '../mixins';
+  import { hidable, hasOptions, dialogCancel, deriveEvents, deriveDBB, portal } from '../mixins';
 
   export default {
-    mixins: [hidable, hasOptions, dialogCancel, modifier, deriveEvents, deriveDBB, portal],
+    mixins: [hidable, hasOptions, dialogCancel, deriveEvents, deriveDBB, portal],
 
     props: {
       target: {

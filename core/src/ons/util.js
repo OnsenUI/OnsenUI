@@ -17,6 +17,7 @@ limitations under the License.
 
 import internal from './internal';
 import autoStyle from './autostyle';
+import ModifierUtil from './internal/modifier-util';
 import animationOptionsParse from './animation-options-parser';
 
 const util = {};
@@ -84,15 +85,7 @@ util.findParent = (element, query, until) => {
  * @param {Element} element
  * @return {boolean}
  */
-util.isAttached = (element) => {
-  while (document.documentElement !== element) {
-    if (!element) {
-      return false;
-    }
-    element = element.parentNode;
-  }
-  return true;
-};
+util.isAttached = element => document.body.contains(element);
 
 /**
  * @param {Element} element
@@ -309,7 +302,8 @@ util.hasModifier = (target, modifierName) => {
   if (!target.hasAttribute('modifier')) {
     return false;
   }
-  return target.getAttribute('modifier').split(/\s+/).some(e => e === modifierName);
+
+  return RegExp(`(^|\\s+)${modifierName}($|\\s+)`, 'i').test(target.getAttribute('modifier'));
 };
 
 /**
@@ -328,9 +322,7 @@ util.addModifier = (target, modifierName, options = {}) => {
     return false;
   }
 
-  modifierName = modifierName.trim();
-  const modifierAttribute = target.getAttribute('modifier') || '';
-  target.setAttribute('modifier', (modifierAttribute + ' ' + modifierName).trim());
+  target.setAttribute('modifier', ((target.getAttribute('modifier') || '') + ' ' + modifierName).trim());
   return true;
 };
 
@@ -342,20 +334,17 @@ util.addModifier = (target, modifierName, options = {}) => {
  * @return {Boolean} Whether it was found or not.
  */
 util.removeModifier = (target, modifierName, options = {}) => {
-  if (!target.getAttribute('modifier')) {
-    return false;
-  }
-
   if (options.autoStyle) {
     modifierName = autoStyle.mapModifier(modifierName, target, options.forceAutoStyle);
   }
 
-  const modifiers = target.getAttribute('modifier').split(/\s+/);
+  if (!target.getAttribute('modifier') || !util.hasModifier(target, modifierName)) {
+    return false;
+  }
 
-  const newModifiers = modifiers.filter(item => item && item !== modifierName);
-  target.setAttribute('modifier', newModifiers.join(' '));
-
-  return modifiers.length !== newModifiers.length;
+  const newModifiers = target.getAttribute('modifier').split(/\s+/).filter(m => m && m !== modifierName);
+  newModifiers.length ? target.setAttribute('modifier', newModifiers.join(' ')) : target.removeAttribute('modifier');
+  return true;
 };
 
 /**
@@ -374,6 +363,16 @@ util.toggleModifier = (...args) => {
   toggle ? util.addModifier(...args) : util.removeModifier(...args)
 };
 
+/**
+ * @param {Element} el
+ * @param {String} defaultClass
+ * @param {Object} scheme
+ */
+util.restoreClass = (el, defaultClass, scheme) => {
+  defaultClass.split(/\s+/).forEach(c => !el.classList.contains(c) && el.classList.add(c));
+  el.hasAttribute('modifier') && ModifierUtil.refresh(el, scheme);
+}
+
 // TODO: FIX
 util.updateParentPosition = (el) => {
   if (!el._parentUpdated && el.parentElement) {
@@ -386,7 +385,7 @@ util.updateParentPosition = (el) => {
 
 util.toggleAttribute = (element, name, value) => {
   if (value) {
-    element.setAttribute(name, value);
+    element.setAttribute(name, typeof value === 'boolean' ? '' : value);
   } else {
     element.removeAttribute(name);
   }
@@ -462,5 +461,15 @@ util.warn = (...args) => {
     console.warn(...args);
   }
 };
+
+util.preventScroll = gd => {
+  const prevent = e => e.cancelable && e.preventDefault();
+  gd.on('touchmove', prevent, true);
+  const clean = e => {
+    gd.off('touchmove', prevent, true);
+    gd.off('touchend', clean, true);
+  };
+  gd.on('touchend', clean, true);
+}
 
 export default util;

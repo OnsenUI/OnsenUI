@@ -54,10 +54,7 @@ class Tabbar extends BasicComponent {
     node.addEventListener('prechange', this.onPreChange);
     node.addEventListener('postchange', this.onPostChange);
     node.addEventListener('reactive', this.onReactive);
-
-    setTimeout(() => {
-      node.setActiveTab(this.props.index);
-    }, 0);
+    node.onSwipe = this.props.onSwipe || null;
   }
 
   componentWillUnmount() {
@@ -69,35 +66,42 @@ class Tabbar extends BasicComponent {
 
   componentDidUpdate(prevProps) {
     super.componentDidUpdate(prevProps);
-    if (prevProps.index !== this.props.index) {
-      this._tabbar.setActiveTab(this.props.index);
+    const node = this._tabbar;
+    if (this.props.index !== node.getActiveTabIndex()) {
+      node.setActiveTab(this.props.index);
+    }
+    if (this.props.onSwipe !== prevProps.onSwipe) {
+      node.onSwipe = this.props.onSwipe;
     }
   }
 
   render() {
-    const tabs = this.props.renderTabs(this.props.index, this);
+    const {...props} = this.props;
+    const tabs = props.renderTabs(props.index, this);
 
     if (!this.tabPages) {
       this.tabPages = tabs.map((tab) => tab.content);
     } else {
-      this.tabPages[this.props.index] = tabs[this.props.index].content;
+      this.tabPages[props.index] = tabs[props.index].content;
     }
 
-    var {...others} = this.props;
+    props.activeIndex = props.index; // Tabbar's initial index
 
-    ['animation'].forEach((el) => {
-      Util.convert(others, el);
-    });
-
-    Util.convert(others, 'animationOptions', {fun: Util.animationOptionsConverter, newName: 'animation-options'});
+    ['animation', 'swipeable'].forEach(el => Util.convert(props, el));
+    Util.convert(props, 'animationOptions', {fun: Util.animationOptionsConverter, newName: 'animation-options'});
+    Util.convert(props, 'tabBorder', {newName: 'tab-border'});
 
     return (
-      <ons-tabbar {...this.props} ref={(tabbar) => { this._tabbar = tabbar; }}>
-        <div className={'ons-tabbar__content tabbar__content' + (this.props.position === 'top' ? ' tabbar--top__content' : '')}>
-          {this.tabPages}
+      <ons-tabbar {...props} ref={(tabbar) => { this._tabbar = tabbar; }}>
+        <div className={'ons-tabbar__content tabbar__content' + (props.position === 'top' ? ' tabbar--top__content' : '')}>
+          <div>
+            {this.tabPages}
+          </div>
+          <div></div>
         </div>
-        <div className={'tabbar ons-tabbar__footer ons-tabbar-inner' + (this.props.position === 'top' ? ' tabbar--top' : '')}>
+        <div className={'tabbar ons-tabbar__footer ons-tabbar-inner' + (props.position === 'top' ? ' tabbar--top' : '')}>
           {tabs.map((tab) => tab.tab)}
+          <div className='tabbar__border'></div>
         </div>
       </ons-tabbar>
     );
@@ -134,13 +138,22 @@ Tabbar.propTypes = {
   position: PropTypes.string,
 
   /**
+   * @name swipeable
+   * @type bool
+   * @description
+   *  [en]Ennable swipe interaction.[/en]
+   *  [ja][/ja]
+   */
+  swipeable: PropTypes.bool,
+
+  /**
    * @name animation
    * @type string
    * @description
-   *  [en] Animation name. Available values are `"none"`, `"slide"` and `"fade"`. Default is `"none"`. [/en]
+   *  [en]If this attribute is set to `"none"` the transitions will not be animated.[/en]
    *  [ja][/ja]
    */
-  animation: PropTypes.oneOf(['none', 'slide', 'fade']),
+  animation: PropTypes.oneOf(['none', 'slide']),
 
   /**
    * @name animationOptions
@@ -151,6 +164,15 @@ Tabbar.propTypes = {
    *  [ja][/ja]
    */
   animationOptions: PropTypes.object,
+
+  /**
+   * @name tabBorder
+   * @type bool
+   * @description
+   *  [en]If true, the tabs show a dynamic bottom border. Only works for iOS since the border is always visible in Material Design.[/en]
+   *  [ja][/ja]
+   */
+  tabBorder: PropTypes.bool,
 
   /**
    * @name onPreChange
@@ -177,7 +199,16 @@ Tabbar.propTypes = {
    *  [en]Called if the already open tab is tapped again.[/en]
    *  [ja][/ja]
    */
-  onReactive: PropTypes.func
+  onReactive: PropTypes.func,
+
+  /**
+   * @name onSwipe
+   * @type function
+   * @description
+   *  [en]Hook called whenever the user slides the tabbar. It gets a decimal index and an animationOptions object as arguments.[/en]
+   *  [ja][/ja]
+   */
+  onSwipe: PropTypes.func
 };
 
 Tabbar.defaultProps = {

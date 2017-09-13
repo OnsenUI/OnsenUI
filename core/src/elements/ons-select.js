@@ -153,9 +153,7 @@ export default class SelectElement extends BaseElement {
   attributeChangedCallback(name, last, current) {
     switch (name) {
       case 'class':
-        if (!this.classList.contains(defaultClassName)) {
-          this.className = defaultClassName + ' ' + current;
-        }
+        util.restoreClass(this, defaultClassName, scheme);
         break;
       case 'modifier':
         ModifierUtil.onModifierChanged(last, current, this, scheme);
@@ -169,10 +167,6 @@ export default class SelectElement extends BaseElement {
 
   get _select() {
     return this.querySelector('select');
-  }
-
-  static get events() {
-    return ['change'];
   }
 
   _updateBoundAttributes() {

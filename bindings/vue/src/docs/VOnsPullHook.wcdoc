@@ -7,6 +7,13 @@
  * @type {Function}
  * @description
  *   [en]This will be called in the `action` state if exists. The function will be given a `done` callback as it's first argument.[/en]
- *   [ja]どうしょう[/ja]
+ *   [ja][/ja]
  */
 
+/**
+ * @attribute on-pull
+ * @type {Function}
+ * @description
+ *   [en]Hook called whenever the element is pulled. It gets the pulled distance ratio (scroll / height) and an animationOptions object as arguments.[/en]
+ *   [ja][/ja]
+ */

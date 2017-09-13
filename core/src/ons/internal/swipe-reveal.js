@@ -15,6 +15,7 @@ limitations under the License.
 
 */
 
+import util from '../../ons/util';
 import GestureDetector from '../../ons/gesture-detector';
 
 const widthToPx = (width) => {
@@ -50,10 +51,12 @@ export default class SwipeReveal {
   }
 
   handleGesture(e) {
-    if (e.type === 'dragstart') {
-      this.onDragStart(e);
-    } else if (!this._ignoreDrag) {
-      e.type === 'dragend' ? this.onDragEnd(e) : this.onDrag(e);
+    if (e.gesture) {
+      if (e.type === 'dragstart') {
+        this.onDragStart(e);
+      } else if (!this._ignoreDrag) {
+        e.type === 'dragend' ? this.onDragEnd(e) : this.onDrag(e);
+      }
     }
   }
 
@@ -68,6 +71,8 @@ export default class SwipeReveal {
 
       this._width = widthToPx(this.element._width || '100%');
       this._startDistance = this._distance = 0;
+
+      util.preventScroll(this.gestureDetector);
     }
   }
 

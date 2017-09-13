@@ -48,7 +48,8 @@ export class PageComponent {
     <div class="content">
       <div id="message">{{msg}}</div>
       <div style="text-align: center; margin: 10px">
-        <ons-button id="push" (click)="push(navi)">push (no animation)</ons-button>
+      <ons-button id="push" (click)="push(navi)">push</ons-button><br>
+      <ons-button id="push-with-no-animation" (click)="pushWithNoAnimation(navi)">push (no animation)</ons-button>
       </div>
     </div>
   `
@@ -58,16 +59,20 @@ export class DefaultPageComponent {
 
   constructor(private _navigator: OnsNavigator) {
   }
-
-  push() {
-    this._navigator.nativeElement.pushPage(PageComponent, {data: {hoge: "fuga"}});
-  }
+  
+    push() {
+      this._navigator.nativeElement.pushPage(PageComponent, {data: {hoge: "fuga"}});
+    }
+    
+    pushWithNoAnimation() {
+      this._navigator.nativeElement.pushPage(PageComponent, {animation: 'none', data: {hoge: "fuga"}});
+    }
 }
 
 @Component({
   selector: 'app',
   template: `
-  <ons-navigator animation="none" [page]="page"></ons-navigator>
+  <ons-navigator animation="slide" swipeable [page]="page"></ons-navigator>
   `
 })
 export class AppComponent {

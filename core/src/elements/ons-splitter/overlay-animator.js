@@ -21,6 +21,8 @@ import SplitterAnimator from './animator.js';
 export default class OverlaySplitterAnimator extends SplitterAnimator {
 
   translate(distance) {
+    this._mask.style.display = 'block'; // Avoid content clicks
+
     animit(this._side)
       .queue({
         transform: `translate3d(${this.minus + distance}px, 0px, 0px)`

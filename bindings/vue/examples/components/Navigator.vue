@@ -3,8 +3,13 @@
     <v-ons-navigator swipeable
       :page-stack="pageStack"
       :options="{animation: 'slide'}"
+      @postpush="log('postpush!')"
+      @show="log('show from navigator!')"
+
+      @push="pageStack = [...pageStack, $event]"
+      @reset="pageStack = [pageStack[0]]"
+      @pop="pageStack.pop()"
     >
-      <div v-for="page in pageStack" :key="page" :is="page" :page-stack="pageStack"></div>
     </v-ons-navigator>
   </v-ons-page>
 </template>
@@ -15,7 +20,7 @@
   const myToolbar = {
     template: `
     <v-ons-toolbar>
-      <div class="left"><v-ons-back-button>Back</v-ons-back-button></div>,
+      <div class="left"><v-ons-back-button>Back</v-ons-back-button></div>
       <div class="center"><slot></slot></div>
     </v-ons-toolbar>
     `,
@@ -23,6 +28,7 @@
   };
 
   const page3 = {
+    name: 'page3',
     template: `
       <v-ons-page p3>
         <my-toolbar>Page 3</my-toolbar>
@@ -34,20 +40,20 @@
     methods: {
       log,
       replace() {
-        this.pageStack.pop();
-        this.pageStack.push(page1);
+        this.$emit('pop');
+        this.$emit('push', page1);
       },
       reset() {
-        this.pageStack.splice(1, this.pageStack.length - 1);
+        this.$emit('reset')
       }
     },
     components: { myToolbar },
-    props: ['pageStack']
   };
 
   const page2 = {
+    name: 'page2',
     template: `
-      <v-ons-page p2>
+      <v-ons-page p2 @init="log('init!')">
         <my-toolbar>Page 2</my-toolbar>
         Page 2
         <v-ons-button @click="push">Push 3 pages</v-ons-button>
@@ -56,24 +62,20 @@
     methods: {
       log,
       push() {
-        this.pageStack.push(page3);
-        this.pageStack.push(page3);
-        this.pageStack.push(page3);
-        this.$nextTick(() => this.navigator.isReady().then(() => {
-          console.log('is ready');
-        }));
+        this.$emit('push', page3);
+        this.$emit('push', page3);
+        this.$emit('push', page3);
       }
     },
     components: { myToolbar },
-    inject: ['navigator'],
-    props: ['pageStack'],
     mounted() {
     }
   };
 
   const page1 = {
+    name: 'page1',
     template: `
-      <v-ons-page p1>
+      <v-ons-page p1 @deviceBackButton="log($event)" @show="log('showing p1')">
         <my-toolbar>Page 1</my-toolbar>
         Page 1
         <v-ons-button @click="push">Push</v-ons-button>
@@ -82,11 +84,10 @@
     methods: {
       log,
       push() {
-        this.pageStack.push(page2)
+        this.$emit('push', page2);
       }
     },
     components: { myToolbar },
-    props: ['pageStack'],
     mounted() {
     }
   };

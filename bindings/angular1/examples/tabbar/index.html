@@ -48,31 +48,28 @@
 
   <body>
 
-    <ons-tabbar ng-controller="MyController" var="tabbar">
-      <ons-tab page="page1.html" active="true">
-        <div ons-tab-active>
-          HOME
-        </div>
-        <div ons-tab-inactive>
-          home
-        </div>
-      </ons-tab>
-      <ons-tab
-        icon="ion-chatbox-working"
-        ng-click="comments = 0"
-        label="Comments"
-        ng-attr-badge="{{ comments ? comments : null }}"
-        page="page2.html"></ons-tab>
-      <ons-tab
-        icon="ion-ios-cog"
-        label="Settings"
-        page="page3.html"></ons-tab>
-    </ons-tabbar>
+    <ons-page>
+      <ons-tabbar ng-controller="MyController" var="tabbar" swipeable>
+        <ons-tab page="page1.html" active label="Home"></ons-tab>
+        <ons-tab
+          icon="ion-chatbox-working"
+          ng-click="comments = 0"
+          label="Comments"
+          ng-attr-badge="{{ comments ? comments : null }}"
+          page="page2.html"></ons-tab>
+        <ons-tab
+          icon="ion-ios-cog"
+          label="Settings"
+          page="page3.html"></ons-tab>
+      </ons-tabbar>
+    </ons-page>
 
     <script type="text/ons-template" id="page3.html">
-      <ons-toolbar>
-        <div class="center">Page3</div>
-      </ons-toolbar>
+      <ons-page>
+        <ons-toolbar>
+          <div class="center">Page3</div>
+        </ons-toolbar>
+      </ons-page>
     </script>
 
   </body>

@@ -85,9 +85,11 @@ notification._createAlertDialog = options => {
   options.buttonLabels.forEach((label, index) => {
     buttons += `
       <ons-alert-dialog-button
-        ${index === options.primaryButtonIndex ? ' alert-dialog-button--primal' : ''}
-        ${options.buttonLabels.length <= 2 ? ' alert-dialog-button--rowfooter' : ''}
-      " style="position: relative;">
+        class="
+          ${index === options.primaryButtonIndex ? ' alert-dialog-button--primal' : ''}
+          ${options.buttonLabels.length <= 2 ? ' alert-dialog-button--rowfooter' : ''}
+        " 
+        style="position: relative;">
         ${label}
       </ons-alert-dialog-button>
     `;
@@ -378,8 +380,8 @@ notification.confirm = (message, options) => {
  *   [en]Type of the input element (`password`, `date`...). Default is `text`.[/en]
  *   [ja][/ja]
  * @param {Boolean} [options.autofocus]
- *   [en]Autofocus the input element. Default is `true`.[/en]
- *   [ja]input要素に自動的にフォーカスするかどうかを指定します。デフォルトはtrueです。[/ja]
+ *   [en]Autofocus the input element. Default is `true`. In Cordova, `KeyboardDisplayRequiresUserAction` in `config.xml` must be `false` to activate this feature.[/en]
+ *   [ja]input要素に自動的にフォーカスするかどうかを指定します。デフォルトはtrueです。Cordova環境では、この機能を有効にするためには `config.xml` で `KeyboardDisplayRequiresUserAction` を `false` に設定する必要があります。[/ja]
  * @param {Boolean} [options.submitOnEnter]
  *   [en]Submit automatically when enter is pressed. Default is `true`.[/en]
  *   [ja]Enterが押された際にそのformをsubmitするかどうかを指定します。デフォルトはtrueです。[/ja]

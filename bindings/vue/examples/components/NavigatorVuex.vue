@@ -77,13 +77,9 @@
     methods: {
       push() {
         this.$store.commit('pushPage', [page3, page3, page3]);
-        this.$nextTick(() => this.navigator.isReady().then(() => {
-          console.log('is ready');
-        }));
       }
     },
     components: { myToolbar },
-    inject: ['navigator'],
     mounted() {
     }
   };

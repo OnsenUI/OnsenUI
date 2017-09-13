@@ -1,4 +1,4 @@
-import { eventToHandler, handlerToProp } from '../internal/util';
+import { capitalize, camelize, eventToHandler, handlerToProp } from '../internal/util';
 
 /* Private */
 const _setupDBB = component => {
@@ -43,8 +43,8 @@ const deriveDBB = {
 };
 
 // These handlers cannot throw events for performance reasons.
-const deriveHandler = handlerName => {
-  const propName = handlerToProp(handlerName);
+const deriveHandler = (handlerName, keepName = false) => {
+  const propName = keepName ? handlerName : handlerToProp(handlerName);
 
   return {
     props: {
@@ -67,6 +67,18 @@ const deriveHandler = handlerName => {
 };
 
 const deriveEvents = {
+  computed: {
+    unrecognizedListeners() {
+      const element = capitalize(camelize(this.$options._componentTag.slice(6))) + 'Element';
+      return Object.keys(this.$listeners || {})
+        .filter(k => (this.$ons[element].events || []).indexOf(k) === -1)
+        .reduce((r, k) => {
+          r[k] = this.$listeners[k];
+          return r;
+        }, {});
+    }
+  },
+
   mounted() {
     this._handlers = {};
 

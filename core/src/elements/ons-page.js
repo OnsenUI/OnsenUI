@@ -226,20 +226,20 @@ export default class PageElement extends BaseElement {
    *  [ja][/ja]
    */
   set onInfiniteScroll(value) {
-    if (value === null) {
-      this._onInfiniteScroll = null;
-      this._contentElement.removeEventListener('scroll', this._boundOnScroll);
-      return;
-    }
-    if (!(value instanceof Function)) {
+    if (value && !(value instanceof Function)) {
       throw new Error('onInfiniteScroll must be a function or null');
     }
-    if (!this._onInfiniteScroll) {
-      this._infiniteScrollLimit = 0.9;
-      this._boundOnScroll = this._onScroll.bind(this);
-      setImmediate(() => this._contentElement.addEventListener('scroll', this._boundOnScroll));
-    }
-    this._onInfiniteScroll = value;
+
+    contentReady(this, () => {
+      if (!value) {
+        this._contentElement.removeEventListener('scroll', this._boundOnScroll);
+      } else if (!this._onInfiniteScroll) {
+        this._infiniteScrollLimit = 0.9;
+        this._boundOnScroll = this._onScroll.bind(this);
+        setImmediate(() => this._contentElement.addEventListener('scroll', this._boundOnScroll));
+      }
+      this._onInfiniteScroll = value;
+    });
   }
 
   get onInfiniteScroll() {
@@ -338,9 +338,7 @@ export default class PageElement extends BaseElement {
   attributeChangedCallback(name, last, current) {
     switch (name) {
       case 'class':
-        if (!this.classList.contains(defaultClassName)) {
-          this.className = defaultClassName + ' ' + current;
-        }
+        util.restoreClass(this, defaultClassName, scheme);
         break;
       case 'modifier':
         ModifierUtil.onModifierChanged(last, current, this, scheme);

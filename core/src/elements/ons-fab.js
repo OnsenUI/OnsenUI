@@ -35,6 +35,9 @@ const scheme = {
  *   [/en]
  *   [ja][/ja]
  * @tutorial vanilla/Reference/fab
+ * @modifier mini
+ *   [en]Makes the `ons-fab` smaller.[/en]
+ *   [ja][/ja]
  * @guide cross-platform-styling [en]Information about cross platform styling[/en][ja]Information about cross platform styling[/ja]
  * @seealso ons-speed-dial
  *   [en]The `<ons-speed-dial>` component is a Floating action button that displays a menu when tapped.[/en]
@@ -118,9 +121,7 @@ export default class FabElement extends BaseElement {
   attributeChangedCallback(name, last, current) {
     switch (name) {
       case 'class':
-        if (!this.classList.contains(defaultClassName)) {
-          this.className = defaultClassName + ' ' + current;
-        }
+        util.restoreClass(this, defaultClassName, scheme);
         break;
       case 'modifier':
         ModifierUtil.onModifierChanged(last, current, this, scheme);

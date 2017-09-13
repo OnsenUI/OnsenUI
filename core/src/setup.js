@@ -63,6 +63,7 @@ ons.IfElement = IfElement;
 ons.ActionSheetElement = ActionSheetElement;
 ons.ActionSheetButtonElement = ActionSheetButtonElement;
 ons.AlertDialogElement = AlertDialogElement;
+ons.AlertDialogButtonElement = AlertDialogButtonElement;
 ons.BackButtonElement = BackButtonElement;
 ons.BottomToolbarElement = BottomToolbarElement;
 ons.ButtonElement = ButtonElement;
@@ -114,8 +115,8 @@ window.addEventListener('load', () => {
     ons.fastClick = FastClick.attach(document.body);
 }, false);
 
-// ons._defaultDeviceBackButtonHandler
-window.addEventListener('DOMContentLoaded', () => {
+ons.ready(function() {
+  // ons._defaultDeviceBackButtonHandler
   ons._deviceBackButtonDispatcher.enable();
   ons._defaultDeviceBackButtonHandler = ons._deviceBackButtonDispatcher.createHandler(window.document.body, () => {
     if (Object.hasOwnProperty.call(navigator, 'app')) {
@@ -125,11 +126,6 @@ window.addEventListener('DOMContentLoaded', () => {
     }
   });
   document.body._gestureDetector = new ons.GestureDetector(document.body);
-}, false);
-
-// setup loading placeholder
-ons.ready(function() {
-  ons._setupLoadingPlaceHolders();
 
   // Simulate Device Back Button on ESC press
   if (!ons.platform.isWebView()) {
@@ -139,6 +135,9 @@ ons.ready(function() {
       }
     })
   }
+
+  // setup loading placeholder
+  ons._setupLoadingPlaceHolders();
 });
 
 // viewport.js

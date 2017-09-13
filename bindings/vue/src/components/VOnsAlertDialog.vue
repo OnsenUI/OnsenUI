@@ -1,5 +1,5 @@
 <template>
-  <ons-alert-dialog>
+  <ons-alert-dialog v-on="unrecognizedListeners">
     <div class="alert-dialog-title">
       <slot name="title">{{title}}</slot>
     </div>
@@ -8,17 +8,17 @@
     </div>
     <div class="alert-dialog-footer">
       <slot name="footer">
-        <button v-for="(handler, key) in footer" :key="key" class="alert-dialog-button" @click="handler">{{key}}</button>
+        <ons-alert-dialog-button v-for="(handler, key) in footer" :key="key" @click="handler">{{key}}</ons-alert-dialog-button>
       </slot>
     </div>
   </ons-alert-dialog>
 </template>
 
 <script>
-  import { hidable, hasOptions, dialogCancel, modifier, deriveEvents, deriveDBB, portal } from '../mixins';
+  import { hidable, hasOptions, dialogCancel, deriveEvents, deriveDBB, portal } from '../mixins';
 
   export default {
-    mixins: [hidable, hasOptions, dialogCancel, modifier, deriveEvents, deriveDBB, portal],
+    mixins: [hidable, hasOptions, dialogCancel, deriveEvents, deriveDBB, portal],
 
     props: {
       title: {

@@ -270,6 +270,7 @@ class Navigator extends BasicComponent {
     node.addEventListener('prepop', this._prePop);
     node.addEventListener('postpop', this._postPop);
 
+    node.swipeMax = this.props.swipePop;
     node.onDeviceBackButton = this.props.onDeviceBackButton || this._onDeviceBackButton.bind(this);
 
     if (this.props.initialRoute && this.props.initialRouteStack) {
@@ -290,6 +291,12 @@ class Navigator extends BasicComponent {
     this.forceUpdate();
   }
 
+  componentWillReceiveProps(newProps) {
+    if (newProps.onDeviceBackButton !== undefined) {
+      this._navi.onDeviceBackButton = newProps.onDeviceBackButton;
+    }
+  }
+
   componentWillUnmount() {
     const node = this._navi;
     node.removeEventListener('prepush', this.props.onPrePush);
@@ -301,11 +308,10 @@ class Navigator extends BasicComponent {
   render() {
     const {...others} = this.props;
     Util.convert(others, 'animationOptions', {fun: Util.animationOptionsConverter, newName: 'animation-options'});
-    const pages = this.routes ? this.routes.map((route) => this.props.renderPage(route, this)) : null;
 
     return (
       <ons-navigator {...others} ref={(navi) => { this._navi = navi; }}>
-        {pages}
+        {this.pages}
       </ons-navigator>
     );
   }
@@ -354,7 +360,8 @@ Navigator.propTypes = {
    * @type function
    * @required false
    * @description
-   *  [en]Called just before a page is pushed.[/en]
+   *  [en]Called just before a page is pushed. It gets an event object with route information.[/en]
+   *  [ja][/ja]
    */
   onPrePush: PropTypes.func,
 
@@ -363,7 +370,8 @@ Navigator.propTypes = {
    * @type function
    * @required false
    * @description
-   *  [en]Called just after a page is pushed.[/en]
+   *  [en]Called just after a page is pushed. It gets an event object with route information.[/en]
+   *  [ja][/ja]
    */
   onPostPush: PropTypes.func,
 
@@ -372,7 +380,7 @@ Navigator.propTypes = {
    * @type function
    * @required false
    * @description
-   *  [en]Called just before a page is popped.[/en]
+   *  [en]Called just before a page is popped. It gets an event object with route information.[/en]
    */
   onPrePop: PropTypes.func,
 
@@ -381,7 +389,8 @@ Navigator.propTypes = {
    * @type function
    * @required false
    * @description
-   *  [en]Called just after a page is popped.[/en]
+   *  [en]Called just after a page is popped. It gets an event object with route information.[/en]
+   *  [ja][/ja]
    */
   onPostPop: PropTypes.func,
 
@@ -393,6 +402,7 @@ Navigator.propTypes = {
    *     Animation name. Available animations are `"slide"`, `"lift"`, `"fade"` and `"none"`.
    *     These are platform based animations. For fixed animations, add `"-ios"` or `"-md"` suffix to the animation name. E.g. `"lift-ios"`, `"lift-md"`. Defaults values are `"slide-ios"` and `"fade-md"`.
    *   [/en]
+   *   [ja][/ja]
    */
   animation: PropTypes.string,
 
@@ -406,13 +416,30 @@ Navigator.propTypes = {
   animationOptions: PropTypes.object,
 
   /**
+   * @name swipeable
+   * @type bool|string
+   * @required false
+   * @description
+   *  [en]Enables swipe-to-pop functionality for iOS.[/en]
+   *  [ja][/ja]
+   */
+  swipeable: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
+
+  /**
+   * @name swipePop
+   * @type function
+   * @required false
+   * @description
+   *  [en]Optional function called on swipe-to-pop. If provided, must perform a popPage with the given options object.[/en]
+   *  [ja][/ja]
+   */
+  swipePop: PropTypes.func,
+  /**
    * @name onDeviceBackButton
    * @type function
    * @required false
    * @description
-   *  [en]
-   *  Custom handler for device back button.
-   *  [/en]
+   *  [en]Custom handler for device back button.[/en]
    *  [ja][/ja]
    */
   onDeviceBackButton: PropTypes.func

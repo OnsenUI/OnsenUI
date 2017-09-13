@@ -81,7 +81,7 @@ describe('OnsPullHookElement', () => {
       const spy = chai.spy.on(pullHook, '_translateTo');
 
       pullHook.setAttribute('disabled', '');
-      pullHook._onDrag();
+      pullHook._onDrag(event);
 
       expect(spy).not.to.have.been.called();
     });
@@ -247,17 +247,6 @@ describe('OnsPullHookElement', () => {
       expect(pullHook.hasAttribute('disabled')).to.be.false;
       pullHook.disabled = true;
       expect(pullHook.hasAttribute('disabled')).to.be.true;
-    });
-  });
-
-  describe('#_isContentFixed()', () => {
-    it('returns true if the pull hook is fixed', () => {
-      pullHook.setAttribute('fixed-content', '');
-      expect(pullHook._isContentFixed()).to.be.true;
-    });
-
-    it('returns false if the pull hook is not fixed', () => {
-      expect(pullHook._isContentFixed()).to.be.false;
     });
   });
 

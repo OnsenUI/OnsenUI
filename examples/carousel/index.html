@@ -13,10 +13,6 @@
   </script>
 
   <style>
-    ons-carousel-item {
-      display: table;
-      text-align: center;
-    }
     .item-label {
       display: table-cell;
       vertical-align: middle;
@@ -33,9 +29,15 @@
 
   <ons-page>
     <ons-toolbar>
+      <div class="left">
+        <ons-toolbar-button onclick="myCarousel.prev()">-</ons-toolbar-button>
+      </div>
       <div class="center">Carousel</div>
+      <div class="right">
+        <ons-toolbar-button onclick="myCarousel.next()">+</ons-toolbar-button>
+      </div>
     </ons-toolbar>
-    <ons-carousel swipeable overscrollable auto-scroll fullscreen auto-scroll-ratio="0.2">
+    <ons-carousel id="myCarousel" initial-index="2" swipeable overscrollable auto-scroll auto-refresh fullscreen auto-scroll-ratio="0.2">
       <ons-carousel-item style="background-color: gray;">
         <div class="item-label">GRAY</div>
       </ons-carousel-item>

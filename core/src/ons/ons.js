@@ -99,7 +99,7 @@ ons.isWebView = ons.platform.isWebView;
  * @signature ready(callback)
  * @description
  *   [ja]アプリの初期化に利用するメソッドです。渡された関数は、Onsen UIの初期化が終了している時点で必ず呼ばれます。[/ja]
- *   [en]Method used to wait for app initialization. The callback will not be executed until Onsen UI has been completely initialized.[/en]
+ *   [en]Method used to wait for app initialization. Waits for `DOMContentLoaded` and `deviceready`, when necessary, before executing the callback.[/en]
  * @param {Function} callback
  *   [en]Function that executes after Onsen UI has been initialized.[/en]
  *   [ja]Onsen UIが初期化が完了した後に呼び出される関数オブジェクトを指定します。[/ja]
@@ -116,13 +116,16 @@ ons.ready = callback => {
  * @method setDefaultDeviceBackButtonListener
  * @signature setDefaultDeviceBackButtonListener(listener)
  * @param {Function} listener
- *   [en]Function that executes when device back button is pressed.[/en]
+ *   [en]Function that executes when device back button is pressed. Must be called on `ons.ready`.[/en]
  *   [ja]デバイスのバックボタンが押された時に実行される関数オブジェクトを指定します。[/ja]
  * @description
  *   [en]Set default handler for device back button.[/en]
  *   [ja]デバイスのバックボタンのためのデフォルトのハンドラを設定します。[/ja]
  */
 ons.setDefaultDeviceBackButtonListener = function(listener) {
+  if (!ons.isReady()) {
+    throw new Error('This method must be called after ons.isReady() is true.');
+  }
   ons._defaultDeviceBackButtonHandler.setListener(listener);
 };
 
@@ -130,10 +133,13 @@ ons.setDefaultDeviceBackButtonListener = function(listener) {
  * @method disableDeviceBackButtonHandler
  * @signature disableDeviceBackButtonHandler()
  * @description
- * [en]Disable device back button event handler.[/en]
+ * [en]Disable device back button event handler. Must be called on `ons.ready`.[/en]
  * [ja]デバイスのバックボタンのイベントを受け付けないようにします。[/ja]
  */
 ons.disableDeviceBackButtonHandler = function() {
+  if (!ons.isReady()) {
+    throw new Error('This method must be called after ons.isReady() is true.');
+  }
   ons._deviceBackButtonDispatcher.disable();
 };
 
@@ -141,10 +147,13 @@ ons.disableDeviceBackButtonHandler = function() {
  * @method enableDeviceBackButtonHandler
  * @signature enableDeviceBackButtonHandler()
  * @description
- * [en]Enable device back button event handler.[/en]
+ * [en]Enable device back button event handler. Must be called on `ons.ready`.[/en]
  * [ja]デバイスのバックボタンのイベントを受け付けるようにします。[/ja]
  */
 ons.enableDeviceBackButtonHandler = function() {
+  if (!ons.isReady()) {
+    throw new Error('This method must be called after ons.isReady() is true.');
+  }
   ons._deviceBackButtonDispatcher.enable();
 };
 
@@ -153,28 +162,51 @@ ons.enableDeviceBackButtonHandler = function() {
  * @method enableAutoStatusBarFill
  * @signature enableAutoStatusBarFill()
  * @description
- *   [en]Enable status bar fill feature on iOS7 and above.[/en]
+ *   [en]Enable status bar fill feature on iOS7 and above. Must be called before `ons.ready`.[/en]
  *   [ja]iOS7以上で、ステータスバー部分の高さを自動的に埋める処理を有効にします。[/ja]
  */
 ons.enableAutoStatusBarFill = () => {
   if (ons.isReady()) {
     throw new Error('This method must be called before ons.isReady() is true.');
   }
-  ons._internal.config.autoStatusBarFill = true;
+  internal.config.autoStatusBarFill = true;
 };
 
 /**
  * @method disableAutoStatusBarFill
  * @signature disableAutoStatusBarFill()
  * @description
- *   [en]Disable status bar fill feature on iOS7 and above.[/en]
+ *   [en]Disable status bar fill feature on iOS7 and above. Must be called before `ons.ready`.[/en]
  *   [ja]iOS7以上で、ステータスバー部分の高さを自動的に埋める処理を無効にします。[/ja]
  */
 ons.disableAutoStatusBarFill = () => {
   if (ons.isReady()) {
     throw new Error('This method must be called before ons.isReady() is true.');
   }
-  ons._internal.config.autoStatusBarFill = false;
+  internal.config.autoStatusBarFill = false;
+};
+
+/**
+ * @method mockStatusBar
+ * @signature mockStatusBar()
+ * @description
+ *   [en]Creates a static element similar to iOS status bar. Only useful for browser testing. Must be called before `ons.ready`.[/en]
+ *   [ja][/ja]
+ */
+ons.mockStatusBar = () => {
+  if (ons.isReady()) {
+    throw new Error('This method must be called before ons.isReady() is true.');
+  }
+
+  if (!document.body.children[0] || !document.body.children[0].classList.contains('ons-status-bar-mock')) {
+    document.body.insertBefore(util.createElement(`
+      <div class="ons-status-bar-mock">
+        <div style="padding-left: 5px">No SIM</div>
+        <div>12:28 PM</div>
+        <div style="padding-right: 15px">80%</div>
+      </div>
+    `), document.body.firstChild);
+  }
 };
 
 /**
@@ -185,7 +217,7 @@ ons.disableAutoStatusBarFill = () => {
  *   [ja]アニメーションを全て無効にします。テストの際に便利です。[/ja]
  */
 ons.disableAnimations = () => {
-  ons._internal.config.animationsDisabled = true;
+  internal.config.animationsDisabled = true;
 };
 
 /**
@@ -196,15 +228,15 @@ ons.disableAnimations = () => {
  *   [ja]アニメーションを有効にします。[/ja]
  */
 ons.enableAnimations = () => {
-  ons._internal.config.animationsDisabled = false;
+  internal.config.animationsDisabled = false;
 };
 
 ons._disableWarnings = () => {
-  ons._internal.config.warningsDisabled = true;
+  internal.config.warningsDisabled = true;
 };
 
 ons._enableWarnings = () => {
-  ons._internal.config.warningsDisabled = false;
+  internal.config.warningsDisabled = false;
 };
 
 /**
@@ -229,7 +261,7 @@ ons.enableAutoStyling = ons._autoStyle.enable;
  * @method forcePlatformStyling
  * @signature forcePlatformStyling(platform)
  * @description
- *   [en]Refresh styling for the given platform.[/en]
+ *   [en]Refresh styling for the given platform. Only useful for demos. Use `ons.platform.select(...)` instead for development and production.[/en]
  *   [ja][/ja]
  * @param {string} platform New platform to style the elements.
  */
@@ -478,6 +510,19 @@ function waitDeviceReady() {
     }
   }, false);
 }
+
+/**
+ * @method getScriptPage
+ * @signature getScriptPage()
+ * @description
+ *   [en]Access the last created page from the current `script` scope. Only works inside `<script></script>` tags that are direct children of `ons-page` element. Use this to add lifecycle hooks to a page.[/en]
+ *   [ja][/ja]
+ * @return {HTMLElement}
+ *   [en]Returns the corresponding page element.[/en]
+ *   [ja][/ja]
+ */
+const getCS = 'currentScript' in document ? () => document.currentScript : () => document.scripts[document.scripts.length - 1];
+ons.getScriptPage = () => getCS() && /ons-page/i.test(getCS().parentElement.tagName) && getCS().parentElement || null;
 
 window._superSecretOns = ons;
 export default ons;

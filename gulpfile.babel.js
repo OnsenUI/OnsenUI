@@ -126,6 +126,17 @@ gulp.task('core', function(done) {
                 plugins: ['add-module-exports']
               }
               // options for the loader
+            },
+
+            {
+              test: /\.svg$/,
+              loader: 'svg-inline-loader',
+              options: {
+                removingTags: ['title', 'desc', 'defs'],
+                removeSVGTagAttrs: false,
+                removingTagAttrs: ['fill'],
+                idPrefix: true
+              }
             }
           ]
         },
@@ -590,7 +601,6 @@ gulp.task('prepare', ['html2js'], () =>  {
     ])
       .pipe(gulp.dest('build/css-components-src/')),
 
-
     // onsenui.css
     gulp.src([
       'core/css/common.css',
@@ -608,6 +618,11 @@ gulp.task('prepare', ['html2js'], () =>  {
         remove: false, // removing prefixes can cause a bug
       }))
       .pipe($.header('/*! <%= pkg.name %> - v<%= pkg.version %> - ' + dateformat(new Date(), 'yyyy-mm-dd') + ' */\n', {pkg: pkg}))
+      .pipe(gulp.dest('build/css/'))
+      .pipe(gulpIf(CORDOVA_APP, gulp.dest('cordova-app/www/lib/onsen/css')))
+      // onsenui.min.css
+      .pipe($.cssmin({processImport: false}))
+      .pipe($.rename({suffix: '.min'}))
       .pipe(gulp.dest('build/css/'))
       .pipe(gulpIf(CORDOVA_APP, gulp.dest('cordova-app/www/lib/onsen/css'))),
 

@@ -117,7 +117,7 @@ class CollapseMode {
   }
 
   handleGesture(e) {
-    if (!this._active || this._lock.isLocked() || this._isOpenOtherSideMenu()) {
+    if (!e.gesture || !this._active || this._lock.isLocked() || this._isOpenOtherSideMenu()) {
       return;
     }
     if (e.type === 'dragstart') {
@@ -128,20 +128,20 @@ class CollapseMode {
   }
 
   _canConsumeGesture(gesture) {
-    const d = gesture.direction;
     const isOpen = this.isOpen();
-    const validDrag = this._element._side === 'left'
+    const validDrag = d => this._element._side === 'left'
       ? ((d === 'left' && isOpen) || (d === 'right' && !isOpen))
       : ((d === 'left' && !isOpen) || (d === 'right' && isOpen));
 
     const distance = this._element._side === 'left' ? gesture.center.clientX : window.innerWidth - gesture.center.clientX;
     const area = this._element._swipeTargetWidth;
 
-    return validDrag && !(area && distance > area && !isOpen);
+    return validDrag(gesture.direction) && !(area && distance > area && !isOpen);
   }
 
   _onDragStart(event) {
-    this._ignoreDrag = event.consumed || !this._canConsumeGesture(event.gesture);
+    this._ignoreDrag = event.consumed || event.gesture && !this._canConsumeGesture(event.gesture)
+      || !(event.gesture.distance <= 15 || event.gesture.deltaTime <= 100);
 
     if (!this._ignoreDrag) {
       event.consume && event.consume();
@@ -149,6 +149,8 @@ class CollapseMode {
 
       this._width = widthToPx(this._element._width, this._element.parentNode);
       this._startDistance = this._distance = this.isOpen() ? this._width : 0;
+
+      util.preventScroll(this._element._gestureDetector);
     }
   }
 
@@ -520,7 +522,7 @@ export default class SplitterSideElement extends BaseElement {
   }
 
   attributeChangedCallback(name, last, current) {
-    this._update(name, current);
+    this.parentNode && this._update(name, current);
   }
 
   _update(name, value) {

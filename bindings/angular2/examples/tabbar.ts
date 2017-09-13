@@ -54,7 +54,7 @@ export class PageComponent {
 @Component({
   selector: 'app',
   template: `
-  <ons-tabbar>
+  <ons-tabbar swipeable animation="none">
     <div class="tabbar__content"></div>
     <div class="tabbar">
       <ons-tab label="Page1" icon="ion-home" [page]="home" active></ons-tab>

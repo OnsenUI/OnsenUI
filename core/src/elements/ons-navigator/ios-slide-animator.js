@@ -69,14 +69,14 @@ export default class IOSSlideNavigatorTransitionAnimator extends NavigatorTransi
   }
 
   _shouldAnimateToolbar(enterPage, leavePage) {
-    const bothPageHasToolbar =
-      enterPage._canAnimateToolbar() && leavePage._canAnimateToolbar();
+    const enterToolbar = enterPage._getToolbarElement();
+    const leaveToolbar = leavePage._getToolbarElement();
 
-    var noMaterialToolbar =
-      !enterPage._getToolbarElement().classList.contains('toolbar--material') &&
-      !leavePage._getToolbarElement().classList.contains('toolbar--material');
+    const toolbars = enterPage._canAnimateToolbar() && leavePage._canAnimateToolbar();
+    const material = util.hasModifier(enterToolbar, 'material') || util.hasModifier(leaveToolbar, 'material');
+    const transparent = util.hasModifier(enterToolbar, 'transparent') || util.hasModifier(leaveToolbar, 'transparent');
 
-    return bothPageHasToolbar && noMaterialToolbar;
+    return toolbars && !material && !transparent;
   }
 
   _calculateDelta(element, decomposition) {

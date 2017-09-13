@@ -96,7 +96,7 @@
   </ons-page>
 
   <template id="alert.html">
-    <ons-alert-dialog>
+    <ons-alert-dialog modifier="rowfooter">
       <div class="alert-dialog-title">Warning!</div>
       <div class="alert-dialog-content">
         An error has occurred!
@@ -104,6 +104,10 @@
       <div class="alert-dialog-footer">
         <ons-alert-dialog-button onclick="app.close()">Cancel</ons-alert-dialog-button>
         <ons-alert-dialog-button onclick="app.close()">OK</ons-alert-dialog-button>
+        <!-- Old way:
+        <button class="alert-dialog-button" onclick="app.close()">Cancel</button>
+        <button class="alert-dialog-button" onclick="app.close()">OK</button>
+        -->
       </div>
     </ons-alert-dialog>
   </template>

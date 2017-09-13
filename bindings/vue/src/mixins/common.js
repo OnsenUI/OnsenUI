@@ -44,17 +44,6 @@ const hidable = {
   }
 };
 
-// Clickable
-const simpleClick = {
-  mounted() {
-    this._boundOnClick = e => this.$emit('click', e);
-    this.$el.addEventListener('click', this._boundOnClick);
-  },
-  beforeDestroy() {
-    this.$el.removeEventListener('click', this._boundOnClick);
-  }
-};
-
 // Components with 'options' property
 const hasOptions = {
   props: {
@@ -64,43 +53,6 @@ const hasOptions = {
         return {};
       }
     }
-  }
-};
-
-// Components with 'modifier' attribute
-const modifier = {
-  props: {
-    modifier: {
-      type: String,
-      default: ''
-    }
-  },
-
-  methods: {
-    _updateModifier() {
-      const preset = this._md ? ['material'] : [];
-
-      // Remove
-      (this._previousModifier || '').split(/\s+/).concat(preset)
-        .forEach(m => util.removeModifier(this.$el, m, { autoStyle: true }));
-
-      // Add
-      this.modifier.trim().split(/\s+/).concat(preset)
-        .forEach(m => m && util.addModifier(this.$el, m, { autoStyle: true }));
-
-      this._previousModifier = this.modifier;
-    }
-  },
-
-  watch: {
-    modifier() {
-      this._updateModifier();
-    }
-  },
-
-  mounted() {
-    this._md = /^material$/.test(this.$el.getAttribute('modifier'));
-    this._updateModifier();
   }
 };
 
@@ -139,4 +91,4 @@ const portal = {
   }
 };
 
-export { hidable, simpleClick, hasOptions, modifier, selfProvider, dialogCancel, portal };
+export { hidable, hasOptions, selfProvider, dialogCancel, portal };

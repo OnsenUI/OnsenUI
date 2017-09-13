@@ -105,14 +105,28 @@ ons-bottom-toolbar {
   overflow: visible;
 }
 
+.page.overflow-visible .page__content.content-swiping,
+.page.overflow-visible .page__content.content-swiping .page,
+.page.overflow-visible .page__content.content-swiping .page__content {
+  overflow: auto;
+}
+
 .toolbar:not(.toolbar--transparent) + .page__background,
-.toolbar + .page__background + .page__content {
+.toolbar:not(.toolbar--cover-content) + .page__background + .page__content {
   top: 44px;
 }
 
+.toolbar.toolbar--cover-content + .page__background + .page__content {
+  padding-top: 44px;
+}
+
 .toolbar--material:not(.toolbar--transparent) + .page__background,
-.toolbar--material + .page__background + .page__content {
+.toolbar--material:not(.toolbar--cover-content) + .page__background + .page__content {
   top: 56px;
+}
+
+.toolbar--material.toolbar--cover-content + .page__background + .page__content {
+  padding-top: 56px;
 }
 
 .page[status-bar-fill] > .page__content {
@@ -124,12 +138,27 @@ ons-bottom-toolbar {
   box-sizing: content-box;
 }
 
+.page[status-bar-fill] > .toolbar + .page__background,
 .page[status-bar-fill] > .toolbar + .page__background + .page__content {
   top: 64px;
 }
 
+.page[status-bar-fill] > .toolbar--material + .page__background,
 .page[status-bar-fill] > .toolbar--material + .page__background + .page__content {
   top: 76px;
+}
+
+.page[status-bar-fill] > .toolbar.toolbar--transparent + .page__background,
+.page[status-bar-fill] > .toolbar.toolbar--cover-content + .page__background + .page__content {
+  top: 0;
+}
+
+.page[status-bar-fill] > .toolbar.toolbar--cover-content + .page__background + .page__content {
+  padding-top: 64px;
+}
+
+.page[status-bar-fill] > .toolbar--material.toolbar--cover-content + .page__background + .page__content {
+  padding-top: 76px;
 }
 
 ons-tabbar[status-bar-fill] > .tabbar--top__content {
@@ -247,4 +276,25 @@ ons-range > input {
 
 ons-select > select {
   width: 100%;
+}
+
+ons-carousel[disabled] {
+  pointer-events: none;
+  opacity: 0.75;
+}
+
+ons-carousel[fullscreen] {
+  height: 100%;
+}
+
+.ons-status-bar-mock {
+  position: absolute;
+  width: 100%;
+  height: 20px;
+  z-index: 30000;
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  line-height: 20px;
+  font-family: Arial, Helvetica;
 }

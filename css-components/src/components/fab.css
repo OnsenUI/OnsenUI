@@ -24,7 +24,7 @@
     text-decoration: none;
     font-size: 25px;
     line-height: var(--fab-height);
-    letter-spacing: var(--letter-spacing);
+    letter-spacing: 0;
     color: var(--fab-text-color);
     vertical-align: middle;
     text-align: center;
@@ -33,7 +33,7 @@
     border-radius: 50%;
     overflow: hidden;
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.12);
-    transition: all 0.05s linear;
+    transition: all 0.1s linear;
   }
 
   --material-fab: {

@@ -10,6 +10,7 @@ describe('OnsSpeedDialItemElement', () => {
 
   afterEach(() => {
     item.remove();
+    item = null;
   });
 
   it('exists', () => {
@@ -17,16 +18,18 @@ describe('OnsSpeedDialItemElement', () => {
   });
 
   it('provides modifier attribute', () => {
-    item.setAttribute('modifier', 'hoge');
+    ons.modifier.add(item, 'hoge');
     expect(item.classList.contains('speed-dial__item--hoge')).to.be.true;
+    ons.modifier.remove(item, 'hoge');
 
-    item.setAttribute('modifier', ' foo bar');
+    ons.modifier.add(item, 'foo', 'bar');
     expect(item.classList.contains('speed-dial__item--foo')).to.be.true;
     expect(item.classList.contains('speed-dial__item--bar')).to.be.true;
     expect(item.classList.contains('speed-dial__item--hoge')).not.to.be.true;
+    ons.modifier.remove(item, 'foo', 'bar');
 
     item.classList.add('speed-dial__item--piyo');
-    item.setAttribute('modifier', 'fuga');
+    ons.modifier.add(item, 'fuga');
     expect(item.classList.contains('speed-dial__item--piyo')).to.be.true;
     expect(item.classList.contains('speed-dial__item--fuga')).to.be.true;
   });
