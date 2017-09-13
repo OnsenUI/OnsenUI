@@ -529,7 +529,7 @@ export default class TabbarElement extends BaseElement {
   }
 
   _show() {
-    setImmediate(() => this.tabs[this.getActiveTabIndex()].loaded.then(el => el && el._show()))
+    setImmediate(() => this.tabs[this.getActiveTabIndex()].loaded.then(el => el && setImmediate(() => el._show())));
   }
 
   _hide() {
