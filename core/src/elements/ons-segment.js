@@ -121,41 +121,42 @@ export default class SegmentElement extends BaseElement {
 
     this.classList.add(defaultClassName);
 
-    if (this.children && this.children.length > 0) {
-      const buttonArray = util.arrayFrom(this.children);
-      if (buttonArray.some(elem => elem.tagName.toLowerCase() !== 'button')) {
+    for (let index = this.children.length - 1; index >= 0; index--) {
+      const button = this.children[index];
+      if (button.tagName !== 'BUTTON') {
         throw new Error('<ons-segment> error: all elements inside <ons-segment> should be <button> elements.');
       }
-      const activeButtonIndex = parseInt(this.getAttribute('active-index')) < buttonArray.length && !this.hasAttribute('tabbar-id')
-        ? parseInt(this.getAttribute('active-index'))
-        : 0;
-      buttonArray.forEach((item, index) => {
-        const segmentItem = util.create('div.segment__item');
-        const segmentInput = index === activeButtonIndex
-          ? util.createElement(`<input type="radio" class="segment__input" name="${this._segmentId}" checked>`)
-          : util.createElement(`<input type="radio" class="segment__input" name="${this._segmentId}">`);
 
-        segmentItem.appendChild(segmentInput);
-        item.classList.add('segment__button');
-        segmentItem.appendChild(item);
-        this.appendChild(segmentItem);
-        segmentInput.addEventListener('change', this._onChange.bind(this));
-      });
+      const segmentItem = util.createElement(`
+        <div class="segment__item">
+          <input type="radio" class="segment__input"
+            name="${this._segmentId}"
+            ${!this.hasAttribute('tabbar-id') && index === (parseInt(this.getAttribute('active-index')) || 0) ? 'checked' : ''}>
+        </div>
+      `);
+
+      this.replaceChild(segmentItem, button);
+      button.classList.add('segment__button');
+      segmentItem.appendChild(button);
     }
 
     if (this.hasAttribute('tabbar-id')) {
       this._tabbar = document.getElementById(this.getAttribute('tabbar-id'));
       if (!this._tabbar) {
         throw new Error(`<ons-segment> error: no tabbar with id ${this.getAttribute('tabbar-id')} was found.`);
-      } else {
-        this._tabbar.setTabbarVisibility(false);
-        this._tabbar.addEventListener('prechange', e => setImmediate(() => {
-          if (!e.detail.canceled) {
-            this._inputs[e.index].checked = true;
-          }
-        }));
       }
+
+      this._tabbar.hide();
+      setImmediate(() => this._inputs[this._tabbar.getActiveTabIndex()].checked = true);
+
+      this._tabbar.addEventListener('prechange', e => setImmediate(() => {
+        if (!e.detail.canceled) {
+          this._inputs[e.index].checked = true;
+        }
+      }));
     }
+
+    this.addEventListener('change', this._onChange.bind(this));
 
     ModifierUtil.initModifier(this, scheme);
   }
