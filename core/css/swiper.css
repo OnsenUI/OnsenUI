@@ -15,29 +15,41 @@ limitations under the License.
 
  */
 
-ons-carousel {
-  display: block;
-  position: relative;
-  width: 100%;
+.ons-swiper {
   overflow: hidden;
-}
-
-ons-carousel-item {
   display: block;
-  height: 100%;
-  visibility: hidden;
-}
-
-ons-carousel[fullscreen] {
-  position: absolute;
-  top: 0px;
-  right: 0px;
-  left: 0px;
-  bottom: 0px;
   box-sizing: border-box;
 }
 
-ons-carousel[disabled] {
-  pointer-events: none;
-  opacity: 0.75;
+.ons-swiper-target {
+  display: flex;
+  height: 100%;
+  z-index: 1;
+  flex-direction: row;
+}
+
+.ons-swiper-target--vertical {
+  flex-direction: column;
+}
+
+.ons-swiper-target > * {
+  height: inherit;
+  flex-shrink: 0;
+  box-sizing: border-box;
+  width: 100%;
+  position: relative !important;
+}
+
+.ons-swiper-tabbar .tabbar--material__button:after {
+  display: none;
+}
+
+.ons-swiper-blocker {
+  display: block;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  pointer-events: none
 }

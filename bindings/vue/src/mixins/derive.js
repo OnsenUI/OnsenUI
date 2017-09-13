@@ -43,8 +43,8 @@ const deriveDBB = {
 };
 
 // These handlers cannot throw events for performance reasons.
-const deriveHandler = handlerName => {
-  const propName = handlerToProp(handlerName);
+const deriveHandler = (handlerName, keepName = false) => {
+  const propName = keepName ? handlerName : handlerToProp(handlerName);
 
   return {
     props: {

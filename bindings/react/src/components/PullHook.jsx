@@ -50,11 +50,21 @@ class PullHook extends BasicComponent {
     var node = ReactDOM.findDOMNode(this);
     node.addEventListener('changestate', this.onChange);
     this._pullHook.onAction = this.props.onLoad || null;
+    this._pullHook.onPull = this.props.onPull || null;
   }
 
   componentWillUnmount() {
     var node = ReactDOM.findDOMNode(this);
     node.removeEventListener('changestate', this.onChange);
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.onLoad !== prevProps.onLoad) {
+      this._pullHook.onAction = this.props.onLoad;
+    }
+    if (this.props.onPull !== prevProps.onPull) {
+      this._pullHook.onPull = this.props.onPull;
+    }
   }
 
   render() {
@@ -88,10 +98,20 @@ PullHook.propTypes = {
    * @type function
    * @required false
    * @description
-   *  [en]Called when the pull hook is in the  `action` state[/en]
+   *  [en]Called when the pull hook is in the `action` state[/en]
    *  [ja][/ja]
    */
   onLoad: PropTypes.func,
+
+  /**
+   * @name onPull
+   * @type function
+   * @required false
+   * @description
+   *  [en]Hook called whenever the user pulls the element. It gets the pulled distance ratio (scroll / height) and an animationOptions object as arguments.[/en]
+   *  [ja][/ja]
+   */
+  onPull: PropTypes.func,
 
   /**
    * @name disabled

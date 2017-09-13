@@ -250,17 +250,6 @@ describe('OnsPullHookElement', () => {
     });
   });
 
-  describe('#_isContentFixed()', () => {
-    it('returns true if the pull hook is fixed', () => {
-      pullHook.setAttribute('fixed-content', '');
-      expect(pullHook._isContentFixed()).to.be.true;
-    });
-
-    it('returns false if the pull hook is not fixed', () => {
-      expect(pullHook._isContentFixed()).to.be.false;
-    });
-  });
-
   describe('#_getScrollableElement()', () => {
     it('returns itself if content is fixed', () => {
       pullHook.setAttribute('fixed-content', '');

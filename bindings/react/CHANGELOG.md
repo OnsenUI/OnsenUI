@@ -8,6 +8,19 @@ dev
 ### New Features
 
 * Components now update back button handler when prop changes.
+* PullHook: Added `onPull` prop.
+* PullHook: `onLoad` prop can be updated.
+* Tabbar: Support for swiping feature. Added `swipeable` and `onSwipe` props.
+
+### Bug Fixes
+
+* Tabbar: `index` was trying to set active tab twice.
+* Navigator: Avoid rendering pages twice.
+
+### BREAKING CHANGES
+
+* SplitterSide: 'isSwipeable' prop has been renamed to 'swipeable'.
+* Tabbar: `index` must be updated during `onPostChange` instead of `onPreChange`.
 
 1.5.0
 ----

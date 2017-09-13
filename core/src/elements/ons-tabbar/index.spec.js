@@ -1,22 +1,33 @@
 'use strict';
 
 describe('OnsTabbarElement', () => {
-  let element, template, template2;
+  let element;
 
   beforeEach(done => {
-    template = ons._util.createElement('<template id="hoge"><ons-page>hogehoge</ons-page></template>');
-    template2 = ons._util.createElement('<template id="fuga"><ons-page>fugafuga</ons-page></template>');
-    element = new ons.TabbarElement();
-    document.body.appendChild(template);
-    document.body.appendChild(template2);
-    ons._contentReady(element, done);
+    element = ons.createElement(`
+      <ons-tabbar animation="none">
+        <div class="tabbar__content">
+          <div>
+            <ons-page id="test-page1">hogehoge</ons-page>
+            <ons-page id="test-page2">fugafuga</ons-page>
+          </div>
+        </div>
+        <div class="tabbar">
+          <ons-tab id="tab1" active></ons-tab>
+          <ons-tab id="tab2"></ons-tab>
+        </div>
+      </ons-tabbar>
+    `, { append: true });
+
+    setImmediate(() => {
+      element._show(); // Normally triggered by parent page
+      setImmediate(done);
+    });
   });
 
   afterEach(() => {
-    template.remove();
-    template2.remove();
     element.remove();
-    template = template2 = element = null;
+    element = null;
   });
 
   it('should exist', () => {
@@ -90,22 +101,31 @@ describe('OnsTabbarElement', () => {
     });
   });
 
-  it('has two children by default', () => {
-    expect(element.children[0]).to.be.ok;
-    expect(element.children[1]).to.be.ok;
-    expect(element.children[2]).not.to.be.ok;
+  it('has two children by default', (done) => {
+    const element = new ons.TabbarElement();
+    ons._contentReady(element);
 
-    expect(element.children[0].classList.contains('ons-tabbar__content')).to.be.true;
-    expect(element.children[0].classList.contains('tabbar__content')).to.be.true;
+    setImmediate(() => {
+      expect(element.children[0]).to.be.ok;
+      expect(element.children[1]).to.be.ok;
+      expect(element.children[2]).not.to.be.ok;
 
-    expect(element.children[1].classList.contains('tabbar')).to.be.true;
-    expect(element.children[1].classList.contains('ons-tabbar__footer')).to.be.true;
+      expect(element.children[0].classList.contains('ons-tabbar__content')).to.be.true;
+      expect(element.children[0].classList.contains('tabbar__content')).to.be.true;
+
+      expect(element.children[1].classList.contains('tabbar')).to.be.true;
+      expect(element.children[1].classList.contains('ons-tabbar__footer')).to.be.true;
+
+      done();
+    });
   });
 
-  describe('#getTabbarId()', () => {
-    it('provides a unique auto generated id', () => {
-      expect(element.getTabbarId()).to.be.ok;
-    });
+  it('sets tab initial index if none is provided', () => {
+    let element = ons.createElement(`<ons-tabbar><ons-tab label="t1"></ons-tab></ons-tabbar>`);
+    expect(element.tabs[0].hasAttribute('active')).to.be.true;
+
+    element = ons.createElement(`<ons-tabbar activeIndex="1"><ons-tab label="t1"></ons-tab><ons-tab label="t2"></ons-tab></ons-tabbar>`);
+    expect(element.tabs[1].hasAttribute('active')).to.be.true;
   });
 
   describe('#setTabbarVisibility()', () => {
@@ -123,98 +143,56 @@ describe('OnsTabbarElement', () => {
       var bottomElement = document.getElementById('bottom');
 
       expect(topElement._contentElement.style.top).to.equal('');
-      expect(topElement._getTabbarElement().style.display).to.equal('');
+      expect(topElement._tabbarElement.style.display).to.equal('');
       expect(bottomElement._contentElement.style.bottom).to.equal('');
-      expect(bottomElement._getTabbarElement().style.display).to.equal('');
+      expect(bottomElement._tabbarElement.style.display).to.equal('');
 
       topElement.setTabbarVisibility(false);
       bottomElement.setTabbarVisibility(false);
       expect(topElement._contentElement.style.top).to.equal('0px');
-      expect(topElement._getTabbarElement().style.display).to.equal('none');
+      expect(topElement._tabbarElement.style.display).to.equal('none');
       expect(bottomElement._contentElement.style.bottom).to.equal('0px');
-      expect(bottomElement._getTabbarElement().style.display).to.equal('none');
+      expect(bottomElement._tabbarElement.style.display).to.equal('none');
 
       topElement.setTabbarVisibility(true);
       bottomElement.setTabbarVisibility(true);
       expect(topElement._contentElement.style.top).to.equal('');
-      expect(topElement._getTabbarElement().style.display).to.equal('');
+      expect(topElement._tabbarElement.style.display).to.equal('');
       expect(bottomElement._contentElement.style.bottom).to.equal('');
-      expect(bottomElement._getTabbarElement().style.display).to.equal('');
+      expect(bottomElement._tabbarElement.style.display).to.equal('');
 
       div.remove();
     });
   });
 
 
-  describe('#_getCurrentPageElement()', () => {
-    it('accepts only \'ons-page\' as current page element', () => {
-      const page = new ons.PageElement();
-      element._contentElement.appendChild(page);
-      expect(element._getCurrentPageElement().classList.contains('page')).to.be.true;
-      expect(element._getCurrentPageElement.bind(element)).not.to.throw('Invalid state: page element must be a "ons-page" element.');
-
-      element._contentElement.removeChild(element._contentElement.querySelector('ons-page'));
-      const button = new ons.ButtonElement();
-      element._contentElement.appendChild(button);
-      expect(element._getCurrentPageElement.bind(element)).to.throw('Invalid state: page element must be a "ons-page" element.');
+  describe('#topPage', () => {
+    it('returns the current page', () => {
+      expect(element.topPage.id).to.equal('test-page1');
+      return element.setActiveTab(1).then(() => expect(element.topPage.id).to.equal('test-page2'));
     });
   });
 
   describe('#getActiveTabIndex()', () => {
-    it('has active tab property', function(done) {
-      const div = document.createElement('div');
-      document.body.appendChild(div);
-      div.innerHTML = `
-        <template id="page1"></template>
-        <template id="page2"></template>
-        <ons-tabbar id="myTabbar">
-          <ons-tab id="tab1" page="page1"></ons-tab>
-          <ons-tab id="tab2" page="page2"></ons-tab>
-        </ons-tabbar>
-      `;
+    it('has active tab property', () => {
+      expect(element.getActiveTabIndex()).to.equal(0);
 
-      setImmediate(() => {
-        const element = document.getElementById('myTabbar');
-        expect(element.getActiveTabIndex()).to.equal(-1);
-
-        document.getElementById('tab1').click();
-        expect(element.getActiveTabIndex()).to.equal(0);
-
-        document.getElementById('tab2').click();
+      return element.setActiveTab(1).then(() => {
         expect(element.getActiveTabIndex()).to.equal(1);
-
-        div.remove();
-        done();
+        return element.setActiveTab(0).then(() => {
+          expect(element.getActiveTabIndex()).to.equal(0);
+          element.remove();
+        });
       });
     });
   });
 
-  describe('events', () => {
-    let template, element;
-
-    beforeEach(() => {
-      template = ons._util.createElement('<template id="page1"><ons-page>Page1</ons-page></template>');
-      element = ons._util.createElement(`
-        <ons-tabbar>
-          <ons-tab label="Page 1" page="page1" no-reload></ons-tab>
-          <ons-tab label="Page 2" page="page1" no-reload></ons-tab>
-        </ons-tabbar>
-      `);
-      document.body.appendChild(template);
-      document.body.appendChild(element);
-    });
-
-    afterEach(() => {
-      template.remove();
-      element.remove();
-      template = element = null;
-    });
-
+  describe('events', (done) => {
     it('fires \'prechange\' event', () => {
       const promise = new Promise((resolve) => {
         element.addEventListener('prechange', resolve);
       });
-      element.setActiveTab(0);
+      element.setActiveTab(1);
       return expect(promise).to.eventually.be.fulfilled;
     });
 
@@ -222,7 +200,7 @@ describe('OnsTabbarElement', () => {
       const promise = new Promise((resolve) => {
         element.addEventListener('postchange', resolve);
       });
-      element.setActiveTab(0);
+      element.setActiveTab(1);
       return expect(promise).to.eventually.be.fulfilled;
     });
 
@@ -231,46 +209,19 @@ describe('OnsTabbarElement', () => {
         element.addEventListener('reactive', resolve);
       });
       element.setActiveTab(0);
-      element.setActiveTab(0);
       return expect(promise).to.eventually.be.fulfilled;
     });
   });
 
   describe('propagate API', () => {
-    let template, element;
-
-    beforeEach(() => {
-      template = ons._util.createElement('<template id="page1"><ons-page>Page1</ons-page></template>');
-      element = ons._util.createElement(`
-        <ons-tabbar>
-          <ons-tab label="Page 1" page="page1"></ons-tab>
-          <ons-tab label="Page 2" page="page1"></ons-tab>
-        </ons-tabbar>
-      `);
-      document.body.appendChild(template);
-      document.body.appendChild(element);
-    });
-
-    afterEach(() => {
-      template.remove();
-      element.remove();
-      template = element = null;
-    });
-
-    it('fires \'init\' event', () => {
-      const promise = new Promise((resolve) => {
-        element.addEventListener('init', resolve);
-      });
-      element.setActiveTab(0);
-      return expect(promise).to.eventually.be.fulfilled;
-    });
-
     it('fires \'show\' event', () => {
       const promise = new Promise((resolve) => {
         element.addEventListener('show', resolve);
       });
-      element.setActiveTab(0);
-      return expect(promise).to.eventually.be.fulfilled;
+      element.setActiveTab(1);
+      return expect(promise).to.eventually.be.fulfilled.then(event => {
+        expect(event.target).to.equal(element.pages[1]);
+      });
     });
 
     it('fires \'hide\' event', () => {
@@ -278,67 +229,29 @@ describe('OnsTabbarElement', () => {
         element.addEventListener('hide', resolve);
       });
 
-      return element.setActiveTab(0).then(function() {
-        element.setActiveTab(1);
-        return expect(promise).to.eventually.be.fulfilled;
+      element.setActiveTab(1);
+      return expect(promise).to.eventually.be.fulfilled.then(event => {
+        expect(event.target).to.equal(element.pages[0]);
       });
     });
   });
 
   describe('#setActiveTab()', () => {
     it('rejects the promise if index does not exist', () => {
-      return expect(element.setActiveTab(0)).to.eventually.be.rejected;
+      return expect(element.setActiveTab(element._tabbarElement.children.length)).to.eventually.be.rejected;
     });
 
-    it('can be canceled', (done) => {
-      const element = ons._util.createElement(`
-        <ons-tabbar>
-          <ons-tab label="Hoge" page="hoge"></ons-tab>
-          <ons-tab label="Fuga" page="fuga"></ons-tab>
-        </ons-tabbar>
-      `);
-
-      element.setActiveTab(1);
-
-      element.addEventListener('prechange', (event) => {
-        event.detail.cancel();
-        done();
-      });
-
-      expect(element.setActiveTab(0)).to.be.false;
-    });
-
-    onlyChrome(it)('does not remove tabs', (done) => {
-      const element = ons._util.createElement(`
-        <ons-tabbar>
-          <ons-tab label="Hoge" page="hoge"></ons-tab>
-          <ons-tab label="fuga" page="fuga"></ons-tab>
-        </ons-tabbar>
-      `);
-
-      element.setActiveTab(0);
-
-      setImmediate(() => {
-        const tmp = element._getCurrentPageElement();
-        element.setActiveTab(1, {'callback': () => {
-          expect(tmp.style.display).to.equal('none');
-          done();
-        }, 'animation': 'none'});
-      });
+    it('can be canceled', () => {
+      element.addEventListener('prechange', e => e.cancel());
+      return expect(element.setActiveTab(1)).to.eventually.be.rejected;
     });
 
     it('returns a promise that resolves to the new page', () => {
-      const element = ons._util.createElement(`
-        <ons-tabbar>
-          <ons-tab label="Hoge" page="hoge" active="true"></ons-tab>
-          <ons-tab label="Fuga" page="fuga"></ons-tab>
-        </ons-tabbar>
-      `);
-
-      expect(element.innerHTML.indexOf('fugafuga')).to.be.below(0);
+      expect(element.topPage).to.equal(element.pages[0]);
       return expect(element.setActiveTab(1)).to.eventually.be.fulfilled.then(page => {
-        expect(element.innerHTML.indexOf('fugafuga')).not.to.be.below(0);
-        expect(page).to.equal(element._getCurrentPageElement());
+        expect(page).to.equal(element.pages[1]);
+        expect(page).to.equal(element.topPage);
+        expect(page.id).to.equal('test-page2');
       });
     });
   });
@@ -372,19 +285,6 @@ describe('OnsTabbarElement', () => {
           done();
         }, 200);
       });
-    });
-  });
-
-  describe('#registerAnimator()', () => {
-    it('throws an error if animator is not a TabbarAnimator', () => {
-      expect(() => window.ons.TabbarElement.registerAnimator('hoge', 'hoge')).to.throw(Error);
-    });
-
-    it('registers a new animator', () => {
-      class MyAnimator extends window.ons.TabbarElement.TabbarAnimator {
-      }
-
-      window.ons.TabbarElement.registerAnimator('hoge', MyAnimator);
     });
   });
 

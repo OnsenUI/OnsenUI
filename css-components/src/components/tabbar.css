@@ -97,8 +97,7 @@
 
 .tabbar {
   @apply(--reset-font);
-  display: table;
-  table-layout: fixed;
+  display: flex;
   position: absolute;
   bottom: 0;
   left: 0;
@@ -116,7 +115,8 @@
 .tabbar__item {
   @apply(--reset-font);
   @apply(--hide-input-parent);
-  display: table-cell;
+  flex-grow: 1;
+  flex-basis: 0;
   width: auto;
   border-radius: 0;
 }
@@ -211,6 +211,10 @@
   right: 0;
   bottom: var(--tabbar-height);
   z-index: 0;
+}
+
+.tabbar--autogrow .tabbar__item {
+  flex-basis: auto;
 }
 
 /*~
@@ -368,6 +372,15 @@
   border-bottom: 4px solid var(--tabbar-active-color);
 }
 
+.tabbar__border {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 4px;
+  background-color: var(--tabbar-active-color);
+}
+
 .tabbar--material {
   background: none;
   background-color: var(--material-tabbar-background-color);
@@ -410,6 +423,11 @@
 
 .tabbar--material__item:not([ripple]):active {
   background-color: var(--material-tabbar-highlight-color);
+}
+
+.tabbar--material__border {
+  height: 2px;
+  background-color: var(--material-tabbar-current-color);
 }
 
 /*~
@@ -492,3 +510,4 @@
 .tabbar--material__icon + .tabbar--material__label {
   font-size: 10px;
 }
+

@@ -190,30 +190,21 @@ export default class PullHookElement extends BaseElement {
       }
     }
 
-    if (this._currentTranslation === 0 && this._getCurrentScroll() === 0) {
-      this._transitionDragLength = event.gesture.deltaY;
-
-      const direction = event.gesture.interimDirection;
-      if (direction === 'down') {
-        this._transitionDragLength -= 1;
-      } else {
-        this._transitionDragLength += 1;
-      }
-    }
-
     const scroll = Math.max(event.gesture.deltaY - this._startScroll, 0);
+    if (scroll !== this._currentTranslation) {
+      if (this._thresholdHeightEnabled() && scroll >= this.thresholdHeight) {
+        event.gesture.stopDetect();
+        setImmediate(() => this._finish());
 
-    if (this._thresholdHeightEnabled() && scroll >= this.thresholdHeight) {
-      event.gesture.stopDetect();
+      } else if (scroll >= this.height) {
+        this._setState(STATE_PREACTION);
 
-      setImmediate(() => this._finish());
-    } else if (scroll >= this.height) {
-      this._setState(STATE_PREACTION);
-    } else {
-      this._setState(STATE_INITIAL);
+      } else {
+        this._setState(STATE_INITIAL);
+      }
+
+      this._translateTo(scroll);
     }
-
-    this._translateTo(scroll);
   }
 
   _onDragEnd(event) {
@@ -250,6 +241,24 @@ export default class PullHookElement extends BaseElement {
       throw new Error('onAction must be a function or null');
     }
     this._onAction = value;
+  }
+
+  /**
+   * @property onPull
+   * @type {Function}
+   * @description
+   *   [en]Hook called whenever the user pulls the element. It gets the pulled distance ratio (scroll / height) and an animationOptions object as arguments.[/en]
+   *   [ja][/ja]
+   */
+  get onPull() {
+    return this._onSwipe;
+  }
+
+  set onPull(value) {
+    if (value && !(value instanceof Function)) {
+      throw new Error(`'onPull' must be a function.`)
+    }
+    this._onPull = value;
   }
 
   _finish() {
@@ -366,16 +375,8 @@ export default class PullHookElement extends BaseElement {
     return this.hasAttribute('disabled');
   }
 
-  _isContentFixed() {
-    return this.hasAttribute('fixed-content');
-  }
-
   _getScrollableElement() {
-    if (this._isContentFixed()) {
-      return this;
-    } else {
-      return this._pageElement;
-    }
+    return this.hasAttribute('fixed-content') ? this : this._pageElement;
   }
 
   _show() {
@@ -405,35 +406,16 @@ export default class PullHookElement extends BaseElement {
       return;
     }
 
-    const done = () => {
-      if (scroll === 0) {
-        const el = this._getScrollableElement();
-        removeTransform(el);
-      }
-
-      if (options.callback) {
-        options.callback();
-      }
-    };
-
     this._currentTranslation = scroll;
+    const opt = options.animate ? { duration: .3, timing: 'cubic-bezier(.1, .7, .1, 1)' } : {};
+    this._onPull && this._onPull((scroll / this.height).toFixed(2), opt);
 
-    if (options.animate) {
-      animit(this._getScrollableElement())
-        .queue({
-          transform: this._generateTranslationTransform(scroll)
-        }, {
-          duration: 0.3,
-          timing: 'cubic-bezier(.1, .7, .1, 1)'
-        })
-        .play(done);
-    } else {
-      animit(this._getScrollableElement())
-        .queue({
-          transform: this._generateTranslationTransform(scroll)
-        })
-        .play(done);
-    }
+    animit(this._getScrollableElement())
+      .queue({ transform: this._generateTranslationTransform(scroll) }, opt)
+      .play(() => {
+        scroll === 0 && removeTransform(this._getScrollableElement())
+        options.callback instanceof Function && options.callback();
+    });
   }
 
   _disableDragLock() { // e2e tests need it

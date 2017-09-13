@@ -67,7 +67,7 @@ export default class CheckboxElement extends BaseCheckboxElement {
     return scheme;
   }
 
-  get _defaultElementClass() {
+  get _defaultClassName() {
     return 'checkbox';
   }
 
