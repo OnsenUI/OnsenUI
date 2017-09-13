@@ -17,6 +17,7 @@ limitations under the License.
 
 import internal from './internal';
 import autoStyle from './autostyle';
+import ModifierUtil from './internal/modifier-util';
 import animationOptionsParse from './animation-options-parser';
 
 const util = {};
@@ -362,6 +363,16 @@ util.toggleModifier = (...args) => {
   toggle ? util.addModifier(...args) : util.removeModifier(...args)
 };
 
+/**
+ * @param {Element} el
+ * @param {String} defaultClass
+ * @param {Object} scheme
+ */
+util.restoreClass = (el, defaultClass, scheme) => {
+  defaultClass.split(/\s+/).forEach(c => !el.classList.contains(c) && el.classList.add(c));
+  el.hasAttribute('modifier') && ModifierUtil.refresh(el, scheme);
+}
+
 // TODO: FIX
 util.updateParentPosition = (el) => {
   if (!el._parentUpdated && el.parentElement) {
@@ -451,18 +462,14 @@ util.warn = (...args) => {
   }
 };
 
-util.skipContentScroll = gesture => {
-  const clickedElement = document.elementFromPoint(gesture.center.clientX, gesture.center.clientY);
-  const content = util.findParent(clickedElement, '.page__content', e => util.match(e, '.page'));
-  if (content) {
-    const preventScroll = e => e.preventDefault();
-    content.addEventListener('touchmove', preventScroll, true);
-    const clean = e => {
-      content.removeEventListener('touchmove', preventScroll, true);
-      content.removeEventListener('touchend', clean, true);
-    };
-    content.addEventListener('touchend', clean, true);
-  }
-};
+util.preventScroll = gd => {
+  const prevent = e => e.cancelable && e.preventDefault();
+  gd.on('touchmove', prevent, true);
+  const clean = e => {
+    gd.off('touchmove', prevent, true);
+    gd.off('touchend', clean, true);
+  };
+  gd.on('touchend', clean, true);
+}
 
 export default util;

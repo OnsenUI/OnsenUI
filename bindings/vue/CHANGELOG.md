@@ -4,6 +4,11 @@ CHANGELOG
 dev
 ----
 
+### New Features
+
+* VOnsPullHook: Added `onPull` prop.
+* VOnsTabbar: Support for swiping feature. Added `swipeable` and `onSwipe` props.
+
 ### Bug Fixes
 
 * VOnsNavigator: Properly hide VOnsBackButton when replacing pages.

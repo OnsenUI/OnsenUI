@@ -28,8 +28,8 @@ export default class BaseCheckboxElement extends BaseInputElement {
 
   get _template() {
     return `
-      <input type="${this.type}" class="${this._defaultElementClass}__input">
-      <span class="${this._defaultElementClass}__checkmark"></span>
+      <input type="${this.type}" class="${this._defaultClassName}__input">
+      <span class="${this._defaultClassName}__checkmark"></span>
     `;
   }
 

@@ -18,8 +18,6 @@ limitations under the License.
 import util from '../util.js';
 import autoStyle from '../autostyle.js';
 
-const isMD = m => /(^|\s+)material($|\s+)/i.test(m);
-
 export default class ModifierUtil {
   /**
    * @param {String} last
@@ -92,8 +90,12 @@ export default class ModifierUtil {
    * @param {Object} scheme
    */
   static onModifierChanged(last, current, element, scheme) {
-    ModifierUtil.applyDiffToElement(ModifierUtil.diff(last, element.getAttribute('modifier') || ''), element, scheme);
-    return autoStyle.restore(element);
+    ModifierUtil.applyDiffToElement(ModifierUtil.diff(last, current), element, scheme);
+    autoStyle.restoreModifier(element);
+  }
+
+  static refresh(element, scheme) {
+    ModifierUtil.applyDiffToElement(ModifierUtil.diff('', element.getAttribute('modifier') || ''), element, scheme);
   }
 
   /**

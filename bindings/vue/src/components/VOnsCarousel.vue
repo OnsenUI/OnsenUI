@@ -3,6 +3,7 @@
     <div>
       <slot></slot>
     </div>
+    <div></div>
   </ons-carousel>
 </template>
 

@@ -67,16 +67,12 @@ class Carousel extends SimpleWrapper {
     node.removeEventListener('overscroll', this.onOverscroll);
   }
 
-  componentWillReceiveProps(props) {
-    const node = findDOMNode(this);
-
-    if (this.props.index !== props.index) {
-      node.setActiveIndex(props.index, props.animationOptions);
-    }
-  }
-
   componentDidUpdate(props) {
     const node = findDOMNode(this);
+
+    if (this.props.index !== node.getActiveIndex()) {
+      node.setActiveIndex(this.props.index, props.animationOptions);
+    }
 
     if (this.props.children.length !== props.children.length) {
       node.refresh();
@@ -98,7 +94,14 @@ class Carousel extends SimpleWrapper {
     Util.convert(others, 'index', {newName: 'initial-index'});
     Util.convert(others, 'animationOptions', {fun: Util.animationOptionsConverter, newName: 'animation-options'});
 
-    return React.createElement(this._getDomNodeName(), others, React.createElement('div', null, this.props.children));
+    return (
+      <ons-carousel {...others}>
+        <div>
+          {this.props.children}
+        </div>
+        <div></div>
+      </ons-carousel>
+    );
   }
 }
 

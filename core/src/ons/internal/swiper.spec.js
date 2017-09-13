@@ -8,17 +8,16 @@ describe('Swiper', () => {
   beforeEach((done) => {
     element = ons.createElement(`
       <div class="swiper">
-        <div class="target" style="width: 100%; height: 300px">
+        <div style="width: 100%; height: 300px">
           <div>Item 1</div>
           <div>Item 2</div>
           <div>Item 3</div>
         </div>
+        <div></div>
       </div>
     `);
     document.body.appendChild(element);
-    swiper = new window.ons._internal.Swiper({
-      element
-    });
+    swiper = new window.ons._internal.Swiper({ getElement: () => element, getAutoScrollRatio: r => r });
     swiper.init();
 
     setImmediate(done);
@@ -115,21 +114,20 @@ describe('Swiper', () => {
 
   describe('#getAutoScrollRatio()', () => {
     it('only accepts values between 0.0 and 1.0', () => {
-      const ratio = r => ({ getAutoScrollRatio: () => r });
-      expect(() => swiper.getAutoScrollRatio(ratio(-1))).to.throw(Error);
-      expect(() => swiper.getAutoScrollRatio(ratio(1.01))).to.throw(Error);
-      expect(() => swiper.getAutoScrollRatio(ratio(-0.01))).to.throw(Error);
+      expect(() => swiper.getAutoScrollRatio(-1)).to.throw(Error);
+      expect(() => swiper.getAutoScrollRatio(1.01)).to.throw(Error);
+      expect(() => swiper.getAutoScrollRatio(-0.01)).to.throw(Error);
 
-      expect(() => swiper.getAutoScrollRatio(ratio(1.0))).not.to.throw(Error);
-      expect(() => swiper.getAutoScrollRatio(ratio(0.0))).not.to.throw(Error);
-      expect(() => swiper.getAutoScrollRatio(ratio(0.5))).not.to.throw(Error);
-      expect(() => swiper.getAutoScrollRatio(ratio(1))).not.to.throw(Error);
-      expect(() => swiper.getAutoScrollRatio(ratio(0))).not.to.throw(Error);
+      expect(() => swiper.getAutoScrollRatio(1.0)).not.to.throw(Error);
+      expect(() => swiper.getAutoScrollRatio(0.0)).not.to.throw(Error);
+      expect(() => swiper.getAutoScrollRatio(0.5)).not.to.throw(Error);
+      expect(() => swiper.getAutoScrollRatio(1)).not.to.throw(Error);
+      expect(() => swiper.getAutoScrollRatio(0)).not.to.throw(Error);
 
       // Fallbacks to default value
-      expect(() => swiper.getAutoScrollRatio(ratio('2.0'))).not.to.throw(Error);
-      expect(() => swiper.getAutoScrollRatio(ratio(null))).not.to.throw(Error);
-      expect(() => swiper.getAutoScrollRatio(ratio(NaN))).not.to.throw(Error);
+      expect(() => swiper.getAutoScrollRatio('2.0')).not.to.throw(Error);
+      expect(() => swiper.getAutoScrollRatio(null)).not.to.throw(Error);
+      expect(() => swiper.getAutoScrollRatio(NaN)).not.to.throw(Error);
     });
 
     it('uses \'0.5\' by default', () => {
@@ -149,13 +147,31 @@ describe('Swiper', () => {
       expect(swiper.getActiveIndex()).to.equal(2);
     });
 
-    it('calls \'postchange\' hook', () => {
-      const spy = chai.spy.on(swiper, 'postChangeHook');
-      return swiper.setActiveIndex(1).then(() => expect(spy).to.have.been.called.once);
+    it('calls change hooks', () => {
+      const deferred = ons._util.defer();
+      const spy = chai.spy.on(swiper, 'preChangeHook');
+
+      swiper.postChangeHook = () => {
+        expect(spy).to.have.been.called.once;
+        deferred.resolve();
+      };
+
+      swiper.setActiveIndex(1);
+      return expect(deferred.promise).to.eventually.be.fulfilled;
     });
 
     it('returns a promise', () => {
       return swiper.setActiveIndex(1).then(() => expect(swiper.getActiveIndex()).to.equal(1));
+    });
+
+    it('can be canceled during prechange', () => {
+      swiper.preChangeHook = () => true;
+      const spy = chai.spy.on(swiper, 'preChangeHook');
+
+      return expect(swiper.setActiveIndex(1, { reject: true })).to.eventually.be.rejected.then(() => {
+        expect(spy).to.have.been.called.once;
+        expect(swiper.getActiveIndex()).to.equal(0);
+      });
     });
   });
 
@@ -187,11 +203,11 @@ describe('Swiper', () => {
 
     it('updates layout parameters on direction change', () => {
       expect(swiper.dM.axis).to.equal('X');
-      expect(swiper.dM.size).to.equal('width');
+      expect(swiper.dM.size).to.equal('Width');
       swiper.isVertical = TRUE;
       swiper.refresh();
       expect(swiper.dM.axis).to.equal('Y');
-      expect(swiper.dM.size).to.equal('height');
+      expect(swiper.dM.size).to.equal('Height');
     });
   });
 
@@ -202,6 +218,7 @@ describe('Swiper', () => {
       ev = new CustomEvent('drag');
       ev.gesture = {
         direction: 'left',
+        deltaTime: 50,
         deltaX: -10,
         velocityX: -10,
         preventDefault: () => {}
@@ -231,6 +248,7 @@ describe('Swiper', () => {
       ev = new CustomEvent('drag');
       ev.gesture = {
         direction: 'left',
+        deltaTime: 50,
         deltaX: 10,
         velocityX: 10,
         preventDefault: () => {}
@@ -239,15 +257,19 @@ describe('Swiper', () => {
       spy = chai.spy.on(swiper, '_scrollTo');
     });
 
-    it('should work if it is swipeable', () => {
+    it('should work if it is swipeable, is started and continued', () => {
+      const spy = chai.spy.on(swiper, '_changeTo');
+      swiper.onDragStart(ev);
+      swiper.onDrag(ev);
       swiper.onDragEnd(ev);
       expect(spy).to.have.been.called.once;
     });
 
     it('should call \'_killOverScroll\' if overscrolled', () => {
       swiper.isOverScrollable = TRUE;
-
       const spy = chai.spy.on(swiper, '_killOverScroll');
+      swiper.onDragStart(ev);
+      swiper.onDrag(ev);
       swiper.onDragEnd(ev);
       expect(spy).to.be.called.once;
     });
@@ -283,9 +305,9 @@ describe('Swiper', () => {
         preventDefault: () => {}
       };
 
-      const scroll = swiper._scroll;
-      swiper._startMomentumScroll(ev);
-      expect(swiper._scroll).not.to.equal(scroll);
+      const fullScroll = document.body.offsetWidth;
+      swiper._startMomentumScroll(2/3 * fullScroll, ev);
+      expect(swiper._scroll).to.equal(fullScroll);
     });
   });
 });

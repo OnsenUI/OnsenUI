@@ -38,6 +38,8 @@ const buttonTemplate = util.createFragment(`
   <div class="tabbar__badge notification"></div>
 `);
 
+const dummyPage = util.create('div', { height: '100%', width: '100%', backgroundColor: 'transparent' });
+
 /**
  * @element ons-tab
  * @category tabbar
@@ -155,10 +157,6 @@ export default class TabElement extends BaseElement {
     this._boundOnClick = this._onClick.bind(this);
   }
 
-  _getPageTarget() {
-    return this.page || this.getAttribute('page');
-  }
-
   set pageLoader(loader) {
     if (!(loader instanceof PageLoader)) {
       throw Error('First parameter must be an instance of PageLoader.');
@@ -250,11 +248,11 @@ export default class TabElement extends BaseElement {
     if (this.onClick instanceof Function) {
       this.onClick();
     } else {
-      this._tabbar.setActiveTab(this.index);
+      this._tabbar.setActiveTab(this.index, { reject: false });
     }
   }
 
-  setActive(active) {
+  setActive(active = true) {
     this._input.checked = active;
     this.classList.toggle('active', active);
     util.toggleAttribute(this, 'active', active)
@@ -264,10 +262,11 @@ export default class TabElement extends BaseElement {
     }
   }
 
-  _loadPageElement(parent = this._tabbar._contentElement) {
+  _loadPageElement(parent, page) {
     this._hasLoaded = true;
     return new Promise(resolve => {
-      this._pageLoader.load({ parent, page: this._getPageTarget() }, pageElement => {
+      this._pageLoader.load({ parent, page }, pageElement => {
+        parent.replaceChild(pageElement, parent.children[this.index]); // Ensure position
         this._loadedPage = pageElement;
         resolve(pageElement);
       });
@@ -281,8 +280,8 @@ export default class TabElement extends BaseElement {
     }
     // Manually attached to DOM, 1 per tab
     const tabbar = this._tabbar;
-    if (tabbar._contentElement.children.length === this.parentElement.children.length) {
-      return tabbar._contentElement.children[this.index];
+    if (tabbar.pages.length === tabbar.tabs.length) {
+      return tabbar.pages[this.index];
     }
     // Loaded in another way
     return null;
@@ -306,13 +305,15 @@ export default class TabElement extends BaseElement {
   }
 
   connectedCallback() {
-    if (!util.isAttached(this)) {
+    if (!util.isAttached(this) || this.loaded) {
       return; // ons-tabbar compilation may trigger this
     }
 
-    this.loaded = util.defer();
+    const deferred = util.defer();
+    this.loaded = deferred.promise;
 
     contentReady(this, () => {
+      const index = this.index;
       const tabbar = this._tabbar;
       if (!tabbar) {
         throw new Error('This ons-tab element must be child of ons-tabbar element.');
@@ -323,17 +324,25 @@ export default class TabElement extends BaseElement {
       }
 
       if (!this._hasLoaded) {
-        TabbarElement.rewritables.ready(tabbar, () => {
-          const elementLoaded = (!this.pageElement && this._getPageTarget())
-            ? this._loadPageElement(tabbar._contentElement)
-            : Promise.resolve(this.pageElement);
+        if (this.hasAttribute('active')) {
+          this.setActive(true);
+          tabbar.setAttribute('activeIndex', index);
+        }
 
-          elementLoaded.then(el => {
-            this.loaded.resolve(el);
-            this.hasAttribute('active')
-              ? !this.isActive() && tabbar.setActiveTab(this.index)
-              : el && (el.style.display = 'none');
-          });
+        if (index === tabbar.tabs.length - 1) {
+          tabbar._onRefresh();
+          setImmediate(() => tabbar._onRefresh());
+        }
+
+        TabbarElement.rewritables.ready(tabbar, () => {
+          const pageTarget = this.page || this.getAttribute('page');
+          if (!this.pageElement && pageTarget) {
+            const parentTarget = tabbar._targetElement;
+            parentTarget.insertBefore(dummyPage.cloneNode(), parentTarget.children[index]); // Ensure position
+            return this._loadPageElement(parentTarget, pageTarget).then(deferred.resolve)
+          }
+
+          return deferred.resolve(this.pageElement);
         });
       }
 
@@ -348,9 +357,7 @@ export default class TabElement extends BaseElement {
   attributeChangedCallback(name, last, current) {
     switch (name) {
       case 'class':
-        if (!this.classList.contains(defaultClassName)) {
-          this.className = defaultClassName + ' ' + current;
-        }
+        util.restoreClass(this, defaultClassName, scheme);
         break;
       case 'modifier':
         contentReady(this, () => ModifierUtil.onModifierChanged(last, current, this, scheme));

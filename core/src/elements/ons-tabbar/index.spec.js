@@ -5,19 +5,24 @@ describe('OnsTabbarElement', () => {
 
   beforeEach(done => {
     element = ons.createElement(`
-      <ons-tabbar>
+      <ons-tabbar animation="none">
         <div class="tabbar__content">
-          <ons-page id="test-page1">hogehoge</ons-page>
-          <ons-page id="test-page2">fugafuga</ons-page>
+          <div>
+            <ons-page id="test-page1">hogehoge</ons-page>
+            <ons-page id="test-page2">fugafuga</ons-page>
+          </div>
         </div>
         <div class="tabbar">
-          <ons-tab id="tab1"></ons-tab>
+          <ons-tab id="tab1" active></ons-tab>
           <ons-tab id="tab2"></ons-tab>
         </div>
       </ons-tabbar>
     `, { append: true });
 
-    ons._contentReady(element, () => setImmediate(done));
+    setImmediate(() => {
+      element._show(); // Normally triggered by parent page
+      setImmediate(done);
+    });
   });
 
   afterEach(() => {
@@ -115,6 +120,14 @@ describe('OnsTabbarElement', () => {
     });
   });
 
+  it('sets tab initial index if none is provided', () => {
+    let element = ons.createElement(`<ons-tabbar><ons-tab label="t1"></ons-tab></ons-tabbar>`);
+    expect(element.tabs[0].hasAttribute('active')).to.be.true;
+
+    element = ons.createElement(`<ons-tabbar activeIndex="1"><ons-tab label="t1"></ons-tab><ons-tab label="t2"></ons-tab></ons-tabbar>`);
+    expect(element.tabs[1].hasAttribute('active')).to.be.true;
+  });
+
   describe('#setTabbarVisibility()', () => {
     it('sets the element visible or invisible', () => {
       var div = document.createElement('div');
@@ -155,26 +168,21 @@ describe('OnsTabbarElement', () => {
 
   describe('#topPage', () => {
     it('returns the current page', () => {
-      expect(element.topPage).to.be.null;
-      element.setActiveTab(0);
-      expect(element.topPage.id).to.equal('test-page1')
+      expect(element.topPage.id).to.equal('test-page1');
+      return element.setActiveTab(1).then(() => expect(element.topPage.id).to.equal('test-page2'));
     });
   });
 
   describe('#getActiveTabIndex()', () => {
-    it('has active tab property', function(done) {
+    it('has active tab property', () => {
+      expect(element.getActiveTabIndex()).to.equal(0);
 
-      setImmediate(() => {
-        expect(element.getActiveTabIndex()).to.equal(-1);
-
-        document.getElementById('tab1').click();
-        expect(element.getActiveTabIndex()).to.equal(0);
-
-        document.getElementById('tab2').click();
+      return element.setActiveTab(1).then(() => {
         expect(element.getActiveTabIndex()).to.equal(1);
-
-        element.remove();
-        done();
+        return element.setActiveTab(0).then(() => {
+          expect(element.getActiveTabIndex()).to.equal(0);
+          element.remove();
+        });
       });
     });
   });
@@ -184,7 +192,7 @@ describe('OnsTabbarElement', () => {
       const promise = new Promise((resolve) => {
         element.addEventListener('prechange', resolve);
       });
-      element.setActiveTab(0);
+      element.setActiveTab(1);
       return expect(promise).to.eventually.be.fulfilled;
     });
 
@@ -192,7 +200,7 @@ describe('OnsTabbarElement', () => {
       const promise = new Promise((resolve) => {
         element.addEventListener('postchange', resolve);
       });
-      element.setActiveTab(0);
+      element.setActiveTab(1);
       return expect(promise).to.eventually.be.fulfilled;
     });
 
@@ -200,7 +208,6 @@ describe('OnsTabbarElement', () => {
       const promise = new Promise((resolve) => {
         element.addEventListener('reactive', resolve);
       });
-      element.setActiveTab(0);
       element.setActiveTab(0);
       return expect(promise).to.eventually.be.fulfilled;
     });
@@ -211,8 +218,10 @@ describe('OnsTabbarElement', () => {
       const promise = new Promise((resolve) => {
         element.addEventListener('show', resolve);
       });
-      element.setActiveTab(0);
-      return expect(promise).to.eventually.be.fulfilled;
+      element.setActiveTab(1);
+      return expect(promise).to.eventually.be.fulfilled.then(event => {
+        expect(event.target).to.equal(element.pages[1]);
+      });
     });
 
     it('fires \'hide\' event', () => {
@@ -220,9 +229,9 @@ describe('OnsTabbarElement', () => {
         element.addEventListener('hide', resolve);
       });
 
-      return element.setActiveTab(0).then(function() {
-        element.setActiveTab(1);
-        return expect(promise).to.eventually.be.fulfilled;
+      element.setActiveTab(1);
+      return expect(promise).to.eventually.be.fulfilled.then(event => {
+        expect(event.target).to.equal(element.pages[0]);
       });
     });
   });
@@ -233,32 +242,16 @@ describe('OnsTabbarElement', () => {
     });
 
     it('can be canceled', () => {
-      const cancel = e => {
-        e.cancel();
-        element.removeEventListener('prechange', cancel);
-      };
-
-      element.addEventListener('prechange', cancel);
-      return expect(element.setActiveTab(0)).to.eventually.be.rejected;
-    });
-
-    onlyChrome(it)('does not remove tabs', (done) => {
-      element.setActiveTab(0);
-
-      setImmediate(() => {
-        const tmp = element.topPage;
-        element.setActiveTab(1).then(() => {
-          expect(tmp.style.display).to.equal('none');
-          done();
-        });
-      });
+      element.addEventListener('prechange', e => e.cancel());
+      return expect(element.setActiveTab(1)).to.eventually.be.rejected;
     });
 
     it('returns a promise that resolves to the new page', () => {
-      expect(element.topPage).to.be.null;
+      expect(element.topPage).to.equal(element.pages[0]);
       return expect(element.setActiveTab(1)).to.eventually.be.fulfilled.then(page => {
-        expect(page.id).to.equal('test-page2');
+        expect(page).to.equal(element.pages[1]);
         expect(page).to.equal(element.topPage);
+        expect(page.id).to.equal('test-page2');
       });
     });
   });
@@ -292,19 +285,6 @@ describe('OnsTabbarElement', () => {
           done();
         }, 200);
       });
-    });
-  });
-
-  describe('#registerAnimator()', () => {
-    it('throws an error if animator is not a TabbarAnimator', () => {
-      expect(() => window.ons.TabbarElement.registerAnimator('hoge', 'hoge')).to.throw(Error);
-    });
-
-    it('registers a new animator', () => {
-      class MyAnimator extends window.ons.TabbarElement.TabbarAnimator {
-      }
-
-      window.ons.TabbarElement.registerAnimator('hoge', MyAnimator);
     });
   });
 

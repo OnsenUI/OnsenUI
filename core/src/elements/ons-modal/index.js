@@ -213,9 +213,7 @@ export default class ModalElement extends BaseDialogElement {
 
   attributeChangedCallback(name, last, current) {
     if (name === 'class') {
-      if (!this.classList.contains(defaultClassName)) {
-        this.className = defaultClassName + ' ' + current;
-      }
+      util.restoreClass(this, defaultClassName, scheme);
     } else {
       super.attributeChangedCallback(name, last, current);
     }

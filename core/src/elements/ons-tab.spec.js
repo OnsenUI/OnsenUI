@@ -133,30 +133,21 @@ describe('OnsTabElement', () => {
 
   describe('active-icon attribute', () => {
     it('sets active-icon name for the tab', done => {
-      const tabbar = ons._util.createElement(`
-        <ons-tabbar>
-          <ons-tab id="tab1" page="page1" icon="ion-home" active-icon="ion-edit"></ons-tab>
-        </ons-tabbar>
-      `);
+      const tabbar = ons._util.createElement('<ons-tabbar></ons-tabbar>');
+      const tab = ons.createElement('<ons-tab active id="tab1" icon="ion-home" active-icon="ion-edit"></ons-tab>');
 
-      const template1 = ons._util.createElement(`
-        <template id="page1"><ons-page></ons-page></template>
-      `);
-
+      tabbar.appendChild(tab);
       document.body.appendChild(tabbar);
-      document.body.appendChild(template1);
 
       setImmediate(() => {
-        expect(tabbar.querySelector('ons-icon').getAttribute('icon')).to.equal('ion-home');
+        tab.setActive(false);
+        expect(tab.querySelector('ons-icon').getAttribute('icon')).to.equal('ion-home');
 
-        tabbar.setActiveTab(0).then(() => {
-          expect(tabbar.querySelector('ons-icon').getAttribute('icon')).to.equal('ion-edit');
+        tab.setActive(true);
+        expect(tabbar.querySelector('ons-icon').getAttribute('icon')).to.equal('ion-edit');
 
-          tabbar.remove();
-          template1.remove()
-
-          done();
-        });
+        tabbar.remove();
+        done();
       });
     });
   });
@@ -266,7 +257,9 @@ describe('OnsTabElement', () => {
       const tabbar = ons.createElement(`
         <ons-tabbar>
           <div class="tabbar__content">
-            <ons-page id="test-page"></ons-page>
+            <div>
+              <ons-page id="test-page"></ons-page>
+            </div>
           </div>
           <div class="tabbar"></div>
         </ons-tabbar>
@@ -282,7 +275,7 @@ describe('OnsTabElement', () => {
         done();
       });
 
-      tabbar._tabbarElement.appendChild(tab);
+      tabbar._tabbarElement.insertBefore(tab, tabbar._tabbarElement.children[0]);
       document.body.appendChild(tabbar);
     });
 
@@ -324,16 +317,15 @@ describe('OnsTabElement', () => {
       setImmediate(() => {
         const tab1 = tabbar.querySelector('#tab1');
         const tab2 = tabbar.querySelector('#tab2');
-        expect(tabbar.getActiveTabIndex()).to.equal(-1);
-
-        tab1.setActive();
-        expect(tabbar.getActiveTabIndex()).not.to.equal(-1);
         expect(tabbar.getActiveTabIndex()).to.equal(0);
 
-        tab2.setActive();
+        tab2.setActive(true);
         tab1.classList.remove('active');
-        expect(tabbar.getActiveTabIndex()).not.to.equal(0);
         expect(tabbar.getActiveTabIndex()).to.equal(1);
+
+        tab1.setActive(true);
+        tab2.setActive(false);
+        expect(tabbar.getActiveTabIndex()).to.equal(0);
 
         document.body.removeChild(tabbar);
         document.body.removeChild(template1);
