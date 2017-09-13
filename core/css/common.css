@@ -264,3 +264,12 @@ ons-range > input {
 ons-select > select {
   width: 100%;
 }
+
+ons-carousel[disabled] {
+  pointer-events: none;
+  opacity: 0.75;
+}
+
+ons-carousel[fullscreen] {
+  height: 100%;
+}

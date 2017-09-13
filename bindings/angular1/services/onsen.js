@@ -37,6 +37,8 @@ limitations under the License.
 
         cleaner: ComponentCleaner,
 
+        util: $onsGlobal._util,
+
         DeviceBackButtonHandler: $onsGlobal._deviceBackButtonDispatcher,
 
         _defaultDeviceBackButtonHandler: $onsGlobal._defaultDeviceBackButtonHandler,
@@ -157,12 +159,12 @@ limitations under the License.
          * @return {Object} pageLoader
          */
         createPageLoader: function(view) {
-          return new window.ons.PageLoader(
+          return new $onsGlobal.PageLoader(
             ({page, parent}, done) => {
-              window.ons._internal.getPageHTMLAsync(page).then(html => {
+              $onsGlobal._internal.getPageHTMLAsync(page).then(html => {
                 this.compileAndLink(
                   view,
-                  window.ons._util.createElement(html),
+                  $onsGlobal._util.createElement(html),
                   element => done(parent.appendChild(element))
                 );
               });
@@ -449,28 +451,28 @@ limitations under the License.
          * @return {Boolean}
          */
         isAndroid: function() {
-          return !!window.navigator.userAgent.match(/android/i);
+          return !!$window.navigator.userAgent.match(/android/i);
         },
 
         /**
          * @return {Boolean}
          */
         isIOS: function() {
-          return !!window.navigator.userAgent.match(/(ipad|iphone|ipod touch)/i);
+          return !!$window.navigator.userAgent.match(/(ipad|iphone|ipod touch)/i);
         },
 
         /**
          * @return {Boolean}
          */
         isWebView: function() {
-          return window.ons.isWebView();
+          return $onsGlobal.isWebView();
         },
 
         /**
          * @return {Boolean}
          */
         isIOS7above: (function() {
-          var ua = window.navigator.userAgent;
+          var ua = $window.navigator.userAgent;
           var match = ua.match(/(iPad|iPhone|iPod touch);.*CPU.*OS (\d+)_(\d+)/i);
 
           var result = match ? parseFloat(match[2] + '.' + match[3]) >= 7 : false;

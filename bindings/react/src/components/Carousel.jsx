@@ -98,7 +98,7 @@ class Carousel extends SimpleWrapper {
     Util.convert(others, 'index', {newName: 'initial-index'});
     Util.convert(others, 'animationOptions', {fun: Util.animationOptionsConverter, newName: 'animation-options'});
 
-    return React.createElement(this._getDomNodeName(), others, this.props.children);
+    return React.createElement(this._getDomNodeName(), others, React.createElement('div', null, this.props.children));
   }
 }
 
