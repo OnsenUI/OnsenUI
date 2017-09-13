@@ -150,10 +150,10 @@ Tabbar.propTypes = {
    * @name animation
    * @type string
    * @description
-   *  [en] Animation name. Available values are `"none"`, `"slide"` and `"fade"`. Default is `"none"`. [/en]
+   *  [en]If this attribute is set to `"none"` the transitions will not be animated.[/en]
    *  [ja][/ja]
    */
-  animation: PropTypes.oneOf(['none', 'slide', 'fade']),
+  animation: PropTypes.oneOf(['none', 'slide']),
 
   /**
    * @name animationOptions
