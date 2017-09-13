@@ -264,12 +264,15 @@ export default class SwipeReveal {
 
   _changeTo(scroll, options = {}) {
     const e = { activeIndex: this.getActiveIndex(scroll), lastActiveIndex: this._lastActiveIndex };
-    const canceled = e.activeIndex === e.lastActiveIndex || this.preChangeHook(e);
-    this._scroll = canceled ? this._offset + this._lastActiveIndex * this.itemNumSize : scroll;
+    const change = e.activeIndex !== e.lastActiveIndex;
+    const canceled = change ? this.preChangeHook(e) : false;
+
+    this._scroll = canceled ? this._offset + e.lastActiveIndex * this.itemNumSize : scroll;
+    this._lastActiveIndex = canceled ? e.lastActiveIndex : e.activeIndex;
+
     return this._scrollTo(this._scroll, options).then(() => {
       if (scroll === this._scroll && !canceled) {
-        this.postChangeHook(e);
-        this._lastActiveIndex = e.activeIndex;
+        change && this.postChangeHook(e);
       } else if (options.reject) {
         return Promise.reject('Canceled');
       }
