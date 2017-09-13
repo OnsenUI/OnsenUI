@@ -9,35 +9,27 @@
     <script src="../../build/js/onsenui.js"></script>
 
     <script>
-      document.addEventListener('init', function(event) {
-        console.log('init');
-      });
-      document.addEventListener('show', function(event) {
-        console.log('show');
-      });
-      document.addEventListener('hide', function(event) {
-        console.log('hide');
-      });
-      document.addEventListener('destroy', function(event) {
-        console.log('destroy');
-      });
-
+      ['init', 'show', 'hide', 'destroy', 'prechange', 'postchange', 'reactive']
+        .forEach(eN => document.addEventListener(eN, e => console.log(eN, e.target.id)));
     </script>
+
+</script>
 
   </head>
 
   <body>
-    <ons-page>
+    <ons-page id="tabbar-page">
       <ons-toolbar>
         <div class="center">Tabbar</div>
       </ons-toolbar>
 
-      <ons-tabbar position="auto">
-        <ons-tab page="page1.html" active
+      <ons-tabbar position="auto" animation="slide">
+        <ons-tab page="page1.html"
           icon="ion-home"
+          active-icon="md-menu"
           label="Home">
         </ons-tab>
-        <ons-tab
+        <ons-tab active
           icon="ion-chatbox-working"
           label="Comments"
           badge="99+"
@@ -50,19 +42,19 @@
     </ons-page>
 
     <template id="page1.html">
-      <ons-page>
+      <ons-page id="tab1">
         <h2>Page1</h2>
       </ons-page>
     </template>
 
     <template id="page2.html">
-      <ons-page>
+      <ons-page id="tab2">
         <h2>Page2</h2>
       </ons-page>
     </template>
 
     <template id="page3.html">
-      <ons-page>
+      <ons-page id="tab3">
         <h2>Page3</h2>
       </ons-page>
     </template>

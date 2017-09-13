@@ -19,7 +19,6 @@ import util from '../ons/util';
 import autoStyle from '../ons/autostyle';
 import ModifierUtil from '../ons/internal/modifier-util';
 import BaseElement from './base/base-element';
-import internal from '../ons/internal';
 import TabbarElement from './ons-tabbar';
 import contentReady from '../ons/content-ready';
 import { PageLoader, defaultPageLoader } from '../ons/page-loader';
@@ -31,21 +30,12 @@ const scheme = {
   '.tabbar__button': 'tabbar--*__button'
 };
 
-const templateSource = util.createElement(`
-  <div>
-    <input type="radio" style="display: none">
-    <button class="tabbar__button"></button>
+const buttonTemplate = util.createFragment(`
+  <div class="tabbar__icon">
+    <ons-icon></ons-icon>
   </div>
-`);
-
-const defaultInnerTemplateSource = util.createElement(`
-  <div>
-    <div class="tabbar__icon">
-      <ons-icon icon="ion-cloud"></ons-icon>
-    </div>
-    <div class="tabbar__label">label</div>
-    <div class="tabbar__badge notification">1</div>
-  </div>
+  <div class="tabbar__label"></div>
+  <div class="tabbar__badge notification"></div>
 `);
 
 /**
@@ -155,30 +145,18 @@ export default class TabElement extends BaseElement {
   constructor() {
     super();
 
-    this._pageLoader = defaultPageLoader;
-    this._page = null;
-
-    if (this.hasAttribute('label') || this.hasAttribute('icon') || this.hasAttribute('badge')) {
+    if (['label', 'icon', 'badge'].some(this.hasAttribute.bind(this))) {
       this._compile();
     } else {
-      contentReady(this, () => {
-        this._compile();
-      });
+      contentReady(this, () => this._compile());
     }
 
+    this._pageLoader = defaultPageLoader;
     this._boundOnClick = this._onClick.bind(this);
   }
 
   _getPageTarget() {
     return this.page || this.getAttribute('page');
-  }
-
-  set page(page) {
-    this._page = page;
-  }
-
-  get page() {
-    return this._page;
   }
 
   set pageLoader(loader) {
@@ -192,213 +170,122 @@ export default class TabElement extends BaseElement {
     return this._pageLoader;
   }
 
-  _templateLoaded() {
-    if (this.children.length == 0) {
-      return false;
-    }
-
-    const hasInput = this._input.getAttribute('type') === 'radio';
-    const hasButton = this._button;
-
-    return !!(hasInput && hasButton);
-  }
-
   _compile() {
     autoStyle.prepare(this);
-
     this.classList.add(defaultClassName);
 
-    if (!this._templateLoaded()) {
-      const fragment = document.createDocumentFragment();
-      let hasChildren = false;
-
-      while (this.childNodes[0]) {
-        const node = this.childNodes[0];
-        this.removeChild(node);
-        fragment.appendChild(node);
-
-        if (node.nodeType == Node.ELEMENT_NODE) {
-          hasChildren = true;
-        }
-      }
-
-      const template = templateSource.cloneNode(true);
-      while (template.children[0]) {
-        this.appendChild(template.children[0]);
-      }
-
-      if (hasChildren) {
-        this._button.appendChild(fragment);
-        this._hasDefaultTemplate = false;
-      } else {
-        this._hasDefaultTemplate = true;
-        this._updateDefaultTemplate();
-      }
+    if (this._button) {
+      return;
     }
 
+    const button = util.create('button.tabbar__button');
+    while(this.childNodes[0]) {
+      button.appendChild(this.childNodes[0]);
+    }
+
+    const input = util.create('input', { display: 'none' });
+    input.type = 'radio';
+
+    this.appendChild(input);
+    this.appendChild(button);
+
+    this._updateButtonContent();
     ModifierUtil.initModifier(this, scheme);
     this._updateRipple();
   }
 
   _updateRipple() {
-    util.updateRipple(this.querySelector('.tabbar__button'), this.hasAttribute('ripple'));
+    this._button && util.updateRipple(this._button, this.hasAttribute('ripple'));
   }
 
-  _updateDefaultTemplate() {
-    if (!this._hasDefaultTemplate) {
-      return;
-    }
-
+  _updateButtonContent() {
     const button = this._button;
-    const template = defaultInnerTemplateSource.cloneNode(true);
-    if (button.children.length === 0) {
-      while (template.children[0]) {
-        button.appendChild(template.children[0]);
-      }
+
+    let iconWrapper = this._icon;
+    if (this.hasAttribute('icon')) {
+      iconWrapper = iconWrapper || buttonTemplate.children[0].cloneNode(true);
+      const icon = iconWrapper.children[0];
+      const lastIconName = icon.getAttribute('icon');
+      icon.setAttribute('icon', this.getAttribute('icon'));
+      iconWrapper.parentElement !== button && button.insertBefore(iconWrapper, button.firstChild);
+      // dirty fix for https://github.com/OnsenUI/OnsenUI/issues/1654
+      icon.attributeChangedCallback('icon', lastIconName, this.getAttribute('icon'));
+    } else {
+      iconWrapper && iconWrapper.remove();
     }
 
-    if (!button.querySelector('.tabbar__icon')) {
-      button.insertBefore(template.querySelector('.tabbar__icon'), button.firstChild);
-    }
-
-    if (!button.querySelector('.tabbar__label')) {
-      button.appendChild(template.querySelector('.tabbar__label'));
-    }
-
-    if (!button.querySelector('.tabbar__badge')) {
-      button.appendChild(template.querySelector('.tabbar__badge'));
-    }
-
-    const icon = this.getAttribute('icon');
-    const label = this.getAttribute('label');
-    const badge = this.getAttribute('badge');
-
-    const iconElement = button.querySelector('.tabbar__icon').children[0];
-    const labelElement = button.querySelector('.tabbar__label');
-    const badgeElement = button.querySelector('.tabbar__badge');
-
-    if (iconElement) {
-      if (typeof icon === 'string') {
-        const last = iconElement.getAttribute('icon');
-        iconElement.setAttribute('icon', icon);
-        // dirty fix for https://github.com/OnsenUI/OnsenUI/issues/1654
-        iconElement.attributeChangedCallback('icon', last, icon);
+    ['label', 'badge'].forEach((attr, index) => {
+      let prop = this.querySelector(`.tabbar__${attr}`);
+      if (this.hasAttribute(attr)) {
+        prop = prop || buttonTemplate.children[++index].cloneNode(true);
+        prop.textContent = this.getAttribute(attr);
+        prop.parentElement !== button && button.appendChild(prop);
       } else {
-        iconElement.parentElement.remove();
+        prop && prop.remove();
       }
-    }
-
-    if (labelElement) {
-      if (typeof label === 'string') {
-        labelElement.textContent = label;
-      } else {
-        labelElement.remove();
-      }
-    }
-
-    if (badgeElement) {
-      if (typeof badge === 'string') {
-        badgeElement.textContent = badge;
-      } else {
-        badgeElement.remove();
-      }
-    }
+    });
   }
 
   get _input() {
-    return this.children[0];
+    return util.findChild(this, 'input');
   }
 
   get _button() {
     return util.findChild(this, '.tabbar__button');
   }
 
+  get _icon() {
+    return this.querySelector('.tabbar__icon');
+  }
+
+  get _tabbar() {
+    return util.findParent(this, 'ons-tabbar');
+  }
+
+  get index() {
+    return Array.prototype.indexOf.call(this.parentElement.children, this);
+  }
+
   _onClick() {
     if (this.onClick instanceof Function) {
       this.onClick();
     } else {
-      const tabbar = this._findTabbarElement();
-      if (tabbar) {
-        tabbar.setActiveTab(this._findTabIndex());
-      }
+      this._tabbar.setActiveTab(this.index);
     }
   }
 
-  setActive() {
-    this._input.checked = true;
-    this.classList.add('active');
-    this.setAttribute('active', '');
+  setActive(active) {
+    this._input.checked = active;
+    this.classList.toggle('active', active);
+    util.toggleAttribute(this, 'active', active)
 
     if (this.hasAttribute('icon') && this.hasAttribute('active-icon')) {
-      const icon = this.getAttribute('active-icon');
-      const iconElement = this._button.querySelector('.tabbar__icon').children[0];
-      iconElement.setAttribute('icon', icon);
+      this._icon.children[0].setAttribute('icon', this.getAttribute(active ? 'active-icon' : 'icon'));
     }
-
-    util.arrayFrom(this.querySelectorAll('[ons-tab-inactive], ons-tab-inactive'))
-      .forEach(element => element.style.display = 'none');
-    util.arrayFrom(this.querySelectorAll('[ons-tab-active], ons-tab-active'))
-      .forEach(element => element.style.display = 'inherit');
   }
 
-  setInactive() {
-    this._input.checked = false;
-    this.classList.remove('active');
-    this.removeAttribute('active');
-
-    if (this.hasAttribute('icon')) {
-      const icon = this.getAttribute('icon');
-      const iconElement = this._button.querySelector('.tabbar__icon').children[0];
-      iconElement.setAttribute('icon', icon);
-    }
-
-    util.arrayFrom(this.querySelectorAll('[ons-tab-inactive], ons-tab-inactive'))
-      .forEach(element => element.style.display = 'inherit');
-    util.arrayFrom(this.querySelectorAll('[ons-tab-active], ons-tab-active'))
-      .forEach(element => element.style.display = 'none');
-  }
-
-  /**
-   * @param {Element} parent
-   * @param {Function} callback
-   */
-  _loadPageElement(parent, callback) {
-    if (!this._loadedPage && !this._getPageTarget()) {
-      const pages = this._findTabbarElement().pages;
-      const index = this._findTabIndex();
-      if (!pages[index]) {
-        throw Error('Page was not provided to <ons-tab> index ' + index);
-      }
-      callback(pages[index]);
-    } else if (this._loadingPage) {
-      this._loadingPage.then(pageElement => {
-        callback(pageElement);
-      });
-    } else if (!this._loadedPage) {
-      const deferred = util.defer();
-      this._loadingPage = deferred.promise;
-
-      this._pageLoader.load({ page: this._getPageTarget(), parent }, pageElement => {
+  _loadPageElement(parent = this._tabbar._contentElement) {
+    this._hasLoaded = true;
+    return new Promise(resolve => {
+      this._pageLoader.load({ parent, page: this._getPageTarget() }, pageElement => {
         this._loadedPage = pageElement;
-        deferred.resolve(pageElement);
-        delete this._loadingPage;
-
-        callback(pageElement);
+        resolve(pageElement);
       });
-    } else {
-      callback(this._loadedPage);
-    }
+    });
   }
 
   get pageElement() {
+    // It has been loaded by ons-tab
     if (this._loadedPage) {
       return this._loadedPage;
     }
-
-    const tabbar = this._findTabbarElement();
-    const index = this._findTabIndex();
-
-    return tabbar._contentElement.children[index];
+    // Manually attached to DOM, 1 per tab
+    const tabbar = this._tabbar;
+    if (tabbar._contentElement.children.length === this.parentElement.children.length) {
+      return tabbar._contentElement.children[this.index];
+    }
+    // Loaded in another way
+    return null;
   }
 
   /**
@@ -409,66 +296,49 @@ export default class TabElement extends BaseElement {
   }
 
   disconnectedCallback() {
+    this.loaded = null;
     this.removeEventListener('click', this._boundOnClick, false);
     if (this._loadedPage) {
       this._pageLoader.unload(this._loadedPage);
       this._loadedPage = null;
+      this._hasLoaded = false;
     }
   }
 
   connectedCallback() {
+    if (!util.isAttached(this)) {
+      return; // ons-tabbar compilation may trigger this
+    }
+
+    this.loaded = util.defer();
+
     contentReady(this, () => {
-      this._ensureElementPosition();
-
-      const tabbar = this._findTabbarElement();
-
-      if (tabbar.hasAttribute('modifier')) {
-        const prefix = this.hasAttribute('modifier') ? this.getAttribute('modifier') + ' ' : '';
-        this.setAttribute('modifier', prefix + tabbar.getAttribute('modifier'));
+      const tabbar = this._tabbar;
+      if (!tabbar) {
+        throw new Error('This ons-tab element must be child of ons-tabbar element.');
       }
 
-      const onReady = () => {
-        if (!this.hasLoaded) {
-          if (this._getPageTarget()) {
-            this._loadPageElement(tabbar._contentElement, pageElement => {
-              pageElement.style.display = 'none';
-              tabbar._contentElement.appendChild(pageElement);
-            });
-          } else if (tabbar._contentElement.children.length === this.parentElement.children.length) {
-            this.pageElement.style.display = 'none';
-          }
-          this.hasLoaded = true;
-        }
+      if (tabbar.hasAttribute('modifier')) {
+        util.addModifier(this, tabbar.getAttribute('modifier'));
+      }
 
-        if (this.hasAttribute('active')) {
-          this._onClick();
-          !this.isActive() && this.setActive();
-        }
-      };
+      if (!this._hasLoaded) {
+        TabbarElement.rewritables.ready(tabbar, () => {
+          const elementLoaded = (!this.pageElement && this._getPageTarget())
+            ? this._loadPageElement(tabbar._contentElement)
+            : Promise.resolve(this.pageElement);
 
-      TabbarElement.rewritables.ready(tabbar, onReady);
+          elementLoaded.then(el => {
+            this.loaded.resolve(el);
+            this.hasAttribute('active')
+              ? !this.isActive() && tabbar.setActiveTab(this.index)
+              : el && (el.style.display = 'none');
+          });
+        });
+      }
 
       this.addEventListener('click', this._boundOnClick, false);
     });
-  }
-
-  _findTabbarElement() {
-    return util.findParent(this, 'ons-tabbar');
-  }
-
-  _findTabIndex() {
-    const elements = this.parentNode.children;
-    for (let i = 0; i < elements.length; i++) {
-      if (this === elements[i]) {
-        return i;
-      }
-    }
-  }
-
-  _ensureElementPosition() {
-    if (!this._findTabbarElement()) {
-      throw new Error('This ons-tab element is must be child of ons-tabbar element.');
-    }
   }
 
   static get observedAttributes() {
@@ -486,17 +356,15 @@ export default class TabElement extends BaseElement {
         contentReady(this, () => ModifierUtil.onModifierChanged(last, current, this, scheme));
         break;
       case 'ripple':
-        this._templateLoaded() && contentReady(this, () => this._updateRipple());
+        contentReady(this, () => this._updateRipple());
         break;
       case 'icon':
       case 'label':
       case 'badge':
-        contentReady(this, () => this._updateDefaultTemplate());
+        contentReady(this, () => this._updateButtonContent());
         break;
       case 'page':
-        if (typeof current === 'string') {
-          this._page = current;
-        }
+        this.page = current || '';
         break;
     }
   }
