@@ -9,6 +9,8 @@ dev
 
 * Components now update back button handler when prop changes.
 * PullHook: Added `onPull` prop.
+* PullHook: `onLoad` prop can be updated.
+* Tabbar: Support for swiping feature. Added `swipeable` and `onSwipe` props.
 
 ### Bug Fixes
 
