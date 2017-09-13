@@ -146,10 +146,9 @@ export default class SegmentElement extends BaseElement {
         throw new Error(`<ons-segment> error: no tabbar with id ${this.getAttribute('tabbar-id')} was found.`);
       } else {
         this._tabbar.setTabbarVisibility(false);
-        this._tabbar.addEventListener('prechange', event => setImmediate(() => {
-          if (!event.detail.canceled) {
-            this._getSegmentInput(event.index).checked = true;
-            this._triggerPostChangeEvent(event.index);
+        this._tabbar.addEventListener('prechange', e => setImmediate(() => {
+          if (!e.detail.canceled) {
+            this._getSegmentInput(e.index).checked = true;
           }
         }));
       }
@@ -250,10 +249,9 @@ export default class SegmentElement extends BaseElement {
 
   _onTabChange(event) {
     event.stopPropagation();
-    if (this._tabbar) {
-      this._tabbar.setActiveTab(parseInt(event.target.id.slice(-1)), { reject: false });
-    }
-    this._triggerPostChangeEvent(event.target.id.slice(-1));
+    this._tabbar
+      ? this._tabbar.setActiveTab(parseInt(event.target.id.slice(-1)), { reject: false })
+      : this._triggerPostChangeEvent(event.target.id.slice(-1));
   }
 
   _triggerPostChangeEvent(index) {
