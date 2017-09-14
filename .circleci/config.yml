@@ -102,7 +102,7 @@ jobs:
             - ./bindings/vue/node_modules
 
       - run:
-          name: Run Tests
+          name: Run OnsenUI Tests
           command: npm run test:skip-build
 
       - run: cd bindings/angular1; gulp e2e-test # bindings/angular1 has no package.json.
