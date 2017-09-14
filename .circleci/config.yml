@@ -120,3 +120,13 @@ jobs:
           path: ~/junit
       - store_artifacts:
           path: ~/junit
+
+      - deploy:
+          name: Deploy
+          command: |
+            if [ "${CIRCLE_BRANCH}" == "master" ]; then
+              mkdir -p ~/artifacts
+              ./scripts/nightly.sh $CIRCLE_BUILD_NUM $CIRCLE_SHA1 ~/artifacts
+            fi
+      - store_artifacts:
+          path: ~/artifacts
