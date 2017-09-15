@@ -56,7 +56,7 @@ class Segment extends SimpleWrapper {
   componentWillReceiveProps(props) {
     const node = findDOMNode(this);
 
-    if (this.props.index !== props.index &&props.index !== node.getActiveButtonIndex()) {
+    if (this.props.index !== props.index && props.index !== node.getActiveButtonIndex()) {
       node.setActiveButton(props.index, { reject: false });
     }
   }
