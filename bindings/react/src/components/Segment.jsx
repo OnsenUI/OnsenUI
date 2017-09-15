@@ -38,22 +38,26 @@ class Segment extends SimpleWrapper {
 
   componentDidMount() {
     super.componentDidMount();
-    var node = findDOMNode(this);
+    const node = findDOMNode(this);
 
     node.addEventListener('postchange', this.onPostChange);
   }
 
   componentWillUnmount() {
-    var node = findDOMNode(this);
+    const node = findDOMNode(this);
 
     node.removeEventListener('postchange', this.onPostChange);
+  }
+
+  shouldComponentUpdate() {
+    return false;
   }
 
   componentWillReceiveProps(props) {
     const node = findDOMNode(this);
 
-    if (this.props.index !== props.index) {
-      node.setActiveButton(props.index, {animation: props.animation, animationOptions: props.animationOptions});
+    if (this.props.index !== props.index &&props.index !== node.getActiveButtonIndex()) {
+      node.setActiveButton(props.index, { reject: false });
     }
   }
 
@@ -96,25 +100,6 @@ Segment.propTypes = {
    *  [ja][/ja]
    */
   modifier: PropTypes.string,
-
-  /**
-   * @name animation
-   * @type string
-   * @description
-   *  [en] Animation name for a connected tabbar. Available values are `"none"`, `"slide"` and `"fade"`. Default is `"none"`. [/en]
-   *  [ja][/ja]
-   */
-  animation: PropTypes.oneOf(['none', 'slide', 'fade']),
-
-  /**
-   * @name animationOptions
-   * @type object
-   * @required false
-   * @description
-   *  [en]Specify the connected tabbar animation's duration, delay and timing. E.g. `{duration: 0.2, delay: 0.4, timing: 'ease-in'}`.[/en]
-   *  [ja][/ja]
-   */
-  animationOptions: PropTypes.object,
 
   /**
    * @name onChange
