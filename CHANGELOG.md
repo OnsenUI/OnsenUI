@@ -18,6 +18,7 @@ dev
 ### Bug Fixes
 
  * core: Device Back Button handler timing issue.
+ * GestureDetector: Fixed memory leak from Hammer.js v1.
  * templates: Fixed a bug where `script` tags might not be ready on time.
  * autoStyle: Fixed [#2171](https://github.com/OnsenUI/OnsenUI/issues/2171).
  * inputs: Accept `required` attr. Fixed [#2169](https://github.com/OnsenUI/OnsenUI/issues/2169).

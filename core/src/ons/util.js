@@ -464,12 +464,14 @@ util.warn = (...args) => {
 
 util.preventScroll = gd => {
   const prevent = e => e.cancelable && e.preventDefault();
-  gd.on('touchmove', prevent, true);
-  const clean = e => {
-    gd.off('touchmove', prevent, true);
-    gd.off('touchend', clean, true);
+
+  const clean = (e) => {
+    gd.off('touchmove', prevent);
+    gd.off('dragend', clean);
   };
-  gd.on('touchend', clean, true);
+
+  gd.on('touchmove', prevent);
+  gd.on('dragend', clean);
 }
 
 export default util;

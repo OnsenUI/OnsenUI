@@ -17,7 +17,7 @@ const directionMap = {
   }
 };
 
-export default class SwipeReveal {
+export default class Swiper {
   constructor(params) {
     const FALSE = (() => false);
 
