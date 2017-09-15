@@ -64,14 +64,13 @@ class Tabbar extends BasicComponent {
     node.removeEventListener('reactive', this.onReactive);
   }
 
-  componentDidUpdate(prevProps) {
-    super.componentDidUpdate(prevProps);
+  componentWillReceiveProps(nextProps) {
     const node = this._tabbar;
-    if (this.props.index !== node.getActiveTabIndex()) {
-      node.setActiveTab(this.props.index);
+    if (nextProps.index !== this.props.index && nextProps.index !== node.getActiveTabIndex()) {
+      node.setActiveTab(nextProps.index, { reject: false });
     }
-    if (this.props.onSwipe !== prevProps.onSwipe) {
-      node.onSwipe = this.props.onSwipe;
+    if (this.props.onSwipe !== nextProps.onSwipe) {
+      node.onSwipe = nextProps.onSwipe;
     }
   }
 
