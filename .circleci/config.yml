@@ -103,7 +103,7 @@ jobs:
 
       - run:
           name: Run OnsenUI Tests
-          command: npm run test:skip-build
+          command: gulp test --disable-warnings --skip-build --browsers local_chrome_headless # npm run test:skip-build
 
       - run: cd bindings/angular1; gulp e2e-test # bindings/angular1 has no package.json.
       - run: cd bindings/angular2; npm test
