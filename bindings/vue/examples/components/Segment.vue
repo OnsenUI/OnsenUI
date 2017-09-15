@@ -2,7 +2,7 @@
   <v-ons-page>
     <v-ons-toolbar>
       <div class="center">
-        <v-ons-segment tabbar-id="tabbar" :index.sync="segmentIndex" @postchange="segmentIndex = $event.index" style="width: 280px">
+        <v-ons-segment tabbar-id="tabbar" :index.sync="segmentIndex" style="width: 280px">
           <button>Page 1</button>
           <button>Page 2</button>
           <button>Page 3</button>
@@ -11,13 +11,13 @@
     </v-ons-toolbar>
 
     <!-- Comment <v-ons-tabbar> out to test this one -->
-    <v-ons-segment :index.sync="segment2Index" style="width: 280px; margin: 10px 20px;">
+    <!-- <v-ons-segment :index.sync="segment2Index" style="width: 280px; margin: 10px 20px;">
       <button>Label 1</button>
       <button>Label 2</button>
       <button>Label 3</button>
-    </v-ons-segment>
+    </v-ons-segment> -->
 
-    <v-ons-tabbar id="tabbar" :tabs="tabs" :index.sync="tabbarIndex" @postchange="tabbarIndex = $event.index; log('postchange event', $event)"></v-ons-tabbar>
+    <v-ons-tabbar swipeable id="tabbar" :tabs="tabs" :index.sync="tabbarIndex"></v-ons-tabbar>
   </v-ons-page>
 </template>
 

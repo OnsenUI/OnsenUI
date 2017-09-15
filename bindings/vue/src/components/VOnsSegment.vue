@@ -5,10 +5,10 @@
 </template>
 
 <script>
-  import { hasOptions, deriveEvents } from '../mixins';
+  import { deriveEvents } from '../mixins';
 
   export default {
-    mixins: [hasOptions, deriveEvents],
+    mixins: [deriveEvents],
 
     props: {
       index: {
@@ -19,7 +19,7 @@
     watch: {
       index() {
         if (this.index !== this.$el.getActiveButtonIndex()) {
-          this.$el.setActiveButton(this.index, this.options);
+          this.$el.setActiveButton(this.index, { reject: false });
         }
       }
     }
