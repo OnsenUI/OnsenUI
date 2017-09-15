@@ -1,0 +1,132 @@
+version: 2
+jobs:
+  build:
+    working_directory: ~/working_directory
+    docker:
+      - image: circleci/node:6-browsers
+        env:
+          - DISPLAY=:99
+          - CHROME_BIN=/usr/bin/google-chrome
+    steps:
+      - checkout
+      - run:
+          name: Print system information
+          command: |
+            echo "node $(node -v)"
+            echo "npm v$(npm --version)"
+            echo "Yarn v$(yarn --version)"
+            echo "$(google-chrome --version)"
+      - run:
+          name: Instal coveralls and gulp globally
+          command: sudo yarn global add coveralls gulp
+
+      # css-components
+      - restore_cache:
+          keys:
+            - v1-css-components-cache-{{ .Branch }}-{{ checksum "css-components/yarn.lock" }}
+            - v1-css-components-cache-{{ .Branch }}
+            - v1-css-components-cache-
+      - run:
+          name: Install css-components dependencies
+          command: |
+            cd css-components
+            yarn install --pure-lockfile
+      - save_cache:
+          key: v1-css-components-cache-{{ .Branch }}-{{ checksum "css-components/yarn.lock" }}
+          paths:
+            - ./css-components/node_modules
+
+      # OnsenUI
+      - restore_cache:
+          keys:
+            - v1-onsenui-cache-{{ .Branch }}-{{ checksum "yarn.lock" }}
+            - v1-onsenui-cache-{{ .Branch }}-
+            - v1-onsenui-cache-
+      - run:
+          name: Install dependencies
+          command: yarn install --pure-lockfile
+      - save_cache:
+          key: v1-onsenui-cache-{{ .Branch }}-{{ checksum "yarn.lock" }}
+          paths:
+            - ./node_modules
+      - run:
+          name: gulp build
+          command: gulp build
+
+      # bindings/angular2
+      - restore_cache:
+          keys:
+            - v1-angular2-cache-{{ .Branch }}-{{ checksum "bindings/angular2/yarn.lock" }}
+            - v1-angular2-cache-{{ .Branch }}-
+            - v1-angular2-cache-
+      - run:
+          name: Install Angular 2 dependencies
+          command: |
+            cd bindings/angular2
+            yarn install --pure-lockfile
+      - save_cache:
+          key: v1-angular2-cache-{{ .Branch }}-{{ checksum "bindings/angular2/yarn.lock" }}
+          paths:
+            - ./bindings/angular2/node_modules
+
+      # bindings/react
+      - restore_cache:
+          keys:
+            - v1-react-cache-{{ .Branch }}-{{ checksum "bindings/react/yarn.lock" }}
+            - v1-react-cache-{{ .Branch }}-
+            - v1-react-cache-
+      - run:
+          name: Install React dependencies
+          command: |
+            cd bindings/react
+            yarn install --pure-lockfile
+      - save_cache:
+          key: v1-react-cache-{{ .Branch }}-{{ checksum "bindings/react/yarn.lock" }}
+          paths:
+            - ./bindings/react/node_modules
+
+      # bindings/vue
+      - restore_cache:
+          keys:
+            - v1-vue-cache-{{ .Branch }}-{{ checksum "bindings/vue/yarn.lock" }}
+            - v1-vue-cache-{{ .Branch }}-
+            - v1-vue-cache-
+      - run:
+          name: Install Vue dependencies
+          command: |
+            cd bindings/vue
+            yarn install --pure-lockfile
+      - save_cache:
+          key: v1-vue-cache-{{ .Branch }}-{{ checksum "bindings/vue/yarn.lock" }}
+          paths:
+            - ./bindings/vue/node_modules
+
+      - run:
+          name: Run OnsenUI Tests
+          command: gulp test --disable-warnings --skip-build --browsers local_chrome_headless # npm run test:skip-build
+
+      - run: cd bindings/angular1; gulp e2e-test # bindings/angular1 has no package.json.
+      - run: cd bindings/angular2; npm test
+      - run: cd bindings/react; npm test
+      - run: cd bindings/react; npm run build
+      - run: cd bindings/vue; npm test
+      - run:
+          name: Save test results
+          command: |
+            mkdir -p ~/junit
+            find . -type f -regex "./core/test/unit/.*xml" -exec cp {} ~/junit/ \;
+            cat ./core/test/unit/coverage/*/lcov.info | coveralls || true # Ignore if this fails.
+      - store_test_results:
+          path: ~/junit
+      - store_artifacts:
+          path: ~/junit
+
+      - deploy:
+          name: Deployment
+          command: |
+            if [ "${CIRCLE_BRANCH}" == "master" ]; then
+              mkdir -p ~/artifacts
+              ./scripts/nightly.sh $CIRCLE_BUILD_NUM $CIRCLE_SHA1 ~/artifacts
+            fi
+      - store_artifacts:
+          path: ~/artifacts
