@@ -139,6 +139,7 @@ export default class SegmentElement extends BaseElement {
       const segmentItem = util.createElement(`
         <div class="segment__item">
           <input type="radio" class="segment__input"
+            onclick="this.nextElementSibling.click()"
             name="${this._segmentId}"
             ${!this.hasAttribute('tabbar-id') && index === (parseInt(this.getAttribute('active-index')) || 0) ? 'checked' : ''}>
         </div>
