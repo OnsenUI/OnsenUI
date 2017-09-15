@@ -30,7 +30,7 @@ describe('ons-segment', () => {
     expect(element.classList.contains('segment--fuga')).to.be.true;
   });
 
-  it('fires \'postchange\' event in standalone mode', () => {
+  it('fires \'postchange\' event', () => {
     const segment = ons.createElement(`
       <ons-segment active-index="0">
         <button>Label 1</button>

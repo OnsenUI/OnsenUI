@@ -110,11 +110,11 @@ export default class SegmentElement extends BaseElement {
     this._segmentId = generateId();
     this._tabbar = null;
     this._onChange = this._onChange.bind(this);
-    this._onTabbarPrechange = this._onTabbarPrechange.bind(this);
+    this._onTabbarPreChange = this._onTabbarPreChange.bind(this);
 
     contentReady(this, () => {
       this._compile()
-      this._lastActiveIndex = this.getActiveButtonIndex();
+      setImmediate(() => this._lastActiveIndex = this._tabbar ? this._tabbar.getActiveTabIndex() : this.getActiveButtonIndex());
     });
   }
 
@@ -164,7 +164,7 @@ export default class SegmentElement extends BaseElement {
         this._tabbar.hide();
         setImmediate(() => this._setChecked(this._tabbar.getActiveTabIndex()));
 
-        this._tabbar.addEventListener('prechange', this._onTabbarPrechange);
+        this._tabbar.addEventListener('prechange', this._onTabbarPreChange);
       });
     }
 
@@ -172,11 +172,12 @@ export default class SegmentElement extends BaseElement {
   }
 
   disconnectedCallback() {
-    if (this._tabbar) {
-      this._tabbar.removeEventListener('prechange', this._onTabbarPrechange);
-      this._tabbar = null;
-    }
-
+    contentReady(this, () => {
+      if (this._tabbar) {
+        this._tabbar.removeEventListener('prechange', this._onTabbarPreChange);
+        this._tabbar = null;
+      }
+    });
     this.removeEventListener('change', this._onChange);
   }
 
@@ -231,8 +232,13 @@ export default class SegmentElement extends BaseElement {
       : this._postChange(this.getActiveButtonIndex());
   }
 
-  _onTabbarPrechange(event) {
-    setImmediate(() => !event.detail.canceled && this._setChecked(event.index));
+  _onTabbarPreChange(event) {
+    setImmediate(() => {
+      if (!event.detail.canceled) {
+        this._setChecked(event.index);
+        this._postChange(event.index);
+      }
+    });
   }
 
   _postChange(index) {
