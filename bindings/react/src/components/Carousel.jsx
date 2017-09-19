@@ -58,6 +58,7 @@ class Carousel extends SimpleWrapper {
     node.addEventListener('postchange', this.onChange);
     node.addEventListener('refresh', this.onRefresh);
     node.addEventListener('overscroll', this.onOverscroll);
+    node.onSwipe = this.props.onSwipe || null;
   }
 
   componentWillUnmount() {
@@ -76,6 +77,10 @@ class Carousel extends SimpleWrapper {
 
     if (this.props.children.length !== props.children.length) {
       node.refresh();
+    }
+
+    if (this.props.onSwipe !== props.onSwipe) {
+      node.onSwipe = this.props.onSwipe;
     }
   }
 
@@ -251,7 +256,16 @@ Carousel.propTypes = {
    *  [en]Specify the animation's duration, delay and timing. E.g.  `{duration: 0.2, delay: 0.4, timing: 'ease-in'}`.[/en]
    *  [ja][/ja]
    */
-  animationOptions: PropTypes.object
+  animationOptions: PropTypes.object,
+
+  /**
+   * @name onSwipe
+   * @type function
+   * @description
+   *  [en]Hook called whenever the user slides the carousel. It gets a decimal index and an animationOptions object as arguments.[/en]
+   *  [ja][/ja]
+   */
+  onSwipe: PropTypes.func
 };
 
 export default Carousel;
