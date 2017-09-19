@@ -112,6 +112,7 @@ export default class PullHookElement extends BaseElement {
     this._boundOnDragStart = this._onDragStart.bind(this);
     this._boundOnDragEnd = this._onDragEnd.bind(this);
     this._boundOnScroll = this._onScroll.bind(this);
+    this._preventScroll = this._preventScroll.bind(this);
 
     this._setState(STATE_INITIAL, true);
     this._hide(); // Fix for transparent toolbar transitions
@@ -179,15 +180,12 @@ export default class PullHookElement extends BaseElement {
 
     event.stopPropagation();
 
-    // Hack to make it work on Android 4.4 WebView. Scrolls manually near the top of the page so
-    // there will be no inertial scroll when scrolling down. Allowing default scrolling will
-    // kill all 'touchmove' events.
-    if (platform.isAndroid()) {
-      const element = this._pageElement;
-      element.scrollTop = this._startScroll - event.gesture.deltaY;
-      if (element.scrollTop < window.innerHeight && event.gesture.direction !== 'up') {
-        event.gesture.preventDefault();
-      }
+    // Hack to make it work on Android 4.4 WebView and iOS UIWebView. Scrolls manually
+    // near the top of the page so there will be no inertial scroll when scrolling down.
+    // Allowing default scrolling will kill all 'touchmove' events.
+    this._pageElement.scrollTop = this._startScroll - event.gesture.deltaY;
+    if (this._pageElement.scrollTop < window.innerHeight && event.gesture.direction !== 'up') {
+      event.gesture.preventDefault();
     }
 
     const scroll = Math.max(event.gesture.deltaY - this._startScroll, 0);
@@ -203,11 +201,13 @@ export default class PullHookElement extends BaseElement {
         this._setState(STATE_INITIAL);
       }
 
+      this._pulling = true;
       this._translateTo(scroll);
     }
   }
 
   _onDragEnd(event) {
+    this._pulling = false;
     if (!event.gesture || this.disabled || this._ignoreDrag) {
       return;
     }
@@ -223,6 +223,11 @@ export default class PullHookElement extends BaseElement {
         this._translateTo(0, {animate: true});
       }
     }
+  }
+
+  _preventScroll(event) {
+    // Fix for Android & iOS when starting from scrollTop > 0 or pulling back
+    this._pulling && event.cancelable && event.preventDefault();
   }
 
   /**
@@ -440,6 +445,7 @@ export default class PullHookElement extends BaseElement {
     this._gestureDetector.on('drag', this._boundOnDrag);
     this._gestureDetector.on('dragstart', this._boundOnDragStart);
     this._gestureDetector.on('dragend', this._boundOnDragEnd);
+    this._gestureDetector.on('touchmove', this._preventScroll);
 
     this._pageElement.addEventListener('scroll', this._boundOnScroll, false);
   }
@@ -449,6 +455,7 @@ export default class PullHookElement extends BaseElement {
       this._gestureDetector.off('drag', this._boundOnDrag);
       this._gestureDetector.off('dragstart', this._boundOnDragStart);
       this._gestureDetector.off('dragend', this._boundOnDragEnd);
+      this._gestureDetector.off('touchmove', this._preventScroll);
 
       this._gestureDetector.dispose();
       this._gestureDetector = null;

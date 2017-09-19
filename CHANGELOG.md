@@ -21,6 +21,7 @@ dev
  * templates: Fixed a bug where `script` tags might not be ready on time.
  * autoStyle: Fixed [#2171](https://github.com/OnsenUI/OnsenUI/issues/2171).
  * inputs: Accept `required` attr. Fixed [#2169](https://github.com/OnsenUI/OnsenUI/issues/2169).
+ * ons-pull-hook: Different glitches on both iOS and Android. Fixed [#1990](https://github.com/OnsenUI/OnsenUI/issues/1990).
  * ons-list-item: `nodivider` modifier should not hide `chevron`.
  * ons-list-item: Fixed [#2150](https://github.com/OnsenUI/OnsenUI/issues/2150).
  * ons-navigator: Fixed [#2167](https://github.com/OnsenUI/OnsenUI/issues/2167).
