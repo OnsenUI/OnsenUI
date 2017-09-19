@@ -12,16 +12,6 @@
  */
 
 /**
- * @attribute hide-tabs
- * @initonly
- * @type {Boolean}
- * @default false
- * @description
- *   [en]Whether to hide the tabs. Valid values are true/false.[/en]
- *   [ja]タブを非表示にする場合に指定します。trueもしくはfalseを指定できます。[/ja]
- */
-
-/**
  * @attribute ons-reactive
  * @initonly
  * @type {Expression}
@@ -142,15 +132,6 @@
       scope: true,
 
       link: function(scope, element, attrs, controller) {
-
-
-        scope.$watch(attrs.hideTabs, function(hide) {
-          if (typeof hide === 'string') {
-            hide = hide === 'true';
-          }
-          element[0].setTabbarVisibility(!hide);
-        });
-
         var tabbarView = new TabbarView(scope, element, attrs);
         $onsen.addModifierMethodsForCustomElements(tabbarView, element);
 
