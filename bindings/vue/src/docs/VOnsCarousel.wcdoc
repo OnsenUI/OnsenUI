@@ -11,6 +11,14 @@
  */
 
 /**
+ * @attribute on-swipe
+ * @type {Function}
+ * @description
+ *   [en]Hook called whenever the user slides the carousel. It gets a decimal index and an animationOptions object as arguments.[/en]
+ *   [ja][/ja]
+ */
+
+/**
  * @event update:index
  * @description
  *   [en]Fired right after user interaction. Useful to update `index` prop.[/en]
