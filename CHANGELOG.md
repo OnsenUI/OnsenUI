@@ -11,6 +11,7 @@ dev
  * css-components: Changed color scheme to more iOS native-like.
  * ons: Added `mockStatusBar` utility to create a fake iOS status bar for browser testing.
  * ons-pull-hook: Added `onPull` property function that gets the pulled distance on drag.
+ * ons-carousel: Added `onSwipe` property function that gets the swiped distance on drag.
  * ons-tabbar: Tabbar can now be swiped to change pages. `swipeable` attribute enables this feature.
 
 ### Bug Fixes
