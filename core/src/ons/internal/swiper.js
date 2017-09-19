@@ -293,7 +293,7 @@ export default class Swiper {
     }
 
     const opt = options.animation  === 'none' ? {} :  options.animationOptions;
-    this.scrollHook && this.scrollHook((scroll / this.targetSize).toFixed(2), options.animationOptions || {});
+    this.scrollHook && this.scrollHook((scroll / this.itemNumSize).toFixed(2), options.animationOptions || {});
     return new Promise(resolve => animit(this.target).queue({ transform: this._getTransform(scroll) }, opt).play(resolve));
   }
 
