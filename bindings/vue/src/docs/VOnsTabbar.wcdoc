@@ -27,6 +27,13 @@
  */
 
 /**
+ * @attribute tabbar-style
+ * @description
+ *   [en]Optional style for the actual tabbar element. Accepts any Vue valid style.[/en]
+ *   [ja][/ja]
+ */
+
+/**
  * @event update:index
  * @description
  *   [en]Fired right after user interaction. Useful to update `index` prop.[/en]

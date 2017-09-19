@@ -8,6 +8,7 @@ dev
 
 * VOnsPullHook: Added `onPull` prop.
 * VOnsTabbar: Support for swiping feature. Added `swipeable` and `onSwipe` props.
+* VOnsTabbar: Added `tabbarStyle` prop to declaratively set the actual tabbar element style.
 
 ### Bug Fixes
 
