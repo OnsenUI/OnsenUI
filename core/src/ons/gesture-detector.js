@@ -300,7 +300,7 @@ Utils = GestureDetector.utils = {
       });
     }
 
-    if(src.indexOf && !findByKey) {
+    if(src.indexOf) {
       return src.indexOf(find);
     } else {
       for(var i = 0, len = src.length; i < len; i++) {
