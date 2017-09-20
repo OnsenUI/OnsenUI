@@ -9,6 +9,7 @@ export { default as VOnsNavigator } from './VOnsNavigator.vue';
 export { default as VOnsSplitterSide } from './VOnsSplitterSide.vue';
 export { default as VOnsLazyRepeat } from './VOnsLazyRepeat.vue';
 export { default as VOnsSelect } from './VOnsSelect.vue';
+export { default as VOnsSegment } from './VOnsSegment.vue';
 
 // Generic components
 import VGeneric from './VGeneric.vue';

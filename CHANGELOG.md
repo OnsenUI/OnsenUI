@@ -7,6 +7,8 @@ dev
 
 ### New Features
 
+ * core: Added `ons-segment` element.
+ * angular1: Added `ons-segment` bindings.
  * css-components: Reimplemented css-components previewer.
  * css-components: Changed color scheme to more iOS native-like.
  * ons: Added `mockStatusBar` utility to create a fake iOS status bar for browser testing.

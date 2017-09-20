@@ -7,6 +7,7 @@ dev
 
 ### New Features
 
+* segment: Added new component.
 * Components now update back button handler when prop changes.
 * PullHook: Added `onPull` prop.
 * PullHook: `onLoad` prop can be updated.

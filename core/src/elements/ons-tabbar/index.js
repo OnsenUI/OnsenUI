@@ -183,6 +183,13 @@ export default class TabbarElement extends BaseElement {
    */
 
   /**
+   * @attribute hide-tabs
+   * @description
+   *   [en]Whether to hide the tabs.[/en]
+   *   [ja]タブを非表示にする場合に指定します。[/ja]
+   */
+
+  /**
    * @attribute tab-border
    * @description
    *   [en]If this attribute is set the tabs show a dynamic bottom border. Only works for iOS since the border is always visible in Material Design.[/en]
@@ -405,7 +412,7 @@ export default class TabbarElement extends BaseElement {
    *   [en]Specify the animation's duration, delay and timing. E.g. `{duration: 0.2, delay: 0.4, timing: 'ease-in'}`.[/en]
    *   [ja]アニメーション時のduration, delay, timingを指定します。e.g. {duration: 0.2, delay: 0.4, timing: 'ease-in'}[/ja]
    * @description
-   *   [en]Show specified tab page. Animations and other options can be specified by the second parameter.[/en]
+   *   [en]Show specified tab page. Animations and their options can be specified by the second parameter.[/en]
    *   [ja]指定したインデックスのタブを表示します。アニメーションなどのオプションを指定できます。[/ja]
    * @return {Promise}
    *   [en]A promise that resolves to the new page element.[/en]
@@ -452,8 +459,10 @@ export default class TabbarElement extends BaseElement {
    *   [ja][/ja]
    */
   setTabbarVisibility(visible) {
-    this._contentElement.style[this._top ? 'top' : 'bottom'] = visible ? '' : '0px';
-    this._tabbarElement.style.display = visible ? '' : 'none';
+    contentReady(this, () => {
+      this._contentElement.style[this._top ? 'top' : 'bottom'] = visible ? '' : '0px';
+      this._tabbarElement.style.display = visible ? '' : 'none';
+    });
   }
 
   show() {
@@ -543,7 +552,7 @@ export default class TabbarElement extends BaseElement {
   }
 
   static get observedAttributes() {
-    return ['modifier', 'position', 'swipeable', 'tab-border'];
+    return ['modifier', 'position', 'swipeable', 'tab-border', 'hide-tabs'];
   }
 
   attributeChangedCallback(name, last, current) {
@@ -555,6 +564,8 @@ export default class TabbarElement extends BaseElement {
       this._updatePosition();
     } else if (name === 'swipeable') {
       this._swiper && this._swiper.updateSwipeable(this.hasAttribute('swipeable'));
+    } else if (name === 'hide-tabs') {
+      this.setTabbarVisibility(!this.hasAttribute('hide-tabs') || current === 'false');
     }
   }
 

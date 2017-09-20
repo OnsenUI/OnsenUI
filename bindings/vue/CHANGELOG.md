@@ -4,6 +4,9 @@ CHANGELOG
 dev
 ----
 
+### New features
+
+* VOnsSegment: New component.
 ### New Features
 
 * VOnsPullHook: Added `onPull` prop.

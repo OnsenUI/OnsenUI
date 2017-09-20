@@ -144,16 +144,6 @@
       tabs[0].click();
       expect(timesReactivated.getText()).toBe('4');
     });
-
-    it('should be possible to hide tabs', function() {
-      var tabBar = element(by.css('.tabbar'));
-
-      expect(tabBar.isDisplayed()).toBeTruthy();
-      element(by.id('toggle-tabbar')).click();
-      expect(tabBar.isDisplayed()).not.toBeTruthy();
-      element(by.id('toggle-tabbar')).click();
-      expect(tabBar.isDisplayed()).toBeTruthy();
-    });
   });
 
   describe('tabbar/issue-1654.html', function() {

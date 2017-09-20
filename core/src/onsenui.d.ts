@@ -353,6 +353,24 @@ declare namespace ons {
     value: any;
   }
 
+  interface OnsSegmentElement extends HTMLElement {
+    /**
+     * @param {Number} index Button index
+     * @param {Object} [options] Parameter object
+     * @param {Boolean} [options.keepPage] If true the button will not be changed
+     * @param {String} [options.animation] Animation name. Available animations are `"fade"`, `"slide"` and `"none"`.
+     * @return Resolves to the selected index or to the new page element if there is a connected tabbar.
+     * @description Make button with the specified index active. If there is a connected tabbar it shows the corresponding tab page. In this case animations and other options can be specified by the second parameter.
+     */
+    setActiveButton(index: number, options?: TabbarOptions): Promise<HTMLElement>;
+    /**
+     * @return {Number} The index of the currently active button
+     * @description Returns button index of current active button. If active button is not found, returns -1
+     */
+    getActiveButtonIndex(): number;
+    tabbar: any;
+  }
+
   interface OnsTemplateElement extends HTMLElement {
     template: any;
   }
