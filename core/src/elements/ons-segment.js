@@ -131,32 +131,24 @@ export default class SegmentElement extends BaseElement {
     this.classList.add(defaultClassName);
 
     for (let index = this.children.length - 1; index >= 0; index--) {
-      const button = this.children[index];
+      const item = this.children[index];
+      item.classList.add('segment__item');
 
-      // Only buttons or compiled items accepted
-      if (button.tagName !== 'BUTTON') {
-        if (button.classList.contains('segment__item')) {
-          const input = button.querySelector('input');
-          input && !input.name && input.setAttribute('name', this._segmentId);
-          continue;
-        } else {
-          throw new Error(`<ons-segment> child ${index} error: segment children must be <button> elements or compiled segment items.`);
+      const input = util.findChild(item, '.segment__input') || util.create('input.segment__input');
+      input.type = 'radio';
+      input.value = index;
+      input.name = input.name || this._segmentId;
+      input.checked = !this.hasAttribute('tabbar-id') && index === (parseInt(this.getAttribute('active-index')) || 0);
+
+      const button = util.findChild(item, '.segment__button') || util.create('.segment__button');
+      if (button.parentElement !== item) {
+        while (item.firstChild) {
+          button.appendChild(item.firstChild);
         }
       }
 
-      const segmentItem = util.createElement(`
-        <div class="segment__item">
-          <input type="radio" class="segment__input"
-            onclick="this.nextElementSibling.click()"
-            value="${index}"
-            name="${this._segmentId}"
-            ${!this.hasAttribute('tabbar-id') && index === (parseInt(this.getAttribute('active-index')) || 0) ? 'checked' : ''}>
-        </div>
-      `);
-
-      this.replaceChild(segmentItem, button);
-      button.classList.add('segment__button');
-      segmentItem.appendChild(button);
+      item.appendChild(input);
+      item.appendChild(button);
     }
 
     ModifierUtil.initModifier(this, scheme);

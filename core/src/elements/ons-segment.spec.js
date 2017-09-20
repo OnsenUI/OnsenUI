@@ -67,26 +67,6 @@ describe('ons-segment', () => {
   });
 
   describe('#_compile()', () => {
-    it('Only accepts buttons or compiled items', () => {
-      const div1 = document.createElement('div');
-      const div2 = document.createElement('div');
-      expect(() => div1.innerHTML = `
-        <ons-segment>
-          <button>Label 1</button>
-          <div class="segment__item">
-            <input>
-            <button>Label2</button>
-          </div>
-        </ons-segment>
-      `).to.be.ok;
-
-      expect(() => div1.innerHTML = `
-        <ons-segment>
-          <div></div>
-        </ons-segment>
-      `).to.throw(Error);
-    });
-
     it('does not compile twice', () => {
       const div1 = document.createElement('div');
       const div2 = document.createElement('div');
