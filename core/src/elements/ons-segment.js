@@ -104,6 +104,14 @@ export default class SegmentElement extends BaseElement {
    *  [ja][/ja]
    */
 
+  /**
+   * @attribute disabled
+   * @description
+   *   [en]Specify if segment should be disabled.[/en]
+   *   [ja]ボタンを無効化する場合は指定します。[/ja]
+   */
+
+
   constructor() {
     super();
 
@@ -251,6 +259,21 @@ export default class SegmentElement extends BaseElement {
       segmentItem: this.children[index]
     });
     this._lastActiveIndex = index;
+  }
+
+  /**
+   * @property disabled
+   * @type {Boolean}
+   * @description
+   *   [en]Whether the segment is disabled or not.[/en]
+   *   [ja]無効化されている場合に`true`。[/ja]
+   */
+  set disabled(value) {
+    return util.toggleAttribute(this, 'disabled', value);
+  }
+
+  get disabled() {
+    return this.hasAttribute('disabled');
   }
 
   static get observedAttributes() {
