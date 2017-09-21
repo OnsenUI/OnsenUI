@@ -19,21 +19,17 @@ const directionMap = {
 
 export default class Swiper {
   constructor(params) {
-    const FALSE = (() => false);
-
     // Parameters
+    const FALSE = (() => false);
+    `getInitialIndex getBubbleWidth isVertical isOverScrollable isCentered
+    isAutoScrollable refreshHook preChangeHook postChangeHook overScrollHook`
+      .split(/\s+/)
+      .forEach(key => this[key] = params[key] || FALSE);
+
     this.getElement = params.getElement; // Required
-    this.getInitialIndex = params.getInitialIndex || FALSE;
-    this.isVertical = params.isVertical || FALSE;
-    this.isOverScrollable = params.isOverScrollable || FALSE;
-    this.isCentered = params.isCentered || FALSE;
-    this.isAutoScrollable = params.isAutoScrollable || FALSE;
-    this.refreshHook = params.refreshHook || FALSE;
-    this.preChangeHook = params.preChangeHook || FALSE;
-    this.postChangeHook = params.postChangeHook || FALSE;
-    this.overScrollHook = params.overScrollHook || FALSE;
-    this.scrollHook = params.scrollHook;
+    this.scrollHook = params.scrollHook; // Optional
     this.itemSize = params.itemSize || '100%';
+
     this.getAutoScrollRatio = (...args) => {
       let ratio = params.getAutoScrollRatio && params.getAutoScrollRatio(...args);
       ratio = typeof ratio === 'number' && ratio === ratio ? ratio : .5;
@@ -64,7 +60,7 @@ export default class Swiper {
     this.blocker.classList.add('ons-swiper-blocker');
 
     // Setup listeners
-    this._gestureDetector = new GestureDetector(this.target, { dragMinDistance: 1, dragLockToAxis: true });
+    this._gestureDetector = new GestureDetector(this.getElement(), { dragMinDistance: 1, dragLockToAxis: true });
     this._mutationObserver = new MutationObserver(() => this.refresh());
     this.updateSwipeable(swipeable);
     this.updateAutoRefresh(autoRefresh);
@@ -209,12 +205,22 @@ export default class Swiper {
     if (event.gesture && !this._ignoreDrag && (event.gesture.distance <= 15 || event.gesture.deltaTime <= 100)) {
       const consume = event.consume;
       event.consume = () => { consume && consume(); this._ignoreDrag = true; };
+
       if (this._canConsumeGesture(event.gesture)) {
-        consume && consume();
-        event.consumed = true;
-        this._started = true; // Avoid starting drag from outside
-        this.toggleBlocker(true);
-        util.preventScroll(this._gestureDetector);
+        const startX = event.gesture.center && event.gesture.center.clientX || 0,
+          distFromEdge = this.getBubbleWidth() || 0,
+          start = () => {
+            consume && consume();
+            event.consumed = true;
+            this._started = true; // Avoid starting drag from outside
+            this.toggleBlocker(true);
+            util.preventScroll(this._gestureDetector);
+          };
+
+        // Let parent elements consume the gesture or consume it right away
+        startX < distFromEdge || startX > (this.targetSize - distFromEdge)
+          ? setImmediate(() => !this._ignoreDrag && start())
+          : start();
       }
     }
   }
@@ -233,8 +239,10 @@ export default class Swiper {
   onDragEnd(event) {
     this._started = false;
     if (!event.gesture || this._ignoreDrag || !this._continued) {
+      this._ignoreDrag = true; // onDragEnd might fire before onDragStart's setImmediate
       return;
     }
+
     this._continued = false;
     event.stopPropagation();
 
@@ -252,7 +260,7 @@ export default class Swiper {
     let duration = Math.abs(nextScroll - scroll) / (velocity + 0.01) / 1000;
     duration = Math.min(.25, Math.max(.1, duration));
 
-    this._changeTo(nextScroll, { animationOptions: { duration, timing: 'cubic-bezier(.4, .7, .5, 1)' } });
+    this._changeTo(nextScroll, { swipe: true, animationOptions: { duration, timing: 'cubic-bezier(.4, .7, .5, 1)' } });
   }
 
   _killOverScroll(scroll) {
@@ -263,7 +271,7 @@ export default class Swiper {
   }
 
   _changeTo(scroll, options = {}) {
-    const e = { activeIndex: this.getActiveIndex(scroll), lastActiveIndex: this._lastActiveIndex };
+    const e = { activeIndex: this.getActiveIndex(scroll), lastActiveIndex: this._lastActiveIndex, swipe: options.swipe || false };
     const change = e.activeIndex !== e.lastActiveIndex;
     const canceled = change ? this.preChangeHook(e) : false;
 

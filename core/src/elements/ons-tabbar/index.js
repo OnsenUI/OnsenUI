@@ -183,6 +183,15 @@ export default class TabbarElement extends BaseElement {
    */
 
   /**
+   * @attribute ignore-edge-width
+   * @type {Number}
+   * @default 20
+   * @description
+   *   [en]Distance in pixels from both edges. Swiping on these areas will prioritize parent components such as `ons-splitter` or `ons-navigator`.[/en]
+   *   [ja][/ja]
+   */
+
+  /**
    * @attribute hide-tabs
    * @description
    *   [en]Whether to hide the tabs.[/en]
@@ -215,6 +224,7 @@ export default class TabbarElement extends BaseElement {
         getElement: () => this._contentElement,
         getInitialIndex: () => this.getAttribute('activeIndex'),
         getAutoScrollRatio: this._getAutoScrollRatio.bind(this),
+        getBubbleWidth: () => parseInt(this.getAttribute('ignore-edge-width') || 20, 10),
         isAutoScrollable: () => true,
         preChangeHook: this._onPreChange.bind(this),
         postChangeHook: this._onPostChange.bind(this),
@@ -301,6 +311,7 @@ export default class TabbarElement extends BaseElement {
   }
 
   _getAutoScrollRatio(matches, velocity, size) {
+    // TODO Use size with velocity
     const ratio = .6 + velocity * 1.2 * (matches ? -1 : 1);
     return Math.min(1, Math.max(0, ratio));
   }
