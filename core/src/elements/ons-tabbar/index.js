@@ -311,9 +311,9 @@ export default class TabbarElement extends BaseElement {
   }
 
   _getAutoScrollRatio(matches, velocity, size) {
-    // TODO Use size with velocity
-    const ratio = .6 + velocity * 1.2 * (matches ? -1 : 1);
-    return Math.min(1, Math.max(0, ratio));
+    const ratio = .6; // Base ratio
+    const modifier = size / 300 * (matches ? -1 : 1); // Based on screen size
+    return Math.min(1, Math.max(0, ratio + velocity * modifier));
   }
 
   get _tabbarElement() {
