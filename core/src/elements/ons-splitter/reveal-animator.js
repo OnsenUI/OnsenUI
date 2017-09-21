@@ -126,41 +126,43 @@ export default class RevealSplitterAnimator extends SplitterAnimator {
     const menuStyle = this._generateBehindPageStyle(this.maxWidth);
     this._slidingElements = this._getSlidingElements();
 
-    animit.runAll(
-      animit(this._slidingElements)
-        .wait(this.delay)
-        .queue({
-          transform: `translate3d(${this.minus + this.maxWidth}px, 0px, 0px)`
-        }, {
-          duration: this.duration,
-          timing: this.timing
-        }),
+    setTimeout(() => { // Fix: Time to update previous translate3d after changing style.display
+      animit.runAll(
+        animit(this._slidingElements)
+          .wait(this.delay)
+          .queue({
+            transform: `translate3d(${this.minus + this.maxWidth}px, 0px, 0px)`
+          }, {
+            duration: this.duration,
+            timing: this.timing
+          }),
 
-      animit(this._mask)
-        .wait(this.delay)
-        .queue({
-          display: 'block'
-        }),
+        animit(this._mask)
+          .wait(this.delay)
+          .queue({
+            display: 'block'
+          }),
 
-      animit(this._side._content)
-        .wait(this.delay)
-        .queue(menuStyle.content, {
-          duration: this.duration,
-          timing: this.timing
-        }),
+        animit(this._side._content)
+          .wait(this.delay)
+          .queue(menuStyle.content, {
+            duration: this.duration,
+            timing: this.timing
+          }),
 
-      animit(this._side)
-        .wait(this.delay)
-        .queue(menuStyle.container, {
-          duration: this.duration,
-          timing: this.timing
-        })
-        .queue(callback => {
-          this._slidingElements = null;
-          callback();
-          done && done();
-        }),
-    );
+        animit(this._side)
+          .wait(this.delay)
+          .queue(menuStyle.container, {
+            duration: this.duration,
+            timing: this.timing
+          })
+          .queue(callback => {
+            this._slidingElements = null;
+            callback();
+            done && done();
+          }),
+      );
+    }, 0);
   }
 
   /**

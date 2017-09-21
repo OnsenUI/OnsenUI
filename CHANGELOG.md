@@ -32,6 +32,7 @@ dev
  * ons-modal: Fixed [#2066](https://github.com/OnsenUI/OnsenUI/issues/2066).
  * ons-toolbar: `cover-content` modifier works with iOS status bar.
  * ons-carousel: Fixed an animation glitch on iOS due to the cubic Bézier curve.
+ * ons-splitter: Translate3d glitch when opening with `reveal` animation.
 
 ### Misc
 
