@@ -101,9 +101,7 @@ gulp.task('generate-preview', (done) => {
 
   if (markupToken !== lastMarkupToken) {
     runSequence('preview-assets', 'preview-js', () => {
-      const template = fs.readFileSync(__dirname + '/previewer-src/index.html.eco', 'utf-8');
-      const componentsJSON = JSON.stringify(components);
-      fs.writeFileSync(__dirname + '/build/index.html', eco.render(template, {components, componentsJSON}), 'utf-8');
+      generate(components);
       browserSync.reload();
 
       lastMarkupToken = markupToken;
@@ -116,12 +114,18 @@ gulp.task('generate-preview', (done) => {
 });
 
 gulp.task('generate-preview-force', ['preview-assets', 'preview-js'], () => {
-  const components = parseComponents();
-  const template = fs.readFileSync(__dirname + '/previewer-src/index.html.eco', 'utf-8');
-  const componentsJSON = JSON.stringify(components);
-  fs.writeFileSync(__dirname + '/build/index.html', eco.render(template, {components, componentsJSON}), 'utf-8');
+  generate(parseComponents());
   browserSync.reload();
 });
+
+function generate(components) {
+  const template = fs.readFileSync(__dirname + '/previewer-src/index.html.eco', 'utf-8');
+  const componentsJSON = JSON.stringify(components);
+  const themes = glob.sync(__dirname + '/build/{*-,}onsen-css-components.css').map(filePath => path.basename(filePath, '.css'));
+  const toJSON = JSON.stringify.bind(JSON);
+
+  fs.writeFileSync(__dirname + '/build/index.html', eco.render(template, {toJSON, components, themes}), 'utf-8');
+}
 
 function identifyComponentsMarkup(componentsJSON) {
   const token = componentsJSON.map(component => {
@@ -141,7 +145,7 @@ function parseComponents() {
 // preview-assets
 ////////////////////////////////////////
 gulp.task('preview-assets', () => {
-  return gulp.src('previewer-src/*.css')
+  return gulp.src('previewer-src/*.{svg,css}')
     .pipe(gulp.dest('./build/'));
 });
 
@@ -248,4 +252,10 @@ function displayBuildCSSInfo() {
       return '.' + path.sep + path.relative(__dirname, cssPath);
     });
   }
+}
+
+function getCSSPaths() {
+  return glob.sync(__dirname + '/build/{*-,}onsen-css-components.css').map(cssPath => {
+    return '.' + path.sep + path.relative(__dirname, cssPath);
+  });
 }

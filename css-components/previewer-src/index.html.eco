@@ -7,12 +7,11 @@
 
   <title>Onsen CSS Components</title>
 
-  <link rel="stylesheet" href="/onsen-css-components.css" />
+  <link rel="stylesheet" href="/onsen-css-components.css" id="theme-css" />
   <link rel="stylesheet" href="https://unpkg.com/onsenui/css/ionicons/css/ionicons.min.css">
   <link rel="stylesheet" href="https://unpkg.com/onsenui/css/material-design-iconic-font/css/material-design-iconic-font.min.css">
   <link rel="stylesheet" href="/style.css">
 
-  <script id="components-data" type="application/json"><%- @componentsJSON %></script>
 
 </head>
 <body ontouchstart=""> <!-- Hack to fix ":active" CSS selector on mobile browsers.-->
@@ -22,6 +21,8 @@
   <script src="https://unpkg.com/vue@2.4.2" async></script>
   <script src="https://unpkg.com/page.js@4.13.3/page.js" async></script>
   <script src="/app.gen.js" async></script>
+
+  <div id="data" data-components="<%= @toJSON(@components) %>" data-themes="<%= @toJSON(@themes) %>"></div>
 
 </body>
 </html>

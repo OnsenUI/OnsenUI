@@ -195,23 +195,25 @@ a.title-label:hover {
   background-color: #eee;
 }
 
-.build-css__file {
+.built-css__select {
+  -webkit-appearance: none;
+  appearance: none;
   height: 25px;
   line-height: 25px;
-  display: inline-block;
-  box-sizing: border-box;
-  border: 1px solid #D9D9D9;
-  color: #999;
-  font-size: 12px;
-  padding: 0 6px;
-  width: 200px;
-  border-radius: 1px;
+  border: 1px solid #d9d9d9;
+  border-radius: 2px;
+  padding: 0 20px 0 4px;
+  color: #222;
+  position: relative;
+  background-image: url(/select-icon.svg);
+  background-repeat: no-repeat;
+  background-position: right 6px center;
 }
 
-.build-css__button,
-.build-css__button:link,
-.build-css__button:visited,
-.build-css__button:hover {
+.built-css__button,
+.built-css__button:link,
+.built-css__button:visited,
+.built-css__button:hover {
   background-color: #F0F0F0;
   border-radius: 2px;
   border: 1px solid #f0f0f0;
@@ -226,7 +228,7 @@ a.title-label:hover {
   box-sizing: border-box;
 }
 
-.build-css__button:active {
+.built-css__button:active {
   opacity: 0.6;
 }
 
