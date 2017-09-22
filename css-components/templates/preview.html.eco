@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Onsen CSS Components</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,user-scalable=no,maximum-scale=1,minimum-scale=1">
+    <link rel="stylesheet" href="./onsen-css-components.css" />
+    <link rel="stylesheet" href="https://unpkg.com/onsenui/css/ionicons/css/ionicons.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/onsenui/css/material-design-iconic-font/css/material-design-iconic-font.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        position: static;
+        background-color: white;
+        overflow: visible;
+      }
+
+      h1#title {
+        font-size: 16px;
+        font-weight: 500;
+        font-family: Helvetica;
+        text-align: center;
+        width: 100%;
+        height: 64px;
+        line-height: 64px;
+        padding: 0;
+        margin: 0 0 20px 0;
+      }
+
+      .components {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-bottom: 50vh;
+      }
+
+      .component-preview {
+        display: inline-block;
+        width: 350px;
+        box-sizing: border-box;
+        margin: 10px 10px 20px 10px;
+      }
+
+      .component-preview__link,
+      .component-preview__link:link,
+      .component-preview__link:visited {
+        color: #333;
+        text-decoration: none;
+      }
+
+      .component-preview__link:hover {
+        text-decoration: underline;
+      }
+
+      .component-preview__title {
+        font-family: Helvetica;
+        font-size: 14px;
+        font-weight: 400;
+        color: #333;
+        line-height: 1.4;
+        margin: 8px 0;
+      }
+
+      .component-preview__toggle {
+        display: none;
+        float: right;
+        margin: 8px 0 0 0;
+        border: none;
+        background-color: white;
+        font-size: 12px;
+        padding: 0px;
+        color: #aaa;
+        text-decoration: underline;
+        cursor: pointer;
+        line-height: 12px;
+        padding: 4px 3px;
+      }
+
+      .component-preview:hover > .component-preview__toggle {
+        display: block;
+      }
+
+      .component-preview__toggle:hover {
+        text-decoration: none;
+      }
+
+      .component-preview__toggle:active {
+        outline: none;
+      }
+
+      .component-preview__toggle:focus {
+        outline: none;
+      }
+
+      .component-preview__markup {
+        background-color: #f3f3f3;
+        color: #888;
+        font-size: 14px;
+        line-height: 1.4;
+        font-family: Consolas, monospace;
+        padding: 4px 6px;
+        max-width: 100%;
+        overflow-x: auto;
+        display: none;
+        user-select: auto;
+        box-sizing: border-box;
+        margin: 0;
+      }
+
+      .component-preview__example {
+        height: 201px;
+        text-align: center;
+        position: relative;
+        z-index: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+      }
+
+    </style>
+  </head>
+  <body ontouchstart=""> <!-- Hack to fix ":active" CSS selector on mobile browsers.-->
+
+    <h1 id="title">CSS Components for Onsen UI</h1>
+
+    <div class="components">
+      <% for component in @components: %>
+      <div class="component-preview">
+        <button class="component-preview__toggle">HTML</button>
+        <h2 class="component-preview__title" id="<%= component.annotation.name.toLowerCase().replace(/ /g, '_') %>">
+          <a href="#<%= component.annotation.name.toLowerCase().replace(/ /g, '_') %>" class="component-preview__link"><%= component.annotation.name %></a>
+        </h2>
+
+        <div class="page component-preview__example">
+          <div style="width: 100%;">
+            <%- component.annotation.markup %>
+          </div>
+        </div>
+
+        <pre class="component-preview__markup"><%= component.annotation.markup %></pre>
+      </div>
+      <% end %>
+    </div>
+
+    <script>
+      var elements = document.querySelectorAll('.component-preview');
+
+      for (var i = 0; i < elements.length; i++) {
+        init(elements[i]);
+      }
+
+      function init(element) {
+        var toggle = element.querySelector('.component-preview__toggle');
+        var markup = element.querySelector('.component-preview__markup');
+        var example = element.querySelector('.component-preview__example');
+
+        toggle.addEventListener('click', function(e) {
+          if (markup.style.display) {
+            markup.style.display = null;
+            example.style.display = null;
+            toggle.textContent = 'HTML';
+          } else {
+            markup.style.display = 'block';
+            example.style.display = 'none';
+            toggle.textContent = 'Preview';
+          }
+        });
+      }
+    </script>
+
+  </body>
+</html>

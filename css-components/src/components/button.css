@@ -1,7 +1,10 @@
 
 :root {
+  --button-background-color: var(--highlight-color);
   --button-text-color: white;
+  --button-cta-background-color: var(--second-highlight-color);
   --button-quiet-color: var(--highlight-color);
+  --button-cta-background-color: var(--second-highlight-color);
   --button-cta-color: white;
   --button-large-padding: 4px 12px;
   --button-padding: 4px 10px;
