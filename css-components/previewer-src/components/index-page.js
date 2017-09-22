@@ -48,11 +48,15 @@ export const IndexPage = {
     changeTheme(event) {
       const theme = event.target.value;
       const suffix = this.query.platform ? `platform=${this.query.platform}` : '';
+
       if (theme === 'onsen-css-components') {
-        page.show(`?${suffix}`);
+        if (suffix === '') {
+          page.show('/');
+        } else {
+          page.show(`?${suffix}`);
+        } 
       } else {
-        // Change query
-        page.show(`?theme=${theme}&${suffix}`);
+        page.show(`?theme=${theme}${suffix === '' ? '' : `&${suffix}`}`);
       }
     },
     filterComponents() {
