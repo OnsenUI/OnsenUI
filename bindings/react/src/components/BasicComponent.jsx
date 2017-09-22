@@ -11,7 +11,9 @@ class BasicComponent extends React.Component {
 
   updateClasses() {
     var node = ReactDOM.findDOMNode(this);
-
+    
+    if (!node) return;
+        
     if (typeof this.props.className !== 'undefined') {
       if (this.lastClass) {
         node.className = node.className.replace(this.lastClass, ' ');
