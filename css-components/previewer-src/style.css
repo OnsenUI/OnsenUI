@@ -84,17 +84,14 @@ a:hover {
   margin: 10px 10px 10px 0;
 }
 
-.pattern__title {
-
-}
-
 .pattern__example {
   display: block;
   position: relative;
   width: 320px;
   height: 568px;
-  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.08) inset;
   border-radius: 2px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-sizing: border-box;
 }
 
 .title-label,
