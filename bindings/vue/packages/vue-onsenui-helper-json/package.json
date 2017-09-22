@@ -1,6 +1,6 @@
 {
   "name": "vue-onsenui-helper-json",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "author": "Onsen UI Team <team@monaca.io>",
   "description": "Tags and attributes information of vue-onsenui, which makes IDE / test editor plugin development easier.",
   "private": false,
