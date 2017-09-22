@@ -19,6 +19,7 @@ const commonjs = require('rollup-plugin-commonjs');
 const glob = require('glob');
 const rimraf = require('rimraf');
 const path = require('path');
+const yaml = require('js-yaml');
 
 const prefix = __dirname + '/../build/css/';
 
@@ -120,11 +121,11 @@ gulp.task('generate-preview-force', ['preview-assets', 'preview-js'], () => {
 
 function generate(components) {
   const template = fs.readFileSync(__dirname + '/previewer-src/index.html.eco', 'utf-8');
-  const componentsJSON = JSON.stringify(components);
+  const patterns = yaml.safeLoadAll(fs.readFileSync(__dirname + '/patterns.yaml', 'utf-8'));
   const themes = glob.sync(__dirname + '/build/{*-,}onsen-css-components.css').map(filePath => path.basename(filePath, '.css'));
   const toJSON = JSON.stringify.bind(JSON);
 
-  fs.writeFileSync(__dirname + '/build/index.html', eco.render(template, {toJSON, components, themes}), 'utf-8');
+  fs.writeFileSync(__dirname + '/build/index.html', eco.render(template, {toJSON, components, themes, patterns}), 'utf-8');
 }
 
 function identifyComponentsMarkup(componentsJSON) {
@@ -184,7 +185,7 @@ gulp.task('serve', ['reset-console', 'build'], done => {
     runSequence('build-css', 'generate-preview', outputDevServerInfo);
   });
 
-  gulp.watch(['previewer-src/**'], () => {
+  gulp.watch(['previewer-src/**', 'patterns.yaml'], () => {
     reset();
     runSequence('generate-preview-force', outputDevServerInfo)
   });

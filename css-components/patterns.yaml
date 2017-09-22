@@ -1,0 +1,20 @@
+---
+name: Basic
+markup: |
+  <div class="page">
+    <div class="toolbar">
+      <div class="toolbar__left"></div>
+      <div class="toolbar__center">Title</div>
+      <div class="toolbar__right"></div>
+    </div>
+  </div>
+---
+name: Material Basic
+markup: |
+  <div class="page page--material">
+    <div class="toolbar toolbar--material">
+      <div class="toolbar__left toolbar--material__left"></div>
+      <div class="toolbar__center toolbar--material__center">Title</div>
+      <div class="toolbar__right toolbar--material__right"></div>
+    </div>
+  </div>

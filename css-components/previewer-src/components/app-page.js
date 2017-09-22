@@ -1,10 +1,12 @@
-import {getPlatform} from '../platform';
-import {IndexPage} from './index-page';
+import {ComponentsPage} from './components-page';
 import {ComponentPage} from './component-page';
 import {CategoryPage} from './category-page';
+import {PatternsPage} from './patterns-page';
+import {PatternPage} from './pattern-page';
+import {NotFoundPage} from './notfound-page';
 import {getQueryParams, mergeQueryString, parseQueryString} from '../util';
 
-export const createAppComponent = ({components, categories}) => ({
+export const createAppPageComponent = ({components, categories}) => ({
   el: '#app',
   data: {
     components,
@@ -19,10 +21,11 @@ export const createAppComponent = ({components, categories}) => ({
           Components
         </a>
 
-        <div class="category-list">
-          <div class="category-list__header">Categories</div>
-          <div v-for="category in categories" class="category-list__item">
-            <a :href="'/categories/' + category.hash" class="category-list__item-link">{{category.name}}</a>
+        <div>
+          <a class="side-navi__category" href="/patterns">Patterns</a>
+          <a class="side-navi__category" href="/">Components</a>
+          <div v-for="category in categories" class="side-navi__category-item">
+            <a :href="'/categories/' + category.hash" class="side-navi__item-link">{{category.name}}</a>
           </div>
         </div>
       </div>
@@ -50,8 +53,8 @@ const createRouter = () => {
     props: ['baseParams'],
     data: () => {
       return {
-        component: IndexPage,
-        params: {platform: getPlatform()},
+        component: ComponentsPage,
+        params: {},
         query: getQueryParams()
       };
     },
@@ -90,14 +93,28 @@ const createRouter = () => {
         this.query = context.query;
       });
 
+      page('/patterns', (context) => {
+        this.component = PatternsPage;
+        this.params = context.params;
+        this.query = context.query;
+      });
+
+      page('/patterns/:id', (context) => {
+        this.component = PatternPage;
+        this.params = context.params;
+        this.query = context.query;
+      });
+
       page('/', (context) => {
-        this.component = IndexPage;
-        this.params = {platform: context.query.platform};
+        this.component = ComponentsPage;
+        this.params = context.params;
         this.query = context.query;
       });
 
       page('*', () => {
-        page.redirect('/');
+        this.component = NotFoundPage;
+        this.params = context.params;
+        this.query = context.query;
       });
 
       page({click: false});

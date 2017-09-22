@@ -77,6 +77,26 @@ a:hover {
   box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.08) inset;
 }
 
+.pattern {
+  width: 320px;
+  box-sizing: border-box;
+  display: inline-block;
+  margin: 10px 10px 10px 0;
+}
+
+.pattern__title {
+
+}
+
+.pattern__example {
+  display: block;
+  position: relative;
+  width: 320px;
+  height: 568px;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.08) inset;
+  border-radius: 2px;
+}
+
 .title-label,
 .title-label:link,
 .title-label:visited,
@@ -139,44 +159,52 @@ a.title-label:hover {
   box-sizing: border-box;
 }
 
-.category-list {
-}
-
-.category-list__header {
+.side-navi__category {
   font-size: 13px;
   font-weight: 500;
   color: #444;
   line-height: 23px;
 }
 
-.category-list__item {
+.side-navi__category:link,
+.side-navi__category:visited {
+  color: #444;
+  text-decoration: none;
+}
+
+.side-navi__category:link:hover,
+.side-navi__category:visited:hover {
+  color: #999;
+}
+
+.side-navi__category-item {
   height: 23px;
   line-height: 22px;
   margin-left: 13px;
 }
 
-.category-list__item-link,
-.category-list__item-link:link,
-.category-list__item-link:visited {
+.side-navi__item-link,
+.side-navi__item-link:link,
+.side-navi__item-link:visited {
   font-size: 12px;
   color: #444;
   text-decoration: none;
 }
 
-.category-list__item-link:hover {
+.side-navi__item-link:hover {
   color: #999;
 }
 
-.platform-filter {
+.platform-select {
   float: right;
   margin: 0 18px 0 0;
   display: flex;
 }
 
-.platform-filter__link,
-.platform-filter__link:link,
-.platform-filter__link:visited,
-.platform-filter__link:hover {
+.platform-select__link,
+.platform-select__link:link,
+.platform-select__link:visited,
+.platform-select__link:hover {
   font-family: 'Helvetica Neue', 'Helevetica', sans-serif;
   font-size: 12px;
   text-decoration: none;
@@ -188,9 +216,9 @@ a.title-label:hover {
   border-radius: 3px;
 }
 
-.platform-filter__link--active,
-.platform-filter__link--active:link,
-.platform-filter__link--active:visited {
+.platform-select__link--active,
+.platform-select__link--active:link,
+.platform-select__link--active:visited {
   color: #444;
   background-color: #eee;
 }
@@ -237,7 +265,7 @@ a.title-label:hover {
     display: none;
   }
 
-  .platform-filter {
+  .platform-select {
     display: none;
   }
 
