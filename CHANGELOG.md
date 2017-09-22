@@ -7,10 +7,16 @@ dev
 
 ### New Features
 
- * core: Added `ons-segment` element.
- * angular1: Added `ons-segment` bindings.
  * css-components: Reimplemented css-components previewer.
  * css-components: Changed color scheme to more iOS native-like.
+
+2.6.0
+----
+
+### New Features
+
+ * core: Added `ons-segment` element.
+ * angular1: Added `ons-segment` bindings.
  * ons: Added `mockStatusBar` utility to create a fake iOS status bar for browser testing.
  * ons-pull-hook: Added `onPull` property function that gets the pulled distance on drag.
  * ons-carousel: Added `onSwipe` property function that gets the swiped distance on drag.

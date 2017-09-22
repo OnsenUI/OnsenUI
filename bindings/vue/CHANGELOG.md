@@ -1,14 +1,12 @@
 CHANGELOG
 ====
 
-dev
+2.2.0
 ----
 
 ### New features
 
 * VOnsSegment: New component.
-### New Features
-
 * VOnsPullHook: Added `onPull` prop.
 * VOnsTabbar: Support for swiping feature. Added `swipeable` and `onSwipe` props.
 * VOnsTabbar: Added `tabbarStyle` prop to declaratively set the actual tabbar element style.
