@@ -19,7 +19,7 @@ export default class extends React.Component {
       showRight: false,
       openLeft: false,
       openRight: false,
-      isSwipeable: true
+      swipeable: true
     };
   }
 
@@ -58,7 +58,7 @@ export default class extends React.Component {
             isOpen={this.state.openLeft}
             onClose={this.handleLeftClose.bind(this)}
             onOpen={this.handleLeftOpen.bind(this)}
-            isSwipeable={this.state.isSwipeable}>
+            swipeable={this.state.swipeable}>
             <Page>
               <Toolbar>
                 <div className="center">content</div>
@@ -70,9 +70,9 @@ export default class extends React.Component {
             <Page renderToolbar={() => <MyToolbar title="ons-splitter-content" />}>
               <p>
                 <Button
-                  onClick={() => this.setState({isSwipeable: !this.state.isSwipeable})}
+                  onClick={() => this.setState({swipeable: !this.state.swipeable})}
                 >
-                  {this.state.isSwipeable ? 'Disable Swipe' : 'Enable Swipeable'}
+                  {this.state.swipeable ? 'Disable Swipe' : 'Enable Swipeable'}
                 </Button>
               </p>
               <p>
@@ -107,7 +107,7 @@ export default class extends React.Component {
             isOpen={this.state.openRight}
             onClose={this.handleRightClose.bind(this)}
             onOpen={this.handleRightOpen.bind(this)}
-            isSwipeable={this.state.isSwipeable}>
+            swipeable={this.state.swipeable}>
             <Page>
               <Toolbar>
                 <div className="center">ons-splitter-side</div>

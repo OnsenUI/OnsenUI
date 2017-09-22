@@ -197,13 +197,16 @@
   height: 32px;
   border-radius: 0;
   box-shadow: none;
-  background-image: radial-gradient(circle cover, var(--material-range-thumb-color) 0%, var(--material-range-thumb-color) calc(var(--material-range-thumb-radius) - 0.4px), transparent var(--material-range-thumb-radius));
+  /* Manually prefix background-image + radial-gradien to fix autoprefixer/cssnext */
+  background-image: -webkit-radial-gradient(circle cover, var(--material-range-thumb-color) 0%, var(--material-range-thumb-color) calc(var(--material-range-thumb-radius) - 0.4px), transparent var(--material-range-thumb-radius)); /* stylelint-disable-line */
+  background-image: radial-gradient(circle cover, var(--material-range-thumb-color) 0%, var(--material-range-thumb-color) calc(var(--material-range-thumb-radius) - 0.4px), transparent var(--material-range-thumb-radius)); /* stylelint-disable-line */
   transition: transform 0.1s linear;
   overflow: visible;
 }
 
 .range--material__input[_zero]::-webkit-slider-thumb {
-  background-image: radial-gradient(circle cover, var(--material-range-zero-thumb-color) 0%, var(--material-range-zero-thumb-color) 4px, var(--material-range-track-color) 4px, var(--material-range-track-color) calc(var(--material-range-thumb-radius) - 0.6px), transparent calc(var(--material-range-thumb-radius)));
+  background-image: -webkit-radial-gradient(circle cover, var(--material-range-zero-thumb-color) 0%, var(--material-range-zero-thumb-color) 4px, var(--material-range-track-color) 4px, var(--material-range-track-color) calc(var(--material-range-thumb-radius) - 0.6px), transparent calc(var(--material-range-thumb-radius))); /* stylelint-disable-line */
+  background-image: radial-gradient(circle cover, var(--material-range-zero-thumb-color) 0%, var(--material-range-zero-thumb-color) 4px, var(--material-range-track-color) 4px, var(--material-range-track-color) calc(var(--material-range-thumb-radius) - 0.6px), transparent calc(var(--material-range-thumb-radius))); /* stylelint-disable-line */
 }
 
 .range--material__input[_zero] + .range--material__focus-ring::-webkit-slider-thumb {

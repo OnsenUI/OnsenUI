@@ -21,8 +21,8 @@ import {Params} from '../ons/params';
  * @directive OnsSplitterSide
  * @selector ons-splitter-side
  * @description
- *   [ja]`<ons-splitter-side>`要素のAngular 2ディレクティブです。[/ja]
- *   [en]Angular 2 directive for `<ons-splitter-side>` component.[/en]
+ *   [ja]`<ons-splitter-side>`要素のAngularディレクティブです。[/ja]
+ *   [en]Angular directive for `<ons-splitter-side>` component.[/en]
  * @example
  *   @Component({
  *     selector: 'ons-page',
@@ -124,7 +124,7 @@ export class OnsSplitterSide {
  * @selector ons-splitter-content
  * @description
  *    [ja]`<ons-splitter-content>`要素のためのAngular2 ディレクティブです。[/ja]
- *    [en]Angular 2 directive for `<ons-splitter-content>` component.[/en]
+ *    [en]Angular directive for `<ons-splitter-content>` component.[/en]
  */
 @Directive({
   selector: 'ons-splitter-content'

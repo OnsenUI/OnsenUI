@@ -1,6 +1,14 @@
 <template>
-  <ons-carousel :initial-index="index" @postchange.self="$emit('update:index', $event.activeIndex)" v-on="unrecognizedListeners">
-    <slot></slot>
+  <ons-carousel
+    :on-swipe.prop="onSwipe"
+    :initial-index="index"
+    @postchange.self="$emit('update:index', $event.activeIndex)"
+    v-on="unrecognizedListeners"
+  >
+    <div>
+      <slot></slot>
+    </div>
+    <div></div>
   </ons-carousel>
 </template>
 
@@ -13,6 +21,9 @@
     props: {
       index: {
         type: Number
+      },
+      onSwipe: {
+        type: Function
       }
     },
 

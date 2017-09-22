@@ -136,11 +136,12 @@ class CollapseMode {
     const distance = this._element._side === 'left' ? gesture.center.clientX : window.innerWidth - gesture.center.clientX;
     const area = this._element._swipeTargetWidth;
 
-    return (validDrag(gesture.direction) || validDrag(gesture.interimDirection)) && !(area && distance > area && !isOpen);
+    return validDrag(gesture.direction) && !(area && distance > area && !isOpen);
   }
 
   _onDragStart(event) {
-    this._ignoreDrag = event.consumed || !this._canConsumeGesture(event.gesture);
+    this._ignoreDrag = event.consumed || event.gesture && !this._canConsumeGesture(event.gesture)
+      || !(event.gesture.distance <= 15 || event.gesture.deltaTime <= 100);
 
     if (!this._ignoreDrag) {
       event.consume && event.consume();
@@ -149,7 +150,7 @@ class CollapseMode {
       this._width = widthToPx(this._element._width, this._element.parentNode);
       this._startDistance = this._distance = this.isOpen() ? this._width : 0;
 
-      util.skipContentScroll(event.gesture);
+      util.preventScroll(this._element._gestureDetector);
     }
   }
 

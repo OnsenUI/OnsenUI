@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Segment Demo | Onsen UI</title>
+  <link rel="stylesheet" href="../../build/css/onsenui.css">
+  <link rel="stylesheet" href="../../build/css/onsen-css-components.css">
+
+  <script src="../../build/js/onsenui.js"></script>
+
+  <script>
+    document.addEventListener('postchange', function (event) {
+      console.log('postchange event', event);
+    });
+    function changeTab() {
+      document.getElementById('tabbar').setActiveTab(1);
+    }
+    function changeButton() {
+      document.getElementById('segment').setActiveButton(1);
+    }
+    function logIndexes() {
+      console.log('active button index', document.getElementById('segment').getActiveButtonIndex());
+      console.log('active tab index', document.getElementById('tabbar').getActiveTabIndex());
+    }
+  </script>
+</head>
+
+<body>
+  <ons-page>
+    <ons-toolbar>
+      <div class="center">
+        <ons-segment onchange="console.log('change!', event.target.value)" id="segment" tabbar-id="tabbar" style="width: 280px">
+          <button onclick="console.log('click!')"><ons-icon icon="ion-home"></ons-icon></button>
+          <button>Page 2</button>
+          <button>Page 3</button>
+        </ons-segment>
+      </div>
+    </ons-toolbar>
+
+    <!-- Comment <ons-tabbar> out to test this one -->
+    <!-- <ons-segment onchange="console.log('change!', event.target.dataset.index)" active-index="1" style="width: 280px; margin: 10px 20px;"> -->
+    <!--   <button onclick="console.log('click!')">Label 1</button> -->
+    <!--   <button>Label 2</button> -->
+    <!--   <button>Label 3</button> -->
+    <!-- </ons-segment> -->
+
+    <ons-tabbar id="tabbar" swipeable>
+      <ons-tab page="page1.html">1</ons-tab>
+      <ons-tab page="page2.html" active>2</ons-tab>
+      <ons-tab page="page3.html">3</ons-tab>
+    </ons-tabbar>
+  </ons-page>
+
+  <template id="page1.html">
+    <ons-page>
+      <h2>Page1</h2>
+      <ons-button onclick="changeTab()">Change tab via tabbar</ons-button>
+      <ons-button onclick="changeButton()">Change tab via segment</ons-button>
+      <ons-button onclick="logIndexes()">Log current button index</ons-button>
+    </ons-page>
+  </template>
+
+  <template id="page2.html">
+    <ons-page>
+      <h2>Page2</h2>
+      <ons-button onclick="logIndexes()">Log current button index</ons-button>
+    </ons-page>
+  </template>
+
+  <template id="page3.html">
+    <ons-page>
+      <h2>Page3</h2>
+      <ons-button onclick="logIndexes()">Log current button index</ons-button>
+    </ons-page>
+  </template>
+</body>
+
+</html>

@@ -6,7 +6,7 @@
   --checkmark-border: 2px solid #fff;
   --material-checkbox-size: 18px;
   --material-checkbox-focus-ring-size: 40px;
-  --material-checkbox-focus-ring-shadow-size: calc((var(--material-checkbox-focus-ring-size) - var(--material-checkbox-size)) / 2px);
+  --material-checkbox-focus-ring-shadow-size: calc((var(--material-checkbox-focus-ring-size) - var(--material-checkbox-size)) / 2);
 
   --checkbox: {
     @apply(--reset-box-model);

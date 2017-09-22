@@ -36,6 +36,18 @@ export default class extends React.Component {
     this.setState({index: number});
   }
 
+  moveRight() {
+    if (this.state.index < this.state.items.length - 1) {
+      this.setState({ index: this.state.index + 1 })
+    }
+  }
+
+  moveLeft() {
+    if (this.state.index > 0) {
+      this.setState({ index: this.state.index - 1 })
+    }
+  }
+
   render() {
     return (
       <Page renderToolbar={() => <MyToolbar title='Fullscreen' />}>
@@ -64,8 +76,8 @@ export default class extends React.Component {
         </Carousel>
 
         <BottomToolbar>
-          <ToolbarButton style={{float: 'right'}} onClick={this.moveRight}>Next</ToolbarButton>
-          <ToolbarButton style={{float: 'left'}} onClick={this.moveLeft}>Prev</ToolbarButton>
+          <ToolbarButton style={{float: 'right'}} onClick={() => this.moveRight()}>Next</ToolbarButton>
+          <ToolbarButton style={{float: 'left'}} onClick={() => this.moveLeft()}>Prev</ToolbarButton>
         </BottomToolbar>
       </Page>
     );

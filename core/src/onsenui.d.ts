@@ -33,7 +33,7 @@ declare namespace ons {
    * @description Method used to wait for app initialization. The callback will not be executed until Onsen UI has been completely initialized
    * @param {Function} callback Function that executes after Onsen UI has been initialized
    */
-  function ready(callback: any): void;
+  function ready(callback: Function): void;
   /**
    * @param {Function} listener Function that executes when device back button is pressed
    * @description Set default handler for device back button
@@ -55,6 +55,10 @@ declare namespace ons {
    * @description Disable status bar fill feature on iOS7 and above
    */
   function disableAutoStatusBarFill(): void;
+  /**
+   * @description Creates a static element similar to iOS status bar. Only useful for browser testing
+   */
+  function mockStatusBar(): void;
   /**
    * @description Disable all animations. Could be handy for testing and older devices.
    */
@@ -349,6 +353,25 @@ declare namespace ons {
     value: any;
   }
 
+  interface OnsSegmentElement extends HTMLElement {
+    /**
+     * @param {Number} index Button index
+     * @param {Object} [options] Parameter object passed to the tabbar, if any.
+     * @return Resolves to the selected index or to the new page element if there is a connected tabbar.
+     * @description Make button with the specified index active. If there is a connected tabbar it shows the corresponding tab page. In this case animations and other options can be specified by the second parameter.
+     */
+    setActiveButton(index: number, options?: TabbarOptions): Promise<HTMLElement>;
+    /**
+     * @return {Number} The index of the currently active button
+     * @description Returns button index of current active button. If active button is not found, returns -1
+     */
+    getActiveButtonIndex(): number;
+    /**
+     * @description Whether the element is disabled or not.
+     */
+    disabled: boolean;
+  }
+
   interface OnsTemplateElement extends HTMLElement {
     template: any;
   }
@@ -435,6 +458,12 @@ declare namespace ons {
      **/
     swipeable: boolean;
     /**
+     * @param {Number} index Decimal index of the current swipe.
+     * @param {Object} animationOptions Object containing duration and timing.
+     * @description Hook called whenever the user slides the carousel.
+     **/
+    onSwipe?: Function;
+    /**
      * @description true if auto scroll is enabled.
      **/
     autoScroll: boolean;
@@ -478,6 +507,12 @@ declare namespace ons {
      * @description A boolean value that specifies whether the element is disabled or not.
      */
     disabled: boolean;
+    /**
+     * @param {Number} ratio Pulled ratio (scroll / height).
+     * @param {Object} animationOptions Object containing duration and timing.
+     * @description Hook called whenever the user pulls the element.
+     **/
+    onPull?: Function;
     /**
      * @description Define the function that will be called in the `"action"` state.
      */
@@ -615,7 +650,7 @@ declare namespace ons {
   interface OnsNavigatorElement extends HTMLElement {
     /**
      * @param {Object} [options] Parameter object
-     * @param {Function} [options.onTransitionEnd] Function that is called when the transition has ended
+     * @param {Function} [options.callback] Function that is called when the transition has ended
      * @description Pops the current page from the page stack. The previous page will be displayed
      */
     popPage(options?: NavigatorOptions): Promise<HTMLElement>;
@@ -623,7 +658,7 @@ declare namespace ons {
      * @param {*} page Page URL. Can be either a HTML document or a <code>&lt;ons-template&gt;</code>
      * @param {Object} [options] Parameter object
      * @param {String} [options.animation] Animation name. Available animations are "slide", "simpleslide", "lift", "fade" and "none"
-     * @param {Function} [options.onTransitionEnd] Function that is called when the transition has ended
+     * @param {Function} [options.callback] Function that is called when the transition has ended
      * @return Promise which resolves to the pushed page.
      * @description Pushes the specified pageUrl into the page stack.
      */
@@ -632,7 +667,7 @@ declare namespace ons {
      * @return Promise which resolves to the inserted page
      * @description Replaces the current page with the specified one. Extends pushPage parameters.
      */
-    replacePage(page: any, options?: ReplacePageOptions): Promise<HTMLElement>;
+    replacePage(page: any, options?: PushPageOptions): Promise<HTMLElement>;
     /**
      * @param {Number} index The index where it should be inserted
      * @param {*} page Page URL. Can be either a HTML document or a <code>&lt;ons-template&gt;</code>
@@ -646,7 +681,7 @@ declare namespace ons {
      * @param {*} page Page URL. Can be either a HTML document or an <code>&lt;ons-template&gt;</code>
      * @param {Object} [options] Parameter object
      * @param {String} [options.animation] Animation name. Available animations are "slide", "simpleslide", "lift", "fade" and "none"
-     * @param {Function} [options.onTransitionEnd] Function that is called when the transition has ended
+     * @param {Function} [options.callback] Function that is called when the transition has ended
      * @description Clears page stack and adds the specified pageUrl to the page stack
      */
     resetToPage(page: any, options?: NavigatorOptions): Promise<HTMLElement>;
@@ -705,6 +740,16 @@ declare namespace ons {
      */
     getActiveTabIndex(): number;
     visible: any;
+    /**
+     * @description true if the tabbar is swipeable.
+     **/
+    swipeable: boolean;
+    /**
+     * @param {Number} index Decimal index of the current swipe.
+     * @param {Object} animationOptions Object containing duration and timing.
+     * @description Hook called whenever the user slides the tabbar.
+     **/
+    onSwipe?: Function;
   }
 
   /**
@@ -1071,10 +1116,6 @@ interface NavigatorOptions {
    * @description Specify the animation's duration, delay and timing. E.g. `{duration: 0.2, delay: 0.4, timing: 'ease-in'}`.
    */
   animationOptions?: string;
-   /**
-   * @description If this parameter is `true`, the previous page will be refreshed (destroyed and created again) before `popPage()` action.
-   */
-  refresh?: boolean;
   /**
    * @description Function that is called when the transition has ended.
    */
@@ -1082,25 +1123,12 @@ interface NavigatorOptions {
 }
 
 interface PushPageOptions {
-  page?: any;
-  options?: {
-    page: any,
-    pageHTML: any,
-    animation: any,
-    animationOptions: any,
-    callback: any,
-    data: any
-  }
-}
-
-interface ReplacePageOptions {
-  page?: any;
-  options?: {
-    animation: any,
-    animationOptions: any,
-    callback: any,
-    data: any
-  }
+  page?: any,
+  pageHTML?: string,
+  animation?: string,
+  animationOptions?: Object,
+  callback?: Function,
+  data?: Object
 }
 
 interface TabbarOptions {
@@ -1178,8 +1206,4 @@ interface BackButtonOptions {
    * @description Function that is called when the transition has ended.
    */
   callback?: Function;
-  /**
-   * @description The previous page will be refreshed (destroyed and created again) before popPage action.
-   */
-  refresh?: boolean;
 }

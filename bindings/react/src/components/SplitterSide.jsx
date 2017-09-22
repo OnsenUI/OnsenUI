@@ -18,7 +18,7 @@ import Util from './Util.js';
     <SplitterSide
       side="left"
       width={200}
-      isSwipeable={true}>
+      swipeable={true}>
       <Page> Page Left </Page>
     </SplitterSide>
     <SplitterContent>
@@ -31,7 +31,7 @@ import Util from './Util.js';
       isOpen={this.state.openRight}
       onClose={this.handleRightClose.bind(this)}
       onOpen={this.handleRightOpen.bind(this)}
-      isSwipeable={true}>
+      swipeable={true}>
       <Page> Page Right </Page>
     </SplitterSide>
   </Splitter>
@@ -57,12 +57,12 @@ class SplitterSide extends BasicComponent {
   render() {
     var {...props} = this.props;
 
-    props.swipeable = this.props.isSwipeable ? 'swipeable' : null;
-
-    if (this.props.isCollapsed) {
-      console.error('The property `isCollapsed` is deprecated, please use `collapse`, see https://onsen.io/v2/docs/react/SplitterSide.html.');
-      delete props['isCollapsed'];
-    }
+    ['isCollapsed', 'isSwipeable'].forEach(p => {
+      if (props.hasOwnProperty(p)) {
+        console.error(`The property '${p}' is deprecated, please use '${p.toLowerCase().slice(2)}', see https://onsen.io/v2/docs/react/SplitterSide.html.`);
+        delete props[p];
+      }
+    });
 
     if (!props.collapse) props.collapse = null;
 
@@ -74,10 +74,8 @@ class SplitterSide extends BasicComponent {
       }
     }
 
+    ['animation', 'swipeable', 'side', 'mode'].forEach(el => Util.convert(props, el));
     Util.convert(props, 'width', {fun: Util.sizeConverter});
-    Util.convert(props, 'animation');
-    Util.convert(props, 'side');
-    Util.convert(props, 'mode');
     Util.convert(props, 'animationOptions', {fun: Util.animationOptionsConverter, newName: 'animation-options'});
     Util.convert(props, 'openThreshold', {newName: 'open-threshold'});
     Util.convert(props, 'swipeTargetWidth', {fun: Util.sizeConverter, newName: 'swipe-target-width'});
@@ -132,13 +130,13 @@ SplitterSide.propTypes = {
   collapse: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
 
   /**
-   * @name isSwipeable
+   * @name swipeable
    * @type bool
    * @description
    *  [en]Ennable swipe interaction on collapse mode.[/en]
    *  [ja][/ja]
    */
-  isSwipeable: PropTypes.bool,
+  swipeable: PropTypes.bool,
 
   /**
    * @name isOpen

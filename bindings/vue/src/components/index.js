@@ -9,6 +9,7 @@ export { default as VOnsNavigator } from './VOnsNavigator.vue';
 export { default as VOnsSplitterSide } from './VOnsSplitterSide.vue';
 export { default as VOnsLazyRepeat } from './VOnsLazyRepeat.vue';
 export { default as VOnsSelect } from './VOnsSelect.vue';
+export { default as VOnsSegment } from './VOnsSegment.vue';
 
 // Generic components
 import VGeneric from './VGeneric.vue';
@@ -46,7 +47,7 @@ export const VOnsInput = extend('input', [modelInput]);
 export const VOnsSearchInput = extend('search-input', [modelInput]);
 export const VOnsRange = extend('range', [modelInput]);
 export const VOnsRadio = extend('radio', [modelRadio]);
-export const VOnsPullHook = extend('pull-hook', [deriveHandler('onAction')]);
+export const VOnsPullHook = extend('pull-hook', [deriveHandler('onAction'), deriveHandler('onPull', true)]);
 export const VOnsFab = extend('fab', [hidable]);
 export const VOnsSpeedDialItem = extend('speed-dial-item');
 export const VOnsPage = extend('page', [deriveDBB, deriveHandler('onInfiniteScroll')]);

@@ -32,6 +32,7 @@ import Ripple from './components/Ripple.jsx';
 import RouterNavigator from './components/RouterNavigator.jsx';
 import Row from './components/Row.jsx';
 import SearchInput from './components/SearchInput.jsx';
+import Segment from './components/Segment.jsx';
 import Select from './components/Select.jsx';
 import SpeedDial from './components/SpeedDial.jsx';
 import SpeedDialItem from './components/SpeedDialItem.jsx';
@@ -40,8 +41,6 @@ import SplitterContent from './components/SplitterContent.jsx';
 import SplitterSide from './components/SplitterSide.jsx';
 import Switch from './components/Switch.jsx';
 import Tab from './components/Tab.jsx';
-import TabActive from './components/TabActive.jsx';
-import TabInactive from './components/TabInactive.jsx';
 import Tabbar from './components/Tabbar.jsx';
 import Toast from './components/Toast.jsx';
 import Toolbar from './components/Toolbar.jsx';
@@ -85,6 +84,7 @@ export {
   RouterUtil,
   Row,
   SearchInput,
+  Segment,
   Select,
   SpeedDial,
   SpeedDialItem,
@@ -93,8 +93,6 @@ export {
   SplitterSide,
   Switch,
   Tab,
-  TabActive,
-  TabInactive,
   Tabbar,
   Toast,
   Toolbar,

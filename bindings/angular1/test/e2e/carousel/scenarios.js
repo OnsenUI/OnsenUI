@@ -9,6 +9,22 @@
       var initialPosition;
       var secondItemPosition;
 
+      var swipe = function(item, width, d) {
+        browser.actions()
+        .mouseMove(item, {x: width * (d>0?.1:.9), y: 100})
+        .mouseDown()
+        .mouseMove({x: width * 0.6 * Math.sign(d), y: 0})
+        .mouseUp()
+        .perform();
+        browser.waitForAngular();
+
+        browser.wait(function() {
+          return item.getLocation().then(function(loc) {
+            return loc.x !== 0;
+          });
+        });
+      };
+
       it('should move the items when swiping left', function() {
         browser.get(path);
 
@@ -17,22 +33,12 @@
         // Store initial position.
         initialPosition = carouselItem.getLocation();
 
-        // Swipe left
-        browser.actions()
-        .mouseMove(carouselItem, {x: 100, y: 100})
-        .mouseDown()
-        .mouseMove({x: -520, y: 0})
-        .mouseUp()
-        .perform();
-        browser.waitForAngular();
+        browser.executeScript('return document.body.clientWidth').then(function(width) {
+          // Swipe left
+          swipe(carouselItem, width, -1);
 
-        browser.wait(function() {
-          return carouselItem.getLocation().then(function(loc) {
-            return loc.x !== 0;
-          });
+          expect(initialPosition).not.toEqual(carouselItem.getLocation());
         });
-
-        expect(initialPosition).not.toEqual(carouselItem.getLocation());
       });
 
       it('should move the items when swiping right', function() {
@@ -40,34 +46,19 @@
 
         var carouselItem = element(by.id('first-item'));
 
-        // Swipe left
-        browser.actions()
-        .mouseMove(carouselItem, {x: 100, y: 100})
-        .mouseDown()
-        .mouseMove({x: -520, y: 0})
-        .mouseUp()
-        .perform();
-        browser.waitForAngular();
+        browser.executeScript('return document.body.clientWidth').then(function(width) {
+          // Swipe left
+          swipe(carouselItem, width, -1);
 
-        // Store the position of the second carousel item
-        secondItemPosition = carouselItem.getLocation();
+          // Store the position of the second carousel item
+          secondItemPosition = carouselItem.getLocation();
 
-        // Swipe right
-        browser.actions()
-        .mouseMove(element(by.id('second-item')), {x: 100, y: 100})
-        .mouseDown()
-        .mouseMove({x: 520, y: 0})
-        .mouseUp()
-        .perform();
-        browser.waitForAngular();
+          // Swipe right
+          swipe(element(by.id('second-item')), width, 1);
 
-        browser.wait(function() {
-          return carouselItem.getLocation().then(function(loc) {
-            return loc.x !== 0;
-          });
+          expect(secondItemPosition).not.toEqual(carouselItem.getLocation());
+
         });
-
-        expect(secondItemPosition).not.toEqual(carouselItem.getLocation());
       });
 
       it('should move the items when clicking the "Next" button', function() {

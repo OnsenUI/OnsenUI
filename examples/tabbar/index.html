@@ -9,61 +9,97 @@
     <script src="../../build/js/onsenui.js"></script>
 
     <script>
-      document.addEventListener('init', function(event) {
-        console.log('init');
-      });
-      document.addEventListener('show', function(event) {
-        console.log('show');
-      });
-      document.addEventListener('hide', function(event) {
-        console.log('hide');
-      });
-      document.addEventListener('destroy', function(event) {
-        console.log('destroy');
-      });
+      ['postchange', 'init', 'hide', 'show'].forEach(eN => document.addEventListener(eN, e => console.log(eN, e)));
+        document.addEventListener('prechange', function(e) {
+          console.log('prechange', e);
+          if (e.activeIndex === 0) {
+            // console.log('Canceled in prechange', e.detail.canceled);
+            // setImmediate(() => console.log('Canceled in prechange', e.detail.canceled));
+            // e.cancel();
+          }
+        });
+
+      function generateElements() {
+        const list = this.querySelector('ons-list');
+        for (let i = 0; i < 10; i++) {
+          list.appendChild(ons.createElement(`
+            <ons-list-item>
+              #${i}
+            </ons-list-item>
+          `));
+        }
+      }
+
+    </script>
 
     </script>
 
   </head>
 
   <body>
-    <ons-page>
+    <ons-page id="tabbar-page">
       <ons-toolbar>
-        <div class="center">Tabbar</div>
+        <div class="center">WhatsApp</div>
+        <div class="right">
+          <ons-toolbar-button>
+            <ons-icon icon="md-search"></ons-icon>
+          </ons-toolbar-button>
+          <ons-toolbar-button>
+            <ons-icon icon="md-more-vert"></ons-icon>
+          </ons-toolbar-button>
+        </div>
       </ons-toolbar>
 
-      <ons-tabbar position="auto">
-        <ons-tab page="page1.html" active
-          icon="ion-home"
-          label="Home">
+      <ons-tabbar position="auto"
+        modifier="autogrow"
+        swipeable
+      >
+        <ons-tab page="page1.html"
+          active
+          icon="ion-camera"
+          style="max-width: 60px"
+        >
         </ons-tab>
         <ons-tab
-          icon="ion-chatbox-working"
-          label="Comments"
+          label="Chats"
           badge="99+"
           page="page2.html"></ons-tab>
         <ons-tab
-          icon="ion-ios-cog"
-          label="Settings"
+          label="Status"
           page="page3.html"></ons-tab>
+        <ons-tab
+          label="Calls"
+          page="page4.html"></ons-tab>
       </ons-tabbar>
     </ons-page>
 
     <template id="page1.html">
-      <ons-page>
-        <h2>Page1</h2>
+      <ons-page id="tab1">
+        <div class="background" style="background-color: lightgray"></div>
       </ons-page>
     </template>
 
     <template id="page2.html">
-      <ons-page>
-        <h2>Page2</h2>
+      <ons-page id="tab2">
+        <ons-list></ons-list>
+        <script>
+          ons.getScriptPage().onInit = generateElements;
+        </script>
       </ons-page>
     </template>
 
     <template id="page3.html">
-      <ons-page>
-        <h2>Page3</h2>
+      <ons-page id="tab3">
+        <div style="margin-top: 20px; text-align: center; font-size: 20px; color: gray">My Status</div>
+      </ons-page>
+    </template>
+
+    <template id="page4.html">
+      <ons-page id="tab4">
+        <ons-list></ons-list>
+        <script>
+          ons.getScriptPage().onInit = generateElements;
+        </script>
       </ons-page>
     </template>
 

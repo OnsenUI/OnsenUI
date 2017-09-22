@@ -5,7 +5,7 @@ import Util from './Util.js';
 
 /**
  * @original ons-navigator
- * @category navigator
+ * @category navigation
  * @tutorial react/Reference/navigator
  * @description
  * [en] This component is responsible for page transitioning and managing the pages of your OnsenUI application. In order to manage to display the pages, the  navigator needs to define the `renderPage` method, that takes an route and a navigator and  converts it to an page.[/en]

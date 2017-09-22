@@ -87,9 +87,7 @@
 
         // Replace page
         this._reattachPage(lastTopPage, currentTopPage, restoreScroll);
-        return this.$el._pushPage({ ...this.options }).then(() => {
-          this._redetachPage(lastTopPage);
-        });
+        return this.$el._pushPage({ ...this.options, _replacePage: true }).then(() => this._redetachPage(lastTopPage));
       },
       _checkSwipe(event) {
         if (this.$el.hasAttribute('swipeable') &&

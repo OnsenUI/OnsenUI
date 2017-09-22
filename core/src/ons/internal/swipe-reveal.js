@@ -72,7 +72,7 @@ export default class SwipeReveal {
       this._width = widthToPx(this.element._width || '100%');
       this._startDistance = this._distance = 0;
 
-      util.skipContentScroll(event.gesture);
+      util.preventScroll(this.gestureDetector);
     }
   }
 

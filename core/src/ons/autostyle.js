@@ -119,11 +119,28 @@ const prepare = (element, force) => {
 };
 
 const mapModifier = (modifier, element, force) => {
-  const p = getPlatform(element, force);
-  return p && modifiersMap.hasOwnProperty(modifier) ? modifiersMap[modifier] : modifier;
+  if (getPlatform(element, force)) {
+    return modifier.split(/\s+/).map(m => modifiersMap.hasOwnProperty(m) ? modifiersMap[m] : m).join(' ');
+  }
+  return modifier;
 };
 
-const restore = element => getPlatform(element) === 'android' && util.addModifier(element, 'material');
+const restoreModifier = element => {
+  if (getPlatform(element) === 'android') {
+    const modifier = element.getAttribute('modifier') || '';
+    let newModifier = mapModifier(modifier, element);
+
+    if (!/(^|\s+)material($|\s+)/i.test(modifier)) {
+      newModifier = 'material ' + newModifier;
+    }
+
+    if (newModifier !== modifier) {
+      element.setAttribute('modifier', newModifier.trim());
+      return true;
+    }
+  }
+  return false;
+};
 
 export default {
   isEnabled: () => autoStyleEnabled,
@@ -132,5 +149,5 @@ export default {
   prepare,
   mapModifier,
   getPlatform,
-  restore
+  restoreModifier
 };

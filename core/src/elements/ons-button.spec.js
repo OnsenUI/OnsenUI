@@ -19,7 +19,7 @@ describe('ons-button', () => {
     element.setAttribute('modifier', 'hoge');
     expect(element.classList.contains('button--hoge')).to.be.true;
 
-    element.setAttribute('modifier', ' foo bar');
+    element.setAttribute('modifier', 'foo bar');
     expect(element.classList.contains('button--foo')).to.be.true;
     expect(element.classList.contains('button--bar')).to.be.true;
     expect(element.classList.contains('button--hoge')).not.to.be.true;

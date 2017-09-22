@@ -1,12 +1,31 @@
 CHANGELOG
 ====
 
-dev
+2.2.0
+----
+
+### New features
+
+* VOnsSegment: New component.
+* VOnsPullHook: Added `onPull` prop.
+* VOnsTabbar: Support for swiping feature. Added `swipeable` and `onSwipe` props.
+* VOnsTabbar: Added `tabbarStyle` prop to declaratively set the actual tabbar element style.
+
+### Bug Fixes
+
+* VOnsNavigator: Properly hide VOnsBackButton when replacing pages.
+
+2.1.1
 ----
 
 ### Bug Fixes
 
 * VOnsNavigator: Keep page scroll during pop animation.
+
+### Misc
+
+* Avoid CE check in production.
+* Removed 'modifier' patches. Requires at least `onsenui@2.5.3`.
 
 2.1.0
 ----

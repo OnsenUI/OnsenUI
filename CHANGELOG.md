@@ -2,6 +2,57 @@
 CHANGELOG
 ====
 
+dev
+----
+
+### New Features
+
+ * css-components: Reimplemented css-components previewer.
+ * css-components: Changed color scheme to more iOS native-like.
+
+2.6.0
+----
+
+### New Features
+
+ * core: Added `ons-segment` element.
+ * angular1: Added `ons-segment` bindings.
+ * ons: Added `mockStatusBar` utility to create a fake iOS status bar for browser testing.
+ * ons-pull-hook: Added `onPull` property function that gets the pulled distance on drag.
+ * ons-carousel: Added `onSwipe` property function that gets the swiped distance on drag.
+ * ons-tabbar: Tabbar can now be swiped to change pages. `swipeable` attribute enables this feature.
+
+### Bug Fixes
+
+ * core: Device Back Button handler timing issue.
+ * GestureDetector: Fixed memory leak from Hammer.js v1.
+ * templates: Fixed a bug where `script` tags might not be ready on time.
+ * autoStyle: Fixed [#2171](https://github.com/OnsenUI/OnsenUI/issues/2171).
+ * inputs: Accept `required` attr. Fixed [#2169](https://github.com/OnsenUI/OnsenUI/issues/2169).
+ * ons-pull-hook: Different glitches on both iOS and Android. Fixed [#1990](https://github.com/OnsenUI/OnsenUI/issues/1990).
+ * ons-list-item: `nodivider` modifier should not hide `chevron`.
+ * ons-list-item: Fixed [#2150](https://github.com/OnsenUI/OnsenUI/issues/2150).
+ * ons-navigator: Fixed [#2167](https://github.com/OnsenUI/OnsenUI/issues/2167).
+ * ons-navigator: iOS slide animation with transparent toolbars glitch.
+ * ons-tabbar: Hide 1px line between toolbar and top tabbar in some Android devices.
+ * ons-modal: Fixed [#2066](https://github.com/OnsenUI/OnsenUI/issues/2066).
+ * ons-toolbar: `cover-content` modifier works with iOS status bar.
+ * ons-carousel: Fixed an animation glitch on iOS due to the cubic Bézier curve.
+ * ons-splitter: Translate3d glitch when opening with `reveal` animation.
+
+### Misc
+
+ * Updated type definitions.
+ * `modifier` classes are restored when `class` attribute is modified.
+ * ons-tab: The first tab will be activated if the `active` attribute is not provided in any tab.
+ * ons-carousel: Improved performance. Animation timing has been adjusted to prevent issues on iOS.
+
+### BREAKING CHANGES
+
+ * ons-tabbar, ons-carousel: DOM structure has been modified. It should not affect except if you manually modify `innerHTML`.
+ * ons-tabbar: Due to the new swipeable feature, `slide` animation is now performed by default unless it is disabled with `animation="none"` attribute. `fade` animator has also been removed (incompatible).
+ * ons-tab: Removed undocumented `ons-tab-active` and `ons-tab-inactive` attributes (from Onsen UI v1).
+
 v2.5.3
 ----
 

@@ -16,8 +16,8 @@ import {
  * @directive OnsSwitch
  * @selector ons-switch
  * @description
- *   [en]Angular 2 directive for `<ons-switch>` component.[/en]
- *   [ja]`<ons-switch>`要素のAngular 2ディレクティブです。[/ja]
+ *   [en]Angular directive for `<ons-switch>` component.[/en]
+ *   [ja]`<ons-switch>`要素のAngularディレクティブです。[/ja]
  * @example
  *   <ons-switch [(value)]="target"></ons-switch>
  */

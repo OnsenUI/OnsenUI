@@ -291,17 +291,24 @@ Utils = GestureDetector.utils = {
    * @param {String} find
    * @return {Boolean|Number} false when not found, or the index
    */
-  inArray: function inArray(src, find) {
+  inArray: function inArray(src, find, deep) {
+    if (deep) {
+      return src.findIndex(function(item) {
+        return Object.keys(find).every(function(key) {
+          return item[key] === find[key];
+        });
+      });
+    }
+
     if(src.indexOf) {
-      var index = src.indexOf(find);
-      return (index === -1) ? false : index;
+      return src.indexOf(find);
     } else {
       for(var i = 0, len = src.length; i < len; i++) {
         if(src[i] === find) {
           return i;
         }
       }
-      return false;
+      return -1;
     }
   },
 
@@ -797,7 +804,7 @@ Event = GestureDetector.event = {
       var touchList = [];
 
       Utils.each(concat, function(touch) {
-        if(Utils.inArray(identifiers, touch.identifier) === false) {
+        if(Utils.inArray(identifiers, touch.identifier) === -1) {
           touchList.push(touch);
         }
         identifiers.push(touch.identifier);
@@ -1269,8 +1276,8 @@ GestureDetector.Instance.prototype = {
     var self = this;
 
     Event.off(self.element, gestures, handler, function(type) {
-      var index = Utils.inArray({ gesture: type, handler: handler });
-      if(index !== false) {
+      var index = Utils.inArray(self.eventHandlers, { gesture: type, handler: handler }, true);
+      if(index >= 0) {
         self.eventHandlers.splice(index, 1);
       }
     });

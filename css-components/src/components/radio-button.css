@@ -5,7 +5,7 @@
   --radio-button-border: 3px solid var(--radio-button-indicator-color);
   --radio-button-size: 24px;
   --material-radio-button-size: 20px;
-  --material-radio-button-shadow-size: calc((48px - var(--material-radio-button-size)) / 2px);
+  --material-radio-button-shadow-size: calc((48px - var(--material-radio-button-size)) / 2);
 
   --radio-button: {
     @apply(--reset-box-model);

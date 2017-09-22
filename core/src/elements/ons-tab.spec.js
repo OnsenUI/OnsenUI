@@ -17,11 +17,6 @@ describe('OnsTabElement', () => {
     expect(window.ons.TabElement).to.be.ok;
   });
 
-  it('has a default template', () => {
-    expect(element.classList.contains('tabbar__item')).to.be.true;
-    expect(element._hasDefaultTemplate).to.be.true;
-  });
-
   it('has "page" property', () => {
     element.page = 'foobar';
     expect(element.page).to.be.equal('foobar');
@@ -138,29 +133,21 @@ describe('OnsTabElement', () => {
 
   describe('active-icon attribute', () => {
     it('sets active-icon name for the tab', done => {
-      const tabbar = ons._util.createElement(`
-        <ons-tabbar>
-          <ons-tab id="tab1" page="page1" icon="ion-home" active-icon="ion-edit"></ons-tab>
-        </ons-tabbar>
-      `);
+      const tabbar = ons._util.createElement('<ons-tabbar></ons-tabbar>');
+      const tab = ons.createElement('<ons-tab active id="tab1" icon="ion-home" active-icon="ion-edit"></ons-tab>');
 
-      const template1 = ons._util.createElement(`
-        <template id="page1"><ons-page></ons-page></template>
-      `);
-
+      tabbar.appendChild(tab);
       document.body.appendChild(tabbar);
-      document.body.appendChild(template1);
 
       setImmediate(() => {
-        expect(tabbar.querySelector('ons-icon').getAttribute('icon')).to.equal('ion-home');
+        tab.setActive(false);
+        expect(tab.querySelector('ons-icon').getAttribute('icon')).to.equal('ion-home');
 
-        tabbar.setActiveTab(0).then(() => {
-          expect(tabbar.querySelector('ons-icon').getAttribute('icon')).to.equal('ion-edit');
+        tab.setActive(true);
+        expect(tabbar.querySelector('ons-icon').getAttribute('icon')).to.equal('ion-edit');
 
-          document.body.removeChild(tabbar);
-
-          done();
-        });
+        tabbar.remove();
+        done();
       });
     });
   });
@@ -232,66 +219,78 @@ describe('OnsTabElement', () => {
     });
   });
 
-  describe('parent', () => {
-    it('should be an \'ons-tabbar\' element', () => {
-      expect(() => element._ensureElementPosition()).to.throw('This ons-tab element is must be child of ons-tabbar element.');
+  describe('#connectedCallback', () => {
+    it('should be child of \'ons-tabbar\' element', () => {
+      const error = 'ons-tabbar';
+      expect(() => document.body.appendChild(element)).to.throw(error);
 
-      const parent = ons._util.createElement(`
-        <ons-tabbar>
-        </ons-tabbar>
-      `);
-
-      parent.appendChild(element);
-      expect(() => element._ensureElementPosition()).not.to.throw('This ons-tab element is must be child of ons-tabbar element.');
-    });
-  });
-
-  describe('_hasDefaultTemplate property', () => {
-    it('is, by default, true', () => {
-      expect(element._hasDefaultTemplate).to.be.true;
-    });
-
-    it('is false when one of the tab\'s children is a ELEMENT_NODE', () => {
-      const tabbar = ons._util.createElement(`
-        <ons-tabbar>
-        </ons-tabbar>
-      `);
-
+      const tabbar = document.createElement('ons-tabbar');
       document.body.appendChild(tabbar);
-      element = ons._util.createElement(`
-        <ons-tab active="true">
-          <div></div>
-        </ons-tab>
-      `);
-      tabbar.appendChild(element);
-      expect(element._hasDefaultTemplate).not.to.be.true;
 
-      document.body.removeChild(tabbar);
+      expect(() => tabbar.appendChild(element)).not.to.throw(error);
+      tabbar.remove();
     });
-  });
 
-  describe('#_updateDefaultTemplate()', () => {
-    it('will return if there is not a default template', () => {
-      var spy = chai.spy.on(element, 'getAttribute');
-      element._hasDefaultTemplate = false;
-      element._updateDefaultTemplate();
-      expect(spy).not.to.have.been.called;
-    });
-  });
+    it('loads the provided page', (done) => {
+      const tabbar = document.createElement('ons-tabbar');
+      const template1 = ons.createElement('<template id="t1"><ons-page id="page1"></ons-page></template>');
+      const tab = ons.createElement('<ons-tab label="tab1" page="t1"></ons-tab>');
+      const spy = chai.spy.on(tab._pageLoader, 'load');
 
-  describe('#_loadPage()', () => {
-    it('returns the current tab _pageElement', (done) => {
-      element = ons._util.createElement(`
-        <ons-tab>
-        </ons-tab>
-      `);
+      tabbar.addEventListener('init', event => {
+        expect(spy).to.have.been.called.once;
+        expect(tab.pageElement).to.equal(event.target);
+        expect(tab.pageElement.id).to.equal('page1');
 
-      const myFunction = (value) => {
-        expect(value).to.equal(element._loadedPage);
+        tabbar.remove();
+        template1.remove();
         done();
-      };
-      element._loadedPage = true;
-      element._loadPageElement(document.createElement('div'), myFunction);
+      });
+
+      tabbar.appendChild(tab);
+      document.body.appendChild(template1);
+      document.body.appendChild(tabbar);
+    });
+
+    it('uses existing pages', (done) => {
+      const tab = ons.createElement('<ons-tab label="tab1"></ons-tab>');
+      const tabbar = ons.createElement(`
+        <ons-tabbar>
+          <div class="tabbar__content">
+            <div>
+              <ons-page id="test-page"></ons-page>
+            </div>
+          </div>
+          <div class="tabbar"></div>
+        </ons-tabbar>
+      `);
+      const spy = chai.spy.on(tab._pageLoader, 'load');
+
+      tabbar.addEventListener('init', event => {
+        expect(spy).not.to.have.been.called;
+        expect(tab.pageElement).to.equal(event.target);
+        expect(tab.pageElement.id).to.equal('test-page');
+
+        tabbar.remove();
+        done();
+      });
+
+      tabbar._tabbarElement.insertBefore(tab, tabbar._tabbarElement.children[0]);
+      document.body.appendChild(tabbar);
+    });
+
+    it('does nothing when there is no page', () => {
+      const tabbar = ons.createElement(`
+        <ons-tabbar>
+          <div class="tabbar__content"></div>
+          <div class="tabbar">
+            <ons-tab label="tab1"></ons-tab>
+          </div>
+        </ons-tabbar>
+      `);
+
+      expect(() => document.body.appendChild(tabbar)).not.to.throw.error;
+      tabbar.remove();
     });
   });
 
@@ -318,16 +317,15 @@ describe('OnsTabElement', () => {
       setImmediate(() => {
         const tab1 = tabbar.querySelector('#tab1');
         const tab2 = tabbar.querySelector('#tab2');
-        expect(tabbar.getActiveTabIndex()).to.equal(-1);
-
-        tab1.setActive();
-        expect(tabbar.getActiveTabIndex()).not.to.equal(-1);
         expect(tabbar.getActiveTabIndex()).to.equal(0);
 
-        tab2.setActive();
+        tab2.setActive(true);
         tab1.classList.remove('active');
-        expect(tabbar.getActiveTabIndex()).not.to.equal(0);
         expect(tabbar.getActiveTabIndex()).to.equal(1);
+
+        tab1.setActive(true);
+        tab2.setActive(false);
+        expect(tabbar.getActiveTabIndex()).to.equal(0);
 
         document.body.removeChild(tabbar);
         document.body.removeChild(template1);

@@ -16,13 +16,10 @@ import {
  * @directive OnsRange
  * @selector ons-range
  * @description
- *   [en]Angular 2 directive for `<ons-range>` component.[/en]
- *   [ja]`<ons-range>`要素のAngular 2ディレクティブです。[/en]
+ *   [en]Angular directive for `<ons-range>` component.[/en]
+ *   [ja]`<ons-range>`要素のAngularディレクティブです。[/en]
  * @example
- *   <ons-range [(value)]="foo"></ons-range><br>
- *
- *   <!-- Add (input) to change immediately on dragging range component -->
- *   <ons-range [(value)]="bar" (input)="bar = $event.target.value"></ons-range>
+ *   <ons-range [(value)]="foo"></ons-range>
  */
 @Directive({
   selector: 'ons-range'
@@ -53,7 +50,7 @@ export class OnsRange implements OnChanges, OnDestroy {
     this._boundOnChange = this._onChange.bind(this);
     this._element = _elementRef.nativeElement;
 
-    this._element.addEventListener('change', this._boundOnChange);
+    this._element.addEventListener('input', this._boundOnChange);
   }
 
   _onChange(event: any) {
@@ -74,7 +71,7 @@ export class OnsRange implements OnChanges, OnDestroy {
   }
 
   ngOnDestroy() {
-    this._element.removeEventListener('change', this._boundOnChange);
+    this._element.removeEventListener('input', this._boundOnChange);
 
     this._element = null;
   }

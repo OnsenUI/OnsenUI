@@ -15,6 +15,7 @@ limitations under the License.
 
 */
 
+import util from '../ons/util';
 import autoStyle from '../ons/autostyle';
 import ModifierUtil from '../ons/internal/modifier-util';
 import BaseElement from './base/base-element';
@@ -24,7 +25,7 @@ const defaultClassName = 'card';
 const scheme = {
   '': 'card--*',
   '.card__title': 'card--*__title',
-  '.card__content': 'card--*__content',
+  '.card__content': 'card--*__content'
 };
 
 /**
@@ -91,9 +92,7 @@ export default class CardElement extends BaseElement {
   attributeChangedCallback(name, last, current) {
     switch (name) {
       case 'class':
-        if (!this.classList.contains(defaultClassName)) {
-          this.className = defaultClassName + ' ' + current;
-        }
+        util.restoreClass(this, defaultClassName, scheme);
         break;
       case 'modifier':
         ModifierUtil.onModifierChanged(last, current, this, scheme);

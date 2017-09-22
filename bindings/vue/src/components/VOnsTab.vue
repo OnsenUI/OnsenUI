@@ -21,14 +21,14 @@
         this.$emit('click', { preventDefault: () => runDefault = false });
 
         if (runDefault) {
-          this.tabbar.$el.setActiveTab(this.$el._findTabIndex(), this.tabbar.options);
+          this.tabbar.$el.setActiveTab(this.$el.index, { reject: false, ...this.tabbar.options });
         }
       }
     },
 
     watch: {
       active() {
-        this.active ? this.$el.setActive() : this.$el.setInactive();
+        this.$el.setActive(this.active);
       }
     }
   };

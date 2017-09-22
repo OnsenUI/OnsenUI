@@ -58,6 +58,7 @@ class Carousel extends SimpleWrapper {
     node.addEventListener('postchange', this.onChange);
     node.addEventListener('refresh', this.onRefresh);
     node.addEventListener('overscroll', this.onOverscroll);
+    node.onSwipe = this.props.onSwipe || null;
   }
 
   componentWillUnmount() {
@@ -67,26 +68,26 @@ class Carousel extends SimpleWrapper {
     node.removeEventListener('overscroll', this.onOverscroll);
   }
 
-  componentWillReceiveProps(props) {
-    const node = findDOMNode(this);
-
-    if (this.props.index !== props.index) {
-      node.setActiveIndex(props.index, props.animationOptions);
-    }
-  }
-
   componentDidUpdate(props) {
     const node = findDOMNode(this);
 
+    if (this.props.index !== node.getActiveIndex()) {
+      node.setActiveIndex(this.props.index, props.animationOptions);
+    }
+
     if (this.props.children.length !== props.children.length) {
       node.refresh();
+    }
+
+    if (this.props.onSwipe !== props.onSwipe) {
+      node.onSwipe = this.props.onSwipe;
     }
   }
 
   render() {
     const {...others} = this.props;
 
-    ['fullscreen', 'swipeable', 'disabled', 'centered', 'overscrollable', 'centered'].forEach((el) => {
+    ['fullscreen', 'swipeable', 'disabled', 'centered', 'overscrollable'].forEach((el) => {
       Util.convert(others, el);
     });
 
@@ -98,7 +99,14 @@ class Carousel extends SimpleWrapper {
     Util.convert(others, 'index', {newName: 'initial-index'});
     Util.convert(others, 'animationOptions', {fun: Util.animationOptionsConverter, newName: 'animation-options'});
 
-    return React.createElement(this._getDomNodeName(), others, this.props.children);
+    return (
+      <ons-carousel {...others}>
+        <div>
+          {this.props.children}
+        </div>
+        <div></div>
+      </ons-carousel>
+    );
   }
 }
 
@@ -248,7 +256,16 @@ Carousel.propTypes = {
    *  [en]Specify the animation's duration, delay and timing. E.g.  `{duration: 0.2, delay: 0.4, timing: 'ease-in'}`.[/en]
    *  [ja][/ja]
    */
-  animationOptions: PropTypes.object
+  animationOptions: PropTypes.object,
+
+  /**
+   * @name onSwipe
+   * @type function
+   * @description
+   *  [en]Hook called whenever the user slides the carousel. It gets a decimal index and an animationOptions object as arguments.[/en]
+   *  [ja][/ja]
+   */
+  onSwipe: PropTypes.func
 };
 
 export default Carousel;

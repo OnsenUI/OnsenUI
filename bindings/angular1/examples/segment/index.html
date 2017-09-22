@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Segment | Onsen UI</title>
+  <link rel="stylesheet" href="../styles/app.css" />
+  <link rel="stylesheet" href="../../../../build/css/onsenui.css">
+  <link rel="stylesheet" href="../../../../build/css/onsen-css-components.css">
+
+  <script src="../../../../build/js/onsenui.js"></script>
+  <script src="../../../../build/js/angular/angular.js"></script>
+  <script src="../../../../build/js/angular-onsenui.js"></script>
+  <script>
+    ons.bootstrap()
+      .controller('PageController', function ($scope) {
+        $scope.changeTab = function () {
+          document.getElementById('tabbar').setActiveTab(1);
+        };
+        $scope.changeButton = function () {
+          document.getElementById('segment').setActiveButton(1);
+        };
+        $scope.logIndexes = function () {
+          console.log('active button index', document.getElementById('segment').getActiveButtonIndex());
+          console.log('active tab index', document.getElementById('tabbar').getActiveTabIndex());
+        };
+      });
+    document.addEventListener('postchange', function (event) {
+      console.log('postchange event', event);
+    });
+  </script>
+
+</head>
+
+<body>
+  <ons-page ng-controller="PageController">
+    <ons-toolbar>
+      <div class="center">
+        <ons-segment id="segment" tabbar-id="tabbar" style="width: 280px">
+          <button>Page 1</button>
+          <button>Page 2</button>
+          <button>Page 3</button>
+        </ons-segment>
+      </div>
+    </ons-toolbar>
+
+    <!-- Comment <ons-tabbar> out to test this one -->
+    <ons-segment active-index="1" style="width: 280px; margin: 10px 20px;">
+      <button>Label 1</button>
+      <button>Label 2</button>
+      <button>Label 3</button>
+    </ons-segment>
+
+    <ons-tabbar id="tabbar">
+      <ons-tab page="page1.html" active></ons-tab>
+      <ons-tab page="page2.html"></ons-tab>
+      <ons-tab page="page3.html"></ons-tab>
+    </ons-tabbar>
+  </ons-page>
+
+  <template id="page1.html">
+    <ons-page>
+      <h2>Page1</h2>
+      <ons-button ng-click="changeTab()">Change tab via tabbar</ons-button>
+      <ons-button ng-click="changeButton()">Change tab via segment</ons-button>
+      <ons-button ng-click="logIndexes()">Log current button index</ons-button>
+    </ons-page>
+  </template>
+
+  <template id="page2.html">
+    <ons-page>
+      <h2>Page2</h2>
+      <ons-button ng-click="logIndexes()">Log current button index</ons-button>
+    </ons-page>
+  </template>
+
+  <template id="page3.html">
+    <ons-page>
+      <h2>Page3</h2>
+      <ons-button ng-click="logIndexes()">Log current button index</ons-button>
+    </ons-page>
+  </template>
+</body>
+
+</html>

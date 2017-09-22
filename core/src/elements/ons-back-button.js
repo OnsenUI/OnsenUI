@@ -148,12 +148,6 @@ export default class BackButtonElement extends BaseElement {
    *   [ja]このメソッドによる画面遷移が終了した際に呼び出される関数オブジェクトを指定します。[/ja]
    */
 
-  /**
-   * @property options.refresh
-   * @description
-   *   [en]The previous page will be refreshed (destroyed and created again) before popPage action.[/en]
-   *   [ja]popPageする前に、前にあるページを生成しなおして更新する場合にtrueを指定します。[/ja]
-   */
   get options() {
     return this._options;
   }
@@ -192,9 +186,7 @@ export default class BackButtonElement extends BaseElement {
   attributeChangedCallback(name, last, current) {
     switch (name) {
       case 'class':
-        if (!this.classList.contains(defaultClassName)) {
-          this.className = defaultClassName + ' ' + current;
-        }
+        util.restoreClass(this, defaultClassName, scheme);
         break;
 
       case 'modifier': {

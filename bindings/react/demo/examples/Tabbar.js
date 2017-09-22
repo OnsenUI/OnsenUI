@@ -30,19 +30,16 @@ export default class extends React.Component {
     console.log('index : ' , activeIndex);
     return [
       {
-        content: <TabPage switchTab={() => { this.setState({index: 1}); }}
-        title='Home' active={activeIndex == 0} tabbar={tabbar} />,
-        tab: <Tab
+        content: <TabPage active={activeIndex === 0} key='asd1' switchTab={() => { this.setState({index: 1}); }}
+        title='Home' tabbar={tabbar} />,
+        tab: <Tab key='jio1'
           onClick={() => console.log('click home')}
           label='Home'
           icon='md-home' />
       },
       {
-        content: <TabPage
-          switchTab={() => { this.setState({index: 0}); }}
-
-        title='Settings' active={activeIndex == 1} tabbar={tabbar} />,
-        tab: <Tab onClick={() => console.log('click setting')} label='Settings' icon='md-settings' />
+        content: <TabPage active={activeIndex === 1} key='asd2' switchTab={() => { this.setState({index: 0}); }} title='Settings' tabbar={tabbar} />,
+        tab: <Tab key='jio2' onClick={() => console.log('click setting', this.state.index)} label='Settings' icon='md-settings' />
       }
     ];
   }
@@ -51,15 +48,17 @@ export default class extends React.Component {
     return (
       <Page>
         <Tabbar
+          animation={'none'}
+          swipeable={true}
           index={this.state.index}
-          onPreChange={(event) =>
+          onPreChange={() => console.log('preChange')}
+          onPostChange={(event) =>
             {
               this.setState({index: event.index});
-              console.log('preChange', event.index);
+              console.log('postChange', event.index);
             }
           }
-          onPostChange={() => console.log('postChange')}
-          onReactive={() => console.log('postChange')}
+          onReactive={() => console.log('reactive')}
           position='bottom'
           renderTabs={this.renderTabs}
         />
