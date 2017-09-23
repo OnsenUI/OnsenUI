@@ -11,9 +11,11 @@ export const PatternsPage = {
 
       <theme-select :query="query" />
 
-      <div class="pattern" v-for="pattern in filterPatterns">
-        <a class="pattern__name title-label" :href="'/patterns/' + pattern.id">{{pattern.name}}</a>
-        <div class="pattern__example"><div v-html="pattern.markup" style="position: static"></div></div>
+      <div class="patterns">
+        <div class="pattern" v-for="pattern in filterPatterns">
+          <a class="pattern__name title-label" :href="'/patterns/' + pattern.id">{{pattern.name}}</a>
+          <div class="pattern__example"><div v-html="pattern.markup" style="position: static"></div></div>
+        </div>
       </div>
     </div>
   `,

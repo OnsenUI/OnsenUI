@@ -77,11 +77,18 @@ a:hover {
   box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.08) inset;
 }
 
+.patterns {
+  clear: both;
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 0 50vh -10px;
+}
+
 .pattern {
   width: 320px;
   box-sizing: border-box;
   display: inline-block;
-  margin: 10px 10px 10px 0;
+  margin: 0px 10px 6px 10px;
 }
 
 .pattern__example {
