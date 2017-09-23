@@ -17,6 +17,10 @@ export const PatternPage = {
         <div>
           <div class="pattern__example"><div style="position: static" v-html="pattern.markup"></div></div>
         </div>
+
+        <h3 class="title-label">HTML</h3>
+
+        <pre class="markup">{{pattern.markup}}</pre>
       </div>
     </div>
   `,

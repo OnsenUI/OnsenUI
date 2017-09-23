@@ -21,7 +21,7 @@ export const ComponentPage = {
 
         <h3 class="title-label">HTML</h3>
 
-        <pre class="component-markup">{{component.markup}}</pre>
+        <pre class="markup">{{component.markup}}</pre>
       </div>
     </div>
   `
