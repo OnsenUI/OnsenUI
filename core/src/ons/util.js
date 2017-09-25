@@ -369,7 +369,7 @@ util.toggleModifier = (...args) => {
  * @param {Object} scheme
  */
 util.restoreClass = (el, defaultClass, scheme) => {
-  defaultClass.split(/\s+/).forEach(c => !el.classList.contains(c) && el.classList.add(c));
+  defaultClass.split(/\s+/).forEach(c => c !== '' && !el.classList.contains(c) && el.classList.add(c));
   el.hasAttribute('modifier') && ModifierUtil.refresh(el, scheme);
 }
 
