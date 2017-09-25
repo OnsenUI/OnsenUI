@@ -21,7 +21,6 @@ import pageAttributeExpression from '../page-attribute-expression';
 import Swiper from './swiper';
 
 const internal = {};
-const doc = document.implementation.createHTMLDocument('ons-internal');
 
 internal.config = {
   autoStatusBarFill: true,
@@ -148,10 +147,14 @@ internal.getTemplateHTMLAsync = function(page) {
         if (xhr.status >= 400 && xhr.status < 600) {
           reject(html);
         } else {
-          // Workaround to make 'script' tags run properly
-          doc.write(`<template id="${page}">${html}</template>`);
-          const fragment = doc.getElementById(page).content;
-          doc.close();
+          if (internal.doc === undefined) {
+            internal.doc = document.implementation.createHTMLDocument('ons-internal');
+          }
+
+          // Make 'script' tags run properly
+          internal.doc.write(`<template id="${page}">${html}</template>`);
+          const fragment = internal.doc.getElementById(page).content;
+          internal.doc.close();
 
           internal.templateStore.set(page, fragment);
           resolve(fragment);
