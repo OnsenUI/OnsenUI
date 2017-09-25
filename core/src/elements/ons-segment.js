@@ -224,7 +224,12 @@ export default class SegmentElement extends BaseElement {
    *   [ja][/ja]
    */
   getActiveButtonIndex() {
-    return Array.prototype.findIndex.call(this.children, el => el.firstElementChild.checked);
+    for (let i = this.children.length - 1; i >= 0; i--) { // Array.findIndex
+      if (this.children[i].firstElementChild.checked) {
+        return i;
+      }
+    }
+    return -1;
   }
 
   _onChange(event) {
