@@ -9,19 +9,24 @@
     <script src="../../build/js/onsenui.js"></script>
 
     <script>
-      ['postchange', 'init', 'hide', 'show'].forEach(eN => document.addEventListener(eN, e => console.log(eN, e)));
-        document.addEventListener('prechange', function(e) {
-          console.log('prechange', e);
-          if (e.activeIndex === 0) {
-            // console.log('Canceled in prechange', e.detail.canceled);
-            // setImmediate(() => console.log('Canceled in prechange', e.detail.canceled));
-            // e.cancel();
-          }
+      ['postchange', 'init', 'hide', 'show'].forEach(function(eN) {
+        document.addEventListener(eN, function(e) {
+          console.log(eN, e);
         });
+      });
+
+      document.addEventListener('prechange', function(e) {
+        console.log('prechange', e);
+        if (e.activeIndex === 0) {
+          // console.log('Canceled in prechange', e.detail.canceled);
+          // setImmediate(() => console.log('Canceled in prechange', e.detail.canceled));
+          // e.cancel();
+        }
+      });
 
       function generateElements() {
-        const list = this.querySelector('ons-list');
-        for (let i = 0; i < 10; i++) {
+        var list = this.querySelector('ons-list');
+        for (var i = 0; i < 10; i++) {
           list.appendChild(ons.createElement(`
             <ons-list-item>
               #${i}
@@ -91,15 +96,5 @@
         <div style="margin-top: 20px; text-align: center; font-size: 20px; color: gray">My Status</div>
       </ons-page>
     </template>
-
-    <template id="page4.html">
-      <ons-page id="tab4">
-        <ons-list></ons-list>
-        <script>
-          ons.getScriptPage().onInit = generateElements;
-        </script>
-      </ons-page>
-    </template>
-
   </body>
 </html>
