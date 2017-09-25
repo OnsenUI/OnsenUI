@@ -572,7 +572,7 @@ export default class TabbarElement extends BaseElement {
       const isTop = m => /(^|\s+)top($|\s+)/i.test(m);
       isTop(last) !== isTop(current) && this._updatePosition();
     } else if (name === 'position') {
-      this._updatePosition();
+      util.isAttached(this) && this._updatePosition();
     } else if (name === 'swipeable') {
       this._swiper && this._swiper.updateSwipeable(this.hasAttribute('swipeable'));
     } else if (name === 'hide-tabs') {
