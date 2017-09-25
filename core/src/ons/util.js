@@ -72,7 +72,7 @@ util.findParent = (element, query, until) => {
 
   let parent = element.parentNode;
   for (;;) {
-    if (!parent || parent === document || (until && until(parent))) {
+    if (!parent || parent === document || parent instanceof DocumentFragment || (until && until(parent))) {
       return null;
     } else if (match(parent)) {
       return parent;
