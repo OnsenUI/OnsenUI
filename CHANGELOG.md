@@ -10,6 +10,11 @@ dev
  * css-components: Reimplemented css-components previewer.
  * css-components: Changed color scheme to more iOS native-like.
 
+### Bug Fixes
+
+ * ons-tabbar: Fixed [#2189](https://github.com/OnsenUI/OnsenUI/issues/2189).
+
+
 2.6.0
 ----
 
