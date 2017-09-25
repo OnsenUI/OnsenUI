@@ -12,8 +12,9 @@ dev
 
 ### Bug Fixes
 
- * ons-tabbar: Fixed [#2189](https://github.com/OnsenUI/OnsenUI/issues/2189).
  * GestureDetector: Fixed `findIndex` issue in Android 4.4.4.
+ * templates: Fixed [#2163](https://github.com/OnsenUI/OnsenUI/issues/2163).
+ * ons-tabbar: Fixed [#2189](https://github.com/OnsenUI/OnsenUI/issues/2189).
 
 2.6.0
 ----
