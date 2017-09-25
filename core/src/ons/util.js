@@ -173,15 +173,9 @@ util.createElement = (html) => {
  * @return {HTMLFragment}
  */
 util.createFragment = (html) => {
-  const wrapper = document.createElement('div');
-  wrapper.innerHTML = html;
-  const fragment = document.createDocumentFragment();
-
-  while (wrapper.firstChild) {
-    fragment.appendChild(wrapper.firstChild);
-  }
-
-  return fragment;
+  const template = document.createElement('template');
+  template.innerHTML = html;
+  return document.importNode(template.content, true);
 };
 
 /*
