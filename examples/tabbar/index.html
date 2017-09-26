@@ -18,20 +18,16 @@
       document.addEventListener('prechange', function(e) {
         console.log('prechange', e);
         if (e.activeIndex === 0) {
-          // console.log('Canceled in prechange', e.detail.canceled);
-          // setImmediate(() => console.log('Canceled in prechange', e.detail.canceled));
-          // e.cancel();
+          //console.log('Canceled in prechange', e.detail.canceled);
+          //setImmediate(function() { console.log('Canceled in prechange', e.detail.canceled) });
+          //e.cancel();
         }
       });
 
       function generateElements() {
         var list = this.querySelector('ons-list');
         for (var i = 0; i < 10; i++) {
-          list.appendChild(ons.createElement(`
-            <ons-list-item>
-              #${i}
-            </ons-list-item>
-          `));
+          list.appendChild(ons.createElement('<ons-list-item>#'+i+'</ons-list-item>'));
         }
       }
 
