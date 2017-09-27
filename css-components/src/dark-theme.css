@@ -1,23 +1,23 @@
 
 :root {
   /* variables for iOS components */
-  --background-color: #333;
+  --background-color: #000;
   --text-color: #eee;
   --sub-text-color: #999;
   --highlight-color: #74c0ff;
   --second-highlight-color: #25a6d9;
-  --border-color: #ccc;
+  --border-color: #333;
   --button-background-color: var(--highlight-color);
   --button-cta-background-color: var(--second-highlight-color);
-  --toolbar-background-color: #212121;
+  --toolbar-background-color: #111;
   --toolbar-button-color: var(--highlight-color);
   --toolbar-text-color: #fff;
-  --toolbar-border-color: #000;
+  --toolbar-border-color: #333;
   --button-bar-color: var(--highlight-color);
   --button-bar-active-text-color: #fff;
   --segment-color: var(--highlight-color);
   --segment-active-text-color: #fff;
-  --list-background-color: #000;
+  --list-background-color: #111;
   --list-header-background-color: #eee;
   --list-tap-active-background-color: #d9d9d9;
   --progress-bar-color: var(--highlight-color);
@@ -31,6 +31,8 @@
   --tabbar-highlight-text-color: var(--highlight-color);
   --tabbar-border-color: #000000;
   --switch-highlight-color: #44db5e;
+  --switch-border-color: #666;
+  --switch-background-color: var(--background-color);
   --modal-background-color: rgba(0, 0, 0, 0.7);
   --modal-text-color: #fff;
   --alert-dialog-background-color: #f4f4f4;

@@ -31,6 +31,8 @@
   --tabbar-highlight-text-color: var(--highlight-color);
   --tabbar-border-color: #ccc;
   --switch-highlight-color: #44db5e;
+  --switch-border-color: #e5e5e5;
+  --switch-background-color: var(--border-color);
   --modal-background-color: rgba(0, 0, 0, 0.7);
   --modal-text-color: #fff;
   --alert-dialog-background-color: #f4f4f4;
