@@ -293,11 +293,12 @@ Utils = GestureDetector.utils = {
    */
   inArray: function inArray(src, find, deep) {
     if (deep) {
-      return src.findIndex(function(item) {
-        return Object.keys(find).every(function(key) {
-          return item[key] === find[key];
-        });
-      });
+      for(var i = 0, len = src.length; i < len; i++) { // Array.findIndex
+        if (Object.keys(find).every(function(key) { return src[i][key] === find[key]; })) {
+          return i;
+        }
+      }
+      return -1;
     }
 
     if(src.indexOf) {

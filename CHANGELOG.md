@@ -12,8 +12,10 @@ dev
 
 ### Bug Fixes
 
+ * GestureDetector: Fixed `findIndex` issue on Android 4.4.4.
+ * templates: Fixed [#2163](https://github.com/OnsenUI/OnsenUI/issues/2163).
  * ons-tabbar: Fixed [#2189](https://github.com/OnsenUI/OnsenUI/issues/2189).
-
+ * ons-tabbar, ons-tab: Fixed several issues on iOS 8.
 
 2.6.0
 ----

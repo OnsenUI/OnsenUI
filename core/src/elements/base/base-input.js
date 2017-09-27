@@ -70,7 +70,7 @@ export default class BaseInputElement extends BaseElement {
       return;
     }
 
-    this.appendChild(util.createFragment(this._template).cloneNode(true));
+    this.appendChild(util.createFragment(this._template));
 
     this._setInputId();
     this._updateBoundAttributes();

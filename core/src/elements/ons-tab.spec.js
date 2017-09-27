@@ -4,7 +4,7 @@ describe('OnsTabElement', () => {
   let element;
 
   beforeEach(done => {
-    element = ons._util.createElement(`<ons-tab> </ons-tab>`);
+    element = ons._util.createElement(`<ons-tab></ons-tab>`);
     ons._contentReady(element, done);
   });
 
@@ -159,7 +159,7 @@ describe('OnsTabElement', () => {
         </ons-tabbar>
       `);
 
-      tabbar.appendChild(element);
+      tabbar._tabbarElement.appendChild(element);
       document.body.appendChild(tabbar);
       setImmediate(() => {
         expect(document.getElementsByClassName('tabbar__label')[0]).not.to.be.ok;

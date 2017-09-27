@@ -67,7 +67,13 @@ gulp.task('cssnext', ['stylelint'], () => {
       root: __dirname + '/src/components/'
     }),
     cssnext({
-      browsers: ['> 1%', 'last 2 versions', 'Firefox ESR', 'Opera 12.1']
+      browsers: [ // enable CSS properties which require prefixes
+        '> 1%', 'Firefox ESR', 'Opera 12.1',
+        'Android >= 4.4',
+        'iOS >= 8.0',
+        'Chrome >= 30', // equivalent to Android 4.4 WebView
+        'Safari >= 9',
+      ],
     }),
     reporter({
       clearAllMessages: true,
@@ -224,8 +230,8 @@ const outputDevServerInfo = (() => {
   }
 
   function output() {
-    const localUrl = browserSync.getOption('urls').get('local'); 
-    const externalUrl = browserSync.getOption('urls').get('external'); 
+    const localUrl = browserSync.getOption('urls').get('local');
+    const externalUrl = browserSync.getOption('urls').get('external');
 
     console.log('\nAccess URLs:');
     console.log('     Local:', gutil.colors.magenta(localUrl));
