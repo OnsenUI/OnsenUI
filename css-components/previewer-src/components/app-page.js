@@ -22,11 +22,11 @@ export const createAppPageComponent = ({components, categories}) => ({
         </a>
 
         <div>
-          <a class="side-navi__category" href="/patterns">Patterns</a>
           <a class="side-navi__category" href="/">Components</a>
           <div v-for="category in categories" class="side-navi__category-item">
             <a :href="'/categories/' + category.hash" class="side-navi__item-link">{{category.name}}</a>
           </div>
+          <a class="side-navi__category" href="/patterns">Patterns</a>
         </div>
       </div>
 

@@ -8,7 +8,7 @@ export const ComponentsPage = {
     <div class="content">
       <platform-select :platform="query.platform" />
 
-      <h2 class="content__header">All Components</h2>
+      <h2 class="content__header">Components</h2>
 
       <theme-select :theme="query.theme" :query="query" />
 
