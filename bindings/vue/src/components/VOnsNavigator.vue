@@ -45,7 +45,7 @@
         return nextPage ? this._findScrollPage(nextPage) : page;
       },
       _setPagesVisibility(start, end, visibility) {
-        for (let i = start; i < end - 1; i++) {
+        for (let i = start; i < end; i++) {
           this.$children[i].$el.style.visibility = visibility;
         }
       },
@@ -86,6 +86,7 @@
         }
 
         // Replace page
+        currentTopPage.style.visibility = 'hidden';
         this._reattachPage(lastTopPage, currentTopPage, restoreScroll);
         return this.$el._pushPage({ ...this.options, _replacePage: true }).then(() => this._redetachPage(lastTopPage));
       },
@@ -105,26 +106,34 @@
         }
 
         const propWasMutated = after === before; // Can be mutated or replaced
-
-        const lastLength = propWasMutated ? this.$children.length : before.length;
-        let lastTopPage = this.$children[this.$children.length - 1].$el;
-
+        const lastTopPage = this.$children[this.$children.length - 1].$el;
         const scrollElement = this._findScrollPage(lastTopPage);
         const scrollValue = scrollElement.scrollTop || 0;
-        const restoreScroll = () => scrollElement.scrollTop = scrollValue;
 
-        this.$nextTick(() => {
-          const currentLength = propWasMutated ? this.$children.length : after.length;
-          let currentTopPage = this.$children[this.$children.length - 1].$el;
+        this._pageStackUpdate = {
+          lastTopPage,
+          lastLength: propWasMutated ? this.$children.length : before.length,
+          currentLength: !propWasMutated && after.length,
+          restoreScroll: () => scrollElement.scrollTop = scrollValue
+        };
 
-          if (currentTopPage !== lastTopPage) {
-            this._ready = this._animate({ lastLength, currentLength, lastTopPage, currentTopPage, restoreScroll });
-          } else if (currentLength !== lastLength) {
-            currentTopPage.updateBackButton(currentLength > 1);
-          }
+        // this.$nextTick(() => { }); // Waits too long, updated() hook is faster and prevents flickerings
+      }
+    },
 
-          lastTopPage = currentTopPage = null;
-        });
+    updated() {
+      if (this._pageStackUpdate) {
+        let currentTopPage = this.$children[this.$children.length - 1].$el;
+        let { lastLength, lastTopPage, currentLength, restoreScroll } = this._pageStackUpdate;
+        currentLength = currentLength === false ? this.$children.length : currentLength;
+
+        if (currentTopPage !== lastTopPage) {
+          this._ready = this._animate({ lastLength, currentLength, lastTopPage, currentTopPage, restoreScroll });
+        } else if (currentLength !== lastLength) {
+          currentTopPage.updateBackButton(currentLength > 1);
+        }
+
+        lastTopPage = currentTopPage = this._pageStackUpdate = null;
       }
     }
   };

@@ -254,7 +254,7 @@ export default class Swiper {
 
   _startMomentumScroll(scroll, event) {
     const velocity = this._getVelocity(event),
-      matchesDirection = event.gesture.interimDirection === this.dM.dir[Math.min(Math.sign(this._getDelta(event)) + 1, 1)];
+      matchesDirection = event.gesture.interimDirection === this.dM.dir[this._getDelta(event) < 0 ? 0 : 1];
 
     const nextScroll = this._getAutoScroll(scroll, velocity, matchesDirection);
     let duration = Math.abs(nextScroll - scroll) / (velocity + 0.01) / 1000;

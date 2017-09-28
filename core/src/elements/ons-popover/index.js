@@ -38,14 +38,6 @@ const _animatorDict = {
   'fade-md': MDFadePopoverAnimator
 };
 
-const templateSource = util.createFragment(`
-  <div class="popover-mask"></div>
-  <div class="popover">
-    <div class="popover__content"></div>
-    <div class="popover__arrow"></div>
-  </div>
-`);
-
 const positions = {
   up: 'bottom',
   left: 'right',
@@ -349,7 +341,13 @@ export default class PopoverElement extends BaseDialogElement {
 
     } else {
 
-      const template = templateSource.cloneNode(true);
+      const template = util.createFragment(`
+        <div class="popover-mask"></div>
+        <div class="popover">
+          <div class="popover__content"></div>
+          <div class="popover__arrow"></div>
+        </div>
+      `);
       const content = template.querySelector('.popover__content');
 
       while (this.childNodes[0]) {

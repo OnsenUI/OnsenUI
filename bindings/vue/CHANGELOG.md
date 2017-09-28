@@ -1,6 +1,13 @@
 CHANGELOG
 ====
 
+2.2.1
+----
+
+### Bug Fixes
+
+* VOnsNavigator: Push page animation flickering.
+
 2.2.0
 ----
 

@@ -147,7 +147,15 @@ internal.getTemplateHTMLAsync = function(page) {
         if (xhr.status >= 400 && xhr.status < 600) {
           reject(html);
         } else {
-          const fragment = util.createFragment(html);
+          if (internal.doc === undefined) {
+            internal.doc = document.implementation.createHTMLDocument('ons-internal');
+          }
+
+          // Make 'script' tags run properly
+          internal.doc.write(`<template id="${page}">${html}</template>`);
+          const fragment = internal.doc.getElementById(page).content;
+          internal.doc.close();
+
           internal.templateStore.set(page, fragment);
           resolve(fragment);
         }

@@ -198,15 +198,21 @@ ons.mockStatusBar = () => {
     throw new Error('This method must be called before ons.isReady() is true.');
   }
 
-  if (!document.body.children[0] || !document.body.children[0].classList.contains('ons-status-bar-mock')) {
-    document.body.insertBefore(util.createElement(`
-      <div class="ons-status-bar-mock">
-        <div style="padding-left: 5px">No SIM</div>
-        <div>12:28 PM</div>
-        <div style="padding-right: 15px">80%</div>
-      </div>
-    `), document.body.firstChild);
-  }
+  const mock = () => {
+    if (!document.body.children[0] || !document.body.children[0].classList.contains('ons-status-bar-mock')) {
+      document.body.insertBefore(util.createElement(`
+        <div class="ons-status-bar-mock">
+          <div style="padding-left: 5px">No SIM</div>
+          <div>12:28 PM</div>
+          <div style="padding-right: 15px">80%</div>
+        </div>
+      `), document.body.firstChild);
+    }
+  };
+
+  document.body
+    ? mock()
+    : internal.waitDOMContentLoaded(mock);
 };
 
 /**

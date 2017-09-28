@@ -378,7 +378,14 @@ export default class TabbarElement extends BaseElement {
           p = 1; // Visual fix for some devices
         }
 
-        this.style.top = top ? parseInt(window.getComputedStyle(page._getContentElement(), null).getPropertyValue('padding-top'), 10) - p + 'px' : '';
+        const content = page._getContentElement();
+        const cs = window.getComputedStyle(page._getContentElement(), null)
+
+        this.style.top = top ? parseInt(cs.getPropertyValue('padding-top'), 10) - p + 'px' : '';
+
+        // Refresh content top - Fix for iOS 8
+        content.style.top = cs.top;
+        content.style.top = '';
       });
     }
 
@@ -572,7 +579,7 @@ export default class TabbarElement extends BaseElement {
       const isTop = m => /(^|\s+)top($|\s+)/i.test(m);
       isTop(last) !== isTop(current) && this._updatePosition();
     } else if (name === 'position') {
-      this._updatePosition();
+      util.isAttached(this) && this._updatePosition();
     } else if (name === 'swipeable') {
       this._swiper && this._swiper.updateSwipeable(this.hasAttribute('swipeable'));
     } else if (name === 'hide-tabs') {

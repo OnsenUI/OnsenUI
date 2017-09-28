@@ -72,7 +72,7 @@ util.findParent = (element, query, until) => {
 
   let parent = element.parentNode;
   for (;;) {
-    if (!parent || parent === document || (until && until(parent))) {
+    if (!parent || parent === document || parent instanceof DocumentFragment || (until && until(parent))) {
       return null;
     } else if (match(parent)) {
       return parent;
@@ -173,15 +173,9 @@ util.createElement = (html) => {
  * @return {HTMLFragment}
  */
 util.createFragment = (html) => {
-  const wrapper = document.createElement('div');
-  wrapper.innerHTML = html;
-  const fragment = document.createDocumentFragment();
-
-  while (wrapper.firstChild) {
-    fragment.appendChild(wrapper.firstChild);
-  }
-
-  return fragment;
+  const template = document.createElement('template');
+  template.innerHTML = html;
+  return document.importNode(template.content, true);
 };
 
 /*
@@ -369,7 +363,7 @@ util.toggleModifier = (...args) => {
  * @param {Object} scheme
  */
 util.restoreClass = (el, defaultClass, scheme) => {
-  defaultClass.split(/\s+/).forEach(c => !el.classList.contains(c) && el.classList.add(c));
+  defaultClass.split(/\s+/).forEach(c => c !== '' && !el.classList.contains(c) && el.classList.add(c));
   el.hasAttribute('modifier') && ModifierUtil.refresh(el, scheme);
 }
 

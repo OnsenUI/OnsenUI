@@ -123,7 +123,7 @@ gulp.task('build:helper-json', ['build:core-docs'], (done) => {
         (attr.extensionOf == null || attr.extensionOf === 'vue')
         &&
         // Some attributes don't exist in vue-onsenui
-        !/(^on-|initial-index|page$|delegate)/.test(attr.name);
+        !/(on-infinite|-index$|page$|delegate)/.test(attr.name);
 
       if (isAllowedAttr) {
         if (/^animation/.test(attr.name)) {
