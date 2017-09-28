@@ -165,8 +165,72 @@ export default class PageElement extends BaseElement {
     });
   }
 
+  _compile() {
+    autoStyle.prepare(this);
+
+    const toolbar = util.findChild(this, 'ons-toolbar');
+
+    const background = util.findChild(this, '.page__background') || util.findChild(this, '.background') || document.createElement('div');
+    background.classList.add('page__background');
+    this.insertBefore(background, !toolbar && this.firstChild || toolbar && toolbar.nextSibling);
+
+    const content = util.findChild(this, '.page__content') || util.findChild(this, '.content') || document.createElement('div');
+    content.classList.add('page__content');
+    if (!content.parentElement) {
+      util.arrayFrom(this.childNodes).forEach(node => {
+        if (node.nodeType !== 1 || this._elementShouldBeMoved(node)) {
+          content.appendChild(node); // Can trigger detached connectedCallbacks
+        }
+      });
+    }
+
+    this._tryToFillStatusBar(content); // Must run before child pages try to fill status bar.
+    this.insertBefore(content, background.nextSibling); // Can trigger attached connectedCallbacks
+
+    // Make wrapper pages transparent for animations
+    if (!background.style.backgroundColor
+      && (!toolbar || !util.hasModifier(toolbar, 'transparent'))
+      && content.children.length === 1
+      && util.isPageControl(content.children[0])
+    ) {
+        background.style.backgroundColor = 'transparent';
+    }
+
+    ModifierUtil.initModifier(this, scheme);
+  }
+
+  _elementShouldBeMoved(el) {
+    if (el.classList.contains('page__background')) {
+      return false;
+    }
+    const tagName = el.tagName.toLowerCase();
+    if (tagName === 'ons-fab') {
+      return !el.hasAttribute('position');
+    }
+    const fixedElements = ['script', 'ons-toolbar', 'ons-bottom-toolbar', 'ons-modal', 'ons-speed-dial', 'ons-dialog', 'ons-alert-dialog', 'ons-popover', 'ons-action-sheet'];
+    return el.hasAttribute('inline') || fixedElements.indexOf(tagName) === -1;
+  }
+
+  _tryToFillStatusBar(content = this._contentElement) {
+    internal.autoStatusBarFill(() => {
+      util.toggleAttribute(this, 'status-bar-fill',
+        !util.findParent(this, e => e.hasAttribute('status-bar-fill')) // Not already filled
+        && (this._canAnimateToolbar(content) || !util.findChild(content, util.isPageControl)) // Has toolbar or cannot delegate
+      );
+    });
+  }
+
+  _canAnimateToolbar(content = this._contentElement) {
+    if (util.findChild(this, 'ons-toolbar')) {
+      return true;
+    }
+    return !!util.findChild(content, el => {
+      return util.match(el, 'ons-toolbar') && !el.hasAttribute('inline');
+    });
+  }
+
   connectedCallback() {
-    if (this._initialized) {
+    if (this._initialized || !util.isAttached(this)) { // Avoid detached calls
       return;
     }
 
@@ -182,7 +246,7 @@ export default class PageElement extends BaseElement {
         setImmediate(() => this._show());
       }
 
-      this._tryToFillStatusBar();
+      this._tryToFillStatusBar(); // Ensure status bar when the element was compiled before connected
 
       if (this.hasAttribute('on-infinite-scroll')) {
         this.attributeChangedCallback('on-infinite-scroll', null, this.getAttribute('on-infinite-scroll'));
@@ -206,17 +270,6 @@ export default class PageElement extends BaseElement {
 
   get backButton() {
     return this.querySelector('ons-back-button');
-  }
-
-  _tryToFillStatusBar(){
-    internal.autoStatusBarFill(() => {
-      const filled = util.findParent(this, e => e.hasAttribute('status-bar-fill'), e => !e.nodeName.match(/ons-modal/i));
-      util.toggleAttribute(this, 'status-bar-fill', !filled && (this._canAnimateToolbar() || !this._hasAPageControlChild()));
-    });
-  }
-
-  _hasAPageControlChild() {
-    return util.findChild(this._contentElement, util.isPageControl);
   }
 
   /**
@@ -283,9 +336,6 @@ export default class PageElement extends BaseElement {
     this._contentElement.scrollTop = newValue;
   }
 
-  /**
-   * @return {HTMLElement}
-   */
   _getContentElement() {
     const result = util.findChild(this, '.page__content');
     if (result) {
@@ -294,21 +344,6 @@ export default class PageElement extends BaseElement {
     throw Error('fail to get ".page__content" element.');
   }
 
-  /**
-   * @return {Boolean}
-   */
-  _canAnimateToolbar() {
-    if (util.findChild(this, 'ons-toolbar')) {
-      return true;
-    }
-    return !!util.findChild(this._contentElement, el => {
-      return util.match(el, 'ons-toolbar') && !el.hasAttribute('inline');
-    });
-  }
-
-  /**
-   * @return {HTMLElement}
-   */
   _getBackgroundElement() {
     const result = util.findChild(this, '.page__background');
     if (result) {
@@ -317,16 +352,10 @@ export default class PageElement extends BaseElement {
     throw Error('fail to get ".page__background" element.');
   }
 
-  /**
-   * @return {HTMLElement}
-   */
   _getBottomToolbarElement() {
     return util.findChild(this, 'ons-bottom-toolbar') || internal.nullElement;
   }
 
-  /**
-   * @return {HTMLElement}
-   */
   _getToolbarElement() {
     return util.findChild(this, 'ons-toolbar') || nullToolbarElement;
   }
@@ -355,49 +384,6 @@ export default class PageElement extends BaseElement {
         }
         break;
     }
-  }
-
-  _compile() {
-    autoStyle.prepare(this);
-
-    const toolbar = util.findChild(this, 'ons-toolbar');
-
-    const background = util.findChild(this, '.page__background') || util.findChild(this, '.background') || document.createElement('div');
-    background.classList.add('page__background');
-    this.insertBefore(background, !toolbar && this.firstChild || toolbar && toolbar.nextSibling);
-
-    const content = util.findChild(this, '.page__content') || util.findChild(this, '.content') || document.createElement('div');
-    content.classList.add('page__content');
-    if (!content.parentElement) {
-      util.arrayFrom(this.childNodes).forEach(node => {
-        if (node.nodeType !== 1 || this._elementShouldBeMoved(node)) {
-          content.appendChild(node);
-        }
-      });
-    }
-    this.insertBefore(content, background.nextSibling);
-
-    // Make wrapper pages transparent for animations
-    if (!background.style.backgroundColor
-      && content.children.length === 1
-      && util.isPageControl(content.children[0])
-    ) {
-        background.style.backgroundColor = 'transparent';
-    }
-
-    ModifierUtil.initModifier(this, scheme);
-  }
-
-  _elementShouldBeMoved(el) {
-    if (el.classList.contains('page__background')) {
-      return false;
-    }
-    const tagName = el.tagName.toLowerCase();
-    if (tagName === 'ons-fab') {
-      return !el.hasAttribute('position');
-    }
-    const fixedElements = ['script', 'ons-toolbar', 'ons-bottom-toolbar', 'ons-modal', 'ons-speed-dial', 'ons-dialog', 'ons-alert-dialog', 'ons-popover', 'ons-action-sheet'];
-    return el.hasAttribute('inline') || fixedElements.indexOf(tagName) === -1;
   }
 
   _show() {

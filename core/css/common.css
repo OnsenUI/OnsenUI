@@ -116,7 +116,8 @@ ons-bottom-toolbar {
   top: 44px;
 }
 
-.toolbar.toolbar--cover-content + .page__background + .page__content {
+.toolbar.toolbar--cover-content + .page__background + .page__content,
+.toolbar.toolbar--cover-content + .page__background + .page__content .page__content {
   padding-top: 44px;
 }
 
@@ -125,7 +126,8 @@ ons-bottom-toolbar {
   top: 56px;
 }
 
-.toolbar--material.toolbar--cover-content + .page__background + .page__content {
+.toolbar--material.toolbar--cover-content + .page__background + .page__content,
+.toolbar--material.toolbar--cover-content + .page__background + .page__content .page__content {
   padding-top: 56px;
 }
 
@@ -138,27 +140,18 @@ ons-bottom-toolbar {
   box-sizing: content-box;
 }
 
-.page[status-bar-fill] > .toolbar + .page__background,
-.page[status-bar-fill] > .toolbar + .page__background + .page__content {
+.page[status-bar-fill] > .toolbar:not(.toolbar--transparent) + .page__background,
+.page[status-bar-fill] > .toolbar:not(.toolbar--cover-content) + .page__background + .page__content {
   top: 64px;
 }
 
-.page[status-bar-fill] > .toolbar--material + .page__background,
-.page[status-bar-fill] > .toolbar--material + .page__background + .page__content {
+.page[status-bar-fill] > .toolbar--material:not(.toolbar-transparent) + .page__background,
+.page[status-bar-fill] > .toolbar--material:not(.toolbar--cover-content) + .page__background + .page__content {
   top: 76px;
 }
 
-.page[status-bar-fill] > .toolbar.toolbar--transparent + .page__background,
-.page[status-bar-fill] > .toolbar.toolbar--cover-content + .page__background + .page__content {
+.page[status-bar-fill] > .toolbar.toolbar--transparent + .page__background {
   top: 0;
-}
-
-.page[status-bar-fill] > .toolbar.toolbar--cover-content + .page__background + .page__content {
-  padding-top: 64px;
-}
-
-.page[status-bar-fill] > .toolbar--material.toolbar--cover-content + .page__background + .page__content {
-  padding-top: 76px;
 }
 
 ons-tabbar[status-bar-fill] > .tabbar--top__content {
