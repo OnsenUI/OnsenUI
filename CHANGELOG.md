@@ -17,6 +17,7 @@ dev
  * ons-tabbar: Fixed [#2189](https://github.com/OnsenUI/OnsenUI/issues/2189).
  * ons-tabbar, ons-tab: Fixed several issues on iOS 8.
  * ons-toolbar: Fixed position with `cover-content` modifier and iOS status bar in nested pages.
+ * ons-page: Ensure status-bar-fill is only added to one page.
 
 2.6.0
 ----
