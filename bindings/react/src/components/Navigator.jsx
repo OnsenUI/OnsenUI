@@ -308,10 +308,11 @@ class Navigator extends BasicComponent {
   render() {
     const {...others} = this.props;
     Util.convert(others, 'animationOptions', {fun: Util.animationOptionsConverter, newName: 'animation-options'});
+    const pages = this.routes ? this.routes.map((route) => this.props.renderPage(route, this)) : null;
 
     return (
       <ons-navigator {...others} ref={(navi) => { this._navi = navi; }}>
-        {this.pages}
+        {pages}
       </ons-navigator>
     );
   }
