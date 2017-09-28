@@ -2,6 +2,13 @@
 CHANGELOG
 ====
 
+1.6.1
+----
+
+### Bug Fixes
+
+* Navigator: Regression issue. Properly update child pages.
+
 1.6.0
 ----
 
