@@ -189,7 +189,7 @@ export default class PageElement extends BaseElement {
 
     // Make wrapper pages transparent for animations
     if (!background.style.backgroundColor
-      && (toolbar && !util.hasModifier(toolbar, 'transparent'))
+      && (!toolbar || !util.hasModifier(toolbar, 'transparent'))
       && content.children.length === 1
       && util.isPageControl(content.children[0])
     ) {
