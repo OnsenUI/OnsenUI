@@ -1,7 +1,6 @@
 :root {
   --search-icon: url('../img/ios-search-input-icon.svg');
   --search-input-background-image: var(--search-icon);
-  --search-input-background-color: rgba(3, 3, 3, 0.09);
   --search-input-color: var(--input-text-color);
   --search-decoration-margin-right: 0;
   --search-input-border-radius: 5.5px;

@@ -1,9 +1,6 @@
 
 :root {
   --range-thumb-size: 28px;
-  --range-track-background-color: #a4aab3;
-  --range-track-background-color-active: var(--highlight-color);
-  --range-thumb-background-color: #fff;
   --range-track-height: 2px;
 
   --material-range-track-height: 2px;
@@ -62,7 +59,7 @@
 .range__input {
   @apply(--reset-input);
   appearance: none;
-  background-image: linear-gradient(var(--highlight-color), var(--highlight-color));
+  background-image: linear-gradient(var(--range-track-background-color-active), var(--range-track-background-color-active));
   background-position: left center;
   background-size: 0% var(--range-track-height);
   background-repeat: no-repeat;

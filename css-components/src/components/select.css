@@ -2,11 +2,11 @@
 :root {
   --select-input-font-size: var(--font-size);
   --select-input-height: 32px;
-  --select-input-color: #000;
+  --select-input-color: var(--text-color);
   --select-input-border-color: var(--input-border-color);
 
   --material-select-input-font-size: 15px;
-  --material-select-input-color: rgba(0, 0, 0, 1);
+  --material-select-input-color: var(--material-text-color);
   --material-select-input-active-color: rgba(0, 0, 0, 0.15);
   --material-select-input-inactive-color: rgba(0, 0, 0, 0.81);
 

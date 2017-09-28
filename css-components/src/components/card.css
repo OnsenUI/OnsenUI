@@ -1,13 +1,9 @@
 
 :root {
-  --card-background-color: white;
   --card-text-line-height: 1.4;
   --card-text-font-size: 14px;
-  --card-text-color: #030303;
-  --material-card-background-color: white;
   --material-card-text-line-height: 1.4;
   --material-card-text-font-size: 14px;
-  --material-card-text-color: rgba(0, 0, 0, 0.54);
 }
 
 /*~

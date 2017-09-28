@@ -144,14 +144,14 @@
 
 .button--light {
   background-color: transparent;
-  color: rgba(0, 0, 0, 0.4);
-  border: 1px solid rgba(0, 0, 0, 0.2);
+  color: color(var(--button-light-color) a(40%));
+  border: 1px solid color(var(--button-light-color) a(20%));
 }
 
 .button--light:active {
-  background-color: rgba(0, 0, 0, 0.05);
-  color: rgba(0, 0, 0, 0.4);
-  border: 1px solid rgba(0, 0, 0, 0.2);
+  background-color: color(var(--button-light-color) a(5%));
+  color: color(var(--button-light-color) a(40%));
+  border: 1px solid color(var(--button-light-color) a(20%));
   opacity: 1;
 }
 
