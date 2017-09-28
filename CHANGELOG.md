@@ -10,6 +10,9 @@ dev
  * css-components: Reimplemented css-components previewer.
  * css-components: Changed color scheme to more iOS native-like.
 
+2.6.1
+----
+
 ### Bug Fixes
 
  * GestureDetector: Fixed `findIndex` issue on Android 4.4.4.
