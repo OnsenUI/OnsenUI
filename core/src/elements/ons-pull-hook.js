@@ -256,7 +256,7 @@ export default class PullHookElement extends BaseElement {
    *   [ja][/ja]
    */
   get onPull() {
-    return this._onSwipe;
+    return this._onPull;
   }
 
   set onPull(value) {
