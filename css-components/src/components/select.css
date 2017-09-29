@@ -2,13 +2,8 @@
 :root {
   --select-input-font-size: var(--font-size);
   --select-input-height: 32px;
-  --select-input-color: var(--text-color);
-  --select-input-border-color: var(--input-border-color);
 
   --material-select-input-font-size: 15px;
-  --material-select-input-color: var(--material-text-color);
-  --material-select-input-active-color: rgba(0, 0, 0, 0.15);
-  --material-select-input-inactive-color: rgba(0, 0, 0, 0.81);
 
   --select-input: {
     @apply(--input);
@@ -122,7 +117,7 @@
   @apply(--material-font);
   color: var(--material-select-input-color);
   font-size: var(--material-select-input-font-size);
-  background-image: url('../img/select-arrow.svg'), linear-gradient(to top, rgba(0, 0, 0, 0.12) 50%, rgba(0, 0, 0, 0.12) 50%);
+  background-image: url('../img/select-arrow.svg'), linear-gradient(to top, var(--material-select-border-color) 50%, var(--material-select-border-color) 50%);
   background-size: auto, 100% 1px;
   background-repeat: no-repeat;
   background-position: right center, left bottom;

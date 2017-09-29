@@ -236,11 +236,11 @@
 }
 
 :disabled + .radio-button--material__checkmark:after {
-  background-color: #afafaf;
-  border-color: #afafaf;
+  background-color: var(--material-radio-button-disabled-color);
+  border-color: var(--material-radio-button-disabled-color);
 }
 
 :disabled + .radio-button--material__checkmark:before {
-  border-color: #afafaf;
+  border-color: var(--material-radio-button-disabled-color);
 }
 

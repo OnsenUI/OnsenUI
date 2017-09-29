@@ -8,9 +8,6 @@
   --material-range-thumb-radius: calc(var(--material-range-thumb-size) / 2);
   --material-range-thumb-vertical-margin: 24px;
   --material-range-thumb-horizontal-margin: 2px;
-  --material-range-disabled-thumb-color: #b0b0b0;
-  --material-range-disabled-thumb-border-color: #eeeeee;
-  --material-range-zero-thumb-color: #f2f2f2;
 
   --range__thumb: {
     cursor: pointer;
