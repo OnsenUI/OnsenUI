@@ -10,6 +10,10 @@ dev
  * css-components: Reimplemented css-components previewer.
  * css-components: Changed color scheme to more iOS native-like.
 
+### Bug Fixes
+
+ * ons-page: Minor issue with status bar when the page is moved in DOM.
+
 2.6.1
 ----
 
