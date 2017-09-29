@@ -1,11 +1,14 @@
 import {PreviewComponent} from './preview-component';
+import {ThemeSelect} from './theme-select';
 
 export const CategoryPage = {
-  props: ['components', 'categories', 'id'],
+  props: ['components', 'categories', 'id', 'query'],
   template: `
     <div class="content">
 
       <h2 class="content__header">{{category.name}} Components</h2>
+
+      <theme-select :theme="query.theme" :query="query" />
 
       <div class="components">
         <css-component v-for="component in filterComponents()" :component="component" :key="component.id" />
@@ -13,7 +16,8 @@ export const CategoryPage = {
     </div>
   `,
   components: {
-    'css-component': PreviewComponent
+    'css-component': PreviewComponent,
+    'theme-select': ThemeSelect
   },
   computed: {
     category() {

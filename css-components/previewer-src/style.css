@@ -264,6 +264,10 @@ a.title-label:hover {
   opacity: 0.6;
 }
 
+.built-css__button:focus {
+  outline: none;
+}
+
 @media (max-width: 480px) {
   .side-navi {
     display: none;
