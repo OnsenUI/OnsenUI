@@ -9,117 +9,73 @@ class BaseDialog extends React.Component {
     super(...args);
 
     const callback = (name, event) => {
-      if (this.props[name]) {
+      if (this.props[name] instanceof Function) {
         return this.props[name](event);
       }
     };
-    this.onCancel = callback.bind(this, 'onCancel');
-    this.onPreShow = callback.bind(this, 'onPreShow');
-    this.onPostShow = callback.bind(this, 'onPostShow');
-    this.onPreHide = callback.bind(this, 'onPreHide');
-    this.onPostHide = callback.bind(this, 'onPostHide');
-  }
 
-  show() {
-    this.node.firstChild.show();
-  }
-
-  updateClasses() {
-    var node = this.node.firstChild;
-
-    if (this.props.className) {
-      if (this.lastClass) {
-        node.className = node.className.replace(this.lastClass, '');
-      }
-
-      this.lastClass = ' ' + this.props.className;
-      node.className += this.lastClass;
-    }
-  }
-
-  hide() {
-    this.node.firstChild.hide();
+    ['onCancel', 'onPreShow', 'onPostShow', 'onPreHide', 'onPostHide']
+      .forEach(k => callback.bind(this, k));
   }
 
   componentDidMount() {
-    this.node = document.createElement('div');
-    document.body.appendChild(this.node);
+    const node = this._dialog;
+    node.addEventListener('dialog-cancel', this.onCancel);
+    node.addEventListener('preshow', this.onPreShow);
+    node.addEventListener('postshow', this.onPostShow);
+    node.addEventListener('prehide', this.onPreHide);
+    node.addEventListener('posthide', this.onPostHide);
 
-    this.node.addEventListener('dialog-cancel', this.onCancel);
-    this.node.addEventListener('preshow', this.onPreShow);
-    this.node.addEventListener('postshow', this.onPostShow);
-    this.node.addEventListener('prehide', this.onPreHide);
-    this.node.addEventListener('posthide', this.onPostHide);
-
-    this.renderPortal(this.props, false, this.props.onDeviceBackButton);
-  }
-
-  componentWillReceiveProps(newProps) {
-    this.renderPortal(newProps, this.props.isOpen);
-    if (newProps.onDeviceBackButton !== undefined) {
-      ReactDOM.findDOMNode(this).onDeviceBackButton = newProps.onDeviceBackButton;
-    }
+    this._update();
   }
 
   componentWillUnmount() {
-    this.node.removeEventListener('dialog-cancel', this.onCancel);
-    this.node.removeEventListener('preshow', this.onPreShow);
-    this.node.removeEventListener('postshow', this.onPostShow);
-    this.node.removeEventListener('prehide', this.onPreHide);
-    this.node.removeEventListener('posthide', this.onPostHide);
+    const node = this._dialog;
+    node.removeEventListener('dialog-cancel', this.onCancel);
+    node.removeEventListener('preshow', this.onPreShow);
+    node.removeEventListener('postshow', this.onPostShow);
+    node.removeEventListener('prehide', this.onPreHide);
+    node.removeEventListener('posthide', this.onPostHide);
 
-    const unmount = () => {
-      ReactDOM.unmountComponentAtNode(this.node);
-      document.body.removeChild(this.node);
-    };
-
-    if (this.node.firstChild.visible === true) {
-      this.node.firstChild.hide().then(unmount);
-    } else {
-      unmount();
+    if (node.visible) {
+      node.hide(); // FIXME
     }
   }
 
-  _update(isShown, onDeviceBackButton) {
-    if (this.props.isOpen) {
-      if (!isShown) {
-        this.show();
-      }
-    } else {
-      this.hide();
+  componentDidUpdate(prevProps) {
+    this._update(prevProps);
+  }
+
+  _update(prevProps = {}) {
+    if (this.props.isOpen !== this._dialog.visible) {
+      this._dialog.toggle(this.props.isOpen);
     }
 
-    this.updateClasses();
-
-    if (onDeviceBackButton instanceof Function) {
-      this.node.firstChild.onDeviceBackButton = onDeviceBackButton;
+    const dbb = this.props.onDeviceBackButton;
+    if (prevProps.onDeviceBackButton !== dbb && dbb instanceof Function) {
+      this._dialog.onDeviceBackButton = dbb;
     }
   }
 
   _getDomNodeName() {
-    throw new Error('_getDomNodeName is not implemented');
+    throw new Error('_getDomNodeName must be implemented');
   }
 
-  renderPortal(props, isShown, onDeviceBackButton = null) {
-    var {...newProps} = props;
+  render() {
+    const { isOpen, ...newProps } = this.props;
+    const DomNodeName = this._getDomNodeName();
 
     Util.convert(newProps, 'isCancelable', {newName: 'cancelable'});
     Util.convert(newProps, 'isDisabled', {newName: 'disabled'});
     Util.convert(newProps, 'maskColor', {newName: 'mask-color'});
     Util.convert(newProps, 'animationOptions', {fun: Util.animationOptionsConverter, newName: 'animation-options'});
 
-    var DomNodeName = this._getDomNodeName();
-
-    ReactDOM.unstable_renderSubtreeIntoContainer(
-      this,
-      <DomNodeName {...newProps} />,
-      this.node,
-      this._update.bind(this, isShown, onDeviceBackButton)
+    return ReactDOM.createPortal(
+      <DomNodeName { ...newProps } ref={ el => (this._dialog = el) }>
+        { this.props.children }
+      </DomNodeName>,
+      document.body
     );
-  }
-
-  render() {
-    return null;
   }
 }
 
