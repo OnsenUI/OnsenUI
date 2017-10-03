@@ -213,7 +213,7 @@
 }
 
 :checked + .switch--material__toggle > .switch--active__handle:before {
-  box-shadow: 0 0 0 14px alpha(var(--material-switch-active-thumb-color), 0.2);
+  box-shadow: 0 0 0 14px color(var(--material-switch-active-thumb-color) alpha(20%));
 }
 
 .switch--material__touch {
