@@ -83,6 +83,10 @@ class SplitterSide extends BasicComponent {
   }
 
   render() {
+    ['isCollapsed', 'isSwipeable'].forEach(p => this.props.hasOwnProperty(p) && console.error(
+      `The property '${p}' is deprecated, please use '${p.toLowerCase().slice(2)}', see https://onsen.io/v2/docs/react/SplitterSide.html.`
+    ));
+
     const { isOpen, ...props } = this.props;
     const attrs = Util.getAttrs(this, props);
 

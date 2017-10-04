@@ -33,7 +33,6 @@ const convert = (dict, name, newName = name) => {
   return dict;
 };
 
-
 export default {
   eventToHandler(string) {
     return 'on' + string.charAt(0).toUpperCase() + string.slice(1);
