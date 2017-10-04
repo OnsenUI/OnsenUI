@@ -1,35 +1,66 @@
+const pixelSize = item => typeof item === 'number' ? `${item}px` : item;
+
+const normalize = key => {
+  if (/^is[A-Z]/.test(key)) {
+    key = key.slice(2);
+  }
+  return key.replace(/([a-zA-Z])([A-Z])/g, '$1-$2').toLowerCase();
+};
+
+const convert = (dict, name, newName = name) => {
+  if (dict.hasOwnProperty(name)) {
+    switch (typeof dict[name]) {
+      case 'boolean':
+        if (dict[name]) {
+          dict[newName] = '';
+        } else {
+          delete dict[newName];
+        }
+        break;
+      case 'string':
+      case 'number':
+        dict[newName] = dict[name];
+        break;
+      default:
+        dict[name] = null;
+    }
+
+    if (newName !== name) {
+      dict[name] = null;
+    }
+  }
+
+  return dict;
+};
+
+
 export default {
-  sizeConverter(item) {
-    if (typeof (item) === 'number') {
-      return `${item}px`;
-    } else {
-      return item;
+  eventToHandler(string) {
+    return 'on' + string.charAt(0).toUpperCase() + string.slice(1);
+  },
+
+  getAttrs(el, props = el.props, dict = {}) {
+    const attrs = { ...props };
+    const validProps = el.constructor.propTypes || {};
+
+    if (attrs.hasOwnProperty('animationOptions') && typeof attrs.animationOptions !== 'string') {
+      attrs.animationOptions = JSON.stringify(attrs.animationOptions);
     }
-  },
 
-  numberConverter(item) {
-    return `${item}px`;
-  },
+    Object.keys(attrs)
+      .forEach(key => {
+        if (validProps.hasOwnProperty(key) && ['onClick'].indexOf(key) === -1) {
+          if (['isOpen'].indexOf(key) !== -1) {
+            attrs[key] = null;
+          } else {
+            if (/(height|width)/i.test(key)) {
+              attrs[key] = pixelSize(attrs[key]);
+            }
+            convert(attrs, key, dict[key] || normalize(key));
+          }
+        }
+      });
 
-  animationOptionsConverter(options) {
-    var keys = Object.keys(options);
-    var innerString = keys.map((key) => key + ': "' + options[key] + '"');
-    return '{' + innerString.join(',') + '}';
-  },
-
-  convert(dict, name, additionalDict = {}) {
-    const fun = additionalDict.fun ? additionalDict.fun : (x) => x;
-    const newName = additionalDict.newName ? additionalDict.newName : name;
-
-    var val = dict[name];
-    if (val) {
-      if (newName !== name) {
-        delete dict[name];
-      }
-      dict[newName] = fun(val);
-    } else {
-      dict[newName] = null;
-    }
-    return dict;
+    return attrs;
   }
 };
