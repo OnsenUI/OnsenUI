@@ -13,6 +13,7 @@ dev
 
 * Modal: It is now placed outside pages and can properly fill iOS status bar.
 * Select: 'onChange' is called only once.
+* Select: 'value' prop correctly sets the initial selected option.
 
 ### Misc
 
