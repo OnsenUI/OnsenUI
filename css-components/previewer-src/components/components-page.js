@@ -5,14 +5,14 @@ import {ThemeSelect} from './theme-select';
 export const ComponentsPage = {
   props: ['components', 'categories', 'query'],
   template: `
-    <div class="content">
+    <div class="pv-content">
       <platform-select :platform="query.platform" />
 
-      <h2 class="content__header">Components</h2>
+      <h2 class="pv-content__header">Components</h2>
 
       <theme-select :theme="query.theme" :query="query" />
 
-      <div class="components">
+      <div class="pv-components">
         <css-component v-for="component in filterComponents" :component="component" :key="component.id" />
       </div>
     </div>

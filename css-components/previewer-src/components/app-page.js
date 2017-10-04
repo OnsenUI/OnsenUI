@@ -14,19 +14,19 @@ export const createAppPageComponent = ({components, categories}) => ({
   },
   template: `
     <div>
-      <div class="side-navi">
-        <a class="side-navi__title" href="/">
+      <div class="pv-side-navi">
+        <a class="pv-side-navi__title" href="/">
           Onsen<br />
           CSS<br />
           Components
         </a>
 
         <div>
-          <a class="side-navi__category" href="/">Components</a>
-          <div v-for="category in categories" class="side-navi__category-item">
-            <a :href="'/categories/' + category.hash" class="side-navi__item-link">{{category.name}}</a>
+          <a class="pv-side-navi__category" href="/">Components</a>
+          <div v-for="category in categories" class="pv-side-navi__category-item">
+            <a :href="'/categories/' + category.hash" class="pv-side-navi__item-link">{{category.name}}</a>
           </div>
-          <a class="side-navi__category" href="/patterns">Patterns</a>
+          <a class="pv-side-navi__category" href="/patterns">Patterns</a>
         </div>
       </div>
 

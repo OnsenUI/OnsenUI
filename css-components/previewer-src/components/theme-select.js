@@ -2,11 +2,11 @@
 export const ThemeSelect = {
   props: ['query'],
   template: `
-    <div class="built-css">
-      <select ref="themeSelect" class="built-css__select" @change="changeTheme($event)">
+    <div class="pv-built-css">
+      <select ref="themeSelect" class="pv-built-css__select" @change="changeTheme($event)">
         <option v-for="theme in themes" :value="theme">{{theme}}.css</option>
       </select>
-      <button class="built-css__button" @click="download($event)">Download</button>
+      <button class="pv-built-css__button" @click="download($event)">Download</button>
     </div>
   `,
   data() {

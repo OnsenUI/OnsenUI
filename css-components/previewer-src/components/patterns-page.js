@@ -4,17 +4,17 @@ import {ThemeSelect} from './theme-select';
 export const PatternsPage = {
   props: ['query'],
   template: `
-    <div class="content">
+    <div class="pv-content">
       <platform-select :platform="query.platform" />
 
-      <h2 class="content__header">Patterns</h2>
+      <h2 class="pv-content__header">Patterns</h2>
 
       <theme-select :query="query" />
 
-      <div class="patterns">
-        <div class="pattern" v-for="pattern in filterPatterns">
-          <a class="pattern__name title-label" :href="'/patterns/' + pattern.id">{{pattern.name}}</a>
-          <div class="pattern__example"><div v-html="pattern.markup" style="position: static"></div></div>
+      <div class="pv-patterns">
+        <div class="pv-pattern" v-for="pattern in filterPatterns">
+          <a class="pv-pattern__name title-label" :href="'/patterns/' + pattern.id">{{pattern.name}}</a>
+          <div class="pv-pattern__example"><div v-html="pattern.markup" style="position: static"></div></div>
         </div>
       </div>
     </div>

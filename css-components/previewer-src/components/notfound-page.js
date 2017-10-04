@@ -2,8 +2,8 @@
 export const NotFoundPage = {
   props: ['components', 'categories', 'id', 'query'],
   template: `
-    <div class="content">
-      <h2 class="content__header">Not Found</h2>
+    <div class="pv-content">
+      <h2 class="pv-content__header">Not Found</h2>
     </div>
   `,
 };

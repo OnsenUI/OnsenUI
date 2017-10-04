@@ -9,18 +9,18 @@ export const PatternPage = {
     return {pattern};
   },
   template: `
-    <div class="content">
+    <div class="pv-content">
       <div v-if="pattern">
-        <h2 class="content__header">{{pattern.name}} Pattern</h2>
+        <h2 class="pv-content__header">{{pattern.name}} Pattern</h2>
 
-        <h3 class="title-label">Example</h3>
+        <h3 class="pv-title-label">Example</h3>
         <div>
-          <div class="pattern__example"><div style="position: static" v-html="pattern.markup"></div></div>
+          <div class="pv-pattern__example"><div style="position: static" v-html="pattern.markup"></div></div>
         </div>
 
-        <h3 class="title-label">HTML</h3>
+        <h3 class="pv-title-label">HTML</h3>
 
-        <pre class="markup">{{pattern.markup}}</pre>
+        <pre class="pv-markup">{{pattern.markup}}</pre>
       </div>
     </div>
   `,

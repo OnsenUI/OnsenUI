@@ -11,17 +11,17 @@ export const ComponentPage = {
     }
   },
   template: `
-    <div class="content" v-if="component">
+    <div class="pv-content" v-if="component">
       <div>
-        <h2 class="content__header">{{component.name}}</h2>
+        <h2 class="pv-content__header">{{component.name}}</h2>
 
-        <h3 class="title-label">Example</h3>
+        <h3 class="pv-title-label">Example</h3>
 
         <component-example :component="component" />
 
-        <h3 class="title-label">HTML</h3>
+        <h3 class="pv-title-label">HTML</h3>
 
-        <pre class="markup">{{component.markup}}</pre>
+        <pre class="pv-markup">{{component.markup}}</pre>
       </div>
     </div>
   `
