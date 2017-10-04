@@ -13,7 +13,7 @@ export const PatternsPage = {
 
       <div class="pv-patterns">
         <div class="pv-pattern" v-for="pattern in filterPatterns">
-          <a class="pv-pattern__name title-label" :href="'/patterns/' + pattern.id">{{pattern.name}}</a>
+          <a class="pv-pattern__name pv-title-label" :href="'/patterns/' + pattern.id">{{pattern.name}}</a>
           <div class="pv-pattern__example"><div v-html="pattern.markup" style="position: static"></div></div>
         </div>
       </div>

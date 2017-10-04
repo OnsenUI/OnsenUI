@@ -1,9 +1,11 @@
 import {ComponentExample} from './preview-component.js';
+import {ThemeSelect} from './theme-select';
 
 export const ComponentPage = {
-  props: ['components', 'id'],
+  props: ['components', 'id', 'query'],
   components: {
-    'component-example': ComponentExample
+    'component-example': ComponentExample,
+    'theme-select': ThemeSelect
   },
   computed: {
     component() {
@@ -14,6 +16,8 @@ export const ComponentPage = {
     <div class="pv-content" v-if="component">
       <div>
         <h2 class="pv-content__header">{{component.name}}</h2>
+
+        <theme-select :theme="query.theme" :query="query" />
 
         <h3 class="pv-title-label">Example</h3>
 

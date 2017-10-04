@@ -1,3 +1,4 @@
+import {ThemeSelect} from './theme-select';
 
 export const PatternPage = {
   props: ['id', 'query'],
@@ -8,10 +9,15 @@ export const PatternPage = {
 
     return {pattern};
   },
+  components: {
+    'theme-select': ThemeSelect
+  },
   template: `
     <div class="pv-content">
       <div v-if="pattern">
         <h2 class="pv-content__header">{{pattern.name}} Pattern</h2>
+
+        <theme-select :theme="query.theme" :query="query" />
 
         <h3 class="pv-title-label">Example</h3>
         <div>
