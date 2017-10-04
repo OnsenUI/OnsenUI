@@ -86,13 +86,13 @@ class Tabbar extends BasicComponent {
 
     return (
       <ons-tabbar {...attrs} ref={(tabbar) => { this._tabbar = tabbar; }}>
-        <div className={'ons-tabbar__content tabbar__content' + (attrs.position === 'top' ? ' tabbar--top__content' : '')}>
+        <div className={'tabbar__content'}>
           <div>
             {this.tabPages}
           </div>
           <div></div>
         </div>
-        <div className={'tabbar ons-tabbar__footer ons-tabbar-inner' + (attrs.position === 'top' ? ' tabbar--top' : '')}>
+        <div className={'tabbar'}>
           {tabs.map((tab) => tab.tab)}
           <div className='tabbar__border'></div>
         </div>
