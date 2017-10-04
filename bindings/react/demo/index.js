@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import 'onsenui';
+import ons from 'onsenui';
 
 import '../../../build/css/onsenui.css';
 import '../../../build/css/onsen-css-components.css';
@@ -208,6 +208,7 @@ class App extends React.Component {
   }
 
   render() {
+    ons.mockStatusBar();
     return (
       <Navigator
         swipeable={true}
