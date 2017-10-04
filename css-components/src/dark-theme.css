@@ -102,6 +102,7 @@
   --material-text-input-text-color: color(#fff a(75%));
   --material-text-input-active-color: color(#fff a(75%));
   --material-text-input-inactive-color: color(#fff a(30%));
+  --material-search-background-color: #424242;
   --material-dialog-background-color: #424242;
   --material-dialog-text-color: var(--material-text-color);
   --material-alert-dialog-background-color: #424242;
