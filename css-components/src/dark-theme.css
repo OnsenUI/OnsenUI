@@ -50,8 +50,8 @@
   --dialog-text-color: #1f1f21;
   --popover-background-color: #242424;
   --popover-text-color: var(--text-color);
-  --notification-background-color: var(--highlight-color);
-  --notification-color: black;
+  --notification-background-color: #fe3824;
+  --notification-color: white;
   --search-input-background-color: color(white a(9%));
   --fab-text-color: #ffffff;
   --fab-background-color: var(--highlight-color);
@@ -67,9 +67,9 @@
   /* variables for Material Design components */
   --material-background-color: #303030;
   --material-text-color: #ffffff;
-  --material-notification-background-color: #ffa101;
-  --material-notification-color: black;
-  --material-switch-active-thumb-color: #ffa101;
+  --material-notification-background-color: #f50057;
+  --material-notification-color: white;
+  --material-switch-active-thumb-color: #ffc107;
   --material-switch-active-background-color: color(var(--material-switch-active-thumb-color) a(50%));
   --material-switch-inactive-thumb-color: #bdbdbd;
   --material-switch-inactive-background-color: color(white a(30%));
