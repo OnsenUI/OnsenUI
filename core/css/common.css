@@ -78,14 +78,17 @@ ons-toolbar:not([inline]), ons-bottom-toolbar {
   right: 0;
   z-index: 10000;
 }
+
 ons-toolbar:not([inline]) {
   top: 0;
 }
+
 ons-bottom-toolbar {
   bottom: 0;
 }
 
-.page, .page__content {
+.page, .page__content,
+.page--material, .page--material__content {
   background-color: transparent !important;
   background: transparent !important;
 }
