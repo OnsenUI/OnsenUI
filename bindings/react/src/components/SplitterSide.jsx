@@ -54,39 +54,6 @@ class SplitterSide extends BasicComponent {
     this.onModeChange = callback.bind(this, 'onModeChange');
   }
 
-  render() {
-    var {...props} = this.props;
-
-    ['isCollapsed', 'isSwipeable'].forEach(p => {
-      if (props.hasOwnProperty(p)) {
-        console.error(`The property '${p}' is deprecated, please use '${p.toLowerCase().slice(2)}', see https://onsen.io/v2/docs/react/SplitterSide.html.`);
-        delete props[p];
-      }
-    });
-
-    if (!props.collapse) props.collapse = null;
-
-    if (typeof props.collapse === 'boolean') {
-      if (props.collapse) {
-        props.collapse = 'collapse';
-      } else {
-        props.collapse = 'false';
-      }
-    }
-
-    ['animation', 'swipeable', 'side', 'mode'].forEach(el => Util.convert(props, el));
-    Util.convert(props, 'width', {fun: Util.sizeConverter});
-    Util.convert(props, 'animationOptions', {fun: Util.animationOptionsConverter, newName: 'animation-options'});
-    Util.convert(props, 'openThreshold', {newName: 'open-threshold'});
-    Util.convert(props, 'swipeTargetWidth', {fun: Util.sizeConverter, newName: 'swipe-target-width'});
-
-    return (
-      <ons-splitter-side {...props} >
-        {this.props.children}
-      </ons-splitter-side>
-    );
-  }
-
   componentDidMount() {
     super.componentDidMount();
     this.node = ReactDOM.findDOMNode(this);
@@ -114,12 +81,23 @@ class SplitterSide extends BasicComponent {
       this.node.close();
     }
   }
+
+  render() {
+    const { isOpen, ...props } = this.props;
+    const attrs = Util.getAttrs(this, props);
+
+    return (
+      <ons-splitter-side { ...attrs } >
+        {this.props.children}
+      </ons-splitter-side>
+    );
+  }
 }
 
 SplitterSide.propTypes = {
   /**
    * @name collapse
-   * @type bool
+   * @type string
    * @description
    *  [en] Specify the collapse behavior. Valid values are `"portrait"`, `"landscape"` or a media query.
    *     The strings `"portrait"` and `"landscape"` means the view will collapse when device is in landscape or portrait orientation.

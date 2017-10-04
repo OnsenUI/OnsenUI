@@ -1,7 +1,5 @@
 import SimpleWrapper from './SimpleWrapper.jsx';
-import React from 'react';
 import PropTypes from 'prop-types';
-import Util from './Util.js';
 
 /**
  * @original ons-col
@@ -22,16 +20,6 @@ class Col extends SimpleWrapper {
   _getDomNodeName() {
     return 'ons-col';
   }
-
-  render() {
-    var {...others} = this.props;
-
-    Util.convert(others, 'verticalAlign', {newName: 'vertical-align'});
-    Util.convert(others, 'width', {fun: Util.sizeConverter});
-
-    return React.createElement(this._getDomNodeName(), others, this.props.children);
-  }
-
 }
 
 Col.propTypes = {

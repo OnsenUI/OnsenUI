@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 import BasicComponent from './BasicComponent.jsx';
+import Util from './Util.js';
+
 /**
  * @original ons-page
  * @category page
@@ -69,9 +71,10 @@ class Page extends BasicComponent {
     const modal = this.props.renderModal(this);
     const fixed = this.props.renderFixed(this);
 
-    const {contentStyle, ...props} = this.props;
+    const {contentStyle, ...other} = this.props;
+    const attrs = Util.getAttrs(this, other);
 
-    return <ons-page {...props} >
+    return <ons-page {...attrs} >
         {toolbar}
         <div className='page__background'> </div>
         <div className='page__content' style={contentStyle}>

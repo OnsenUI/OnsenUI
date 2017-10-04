@@ -101,18 +101,13 @@ class BaseDialog extends React.Component {
   }
 
   renderPortal(props, isShown, onDeviceBackButton = null) {
-    var {...newProps} = props;
-
-    Util.convert(newProps, 'isCancelable', {newName: 'cancelable'});
-    Util.convert(newProps, 'isDisabled', {newName: 'disabled'});
-    Util.convert(newProps, 'maskColor', {newName: 'mask-color'});
-    Util.convert(newProps, 'animationOptions', {fun: Util.animationOptionsConverter, newName: 'animation-options'});
-
-    var DomNodeName = this._getDomNodeName();
+    const { isOpen, ...others } = props;
+    const attrs = Util.getAttrs(this, others);
+    const DomNodeName = this._getDomNodeName();
 
     ReactDOM.unstable_renderSubtreeIntoContainer(
       this,
-      <DomNodeName {...newProps} />,
+      <DomNodeName { ...attrs } children={ props.children } />,
       this.node,
       this._update.bind(this, isShown, onDeviceBackButton)
     );
