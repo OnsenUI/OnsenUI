@@ -12,6 +12,11 @@ dev
 ### Bug Fixes
 
 * Modal: It is now placed outside pages and can properly fill iOS status bar.
+* Select: 'onChange' is called only once.
+
+### Misc
+
+* Non string props are not passed as attributes anymore in order to clean up DOM elements.
 
 ### BREAKING CHANGES
 

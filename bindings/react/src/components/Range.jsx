@@ -1,8 +1,5 @@
-import SimpleWrapper from './SimpleWrapper.jsx';
 import PropTypes from 'prop-types';
-import ReactDOM from 'react-dom';
-
-const EVENT_TYPES = ['change', 'input'];
+import BaseInput from './BaseInput.jsx';
 
 /**
  * @original ons-range
@@ -19,40 +16,7 @@ const EVENT_TYPES = ['change', 'input'];
  *   onChange={(event) => this.setState({value: parseInt(event.target.value)})}
  *   />
  */
-class Range extends SimpleWrapper {
-
-  constructor(...args) {
-    super(...args);
-
-    this.onChange = (event) => {
-      if (this.props.onChange) {
-        return this.props.onChange(event);
-      }
-    };
-  }
-
-  componentDidMount() {
-    super.componentDidMount();
-    var node = ReactDOM.findDOMNode(this);
-
-    EVENT_TYPES.forEach((eventType) => {
-      node.addEventListener(eventType, this.onChange);
-    });
-  }
-
-  componentWillUnmount() {
-    var node = ReactDOM.findDOMNode(this);
-
-    EVENT_TYPES.forEach((eventType) => {
-      node.removeEventListener(eventType, this.onChange);
-    });
-  }
-
-  componentWillReceiveProps(props) {
-    const node = ReactDOM.findDOMNode(this);
-    node.value = props.value;
-  }
-
+class Range extends BaseInput {
   _getDomNodeName() {
     return 'ons-range';
   }

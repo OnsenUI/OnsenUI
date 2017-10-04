@@ -1,7 +1,5 @@
-import React from 'react';
 import PropTypes from 'prop-types';
 import BaseInput from './BaseInput.jsx';
-import Util from './Util.js';
 
 /**
  * @original ons-radio
@@ -20,20 +18,12 @@ import Util from './Util.js';
  *   modifier='material' />
  */
 class Radio extends BaseInput {
+  _getDomNodeName() {
+    return 'ons-radio';
+  }
 
   get EVENT_TYPES() {
     return ['change'];
-  }
-
-  render() {
-    var {checked, ...other} = this.props;
-    other['input-id'] = this.props.inputId;
-
-    Util.convert(other, 'disabled');
-
-    return (
-      <ons-radio checked={checked ? '' : null} {...other} />
-    );
   }
 }
 
