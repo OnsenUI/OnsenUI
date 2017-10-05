@@ -168,7 +168,7 @@ class Examples extends React.Component {
         title: 'Redux Navigator',
         component: ReduxNavigatorExample
       }
-    ];
+    ].sort((a, b) => a.title < b.title ? -1 : 1);
   }
 
   goto(example) {
