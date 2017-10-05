@@ -222,7 +222,7 @@ export default class TabbarElement extends BaseElement {
     if (!this._swiper) {
       this._swiper = new Swiper({
         getElement: () => this._contentElement,
-        getInitialIndex: () => this.getAttribute('activeIndex'),
+        getInitialIndex: () => this.getAttribute('activeIndex') || this.getAttribute('active-index'),
         getAutoScrollRatio: this._getAutoScrollRatio.bind(this),
         getBubbleWidth: () => parseInt(this.getAttribute('ignore-edge-width') || 20, 10),
         isAutoScrollable: () => true,
