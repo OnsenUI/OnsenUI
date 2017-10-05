@@ -306,4 +306,7 @@ ons-carousel[fullscreen] {
 
 .ons-status-bar-mock.android ~ * {
   top: 20px;
+  bottom: 0;
+  position: inherit;
+  width: 100%;
 }
