@@ -140,6 +140,15 @@ Tabbar.propTypes = {
   swipeable: PropTypes.bool,
 
   /**
+   * @name ignoreEdgeWidth
+   * @type number
+   * @description
+   *  [en]Distance in pixels from both edges. Swiping on these areas will prioritize parent components such as `Splitter` or `Navigator`.[/en]
+   *  [ja][/ja]
+   */
+  ignoreEdgeWidth: PropTypes.bool,
+
+  /**
    * @name animation
    * @type string
    * @description
