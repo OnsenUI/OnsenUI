@@ -75,7 +75,7 @@ internal.autoStatusBarFill = action => {
 };
 
 internal.shouldFillStatusBar = () => internal.isEnabledAutoStatusBarFill() &&
-  (platform.isWebView() && platform.isIOS7above() || document.body.querySelector('.ons-status-bar-mock'));
+  (platform.isWebView() && platform.isIOS7above() || document.body.querySelector('.ons-status-bar-mock.ios'));
 
 internal.templateStore = {
   _storage: {},

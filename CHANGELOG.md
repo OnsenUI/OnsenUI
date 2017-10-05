@@ -9,6 +9,7 @@ dev
 
  * css-components: Reimplemented css-components previewer.
  * css-components: Changed color scheme to more iOS native-like.
+ * ons: 'mockStatusBar' now can also show Android's status bar.
 
 ### Bug Fixes
 

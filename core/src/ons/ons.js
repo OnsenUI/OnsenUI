@@ -200,13 +200,16 @@ ons.mockStatusBar = () => {
 
   const mock = () => {
     if (!document.body.children[0] || !document.body.children[0].classList.contains('ons-status-bar-mock')) {
-      document.body.insertBefore(util.createElement(`
-        <div class="ons-status-bar-mock">
-          <div style="padding-left: 5px">No SIM</div>
-          <div>12:28 PM</div>
-          <div style="padding-right: 15px">80%</div>
-        </div>
-      `), document.body.firstChild);
+      const android = platform.isAndroid(), i = i => `<i class="${i.split('-')[0]} ${i}"></i>`;
+      const left = android ? `${i('zmdi-twitter')} ${i('zmdi-google-play')}` : `No SIM ${i('fa-wifi')}`,
+        center = android ? '' : '12:28 PM',
+        right = android ? `${i('zmdi-network')} ${i('zmdi-wifi')} ${i('zmdi-battery')} 12:28 PM` : `80% ${i('fa-battery-three-quarters')}`;
+
+      document.body.insertBefore(util.createElement(
+        `<div class="ons-status-bar-mock ${android ? 'android' : 'ios'}">` +
+          `<div>${left}</div><div>${center}</div><div>${right}</div>` +
+        `</div>`
+      ), document.body.firstChild);
     }
   };
 
