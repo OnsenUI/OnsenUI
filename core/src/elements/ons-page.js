@@ -230,26 +230,28 @@ export default class PageElement extends BaseElement {
   }
 
   connectedCallback() {
-    if (this._initialized || !util.isAttached(this)) { // Avoid detached calls
+    if (!util.isAttached(this)) { // Avoid detached calls
       return;
     }
 
-    this._initialized = true;
-
     contentReady(this, () => {
-      setImmediate(() => {
-        this.onInit && this.onInit();
-        util.triggerElementEvent(this, 'init');
-      });
-
-      if (!util.hasAnyComponentAsParent(this)) {
-        setImmediate(() => this._show());
-      }
-
       this._tryToFillStatusBar(); // Ensure status bar when the element was compiled before connected
 
       if (this.hasAttribute('on-infinite-scroll')) {
         this.attributeChangedCallback('on-infinite-scroll', null, this.getAttribute('on-infinite-scroll'));
+      }
+
+      if (!this._initialized) {
+        this._initialized = true;
+
+        setImmediate(() => {
+          this.onInit && this.onInit();
+          util.triggerElementEvent(this, 'init');
+        });
+
+        if (!util.hasAnyComponentAsParent(this)) {
+          setImmediate(() => this._show());
+        }
       }
     });
   }

@@ -27,32 +27,30 @@ class Icon extends SimpleWrapper {
   }
 
   render() {
-    var {icon, size, ...others} = this.props;
-
-    Util.convert(others, 'fixedWidth', {newName: 'fixed-width'});
-    Util.convert(others, 'spin');
+    const { icon, size, ...others } = this.props;
+    const attrs = Util.getAttrs(this, others);
 
     if (icon) {
       if ((typeof icon) === 'string') {
-        others.icon = icon;
+        attrs.icon = icon;
       } else {
         const keys = Object.keys(icon).filter((a) => a !== 'default');
         const innerString = keys.map((key) => key + ':' + icon[key] + '');
-        others.icon = icon.default + ', ' + innerString.join(',');
+        attrs.icon = icon.default + ', ' + innerString.join(',');
       }
     }
 
     if (size) {
       if ((typeof size) === 'number') {
-        others.size = `${size}px`;
+        attrs.size = `${size}px`;
       } else {
         const keys = Object.keys(size).filter((a) => a !== 'default');
         const innerString = keys.map((key) => key + ':' + size[key] + 'px');
-        others.size = size.default + 'px, ' + innerString.join(',');
+        attrs.size = size.default + 'px, ' + innerString.join(',');
       }
     }
 
-    return React.createElement(this._getDomNodeName(), others, this.props.children);
+    return React.createElement(this._getDomNodeName(), attrs, this.props.children);
   }
 
 }

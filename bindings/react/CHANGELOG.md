@@ -2,6 +2,27 @@
 CHANGELOG
 ====
 
+dev
+----
+
+### New Features
+
+* Modal: Updated API to match other dialogs. `onPreShow`, `onPreHide`, `onPostShow` and `onPostHide` hooks are now available. It can still be rendered in Page's `renderModal` function or directly as a child component like any other dialog.
+
+### Bug Fixes
+
+* Modal: It is now placed outside pages and can properly fill iOS status bar.
+* Select: 'onChange' is called only once.
+* Select: 'value' prop correctly sets the initial selected option.
+
+### Misc
+
+* Non string props are not passed as attributes anymore in order to clean up DOM elements.
+
+### BREAKING CHANGES
+
+* Modal: `onHide` and `onShow` hooks are renamed to `onPostHide` and `onPostShow`.
+
 1.6.1
 ----
 

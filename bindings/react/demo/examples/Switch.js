@@ -5,7 +5,6 @@ import {
   Toolbar,
   ToolbarButton,
   BackButton,
-  Input,
   Switch
 } from 'react-onsenui';
 
@@ -27,7 +26,7 @@ export default class extends React.Component {
       <Page renderToolbar={() => <MyToolbar title='Switch' />} >
         <div style={{textAlign: 'center'}}>
           <h1>Page Content</h1>
-          <Input type='checkbox' checked={this.state.checked} onChange={this.onChange} />
+          <input type='checkbox' checked={this.state.checked} onChange={this.onChange} />
           <br />
           <Switch disabled={false} checked={this.state.checked} onChange={this.onChange} />
           <p />

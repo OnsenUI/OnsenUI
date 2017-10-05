@@ -1,7 +1,5 @@
-import React from 'react';
 import PropTypes from 'prop-types';
 import BaseInput from './BaseInput.jsx';
-import Util from './Util.js';
 
 /**
  * @original ons-input
@@ -20,16 +18,8 @@ import Util from './Util.js';
  *   placeholder='Username' />
  */
 class Input extends BaseInput {
-
-  render() {
-    var {...other} = this.props;
-    other['input-id'] = this.props.inputId;
-
-    Util.convert(other, 'disabled');
-
-    return (
-      <ons-input {...other} />
-    );
+  _getDomNodeName() {
+    return 'ons-input';
   }
 }
 

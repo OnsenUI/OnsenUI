@@ -307,7 +307,7 @@ export default class NavigatorElement extends BaseElement {
           if (/ons-back-button/i.test(event.target.tagName) || util.findParent(event.target, 'ons-back-button', p => /ons-page/i.test(p.tagName))) {
             return true;
           }
-          const area = Math.max(20, parseInt(this.getAttribute('swipe-target-width')) || 0);
+          const area = parseInt(this.getAttribute('swipe-target-width') || 25, 10);
           return event.gesture.direction !==  'right' || area <= distance || this._isRunning || this.children.length <= 1;
         }
       });

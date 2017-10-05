@@ -284,10 +284,29 @@ ons-carousel[fullscreen] {
   position: absolute;
   width: 100%;
   height: 20px;
+  padding: 0 16px 0 6px;
+  box-sizing: border-box;
   z-index: 30000;
   display: flex;
   justify-content: space-between;
   font-size: 12px;
   line-height: 20px;
   font-family: Arial, Helvetica;
+}
+
+.ons-status-bar-mock i {
+  padding: 0 2px;
+}
+
+.ons-status-bar-mock.android {
+  color: white;
+  background-color: #222;
+  font-family: Roboto, Arial, Helvetica;
+}
+
+.ons-status-bar-mock.android ~ * {
+  top: 20px;
+  bottom: 0;
+  position: inherit;
+  width: 100%;
 }

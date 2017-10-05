@@ -95,7 +95,7 @@ class MyDialog extends React.Component {
   render() {
     return (
       <Dialog
-        onCancel={this.props.onCancel} isOpen={this.props.isOpen} animation='default' cancelable>
+        onCancel={this.props.onCancel} isOpen={this.props.isOpen} animation='default' isCancelable={true}>
       <Navigator animation='slide' ref='navi'
         initialRoute={{comp: FirstPage, props: {
           pushPage: this.pushPage, onNameChanged: this.onNameChanged }}}

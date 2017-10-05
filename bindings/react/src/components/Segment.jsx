@@ -1,4 +1,4 @@
-import SimpleWrapper from './SimpleWrapper.jsx';
+import BasicComponent from './BasicComponent.jsx';
 import React from 'react';
 import PropTypes from 'prop-types';
 import {findDOMNode} from 'react-dom';
@@ -20,7 +20,7 @@ import Util from './Util.js';
  *  <button>Label 3</button>
  * </Segment>
  */
-class Segment extends SimpleWrapper {
+class Segment extends BasicComponent {
 
   constructor(...args) {
     super(...args);
@@ -62,12 +62,8 @@ class Segment extends SimpleWrapper {
   }
 
   render() {
-    const {...others} = this.props;
-
-    Util.convert(others, 'index', {newName: 'active-index'});
-    Util.convert(others, 'tabbarId', {newName: 'tabbar-id'});
-
-    return React.createElement(this._getDomNodeName(), others, this.props.children);
+    const attrs = Util.getAttrs(this, this.props, { index: 'active-index' });
+    return React.createElement(this._getDomNodeName(), attrs, this.props.children);
   }
 }
 

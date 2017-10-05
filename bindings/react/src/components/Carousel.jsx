@@ -85,22 +85,10 @@ class Carousel extends SimpleWrapper {
   }
 
   render() {
-    const {...others} = this.props;
-
-    ['fullscreen', 'swipeable', 'disabled', 'centered', 'overscrollable'].forEach((el) => {
-      Util.convert(others, el);
-    });
-
-    Util.convert(others, 'itemWidth', {fun: Util.sizeConverter, newName: 'item-width'});
-    Util.convert(others, 'itemHeight', {fun: Util.sizeConverter, newName: 'item-height'});
-    Util.convert(others, 'autoScroll', {newName: 'auto-scroll'});
-    Util.convert(others, 'autoRefresh', {newName: 'auto-refresh'});
-    Util.convert(others, 'autoScrollRatio', {newName: 'auto-scroll-ratio'});
-    Util.convert(others, 'index', {newName: 'initial-index'});
-    Util.convert(others, 'animationOptions', {fun: Util.animationOptionsConverter, newName: 'animation-options'});
+    const attrs = Util.getAttrs(this, this.props, { index: 'initial-index' });
 
     return (
-      <ons-carousel {...others}>
+      <ons-carousel {...attrs}>
         <div>
           {this.props.children}
         </div>

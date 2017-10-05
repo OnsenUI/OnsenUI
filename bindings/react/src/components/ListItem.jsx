@@ -1,8 +1,6 @@
 import ReactDOM from 'react-dom';
-import React from 'react';
 import PropTypes from 'prop-types';
 import SimpleWrapper from './SimpleWrapper.jsx';
-import Util from './Util.js';
 
 /**
  * @original ons-list-item
@@ -33,16 +31,6 @@ class ListItem extends SimpleWrapper {
   componentDidUpdate() {
     super.componentDidUpdate();
     this.node._compile();
-  }
-
-  render() {
-    var {...others} = this.props;
-
-    Util.convert(others, 'tappable');
-    Util.convert(others, 'tapBackgroundColor', {newName: 'tap-background-color'});
-    Util.convert(others, 'lockOnDrag', {newName: 'lock-on-drag'});
-
-    return React.createElement(this._getDomNodeName(), others, this.props.children);
   }
 }
 

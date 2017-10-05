@@ -72,12 +72,62 @@ const _animatorDict = {
 export default class ModalElement extends BaseDialogElement {
 
   /**
+   * @event preshow
+   * @description
+   * [en]Fired just before the modal is displayed.[/en]
+   * [ja]モーダルが表示される直前に発火します。[/ja]
+   * @param {Object} event [en]Event object.[/en]
+   * @param {Object} event.modal
+   *   [en]Component object.[/en]
+   *   [ja]コンポーネントのオブジェクト。[/ja]
+   * @param {Function} event.cancel
+   *   [en]Execute this function to stop the modal from being shown.[/en]
+   *   [ja]この関数を実行すると、ダイアログの表示がキャンセルされます。[/ja]
+   */
+
+  /**
+   * @event postshow
+   * @description
+   * [en]Fired just after the modal is displayed.[/en]
+   * [ja]モーダルが表示された直後に発火します。[/ja]
+   * @param {Object} event [en]Event object.[/en]
+   * @param {Object} event.modal
+   *   [en]Component object.[/en]
+   *   [ja]コンポーネントのオブジェクト。[/ja]
+   */
+
+  /**
+   * @event prehide
+   * @description
+   * [en]Fired just before the modal is hidden.[/en]
+   * [ja]モーダルが隠れる直前に発火します。[/ja]
+   * @param {Object} event [en]Event object.[/en]
+   * @param {Object} event.modal
+   *   [en]Component object.[/en]
+   *   [ja]コンポーネントのオブジェクト。[/ja]
+   * @param {Function} event.cancel
+   *   [en]Execute this function to stop the modal from being hidden.[/en]
+   *   [ja]この関数を実行すると、ダイアログの非表示がキャンセルされます。[/ja]
+   */
+
+  /**
+   * @event posthide
+   * @description
+   * [en]Fired just after the modal is hidden.[/en]
+   * [ja]モーダルが隠れた後に発火します。[/ja]
+   * @param {Object} event [en]Event object.[/en]
+   * @param {Object} event.modal
+   *   [en]Component object.[/en]
+   *   [ja]コンポーネントのオブジェクト。[/ja]
+   */
+
+  /**
    * @attribute animation
    * @type {String}
    * @default default
    * @description
-   *  [en]The animation used when showing and hiding the modal. Can be either `"none"` or `"fade"`.[/en]
-   *  [ja]モーダルを表示する際のアニメーション名を指定します。"none"もしくは"fade"を指定できます。[/ja]
+   *  [en]The animation used when showing and hiding the modal. Can be either `"none"`, `"fade"` or `"lift"`.[/en]
+   *  [ja]モーダルを表示する際のアニメーション名を指定します。"none"もしくは"fade","lift"を指定できます。[/ja]
    */
 
   /**
@@ -162,6 +212,9 @@ export default class ModalElement extends BaseDialogElement {
    * @param {String} [options.animationOptions]
    *   [en]Specify the animation's duration, delay and timing. E.g. `{duration: 0.2, delay: 0.4, timing: 'ease-in'}`.[/en]
    *   [ja]アニメーション時のduration, delay, timingを指定します。e.g. {duration: 0.2, delay: 0.4, timing: 'ease-in'}[/ja]
+   * @param {Function} [options.callback]
+   *   [en]This function is called after the modal has been revealed.[/en]
+   *   [ja]モーダルが表示され終わった後に呼び出される関数オブジェクトを指定します。[/ja]
    * @description
    *   [en]Show modal.[/en]
    *   [ja]モーダルを表示します。[/ja]
@@ -182,6 +235,9 @@ export default class ModalElement extends BaseDialogElement {
    * @param {String} [options.animationOptions]
    *   [en]Specify the animation's duration, delay and timing. E.g. `{duration: 0.2, delay: 0.4, timing: 'ease-in'}`.[/en]
    *   [ja]アニメーション時のduration, delay, timingを指定します。e.g. {duration: 0.2, delay: 0.4, timing: 'ease-in'}[/ja]
+   * @param {Function} [options.callback]
+   *   [en]This function is called after the modal has been revealed.[/en]
+   *   [ja]モーダルが表示され終わった後に呼び出される関数オブジェクトを指定します。[/ja]
    * @description
    *   [en]Toggle modal visibility.[/en]
    *   [ja]モーダルの表示を切り替えます。[/ja]
@@ -199,6 +255,9 @@ export default class ModalElement extends BaseDialogElement {
    * @param {String} [options.animationOptions]
    *   [en]Specify the animation's duration, delay and timing. E.g. `{duration: 0.2, delay: 0.4, timing: 'ease-in'}`.[/en]
    *   [ja]アニメーション時のduration, delay, timingを指定します。e.g. {duration: 0.2, delay: 0.4, timing: 'ease-in'}[/ja]
+   * @param {Function} [options.callback]
+   *   [en]This function is called after the modal has been revealed.[/en]
+   *   [ja]モーダルが表示され終わった後に呼び出される関数オブジェクトを指定します。[/ja]
    * @description
    *   [en]Hide modal.[/en]
    *   [ja]モーダルを非表示にします。[/ja]
