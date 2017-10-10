@@ -345,10 +345,7 @@ ons.createElement = (template, options = {}) => {
     if (options.append) {
       const target = options.append instanceof HTMLElement ? options.append : document.body;
       target.insertBefore(element, options.insertBefore || null);
-
-      if (options.link instanceof Function) {
-        options.link(element);
-      }
+      options.link instanceof Function && options.link(element);
     }
 
     return element;
@@ -453,7 +450,7 @@ ons.openActionSheet = actionSheet;
  * @method resolveLoadingPlaceholder
  * @signature resolveLoadingPlaceholder(page)
  * @param {String} page
- *   [en]Page name. Can be either an HTML file or an <ons-template> element.[/en]
+ *   [en]Page name. Can be either an HTML file or a `<template>` id.[/en]
  *   [ja]pageのURLか、もしくはons-templateで宣言したテンプレートのid属性の値を指定できます。[/ja]
  * @description
  *   [en]If no page is defined for the `ons-loading-placeholder` attribute it will wait for this method being called before loading the page.[/en]
@@ -487,26 +484,19 @@ ons._setupLoadingPlaceHolders = function() {
   });
 };
 
-ons._resolveLoadingPlaceholder = function(element, page, link) {
-  link = link || function(element, done) { done(); };
-  ons._internal.getPageHTMLAsync(page).then(html => {
-
-    while (element.firstChild) {
-      element.removeChild(element.firstChild);
-    }
-
-    const contentElement = ons._util.createElement('<div>' + html + '</div>');
-    contentElement.style.display = 'none';
-
-    element.appendChild(contentElement);
-
-    link(contentElement, function() {
-      contentElement.style.display = '';
-    });
-
-  }).catch(error => {
-    throw new Error('Unabled to resolve placeholder: ' + error);
-  });
+ons._resolveLoadingPlaceholder = function(parent, page, link = ((el, done) => done())) {
+  page && ons.createElement(page)
+    .then(element => {
+      element.style.display = 'none';
+      parent.appendChild(element);
+      link(element, () => {
+        while (parent.firstChild && parent.firstChild !== element) {
+          parent.removeChild(parent.firstChild);
+        }
+        element.style.display = '';
+      });
+    })
+    .catch(error => Promise.reject('Unabled to resolve placeholder: ' + error));
 };
 
 function waitDeviceReady() {
