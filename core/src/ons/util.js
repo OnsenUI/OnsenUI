@@ -456,6 +456,11 @@ util.warn = (...args) => {
   }
 };
 
+/**
+ * Prevent scrolling while draging horizontally.
+ *
+ * @param {gd} GestureDetector instance
+ */
 util.preventScroll = gd => {
   const prevent = e => e.cancelable && e.preventDefault();
 
@@ -466,6 +471,13 @@ util.preventScroll = gd => {
 
   gd.on('touchmove', prevent);
   gd.on('dragend', clean);
-}
+};
+
+/**
+ * Distance and deltaTime filter some weird dragstart events that are not fired immediately.
+ *
+ * @param {event}
+ */
+util.isValidGesture = event => event.gesture !== undefined && (event.gesture.distance <= 15 || event.gesture.deltaTime <= 100);
 
 export default util;
