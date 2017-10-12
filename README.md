@@ -94,13 +94,18 @@ Onsen UI is tested with the following browsers and mobile OS.
 
 * __Download the latest released version__
 
-We have a [distribution repository](https://github.com/OnsenUI/OnsenUI-dist/releases) with changelog. Onsen UI is also available in __npm__, __bower__ and __jspm__ [jsDelivr](https://www.jsdelivr.com/package/npm/onsenui). Example:
+We have a [distribution repository](https://github.com/OnsenUI/OnsenUI-dist/releases) with changelog. Onsen UI is also available in __npm__, __bower__ and __jspm__. Example:
 
 ```bash
 npm install onsenui
 ```
 
 This downloads Onsen UI main library and AngularJS bindings. For other bindings, install also `react-onsenui`, `vue-onsenui` or `ngx-onsenui`.
+
+* __Download or request from a CDN__
+
+You can also take the necessary files from a CDN. Some of the options are [unpkg](https://unpkg.com/onsenui/), [jsDelivr](https://www.jsdelivr.com/package/npm/onsenui) and [cdnjs](https://cdnjs.com/libraries/onsen).
+
 
 * __Get the latest development build__
 
