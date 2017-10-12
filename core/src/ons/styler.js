@@ -60,7 +60,7 @@ styler._prefix = (function() {
   )[1];
 
   return function(name) {
-    return prefix + name.substr(0, 1).toUpperCase() + name.substr(1);
+    return '-' + prefix + '-' + util.hyphenate(name);
   };
 })();
 

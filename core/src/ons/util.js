@@ -15,6 +15,7 @@ limitations under the License.
 
 */
 
+import styler from './styler';
 import internal from './internal';
 import autoStyle from './autostyle';
 import ModifierUtil from './internal/modifier-util';
@@ -129,6 +130,12 @@ util.propagateAction = (element, action) => {
 util.camelize = string => string.toLowerCase().replace(/-([a-z])/g, (m, l) => l.toUpperCase());
 
 /**
+ * @param {String} string - string to be hyphenated
+ * @return {String} Hyphenated string
+ */
+util.hyphenate = string => string.replace(/([a-zA-Z])([A-Z])/g, '$1-$2').toLowerCase();
+
+/**
  * @param {String} selector - tag and class only
  * @param {Object} style
  * @param {Element}
@@ -141,7 +148,7 @@ util.create = (selector = '', style = {}) => {
     element.className = classList.join(' ');
   }
 
-  util.extend(element.style, style);
+  styler(element, style);
 
   return element;
 };
