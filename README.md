@@ -102,6 +102,11 @@ npm install onsenui
 
 This downloads Onsen UI main library and AngularJS bindings. For other bindings, install also `react-onsenui`, `vue-onsenui` or `ngx-onsenui`.
 
+* __Download or request from a CDN__
+
+You can also take the necessary files from a CDN. Some of the options are [unpkg](https://unpkg.com/onsenui/), [jsDelivr](https://www.jsdelivr.com/package/npm/onsenui) and [cdnjs](https://cdnjs.com/libraries/onsen).
+
+
 * __Get the latest development build__
 
 Optionally, you can download the [latest development build here](https://circleci.com/api/v1/project/OnsenUI/OnsenUI/latest/artifacts/0/$CIRCLE_ARTIFACTS/onsenui.zip?branch=master&filter=successful). Be careful, usually everything there is already tested but it might be unstable sometimes.
