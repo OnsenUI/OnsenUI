@@ -16,7 +16,7 @@ import autoStyle from '../ons/autostyle';
 import ModifierUtil from '../ons/internal/modifier-util';
 import BaseElement from './base/base-element';
 import contentReady from '../ons/content-ready';
-import styler from '../lib/styler';
+import styler from '../ons/styler';
 
 const defaultClassName = 'speed-dial';
 const scheme = {
