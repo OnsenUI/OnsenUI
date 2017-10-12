@@ -16,6 +16,7 @@ limitations under the License.
 */
 
 import util from '../ons/util';
+import styler from '../ons/styler';
 import autoStyle from '../ons/autostyle';
 import ModifierUtil from '../ons/internal/modifier-util';
 import BaseElement from './base/base-element';
@@ -260,30 +261,24 @@ export default class ListItemElement extends BaseElement {
     }
 
     this.tapped = true;
-
-    this.style.transition = this._transition;
-    this.style.webkitTransition = this._transition;
-    this.style.MozTransition = this._transition;
+    const touchStyle = { transition: this._transition };
 
     if (this._tappable) {
       if (this.style.backgroundColor) {
         this._originalBackgroundColor = this.style.backgroundColor;
       }
 
-      this.style.backgroundColor = this._tapBackgroundColor;
-      this.style.boxShadow = `0px -1px 0px 0px ${this._tapBackgroundColor}`;
+      touchStyle.backgroundColor = this._tapBackgroundColor;
+      touchStyle.boxShadow = `0px -1px 0px 0px ${this._tapBackgroundColor}`;
     }
+
+    styler(this, touchStyle);
   }
 
   _onRelease() {
     this.tapped = false;
-
-    this.style.transition = '';
-    this.style.webkitTransition = '';
-    this.style.MozTransition = '';
-
     this.style.backgroundColor = this._originalBackgroundColor || '';
-    this.style.boxShadow = '';
+    styler.clear(this, 'transition boxShadow');
   }
 
   _shouldLockOnDrag() {

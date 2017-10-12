@@ -16,6 +16,7 @@ limitations under the License.
 */
 
 import contentReady from '../../ons/content-ready';
+import styler from '../../ons/styler';
 import animit from '../../ons/animit';
 import SplitterAnimator from './animator.js';
 
@@ -44,32 +45,28 @@ export default class RevealSplitterAnimator extends SplitterAnimator {
   }
 
   _setStyles(sideElement) {
-    sideElement.style.left = sideElement.side === 'right' ? 'auto' : 0;
-    sideElement.style.right = sideElement.side === 'right'  ? 0 : 'auto';
-    sideElement.style.zIndex = 0;
-    sideElement.style.backgroundColor = 'black';
-    sideElement.style.transform = this._generateBehindPageStyle(0).container.transform;
-    sideElement.style.display = 'none';
+    styler(sideElement, {
+      left: sideElement.side === 'right' ? 'auto' : 0,
+      right: sideElement.side === 'right'  ? 0 : 'auto',
+      zIndex: 0,
+      backgroundColor: 'black',
+      transform: this._generateBehindPageStyle(0).container.transform,
+      display: 'none'
+    });
 
     const splitter = sideElement.parentElement;
-    contentReady(splitter, () => {
-      if (splitter.content) {
-        splitter.content.style.boxShadow = '0 0 12px 0 rgba(0, 0, 0, 0.2)';
-      }
-    });
+    contentReady(splitter, () => splitter.content && styler(splitter.content, { boxShadow: '0 0 12px 0 rgba(0, 0, 0, 0.2)' }));
   }
 
   _unsetStyles(sideElement) {
-    sideElement.style.left = sideElement.style.right = sideElement.style.zIndex = sideElement.style.backgroundColor = sideElement.style.display = '';
+    styler.clear(sideElement, 'left right zIndex backgroundColor display');
     if (sideElement._content) {
       sideElement._content.style.opacity = '';
     }
 
     // Check if the other side needs the common styles
     if (!this._oppositeSide || this._oppositeSide.mode === 'split') {
-      if (sideElement.parentElement.content) {
-        sideElement.parentElement.content.style.boxShadow = '';
-      }
+      sideElement.parentElement.content && styler.clear(sideElement.parentElement.content, 'boxShadow');
     }
   }
 

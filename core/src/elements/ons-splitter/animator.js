@@ -16,6 +16,7 @@ limitations under the License.
 */
 
 import util from '../../ons/util';
+import styler from '../../ons/styler';
 import contentReady from '../../ons/content-ready';
 import animit from '../../ons/animit';
 import BaseAnimator from '../../ons/base-animator';
@@ -57,9 +58,8 @@ export default class SplitterAnimator extends BaseAnimator {
   }
 
   clearTransition() {
-    this._side && (this._side.style.transform = this._side.style.transition = this._side.style.webkitTransition = '');
-    this._mask && (this._mask.style.transform = this._mask.style.transition = this._mask.style.webkitTransition = '');
-    this._content && (this._content.style.transform = this._content.style.transition = this._content.style.webkitTransition = '');
+    'side mask content'.split(/\s+/)
+      .forEach(e => this['_' + e] && styler.clear(this['_' + e], 'transform transition'))
   }
 
   clearMask() {

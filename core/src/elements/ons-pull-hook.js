@@ -16,6 +16,7 @@ limitations under the License.
 */
 
 import util from '../ons/util';
+import styler from '../ons/styler';
 import platform from '../ons/platform';
 import BaseElement from './base/base-element';
 import GestureDetector from '../ons/gesture-detector';
@@ -24,13 +25,6 @@ import animit from '../ons/animit';
 const STATE_INITIAL = 'initial';
 const STATE_PREACTION = 'preaction';
 const STATE_ACTION = 'action';
-
-const removeTransform = (el) => {
-  el.style.transform = '';
-  el.style.WebkitTransform = '';
-  el.style.transition = '';
-  el.style.WebkitTransition = '';
-};
 
 /**
  * @element ons-pull-hook
@@ -418,7 +412,7 @@ export default class PullHookElement extends BaseElement {
     animit(this._getScrollableElement())
       .queue({ transform: this._generateTranslationTransform(scroll) }, opt)
       .play(() => {
-        scroll === 0 && removeTransform(this._getScrollableElement())
+        scroll === 0 && styler.clear(this._getScrollableElement(), 'transition transform');
         options.callback instanceof Function && options.callback();
     });
   }
