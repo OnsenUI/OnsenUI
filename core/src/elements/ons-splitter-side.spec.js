@@ -104,12 +104,13 @@ describe('OnsSplitterSideElement', () => {
     });
   });
 
-  describe('#handleGesture()', () => {
+  describe('#ignoreSwipe()', () => {
     const shouldIgnore = (gesture, value) => {
       gesture.center = gesture.center || {};
       gesture.distance = 0;
-      right._boundHandleGesture({type: 'dragstart', gesture});
-      expect(!!right._collapseMode._ignoreDrag).to.equal(value);
+      right._swipe.handleGesture({type: 'dragstart', gesture});
+      expect(!!right._swipe._ignoreDrag).to.equal(value);
+      right._state = 'closed';
     };
 
     it('should ignore scrolling', () => {
@@ -123,13 +124,17 @@ describe('OnsSplitterSideElement', () => {
       shouldIgnore({direction: 'left'}, false);
       shouldIgnore({direction: 'left', center: {clientX: 10}}, false);
       shouldIgnore({direction: 'right', center: {clientX: 10}}, true); // Right and closed
-      right._swipeTargetWidth = 30;
+
+      right.setAttribute('swipe-target-width', '30px');
       shouldIgnore({direction: 'left', center: {clientX: w - 10}}, false);
       shouldIgnore({direction: 'left', center: {clientX: w - 40}}, true);
-      right._side = 'left';
+
+      right.setAttribute('side', 'left');
       shouldIgnore({direction: 'left', center: {clientX: 10}}, true); // Left and closed
       shouldIgnore({direction: 'right', center: {clientX: 10}}, false);
       shouldIgnore({direction: 'right', center: {clientX: 40}}, true);
+
+      right.setAttribute('side', 'right');
     });
   });
 });

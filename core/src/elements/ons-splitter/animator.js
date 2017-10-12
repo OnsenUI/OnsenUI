@@ -53,7 +53,7 @@ export default class SplitterAnimator extends BaseAnimator {
   }
 
   get minus() {
-    return this._side._side === 'right' ? '-' : '';
+    return this._side.side === 'right' ? '-' : '';
   }
 
   clearTransition() {

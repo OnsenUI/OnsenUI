@@ -199,10 +199,9 @@ export default class Swiper {
   }
 
   onDragStart(event) {
-    this._ignoreDrag = event.consumed;
+    this._ignoreDrag = event.consumed || !util.isValidGesture(event);
 
-    // distance and deltaTime filter some weird dragstart events that are not fired immediately
-    if (event.gesture && !this._ignoreDrag && (event.gesture.distance <= 15 || event.gesture.deltaTime <= 100)) {
+    if (!this._ignoreDrag) {
       const consume = event.consume;
       event.consume = () => { consume && consume(); this._ignoreDrag = true; };
 
