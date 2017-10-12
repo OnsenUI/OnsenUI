@@ -94,7 +94,7 @@ Onsen UI is tested with the following browsers and mobile OS.
 
 * __Download the latest released version__
 
-We have a [distribution repository](https://github.com/OnsenUI/OnsenUI-dist/releases) with changelog. Onsen UI is also available in __npm__, __bower__ and __jspm__. Example:
+We have a [distribution repository](https://github.com/OnsenUI/OnsenUI-dist/releases) with changelog. Onsen UI is also available in __npm__, __bower__ and __jspm__ [jsDelivr](https://www.jsdelivr.com/package/npm/onsenui). Example:
 
 ```bash
 npm install onsenui
