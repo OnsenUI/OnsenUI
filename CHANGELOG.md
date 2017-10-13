@@ -14,6 +14,8 @@ dev
 ### Bug Fixes
 
  * ons-page: Minor issue with status bar when the page is moved in DOM.
+ * deviceBackButton: Fixed [#2215](https://github.com/OnsenUI/OnsenUI/issues/2215).
+ * templates: Firefox issue. Fixed [#2216](https://github.com/OnsenUI/OnsenUI/issues/2216).
 
 2.6.1
 ----
