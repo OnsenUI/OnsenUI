@@ -1,3 +1,5 @@
+import './ons/platform'; // This file must be loaded before Custom Elements polyfills.
+
 import './polyfills';
 import './vendor';
 
@@ -128,7 +130,6 @@ window.addEventListener('load', () => {
       // Do nothing. 'touch-action: manipulation' has no effect on UIWebView.
     }
   }
-
 }, false);
 
 ons.ready(function() {

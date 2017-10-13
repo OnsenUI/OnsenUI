@@ -15,6 +15,9 @@ limitations under the License.
 
 */
 
+// Save HTMLElement object before Custom Elements polyfill patch global HTMLElement.
+const NativeHTMLElement = window.HTMLElement;
+
 /**
  * @object ons.platform
  * @category util
@@ -73,8 +76,8 @@ class Platform {
    * @return {Boolean}
    */
   isWKWebView() {
-    const hasIndexedDB = !!window.indexedDB;
-    return this.isIOS() && window.webkit && window.webkit.messageHandlers && indexedDB;
+    const lte9 = /constructor/i.test(NativeHTMLElement);
+    return this.isIOS() && window.webkit && window.webkit.messageHandlers && window.indexedDB && !lte9;
   }
 
   /**
@@ -86,8 +89,8 @@ class Platform {
    * @return {Boolean}
    */
   isUIWebView() {
-    const hasIndexedDB = !!window.indexedDB; // UIWebView doesn't have IndexedDB.
-    return this.isIOS() && !indexedDB;
+    const lte9 = /constructor/i.test(NativeHTMLElement);
+    return  this.isIOS() && !this.isIOSSafari() && !this.isWKWebView() && !window.indexedDB && !window.statusbar.visible && lte9;
   }
 
   /**
