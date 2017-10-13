@@ -58,6 +58,9 @@ module.exports = {
       }
     ]
   },
+  vue: {
+    esModule: false
+  },
   devServer: {
     historyApiFallback: true,
     noInfo: true
