@@ -65,6 +65,47 @@ class Platform {
   }
 
   /**
+   * @method isWKWebView
+   * @signature isWKWebView()
+   * @description
+   *   [en]Returns whether app is running in WKWebView.[/en]
+   *   [ja]WKWebViewで実行されているかどうかを返します。[/ja]
+   * @return {Boolean}
+   */
+  isWKWebView() {
+    const hasIndexedDB = !!window.indexedDB;
+    return this.isIOS() && window.webkit && window.webkit.messageHandlers && indexedDB;
+  }
+
+  /**
+   * @method isUIWebView
+   * @signature isUIWebView()
+   * @description
+   *   [en]Returns whether app is running in UIWebView.[/en]
+   *   [ja]UIWebViewで実行されているかどうかを返します。[/ja]
+   * @return {Boolean}
+   */
+  isUIWebView() {
+    const hasIndexedDB = !!window.indexedDB; // UIWebView doesn't have IndexedDB.
+    return this.isIOS() && !indexedDB;
+  }
+
+  /**
+   * @method isIOSSafari
+   * @signature isIOSSafari()
+   * @description
+   *   [en]Returns whether app is running in iOS Safari.[/en]
+   *   [ja]iOS Safariで実行されているかどうかを返します。[/ja]
+   * @return {Boolean}
+   */
+  isIOSSafari() {
+    const navigator = window.navigator;
+    const ua = navigator.userAgent;
+
+    return this.isIOS() && ua.indexOf('Safari') !== -1 && ua.indexOf('Version') !== -1 && !navigator.standalone;
+  }
+
+  /**
    * @method isIOS
    * @signature isIOS()
    * @description
