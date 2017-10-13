@@ -1,0 +1,102 @@
+/*
+  Note:
+
+  :not(X) does not work if X is a complex selector like `.foo .bar` due to the spec of :not(X).
+  Instead we have to use the following form for representing A:not(X A):not(Y A):not(Z A),
+  which means `A which does not have any X, Y and Z as its ancestors`.
+
+  // Equivalent to A:not(X A):not(Y A):not(Z A) { foo: bar; }
+  A {
+    // Apply styles for A
+    foo: bar;
+  }
+  X A,
+  Y A,
+  Z A {
+    // Subtract `X A`, `Y A` and `Z A`
+    // (Restore original styles of A)
+  }
+*/
+
+/*
+  Note:
+
+  @apply has been deprecated as of Oct, 2017.
+  Please do not use @apply to restore original styles.
+*/
+
+@media (orientation: portrait) {
+  /* Outermost toolbar */
+  body[onsflag-iphonex] .toolbar {
+    top: 0;
+    box-sizing: content-box;
+    padding-top: var(--iphonex-safe-area-inset-top-portrait);
+  }
+  /* Non-outermost toolbar */
+  body[onsflag-iphonex] .toolbar+.page__background+.page__content .toolbar, /* if wrapped with a page with a toolbar */
+  body[onsflag-iphonex] .tabbar--top__content .toolbar { /* if wrapped with a top tabbar */
+    /* Restore original styles */
+    top: 0;
+    box-sizing: border-box;
+    padding-top: 0;
+  }
+
+  /* Outermost page__content without toolbars */
+  body[onsflag-iphonex] .page__content {
+    top: 0;
+    padding-top: var(--iphonex-safe-area-inset-top-portrait);
+  }
+  /* Non-outermost page__content without toolbars */
+  body[onsflag-iphonex] .toolbar+.page__background+.page__content .page__content, /* if wrapped with a page with a toolbar */
+  body[onsflag-iphonex] .tabbar--top__content .page__content, /* if wrapped with a top tabbar */
+  body[onsflag-iphonex] .toolbar+.page__background+.page__content { /* if the page has a toolbar */
+    /* Restore original styles */
+    top: 0;
+    padding-top: 0;
+  }
+
+  /* Outermost page__content with a toolbar */
+  body[onsflag-iphonex] .toolbar+.page__background+.page__content {
+    top: calc(var(--iphonex-safe-area-inset-top-portrait) + var(--toolbar-height));
+    padding-top: 0;
+  }
+  /* Non-outermost page__content with a toolbar */
+  body[onsflag-iphonex] .toolbar+.page__background+.page__content .toolbar+.page__background+.page__content, /* if wrapped with a page with a toolbar */
+  body[onsflag-iphonex] .tabbar--top__content .toolbar+.page__background+.page__content { /* if wrapped with a top tabbar */
+    /* Restore original styles */
+    top: 0;
+    padding-top: 0;
+  }
+
+  /* Outermost page__content with a transparent cover-content toolbar and its direct descendant page_content */
+  body[onsflag-iphonex] .toolbar.toolbar--transparent.toolbar--cover-content+.page__background+.page__content,
+  body[onsflag-iphonex] .toolbar.toolbar--transparent.toolbar--cover-content+.page__background+.page__content .page_content {
+    top: 0;
+    padding-top: calc(var(--iphonex-safe-area-inset-top-portrait) + var(--toolbar-height));
+  }
+  /* Non-outermost page__content with a transparent cover-content toolbar and its direct descendant page_content */
+  body[onsflag-iphonex] .toolbar+.page__background+.page__content .toolbar.toolbar--transparent.toolbar--cover-content+.page__background+.page__content /* if wrapped with a page with a toolbar */
+  body[onsflag-iphonex] .toolbar+.page__background+.page__content .toolbar.toolbar--transparent.toolbar--cover-content+.page__background+.page__content .page__content,
+  body[onsflag-iphonex] .tabbar--top__content .toolbar.toolbar--transparent.toolbar--cover-content+.page__background+.page__content
+  body[onsflag-iphonex] .tabbar--top__content .toolbar.toolbar--transparent.toolbar--cover-content+.page__background+.page__content .page_content {  /* if wrapped with a top tabbar */
+    /* Restore original styles */
+    top: 0;
+    padding-top: var(--toolbar-height);
+  }
+
+  /* Outermost top tabbar */
+  body[onsflag-iphonex] .tabbar--top {
+    /* Restore original styles */
+    padding-top: var(--iphonex-safe-area-inset-top-portrait);
+  }
+  /* Non-outermost top tabbar */
+  body[onsflag-iphonex] .toolbar+.page__background+.page__content .tabbar--top, /* if wrapped with a page with a toolbar */
+  body[onsflag-iphonex] .tabbar--top__content .tabbar--top { /* if wrapped with a top tabbar */
+    /* Restore original styles */
+    padding-top: 0;
+  }
+}
+
+@media (orientation: landscape) {
+  
+}
