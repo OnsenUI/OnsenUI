@@ -56,12 +56,12 @@ input, textarea, select {
   -moz-user-select: text;
 }
 
-input:active, input:focus, textarea:active, textarea:focus, select:active, select:focus {
-  outline: none;
+a, button, input, textarea, select {
+  touch-action: manipulation;
 }
 
-a, button, input, textarea {
-  touch-action: manipulation;
+input:active, input:focus, textarea:active, textarea:focus, select:active, select:focus {
+  outline: none;
 }
 
 h1 {
