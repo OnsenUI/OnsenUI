@@ -63,13 +63,17 @@ const styler = function(element, style) {
  * @param {String} styles Space-separated CSS properties to remove
  */
 styler.clear = function(element, styles = '') {
-  const clearlist = styles.split(/\s+/).reduce((r, s) => r.concat([util.hyphenate(s), prefix(s)]), []);
+  const clearlist = styles.split(/\s+/).reduce((r, s) => r.concat([util.hyphenate(s), prefix(s)]), []),
+    keys = [];
+
   for (let i = element.style.length - 1; i >= 0; i--) {
     const key = element.style[i];
     if (clearlist.length === 0 || clearlist.some(s => key.indexOf(s) === 0)) {
-      element.style[key] = '';
+      keys.push(key); // Store the key to fix Safari style indexes
     }
   }
+
+  keys.forEach(key => element.style[key] = '');
   element.getAttribute('style') === '' && element.removeAttribute('style');
 };
 
