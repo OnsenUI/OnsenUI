@@ -24,6 +24,7 @@ ons-page, ons-navigator,
 ons-split-view, ons-sliding-menu, ons-tabbar,
 ons-gesture-detector {
   display: block;
+  touch-action: manipulation;
 }
 
 ons-navigator,
