@@ -112,7 +112,7 @@ ons.CardElement = CardElement;
 
 // fastclick
 window.addEventListener('load', () => {
-    ons.fastClick = FastClick.attach(document.body);
+  ons.fastClick = FastClick.attach(document.body);
 }, false);
 
 ons.ready(function() {
@@ -141,6 +141,6 @@ ons.ready(function() {
 });
 
 // viewport.js
-new Viewport().setup();
+Viewport.setup();
 
 export default ons;
