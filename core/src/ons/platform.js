@@ -77,7 +77,7 @@ class Platform {
    */
   isWKWebView() {
     const lte9 = /constructor/i.test(NativeHTMLElement);
-    return this.isIOS() && window.webkit && window.webkit.messageHandlers && window.indexedDB && !lte9;
+    return !!(this.isIOS() && window.webkit && window.webkit.messageHandlers && window.indexedDB && !lte9);
   }
 
   /**
@@ -89,8 +89,7 @@ class Platform {
    * @return {Boolean}
    */
   isUIWebView() {
-    const lte9 = /constructor/i.test(NativeHTMLElement);
-    return  this.isIOS() && !this.isIOSSafari() && !this.isWKWebView() && !window.indexedDB && !window.statusbar.visible && lte9;
+    return !!(this.isIOS() && !this.isIOSSafari() && !this.isWKWebView());
   }
 
   /**
@@ -105,7 +104,7 @@ class Platform {
     const navigator = window.navigator;
     const ua = navigator.userAgent;
 
-    return this.isIOS() && ua.indexOf('Safari') !== -1 && ua.indexOf('Version') !== -1 && !navigator.standalone;
+    return !!(this.isIOS() && ua.indexOf('Safari') !== -1 && ua.indexOf('Version') !== -1 && !navigator.standalone);
   }
 
   /**
