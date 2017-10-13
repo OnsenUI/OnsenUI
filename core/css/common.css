@@ -111,26 +111,6 @@ ons-bottom-toolbar {
   overflow: auto;
 }
 
-.toolbar:not(.toolbar--transparent) + .page__background,
-.toolbar:not(.toolbar--cover-content) + .page__background + .page__content {
-  top: 44px;
-}
-
-.toolbar.toolbar--cover-content + .page__background + .page__content,
-.toolbar.toolbar--cover-content + .page__background + .page__content .page__content {
-  padding-top: 44px;
-}
-
-.toolbar--material:not(.toolbar--transparent) + .page__background,
-.toolbar--material:not(.toolbar--cover-content) + .page__background + .page__content {
-  top: 56px;
-}
-
-.toolbar--material.toolbar--cover-content + .page__background + .page__content,
-.toolbar--material.toolbar--cover-content + .page__background + .page__content .page__content {
-  padding-top: 56px;
-}
-
 .page[status-bar-fill] > .page__content {
   top: 20px;
 }
