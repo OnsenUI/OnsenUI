@@ -18,42 +18,14 @@ limitations under the License.
 import util from '../ons/util';
 
 /**
- * Minimal utility library for manipulating element's style.
- */
-const styler = function(element, style) {
-  return styler.css.apply(styler, arguments);
-};
-
-/**
- * Set element's style.
- *
- * @param {Element} element
- * @param {Object} styles
- * @return {Element}
- */
-styler.css = function(element, styles) {
-  var keys = Object.keys(styles);
-  keys.forEach(function(key) {
-    if (key in element.style) {
-      element.style[key] = styles[key];
-    } else if (styler._prefix(key) in element.style) {
-      element.style[styler._prefix(key)] = styles[key];
-    } else {
-      util.warn('No such style property: ' + key);
-    }
-  });
-  return element;
-};
-
-/**
  * Add vendor prefix.
  *
  * @param {String} name
  * @return {String}
  */
-styler._prefix = (function() {
-  var styles = window.getComputedStyle(document.documentElement, '');
-  var prefix = (Array.prototype.slice
+const prefix = (function() {
+  const styles = window.getComputedStyle(document.documentElement, '');
+  const prefix = (Array.prototype.slice
     .call(styles)
     .join('')
     .match(/-(moz|webkit|ms)-/) || (styles.OLink === '' && ['', 'o'])
@@ -64,27 +36,45 @@ styler._prefix = (function() {
   };
 })();
 
+
 /**
+ * Minimal utility library for manipulating element's style.
+ * Set element's style.
+ *
  * @param {Element} element
+ * @param {Object} styles
+ * @return {Element}
  */
-styler.clear = function(element) {
-  styler._clear(element);
+const styler = function(element, style) {
+  Object.keys(style).forEach(function(key) {
+    if (key in element.style) {
+      element.style[key] = style[key];
+    } else if (prefix(key) in element.style) {
+      element.style[prefix(key)] = style[key];
+    } else {
+      util.warn('No such style property: ' + key);
+    }
+  });
+  return element;
 };
 
 /**
  * @param {Element} element
+ * @param {String} styles Space-separated CSS properties to remove
  */
-styler._clear = function(element) {
-  var len = element.style.length;
-  var style = element.style;
-  var keys = [];
-  for (var i = 0; i < len; i++) {
-    keys.push(style[i]);
+styler.clear = function(element, styles = '') {
+  const clearlist = styles.split(/\s+/).reduce((r, s) => r.concat([util.hyphenate(s), prefix(s)]), []),
+    keys = [];
+
+  for (let i = element.style.length - 1; i >= 0; i--) {
+    const key = element.style[i];
+    if (clearlist.length === 0 || clearlist.some(s => key.indexOf(s) === 0)) {
+      keys.push(key); // Store the key to fix Safari style indexes
+    }
   }
 
-  keys.forEach(function(key) {
-    style[key] = '';
-  });
+  keys.forEach(key => element.style[key] = '');
+  element.getAttribute('style') === '' && element.removeAttribute('style');
 };
 
 export default styler;

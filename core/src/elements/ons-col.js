@@ -15,6 +15,7 @@ limitations under the License.
 
 */
 
+import styler from '../ons/styler';
 import BaseElement from './base/base-element';
 
 /**
@@ -75,17 +76,15 @@ export default class ColElement extends BaseElement {
 
   _updateWidth() {
     let width = this.getAttribute('width');
-    if (typeof width  === 'string') {
-      width = ('' + width).trim();
-      width = width.match(/^\d+$/) ? width + '%' : width;
+    if (!width) {
+      styler.clear(this, 'flex maxWidth');
+    } else {
+      width = width.trim().match(/^\d+$/) ? width + '%' : width;
 
-      this.style.webkitBoxFlex = '0';
-      this.style.webkitFlex = '0 0 ' + width;
-      this.style.mozBoxFlex = '0';
-      this.style.mozFlex = '0 0 ' + width;
-      this.style.msFlex = '0 0 ' + width;
-      this.style.flex = '0 0 ' + width;
-      this.style.maxWidth = width;
+      styler(this, {
+        flex: '0 0 ' + width,
+        maxWidth: width
+      });
     }
   }
 }

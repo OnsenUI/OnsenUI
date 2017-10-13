@@ -54,17 +54,6 @@ describe('OnsListItemElement', () => {
     });
   });
 
-  describe('#_shouldLockOnDrag()', () => {
-    it('returns false if \'lock-on-drag\' element is not present', () => {
-      expect(listItem._shouldLockOnDrag()).to.be.false;
-    });
-
-    it('returns true if \'lock-on-drag\' element is present', () => {
-      listItem.setAttribute('lock-on-drag', '');
-      expect(listItem._shouldLockOnDrag()).to.be.true;
-    });
-  });
-
   describe('#_onTouch()', () => {
     it('should add change the background color.', () => {
       const color = 'rgb(250, 250, 250)';

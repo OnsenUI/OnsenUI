@@ -308,7 +308,7 @@ export default class SpeedDialElement extends BaseElement {
    */
   show() {
     this._fab.show();
-    this.style.webkitTransform = this.style.transform =  this._getTranslate();
+    styler(this, { transform: this._getTranslate });
     return Promise.resolve();
   }
 
