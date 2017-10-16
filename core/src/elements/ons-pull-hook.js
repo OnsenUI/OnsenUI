@@ -115,7 +115,7 @@ export default class PullHookElement extends BaseElement {
   _setStyle() {
     const height = this.height + 'px';
     styler(this, { height, lineHeight: height });
-    this._show();
+    this.style.display === '' && this._show();
   }
 
   _onScroll(event) {
