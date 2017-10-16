@@ -319,6 +319,12 @@ export default class SplitterSideElement extends BaseElement {
     });
 
     contentReady(this, () => {
+      // These attributes are used early by the parent element
+      this.attributeChangedCallback('width');
+      if (!this.hasAttribute('side')) {
+        this.setAttribute('side', 'left');
+      }
+
       rewritables.ready(this, () => {
         const page = this._page || this.getAttribute('page');
         page && this.load(page);
@@ -363,10 +369,6 @@ export default class SplitterSideElement extends BaseElement {
     contentReady(this, () => {
       this.constructor.observedAttributes.forEach(attr => this.attributeChangedCallback(attr, null, this.getAttribute(attr)));
     });
-
-    if (!this.hasAttribute('side')) {
-      this.setAttribute('side', 'left');
-    }
   }
 
   get side() {

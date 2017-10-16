@@ -16,7 +16,8 @@ dev
  * ons-page: Minor issue with status bar when the page is moved in DOM.
  * deviceBackButton: Fixed [#2215](https://github.com/OnsenUI/OnsenUI/issues/2215).
  * templates: Firefox issue. Fixed [#2216](https://github.com/OnsenUI/OnsenUI/issues/2216).
- * Dialogs: Prevent scrolling behind dialog masks due to iOS bug.
+ * Dialogs: Prevent scrolling behind dialog masks due to iOS bug. Fixed [#2220](https://github.com/OnsenUI/OnsenUI/issues/2220).
+ * Splitter: Correctly set content width on inital split mode. Fixed [#2205](https://github.com/OnsenUI/OnsenUI/issues/2205).
 
 2.6.1
 ----
