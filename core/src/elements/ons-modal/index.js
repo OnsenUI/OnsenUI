@@ -191,6 +191,16 @@ export default class ModalElement extends BaseDialogElement {
     this.style.display = shouldShow ? 'table' : 'none';
   }
 
+  connectedCallback() {
+    super.connectedCallback();
+    this.addEventListener('touchmove', super._preventScroll, false); // iOS fix
+  }
+
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    this.removeEventListener('touchmove', super._preventScroll, false);
+  }
+
   /**
    * @property visible
    * @readonly
