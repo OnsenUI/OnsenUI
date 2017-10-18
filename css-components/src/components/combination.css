@@ -8,6 +8,11 @@
   box-sizing: border-box;
   padding-top: 0;
 }
+.bottom-bar {
+  bottom: 0;
+  box-sizing: border-box;
+  padding-bottom: 0;
+}
 
 /* All page__background with a ordinal toolbar */
 .toolbar+.page__background {
@@ -46,6 +51,10 @@
 /* All top tabbar */
 .tabbar--top {
   padding-top: 0;
+}
+/* All bottom tabbar */
+.tabbar {
+  padding-bottom: 0;
 }
 
 /* -------- */
