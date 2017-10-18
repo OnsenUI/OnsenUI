@@ -156,3 +156,55 @@
     bottom: var(--tabbar-height);
   }
 }
+
+@media (orientation: landscape) {
+  /* Outermost bottom-bar */
+  body[onsflag-iphonex-landscape] .bottom-bar {
+    bottom: 0;
+    box-sizing: content-box;
+    padding-bottom: var(--iphonex-safe-area-inset-bottom-landscape);
+  }
+  /* Non-outermost bottom-bar */
+  body[onsflag-iphonex-landscape] .page-with-bottom-toolbar > .page__content .bottom-bar, /* if wrapped with a page with a bottom-bar */
+  body[onsflag-iphonex-landscape] .tabbar__content .bottom-bar { /* if wrapped with a bottom tabbar */
+    /* Restore original styles */
+    bottom: 0;
+    box-sizing: border-box;
+    padding-bottom: 0;
+  }
+
+  /* Outermost page__content with a bottom-bar */
+  body[onsflag-iphonex-landscape] .page-with-bottom-toolbar > .page__content {
+    bottom: calc(var(--iphonex-safe-area-inset-bottom-landscape) + var(--toolbar-height));
+    padding-bottom: 0;
+  }
+  /* Non-outermost page__content with a bottom-bar */
+  body[onsflag-iphonex-landscape] .page-with-bottom-toolbar > .page__content .page-with-bottom-toolbar > .page__content, /* if wrapped with a page with a bottom-bar */
+  body[onsflag-iphonex-landscape] .tabbar__content .page-with-bottom-toolbar > .page__content { /* if wrapped with a bottom tabbar */
+    /* Restore original styles */
+    bottom: var(--toolbar-height);
+    padding-bottom: 0;
+  }
+
+  /* Outermost bottom tabbar */
+  body[onsflag-iphonex-landscape] .tabbar {
+    padding-bottom: var(--iphonex-safe-area-inset-bottom-landscape);
+  }
+  /* Non-outermost bottom tabbar */
+  body[onsflag-iphonex-landscape] .page-with-bottom-toolbar > .page__content .tabbar, /* if wrapped with a page with a bottom-bar */
+  body[onsflag-iphonex-landscape] .tabbar__content .tabbar { /* if wrapped with a bottom tabbar */
+    /* Restore original styles */
+    padding-bottom: 0;
+  }
+
+  /* Outermost tabbar__content */
+  body[onsflag-iphonex-landscape] .tabbar__content {
+    bottom: calc(var(--iphonex-safe-area-inset-bottom-landscape) + var(--tabbar-height));
+  }
+  /* Non-outermost tabbar__content */
+  body[onsflag-iphonex-landscape] .page-with-bottom-toolbar > .page__content .tabbar__content, /* if wrapped with a page with a bottom-bar */
+  body[onsflag-iphonex-landscape] .tabbar__content .tabbar__content { /* if wrapped with a bottom tabbar */
+    /* Restore original styles */
+    bottom: var(--tabbar-height);
+  }
+}
