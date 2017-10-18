@@ -556,10 +556,12 @@ export default class TabbarElement extends BaseElement {
   }
 
   _show() {
+    this._swiper.show();
     setImmediate(() => this.tabs[this.getActiveTabIndex()].loaded.then(el => el && setImmediate(() => el._show())));
   }
 
   _hide() {
+    this._swiper.hide();
     const topPage = this.topPage;
     topPage && topPage._hide();
   }

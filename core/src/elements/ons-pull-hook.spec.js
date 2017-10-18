@@ -69,13 +69,6 @@ describe('OnsPullHookElement', () => {
     });
   });
 
-  describe('#_generateTranslationTransform()', () => {
-    it('returns a string', () => {
-      const transform = pullHook._generateTranslationTransform(100);
-      expect(transform).to.be.a('string');
-    });
-  });
-
   describe('#_onDrag()', () => {
     it('does nothing if disabled', () => {
       const spy = chai.spy.on(pullHook, '_translateTo');
@@ -216,23 +209,10 @@ describe('OnsPullHookElement', () => {
     });
   });
 
-  describe('#_getState()', () => {
-    it('returns the state', () => {
-      pullHook.setAttribute('state', 'hoge');
-      expect(pullHook._getState()).to.equal('hoge');
-    });
-  });
-
   describe('#state', () => {
     it('returns the state', () => {
       pullHook.setAttribute('state', 'hoge');
       expect(pullHook.state).to.equal('hoge');
-    });
-  });
-
-  describe('#_getCurrentScroll()', () => {
-    it('returns the current page scroll', () => {
-      expect(pullHook._getCurrentScroll()).to.equal(page.scrollTop);
     });
   });
 
@@ -247,17 +227,6 @@ describe('OnsPullHookElement', () => {
       expect(pullHook.hasAttribute('disabled')).to.be.false;
       pullHook.disabled = true;
       expect(pullHook.hasAttribute('disabled')).to.be.true;
-    });
-  });
-
-  describe('#_getScrollableElement()', () => {
-    it('returns itself if content is fixed', () => {
-      pullHook.setAttribute('fixed-content', '');
-      expect(pullHook._getScrollableElement()).to.equal(pullHook);
-    });
-
-    it('returns another element if content is not fixed', () => {
-      expect(pullHook._getScrollableElement()).not.to.equal(pullHook);
     });
   });
 });

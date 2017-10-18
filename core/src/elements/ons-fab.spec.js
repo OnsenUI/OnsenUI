@@ -142,22 +142,6 @@ describe('OnsFabElement', () => {
     });
   });
 
-  describe('#toggle()', () => {
-    it('calls #show() if element is hidden', () => {
-      fab.hide();
-      const spy = chai.spy.on(fab, 'show');
-      fab.toggle();
-      expect(spy).to.have.been.called.once;
-    });
-
-    it('calls #hide() if element is shown', () => {
-      fab.show();
-      const spy = chai.spy.on(fab, 'hide');
-      fab.toggle();
-      expect(spy).to.have.been.called.once;
-    });
-  });
-
   describe('#_compile()', () => {
     it('does not compile twice', () => {
       const div1 = document.createElement('div');
