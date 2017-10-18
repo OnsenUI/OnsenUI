@@ -56,10 +56,12 @@
     padding-bottom: 0;
   }
 
-  /* Outermost page__content without toolbars */
+  /* Outermost page__content without toolbars or bottom-bars */
   body[onsflag-iphonex-portrait] .page__content {
     top: 0;
     padding-top: var(--iphonex-safe-area-inset-top-portrait);
+    bottom: 0;
+    padding-bottom: var(--iphonex-safe-area-inset-bottom-portrait);
   }
   /* Non-outermost */
   body[onsflag-iphonex-portrait] .toolbar+.page__background+.page__content .page__content, /* if wrapped with a page with a toolbar */
@@ -68,6 +70,13 @@
     /* Restore original styles */
     top: 0;
     padding-top: 0;
+  }
+  body[onsflag-iphonex-portrait] .page-with-bottom-toolbar > .page__content .page__content, /* if wrapped with a page with a bottom-bar */
+  body[onsflag-iphonex-portrait] .tabbar__content:not(.tabbar--top__content) .page__content, /* if wrapped with a bottom tabbar */
+  body[onsflag-iphonex-portrait] .page-with-bottom-toolbar > .page__content { /* if the page has a bottom-bar */
+    /* Restore original styles */
+    bottom: 0;
+    padding-bottom: 0;
   }
 
   /* Outermost page__content with a toolbar */
@@ -170,6 +179,20 @@
     /* Restore original styles */
     bottom: 0;
     box-sizing: border-box;
+    padding-bottom: 0;
+  }
+
+  /* Outermost page__content without bottom-bars */
+  body[onsflag-iphonex-landscape] .page__content {
+    bottom: 0;
+    padding-bottom: var(--iphonex-safe-area-inset-bottom-landscape);
+  }
+  /* Non-outermost */
+  body[onsflag-iphonex-landscape] .page-with-bottom-toolbar > .page__content .page__content, /* if wrapped with a page with a bottom-bar */
+  body[onsflag-iphonex-landscape] .tabbar__content:not(.tabbar--top__content) .page__content, /* if wrapped with a bottom tabbar */
+  body[onsflag-iphonex-landscape] .page-with-bottom-toolbar > .page__content { /* if the page has a bottom-bar */
+    /* Restore original styles */
+    bottom: 0;
     padding-bottom: 0;
   }
 
