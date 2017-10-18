@@ -13,6 +13,7 @@ dev
 
 ### Bug Fixes
 
+ * css-components: Fixed margin of `.action-sheet` and `.action-sheet-button`.
  * ons-page: Minor issue with status bar when the page is moved in DOM.
 
 2.6.1
