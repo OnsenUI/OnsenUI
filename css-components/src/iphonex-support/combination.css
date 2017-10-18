@@ -64,7 +64,7 @@
   body[onsflag-iphonex-portrait] .toolbar+.page__background+.page__content .toolbar+.page__background+.page__content, /* if wrapped with a page with a toolbar */
   body[onsflag-iphonex-portrait] .tabbar--top__content .toolbar+.page__background+.page__content { /* if wrapped with a top tabbar */
     /* Restore original styles */
-    top: 0;
+    top: var(--toolbar-height);
     padding-top: 0;
   }
 
