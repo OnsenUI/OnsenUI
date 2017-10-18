@@ -1,0 +1,6 @@
+@media (orientation: landscape) {
+  body[onsflag-iphonex-landscape] .page__content {
+    padding-left: var(--iphonex-safe-area-inset-left-landscape);
+    padding-right: var(--iphonex-safe-area-inset-right-landscape);
+  }
+}
