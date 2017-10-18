@@ -14,6 +14,7 @@ dev
 ### Bug Fixes
 
  * ons-page: Minor issue with status bar when the page is moved in DOM.
+ * core: Changed to disable FastClick when it isn't needed.
 
 2.6.1
 ----
