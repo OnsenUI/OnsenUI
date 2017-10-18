@@ -86,7 +86,6 @@
 
   /* Outermost top tabbar */
   body[onsflag-iphonex-portrait] .tabbar--top {
-    /* Restore original styles */
     padding-top: var(--iphonex-safe-area-inset-top-portrait);
   }
   /* Non-outermost top tabbar */
