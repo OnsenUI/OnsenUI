@@ -1,0 +1,9 @@
+@media (orientation: landscape) {
+  body[onsflag-iphonex-landscape] .toolbar__left {
+    padding-left: var(--iphonex-safe-area-inset-left-landscape);
+  }
+
+  body[onsflag-iphonex-landscape] .toolbar__right {
+    padding-right: var(--iphonex-safe-area-inset-right-landscape);
+  }
+}
