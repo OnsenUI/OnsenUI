@@ -15,6 +15,9 @@ limitations under the License.
 
 */
 
+// Save HTMLElement object before Custom Elements polyfill patch global HTMLElement.
+const NativeHTMLElement = window.HTMLElement;
+
 /**
  * @object ons.platform
  * @category util
@@ -30,6 +33,7 @@ class Platform {
    */
   constructor() {
     this._renderPlatform = null;
+    this._ignorePlatformSelect = false;
   }
 
   /**
@@ -46,6 +50,18 @@ class Platform {
     if (typeof platform === 'string') {
       this._renderPlatform = platform.trim().toLowerCase();
     }
+  }
+
+  _getRenderPlatform() {
+    return this._ignorePlatformSelect ? null : this._renderPlatform;
+  }
+
+  runOnActualPlatform(fn) {
+    this._ignorePlatformSelect = true;
+    const result = fn();
+    this._ignorePlatformSelect = false;
+
+    return result;
   }
 
   /**
@@ -65,6 +81,46 @@ class Platform {
   }
 
   /**
+   * @method isWKWebView
+   * @signature isWKWebView()
+   * @description
+   *   [en]Returns whether app is running in WKWebView.[/en]
+   *   [ja]WKWebViewで実行されているかどうかを返します。[/ja]
+   * @return {Boolean}
+   */
+  isWKWebView() {
+    const lte9 = /constructor/i.test(NativeHTMLElement);
+    return !!(this.isIOS() && window.webkit && window.webkit.messageHandlers && window.indexedDB && !lte9);
+  }
+
+  /**
+   * @method isUIWebView
+   * @signature isUIWebView()
+   * @description
+   *   [en]Returns whether app is running in UIWebView.[/en]
+   *   [ja]UIWebViewで実行されているかどうかを返します。[/ja]
+   * @return {Boolean}
+   */
+  isUIWebView() {
+    return !!(this.isIOS() && !this.isIOSSafari() && !this.isWKWebView());
+  }
+
+  /**
+   * @method isIOSSafari
+   * @signature isIOSSafari()
+   * @description
+   *   [en]Returns whether app is running in iOS Safari.[/en]
+   *   [ja]iOS Safariで実行されているかどうかを返します。[/ja]
+   * @return {Boolean}
+   */
+  isIOSSafari() {
+    const navigator = window.navigator;
+    const ua = navigator.userAgent;
+
+    return !!(this.isIOS() && ua.indexOf('Safari') !== -1 && ua.indexOf('Version') !== -1 && !navigator.standalone);
+  }
+
+  /**
    * @method isIOS
    * @signature isIOS()
    * @description
@@ -73,8 +129,8 @@ class Platform {
    * @return {Boolean}
    */
   isIOS() {
-    if (this._renderPlatform) {
-      return this._renderPlatform === 'ios';
+    if (this._getRenderPlatform()) {
+      return this._getRenderPlatform() === 'ios';
     } else if (typeof device === 'object' && !/browser/i.test(device.platform)) {
       return /iOS/i.test(device.platform);
     } else {
@@ -91,8 +147,8 @@ class Platform {
    * @return {Boolean}
    */
   isAndroid() {
-    if (this._renderPlatform) {
-      return this._renderPlatform === 'android';
+    if (this._getRenderPlatform()) {
+      return this._getRenderPlatform() === 'android';
     } else if (typeof device === 'object' && !/browser/i.test(device.platform)) {
       return /Android/i.test(device.platform);
     } else {
@@ -128,8 +184,8 @@ class Platform {
    * @return {Boolean}
    */
   isWP() {
-    if (this._renderPlatform) {
-      return this._renderPlatform === 'wp';
+    if (this._getRenderPlatform()) {
+      return this._getRenderPlatform() === 'wp';
     } else if (typeof device === 'object' && !/browser/i.test(device.platform)) {
       return /Win32NT|WinCE/i.test(device.platform);
     } else {
@@ -177,8 +233,8 @@ class Platform {
    * @return {Boolean}
    */
   isBlackBerry() {
-    if (this._renderPlatform) {
-      return this._renderPlatform === 'blackberry';
+    if (this._getRenderPlatform()) {
+      return this._getRenderPlatform() === 'blackberry';
     } else if (typeof device === 'object' && !/browser/i.test(device.platform)) {
       return /BlackBerry/i.test(device.platform);
     } else {
@@ -195,8 +251,8 @@ class Platform {
    * @return {Boolean}
    */
   isOpera() {
-    if (this._renderPlatform) {
-      return this._renderPlatform === 'opera';
+    if (this._getRenderPlatform()) {
+      return this._getRenderPlatform() === 'opera';
     } else {
       return (!!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0);
     }
@@ -211,8 +267,8 @@ class Platform {
    * @return {Boolean}
    */
   isFirefox() {
-    if (this._renderPlatform) {
-      return this._renderPlatform === 'firefox';
+    if (this._getRenderPlatform()) {
+      return this._getRenderPlatform() === 'firefox';
     } else {
       return (typeof InstallTrigger !== 'undefined');
     }
@@ -227,8 +283,8 @@ class Platform {
    * @return {Boolean}
    */
   isSafari() {
-    if (this._renderPlatform) {
-      return this._renderPlatform === 'safari';
+    if (this._getRenderPlatform()) {
+      return this._getRenderPlatform() === 'safari';
     } else {
       return (Object.prototype.toString.call(window.HTMLElement).indexOf('Constructor') > 0) || (function (p) { return p.toString() === '[object SafariRemoteNotification]' })(!window['safari'] || safari.pushNotification);
     }
@@ -243,8 +299,8 @@ class Platform {
    * @return {Boolean}
    */
   isChrome() {
-    if (this._renderPlatform) {
-      return this._renderPlatform === 'chrome';
+    if (this._getRenderPlatform()) {
+      return this._getRenderPlatform() === 'chrome';
     } else {
       return (!!window.chrome && !(!!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0) && !(navigator.userAgent.indexOf(' Edge/') >= 0));
     }
@@ -259,8 +315,8 @@ class Platform {
    * @return {Boolean}
    */
   isIE() {
-    if (this._renderPlatform) {
-      return this._renderPlatform === 'ie';
+    if (this._getRenderPlatform()) {
+      return this._getRenderPlatform() === 'ie';
     } else {
       return false || !!document.documentMode;
     }
@@ -275,8 +331,8 @@ class Platform {
    * @return {Boolean}
    */
   isEdge() {
-    if (this._renderPlatform) {
-      return this._renderPlatform === 'edge';
+    if (this._getRenderPlatform()) {
+      return this._getRenderPlatform() === 'edge';
     } else {
       return navigator.userAgent.indexOf(' Edge/') >= 0;
     }

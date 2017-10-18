@@ -6,7 +6,7 @@ function init() {
 
   window.components = components;
 
-  var app = new Vue(createAppComponent({
+  const app = new Vue(createAppComponent({
     components,
     categories
   }));

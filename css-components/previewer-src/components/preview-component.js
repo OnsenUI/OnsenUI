@@ -3,7 +3,8 @@ export const ComponentExample = {
   props: ['component'],
   template: `
       <div class="page component-example" :class="{'page--material__background': isAndroid()}">
-        <div style="width: 100%;" v-html="component.markup"></div>
+        <!-- ontouchstart is a hack to enable :active CSS selector in iOS browsers. -->
+        <div style="width: 100%;" v-html="component.markup" ontouchstart=""></div>
       </div>
     `,
   methods: {

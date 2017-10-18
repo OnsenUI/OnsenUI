@@ -14,6 +14,7 @@ dev
 ### Bug Fixes
 
  * ons-page: Minor issue with status bar when the page is moved in DOM.
+ * core: Changed to disable FastClick when it isn't needed.
  * deviceBackButton: Fixed [#2215](https://github.com/OnsenUI/OnsenUI/issues/2215).
  * templates: Firefox issue. Fixed [#2216](https://github.com/OnsenUI/OnsenUI/issues/2216).
  * dialogs: Prevent scrolling behind dialog masks due to iOS bug. Fixed [#2220](https://github.com/OnsenUI/OnsenUI/issues/2220).
