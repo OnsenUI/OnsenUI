@@ -53,7 +53,7 @@
   padding-top: 0;
 }
 /* All bottom tabbar */
-.tabbar {
+.tabbar:not(.tabbar--top) {
   padding-bottom: 0;
 }
 
