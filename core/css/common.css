@@ -154,10 +154,6 @@ ons-tabbar[position="top"] .page[status-bar-fill] > .page__content {
   top: 49px;
 }
 
-.page-with-bottom-toolbar > .page__content {
-  bottom: 44px;
-}
-
 .page__content > .list:not(.list--material):first-child {
   margin-top: -1px; /* Avoid double border with toolbar */
 }

@@ -22,11 +22,17 @@
 .page__content {
   top: 0;
   padding-top: 0;
+
+  bottom: 0;
 }
 /* All page__content with a toolbar */
 .toolbar+.page__background+.page__content {
   top: var(--toolbar-height);
   padding-top: 0;
+}
+/* All page__content with a bottom-bar */
+.page-with-bottom-toolbar > .page__content {
+  bottom: 44px;
 }
 
 /* All page__content with a transparent cover-content toolbar and its direct descendant page_content */
@@ -35,6 +41,7 @@
   top: 0;
   padding-top: var(--toolbar-height);
 }
+
 
 /* All top tabbar */
 .tabbar--top {
