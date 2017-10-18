@@ -118,18 +118,20 @@ window.addEventListener('load', () => {
 
   const suppportTouchAction = 'touch-action' in document.body.style;
 
-  if (ons.platform.isAndroid()) {
-    // In Android4.4+, correct viewport settings can remove click delay.
-    // So disable FastClick on Android.
-    ons.fastClick.destroy();
-  } else if (ons.platform.isIOS()) {
-    if (supportTouchAction && (ons.platform.isIOSSafari() || ons.platform.isWKWebView())) {
-      // If 'touch-action' supported in iOS Safari or WKWebView, disable FastClick.
+  ons.platform.runOnActualPlatform(() => {
+    if (ons.platform.isAndroid()) {
+      // In Android4.4+, correct viewport settings can remove click delay.
+      // So disable FastClick on Android.
       ons.fastClick.destroy();
-    } else {
-      // Do nothing. 'touch-action: manipulation' has no effect on UIWebView.
+    } else if (ons.platform.isIOS()) {
+      if (supportTouchAction && (ons.platform.isIOSSafari() || ons.platform.isWKWebView())) {
+        // If 'touch-action' supported in iOS Safari or WKWebView, disable FastClick.
+        ons.fastClick.destroy();
+      } else {
+        // Do nothing. 'touch-action: manipulation' has no effect on UIWebView.
+      }
     }
-  }
+  });
 }, false);
 
 ons.ready(function() {
