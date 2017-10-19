@@ -1,24 +1,15 @@
-import 'babel-polyfill';
-
-// Rollup plugins
 import pkg from './package.json';
 import dateformat from 'dateformat';
 
+// Rollup plugins
 import babel from 'rollup-plugin-babel';
 import eslint from 'rollup-plugin-eslint';
 import resolve from 'rollup-plugin-node-resolve';
 import commonjs from 'rollup-plugin-commonjs';
-import replace from 'rollup-plugin-replace';
 import string from 'rollup-plugin-string';
-
 import filesize from 'rollup-plugin-filesize';
 import progress from 'rollup-plugin-progress';
 import visualizer from 'rollup-plugin-visualizer';
-// import uglify from 'rollup-plugin-uglify';
-// import postcssPlugin from 'rollup-plugin-postcss';
-
-// import cssnano from 'cssnano';
-// import cssnext from 'postcss-cssnext';
 
 const stringOpt = { include: '**/*.svg', }; // SVG images
 
@@ -50,23 +41,8 @@ const commonjsOpt = {
   include: 'node_modules/**',
 };
 
-const replaceOpt = {
-  ONS_ENV: JSON.stringify(process.env.NODE_ENV || 'production')
-};
 
-
-// const postcss = postcss({
-//   extensions: ['.css'],
-//   plugins: [
-//     cssnext({
-//       browsers: [],
-//       warnForDuplicates: false,
-//     }),
-//     cssnano(),
-//   ],
-// });
-
-const builds = [
+export default [
   {
     input: 'core/src/setup.js',
     output: {
@@ -89,15 +65,12 @@ const builds = [
       resolve(resolveOpt),
       commonjs(commonjsOpt),
       babel(babelOpt),
-      replace(replaceOpt),
       progress(),
       filesize(),
       visualizer({
         filename: 'module-stats.html',
         sourcemap: true, // Shows minified sizes
       }),
-      // uglify()
-      // (process.env.NODE_ENV === 'production' && uglify())
     ],
     banner: `/* ${pkg.name} v${pkg.version} - ${dateformat(new Date(), 'yyyy-mm-dd')} */\n`
   },
@@ -133,5 +106,3 @@ const builds = [
     banner: `/* angular-${pkg.name} v${pkg.version} - ${dateformat(new Date(), 'yyyy-mm-dd')} */\n`
   }
 ];
-
-export default builds;
