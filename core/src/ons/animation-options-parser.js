@@ -66,7 +66,7 @@ const nextToken = (string) => {
       }
     }
 
-  } else if (string[0] === '\'' || string[0] === '\"') {
+  } else if (string[0] === '\'' || string[0] === '"') {
 
     for (let i = 1; i < string.length; i++) {
       if (string[i] === string[0]) {
@@ -90,7 +90,7 @@ const nextToken = (string) => {
 };
 
 const parseObject = (string) => {
-  const isValidKey = key => /^[A-Z_\$][A-Z0-9_\$]*$/i.test(key);
+  const isValidKey = key => /^[A-Z_$][A-Z0-9_$]*$/i.test(key);
 
   string = string.trim();
   const originalString = string;

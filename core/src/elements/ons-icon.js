@@ -182,7 +182,7 @@ export default class IconElement extends BaseElement {
       classList.push('fa');
     } else if(iconName.indexOf('md-') === 0)  {
       classList.push('zmdi');
-      classList.push('zmdi-' + iconName.split(/\-(.+)?/)[1]);
+      classList.push('zmdi-' + iconName.split(/-(.+)?/)[1]);
     } else {
       classList.push('fa');
       classList.push('fa-' + iconName);
