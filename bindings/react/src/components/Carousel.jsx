@@ -58,6 +58,7 @@ class Carousel extends SimpleWrapper {
     node.addEventListener('postchange', this.onChange);
     node.addEventListener('refresh', this.onRefresh);
     node.addEventListener('overscroll', this.onOverscroll);
+    node.onSwipe = this.props.onSwipe || null;
   }
 
   componentWillUnmount() {
@@ -77,25 +78,17 @@ class Carousel extends SimpleWrapper {
     if (this.props.children.length !== props.children.length) {
       node.refresh();
     }
+
+    if (this.props.onSwipe !== props.onSwipe) {
+      node.onSwipe = this.props.onSwipe;
+    }
   }
 
   render() {
-    const {...others} = this.props;
-
-    ['fullscreen', 'swipeable', 'disabled', 'centered', 'overscrollable', 'centered'].forEach((el) => {
-      Util.convert(others, el);
-    });
-
-    Util.convert(others, 'itemWidth', {fun: Util.sizeConverter, newName: 'item-width'});
-    Util.convert(others, 'itemHeight', {fun: Util.sizeConverter, newName: 'item-height'});
-    Util.convert(others, 'autoScroll', {newName: 'auto-scroll'});
-    Util.convert(others, 'autoRefresh', {newName: 'auto-refresh'});
-    Util.convert(others, 'autoScrollRatio', {newName: 'auto-scroll-ratio'});
-    Util.convert(others, 'index', {newName: 'initial-index'});
-    Util.convert(others, 'animationOptions', {fun: Util.animationOptionsConverter, newName: 'animation-options'});
+    const attrs = Util.getAttrs(this, this.props, { index: 'initial-index' });
 
     return (
-      <ons-carousel {...others}>
+      <ons-carousel {...attrs}>
         <div>
           {this.props.children}
         </div>
@@ -251,7 +244,16 @@ Carousel.propTypes = {
    *  [en]Specify the animation's duration, delay and timing. E.g.  `{duration: 0.2, delay: 0.4, timing: 'ease-in'}`.[/en]
    *  [ja][/ja]
    */
-  animationOptions: PropTypes.object
+  animationOptions: PropTypes.object,
+
+  /**
+   * @name onSwipe
+   * @type function
+   * @description
+   *  [en]Hook called whenever the user slides the carousel. It gets a decimal index and an animationOptions object as arguments.[/en]
+   *  [ja][/ja]
+   */
+  onSwipe: PropTypes.func
 };
 
 export default Carousel;

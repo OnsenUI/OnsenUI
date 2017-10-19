@@ -25,7 +25,7 @@ const defaultClassName = 'card';
 const scheme = {
   '': 'card--*',
   '.card__title': 'card--*__title',
-  '.card__content': 'card--*__content',
+  '.card__content': 'card--*__content'
 };
 
 /**

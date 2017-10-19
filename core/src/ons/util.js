@@ -15,6 +15,7 @@ limitations under the License.
 
 */
 
+import styler from './styler';
 import internal from './internal';
 import autoStyle from './autostyle';
 import ModifierUtil from './internal/modifier-util';
@@ -72,7 +73,7 @@ util.findParent = (element, query, until) => {
 
   let parent = element.parentNode;
   for (;;) {
-    if (!parent || parent === document || (until && until(parent))) {
+    if (!parent || parent === document || parent instanceof DocumentFragment || (until && until(parent))) {
       return null;
     } else if (match(parent)) {
       return parent;
@@ -129,6 +130,12 @@ util.propagateAction = (element, action) => {
 util.camelize = string => string.toLowerCase().replace(/-([a-z])/g, (m, l) => l.toUpperCase());
 
 /**
+ * @param {String} string - string to be hyphenated
+ * @return {String} Hyphenated string
+ */
+util.hyphenate = string => string.replace(/([a-zA-Z])([A-Z])/g, '$1-$2').toLowerCase();
+
+/**
  * @param {String} selector - tag and class only
  * @param {Object} style
  * @param {Element}
@@ -141,7 +148,7 @@ util.create = (selector = '', style = {}) => {
     element.className = classList.join(' ');
   }
 
-  util.extend(element.style, style);
+  styler(element, style);
 
   return element;
 };
@@ -173,15 +180,9 @@ util.createElement = (html) => {
  * @return {HTMLFragment}
  */
 util.createFragment = (html) => {
-  const wrapper = document.createElement('div');
-  wrapper.innerHTML = html;
-  const fragment = document.createDocumentFragment();
-
-  while (wrapper.firstChild) {
-    fragment.appendChild(wrapper.firstChild);
-  }
-
-  return fragment;
+  const template = document.createElement('template');
+  template.innerHTML = html;
+  return document.importNode(template.content, true);
 };
 
 /*
@@ -369,7 +370,7 @@ util.toggleModifier = (...args) => {
  * @param {Object} scheme
  */
 util.restoreClass = (el, defaultClass, scheme) => {
-  defaultClass.split(/\s+/).forEach(c => !el.classList.contains(c) && el.classList.add(c));
+  defaultClass.split(/\s+/).forEach(c => c !== '' && !el.classList.contains(c) && el.classList.add(c));
   el.hasAttribute('modifier') && ModifierUtil.refresh(el, scheme);
 }
 
@@ -462,14 +463,28 @@ util.warn = (...args) => {
   }
 };
 
+/**
+ * Prevent scrolling while draging horizontally.
+ *
+ * @param {gd} GestureDetector instance
+ */
 util.preventScroll = gd => {
   const prevent = e => e.cancelable && e.preventDefault();
-  gd.on('touchmove', prevent, true);
-  const clean = e => {
-    gd.off('touchmove', prevent, true);
-    gd.off('touchend', clean, true);
+
+  const clean = (e) => {
+    gd.off('touchmove', prevent);
+    gd.off('dragend', clean);
   };
-  gd.on('touchend', clean, true);
-}
+
+  gd.on('touchmove', prevent);
+  gd.on('dragend', clean);
+};
+
+/**
+ * Distance and deltaTime filter some weird dragstart events that are not fired immediately.
+ *
+ * @param {event}
+ */
+util.isValidGesture = event => event.gesture !== undefined && (event.gesture.distance <= 15 || event.gesture.deltaTime <= 100);
 
 export default util;

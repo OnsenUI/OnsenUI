@@ -1,7 +1,5 @@
 import SimpleWrapper from './SimpleWrapper.jsx';
-import React from 'react';
 import PropTypes from 'prop-types';
-import Util from './Util.js';
 
 /**
  * @original ons-progress-bar
@@ -18,16 +16,6 @@ class ProgressBar extends SimpleWrapper {
   _getDomNodeName() {
     return 'ons-progress-bar';
   }
-
-  render() {
-    var {...others} = this.props;
-
-    Util.convert(others, 'indeterminate');
-    Util.convert(others, 'secondaryValue', {newName: 'secondary-value'});
-
-    return React.createElement(this._getDomNodeName(), others, this.props.children);
-  }
-
 }
 
 ProgressBar.propTypes = {

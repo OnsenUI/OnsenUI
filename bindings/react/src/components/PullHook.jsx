@@ -47,14 +47,14 @@ class PullHook extends BasicComponent {
 
   componentDidMount() {
     super.componentDidMount();
-    var node = ReactDOM.findDOMNode(this);
+    const node = ReactDOM.findDOMNode(this);
     node.addEventListener('changestate', this.onChange);
     this._pullHook.onAction = this.props.onLoad || null;
     this._pullHook.onPull = this.props.onPull || null;
   }
 
   componentWillUnmount() {
-    var node = ReactDOM.findDOMNode(this);
+    const node = ReactDOM.findDOMNode(this);
     node.removeEventListener('changestate', this.onChange);
   }
 
@@ -68,17 +68,8 @@ class PullHook extends BasicComponent {
   }
 
   render() {
-    var {...others} = this.props;
-
-    ['disabled'].forEach((el) => {
-      Util.convert(others, el);
-    });
-
-    Util.convert(others, 'height', {fun: Util.sizeConverter});
-    Util.convert(others, 'thresholdHeight', {fun: Util.sizeConverter, newName: 'threshold-height'});
-    Util.convert(others, 'fixedContent', {newName: 'fixed-content'});
-
-    return <ons-pull-hook ref={(pullHook) => { this._pullHook = pullHook; }} {...others} />;
+    const attrs = Util.getAttrs(this);
+    return <ons-pull-hook { ...attrs } ref={(pullHook) => { this._pullHook = pullHook; }} />;
   }
 }
 

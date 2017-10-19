@@ -16,7 +16,7 @@ import autoStyle from '../ons/autostyle';
 import ModifierUtil from '../ons/internal/modifier-util';
 import BaseElement from './base/base-element';
 import contentReady from '../ons/content-ready';
-import styler from '../lib/styler';
+import styler from '../ons/styler';
 
 const defaultClassName = 'speed-dial';
 const scheme = {
@@ -308,7 +308,7 @@ export default class SpeedDialElement extends BaseElement {
    */
   show() {
     this._fab.show();
-    this.style.webkitTransform = this.style.transform =  this._getTranslate();
+    styler(this, { transform: this._getTranslate });
     return Promise.resolve();
   }
 

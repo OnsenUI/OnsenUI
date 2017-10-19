@@ -71,13 +71,13 @@
   }
 
   --fab--disabled: {
-    background-color: alpha(black, 0.5);
+    background-color: color(black alpha(50%));
     @apply(--material-shadow-0);
     @apply(--disabled);
   }
 
   --material-fab--disabled: {
-    background-color: alpha(black, 0.5);
+    background-color: color(black alpha(50%));
     @apply(--material-shadow-0);
     @apply(--disabled);
   }

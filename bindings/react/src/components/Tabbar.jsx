@@ -64,42 +64,35 @@ class Tabbar extends BasicComponent {
     node.removeEventListener('reactive', this.onReactive);
   }
 
-  componentDidUpdate(prevProps) {
-    super.componentDidUpdate(prevProps);
+  componentWillReceiveProps(nextProps) {
     const node = this._tabbar;
-    if (this.props.index !== node.getActiveTabIndex()) {
-      node.setActiveTab(this.props.index);
+    if (nextProps.index !== this.props.index && nextProps.index !== node.getActiveTabIndex()) {
+      node.setActiveTab(nextProps.index, { reject: false });
     }
-    if (this.props.onSwipe !== prevProps.onSwipe) {
-      node.onSwipe = this.props.onSwipe;
+    if (this.props.onSwipe !== nextProps.onSwipe) {
+      node.onSwipe = nextProps.onSwipe;
     }
   }
 
   render() {
-    const {...props} = this.props;
-    const tabs = props.renderTabs(props.index, this);
+    const attrs = Util.getAttrs(this, this.props, { index: 'activeIndex' });
+    const tabs = this.props.renderTabs(this.props.index, this);
 
     if (!this.tabPages) {
       this.tabPages = tabs.map((tab) => tab.content);
     } else {
-      this.tabPages[props.index] = tabs[props.index].content;
+      this.tabPages[this.props.index] = tabs[this.props.index].content;
     }
 
-    props.activeIndex = props.index; // Tabbar's initial index
-
-    ['animation', 'swipeable'].forEach(el => Util.convert(props, el));
-    Util.convert(props, 'animationOptions', {fun: Util.animationOptionsConverter, newName: 'animation-options'});
-    Util.convert(props, 'tabBorder', {newName: 'tab-border'});
-
     return (
-      <ons-tabbar {...props} ref={(tabbar) => { this._tabbar = tabbar; }}>
-        <div className={'ons-tabbar__content tabbar__content' + (props.position === 'top' ? ' tabbar--top__content' : '')}>
+      <ons-tabbar {...attrs} ref={(tabbar) => { this._tabbar = tabbar; }}>
+        <div className={'tabbar__content'}>
           <div>
             {this.tabPages}
           </div>
           <div></div>
         </div>
-        <div className={'tabbar ons-tabbar__footer ons-tabbar-inner' + (props.position === 'top' ? ' tabbar--top' : '')}>
+        <div className={'tabbar'}>
           {tabs.map((tab) => tab.tab)}
           <div className='tabbar__border'></div>
         </div>
@@ -147,6 +140,15 @@ Tabbar.propTypes = {
   swipeable: PropTypes.bool,
 
   /**
+   * @name ignoreEdgeWidth
+   * @type number
+   * @description
+   *  [en]Distance in pixels from both edges. Swiping on these areas will prioritize parent components such as `Splitter` or `Navigator`.[/en]
+   *  [ja][/ja]
+   */
+  ignoreEdgeWidth: PropTypes.bool,
+
+  /**
    * @name animation
    * @type string
    * @description
@@ -160,7 +162,7 @@ Tabbar.propTypes = {
    * @type object
    * @required false
    * @description
-   *  [en]Specify the animation's duration, delay and timing. E.g.  `{duration: 0.2, delay: 0.4, timing: 'ease-in'}`.[/en]
+   *  [en]Specify the animation's duration, delay and timing. E.g. `{duration: 0.2, delay: 0.4, timing: 'ease-in'}`.[/en]
    *  [ja][/ja]
    */
   animationOptions: PropTypes.object,

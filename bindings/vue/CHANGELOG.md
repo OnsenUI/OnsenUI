@@ -1,13 +1,22 @@
 CHANGELOG
 ====
 
-dev
+2.2.1
 ----
 
-### New Features
+### Bug Fixes
 
+* VOnsNavigator: Push page animation flickering.
+
+2.2.0
+----
+
+### New features
+
+* VOnsSegment: New component.
 * VOnsPullHook: Added `onPull` prop.
 * VOnsTabbar: Support for swiping feature. Added `swipeable` and `onSwipe` props.
+* VOnsTabbar: Added `tabbarStyle` prop to declaratively set the actual tabbar element style.
 
 ### Bug Fixes
 

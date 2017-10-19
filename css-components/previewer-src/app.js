@@ -11,7 +11,10 @@ function init() {
   window.themes = themes;
   window.patterns = patterns;
 
-  var app = new Vue(createAppPageComponent({components, categories}));
+  const app = new Vue(createAppComponent({
+    components,
+    categories
+  }));
 };
 
 function loadCategories(components) {

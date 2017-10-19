@@ -9,16 +9,51 @@ dev
 
  * css-components: Reimplemented css-components previewer.
  * css-components: Changed color scheme to more iOS native-like.
+ * ons: 'mockStatusBar' now can also show Android's status bar.
+
+### Bug Fixes
+
+ * ons-page: Minor issue with status bar when the page is moved in DOM.
+ * core: Changed to disable FastClick when it isn't needed.
+ * deviceBackButton: Fixed [#2215](https://github.com/OnsenUI/OnsenUI/issues/2215).
+ * templates: Firefox issue. Fixed [#2216](https://github.com/OnsenUI/OnsenUI/issues/2216).
+ * dialogs: Prevent scrolling behind dialog masks due to iOS bug. Fixed [#2220](https://github.com/OnsenUI/OnsenUI/issues/2220).
+ * ons-splitter: Correctly set content width on inital split mode. Fixed [#2205](https://github.com/OnsenUI/OnsenUI/issues/2205).
+ * ons-tabbar, ons-carousel: Can now be displayed inside dialogs/modals.
+ * ons-tabbar: Resizing window while tabbar is not visible should not update the tabbar.
+
+2.6.1
+----
+
+### Bug Fixes
+
+ * GestureDetector: Fixed `findIndex` issue on Android 4.4.4.
+ * templates: Fixed [#2163](https://github.com/OnsenUI/OnsenUI/issues/2163).
+ * ons-tabbar: Fixed [#2189](https://github.com/OnsenUI/OnsenUI/issues/2189).
+ * ons-tabbar, ons-tab: Fixed several issues on iOS 8.
+ * ons-toolbar: Fixed position with `cover-content` modifier and iOS status bar in nested pages.
+ * ons-page: Ensure status-bar-fill is only added to one page.
+
+2.6.0
+----
+
+### New Features
+
+ * core: Added `ons-segment` element.
+ * angular1: Added `ons-segment` bindings.
  * ons: Added `mockStatusBar` utility to create a fake iOS status bar for browser testing.
  * ons-pull-hook: Added `onPull` property function that gets the pulled distance on drag.
+ * ons-carousel: Added `onSwipe` property function that gets the swiped distance on drag.
  * ons-tabbar: Tabbar can now be swiped to change pages. `swipeable` attribute enables this feature.
 
 ### Bug Fixes
 
  * core: Device Back Button handler timing issue.
+ * GestureDetector: Fixed memory leak from Hammer.js v1.
  * templates: Fixed a bug where `script` tags might not be ready on time.
  * autoStyle: Fixed [#2171](https://github.com/OnsenUI/OnsenUI/issues/2171).
  * inputs: Accept `required` attr. Fixed [#2169](https://github.com/OnsenUI/OnsenUI/issues/2169).
+ * ons-pull-hook: Different glitches on both iOS and Android. Fixed [#1990](https://github.com/OnsenUI/OnsenUI/issues/1990).
  * ons-list-item: `nodivider` modifier should not hide `chevron`.
  * ons-list-item: Fixed [#2150](https://github.com/OnsenUI/OnsenUI/issues/2150).
  * ons-navigator: Fixed [#2167](https://github.com/OnsenUI/OnsenUI/issues/2167).
@@ -27,6 +62,7 @@ dev
  * ons-modal: Fixed [#2066](https://github.com/OnsenUI/OnsenUI/issues/2066).
  * ons-toolbar: `cover-content` modifier works with iOS status bar.
  * ons-carousel: Fixed an animation glitch on iOS due to the cubic Bézier curve.
+ * ons-splitter: Translate3d glitch when opening with `reveal` animation.
 
 ### Misc
 

@@ -141,25 +141,25 @@
 
 /* NOTE: If you changed this properties, you should check if ons-popover is broken. */
 .popover--bottom__arrow {
-  transform: translateY(6px) translateX(calc(0 - var(--popover-arrow-size) / 2px)) rotate(-45deg);
+  transform: translateY(6px) translateX(calc(var(--popover-arrow-size) / -2)) rotate(-45deg);
   bottom: 0;
   margin-right: -18px;
 }
 
 .popover--top__arrow {
-  transform: translateY(-6px) translateX(calc(0 - var(--popover-arrow-size) / 2px)) rotate(135deg);
+  transform: translateY(-6px) translateX(calc(var(--popover-arrow-size) / -2)) rotate(135deg);
   top: 0;
   margin-right: -18px;
 }
 
 .popover--left__arrow {
-  transform: translateX(-6px) translateY(calc(0 - var(--popover-arrow-size) / 2px)) rotate(45deg);
+  transform: translateX(-6px) translateY(calc(var(--popover-arrow-size) / -2)) rotate(45deg);
   left: 0;
   margin-bottom: -18px;
 }
 
 .popover--right__arrow {
-  transform: translateX(6px) translateY(calc(0 - var(--popover-arrow-size) / 2px)) rotate(225deg);
+  transform: translateX(6px) translateY(calc(var(--popover-arrow-size) / -2)) rotate(225deg);
   right: 0;
   margin-bottom: -18px;
 }

@@ -183,6 +183,22 @@ export default class TabbarElement extends BaseElement {
    */
 
   /**
+   * @attribute ignore-edge-width
+   * @type {Number}
+   * @default 20
+   * @description
+   *   [en]Distance in pixels from both edges. Swiping on these areas will prioritize parent components such as `ons-splitter` or `ons-navigator`.[/en]
+   *   [ja][/ja]
+   */
+
+  /**
+   * @attribute hide-tabs
+   * @description
+   *   [en]Whether to hide the tabs.[/en]
+   *   [ja]タブを非表示にする場合に指定します。[/ja]
+   */
+
+  /**
    * @attribute tab-border
    * @description
    *   [en]If this attribute is set the tabs show a dynamic bottom border. Only works for iOS since the border is always visible in Material Design.[/en]
@@ -206,8 +222,9 @@ export default class TabbarElement extends BaseElement {
     if (!this._swiper) {
       this._swiper = new Swiper({
         getElement: () => this._contentElement,
-        getInitialIndex: () => this.getAttribute('activeIndex'),
+        getInitialIndex: () => this.getAttribute('activeIndex') || this.getAttribute('active-index'),
         getAutoScrollRatio: this._getAutoScrollRatio.bind(this),
+        getBubbleWidth: () => parseInt(this.getAttribute('ignore-edge-width') || 25, 10),
         isAutoScrollable: () => true,
         preChangeHook: this._onPreChange.bind(this),
         postChangeHook: this._onPostChange.bind(this),
@@ -294,8 +311,9 @@ export default class TabbarElement extends BaseElement {
   }
 
   _getAutoScrollRatio(matches, velocity, size) {
-    const ratio = .6 + velocity * 1.2 * (matches ? -1 : 1);
-    return Math.min(1, Math.max(0, ratio));
+    const ratio = .6; // Base ratio
+    const modifier = size / 300 * (matches ? -1 : 1); // Based on screen size
+    return Math.min(1, Math.max(0, ratio + velocity * modifier));
   }
 
   get _tabbarElement() {
@@ -360,7 +378,14 @@ export default class TabbarElement extends BaseElement {
           p = 1; // Visual fix for some devices
         }
 
-        this.style.top = top ? parseInt(window.getComputedStyle(page._getContentElement(), null).getPropertyValue('padding-top'), 10) - p + 'px' : '';
+        const content = page._getContentElement();
+        const cs = window.getComputedStyle(page._getContentElement(), null)
+
+        this.style.top = top ? parseInt(cs.getPropertyValue('padding-top'), 10) - p + 'px' : '';
+
+        // Refresh content top - Fix for iOS 8
+        content.style.top = cs.top;
+        content.style.top = '';
       });
     }
 
@@ -405,7 +430,7 @@ export default class TabbarElement extends BaseElement {
    *   [en]Specify the animation's duration, delay and timing. E.g. `{duration: 0.2, delay: 0.4, timing: 'ease-in'}`.[/en]
    *   [ja]アニメーション時のduration, delay, timingを指定します。e.g. {duration: 0.2, delay: 0.4, timing: 'ease-in'}[/ja]
    * @description
-   *   [en]Show specified tab page. Animations and other options can be specified by the second parameter.[/en]
+   *   [en]Show specified tab page. Animations and their options can be specified by the second parameter.[/en]
    *   [ja]指定したインデックスのタブを表示します。アニメーションなどのオプションを指定できます。[/ja]
    * @return {Promise}
    *   [en]A promise that resolves to the new page element.[/en]
@@ -452,8 +477,10 @@ export default class TabbarElement extends BaseElement {
    *   [ja][/ja]
    */
   setTabbarVisibility(visible) {
-    this._contentElement.style[this._top ? 'top' : 'bottom'] = visible ? '' : '0px';
-    this._tabbarElement.style.display = visible ? '' : 'none';
+    contentReady(this, () => {
+      this._contentElement.style[this._top ? 'top' : 'bottom'] = visible ? '' : '0px';
+      this._tabbarElement.style.display = visible ? '' : 'none';
+    });
   }
 
   show() {
@@ -529,10 +556,12 @@ export default class TabbarElement extends BaseElement {
   }
 
   _show() {
+    this._swiper.show();
     setImmediate(() => this.tabs[this.getActiveTabIndex()].loaded.then(el => el && setImmediate(() => el._show())));
   }
 
   _hide() {
+    this._swiper.hide();
     const topPage = this.topPage;
     topPage && topPage._hide();
   }
@@ -543,7 +572,7 @@ export default class TabbarElement extends BaseElement {
   }
 
   static get observedAttributes() {
-    return ['modifier', 'position', 'swipeable', 'tab-border'];
+    return ['modifier', 'position', 'swipeable', 'tab-border', 'hide-tabs'];
   }
 
   attributeChangedCallback(name, last, current) {
@@ -552,9 +581,11 @@ export default class TabbarElement extends BaseElement {
       const isTop = m => /(^|\s+)top($|\s+)/i.test(m);
       isTop(last) !== isTop(current) && this._updatePosition();
     } else if (name === 'position') {
-      this._updatePosition();
+      util.isAttached(this) && this._updatePosition();
     } else if (name === 'swipeable') {
       this._swiper && this._swiper.updateSwipeable(this.hasAttribute('swipeable'));
+    } else if (name === 'hide-tabs') {
+      this.setTabbarVisibility(!this.hasAttribute('hide-tabs') || current === 'false');
     }
   }
 

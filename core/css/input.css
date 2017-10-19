@@ -20,6 +20,7 @@ ons-input:not([float]) .text-input--material__label--active {
 ons-input[disabled],
 ons-radio[disabled],
 ons-checkbox[disabled],
+ons-segment[disabled],
 ons-search-input[disabled] {
   opacity: 0.5;
   pointer-events: none;

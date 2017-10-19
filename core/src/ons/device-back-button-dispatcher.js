@@ -234,7 +234,7 @@ class DeviceBackButtonDispatcher {
         element: element,
         children: Array.prototype.concat.apply([], arrayOf(element.children).map(function(childElement) {
 
-          if (childElement.style.display === 'none') {
+          if (childElement.style.display === 'none' || childElement._isShown === false) {
             return [];
           }
 

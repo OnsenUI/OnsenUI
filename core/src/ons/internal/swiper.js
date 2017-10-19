@@ -17,23 +17,19 @@ const directionMap = {
   }
 };
 
-export default class SwipeReveal {
+export default class Swiper {
   constructor(params) {
-    const FALSE = (() => false);
-
     // Parameters
+    const FALSE = (() => false);
+    `getInitialIndex getBubbleWidth isVertical isOverScrollable isCentered
+    isAutoScrollable refreshHook preChangeHook postChangeHook overScrollHook`
+      .split(/\s+/)
+      .forEach(key => this[key] = params[key] || FALSE);
+
     this.getElement = params.getElement; // Required
-    this.getInitialIndex = params.getInitialIndex || FALSE;
-    this.isVertical = params.isVertical || FALSE;
-    this.isOverScrollable = params.isOverScrollable || FALSE;
-    this.isCentered = params.isCentered || FALSE;
-    this.isAutoScrollable = params.isAutoScrollable || FALSE;
-    this.refreshHook = params.refreshHook || FALSE;
-    this.preChangeHook = params.preChangeHook || FALSE;
-    this.postChangeHook = params.postChangeHook || FALSE;
-    this.overScrollHook = params.overScrollHook || FALSE;
-    this.scrollHook = params.scrollHook;
+    this.scrollHook = params.scrollHook; // Optional
     this.itemSize = params.itemSize || '100%';
+
     this.getAutoScrollRatio = (...args) => {
       let ratio = params.getAutoScrollRatio && params.getAutoScrollRatio(...args);
       ratio = typeof ratio === 'number' && ratio === ratio ? ratio : .5;
@@ -64,11 +60,10 @@ export default class SwipeReveal {
     this.blocker.classList.add('ons-swiper-blocker');
 
     // Setup listeners
-    this._gestureDetector = new GestureDetector(this.target, { dragMinDistance: 1, dragLockToAxis: true });
+    this._gestureDetector = new GestureDetector(this.getElement(), { dragMinDistance: 1, dragLockToAxis: true });
     this._mutationObserver = new MutationObserver(() => this.refresh());
     this.updateSwipeable(swipeable);
     this.updateAutoRefresh(autoRefresh);
-    this.resizeOn();
 
     // Setup initial layout
     this._scroll = this._offset = this._lastActiveIndex = 0;
@@ -90,7 +85,7 @@ export default class SwipeReveal {
     this._gestureDetector && this._gestureDetector.dispose();
     this.target = this.blocker = this._gestureDetector = this._mutationObserver = null;
 
-    this.resizeOff();
+    this.setupResize(false);
   }
 
   onResize() {
@@ -145,7 +140,7 @@ export default class SwipeReveal {
     const count = this.itemCount,
       size = this.itemNumSize;
 
-    if (scroll < 0) {
+    if (scroll <= 0) {
       return 0;
     }
 
@@ -158,12 +153,17 @@ export default class SwipeReveal {
     return count - 1;
   }
 
-  resizeOn() {
-    window.addEventListener('resize', this.onResize, true);
+  setupResize(add) {
+    window[(add ? 'add' : 'remove') + 'EventListener']('resize', this.onResize, true);
   }
 
-  resizeOff() {
-    window.removeEventListener('resize', this.onResize, true);
+  show() {
+    this.setupResize(true);
+    this.onResize();
+  }
+
+  hide() {
+    this.setupResize(false);
   }
 
   updateSwipeable(shouldUpdate) {
@@ -203,18 +203,27 @@ export default class SwipeReveal {
   }
 
   onDragStart(event) {
-    this._ignoreDrag = event.consumed;
+    this._ignoreDrag = event.consumed || !util.isValidGesture(event);
 
-    // distance and deltaTime filter some weird dragstart events that are not fired immediately
-    if (event.gesture && !this._ignoreDrag && (event.gesture.distance <= 15 || event.gesture.deltaTime <= 100)) {
+    if (!this._ignoreDrag) {
       const consume = event.consume;
       event.consume = () => { consume && consume(); this._ignoreDrag = true; };
+
       if (this._canConsumeGesture(event.gesture)) {
-        consume && consume();
-        event.consumed = true;
-        this._started = true; // Avoid starting drag from outside
-        this.toggleBlocker(true);
-        util.preventScroll(this._gestureDetector);
+        const startX = event.gesture.center && event.gesture.center.clientX || 0,
+          distFromEdge = this.getBubbleWidth() || 0,
+          start = () => {
+            consume && consume();
+            event.consumed = true;
+            this._started = true; // Avoid starting drag from outside
+            this.toggleBlocker(true);
+            util.preventScroll(this._gestureDetector);
+          };
+
+        // Let parent elements consume the gesture or consume it right away
+        startX < distFromEdge || startX > (this.targetSize - distFromEdge)
+          ? setImmediate(() => !this._ignoreDrag && start())
+          : start();
       }
     }
   }
@@ -233,8 +242,10 @@ export default class SwipeReveal {
   onDragEnd(event) {
     this._started = false;
     if (!event.gesture || this._ignoreDrag || !this._continued) {
+      this._ignoreDrag = true; // onDragEnd might fire before onDragStart's setImmediate
       return;
     }
+
     this._continued = false;
     event.stopPropagation();
 
@@ -246,13 +257,13 @@ export default class SwipeReveal {
 
   _startMomentumScroll(scroll, event) {
     const velocity = this._getVelocity(event),
-      matchesDirection = event.gesture.interimDirection === this.dM.dir[Math.min(Math.sign(this._getDelta(event)) + 1, 1)];
+      matchesDirection = event.gesture.interimDirection === this.dM.dir[this._getDelta(event) < 0 ? 0 : 1];
 
     const nextScroll = this._getAutoScroll(scroll, velocity, matchesDirection);
     let duration = Math.abs(nextScroll - scroll) / (velocity + 0.01) / 1000;
     duration = Math.min(.25, Math.max(.1, duration));
 
-    this._changeTo(nextScroll, { animationOptions: { duration, timing: 'cubic-bezier(.4, .7, .5, 1)' } });
+    this._changeTo(nextScroll, { swipe: true, animationOptions: { duration, timing: 'cubic-bezier(.4, .7, .5, 1)' } });
   }
 
   _killOverScroll(scroll) {
@@ -263,7 +274,7 @@ export default class SwipeReveal {
   }
 
   _changeTo(scroll, options = {}) {
-    const e = { activeIndex: this.getActiveIndex(scroll), lastActiveIndex: this._lastActiveIndex };
+    const e = { activeIndex: this.getActiveIndex(scroll), lastActiveIndex: this._lastActiveIndex, swipe: options.swipe || false };
     const change = e.activeIndex !== e.lastActiveIndex;
     const canceled = change ? this.preChangeHook(e) : false;
 
@@ -293,7 +304,7 @@ export default class SwipeReveal {
     }
 
     const opt = options.animation  === 'none' ? {} :  options.animationOptions;
-    this.scrollHook && this.scrollHook((scroll / this.targetSize).toFixed(2), options.animationOptions || {});
+    this.scrollHook && this.itemNumSize > 0 && this.scrollHook((scroll / this.itemNumSize).toFixed(2), options.animationOptions || {});
     return new Promise(resolve => animit(this.target).queue({ transform: this._getTransform(scroll) }, opt).play(resolve));
   }
 

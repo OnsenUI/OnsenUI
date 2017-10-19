@@ -1,7 +1,5 @@
-import React from 'react';
 import PropTypes from 'prop-types';
 import BaseInput from './BaseInput.jsx';
-import Util from './Util.js';
 
 /**
  * @original ons-checkbox
@@ -20,20 +18,12 @@ import Util from './Util.js';
  *   modifier='material' />
  */
 class Checkbox extends BaseInput {
+  _getDomNodeName() {
+    return 'ons-checkbox';
+  }
 
   get EVENT_TYPES() {
     return ['change'];
-  }
-
-  render() {
-    var {checked, ...other} = this.props;
-    other['input-id'] = this.props.inputId;
-
-    Util.convert(other, 'disabled');
-
-    return (
-      <ons-checkbox checked={checked ? '' : null} {...other} />
-    );
   }
 }
 

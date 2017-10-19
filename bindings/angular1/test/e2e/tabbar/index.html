@@ -14,10 +14,6 @@
       .controller('TestController', function($scope) {
         $scope.label = 'My label';
 
-        $scope.toggleTabs = function() {
-          $scope.hideTabs = !$scope.hideTabs;
-        };
-
         $scope.currentIndex = 0;
         $scope.onPostchange = function($event) {
           $scope.currentIndex = $event.activeIndex;
@@ -29,7 +25,7 @@
     <ons-page ng-controller="TestController">
       <ons-toolbar><div class="center">Index: <span id="current-index">{{ currentIndex }}</span></div></ons-toolbar>
 
-      <ons-tabbar swipeable animation="none" hide-tabs="hideTabs" ng-init="reactive = 0" ons-reactive="reactive = reactive + 1" ons-postchange="onPostchange($event)">
+      <ons-tabbar swipeable animation="none" ng-init="reactive = 0" ons-reactive="reactive = reactive + 1" ons-postchange="onPostchange($event)">
         <ons-tab id="tab1" label="{{ label }}" page="page1.html">
         </ons-tab>
         <ons-tab id="tab2" label="Page 2" page="page2.html">

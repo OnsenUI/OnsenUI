@@ -1,6 +1,6 @@
 {
   "name": "react-onsenui",
-  "version": "1.5.0",
+  "version": "1.7.0",
   "description": "Onsen UI - React Components for Hybrid Cordova/PhoneGap Apps with Material Design and iOS UI components",
   "scripts": {
     "build": "npm run lint && cross-env NODE_ENV=production webpack --progress --hide-modules --config webpack.prod.config.js",
@@ -40,9 +40,9 @@
   },
   "homepage": "https://onsen.io/react/",
   "devDependencies": {
-    "babel-core": "^6.17.0",
+    "babel-core": "^6.26.0",
     "babel-eslint": "^7.2.3",
-    "babel-loader": "^7",
+    "babel-loader": "^7.1.2",
     "babel-preset-env": "^1.4.0",
     "babel-preset-es2016": "^6.24.1",
     "babel-preset-es2017": "^6.24.1",
@@ -66,23 +66,21 @@
     "karma-webpack": "^2.0.3",
     "mocha": "^3.1.2",
     "prompt": "^1.0.0",
-    "react": "^15.5.3",
-    "react-docgen": "^2.13.0",
-    "react-dom": "^15.5.3",
+    "prop-types": "^15.6.0",
+    "react": "^16.0.0",
+    "react-docgen": "^2.18.0",
+    "react-dom": "^16.0.0",
     "react-hot-loader": "^3.0.0-beta.6",
-    "react-redux": "^5.0.4",
-    "redux": "^3.6.0",
+    "react-redux": "^5.0.6",
+    "redux": "^3.7.2",
     "style-loader": "^0.13.1",
     "url-loader": "^0.5.7",
     "webpack": "^2.6.1",
     "webpack-dev-server": "^1.16.2"
   },
   "peerDependencies": {
-    "onsenui": "~2.5.0",
+    "onsenui": "~2.6.0",
     "react": "^15.5.3",
     "react-dom": "^15.5.3"
-  },
-  "dependencies": {
-    "prop-types": "^15.5.10"
   }
 }

@@ -198,15 +198,24 @@ ons.mockStatusBar = () => {
     throw new Error('This method must be called before ons.isReady() is true.');
   }
 
-  if (!document.body.children[0] || !document.body.children[0].classList.contains('ons-status-bar-mock')) {
-    document.body.insertBefore(util.createElement(`
-      <div class="ons-status-bar-mock">
-        <div style="padding-left: 5px">No SIM</div>
-        <div>12:28 PM</div>
-        <div style="padding-right: 15px">80%</div>
-      </div>
-    `), document.body.firstChild);
-  }
+  const mock = () => {
+    if (!document.body.children[0] || !document.body.children[0].classList.contains('ons-status-bar-mock')) {
+      const android = platform.isAndroid(), i = i => `<i class="${i.split('-')[0]} ${i}"></i>`;
+      const left = android ? `${i('zmdi-twitter')} ${i('zmdi-google-play')}` : `No SIM ${i('fa-wifi')}`,
+        center = android ? '' : '12:28 PM',
+        right = android ? `${i('zmdi-network')} ${i('zmdi-wifi')} ${i('zmdi-battery')} 12:28 PM` : `80% ${i('fa-battery-three-quarters')}`;
+
+      document.body.insertBefore(util.createElement(
+        `<div class="ons-status-bar-mock ${android ? 'android' : 'ios'}">` +
+          `<div>${left}</div><div>${center}</div><div>${right}</div>` +
+        `</div>`
+      ), document.body.firstChild);
+    }
+  };
+
+  document.body
+    ? mock()
+    : internal.waitDOMContentLoaded(mock);
 };
 
 /**
@@ -336,10 +345,7 @@ ons.createElement = (template, options = {}) => {
     if (options.append) {
       const target = options.append instanceof HTMLElement ? options.append : document.body;
       target.insertBefore(element, options.insertBefore || null);
-
-      if (options.link instanceof Function) {
-        options.link(element);
-      }
+      options.link instanceof Function && options.link(element);
     }
 
     return element;
@@ -444,7 +450,7 @@ ons.openActionSheet = actionSheet;
  * @method resolveLoadingPlaceholder
  * @signature resolveLoadingPlaceholder(page)
  * @param {String} page
- *   [en]Page name. Can be either an HTML file or an <ons-template> element.[/en]
+ *   [en]Page name. Can be either an HTML file or a `<template>` id.[/en]
  *   [ja]pageのURLか、もしくはons-templateで宣言したテンプレートのid属性の値を指定できます。[/ja]
  * @description
  *   [en]If no page is defined for the `ons-loading-placeholder` attribute it will wait for this method being called before loading the page.[/en]
@@ -478,26 +484,19 @@ ons._setupLoadingPlaceHolders = function() {
   });
 };
 
-ons._resolveLoadingPlaceholder = function(element, page, link) {
-  link = link || function(element, done) { done(); };
-  ons._internal.getPageHTMLAsync(page).then(html => {
-
-    while (element.firstChild) {
-      element.removeChild(element.firstChild);
-    }
-
-    const contentElement = ons._util.createElement('<div>' + html + '</div>');
-    contentElement.style.display = 'none';
-
-    element.appendChild(contentElement);
-
-    link(contentElement, function() {
-      contentElement.style.display = '';
-    });
-
-  }).catch(error => {
-    throw new Error('Unabled to resolve placeholder: ' + error);
-  });
+ons._resolveLoadingPlaceholder = function(parent, page, link = ((el, done) => done())) {
+  page && ons.createElement(page)
+    .then(element => {
+      element.style.display = 'none';
+      parent.appendChild(element);
+      link(element, () => {
+        while (parent.firstChild && parent.firstChild !== element) {
+          parent.removeChild(parent.firstChild);
+        }
+        element.style.display = '';
+      });
+    })
+    .catch(error => Promise.reject('Unabled to resolve placeholder: ' + error));
 };
 
 function waitDeviceReady() {

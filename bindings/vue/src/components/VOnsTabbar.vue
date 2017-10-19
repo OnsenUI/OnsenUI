@@ -13,7 +13,7 @@
       </div>
       <div></div>
     </div>
-    <div class="tabbar">
+    <div class="tabbar" :style="tabbarStyle">
       <slot>
         <v-ons-tab v-for="tab in tabs" v-bind="tab" :key="_tabKey(tab)"></v-ons-tab>
       </slot>
@@ -40,6 +40,9 @@
       },
       onSwipe: {
         type: Function
+      },
+      tabbarStyle: {
+        type: null
       }
     },
 

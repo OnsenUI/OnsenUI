@@ -30,16 +30,6 @@ const scheme = {
   '.tabbar__button': 'tabbar--*__button'
 };
 
-const buttonTemplate = util.createFragment(`
-  <div class="tabbar__icon">
-    <ons-icon></ons-icon>
-  </div>
-  <div class="tabbar__label"></div>
-  <div class="tabbar__badge notification"></div>
-`);
-
-const dummyPage = util.create('div', { height: '100%', width: '100%', backgroundColor: 'transparent' });
-
 /**
  * @element ons-tab
  * @category tabbar
@@ -201,7 +191,7 @@ export default class TabElement extends BaseElement {
 
     let iconWrapper = this._icon;
     if (this.hasAttribute('icon')) {
-      iconWrapper = iconWrapper || buttonTemplate.children[0].cloneNode(true);
+      iconWrapper = iconWrapper || util.createElement('<div class="tabbar__icon"><ons-icon></ons-icon></div>');
       const icon = iconWrapper.children[0];
       const lastIconName = icon.getAttribute('icon');
       icon.setAttribute('icon', this.getAttribute('icon'));
@@ -215,7 +205,7 @@ export default class TabElement extends BaseElement {
     ['label', 'badge'].forEach((attr, index) => {
       let prop = this.querySelector(`.tabbar__${attr}`);
       if (this.hasAttribute(attr)) {
-        prop = prop || buttonTemplate.children[++index].cloneNode(true);
+        prop = prop || util.create(`.tabbar__${attr}` + (attr === 'badge' ? ' notification' : ''));
         prop.textContent = this.getAttribute(attr);
         prop.parentElement !== button && button.appendChild(prop);
       } else {
@@ -338,7 +328,8 @@ export default class TabElement extends BaseElement {
           const pageTarget = this.page || this.getAttribute('page');
           if (!this.pageElement && pageTarget) {
             const parentTarget = tabbar._targetElement;
-            parentTarget.insertBefore(dummyPage.cloneNode(), parentTarget.children[index]); // Ensure position
+            const dummyPage = util.create('div', { height: '100%', width: '100%', backgroundColor: 'transparent' });
+            parentTarget.insertBefore(dummyPage, parentTarget.children[index]); // Ensure position
             return this._loadPageElement(parentTarget, pageTarget).then(deferred.resolve)
           }
 

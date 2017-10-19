@@ -178,6 +178,7 @@ export default class CarouselElement extends BaseElement {
   /**
    * @attribute initial-index
    * @initonly
+   * @default 0
    * @type {Number}
    * @description
    *   [en]Specify the index of the ons-carousel-item to show initially. Default is 0.[/en]
@@ -243,6 +244,7 @@ export default class CarouselElement extends BaseElement {
         preChangeHook: this._onChange.bind(this, 'prechange'),
         postChangeHook: this._onChange.bind(this, 'postchange'),
         refreshHook: this._onRefresh.bind(this),
+        scrollHook: this._onSwipe
       });
 
       contentReady(this, () => this._swiper.init({
@@ -287,11 +289,11 @@ export default class CarouselElement extends BaseElement {
   }
 
   _show() {
-    this._swiper.resizeOn();
+    this._swiper.show();
   }
 
   _hide() {
-    this._swiper.resizeOff();
+    this._swiper.hide();
   }
 
   _onOverScroll({ direction, killOverScroll }) {
@@ -515,6 +517,24 @@ export default class CarouselElement extends BaseElement {
 
   set swipeable(value) {
     return util.toggleAttribute(this, 'swipeable', value);
+  }
+
+  /**
+   * @property onSwipe
+   * @type {Function}
+   * @description
+   *   [en]Hook called whenever the user slides the carousel. It gets a decimal index and an animationOptions object as arguments.[/en]
+   *   [ja][/ja]
+   */
+  get onSwipe() {
+    return this._onSwipe;
+  }
+
+  set onSwipe(value) {
+    if (value && !(value instanceof Function)) {
+      throw new Error(`'onSwipe' must be a function.`)
+    }
+    this._onSwipe = value;
   }
 
   /**

@@ -50,7 +50,7 @@
             page: home,
             props: {
               test: 'This is a page prop.'
-            },
+            }
           },
           {
             label: 'News',

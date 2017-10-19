@@ -232,6 +232,24 @@ declare namespace ons {
     function isAndroidTablet(): boolean;
 
     /**
+     * @description Returns whether app is running in UIWebView.
+     * @return {Boolean}
+     */
+    function isUIWebView(): boolean;
+
+    /**
+     * @description Returns whether app is running in iOS Safari.
+     * @return {Boolean}
+     */
+    function isIOSSafari(): boolean;
+
+    /**
+     * @description Returns whether app is running in WKWebView.
+     * @return {Boolean}
+     */
+    function isWKWebView(): boolean;
+
+    /**
      * @description Returns whether the device is iPhone
      * @return {Boolean}
      */
@@ -353,6 +371,25 @@ declare namespace ons {
     value: any;
   }
 
+  interface OnsSegmentElement extends HTMLElement {
+    /**
+     * @param {Number} index Button index
+     * @param {Object} [options] Parameter object passed to the tabbar, if any.
+     * @return Resolves to the selected index or to the new page element if there is a connected tabbar.
+     * @description Make button with the specified index active. If there is a connected tabbar it shows the corresponding tab page. In this case animations and other options can be specified by the second parameter.
+     */
+    setActiveButton(index: number, options?: TabbarOptions): Promise<HTMLElement>;
+    /**
+     * @return {Number} The index of the currently active button
+     * @description Returns button index of current active button. If active button is not found, returns -1
+     */
+    getActiveButtonIndex(): number;
+    /**
+     * @description Whether the element is disabled or not.
+     */
+    disabled: boolean;
+  }
+
   interface OnsTemplateElement extends HTMLElement {
     template: any;
   }
@@ -438,6 +475,12 @@ declare namespace ons {
      * @description true if the carousel is swipeable.
      **/
     swipeable: boolean;
+    /**
+     * @param {Number} index Decimal index of the current swipe.
+     * @param {Object} animationOptions Object containing duration and timing.
+     * @description Hook called whenever the user slides the carousel.
+     **/
+    onSwipe?: Function;
     /**
      * @description true if auto scroll is enabled.
      **/
