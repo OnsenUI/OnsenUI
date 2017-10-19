@@ -1,4 +1,12 @@
 @media (orientation: landscape) {
+  /* Suppress safe area support for pages in splitter sides */
+  body[onsflag-iphonex-landscape] ons-splitter-side[side="left"] .page__content {
+    padding-right: 0;
+  }
+  body[onsflag-iphonex-landscape] ons-splitter-side[side="right"] .page__content {
+    padding-left: 0;
+  }
+
   /* Support the situation that a progress bar is located just below a toolbar */
   body[onsflag-iphonex-landscape] .page__content > ons-progress-bar > .progress-bar {
     margin-left: -44px;
