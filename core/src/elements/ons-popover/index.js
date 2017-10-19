@@ -269,7 +269,7 @@ export default class PopoverElement extends BaseDialogElement {
       right: (safeAreaRect.right - margin) - targetRect.right + Math.round(targetRect.width / 2)
     };
 
-    const {vertical, primary: primaryDirection, secondary} = this._calculateDirections(targetDistance);
+    const {vertical, primary: primaryDirection, secondary: secondaryDirection} = this._calculateDirections(targetDistance);
     this._currentDirection = primaryDirection;
     util.addModifier(this, primaryDirection);
 
@@ -287,16 +287,16 @@ export default class PopoverElement extends BaseDialogElement {
       safeAreaLengths[primaryDirection] + margin + targetDistance[primaryDirection] + targetAndArrowLength
     );
     const secondaryOffset = Math.max(
-      safeAreaLengths[secondary] + margin,
-      safeAreaLengths[secondary] + margin + targetCenterDistanceFrom[secondary] - (contentSize[sizeName] / 2)
+      safeAreaLengths[secondaryDirection] + margin,
+      safeAreaLengths[secondaryDirection] + margin + targetCenterDistanceFrom[secondaryDirection] - (contentSize[sizeName] / 2)
     );
     this._popover.style[primaryDirection] = primaryOffset + 'px';
-    this._popover.style[secondary] = secondaryOffset + 'px';
+    this._popover.style[secondaryDirection] = secondaryOffset + 'px';
 
     // Setting .popover__arrow position.
-    this._arrow.style[secondary] = Math.max(
+    this._arrow.style[secondaryDirection] = Math.max(
       radius,
-      (safeAreaLengths[secondary] + margin) + targetCenterDistanceFrom[secondary] - secondaryOffset
+      (safeAreaLengths[secondaryDirection] + margin) + targetCenterDistanceFrom[secondaryDirection] - secondaryOffset
     ) + 'px';
   }
 
