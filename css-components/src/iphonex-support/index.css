@@ -21,7 +21,7 @@
 /* @import './popover.css'; */
 /* @import './progress-bar.css'; */
 /* @import './progress-circular.css'; */
-/* @import './fab.css'; */
+@import './fab.css';
 /* @import './modal.css'; */
 /* @import './select.css'; */
 @import './action-sheet.css';
