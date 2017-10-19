@@ -21,6 +21,7 @@ import ModifierUtil from '../../ons/internal/modifier-util';
 import AnimatorFactory from '../../ons/internal/animator-factory';
 import { PopoverAnimator, IOSFadePopoverAnimator, MDFadePopoverAnimator } from './animator';
 import platform from '../../ons/platform';
+import iPhoneXPatch from '../../ons/iphonex-patch';
 import BaseDialogElement from '../base/base-dialog';
 import contentReady from '../../ons/content-ready';
 
@@ -246,22 +247,26 @@ export default class PopoverElement extends BaseDialogElement {
 
   _positionPopover(target) {
     const {_radius: radius, _content: contentElement, _margin: margin} = this;
+    const safeAreaLengths = iPhoneXPatch.getSafeAreaLengths();
+    const safeAreaRect = iPhoneXPatch.getSafeAreaDOMRect();
     const targetRect = target.getBoundingClientRect();
     const isMD = util.hasModifier(this, 'material');
     const cover = isMD && this.hasAttribute('cover-target');
 
+    // Distance from each side of the safe area (with margin) to the target element
     const targetDistance = {
-      top: targetRect.top - margin,
-      left: targetRect.left - margin,
-      right: window.innerWidth - targetRect.right - margin,
-      bottom: window.innerHeight - targetRect.bottom - margin
+      top: targetRect.top - (safeAreaRect.top + margin),
+      left: targetRect.left - (safeAreaRect.left + margin),
+      bottom: (safeAreaRect.bottom - margin) - targetRect.bottom,
+      right: (safeAreaRect.right - margin) - targetRect.right
     };
 
+    // Distance from each side of the safe area (with margin) to the geometric center of the target element
     const targetCenterDistanceFrom = {
-      top: targetRect.top + Math.round(targetRect.height / 2),
-      bottom: window.innerHeight - targetRect.bottom + Math.round(targetRect.height / 2),
-      left: targetRect.left + Math.round(targetRect.width / 2),
-      right: window.innerWidth - targetRect.right + Math.round(targetRect.width / 2)
+      top: targetRect.top + Math.round(targetRect.height / 2) - (safeAreaRect.top + margin),
+      left: targetRect.left + Math.round(targetRect.width / 2) - (safeAreaRect.left + margin),
+      bottom: (safeAreaRect.bottom - margin) - targetRect.bottom + Math.round(targetRect.height / 2),
+      right: (safeAreaRect.right - margin) - targetRect.right + Math.round(targetRect.width / 2)
     };
 
     const {vertical, primary: primaryDirection, secondary} = this._calculateDirections(targetDistance);
@@ -276,13 +281,23 @@ export default class PopoverElement extends BaseDialogElement {
     }))(window.getComputedStyle(contentElement));
 
     // Setting .popover position.
-    const offset = cover ? 0 : (vertical ? targetRect.height : targetRect.width) + (isMD ? 0 : 14);
-    this._popover.style[primaryDirection] = Math.max(margin, targetDistance[primaryDirection] + offset + margin) + 'px';
-    const secondaryOffset = Math.max(margin, margin + targetDistance[secondary] - (contentSize[sizeName] - targetRect[sizeName]) / 2);
+    const targetAndArrowLength = cover ? 0 : (vertical ? targetRect.height : targetRect.width) + (isMD ? 0 : 14);
+    const primaryOffset = Math.max(
+      safeAreaLengths[primaryDirection] + margin,
+      safeAreaLengths[primaryDirection] + margin + targetDistance[primaryDirection] + targetAndArrowLength
+    );
+    const secondaryOffset = Math.max(
+      safeAreaLengths[secondary] + margin,
+      safeAreaLengths[secondary] + margin + targetCenterDistanceFrom[secondary] - (contentSize[sizeName] / 2)
+    );
+    this._popover.style[primaryDirection] = primaryOffset + 'px';
     this._popover.style[secondary] = secondaryOffset + 'px';
 
     // Setting .popover__arrow position.
-    this._arrow.style[secondary] = Math.max(radius, (targetCenterDistanceFrom[secondary] - secondaryOffset)) + 'px';
+    this._arrow.style[secondary] = Math.max(
+      radius,
+      (safeAreaLengths[secondary] + margin) + targetCenterDistanceFrom[secondary] - secondaryOffset
+    ) + 'px';
   }
 
   _calculateDirections(distance) {
