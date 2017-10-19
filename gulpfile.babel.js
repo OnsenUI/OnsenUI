@@ -32,15 +32,15 @@ import os from 'os';
 import {spawn} from 'child_process';
 import fs from 'fs';
 import {argv} from 'yargs';
-import webpack from 'webpack';
-import ProgressBarPlugin from 'progress-bar-webpack-plugin';
 import karma from 'karma';
 import WebdriverIOLauncher from 'webdriverio/build/lib/launcher';
 import chalk from 'chalk';
+import * as rollup from 'rollup';
+import rollupConfig from './rollup.config.js';
+import gulpLoadPlugins from 'gulp-load-plugins';
 
-////////////////////////////////////////
+const $ = gulpLoadPlugins();
 
-const $ = require('gulp-load-plugins')();
 const CORDOVA_APP = false;
 
 ////////////////////////////////////////
@@ -66,139 +66,22 @@ gulp.task('browser-sync', () => {
 // core
 ////////////////////////////////////////
 gulp.task('core', function(done) {
-  try {
-    webpack(
-      { // webpack2 config
-        entry: './core/src/setup.js', // string | object | array
-        // Here the application starts executing
-        // and webpack starts bundling
+  const config = { ...rollupConfig[0], ...rollupConfig[0].output };
 
-        output: {
-          // options related to how webpack emits results
+  async function build() {
+    // create a bundle
+    const bundle = await rollup.rollup(config);
 
-          path: path.resolve(__dirname, 'build/js'), // string
-          // the target directory for all output files
-          // must be an absolute path (use the Node.js path module)
+    // generate code and a sourcemap
+    const { code, map } = await bundle.generate(config);
 
-          filename: 'onsenui.js', // string
-          // the filename template for entry chunks
-
-          // publicPath: '/assets/', // string
-          // the url to the output directory resolved relative to the HTML page
-
-          library: 'ons', // string,
-          // the name of the exported library
-
-          libraryTarget: 'umd', // universal module definition
-          // the type of the exported library
-        },
-
-        module: {
-          // configuration regarding modules
-
-          rules: [
-            // rules for modules (configure loaders, parser options, etc.)
-
-            {
-              test: /\.js$/,
-              include: [
-                path.resolve(__dirname, 'core/src'),
-                path.resolve(__dirname, 'node_modules') // untranspiled ES modules must be transpiled
-              ],
-              exclude: [
-                // path.resolve(__dirname, 'app/demo-files')
-              ],
-              // these are matching conditions, each accepting a regular expression or string
-              // test and include have the same behavior, both must be matched
-              // exclude must not be matched (takes preferrence over test and include)
-              // Best practices:
-              // - Use RegExp only in test and for filename matching
-              // - Use arrays of absolute paths in include and exclude
-              // - Try to avoid exclude and prefer include
-
-              loader: 'babel-loader',
-              // the loader which should be applied, it'll be resolved relative to the context
-              // -loader suffix is no longer optional in webpack2 for clarity reasons
-              // see webpack 1 upgrade guide
-
-              options: {
-                presets: ['env', 'stage-3'],
-                plugins: ['add-module-exports']
-              }
-              // options for the loader
-            },
-
-            {
-              test: /\.svg$/,
-              loader: 'svg-inline-loader',
-              options: {
-                removingTags: ['title', 'desc', 'defs'],
-                removeSVGTagAttrs: false,
-                removingTagAttrs: ['fill'],
-                idPrefix: true
-              }
-            }
-          ]
-        },
-
-        resolve: {
-          // options for resolving module requests
-          // (does not apply to resolving to loaders)
-
-          extensions: ['.js']
-          // extensions that are used
-        },
-
-        devtool: 'cheap-module-inline-source-map', // enum
-        // enhance debugging by adding meta info for the browser devtools
-        // source-map most detailed at the expense of build speed.,
-
-        plugins: [
-          new webpack.BannerPlugin(`${pkg.name} v${pkg.version} - ${dateformat(new Date(), 'yyyy-mm-dd')}`),
-          new ProgressBarPlugin({
-            format: [':bar', chalk.green(':percent'), ':msg'].join(' '),
-            complete: chalk.bgGreen(' '),
-            incomplete: chalk.bgWhite(' '),
-            width: 40,
-            total: 100
-          })
-        ],
-
-        node: {
-            process: false,
-            setImmediate: false,
-            timers: false,
-        }
-      },
-      (err, stats) => { // called when bundling is done
-        if (err) { // if fatal error occurs
-          done(err);
-          return;
-        }
-
-        const jsonStats = stats.toJson();
-        if (jsonStats.errors.length > 0) {
-            console.log('\n' + $.util.colors.red('Errors from webpack:'));
-          for (const error of jsonStats.errors) {
-            console.log('\n' + $.util.colors.red(error));
-          }
-          done(new Error('webpack failed'));
-          return;
-        }
-        if (jsonStats.warnings.length > 0) {
-          console.log('\n' + $.util.colors.red('Warnings from webpack:'));
-          for (const warning of jsonStats.warnings) {
-            console.log('\n' + $.util.colors.yellow(warning));
-          }
-        }
-
-        browserSync.reload();
-        done();
-      }
-    );
-  } catch (e) {
-    done(e);
+    // or write the bundle to disk
+    await bundle.write(config);
+    done();
   }
+
+  build();
+
 });
 
 ////////////////////////////////////////
@@ -544,7 +427,6 @@ gulp.task('minify-js', () => {
   return merge(
     gulp.src('build/js/{onsenui,angular-onsenui}.js')
       .pipe($.uglify({
-        mangle: false,
         preserveComments: (node, comment) => {
           return comment.line === 1;
         }
@@ -742,7 +624,7 @@ gulp.task('dist-no-build', [], distFiles);
 ////////////////////////////////////////
 // serve
 ////////////////////////////////////////
-gulp.task('serve', ['watch-eslint', 'prepare', 'browser-sync', 'watch-core'], () => {
+gulp.task('serve', ['prepare', 'browser-sync', 'watch-core'], () => {
   gulp.watch(['bindings/angular1/templates/*.tpl'], ['html2js']);
 
   const watched = [

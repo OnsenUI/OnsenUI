@@ -1,5 +1,5 @@
-import './polyfills';
-import './vendor';
+import './polyfills/index.js';
+import './vendor/index.js';
 
 import ons from './ons/ons';
 
