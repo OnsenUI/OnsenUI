@@ -350,22 +350,6 @@ gulp.task('unit-test',
 );
 
 ////////////////////////////////////////
-// html2js
-////////////////////////////////////////
-gulp.task('html2js', () => {
-  return gulp.src('bindings/angular1/templates/*.tpl')
-    .pipe($.html2js('angular.js', {
-      adapter: 'angular',
-      base: path.join(__dirname, 'bindings/angular1'),
-      name: 'templates-main',
-      useStrict: true,
-      quoteChar: '\''
-    }))
-    .pipe($.concat('templates.js'))
-    .pipe(gulp.dest('bindings/angular1/directives/'));
-});
-
-////////////////////////////////////////
 // build-css-components
 ////////////////////////////////////////
 gulp.task('build-css-components', () => {
@@ -442,7 +426,7 @@ gulp.task('minify-js', () => {
 ////////////////////////////////////////
 // prepare
 ////////////////////////////////////////
-gulp.task('prepare', ['html2js'], () =>  {
+gulp.task('prepare', () =>  {
 
   let onlyES6;
 
@@ -604,8 +588,6 @@ gulp.task('dist-no-build', [], distFiles);
 // serve
 ////////////////////////////////////////
 gulp.task('serve', ['prepare', 'browser-sync', 'watch-core'], () => {
-  gulp.watch(['bindings/angular1/templates/*.tpl'], ['html2js']);
-
   const watched = [
     'core/css/*.css'
   ];
