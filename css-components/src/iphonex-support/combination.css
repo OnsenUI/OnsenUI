@@ -34,6 +34,8 @@
     padding-top: var(--iphonex-safe-area-inset-top-portrait);
   }
   /* Non-outermost */
+  body[onsflag-iphonex-portrait] .dialog .toolbar, /* if wrapped with dialogs */
+  body[onsflag-iphonex-portrait] .modal .toolbar, /* if wrapped with modals */
   body[onsflag-iphonex-portrait] .toolbar+.page__background+.page__content .toolbar, /* if wrapped with a page with a toolbar */
   body[onsflag-iphonex-portrait] .tabbar--top__content .toolbar { /* if wrapped with a top tabbar */
     /* Restore original styles */
@@ -49,6 +51,8 @@
     padding-bottom: var(--iphonex-safe-area-inset-bottom-portrait);
   }
   /* Non-outermost */
+  body[onsflag-iphonex-portrait] .dialog .bottom-bar, /* if wrapped with dialogs */
+  body[onsflag-iphonex-portrait] .modal .bottom-bar, /* if wrapped with modals */
   body[onsflag-iphonex-portrait] .page-with-bottom-toolbar > .page__content .bottom-bar, /* if wrapped with a page with a bottom-bar */
   body[onsflag-iphonex-portrait] .tabbar__content:not(.tabbar--top__content) .bottom-bar { /* if wrapped with a bottom tabbar */
     /* Restore original styles */
@@ -65,6 +69,8 @@
     padding-bottom: var(--iphonex-safe-area-inset-bottom-portrait);
   }
   /* Non-outermost */
+  body[onsflag-iphonex-portrait] .dialog .page__content, /* if wrapped with dialogs */
+  body[onsflag-iphonex-portrait] .modal .page__content, /* if wrapped with modals */
   body[onsflag-iphonex-portrait] .toolbar+.page__background+.page__content .page__content, /* if wrapped with a page with a toolbar */
   body[onsflag-iphonex-portrait] .tabbar--top__content .page__content, /* if wrapped with a top tabbar */
   body[onsflag-iphonex-portrait] .toolbar+.page__background+.page__content { /* if the page has a toolbar */
@@ -72,6 +78,8 @@
     top: 0;
     padding-top: 0;
   }
+  body[onsflag-iphonex-portrait] .dialog .page__content, /* if wrapped with dialogs */
+  body[onsflag-iphonex-portrait] .modal .page__content, /* if wrapped with modals */
   body[onsflag-iphonex-portrait] .page-with-bottom-toolbar > .page__content .page__content, /* if wrapped with a page with a bottom-bar */
   body[onsflag-iphonex-portrait] .tabbar__content:not(.tabbar--top__content) .page__content, /* if wrapped with a bottom tabbar */
   body[onsflag-iphonex-portrait] .page-with-bottom-toolbar > .page__content { /* if the page has a bottom-bar */
@@ -86,6 +94,8 @@
     padding-top: 0;
   }
   /* Non-outermost */
+  body[onsflag-iphonex-portrait] .dialog .toolbar+.page__background+.page__content, /* if wrapped with dialogs */
+  body[onsflag-iphonex-portrait] .modal .toolbar+.page__background+.page__content, /* if wrapped with modals */
   body[onsflag-iphonex-portrait] .toolbar+.page__background+.page__content .toolbar+.page__background+.page__content, /* if wrapped with a page with a toolbar */
   body[onsflag-iphonex-portrait] .tabbar--top__content .toolbar+.page__background+.page__content { /* if wrapped with a top tabbar */
     /* Restore original styles */
@@ -99,6 +109,8 @@
     padding-bottom: 0;
   }
   /* Non-outermost */
+  body[onsflag-iphonex-portrait] .dialog .page-with-bottom-toolbar > .page__content, /* if wrapped with dialogs */
+  body[onsflag-iphonex-portrait] .modal .page-with-bottom-toolbar > .page__content, /* if wrapped with modals */
   body[onsflag-iphonex-portrait] .page-with-bottom-toolbar > .page__content .page-with-bottom-toolbar > .page__content, /* if wrapped with a page with a bottom-bar */
   body[onsflag-iphonex-portrait] .tabbar__content:not(.tabbar--top__content) .page-with-bottom-toolbar > .page__content { /* if wrapped with a bottom tabbar */
     /* Restore original styles */
@@ -113,6 +125,10 @@
     padding-top: calc(var(--iphonex-safe-area-inset-top-portrait) + var(--toolbar-height));
   }
   /* Non-outermost */
+  body[onsflag-iphonex-portrait] .dialog .toolbar.toolbar--transparent.toolbar--cover-content+.page__background+.page__content, /* if wrapped with dialogs */
+  body[onsflag-iphonex-portrait] .dialog .toolbar.toolbar--transparent.toolbar--cover-content+.page__background+.page__content .page_content,
+  body[onsflag-iphonex-portrait] .modal .toolbar.toolbar--transparent.toolbar--cover-content+.page__background+.page__content, /* if wrapped with modals */
+  body[onsflag-iphonex-portrait] .modal .toolbar.toolbar--transparent.toolbar--cover-content+.page__background+.page__content .page_content,
   body[onsflag-iphonex-portrait] .toolbar+.page__background+.page__content .toolbar.toolbar--transparent.toolbar--cover-content+.page__background+.page__content /* if wrapped with a page with a toolbar */
   body[onsflag-iphonex-portrait] .toolbar+.page__background+.page__content .toolbar.toolbar--transparent.toolbar--cover-content+.page__background+.page__content .page__content,
   body[onsflag-iphonex-portrait] .tabbar--top__content .toolbar.toolbar--transparent.toolbar--cover-content+.page__background+.page__content
@@ -127,6 +143,8 @@
     padding-top: var(--iphonex-safe-area-inset-top-portrait);
   }
   /* Non-outermost */
+  body[onsflag-iphonex-portrait] .dialog .tabbar--top, /* if wrapped with dialogs */
+  body[onsflag-iphonex-portrait] .modal .tabbar--top, /* if wrapped with modals */
   body[onsflag-iphonex-portrait] .toolbar+.page__background+.page__content .tabbar--top, /* if wrapped with a page with a toolbar */
   body[onsflag-iphonex-portrait] .tabbar--top__content .tabbar--top { /* if wrapped with a top tabbar */
     /* Restore original styles */
@@ -138,6 +156,8 @@
     top: calc(var(--iphonex-safe-area-inset-top-portrait) + var(--tabbar-height));
   }
   /* Non-outermost */
+  body[onsflag-iphonex-portrait] .dialog .tabbar--top__content, /* if wrapped with dialogs */
+  body[onsflag-iphonex-portrait] .modal .tabbar--top__content, /* if wrapped with modals */
   body[onsflag-iphonex-portrait] .toolbar+.page__background+.page__content .tabbar--top__content, /* if wrapped with a page with a toolbar */
   body[onsflag-iphonex-portrait] .tabbar--top__content .tabbar--top__content { /* if wrapped with a top tabbar */
     /* Restore original styles */
@@ -149,6 +169,8 @@
     padding-bottom: var(--iphonex-safe-area-inset-bottom-portrait);
   }
   /* Non-outermost */
+  body[onsflag-iphonex-portrait] .dialog .tabbar:not(.tabbar--top):not(.tabbar--top), /* if wrapped with dialogs */
+  body[onsflag-iphonex-portrait] .modal .tabbar:not(.tabbar--top):not(.tabbar--top), /* if wrapped with modals */
   body[onsflag-iphonex-portrait] .page-with-bottom-toolbar > .page__content .tabbar:not(.tabbar--top), /* if wrapped with a page with a bottom-bar */
   body[onsflag-iphonex-portrait] .tabbar__content:not(.tabbar--top__content) .tabbar:not(.tabbar--top) { /* if wrapped with a bottom tabbar */
     /* Restore original styles */
@@ -160,6 +182,8 @@
     bottom: calc(var(--iphonex-safe-area-inset-bottom-portrait) + var(--tabbar-height));
   }
   /* Non-outermost */
+  body[onsflag-iphonex-portrait] .dialog .tabbar__content:not(.tabbar--top__content), /* if wrapped with dialogs */
+  body[onsflag-iphonex-portrait] .modal .tabbar__content:not(.tabbar--top__content), /* if wrapped with modals */
   body[onsflag-iphonex-portrait] .page-with-bottom-toolbar > .page__content .tabbar__content:not(.tabbar--top__content), /* if wrapped with a page with a bottom-bar */
   body[onsflag-iphonex-portrait] .tabbar__content:not(.tabbar--top__content) .tabbar__content:not(.tabbar--top__content) { /* if wrapped with a bottom tabbar */
     /* Restore original styles */
@@ -174,6 +198,8 @@
     padding-bottom: var(--iphonex-safe-area-inset-bottom-landscape);
   }
   /* Non-outermost */
+  body[onsflag-iphonex-landscape] .dialog .bottom-bar, /* if wrapped with dialogs */
+  body[onsflag-iphonex-landscape] .modal .bottom-bar, /* if wrapped with modals */
   body[onsflag-iphonex-landscape] .page-with-bottom-toolbar > .page__content .bottom-bar, /* if wrapped with a page with a bottom-bar */
   body[onsflag-iphonex-landscape] .tabbar__content:not(.tabbar--top__content) .bottom-bar { /* if wrapped with a bottom tabbar */
     /* Restore original styles */
@@ -188,6 +214,8 @@
     padding-bottom: var(--iphonex-safe-area-inset-bottom-landscape);
   }
   /* Non-outermost */
+  body[onsflag-iphonex-landscape] .dialog .page__content, /* if wrapped with dialogs */
+  body[onsflag-iphonex-landscape] .modal .page__content, /* if wrapped with modals */
   body[onsflag-iphonex-landscape] .page-with-bottom-toolbar > .page__content .page__content, /* if wrapped with a page with a bottom-bar */
   body[onsflag-iphonex-landscape] .tabbar__content:not(.tabbar--top__content) .page__content, /* if wrapped with a bottom tabbar */
   body[onsflag-iphonex-landscape] .page-with-bottom-toolbar > .page__content { /* if the page has a bottom-bar */
@@ -202,6 +230,8 @@
     padding-bottom: 0;
   }
   /* Non-outermost */
+  body[onsflag-iphonex-landscape] .dialog .page-with-bottom-toolbar > .page__content, /* if wrapped with dialogs */
+  body[onsflag-iphonex-landscape] .modal .page-with-bottom-toolbar > .page__content, /* if wrapped with modals */
   body[onsflag-iphonex-landscape] .page-with-bottom-toolbar > .page__content .page-with-bottom-toolbar > .page__content, /* if wrapped with a page with a bottom-bar */
   body[onsflag-iphonex-landscape] .tabbar__content:not(.tabbar--top__content) .page-with-bottom-toolbar > .page__content { /* if wrapped with a bottom tabbar */
     /* Restore original styles */
@@ -214,6 +244,8 @@
     padding-bottom: var(--iphonex-safe-area-inset-bottom-landscape);
   }
   /* Non-outermost */
+  body[onsflag-iphonex-landscape] .dialog .tabbar:not(.tabbar--top), /* if wrapped with dialogs */
+  body[onsflag-iphonex-landscape] .modal .tabbar:not(.tabbar--top), /* if wrapped with modals */
   body[onsflag-iphonex-landscape] .page-with-bottom-toolbar > .page__content .tabbar:not(.tabbar--top), /* if wrapped with a page with a bottom-bar */
   body[onsflag-iphonex-landscape] .tabbar__content:not(.tabbar--top__content) .tabbar:not(.tabbar--top) { /* if wrapped with a bottom tabbar */
     /* Restore original styles */
@@ -225,6 +257,8 @@
     bottom: calc(var(--iphonex-safe-area-inset-bottom-landscape) + var(--tabbar-height));
   }
   /* Non-outermost */
+  body[onsflag-iphonex-landscape] .dialog .tabbar__content:not(.tabbar--top__content), /* if wrapped with dialogs */
+  body[onsflag-iphonex-landscape] .modal .tabbar__content:not(.tabbar--top__content), /* if wrapped with modals */
   body[onsflag-iphonex-landscape] .page-with-bottom-toolbar > .page__content .tabbar__content:not(.tabbar--top__content), /* if wrapped with a page with a bottom-bar */
   body[onsflag-iphonex-landscape] .tabbar__content:not(.tabbar--top__content) .tabbar__content:not(.tabbar--top__content) { /* if wrapped with a bottom tabbar */
     /* Restore original styles */
@@ -232,7 +266,7 @@
   }
 }
 
-/* Lists */
+/* Lists in .page__content */
 @media (orientation: landscape) {
   /* Only patching lists just under .page__content */
   body[onsflag-iphonex-landscape] .page__content > .list:not(.list--inset) {
@@ -261,5 +295,42 @@
   }
   body[onsflag-iphonex-landscape] .page__content > .list:not(.list--inset) > .list-item > .list-item--chevron__right {
     padding-right: calc(var(--iphonex-safe-area-inset-right-landscape) + 30px);
+  }
+}
+/* Lists in .page__content in dialogs and modals */
+@media (orientation: landscape) {
+  /* Only patching lists just under .page__content */
+  body[onsflag-iphonex-landscape] .dialog .page__content > .list:not(.list--inset),
+  body[onsflag-iphonex-landscape] .modal .page__content > .list:not(.list--inset) {
+    margin-left: calc(- var(--iphonex-safe-area-inset-left-landscape));
+    margin-right: calc(- var(--iphonex-safe-area-inset-right-landscape));
+  }
+
+  /* For left safe area */
+  body[onsflag-iphonex-landscape] .dialog .page__content > .list:not(.list--inset) > .list-header,
+  body[onsflag-iphonex-landscape] .modal .page__content > .list:not(.list--inset) > .list-header {
+    padding-left: calc(var(--iphonex-safe-area-inset-left-landscape) + 15px);
+  }
+  body[onsflag-iphonex-landscape] .dialog .page__content > .list:not(.list--inset) > .list-item,
+  body[onsflag-iphonex-landscape] .modal .page__content > .list:not(.list--inset) > .list-item {
+    padding-left: 14px;
+  }
+
+  /* For right safe area */
+  body[onsflag-iphonex-landscape] .dialog .page__content > .list:not(.list--inset) > .list-item--chevron:before,
+  body[onsflag-iphonex-landscape] .modal .page__content > .list:not(.list--inset) > .list-item--chevron:before {
+    right: 16px;
+  }
+  body[onsflag-iphonex-landscape] .dialog .page__content > .list:not(.list--inset) > .list-item > .list-item__center:last-child,
+  body[onsflag-iphonex-landscape] .modal .page__content > .list:not(.list--inset) > .list-item > .list-item__center:last-child {
+    padding-right: 6px;
+  }
+  body[onsflag-iphonex-landscape] .dialog .page__content > .list:not(.list--inset) > .list-item > .list-item__right,
+  body[onsflag-iphonex-landscape] .modal .page__content > .list:not(.list--inset) > .list-item > .list-item__right {
+    padding-right: 12px;
+  }
+  body[onsflag-iphonex-landscape] .dialog .page__content > .list:not(.list--inset) > .list-item > .list-item--chevron__right,
+  body[onsflag-iphonex-landscape] .modal .page__content > .list:not(.list--inset) > .list-item > .list-item--chevron__right {
+    padding-right: 30px;
   }
 }
