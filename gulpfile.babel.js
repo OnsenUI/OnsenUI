@@ -362,39 +362,6 @@ gulp.task('build-css-components', () => {
   }));
 });
 
-/////////////////////////////////////////
-// eslint
-////////////////////////////////////////
-gulp.task('eslint', () => {
-  return gulp.src(eslintTargets())
-    .pipe($.cached('eslint'))
-    .pipe($.eslint({useEslintrc: true}))
-    .pipe($.remember('eslint'))
-    .pipe($.eslint.format());
-});
-
-/////////////////////////////////////////
-// watch-eslint
-////////////////////////////////////////
-gulp.task('watch-eslint', ['eslint'], () => {
-  gulp.watch(eslintTargets(), ['eslint']);
-});
-
-function eslintTargets() {
-  return [
-    'gulpfile.babel.js',
-    'docs/packages/**/*.js',
-    'core/src/**/*.js',
-    '!core/src/polyfills/**/*.js',
-    '!core/src/vendor/**/*.js',
-    'bindings/angular1/js/**/*.js',
-    'bindings/angular1/directives/**/*.js',
-    'bindings/angular1/services/**/*.js',
-    'bindings/angular1/elements/**/*.js',
-    'bindings/angular1/views/**/*.js'
-  ];
-}
-
 ////////////////////////////////////////
 // clean
 ////////////////////////////////////////
