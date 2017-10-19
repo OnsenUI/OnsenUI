@@ -13,16 +13,14 @@
   --list-header-padding: 0 0 0 15px;
   --list-header-min-height: 24px;
   --list-header-font-weight: var(--font-weight--large);
-  --material-list-item-min-height: 48px;
-  --material-list-item-padding: 0 0 0 16px;
-  --material-list-item-separator-color: #eee;
-  --material-list-header-text-color: #757575;
   --inset-list-border: 1px solid var(--list-item-separator-color);
   --list-title-color: #6d6d72;
   --list-title-font-size: 13px;
   --list-title-font-weight: 500;
   --list-title-line-height: 24px;
   --list-title-padding: 0 0 0 16px;
+  --material-list-item-min-height: 48px;
+  --material-list-item-padding: 0 0 0 16px;
   --material-list-title-color: #757575;
   --material-list-title-font-size: 14px;
   --material-list-title-font-weight: 500;
@@ -315,8 +313,8 @@
  */
 
 .list-item--chevron:before {
-  border-right: 2px solid #c7c7cc;
-  border-bottom: 2px solid #c7c7cc;
+  border-right: 2px solid var(--list-item-chevron-color);
+  border-bottom: 2px solid var(--list-item-chevron-color);
   position: absolute;
   content: '';
   width: 7px;
@@ -659,6 +657,7 @@
 .list--material {
   @apply(--material-font);
   background-image: none;
+  background-color: var(--material-list-background-color);
 }
 
 .list-item--material {

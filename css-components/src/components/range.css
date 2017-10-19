@@ -1,9 +1,6 @@
 
 :root {
   --range-thumb-size: 28px;
-  --range-track-background-color: #a4aab3;
-  --range-track-background-color-active: var(--highlight-color);
-  --range-thumb-background-color: #fff;
   --range-track-height: 2px;
 
   --material-range-track-height: 2px;
@@ -11,9 +8,6 @@
   --material-range-thumb-radius: calc(var(--material-range-thumb-size) / 2);
   --material-range-thumb-vertical-margin: 24px;
   --material-range-thumb-horizontal-margin: 2px;
-  --material-range-disabled-thumb-color: #b0b0b0;
-  --material-range-disabled-thumb-border-color: #eeeeee;
-  --material-range-zero-thumb-color: #f2f2f2;
 
   --range__thumb: {
     cursor: pointer;
@@ -62,7 +56,7 @@
 .range__input {
   @apply(--reset-input);
   appearance: none;
-  background-image: linear-gradient(var(--highlight-color), var(--highlight-color));
+  background-image: linear-gradient(var(--range-track-background-color-active), var(--range-track-background-color-active));
   background-position: left center;
   background-size: 0% var(--range-track-height);
   background-repeat: no-repeat;

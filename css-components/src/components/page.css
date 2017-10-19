@@ -44,6 +44,7 @@
 
 .page--material {
   @apply(--material-font);
+  background-color: var(--page-material-background-color);
 }
 
 .page--material__content {
@@ -100,3 +101,4 @@
 .page--material__background {
   background-color: var(--page-material-background-color);
 }
+
