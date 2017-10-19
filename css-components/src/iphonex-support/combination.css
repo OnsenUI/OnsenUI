@@ -302,14 +302,14 @@
   /* Only patching lists just under .page__content */
   body[onsflag-iphonex-landscape] .dialog .page__content > .list:not(.list--inset),
   body[onsflag-iphonex-landscape] .modal .page__content > .list:not(.list--inset) {
-    margin-left: calc(- var(--iphonex-safe-area-inset-left-landscape));
-    margin-right: calc(- var(--iphonex-safe-area-inset-right-landscape));
+    margin-left: 0;
+    margin-right: 0;
   }
 
   /* For left safe area */
   body[onsflag-iphonex-landscape] .dialog .page__content > .list:not(.list--inset) > .list-header,
   body[onsflag-iphonex-landscape] .modal .page__content > .list:not(.list--inset) > .list-header {
-    padding-left: calc(var(--iphonex-safe-area-inset-left-landscape) + 15px);
+    padding-left: 15px;
   }
   body[onsflag-iphonex-landscape] .dialog .page__content > .list:not(.list--inset) > .list-item,
   body[onsflag-iphonex-landscape] .modal .page__content > .list:not(.list--inset) > .list-item {
