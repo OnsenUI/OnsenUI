@@ -1,0 +1,8 @@
+@media (orientation: landscape) {
+  /* Support the situation that a progress bar is located just below a toolbar */
+  body[onsflag-iphonex-landscape] .page__content > ons-progress-bar > .progress-bar {
+    margin-left: -44px;
+    margin-right: -44px;
+    width: calc(100% + 88px);
+  }
+}
