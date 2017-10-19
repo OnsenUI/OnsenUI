@@ -1,3 +1,5 @@
+import 'babel-polyfill';
+
 // Rollup plugins
 import pkg from './package.json';
 import dateformat from 'dateformat';
@@ -77,11 +79,6 @@ const builds = [
       eslint({
         include: [
           'core/src/**/*.js',
-          // 'bindings/angular1/js/**/*.js',
-          // 'bindings/angular1/directives/**/*.js',
-          // 'bindings/angular1/services/**/*.js',
-          // 'bindings/angular1/elements/**/*.js',
-          // 'bindings/angular1/views/**/*.js'
         ],
         exclude: [
           'core/src/polyfills/**/*.js',
@@ -93,9 +90,7 @@ const builds = [
       commonjs(commonjsOpt),
       babel(babelOpt),
       replace(replaceOpt),
-      progress({
-        clearLine: true, // Default true
-      }),
+      progress(),
       filesize(),
       visualizer({
         filename: 'module-stats.html',
@@ -127,18 +122,15 @@ const builds = [
       }),
       resolve(resolveOpt),
       commonjs(commonjsOpt),
-      babel(babelOpt),
-      progress({
-        clearLine: true, // Default true
-      }),
+      babel(Object.assign({}, babelOpt, { plugins: [ ['angularjs-annotate', { explicitOnly: false }] ] })),
+      progress(),
       filesize(),
-      // visualizer({
-      //   filename: 'module-stats.html',
-      //   sourcemap: true, // Shows minified sizes
-      // }),
-      // uglify()
-      // (process.env.NODE_ENV === 'production' && uglify())
+      visualizer({
+        filename: 'bindings/angular1/module-stats.html',
+        sourcemap: true, // Shows minified sizes
+      }),
     ],
+    banner: `/* angular-${pkg.name} v${pkg.version} - ${dateformat(new Date(), 'yyyy-mm-dd')} */\n`
   }
 ];
 

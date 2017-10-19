@@ -447,27 +447,6 @@ gulp.task('prepare', ['html2js'], () =>  {
   let onlyES6;
 
   return merge(
-
-    // angular-onsenui.js
-    gulp.src([
-      'bindings/angular1/vendor/*.js',
-      'bindings/angular1/lib/*.js',
-      'bindings/angular1/directives/templates.js',
-      'bindings/angular1/js/onsen.js',
-      'bindings/angular1/views/*.js',
-      'bindings/angular1/directives/*.js',
-      'bindings/angular1/services/*.js',
-      'bindings/angular1/js/*.js'
-    ])
-      .pipe($.plumber())
-      .pipe($.sourcemaps.init())
-      .pipe($.babel({ plugins: [['angularjs-annotate', { 'explicitOnly': false }]] }))
-      .pipe($.concat('angular-onsenui.js'))
-      .pipe($.header('/*! angular-onsenui.js for <%= pkg.name %> - v<%= pkg.version %> - ' + dateformat(new Date(), 'yyyy-mm-dd') + ' */\n', {pkg: pkg}))
-      .pipe($.sourcemaps.write())
-      .pipe(gulp.dest('build/js/'))
-      .pipe(gulpIf(CORDOVA_APP, gulp.dest('cordova-app/www/lib/onsen/js'))),
-
     // onsen-css-components
     gulp.src([
       'build/css/**/*',
@@ -628,7 +607,6 @@ gulp.task('serve', ['prepare', 'browser-sync', 'watch-core'], () => {
   gulp.watch(['bindings/angular1/templates/*.tpl'], ['html2js']);
 
   const watched = [
-    'bindings/angular1/*/*',
     'core/css/*.css'
   ];
 

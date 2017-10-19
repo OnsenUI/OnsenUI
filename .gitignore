@@ -2,6 +2,7 @@ logs/*
 !.gitkeep
 node_modules
 dist
+module-stats.html
 .DS_Store
 .idea
 .selenium
