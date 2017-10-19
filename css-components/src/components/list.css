@@ -916,7 +916,7 @@
   name: List title
   category: List
   markup: |
-    <div class="list-title">LIST TITLE</div>
+    <div class="list-title">List Title</div>
     <ul class="list">
       <li class="list-item">
         <div class="list-item__center">Item</div>
@@ -940,6 +940,8 @@
   font-size: var(--list-title-font-size);
   font-weight: var(--list-title-font-weight);
   line-height: var(--list-title-line-height);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
 }
 
 /*~

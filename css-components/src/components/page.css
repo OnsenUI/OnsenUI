@@ -16,6 +16,7 @@
   overflow-y: hidden;
   color: var(--text-color);
   -ms-overflow-style: none;
+  -webkit-font-smoothing: antialiased;
 }
 
 .page::-webkit-scrollbar {
