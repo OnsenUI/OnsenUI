@@ -87,14 +87,11 @@ iPhoneXPatch.getSafeAreaDOMRect = () => {
   }
 
   return {
-    x,
-    y,
-    width,
-    height,
-    left: x,
-    top: y,
-    right: x + width,
-    bottom: y + height
+    ...safeAreaRect,
+    left: safeAreaRect.x,
+    top: safeAreaRect.y,
+    right: safeAreaRect.x + safeAreaRect.width,
+    bottom: safeAreaRect.y + safeAreaRect.height
   };
 }
 
