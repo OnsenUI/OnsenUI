@@ -11,7 +11,7 @@ function init() {
   window.themes = themes;
   window.patterns = patterns;
 
-  const app = new Vue(createAppComponent({
+  const app = new Vue(createAppPageComponent({
     components,
     categories
   }));
