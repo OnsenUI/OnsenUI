@@ -4,8 +4,8 @@
     <title>md-back-button-icon</title>
     <desc>Created with Sketch.</desc>
     <defs></defs>
-    <g id="toolbar-back-button" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g id="android" transform="translate(-32.000000, -32.000000)" fill-rule="nonzero" fill="#000000">
+    <g id="toolbar-back-button" stroke="none" stroke-width="1" fill-rule="evenodd">
+        <g id="android" transform="translate(-32.000000, -32.000000)" fill-rule="nonzero">
             <polygon id="md-back-button-icon" points="48 39 35.83 39 41.42 33.41 40 32 32 40 40 48 41.41 46.59 35.83 41 48 41"></polygon>
         </g>
     </g>

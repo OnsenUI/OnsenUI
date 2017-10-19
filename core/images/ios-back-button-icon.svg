@@ -4,8 +4,8 @@
     <title>ios-back-button-icon</title>
     <desc>Created with Sketch.</desc>
     <defs></defs>
-    <g id="toolbar-back-button" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g id="ios" transform="translate(-34.000000, -30.000000)" fill="#000000">
+    <g id="toolbar-back-button" stroke="none" stroke-width="1" fill-rule="evenodd">
+        <g id="ios" transform="translate(-34.000000, -30.000000)">
             <polygon id="ios-back-button-icon" points="34 40.5 44.5 30 46.5 32 38 40.5 46.5 49 44.5 51"></polygon>
         </g>
     </g>
