@@ -35,7 +35,7 @@ import {argv} from 'yargs';
 import karma from 'karma';
 import WebdriverIOLauncher from 'webdriverio/build/lib/launcher';
 import chalk from 'chalk';
-import * as rollup from 'rollup';
+import { rollup, watch as rollupWatch } from 'rollup';
 import rollupConfig from './rollup.config.js';
 import gulpLoadPlugins from 'gulp-load-plugins';
 
@@ -63,33 +63,39 @@ gulp.task('browser-sync', () => {
 });
 
 ////////////////////////////////////////
-// core
+// bundles
 ////////////////////////////////////////
-gulp.task('core', function(done) {
-  const config = { ...rollupConfig[0], ...rollupConfig[0].output };
-
-  async function build() {
-    // create a bundle
-    const bundle = await rollup.rollup(config);
-
-    // generate code and a sourcemap
-    const { code, map } = await bundle.generate(config);
-
-    // or write the bundle to disk
-    await bundle.write(config);
-    done();
-  }
-
-  build();
-
+const bundle = config => rollup(config).then(bundle => bundle.write(config.output));
+const watch = config => new Promise((resolve, reject) => {
+  rollupWatch(config).on('event', event => {
+    switch (event.code) {
+      case 'BUNDLE_START':
+        $.util.log(`Bundling ${$.util.colors.blue(path.basename(event.output[0]))} ...`);
+        break;
+      case 'BUNDLE_END':
+        $.util.log(`Finished ${$.util.colors.blue(path.basename(event.output[0]))} bundle`);
+        resolve();
+        break;
+      case 'ERROR':
+        $.util.log($.util.colors.red('Encountered an error while bundling'));
+        resolve();
+        break;
+      case 'FATAL':
+        $.util.log($.util.colors.red('Encountered an unrecoverable error\n\n', event.error));
+        reject();
+        process.exit(1);
+        break;
+    }
+  });
 });
 
-////////////////////////////////////////
-// watch-core
-////////////////////////////////////////
-gulp.task('watch-core', ['prepare', 'core'], () => {
-  return gulp.watch(['core/src/*.js', 'core/src/**/*.js', '!core/src/*.spec.js', '!core/src/**/*.spec.js'], ['core']);
-});
+gulp.task('core', () => bundle(rollupConfig[0]));
+gulp.task('angular-bindings', () => bundle(rollupConfig[1]));
+
+gulp.task('watch-core', () => watch(rollupConfig[0]));
+gulp.task('watch-angular-bindings', () => watch(rollupConfig[1]));
+gulp.task('watch-bundles', () => watch(rollupConfig[0]).then(() => watch(rollupConfig[1])));
+
 
 ////////////////////////////////////////
 // core-dts-test
@@ -230,11 +236,7 @@ gulp.task('core-dts-test', (argv['skip-build'] ? [] : ['core']), (done) => {
 ////////////////////////////////////////
 // unit-test
 ////////////////////////////////////////
-gulp.task('unit-test',
-  [].concat(
-    argv['skip-build'] ? [] : (argv.watch ? ['watch-core'] : ['prepare', 'core']),
-    ['core-dts-test']
-  ),
+gulp.task('unit-test', argv['skip-build'] ? [] : ['prepare', (argv.watch ? 'watch-core' : 'core')],
   (done) => {
     // Usage:
     //     # run all unit tests in just one Karma server
@@ -410,11 +412,7 @@ gulp.task('clean', () => {
 gulp.task('minify-js', () => {
   return merge(
     gulp.src('build/js/{onsenui,angular-onsenui}.js')
-      .pipe($.uglify({
-        preserveComments: (node, comment) => {
-          return comment.line === 1;
-        }
-      }))
+      .pipe($.uglify({ output: { comments: (node, comment) => comment.line === 1 } }))
       .pipe($.rename(path => {
         path.extname = '.min.js';
       }))
@@ -538,6 +536,7 @@ gulp.task('build', done => {
   return runSequence(
     'clean',
     'core',
+    'angular-bindings',
     'build-css-components',
     'prepare',
     'minify-js',
@@ -555,6 +554,7 @@ gulp.task('soft-build', done => {
   return runSequence(
     'clean',
     'core',
+    'angular-bindings',
     'build-css-components',
     'prepare',
     'minify-js',
@@ -587,7 +587,8 @@ gulp.task('dist-no-build', [], distFiles);
 ////////////////////////////////////////
 // serve
 ////////////////////////////////////////
-gulp.task('serve', ['prepare', 'browser-sync', 'watch-core'], () => {
+
+gulp.task('serve', ['prepare', 'watch-bundles', 'browser-sync'], () => {
   const watched = [
     'core/css/*.css'
   ];
@@ -602,6 +603,7 @@ gulp.task('serve', ['prepare', 'browser-sync', 'watch-core'], () => {
 
   // for livereload
   gulp.watch([
+    'build/js/*onsenui.js',
     'build/css/onsen-css-components.css',
     'examples/*/*.{js,css,html}',
     'bindings/angular1/test/e2e/*/*.{js,css,html}'
