@@ -11,10 +11,11 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
+import util from '../ons/util';
+import styler from '../ons/styler';
 import autoStyle from '../ons/autostyle';
 import ModifierUtil from '../ons/internal/modifier-util';
 import BaseElement from './base/base-element';
-import util from '../ons/util';
 import contentReady from '../ons/content-ready';
 
 const defaultClassName = 'fab';
@@ -186,12 +187,6 @@ export default class FabElement extends BaseElement {
     }
   }
 
-  _getTranslate() {
-    const isBottom = (this.getAttribute('position') || '').indexOf('bottom') >= 0;
-    const translate = isBottom ? `translate3d(0px, -${util.globals.fabOffset || 0}px, 0px) ` : '';
-    return translate;
-  }
-
   /**
    * @method show
    * @signature show()
@@ -199,10 +194,8 @@ export default class FabElement extends BaseElement {
    *  [en]Show the floating action button.[/en]
    *  [ja][/ja]
    */
-  show(options = {}) {
-    const translate = this._getTranslate();
-    this.style.transform = translate + 'scale(1)';
-    this.style.webkitTransform = translate + 'scale(1)';
+  show() {
+    this.toggle(true);
   }
 
   /**
@@ -212,10 +205,22 @@ export default class FabElement extends BaseElement {
    *  [en]Hide the floating action button.[/en]
    *  [ja][/ja]
    */
-  hide(options = {}) {
-    const translate = this._getTranslate();
-    this.style.transform = translate + 'scale(0)';
-    this.style.webkitTransform = translate + 'scale(0)';
+  hide() {
+    this.toggle(false);
+  }
+
+  /**
+   * @method toggle
+   * @signature toggle()
+   * @description
+   *   [en]Toggle the visibility of the button.[/en]
+   *   [ja][/ja]
+   */
+  toggle(action = !this.visible) {
+    const isBottom = (this.getAttribute('position') || '').indexOf('bottom') >= 0;
+    const translate = isBottom ? `translate3d(0px, -${util.globals.fabOffset || 0}px, 0px)` : '';
+
+    styler(this, { transform: `${translate} scale(${Number(action)})` });
   }
 
   /**
@@ -243,17 +248,6 @@ export default class FabElement extends BaseElement {
    */
   get visible() {
     return this.style.transform.indexOf('scale(0)') === -1 && this.style.display !== 'none';
-  }
-
-  /**
-   * @method toggle
-   * @signature toggle()
-   * @description
-   *   [en]Toggle the visibility of the button.[/en]
-   *   [ja][/ja]
-   */
-  toggle() {
-    this.visible ? this.hide() : this.show();
   }
 }
 

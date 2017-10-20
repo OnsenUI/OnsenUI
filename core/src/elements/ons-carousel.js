@@ -289,11 +289,11 @@ export default class CarouselElement extends BaseElement {
   }
 
   _show() {
-    this._swiper.resizeOn();
+    this._swiper.show();
   }
 
   _hide() {
-    this._swiper.resizeOff();
+    this._swiper.hide();
   }
 
   _onOverScroll({ direction, killOverScroll }) {

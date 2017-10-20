@@ -18,6 +18,7 @@ limitations under the License.
 
 import util from '../../ons/util';
 import animit from '../../ons/animit';
+import iPhoneXPatch from '../../ons/iphonex-patch';
 import ToastAnimator from './animator';
 
 /**
@@ -27,6 +28,11 @@ export default class FallToastAnimator extends ToastAnimator {
 
   constructor({ timing = 'ease', delay = 0, duration = 0.35 } = {}) {
     super({ timing, delay, duration });
+    if (iPhoneXPatch.isIPhoneXPortraitPatchActive()) {
+      this.fallAmount = 'calc(-100% - 44px)';
+    } else {
+      this.fallAmount = '-100%';
+    }
   }
 
   /**
@@ -41,7 +47,7 @@ export default class FallToastAnimator extends ToastAnimator {
       animit(toast)
         .saveStyle()
         .queue({
-          transform: `translate3d(0, -100%, 0)`,
+          transform: `translate3d(0, ${this.fallAmount}, 0)`,
           opacity: 0
         })
         .wait(this.delay)
@@ -77,7 +83,7 @@ export default class FallToastAnimator extends ToastAnimator {
         })
         .wait(this.delay)
         .queue({
-          transform: `translate3d(0, -100%, 0)`,
+          transform: `translate3d(0, ${this.fallAmount}, 0)`,
           opacity: 0
         }, {
           duration: this.duration,
@@ -93,8 +99,15 @@ export default class FallToastAnimator extends ToastAnimator {
   }
 
   _updatePosition(toast, cleanUp) {
-    if (parseInt(toast.style.top, 10) !== 0) {
-      toast.style.top = 0;
+    let correctTop;
+    if (iPhoneXPatch.isIPhoneXPortraitPatchActive()) {
+      correctTop = '44px';
+    } else {
+      correctTop = '0';
+    }
+
+    if (toast.style.top !== correctTop) {
+      toast.style.top = correctTop;
       toast.style.bottom = 'initial';
     }
   }

@@ -75,7 +75,7 @@ internal.autoStatusBarFill = action => {
 };
 
 internal.shouldFillStatusBar = () => internal.isEnabledAutoStatusBarFill() &&
-  (platform.isWebView() && platform.isIOS7above() || document.body.querySelector('.ons-status-bar-mock'));
+  (platform.isWebView() && platform.isIOS7above() && !platform.isIPhoneX() || document.body.querySelector('.ons-status-bar-mock.ios'));
 
 internal.templateStore = {
   _storage: {},
@@ -153,7 +153,8 @@ internal.getTemplateHTMLAsync = function(page) {
 
           // Make 'script' tags run properly
           internal.doc.write(`<template id="${page}">${html}</template>`);
-          const fragment = internal.doc.getElementById(page).content;
+          const template = internal.doc.getElementById(page);
+          const fragment = template ? template.content : util.createFragment(html);
           internal.doc.close();
 
           internal.templateStore.set(page, fragment);

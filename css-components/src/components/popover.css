@@ -1,12 +1,11 @@
 
 :root {
-  --popover-background-color-material: #fafafa;
   --popover-arrow-size: 18px;
   --popover-arrow-radius: 4px;
   --popover-radius: 8px;
-  --popover-radius-material: 2px;
   --popover-margin: 6px;
-  --popover-margin-material: 4px;
+  --material-popover-radius: 2px;
+  --material-popover-margin: 4px;
 }
 
 /*~
@@ -187,9 +186,9 @@
 }
 
 .popover--material__content {
-  background-color: var(--popover-background-color-material);
-  border-radius: var(--popover-radius-material);
-  color: var(--popover-text-color);
+  background-color: var(--material-popover-background-color);
+  border-radius: var(--material-popover-radius);
+  color: var(--material-popover-text-color);
   @apply(--material-shadow-1);
 }
 

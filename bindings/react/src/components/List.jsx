@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import BasicComponent from './BasicComponent.jsx';
+import Util from './Util.js';
 
 /**
  * @original ons-list
@@ -25,10 +26,11 @@ import BasicComponent from './BasicComponent.jsx';
  */
 class List extends BasicComponent {
   render() {
-    var pages = this.props.dataSource.map((data, idx) => this.props.renderRow(data, idx));
+    const attrs = Util.getAttrs(this);
+    const pages = this.props.dataSource.map((data, idx) => this.props.renderRow(data, idx));
 
     return (
-      <ons-list {...this.props} ref={(list) => { this._list = list; }}>
+      <ons-list { ...attrs } ref={(list) => { this._list = list; }}>
         {this.props.renderHeader()}
         {pages}
         {this.props.children}

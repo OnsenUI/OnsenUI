@@ -1,14 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg width="18px" height="18px" viewBox="0 0 18 18" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <!-- Generator: Sketch 42 (36781) - http://www.bohemiancoding.com/sketch -->
-    <title>android-search-input-icon</title>
+    <!-- Generator: Sketch 43.2 (39069) - http://www.bohemiancoding.com/sketch -->
+    <title>Shape</title>
     <desc>Created with Sketch.</desc>
     <defs></defs>
-    <g id="components" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" opacity="0.54">
-        <g id="material-search" transform="translate(-52.000000, -41.000000)" fill="#000000">
-            <g id="search" transform="translate(33.000000, 26.000000)">
-                <g id="Material/Icons-black/search" transform="translate(16.000000, 12.000000)">
-                    <path d="M15.502,9.491 L14.708,9.491 L14.432,9.765 C15.407,10.902 16,12.376 16,13.991 C16,17.581 13.09,20.491 9.5,20.491 C5.91,20.491 3,17.581 3,13.991 C3,10.401 5.91,7.491 9.5,7.491 C11.115,7.491 12.588,8.083 13.725,9.057 L14.001,8.783 L14.001,7.991 L18.999,3 L20.49,4.491 L15.502,9.491 L15.502,9.491 Z M9.5,9.491 C7.014,9.491 5,11.505 5,13.991 C5,16.476 7.014,18.491 9.5,18.491 C11.985,18.491 14,16.476 14,13.991 C14,11.505 11.985,9.491 9.5,9.491 L9.5,9.491 Z" id="Shape" transform="translate(11.745000, 11.745500) scale(1, -1) translate(-11.745000, -11.745500) "></path>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="android-search-input-icon" fill-rule="nonzero" fill="#898989">
+            <g id="components">
+                <g id="material-search">
+                    <g id="search">
+                        <g id="Material/Icons-black/search">
+                            <path d="M12.502,6.491 L11.708,6.491 L11.432,6.765 C12.407,7.902 13,9.376 13,10.991 C13,14.581 10.09,17.491 6.5,17.491 C2.91,17.491 0,14.581 0,10.991 C0,7.401 2.91,4.491 6.5,4.491 C8.115,4.491 9.588,5.083 10.725,6.057 L11.001,5.783 L11.001,4.991 L15.999,0 L17.49,1.491 L12.502,6.491 L12.502,6.491 Z M6.5,6.491 C4.014,6.491 2,8.505 2,10.991 C2,13.476 4.014,15.491 6.5,15.491 C8.985,15.491 11,13.476 11,10.991 C11,8.505 8.985,6.491 6.5,6.491 L6.5,6.491 Z" id="Shape" transform="translate(8.745000, 8.745500) scale(-1, 1) rotate(-180.000000) translate(-8.745000, -8.745500) "></path>
+                        </g>
+                    </g>
                 </g>
             </g>
         </g>

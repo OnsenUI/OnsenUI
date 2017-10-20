@@ -1,3 +1,5 @@
+import './ons/platform'; // This file must be loaded before Custom Elements polyfills.
+
 import './polyfills';
 import './vendor';
 
@@ -112,7 +114,24 @@ ons.CardElement = CardElement;
 
 // fastclick
 window.addEventListener('load', () => {
-    ons.fastClick = FastClick.attach(document.body);
+  ons.fastClick = FastClick.attach(document.body);
+
+  const supportTouchAction = 'touch-action' in document.body.style;
+
+  ons.platform._runOnActualPlatform(() => {
+    if (ons.platform.isAndroid()) {
+      // In Android4.4+, correct viewport settings can remove click delay.
+      // So disable FastClick on Android.
+      ons.fastClick.destroy();
+    } else if (ons.platform.isIOS()) {
+      if (supportTouchAction && (ons.platform.isIOSSafari() || ons.platform.isWKWebView())) {
+        // If 'touch-action' supported in iOS Safari or WKWebView, disable FastClick.
+        ons.fastClick.destroy();
+      } else {
+        // Do nothing. 'touch-action: manipulation' has no effect on UIWebView.
+      }
+    }
+  });
 }, false);
 
 ons.ready(function() {
@@ -141,6 +160,6 @@ ons.ready(function() {
 });
 
 // viewport.js
-new Viewport().setup();
+Viewport.setup();
 
 export default ons;

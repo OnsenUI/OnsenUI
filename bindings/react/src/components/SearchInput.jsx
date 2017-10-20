@@ -1,7 +1,5 @@
-import React from 'react';
 import PropTypes from 'prop-types';
 import BaseInput from './BaseInput.jsx';
-import Util from './Util.js';
 
 /**
  * @original ons-search-input
@@ -22,16 +20,8 @@ import Util from './Util.js';
  *   placeholder='Username' />
  */
 class SearchInput extends BaseInput {
-
-  render() {
-    var {...other} = this.props;
-    other['input-id'] = this.props.inputId;
-
-    Util.convert(other, 'disabled');
-
-    return (
-      <ons-search-input {...other} />
-    );
+  _getDomNodeName() {
+    return 'ons-search-input';
   }
 }
 

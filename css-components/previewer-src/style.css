@@ -23,13 +23,13 @@ a:hover {
   text-decoration: none;
 }
 
-.content {
+.pv-content {
   padding-left: 140px;
   width: 100%;
   box-sizing: border-box;
 }
 
-.content__header {
+.pv-content__header {
   font-size: 22px;
   font-weight: 400;
   font-family: 'Helvetica Neue', 'Helvetica', sans-serif;
@@ -38,32 +38,32 @@ a:hover {
   padding: 0;
 }
 
-.components {
+.pv-components {
   clear: both;
   display: flex;
   flex-wrap: wrap;
   margin: 0 0 50vh -10px;
 }
 
-.component-preview {
+.pv-component-preview {
   display: block;
   width: 350px;
   box-sizing: border-box;
   margin: 0px 10px 6px 10px;
 }
 
-.component-preview__link,
-.component-preview__link:link,
-.component-preview__link:visited {
+.pv-component-preview__link,
+.pv-component-preview__link:link,
+.pv-component-preview__link:visited {
   color: #333;
   text-decoration: none;
 }
 
-.component-preview__link:hover {
+.pv-component-preview__link:hover {
   text-decoration: underline;
 }
 
-.component-example {
+.pv-component-example {
   height: 201px;
   text-align: center;
   position: relative;
@@ -77,10 +77,34 @@ a:hover {
   box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.08) inset;
 }
 
-.title-label,
-.title-label:link,
-.title-label:visited,
-.title-label:hover {
+.pv-patterns {
+  clear: both;
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 0 50vh -10px;
+}
+
+.pv-pattern {
+  width: 320px;
+  box-sizing: border-box;
+  display: inline-block;
+  margin: 0px 10px 6px 10px;
+}
+
+.pv-pattern__example {
+  display: block;
+  position: relative;
+  width: 320px;
+  height: 568px;
+  border-radius: 2px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-sizing: border-box;
+}
+
+.pv-title-label,
+.pv-title-label:link,
+.pv-title-label:visited,
+.pv-title-label:hover {
   font-size: 12px;
   color: #444;
   font-weight: 500;
@@ -90,11 +114,11 @@ a:hover {
   display: inline-block;
 }
 
-a.title-label:hover {
+a.pv-title-label:hover {
   color: #999;
 }
 
-.component-markup {
+.pv-markup {
   font-family: 'Menlo', monospace;
   font-size: 13px;
   line-height: 1.6;
@@ -108,7 +132,7 @@ a.title-label:hover {
   overflow: auto;
 }
 
-.side-navi {
+.pv-side-navi {
   float: left; 
   position: fixed;
   top: 0;
@@ -119,13 +143,13 @@ a.title-label:hover {
   overflow-y: auto;
 }
 
-.side-navi::-webkit-scrollbar { 
+.pv-side-navi::-webkit-scrollbar { 
   display: none; 
 }
 
-.side-navi__title,
-.side-navi__title:link,
-.side-navi__title:visited {
+.pv-side-navi__title,
+.pv-side-navi__title:link,
+.pv-side-navi__title:visited {
   font-size: 13px;
   line-height: 18px;
   margin: -6px -6px 20px -6px;
@@ -139,44 +163,52 @@ a.title-label:hover {
   box-sizing: border-box;
 }
 
-.category-list {
-}
-
-.category-list__header {
+.pv-side-navi__category {
   font-size: 13px;
   font-weight: 500;
   color: #444;
   line-height: 23px;
 }
 
-.category-list__item {
+.pv-side-navi__category:link,
+.pv-side-navi__category:visited {
+  color: #444;
+  text-decoration: none;
+}
+
+.pv-side-navi__category:link:hover,
+.pv-side-navi__category:visited:hover {
+  color: #999;
+}
+
+.pv-side-navi__category-item {
   height: 23px;
   line-height: 22px;
   margin-left: 13px;
 }
 
-.category-list__item-link,
-.category-list__item-link:link,
-.category-list__item-link:visited {
+.pv-side-navi__item-link,
+.pv-side-navi__item-link:link,
+.pv-side-navi__item-link:visited {
   font-size: 12px;
   color: #444;
   text-decoration: none;
 }
 
-.category-list__item-link:hover {
+.pv-side-navi__item-link:hover {
   color: #999;
 }
 
-.platform-filter {
+.pv-platform-select {
   float: right;
   margin: 0 18px 0 0;
   display: flex;
 }
 
-.platform-filter__link,
-.platform-filter__link:link,
-.platform-filter__link:visited,
-.platform-filter__link:hover {
+.pv-platform-select__link,
+.pv-platform-select__link:link,
+.pv-platform-select__link:visited,
+.pv-platform-select__link:hover {
   font-family: 'Helvetica Neue', 'Helevetica', sans-serif;
   font-size: 12px;
   text-decoration: none;
@@ -188,30 +220,32 @@ a.title-label:hover {
   border-radius: 3px;
 }
 
-.platform-filter__link--active,
-.platform-filter__link--active:link,
-.platform-filter__link--active:visited {
+.pv-platform-select__link--active,
+.pv-platform-select__link--active:link,
+.pv-platform-select__link--active:visited {
   color: #444;
   background-color: #eee;
 }
 
-.build-css__file {
+.pv-built-css__select {
+  -webkit-appearance: none;
+  appearance: none;
   height: 25px;
   line-height: 25px;
-  display: inline-block;
-  box-sizing: border-box;
-  border: 1px solid #D9D9D9;
-  color: #999;
-  font-size: 12px;
-  padding: 0 6px;
-  width: 200px;
-  border-radius: 1px;
+  border: 1px solid #d9d9d9;
+  border-radius: 2px;
+  padding: 0 20px 0 4px;
+  color: #222;
+  position: relative;
+  background-image: url(/select-icon.svg);
+  background-repeat: no-repeat;
+  background-position: right 6px center;
 }
 
-.build-css__button,
-.build-css__button:link,
-.build-css__button:visited,
-.build-css__button:hover {
+.pv-built-css__button,
+.pv-built-css__button:link,
+.pv-built-css__button:visited,
+.pv-built-css__button:hover {
   background-color: #F0F0F0;
   border-radius: 2px;
   border: 1px solid #f0f0f0;
@@ -226,35 +260,39 @@ a.title-label:hover {
   box-sizing: border-box;
 }
 
-.build-css__button:active {
+.pv-built-css__button:active {
   opacity: 0.6;
 }
 
+.pv-built-css__button:focus {
+  outline: none;
+}
+
 @media (max-width: 480px) {
-  .side-navi {
+  .pv-side-navi {
     display: none;
   }
 
-  .platform-filter {
+  .pv-platform-select {
     display: none;
   }
 
-  .content {
+  .pv-content {
     padding: 0 10px;
   }
 
-  .components {
+  .pv-components {
     display: block;
     margin-left: 0;
   }
 
-  .component-preview {
+  .pv-component-preview {
     width: auto;
     margin-right: 0px;
     margin-left: 0px;
   }
 
-  .component-example {
+  .pv-component-example {
     width: auto;
     border-radius: 0;
     margin-right: -10px;
@@ -262,13 +300,13 @@ a.title-label:hover {
     box-shadow: none;
   }
 
-  .component-markup {
+  .pv-component-markup {
     margin-right: -10px;
     margin-left: -10px;
     width: auto;
   }
 
-  .build-css {
+  .pv-build-css {
     display: none;
   }
 }

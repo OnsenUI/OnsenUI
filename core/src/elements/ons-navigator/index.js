@@ -297,17 +297,19 @@ export default class NavigatorElement extends BaseElement {
     this.onDeviceBackButton = this._onDeviceBackButton.bind(this);
 
     if (!platform.isAndroid() || this.getAttribute('swipeable') === 'force') {
+      this._swipeAnimator = new IOSSwipeNavigatorTransitionAnimator();
+
       this._swipe = new SwipeReveal({
         element: this,
-        animator: new IOSSwipeNavigatorTransitionAnimator(),
-        swipeMax: animator => this.swipeMax ? this.swipeMax({animator}) : this.popPage({animator}),
+        swipeMax: () => this[this.swipeMax ? 'swipeMax' : 'popPage']({ animator: this._swipeAnimator }),
+        swipeMid: (distance, width) => this._swipeAnimator.translate(distance, width, this.topPage.previousElementSibling, this.topPage),
+        swipeMin: () => this._swipeAnimator.restore(this.topPage.previousElementSibling, this.topPage),
         getThreshold: () => Math.max(0.2, parseFloat(this.getAttribute('swipe-threshold')) || 0),
-        getAnimationElements: () => [this.topPage.previousElementSibling, this.topPage],
         ignoreSwipe: (event, distance) => {
           if (/ons-back-button/i.test(event.target.tagName) || util.findParent(event.target, 'ons-back-button', p => /ons-page/i.test(p.tagName))) {
             return true;
           }
-          const area = Math.max(20, parseInt(this.getAttribute('swipe-target-width')) || 0);
+          const area = parseInt(this.getAttribute('swipe-target-width') || 25, 10);
           return event.gesture.direction !==  'right' || area <= distance || this._isRunning || this.children.length <= 1;
         }
       });
@@ -372,7 +374,7 @@ export default class NavigatorElement extends BaseElement {
     this._backButtonHandler = null;
 
     this._swipe && this._swipe.dispose();
-    this._swipe = null;
+    this._swipe = this._swipeAnimator = null;
   }
 
   static get observedAttributes() {

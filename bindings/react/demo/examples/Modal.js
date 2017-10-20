@@ -52,9 +52,8 @@ export default class extends React.Component {
       <Modal
         isOpen={this.state.showModal}
         animation='fade'
-        animationOptions={{duration: 2, delay: 0.2, timing: 'ease-in'}}
-        onShow={() => console.log('modal shown')}
-        onHide={() => console.log('modal hidden')}
+        onPostShow={() => console.log('modal shown')}
+        onPostHide={() => console.log('modal hidden')}
       >
         <Page renderToolbar={this.renderModalToolbar.bind(this)} style={{backgroundColor: 'blue'}}>
           <p>
@@ -68,7 +67,6 @@ export default class extends React.Component {
   render() {
     return (
       <Page
-        renderModal={this.renderModal.bind(this)}
         renderToolbar={() => (
           <MyToolbar
             title='Page'
@@ -81,6 +79,7 @@ export default class extends React.Component {
             Open Modal
           </Button>
         </section>
+        {this.renderModal()}
       </Page>
     );
   }

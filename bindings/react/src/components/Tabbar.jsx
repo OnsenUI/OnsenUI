@@ -75,30 +75,24 @@ class Tabbar extends BasicComponent {
   }
 
   render() {
-    const {...props} = this.props;
-    const tabs = props.renderTabs(props.index, this);
+    const attrs = Util.getAttrs(this, this.props, { index: 'activeIndex' });
+    const tabs = this.props.renderTabs(this.props.index, this);
 
     if (!this.tabPages) {
       this.tabPages = tabs.map((tab) => tab.content);
     } else {
-      this.tabPages[props.index] = tabs[props.index].content;
+      this.tabPages[this.props.index] = tabs[this.props.index].content;
     }
 
-    props.activeIndex = props.index; // Tabbar's initial index
-
-    ['animation', 'swipeable'].forEach(el => Util.convert(props, el));
-    Util.convert(props, 'animationOptions', {fun: Util.animationOptionsConverter, newName: 'animation-options'});
-    Util.convert(props, 'tabBorder', {newName: 'tab-border'});
-
     return (
-      <ons-tabbar {...props} ref={(tabbar) => { this._tabbar = tabbar; }}>
-        <div className={'ons-tabbar__content tabbar__content' + (props.position === 'top' ? ' tabbar--top__content' : '')}>
+      <ons-tabbar {...attrs} ref={(tabbar) => { this._tabbar = tabbar; }}>
+        <div className={'tabbar__content'}>
           <div>
             {this.tabPages}
           </div>
           <div></div>
         </div>
-        <div className={'tabbar ons-tabbar__footer ons-tabbar-inner' + (props.position === 'top' ? ' tabbar--top' : '')}>
+        <div className={'tabbar'}>
           {tabs.map((tab) => tab.tab)}
           <div className='tabbar__border'></div>
         </div>
@@ -144,6 +138,15 @@ Tabbar.propTypes = {
    *  [ja][/ja]
    */
   swipeable: PropTypes.bool,
+
+  /**
+   * @name ignoreEdgeWidth
+   * @type number
+   * @description
+   *  [en]Distance in pixels from both edges. Swiping on these areas will prioritize parent components such as `Splitter` or `Navigator`.[/en]
+   *  [ja][/ja]
+   */
+  ignoreEdgeWidth: PropTypes.bool,
 
   /**
    * @name animation

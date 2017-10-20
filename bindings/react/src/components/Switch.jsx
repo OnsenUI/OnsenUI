@@ -1,7 +1,5 @@
-import React from 'react';
 import PropTypes from 'prop-types';
-import BasicComponent from './BasicComponent.jsx';
-import Util from './Util.js';
+import BaseInput from './BaseInput.jsx';
 
 /**
  * @original ons-switch
@@ -15,38 +13,13 @@ import Util from './Util.js';
  * @example
  * <Switch checked={this.state.checked} onChange={this.onChange} />
  */
-class Switch extends BasicComponent {
-
-  constructor(...args) {
-    super(...args);
-
-    this.onChange = event => {
-      if (this.props.onChange) {
-        return this.props.onChange(event);
-      }
-    };
+class Switch extends BaseInput {
+  _getDomNodeName() {
+    return 'ons-switch';
   }
 
-  componentDidMount() {
-    super.componentDidMount();
-    this._switch.addEventListener('change', this.onChange);
-  }
-
-  componentWillUnmount() {
-    this._switch.removeEventListener('change', this.onChange);
-  }
-
-  render() {
-    var {checked, inputId, ...other} = this.props;
-
-    Util.convert(other, 'disabled');
-
-    if (inputId) {
-      other['input-id'] = inputId;
-    }
-    return (
-      <ons-switch ref={(switchElement) => { this._switch = switchElement; }} checked={checked ? '' : null} {...other} />
-    );
+  get EVENT_TYPES() {
+    return ['change'];
   }
 }
 
