@@ -256,6 +256,12 @@ declare namespace ons {
     function isIPhone(): boolean;
 
     /**
+     * @description Returns whether the device is iPhone X
+     * @return {Boolean}
+     */
+    function isIPhoneX(): boolean;
+    
+    /**
      * @description Returns whether the device is iPad
      * @return {Boolean}
      */

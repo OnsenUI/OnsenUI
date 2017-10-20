@@ -99,6 +99,20 @@ class Platform {
   }
 
   /**
+   * @methos isIPhoneX
+   * @signature isIPhoneX()
+   * @description
+   *   [en]Returns whether the device is iPhone X.[/en]
+   *   [ja]iPhone X上で実行されているかどうかを返します。[/ja]
+   * @return {Boolean}
+   */
+  isIPhoneX() {
+    // iPhone 8 and iPhone X have a same user agent. We cannot avoid using window.screen.
+    // This works well both in iOS Safari and (UI|WK)WebView of iPhone X.
+    return this.isIPhone() && window.screen.width === 375 && window.screen.height === 812;
+  }
+
+  /**
    * @method isIPad
    * @signature isIPad()
    * @description
