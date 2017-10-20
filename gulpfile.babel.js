@@ -40,6 +40,7 @@ import rollupConfig from './rollup.config.js';
 import gulpLoadPlugins from 'gulp-load-plugins';
 
 const $ = gulpLoadPlugins();
+$.hub(['./css-components/gulpfile.js']); // adds 'build-css', 'css-clean' and 'cssnext' tasks
 
 ////////////////////////////////////////
 // bundles
@@ -215,7 +216,7 @@ gulp.task('core-dts-test', (argv['skip-build'] ? [] : ['core']), (done) => {
 ////////////////////////////////////////
 // unit-test
 ////////////////////////////////////////
-gulp.task('unit-test', argv['skip-build'] ? [] : ['prepare', (argv.watch ? 'watch-core' : 'core')],
+gulp.task('unit-test', argv['skip-build'] ? [] : ['core-css', (argv.watch ? 'watch-core' : 'core')],
   (done) => {
     // Usage:
     //     # run all unit tests in just one Karma server
@@ -331,17 +332,6 @@ gulp.task('unit-test', argv['skip-build'] ? [] : ['prepare', (argv.watch ? 'watc
 );
 
 ////////////////////////////////////////
-// build-css-components
-////////////////////////////////////////
-gulp.task('build-css-components', () => {
-  return gulp.src('css-components/gulpfile.js')
-  .pipe($.chug({
-    read: false,
-    tasks: ['build']
-  }));
-});
-
-////////////////////////////////////////
 // clean
 ////////////////////////////////////////
 gulp.task('clean', () => {
@@ -367,42 +357,60 @@ gulp.task('minify-js', () => {
 });
 
 ////////////////////////////////////////
-// prepare
+// core-css
 ////////////////////////////////////////
-gulp.task('prepare', () =>  {
+gulp.task('core-css', () =>  {
+  return merge(gulp.src([
+    'core/css/common.css',
+    'core/css/*.css'
+  ])
+    .pipe($.concat('onsenui.css'))
+    .pipe($.autoprefixer({
+      browsers: [ // enable CSS properties which require prefixes
+        'Android >= 4.4',
+        'iOS >= 8.0',
+        'Chrome >= 30', // equivalent to Android 4.4 WebView
+        'Safari >= 9',
+      ],
+      add: true,
+      remove: false, // removing prefixes can cause a bug
+    }))
+    .pipe($.header('/*! <%= pkg.name %> - v<%= pkg.version %> - ' + dateformat(new Date(), 'yyyy-mm-dd') + ' */\n', {pkg: pkg}))
+    .pipe(gulp.dest('build/css/'))
+    // onsenui.min.css
+    .pipe($.cssmin({processImport: false}))
+    .pipe($.rename({suffix: '.min'}))
+    .pipe(gulp.dest('build/css/')),
 
+    // font-awesome fle copy
+    gulp.src('core/css/font_awesome/**/*')
+      .pipe(gulp.dest('build/css/font_awesome/')),
+
+    // ionicons file copy
+    gulp.src('core/css/ionicons/**/*')
+      .pipe(gulp.dest('build/css/ionicons/')),
+
+    // material icons file copy
+    gulp.src('core/css/material-design-iconic-font/**/*')
+    .pipe(gulp.dest('build/css/material-design-iconic-font/'))
+  );
+});
+
+////////////////////////////////////////
+// copy-files
+////////////////////////////////////////
+gulp.task('copy-files', () =>  {
   return merge(
     // CSS source
     gulp.src([
       'css-components/**/*',
+      '!css-components/build/',
+      '!css-components/build/**/*',
       '!css-components/node_modules/',
       '!css-components/node_modules/**/*',
       '!css-components/npm-debug.log'
     ])
       .pipe(gulp.dest('build/css-components-src/')),
-
-    // onsenui.css
-    gulp.src([
-      'core/css/common.css',
-      'core/css/*.css'
-    ])
-      .pipe($.concat('onsenui.css'))
-      .pipe($.autoprefixer({
-        browsers: [ // enable CSS properties which require prefixes
-          'Android >= 4.4',
-          'iOS >= 8.0',
-          'Chrome >= 30', // equivalent to Android 4.4 WebView
-          'Safari >= 9',
-        ],
-        add: true,
-        remove: false, // removing prefixes can cause a bug
-      }))
-      .pipe($.header('/*! <%= pkg.name %> - v<%= pkg.version %> - ' + dateformat(new Date(), 'yyyy-mm-dd') + ' */\n', {pkg: pkg}))
-      .pipe(gulp.dest('build/css/'))
-      // onsenui.min.css
-      .pipe($.cssmin({processImport: false}))
-      .pipe($.rename({suffix: '.min'}))
-      .pipe(gulp.dest('build/css/')),
 
     // ES Modules (raw ES source codes)
     gulp.src([
@@ -421,18 +429,6 @@ gulp.task('prepare', () =>  {
     // angular.js copy
     gulp.src('bindings/angular1/lib/angular/*.*')
       .pipe(gulp.dest('build/js/angular/')),
-
-    // font-awesome fle copy
-    gulp.src('core/css/font_awesome/**/*')
-      .pipe(gulp.dest('build/css/font_awesome/')),
-
-    // ionicons file copy
-    gulp.src('core/css/ionicons/**/*')
-      .pipe(gulp.dest('build/css/ionicons/')),
-
-    // material icons file copy
-    gulp.src('core/css/material-design-iconic-font/**/*')
-      .pipe(gulp.dest('build/css/material-design-iconic-font/')),
 
     // type definitions copy
     gulp.src('core/src/onsenui.d.ts')
@@ -468,8 +464,9 @@ gulp.task('build', done => {
     'clean',
     'core',
     'angular-bindings',
-    'build-css-components',
-    'prepare',
+    'core-css',
+    'build-css',
+    'copy-files',
     'minify-js',
     'build-docs',
     'compress-distribution-package',
@@ -486,8 +483,9 @@ gulp.task('soft-build', done => {
     'clean',
     'core',
     'angular-bindings',
-    'build-css-components',
-    'prepare',
+    'core-css',
+    'build-css',
+    'copy-files',
     'minify-js',
     done
   );
@@ -520,8 +518,7 @@ gulp.task('dist-no-build', [], distFiles);
 ////////////////////////////////////////
 
 gulp.task('serve', done => {
-  // Prepare core CSS
-  gulp.watch(['core/css/*.css'], { debounceDelay: 300 }, ['prepare']);
+  gulp.watch(['core/css/*.css'], { debounceDelay: 300 }, ['core-css']);
 
   // Livereload
   gulp.watch([
@@ -535,7 +532,7 @@ gulp.task('serve', done => {
       .pipe(browserSync.reload({stream: true, once: true}));
   });
 
-  return runSequence('prepare', 'watch-bundles', 'browser-sync', done);
+  return runSequence('css-clean', 'cssnext', 'core-css', 'watch-bundles', 'browser-sync', done);
 });
 
 gulp.task('browser-sync', (done) => {
@@ -566,7 +563,7 @@ gulp.task('build-docs', () => {
 ////////////////////////////////////////
 // test
 ////////////////////////////////////////
-gulp.task('test', ['prepare'], function(done) {
+gulp.task('test', ['core-css'], function(done) {
   return runSequence('core-dts-test', 'unit-test', done);
 });
 
@@ -613,7 +610,7 @@ gulp.task('e2e-test', function(done) {
   runSequence('e2e-test-protractor', 'e2e-test-webdriverio', done);
 });
 
-gulp.task('e2e-test-protractor', ['webdriver-download', 'prepare'], function(){
+gulp.task('e2e-test-protractor', ['webdriver-download', 'core-css'], function(){
   const port = 8081;
 
   $.connect.server({
@@ -643,7 +640,7 @@ gulp.task('e2e-test-protractor', ['webdriver-download', 'prepare'], function(){
     });
 });
 
-gulp.task('e2e-test-webdriverio', ['webdriver-download', 'prepare'], function(done){
+gulp.task('e2e-test-webdriverio', ['webdriver-download', 'core-css'], function(done){
   // Usage:
   //     # run all WebdriverIO E2E tests
   //     gulp e2e-test-webdriverio

@@ -1,7 +1,6 @@
 const gulp = require('gulp');
 const pkg = require('./package.json');
 const merge = require('event-stream').merge;
-const gutil = require('gulp-util');
 const runSequence = require('run-sequence');
 const browserSync = require('browser-sync').create();
 const $ = require('gulp-load-plugins')();
@@ -12,13 +11,17 @@ const autoprefixer = require('autoprefixer');
 const cssnext = require('postcss-cssnext');
 const reporter = require('postcss-reporter');
 const historyApiFallback = require('connect-history-api-fallback');
-const file = require('gulp-file');
 const {rollup} = require('rollup');
 const babel = require('rollup-plugin-babel');
 const commonjs = require('rollup-plugin-commonjs');
 const glob = require('glob');
 const rimraf = require('rimraf');
 const path = require('path');
+
+// Include these plugins outside $ to fix gulp-hub
+const plumber = require('gulp-plumber');
+const postcss = require('gulp-postcss');
+const stylelint = require('gulp-stylelint');
 
 const prefix = __dirname + '/../build/css/';
 
@@ -39,7 +42,7 @@ gulp.task('build-css', ['css-clean', 'cssnext', 'cssmin']);
 ////////////////////////////////////////
 gulp.task('stylelint', () => {
   return gulp.src('./src/**/*.css')
-    .pipe($.stylelint({
+    .pipe(stylelint({
       failAfterError: false,
       reporters: [{formatter: 'string', console: true}]
     }));
@@ -83,8 +86,8 @@ gulp.task('cssnext', ['stylelint'], () => {
   ];
 
   return gulp.src('src/{*-,}onsen-css-components.css')
-    .pipe($.plumber())
-    .pipe($.postcss(plugins))
+    .pipe(plumber())
+    .pipe(postcss(plugins))
     .pipe(gulp.dest('./build/'))
     .pipe(gulp.dest(prefix))
     .pipe(browserSync.stream());
@@ -213,7 +216,7 @@ gulp.task('serve', ['reset-console', 'build'], done => {
 gulp.task('reset-console', reset);
 
 function reset() {
-  process.stdout.write('\033c');
+  process.stdout.write('\x1Bc');
 }
 
 const outputDevServerInfo = (() => {
@@ -230,12 +233,12 @@ const outputDevServerInfo = (() => {
   }
 
   function output() {
-    const localUrl = browserSync.getOption('urls').get('local'); 
-    const externalUrl = browserSync.getOption('urls').get('external'); 
+    const localUrl = browserSync.getOption('urls').get('local');
+    const externalUrl = browserSync.getOption('urls').get('external');
 
     console.log('\nAccess URLs:');
-    console.log('     Local:', gutil.colors.magenta(localUrl));
-    console.log('  External:', gutil.colors.magenta(externalUrl));
+    console.log('     Local:', $.util.colors.magenta(localUrl));
+    console.log('  External:', $.util.colors.magenta(externalUrl));
     console.log();
 
     displayBuildCSSInfo();
@@ -246,7 +249,7 @@ function displayBuildCSSInfo() {
 
   console.log('Built CSS Files:')
   getCSSPaths().forEach(cssPath => {
-    console.log('  ' + gutil.colors.magenta(cssPath));
+    console.log('  ' + $.util.colors.magenta(cssPath));
   });
 
   function getCSSPaths() {

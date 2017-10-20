@@ -1464,7 +1464,7 @@ caller-path@^0.1.0:
   dependencies:
     callsites "^0.2.0"
 
-callsite@1.0.0:
+callsite@1.0.0, callsite@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/callsite/-/callsite-1.0.0.tgz#280398e5d664bd74038b6f0905153e6e8af1bc20"
 
@@ -2862,6 +2862,13 @@ filesize@~2.0.0:
   version "2.0.4"
   resolved "https://registry.yarnpkg.com/filesize/-/filesize-2.0.4.tgz#7805941c60fcdfe63f46d7ea358c59ade11c1325"
 
+fill-keys@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/fill-keys/-/fill-keys-1.0.2.tgz#9a8fa36f4e8ad634e3bf6b4f3c8882551452eb20"
+  dependencies:
+    is-object "~1.0.1"
+    merge-descriptors "~1.0.0"
+
 fill-range@^2.1.0:
   version "2.2.3"
   resolved "https://registry.yarnpkg.com/fill-range/-/fill-range-2.2.3.tgz#50b77dfd7e469bc7492470963699fe7a8485a723"
@@ -3336,15 +3343,6 @@ gulp-chmod@^1.3.0:
     stat-mode "^0.2.0"
     through2 "^2.0.0"
 
-gulp-chug@^0.5.1:
-  version "0.5.1"
-  resolved "https://registry.yarnpkg.com/gulp-chug/-/gulp-chug-0.5.1.tgz#b1918881b2bb52fd47e3cb2371587fca4c45e5c6"
-  dependencies:
-    gulp-util "^3.0.7"
-    lodash "^4.0.0"
-    resolve "^1.1.6"
-    through2 "^2.0.0"
-
 gulp-clean@^0.3.1:
   version "0.3.2"
   resolved "https://registry.yarnpkg.com/gulp-clean/-/gulp-clean-0.3.2.tgz#a347d473acea40182f935587a451941671928102"
@@ -3411,6 +3409,18 @@ gulp-html2js@^0.4.2:
     html-minifier "~0.6.7"
     map-stream "^0.1.0"
     through2 "^2.0.0"
+
+gulp-hub@^0.8.0:
+  version "0.8.0"
+  resolved "https://registry.yarnpkg.com/gulp-hub/-/gulp-hub-0.8.0.tgz#a683a7bd5a9925674539d14db9ef4696f4842b33"
+  dependencies:
+    callsite "^1.0.0"
+    glob "^7.0.3"
+    gulp "^3.8.10"
+    gulp-util "^3.0.7"
+    lodash "^4.13.1"
+    proxyquire "^1.0.1"
+    run-sequence "^1.0.2"
 
 gulp-if@^2.0.0:
   version "2.0.1"
@@ -3549,7 +3559,7 @@ gulp-zip@^3.0.2:
     through2 "^2.0.1"
     yazl "^2.1.0"
 
-gulp@^3.9.0:
+gulp@^3.8.10, gulp@^3.9.0:
   version "3.9.1"
   resolved "https://registry.yarnpkg.com/gulp/-/gulp-3.9.1.tgz#571ce45928dd40af6514fc4011866016c13845b4"
   dependencies:
@@ -3987,6 +3997,10 @@ is-number@^2.0.2, is-number@^2.1.0:
 is-obj@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/is-obj/-/is-obj-1.0.1.tgz#3e4729ac1f5fde025cd7d83a896dab9f4f67db0f"
+
+is-object@~1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/is-object/-/is-object-1.0.1.tgz#8952688c5ec2ffd6b03ecc85e769e02903083470"
 
 is-path-cwd@^1.0.0:
   version "1.0.0"
@@ -4742,6 +4756,10 @@ meow@^3.3.0:
     redent "^1.0.0"
     trim-newlines "^1.0.0"
 
+merge-descriptors@~1.0.0:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/merge-descriptors/-/merge-descriptors-1.0.1.tgz#b00aaa556dd8b44568150ec9d1b953f3f90cbb61"
+
 merge-stream@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/merge-stream/-/merge-stream-1.0.0.tgz#9cfd156fef35421e2b5403ce11dc6eb1962b026e"
@@ -4873,6 +4891,10 @@ mocha@^2.5.3:
     mkdirp "0.5.1"
     supports-color "1.2.0"
     to-iso-string "0.0.2"
+
+module-not-found-error@^1.0.0:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/module-not-found-error/-/module-not-found-error-1.0.1.tgz#cf8b4ff4f29640674d6cdd02b0e3bc523c2bbdc0"
 
 morgan@~1.6.1:
   version "1.6.1"
@@ -5434,6 +5456,14 @@ protractor@^4.0.10:
     source-map-support "~0.4.0"
     webdriver-manager "^10.2.6"
 
+proxyquire@^1.0.1:
+  version "1.8.0"
+  resolved "https://registry.yarnpkg.com/proxyquire/-/proxyquire-1.8.0.tgz#02d514a5bed986f04cbb2093af16741535f79edc"
+  dependencies:
+    fill-keys "^1.0.2"
+    module-not-found-error "^1.0.0"
+    resolve "~1.1.7"
+
 pseudomap@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/pseudomap/-/pseudomap-1.0.2.tgz#f052a28da70e618917ef0a8ac34c1ae5a68286b3"
@@ -5896,7 +5926,7 @@ resolve-url@~0.2.1:
   version "0.2.1"
   resolved "https://registry.yarnpkg.com/resolve-url/-/resolve-url-0.2.1.tgz#2c637fe77c893afd2a663fe21aa9080068e2052a"
 
-resolve@1.1.7, resolve@1.1.x, resolve@^1.1.6, resolve@^1.1.7:
+resolve@1.1.7, resolve@1.1.x, resolve@^1.1.6, resolve@^1.1.7, resolve@~1.1.7:
   version "1.1.7"
   resolved "https://registry.yarnpkg.com/resolve/-/resolve-1.1.7.tgz#203114d82ad2c5ed9e8e0411b3932875e889e97b"
 
@@ -6051,7 +6081,7 @@ run-async@^2.2.0:
   dependencies:
     is-promise "^2.1.0"
 
-run-sequence@^1.2.1:
+run-sequence@^1.0.2, run-sequence@^1.2.1:
   version "1.2.2"
   resolved "https://registry.yarnpkg.com/run-sequence/-/run-sequence-1.2.2.tgz#5095a0bebe98733b0140bd08dd80ec030ddacdeb"
   dependencies:

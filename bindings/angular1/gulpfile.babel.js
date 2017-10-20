@@ -48,7 +48,7 @@ gulp.task('webdriver-download', () => {
 ////////////////////////////////////////
 // e2e-test (overrides parent definition)
 ////////////////////////////////////////
-gulp.task('e2e-test', ['webdriver-download', 'prepare'], function() {
+gulp.task('e2e-test', ['webdriver-download'], function() {
   const port = 8081;
 
   $.connect.server({
