@@ -102,7 +102,7 @@ function createObjectIndex(fileIndex) {
 
   var objectIndex = {};
   Object.keys(index).forEach(function(objectName) {
-    
+
     var docdict = mergeDocdict(index[objectName]);
 
     var object = docdict.object.find(function(object) {
@@ -140,7 +140,7 @@ function mergeDocdict(docdicts) {
 function mkdir(path) {
   return new Promise(function(resolve, reject) {
     mkpath(path, function(error) {
-      if (error) { 
+      if (error) {
         reject(error);
       } else {
         resolve();
@@ -150,20 +150,22 @@ function mkdir(path) {
 }
 
 function writeIndex(dir, docIndex) {
-  return mkdir(dir).then(Promise.all(Object.keys(docIndex).map(function(key) {
-    return new Promise(function(resolve, reject) {
-      var doc = docIndex[key];
-      var path = join(dir, doc.name + '.json');
+  return mkdir(dir).then(function() {
+    return Promise.all(Object.keys(docIndex).map(function(key) {
+      return new Promise(function(resolve, reject) {
+        var doc = docIndex[key];
+        var path = join(dir, doc.name + '.json');
 
-      fs.writeFile(path, JSON.stringify(doc, null, '  '), function(error) {
-        if (error) {
-          reject(error);
-        } else {
-          resolve();
-        }
+        fs.writeFile(path, JSON.stringify(doc, null, '  '), function(error) {
+          if (error) {
+            reject(error);
+          } else {
+            resolve();
+          }
+        });
       });
-    });
-  })));
+    }))
+  });
 }
 
 function validateIndex(docIndex, schema) {
@@ -203,7 +205,7 @@ function collect(params) {
   });
 }
 
-/** 
+/**
  * @param {string} out
  * @return {Promise}
  */
@@ -211,7 +213,7 @@ function build(out) {
   out = resolve(out);
   return collect({
     src: [
-      './core/src/elements/**/*.js', 
+      './core/src/elements/**/*.js',
       './core/src/ons/**/*.js',
       './bindings/angular1/directives/*.js',
       './bindings/angular1/js/*.js',
