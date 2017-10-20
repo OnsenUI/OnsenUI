@@ -1,5 +1,5 @@
 @media (orientation: landscape) {
-  body[onsflag-iphonex-landscape] .tabbar {
+  html[onsflag-iphonex-landscape] .tabbar {
     padding-left: var(--iphonex-safe-area-inset-left-landscape);
     padding-right: var(--iphonex-safe-area-inset-right-landscape);
     width: calc(100% - var(--iphonex-safe-area-inset-left-landscape) - var(--iphonex-safe-area-inset-right-landscape));

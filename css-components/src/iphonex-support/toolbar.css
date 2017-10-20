@@ -1,13 +1,13 @@
 @media (orientation: landscape) {
-  body[onsflag-iphonex-landscape] .toolbar__left {
+  html[onsflag-iphonex-landscape] .toolbar__left {
     padding-left: var(--iphonex-safe-area-inset-left-landscape);
   }
 
-  body[onsflag-iphonex-landscape] .toolbar__right {
+  html[onsflag-iphonex-landscape] .toolbar__right {
     padding-right: var(--iphonex-safe-area-inset-right-landscape);
   }
 
-  body[onsflag-iphonex-landscape] .bottom-bar {
+  html[onsflag-iphonex-landscape] .bottom-bar {
     padding-right: var(--iphonex-safe-area-inset-right-landscape);
     padding-left: var(--iphonex-safe-area-inset-left-landscape);
   }

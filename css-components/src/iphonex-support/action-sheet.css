@@ -1,11 +1,11 @@
 @media (orientation: portrait) {
-  body[onsflag-iphonex-portrait] .action-sheet {
+  html[onsflag-iphonex-portrait] .action-sheet {
     bottom: calc(var(--iphonex-safe-area-inset-bottom-portrait) + 14px); /* bottom safe area + 14 pt (extra bottom margin) */
   }
 }
 
 @media (orientation: landscape) {
-  body[onsflag-iphonex-landscape] .action-sheet {
+  html[onsflag-iphonex-landscape] .action-sheet {
     /* The width in landscape mode is the same as the width in portrait mode */
     left: calc((100vw - (100vh + 20px)) / 2);
     right: calc((100vw - (100vh + 20px)) / 2);

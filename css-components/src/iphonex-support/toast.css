@@ -1,11 +1,11 @@
 @media (orientation: portrait) {
-  body[onsflag-iphonex-landscape] .toast {
+  html[onsflag-iphonex-landscape] .toast {
     bottom: var(--iphonex-safe-area-inset-bottom-portrait);
   }
 }
 
 @media (orientation: landscape) {
-  body[onsflag-iphonex-landscape] .toast {
+  html[onsflag-iphonex-landscape] .toast {
     left: calc(var(--iphonex-safe-area-inset-left-landscape) + 8px);
     right: calc(var(--iphonex-safe-area-inset-right-landscape) + 8px);
     bottom: var(--iphonex-safe-area-inset-bottom-landscape);
