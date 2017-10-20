@@ -1,5 +1,4 @@
 :root {
-  --switch-background-color: var(--border-color);
   --switch-checked-background-color: var(--switch-highlight-color); /* background color active */
   --switch-thumb-background-color: white;
   --switch-thumb-border-color: var(--border-color);
@@ -69,7 +68,7 @@
 
 /* switch toggle background */
 .switch__toggle {
-  background-color: #fff;
+  background-color: var(--switch-background-color);
   position: absolute;
   top: 0;
   left: 0;
@@ -79,7 +78,7 @@
   transition-property: all;
   transition-duration: 0.35s;
   transition-timing-function: ease-out;
-  box-shadow: inset 0 0 0 2px #e5e5e5;
+  box-shadow: inset 0 0 0 2px var(--switch-border-color);
 }
 
 /* switch toggle circle */

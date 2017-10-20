@@ -32,8 +32,6 @@ const scheme = {
   '.page__background': 'page--*__background'
 };
 
-const nullToolbarElement = document.createElement('ons-toolbar'); // requires that 'ons-toolbar' element is registered
-
 /**
  * @element ons-page
  * @category page
@@ -359,7 +357,7 @@ export default class PageElement extends BaseElement {
   }
 
   _getToolbarElement() {
-    return util.findChild(this, 'ons-toolbar') || nullToolbarElement;
+    return util.findChild(this, 'ons-toolbar') || document.createElement('ons-toolbar');
   }
 
   static get observedAttributes() {

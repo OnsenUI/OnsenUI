@@ -3,13 +3,7 @@
   --segment-border-top: 1px solid var(--segment-color);
   --segment-border-bottom: 1px solid var(--segment-color);
   --segment-border: 0 solid var(--segment-color);
-  --segment-active-background-color: color(var(--segment-color) tint(var(--alpha-lighten)));
   --segment-border-radius: 4px;
-
-  --material-segment-background-color: #fafafa;
-  --material-segment-active-background-color: #c8c8c8;
-  --material-segment-text-color: rgba(0, 0, 0, 0.38);
-  --material-segment-active-text-color: #353535;
 }
 
 /*~

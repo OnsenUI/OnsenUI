@@ -24,6 +24,7 @@ ons-page, ons-navigator,
 ons-split-view, ons-sliding-menu, ons-tabbar,
 ons-gesture-detector {
   display: block;
+  touch-action: manipulation; /* Remove click delay */
 }
 
 ons-navigator,
@@ -39,6 +40,7 @@ ons-alert-dialog {
   bottom: 0;
   right: 0;
   overflow: hidden;
+  touch-action: manipulation; /* Remove click delay */
 }
 
 ons-toast {
@@ -78,14 +80,17 @@ ons-toolbar:not([inline]), ons-bottom-toolbar {
   right: 0;
   z-index: 10000;
 }
+
 ons-toolbar:not([inline]) {
   top: 0;
 }
+
 ons-bottom-toolbar {
   bottom: 0;
 }
 
-.page, .page__content {
+.page, .page__content,
+.page--material, .page--material__content {
   background-color: transparent !important;
   background: transparent !important;
 }

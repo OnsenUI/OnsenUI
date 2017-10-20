@@ -1,5 +1,4 @@
 :root {
-  --notification-color: white;
   --notification-border-radius: 19px;
   --notification-width: auto;
   --notification-height: 19px;
@@ -65,4 +64,5 @@
   background-color: var(--material-notification-background-color);
   font-size: var(--material-notification-font-size);
   font-weight: var(--material-notification-font-weight);
+  color: var(--material-notification-color);
 }

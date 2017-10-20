@@ -15,6 +15,13 @@ dev
 
  * css-components: Fixed margin of `.action-sheet` and `.action-sheet-button`.
  * ons-page: Minor issue with status bar when the page is moved in DOM.
+ * core: Changed to disable FastClick when it isn't needed.
+ * deviceBackButton: Fixed [#2215](https://github.com/OnsenUI/OnsenUI/issues/2215).
+ * templates: Firefox issue. Fixed [#2216](https://github.com/OnsenUI/OnsenUI/issues/2216).
+ * dialogs: Prevent scrolling behind dialog masks due to iOS bug. Fixed [#2220](https://github.com/OnsenUI/OnsenUI/issues/2220).
+ * ons-splitter: Correctly set content width on inital split mode. Fixed [#2205](https://github.com/OnsenUI/OnsenUI/issues/2205).
+ * ons-tabbar, ons-carousel: Can now be displayed inside dialogs/modals.
+ * ons-tabbar: Resizing window while tabbar is not visible should not update the tabbar.
 
 2.6.1
 ----
