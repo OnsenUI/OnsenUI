@@ -595,6 +595,7 @@ gulp.task('prepare', ['html2js'], () =>  {
     // less files
     gulp.src([
       'css-components/**/*',
+      '!css-components/onsen-visual-design-spec.sketch',
       '!css-components/node_modules/',
       '!css-components/node_modules/**/*',
       '!css-components/npm-debug.log'
