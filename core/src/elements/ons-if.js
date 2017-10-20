@@ -68,7 +68,7 @@ export default class IfElement extends BaseElement {
     super();
 
     contentReady(this, () => {
-      if (platform._renderPlatform !== null) {
+      if (platform._getRenderPlatform() !== null) {
         this._platformUpdate();
       } else if (!this._isAllowedPlatform()) {
         while (this.childNodes[0]) {
