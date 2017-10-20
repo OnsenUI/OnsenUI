@@ -69,6 +69,7 @@
   ],
   "homepage": "https://onsen.io/",
   "devDependencies": {
+    "angular": "^1.6.6",
     "babel-core": "^6.26.0",
     "babel-eslint": "^8.0.1",
     "babel-plugin-angularjs-annotate": "^0.7.0",

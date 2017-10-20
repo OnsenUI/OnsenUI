@@ -425,10 +425,6 @@ gulp.task('copy-files', () =>  {
     ])
       .pipe(gulp.dest('build/')),
 
-    // angular.js copy
-    gulp.src('bindings/angular1/lib/angular/*.*')
-      .pipe(gulp.dest('build/js/angular/')),
-
     // type definitions copy
     gulp.src('core/src/onsenui.d.ts')
       .pipe(gulp.dest('build/js/')),
