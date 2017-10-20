@@ -567,7 +567,7 @@ gulp.task('build-docs', () => {
 // test
 ////////////////////////////////////////
 gulp.task('test', ['prepare'], function(done) {
-  return runSequence('unit-test', done);
+  return runSequence('core-dts-test', 'unit-test', done);
 });
 
 ////////////////////////////////////////
