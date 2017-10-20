@@ -41,8 +41,6 @@ import gulpLoadPlugins from 'gulp-load-plugins';
 
 const $ = gulpLoadPlugins();
 
-const CORDOVA_APP = false;
-
 ////////////////////////////////////////
 // browser-sync
 ////////////////////////////////////////
@@ -384,7 +382,6 @@ gulp.task('minify-js', () => {
         path.extname = '.min.js';
       }))
       .pipe(gulp.dest('build/js/'))
-      .pipe(gulpIf(CORDOVA_APP, gulp.dest('cordova-app/www/lib/onsen/js')))
   );
 });
 
@@ -393,16 +390,8 @@ gulp.task('minify-js', () => {
 ////////////////////////////////////////
 gulp.task('prepare', () =>  {
 
-  let onlyES6;
-
   return merge(
-    // onsen-css-components
-    gulp.src([
-      'build/css/**/*',
-    ])
-      .pipe(gulpIf(CORDOVA_APP, gulp.dest('cordova-app/www/lib/onsen/css'))),
-
-    // less files
+    // CSS source
     gulp.src([
       'css-components/**/*',
       '!css-components/node_modules/',
@@ -429,12 +418,10 @@ gulp.task('prepare', () =>  {
       }))
       .pipe($.header('/*! <%= pkg.name %> - v<%= pkg.version %> - ' + dateformat(new Date(), 'yyyy-mm-dd') + ' */\n', {pkg: pkg}))
       .pipe(gulp.dest('build/css/'))
-      .pipe(gulpIf(CORDOVA_APP, gulp.dest('cordova-app/www/lib/onsen/css')))
       // onsenui.min.css
       .pipe($.cssmin({processImport: false}))
       .pipe($.rename({suffix: '.min'}))
       .pipe(gulp.dest('build/css/'))
-      .pipe(gulpIf(CORDOVA_APP, gulp.dest('cordova-app/www/lib/onsen/css'))),
 
     // ES Modules (raw ES source codes)
     gulp.src([
@@ -469,10 +456,6 @@ gulp.task('prepare', () =>  {
     // type definitions copy
     gulp.src('core/src/onsenui.d.ts')
       .pipe(gulp.dest('build/js/')),
-
-    // auto prepare
-    gulp.src('cordova-app/www/index.html')
-      .pipe(gulpIf(CORDOVA_APP, $.shell(['cd cordova-app; cordova prepare'])))
   );
 });
 
@@ -559,10 +542,6 @@ gulp.task('serve', ['prepare', 'watch-bundles', 'browser-sync'], () => {
   const watched = [
     'core/css/*.css'
   ];
-
-  if (CORDOVA_APP) {
-    watched.push('cordova-app/www/*.html');
-  }
 
   gulp.watch(watched, {
     debounceDelay: 300
