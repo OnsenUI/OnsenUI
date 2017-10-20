@@ -36,7 +36,7 @@
   /* Non-outermost */
   html[onsflag-iphonex-portrait] .dialog .toolbar, /* if wrapped with dialogs */
   html[onsflag-iphonex-portrait] .modal .toolbar, /* if wrapped with modals */
-  html[onsflag-iphonex-portrait] .toolbar+.page__background+.page__content .toolbar, /* if wrapped with a page with a toolbar */
+  html[onsflag-iphonex-portrait] .toolbar:not(.toolbar--cover-content)+.page__background+.page__content .toolbar, /* if wrapped with a page with a toolbar */
   html[onsflag-iphonex-portrait] .tabbar--top__content .toolbar { /* if wrapped with a top tabbar */
     /* Restore original styles */
     top: 0;
@@ -71,9 +71,9 @@
   /* Non-outermost */
   html[onsflag-iphonex-portrait] .dialog .page__content, /* if wrapped with dialogs */
   html[onsflag-iphonex-portrait] .modal .page__content, /* if wrapped with modals */
-  html[onsflag-iphonex-portrait] .toolbar+.page__background+.page__content .page__content, /* if wrapped with a page with a toolbar */
+  html[onsflag-iphonex-portrait] .toolbar:not(.toolbar--cover-content)+.page__background+.page__content .page__content, /* if wrapped with a page with a toolbar */
   html[onsflag-iphonex-portrait] .tabbar--top__content .page__content, /* if wrapped with a top tabbar */
-  html[onsflag-iphonex-portrait] .toolbar+.page__background+.page__content { /* if the page has a toolbar */
+  html[onsflag-iphonex-portrait] .toolbar:not(.toolbar--cover-content)+.page__background+.page__content { /* if the page has a toolbar */
     /* Restore original styles */
     top: 0;
     padding-top: 0;
@@ -89,15 +89,15 @@
   }
 
   /* Outermost page__content with a toolbar */
-  html[onsflag-iphonex-portrait] .toolbar+.page__background+.page__content {
+  html[onsflag-iphonex-portrait] .toolbar:not(.toolbar--cover-content)+.page__background+.page__content {
     top: calc(var(--iphonex-safe-area-inset-top-portrait) + var(--toolbar-height));
     padding-top: 0;
   }
   /* Non-outermost */
-  html[onsflag-iphonex-portrait] .dialog .toolbar+.page__background+.page__content, /* if wrapped with dialogs */
-  html[onsflag-iphonex-portrait] .modal .toolbar+.page__background+.page__content, /* if wrapped with modals */
-  html[onsflag-iphonex-portrait] .toolbar+.page__background+.page__content .toolbar+.page__background+.page__content, /* if wrapped with a page with a toolbar */
-  html[onsflag-iphonex-portrait] .tabbar--top__content .toolbar+.page__background+.page__content { /* if wrapped with a top tabbar */
+  html[onsflag-iphonex-portrait] .dialog .toolbar:not(.toolbar--cover-content)+.page__background+.page__content, /* if wrapped with dialogs */
+  html[onsflag-iphonex-portrait] .modal .toolbar:not(.toolbar--cover-content)+.page__background+.page__content, /* if wrapped with modals */
+  html[onsflag-iphonex-portrait] .toolbar:not(.toolbar--cover-content)+.page__background+.page__content .toolbar:not(.toolbar--cover-content)+.page__background+.page__content, /* if wrapped with a page with a toolbar */
+  html[onsflag-iphonex-portrait] .tabbar--top__content .toolbar:not(.toolbar--cover-content)+.page__background+.page__content { /* if wrapped with a top tabbar */
     /* Restore original styles */
     top: var(--toolbar-height);
     padding-top: 0;
@@ -129,8 +129,8 @@
   html[onsflag-iphonex-portrait] .dialog .toolbar.toolbar--transparent.toolbar--cover-content+.page__background+.page__content .page_content,
   html[onsflag-iphonex-portrait] .modal .toolbar.toolbar--transparent.toolbar--cover-content+.page__background+.page__content, /* if wrapped with modals */
   html[onsflag-iphonex-portrait] .modal .toolbar.toolbar--transparent.toolbar--cover-content+.page__background+.page__content .page_content,
-  html[onsflag-iphonex-portrait] .toolbar+.page__background+.page__content .toolbar.toolbar--transparent.toolbar--cover-content+.page__background+.page__content, /* if wrapped with a page with a toolbar */
-  html[onsflag-iphonex-portrait] .toolbar+.page__background+.page__content .toolbar.toolbar--transparent.toolbar--cover-content+.page__background+.page__content .page__content,
+  html[onsflag-iphonex-portrait] .toolbar:not(.toolbar--cover-content)+.page__background+.page__content .toolbar.toolbar--transparent.toolbar--cover-content+.page__background+.page__content, /* if wrapped with a page with a toolbar */
+  html[onsflag-iphonex-portrait] .toolbar:not(.toolbar--cover-content)+.page__background+.page__content .toolbar.toolbar--transparent.toolbar--cover-content+.page__background+.page__content .page__content,
   html[onsflag-iphonex-portrait] .tabbar--top__content .toolbar.toolbar--transparent.toolbar--cover-content+.page__background+.page__content,
   html[onsflag-iphonex-portrait] .tabbar--top__content .toolbar.toolbar--transparent.toolbar--cover-content+.page__background+.page__content .page_content {  /* if wrapped with a top tabbar */
     /* Restore original styles */
@@ -145,7 +145,7 @@
   /* Non-outermost */
   html[onsflag-iphonex-portrait] .dialog .tabbar--top, /* if wrapped with dialogs */
   html[onsflag-iphonex-portrait] .modal .tabbar--top, /* if wrapped with modals */
-  html[onsflag-iphonex-portrait] .toolbar+.page__background+.page__content .tabbar--top, /* if wrapped with a page with a toolbar */
+  html[onsflag-iphonex-portrait] .toolbar:not(.toolbar--cover-content)+.page__background+.page__content .tabbar--top, /* if wrapped with a page with a toolbar */
   html[onsflag-iphonex-portrait] .tabbar--top__content .tabbar--top { /* if wrapped with a top tabbar */
     /* Restore original styles */
     padding-top: 0;
@@ -158,7 +158,7 @@
   /* Non-outermost */
   html[onsflag-iphonex-portrait] .dialog .tabbar--top__content, /* if wrapped with dialogs */
   html[onsflag-iphonex-portrait] .modal .tabbar--top__content, /* if wrapped with modals */
-  html[onsflag-iphonex-portrait] .toolbar+.page__background+.page__content .tabbar--top__content, /* if wrapped with a page with a toolbar */
+  html[onsflag-iphonex-portrait] .toolbar:not(.toolbar--cover-content)+.page__background+.page__content .tabbar--top__content, /* if wrapped with a page with a toolbar */
   html[onsflag-iphonex-portrait] .tabbar--top__content .tabbar--top__content { /* if wrapped with a top tabbar */
     /* Restore original styles */
     top: var(--tabbar-height);
