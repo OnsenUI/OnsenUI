@@ -22,7 +22,6 @@ import 'babel-polyfill';
 import gulp from 'gulp';
 import path from'path';
 import glob from 'glob';
-import gulpIf from 'gulp-if';
 import pkg from './package.json';
 import {merge} from 'event-stream';
 import runSequence from 'run-sequence';
