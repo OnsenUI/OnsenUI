@@ -1,0 +1,47 @@
+/* Suppress safe area support for pages in splitter sides */
+@media (orientation: landscape) {
+  html[onsflag-iphonex-landscape] ons-splitter-side[side="left"] .page__content {
+    padding-right: 0;
+  }
+  html[onsflag-iphonex-landscape] ons-splitter-side[side="right"] .page__content {
+    padding-left: 0;
+  }
+}
+/* Support the situation that a progress bar is located just below a toolbar */
+@media (orientation: landscape) {
+  html[onsflag-iphonex-landscape] .page__content > ons-progress-bar > .progress-bar {
+    margin-left: -44px;
+    margin-right: -44px;
+    width: calc(100% + 88px);
+  }
+}
+/* Lists in .page__content in splitter-sides */
+@media (orientation: landscape) {
+  /* Suppress left safe area support for pages in right splitter sides */
+  html[onsflag-iphonex-landscape] ons-splitter-side[side="right"] .page__content > .list:not(.list--inset) {
+    margin-left: 0;
+  }
+  html[onsflag-iphonex-landscape] ons-splitter-side[side="right"] .page__content > .list:not(.list--inset) > .list-header {
+    padding-left: 15px;
+  }
+  html[onsflag-iphonex-landscape] ons-splitter-side[side="right"] .page__content > .list:not(.list--inset) > .list-item {
+    padding-left: 14px;
+  }
+
+  /* Suppress right safe area support for pages in left splitter sides */
+  html[onsflag-iphonex-landscape] ons-splitter-side[side="left"] .page__content > .list:not(.list--inset) {
+    margin-right: 0;
+  }
+  html[onsflag-iphonex-landscape] ons-splitter-side[side="left"] .page__content > .list:not(.list--inset) > .list-item--chevron:before {
+    right: 16px;
+  }
+  html[onsflag-iphonex-landscape] ons-splitter-side[side="left"] .page__content > .list:not(.list--inset) > .list-item > .list-item__center:last-child {
+    padding-right: 6px;
+  }
+  html[onsflag-iphonex-landscape] ons-splitter-side[side="left"] .page__content > .list:not(.list--inset) > .list-item > .list-item__right {
+    padding-right: 12px;
+  }
+  html[onsflag-iphonex-landscape] ons-splitter-side[side="left"] .page__content > .list:not(.list--inset) > .list-item > .list-item--chevron__right {
+    padding-right: 30px;
+  }
+}

@@ -7,12 +7,14 @@ dev
 
 ### New Features
 
+ * css-components: Supported iPhone X.
  * css-components: Reimplemented css-components previewer.
  * css-components: Changed color scheme to more iOS native-like.
  * ons: 'mockStatusBar' now can also show Android's status bar.
 
 ### Bug Fixes
 
+ * css-components: Fixed margin of `.action-sheet` and `.action-sheet-button`.
  * ons-page: Minor issue with status bar when the page is moved in DOM.
  * core: Changed to disable FastClick when it isn't needed.
  * deviceBackButton: Fixed [#2215](https://github.com/OnsenUI/OnsenUI/issues/2215).
@@ -21,6 +23,10 @@ dev
  * ons-splitter: Correctly set content width on inital split mode. Fixed [#2205](https://github.com/OnsenUI/OnsenUI/issues/2205).
  * ons-tabbar, ons-carousel: Can now be displayed inside dialogs/modals.
  * ons-tabbar: Resizing window while tabbar is not visible should not update the tabbar.
+
+### Misc
+
+ * core: Auto status bar fill for iOS 7+ WebView is now automatically disabled on iPhone X WebView.
 
 2.6.1
 ----

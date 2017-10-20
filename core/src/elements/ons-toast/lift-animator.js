@@ -18,6 +18,7 @@ limitations under the License.
 
 import util from '../../ons/util';
 import animit from '../../ons/animit';
+import iPhoneXPatch from '../../ons/iphonex-patch';
 import ToastAnimator from './animator';
 
 /**
@@ -28,6 +29,13 @@ export default class LiftToastAnimator extends ToastAnimator {
   constructor({ timing = 'ease', delay = 0, duration = 0.35 } = {}) {
     super({ timing, delay, duration });
     this.bodyHeight = document.body.clientHeight; // avoid Forced Synchronous Layout
+    if (iPhoneXPatch.isIPhoneXPortraitPatchActive()) {
+      this.liftAmount = 'calc(100% + 34px)';
+    } else if (iPhoneXPatch.isIPhoneXLandscapePatchActive()) {
+      this.liftAmount = 'calc(100% + 21px)';
+    } else {
+      this.liftAmount = '100%';
+    }
   }
 
   /**
@@ -41,7 +49,7 @@ export default class LiftToastAnimator extends ToastAnimator {
       animit(toast)
         .saveStyle()
         .queue({
-          transform: `translate3d(0, 100%, 0)`,
+          transform: `translate3d(0, ${this.liftAmount}, 0)`,
           opacity: 0
         })
         .wait(this.delay)
@@ -76,7 +84,7 @@ export default class LiftToastAnimator extends ToastAnimator {
         })
         .wait(this.delay)
         .queue({
-          transform: `translate3d(0, 100%, 0)`,
+          transform: `translate3d(0, ${this.liftAmount}, 0)`,
           opacity: 0
         }, {
           duration: this.duration,
