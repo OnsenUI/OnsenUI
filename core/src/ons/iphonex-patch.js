@@ -19,12 +19,12 @@ limitations under the License.
 const iPhoneXPatch = {};
 
 iPhoneXPatch.isIPhoneXPortraitPatchActive = () => {
-  return document.documentElement.getAttribute('onsflag-iphonex-portrait') === 'true' && window.innerWidth < window.innerHeight;
+  return document.documentElement.getAttribute('onsflag-iphonex-portrait') != null && window.innerWidth < window.innerHeight;
 }
 
 iPhoneXPatch.isIPhoneXLandscapePatchActive = () => {
   // If width === height, treat it as landscape
-  return document.documentElement.getAttribute('onsflag-iphonex-landscape') === 'true' && window.innerWidth >= window.innerHeight;
+  return document.documentElement.getAttribute('onsflag-iphonex-landscape') != null && window.innerWidth >= window.innerHeight;
 }
 
 /**
