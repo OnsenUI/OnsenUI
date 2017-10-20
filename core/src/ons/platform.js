@@ -32,7 +32,7 @@ class Platform {
    * @type {String}
    */
   constructor() {
-    this._renderPlatform = null;
+    this._selectedPlatform = null;
     this._ignorePlatformSelect = false;
   }
 
@@ -48,12 +48,12 @@ class Platform {
    */
   select(platform) {
     if (typeof platform === 'string') {
-      this._renderPlatform = platform.trim().toLowerCase();
+      this._selectedPlatform = platform.trim().toLowerCase();
     }
   }
 
-  _getRenderPlatform() {
-    return this._ignorePlatformSelect ? null : this._renderPlatform;
+  _getSelectedPlatform() {
+    return this._ignorePlatformSelect ? null : this._selectedPlatform;
   }
 
   runOnActualPlatform(fn) {
@@ -129,8 +129,8 @@ class Platform {
    * @return {Boolean}
    */
   isIOS() {
-    if (this._getRenderPlatform()) {
-      return this._getRenderPlatform() === 'ios';
+    if (this._getSelectedPlatform()) {
+      return this._getSelectedPlatform() === 'ios';
     } else if (typeof device === 'object' && !/browser/i.test(device.platform)) {
       return /iOS/i.test(device.platform);
     } else {
@@ -147,8 +147,8 @@ class Platform {
    * @return {Boolean}
    */
   isAndroid() {
-    if (this._getRenderPlatform()) {
-      return this._getRenderPlatform() === 'android';
+    if (this._getSelectedPlatform()) {
+      return this._getSelectedPlatform() === 'android';
     } else if (typeof device === 'object' && !/browser/i.test(device.platform)) {
       return /Android/i.test(device.platform);
     } else {
@@ -184,8 +184,8 @@ class Platform {
    * @return {Boolean}
    */
   isWP() {
-    if (this._getRenderPlatform()) {
-      return this._getRenderPlatform() === 'wp';
+    if (this._getSelectedPlatform()) {
+      return this._getSelectedPlatform() === 'wp';
     } else if (typeof device === 'object' && !/browser/i.test(device.platform)) {
       return /Win32NT|WinCE/i.test(device.platform);
     } else {
@@ -233,8 +233,8 @@ class Platform {
    * @return {Boolean}
    */
   isBlackBerry() {
-    if (this._getRenderPlatform()) {
-      return this._getRenderPlatform() === 'blackberry';
+    if (this._getSelectedPlatform()) {
+      return this._getSelectedPlatform() === 'blackberry';
     } else if (typeof device === 'object' && !/browser/i.test(device.platform)) {
       return /BlackBerry/i.test(device.platform);
     } else {
@@ -251,8 +251,8 @@ class Platform {
    * @return {Boolean}
    */
   isOpera() {
-    if (this._getRenderPlatform()) {
-      return this._getRenderPlatform() === 'opera';
+    if (this._getSelectedPlatform()) {
+      return this._getSelectedPlatform() === 'opera';
     } else {
       return (!!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0);
     }
@@ -267,8 +267,8 @@ class Platform {
    * @return {Boolean}
    */
   isFirefox() {
-    if (this._getRenderPlatform()) {
-      return this._getRenderPlatform() === 'firefox';
+    if (this._getSelectedPlatform()) {
+      return this._getSelectedPlatform() === 'firefox';
     } else {
       return (typeof InstallTrigger !== 'undefined');
     }
@@ -283,8 +283,8 @@ class Platform {
    * @return {Boolean}
    */
   isSafari() {
-    if (this._getRenderPlatform()) {
-      return this._getRenderPlatform() === 'safari';
+    if (this._getSelectedPlatform()) {
+      return this._getSelectedPlatform() === 'safari';
     } else {
       return (Object.prototype.toString.call(window.HTMLElement).indexOf('Constructor') > 0) || (function (p) { return p.toString() === '[object SafariRemoteNotification]' })(!window['safari'] || safari.pushNotification);
     }
@@ -299,8 +299,8 @@ class Platform {
    * @return {Boolean}
    */
   isChrome() {
-    if (this._getRenderPlatform()) {
-      return this._getRenderPlatform() === 'chrome';
+    if (this._getSelectedPlatform()) {
+      return this._getSelectedPlatform() === 'chrome';
     } else {
       return (!!window.chrome && !(!!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0) && !(navigator.userAgent.indexOf(' Edge/') >= 0));
     }
@@ -315,8 +315,8 @@ class Platform {
    * @return {Boolean}
    */
   isIE() {
-    if (this._getRenderPlatform()) {
-      return this._getRenderPlatform() === 'ie';
+    if (this._getSelectedPlatform()) {
+      return this._getSelectedPlatform() === 'ie';
     } else {
       return false || !!document.documentMode;
     }
@@ -331,8 +331,8 @@ class Platform {
    * @return {Boolean}
    */
   isEdge() {
-    if (this._getRenderPlatform()) {
-      return this._getRenderPlatform() === 'edge';
+    if (this._getSelectedPlatform()) {
+      return this._getSelectedPlatform() === 'edge';
     } else {
       return navigator.userAgent.indexOf(' Edge/') >= 0;
     }
