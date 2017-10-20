@@ -16,6 +16,7 @@
   overflow-y: hidden;
   color: var(--text-color);
   -ms-overflow-style: none;
+  -webkit-font-smoothing: antialiased;
 }
 
 .page::-webkit-scrollbar {
@@ -44,6 +45,7 @@
 
 .page--material {
   @apply(--material-font);
+  background-color: var(--page-material-background-color);
 }
 
 .page--material__content {
@@ -100,3 +102,4 @@
 .page--material__background {
   background-color: var(--page-material-background-color);
 }
+

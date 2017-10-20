@@ -3,7 +3,6 @@
   --button-bar-border-top: 1px solid var(--button-bar-color);
   --button-bar-border-bottom: 1px solid var(--button-bar-color);
   --button-bar-border: 0 solid var(--button-bar-color);
-  --button-bar-active-background-color: color(var(--button-bar-color) tint(var(--alpha-lighten)));
   --button-bar-border-radius: 4px;
 
   --button-bar: {

@@ -15,6 +15,9 @@ limitations under the License.
 
 */
 
+// Save HTMLElement object before Custom Elements polyfill patch global HTMLElement.
+const NativeHTMLElement = window.HTMLElement;
+
 /**
  * @object ons.platform
  * @category util
@@ -29,7 +32,8 @@ class Platform {
    * @type {String}
    */
   constructor() {
-    this._renderPlatform = null;
+    this._selectedPlatform = null;
+    this._ignorePlatformSelect = false;
   }
 
   /**
@@ -44,8 +48,20 @@ class Platform {
    */
   select(platform) {
     if (typeof platform === 'string') {
-      this._renderPlatform = platform.trim().toLowerCase();
+      this._selectedPlatform = platform.trim().toLowerCase();
     }
+  }
+
+  _getSelectedPlatform() {
+    return this._ignorePlatformSelect ? null : this._selectedPlatform;
+  }
+
+  _runOnActualPlatform(fn) {
+    this._ignorePlatformSelect = true;
+    const result = fn();
+    this._ignorePlatformSelect = false;
+
+    return result;
   }
 
   /**
@@ -65,6 +81,46 @@ class Platform {
   }
 
   /**
+   * @method isWKWebView
+   * @signature isWKWebView()
+   * @description
+   *   [en]Returns whether app is running in WKWebView.[/en]
+   *   [ja]WKWebViewで実行されているかどうかを返します。[/ja]
+   * @return {Boolean}
+   */
+  isWKWebView() {
+    const lte9 = /constructor/i.test(NativeHTMLElement);
+    return !!(this.isIOS() && window.webkit && window.webkit.messageHandlers && window.indexedDB && !lte9);
+  }
+
+  /**
+   * @method isUIWebView
+   * @signature isUIWebView()
+   * @description
+   *   [en]Returns whether app is running in UIWebView.[/en]
+   *   [ja]UIWebViewで実行されているかどうかを返します。[/ja]
+   * @return {Boolean}
+   */
+  isUIWebView() {
+    return !!(this.isIOS() && !this.isIOSSafari() && !this.isWKWebView());
+  }
+
+  /**
+   * @method isIOSSafari
+   * @signature isIOSSafari()
+   * @description
+   *   [en]Returns whether app is running in iOS Safari.[/en]
+   *   [ja]iOS Safariで実行されているかどうかを返します。[/ja]
+   * @return {Boolean}
+   */
+  isIOSSafari() {
+    const navigator = window.navigator;
+    const ua = navigator.userAgent;
+
+    return !!(this.isIOS() && ua.indexOf('Safari') !== -1 && ua.indexOf('Version') !== -1 && !navigator.standalone);
+  }
+
+  /**
    * @method isIOS
    * @signature isIOS()
    * @description
@@ -73,9 +129,11 @@ class Platform {
    * @return {Boolean}
    */
   isIOS() {
-    if (this._renderPlatform) {
-      return this._renderPlatform === 'ios';
-    } else if (typeof device === 'object' && !/browser/i.test(device.platform)) {
+    if (this._getSelectedPlatform()) {
+      return this._getSelectedPlatform() === 'ios';
+    }
+
+    if (typeof device === 'object' && !/browser/i.test(device.platform)) {
       return /iOS/i.test(device.platform);
     } else {
       return /iPhone|iPad|iPod/i.test(navigator.userAgent);
@@ -91,9 +149,11 @@ class Platform {
    * @return {Boolean}
    */
   isAndroid() {
-    if (this._renderPlatform) {
-      return this._renderPlatform === 'android';
-    } else if (typeof device === 'object' && !/browser/i.test(device.platform)) {
+    if (this._getSelectedPlatform()) {
+      return this._getSelectedPlatform() === 'android';
+    }
+
+    if (typeof device === 'object' && !/browser/i.test(device.platform)) {
       return /Android/i.test(device.platform);
     } else {
       return /Android/i.test(navigator.userAgent);
@@ -128,9 +188,11 @@ class Platform {
    * @return {Boolean}
    */
   isWP() {
-    if (this._renderPlatform) {
-      return this._renderPlatform === 'wp';
-    } else if (typeof device === 'object' && !/browser/i.test(device.platform)) {
+    if (this._getSelectedPlatform()) {
+      return this._getSelectedPlatform() === 'wp';
+    }
+
+    if (typeof device === 'object' && !/browser/i.test(device.platform)) {
       return /Win32NT|WinCE/i.test(device.platform);
     } else {
       return /Windows Phone|IEMobile|WPDesktop/i.test(navigator.userAgent);
@@ -177,9 +239,11 @@ class Platform {
    * @return {Boolean}
    */
   isBlackBerry() {
-    if (this._renderPlatform) {
-      return this._renderPlatform === 'blackberry';
-    } else if (typeof device === 'object' && !/browser/i.test(device.platform)) {
+    if (this._getSelectedPlatform()) {
+      return this._getSelectedPlatform() === 'blackberry';
+    }
+
+    if (typeof device === 'object' && !/browser/i.test(device.platform)) {
       return /BlackBerry/i.test(device.platform);
     } else {
       return /BlackBerry|RIM Tablet OS|BB10/i.test(navigator.userAgent);
@@ -195,11 +259,11 @@ class Platform {
    * @return {Boolean}
    */
   isOpera() {
-    if (this._renderPlatform) {
-      return this._renderPlatform === 'opera';
-    } else {
-      return (!!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0);
+    if (this._getSelectedPlatform()) {
+      return this._getSelectedPlatform() === 'opera';
     }
+
+    return (!!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0);
   }
 
   /**
@@ -211,11 +275,11 @@ class Platform {
    * @return {Boolean}
    */
   isFirefox() {
-    if (this._renderPlatform) {
-      return this._renderPlatform === 'firefox';
-    } else {
-      return (typeof InstallTrigger !== 'undefined');
+    if (this._getSelectedPlatform()) {
+      return this._getSelectedPlatform() === 'firefox';
     }
+
+    return (typeof InstallTrigger !== 'undefined');
   }
 
   /**
@@ -227,11 +291,11 @@ class Platform {
    * @return {Boolean}
    */
   isSafari() {
-    if (this._renderPlatform) {
-      return this._renderPlatform === 'safari';
-    } else {
-      return (Object.prototype.toString.call(window.HTMLElement).indexOf('Constructor') > 0) || (function (p) { return p.toString() === '[object SafariRemoteNotification]' })(!window['safari'] || safari.pushNotification);
+    if (this._getSelectedPlatform()) {
+      return this._getSelectedPlatform() === 'safari';
     }
+
+    return (Object.prototype.toString.call(window.HTMLElement).indexOf('Constructor') > 0) || (function (p) { return p.toString() === '[object SafariRemoteNotification]' })(!window['safari'] || safari.pushNotification);
   }
 
   /**
@@ -243,11 +307,11 @@ class Platform {
    * @return {Boolean}
    */
   isChrome() {
-    if (this._renderPlatform) {
-      return this._renderPlatform === 'chrome';
-    } else {
-      return (!!window.chrome && !(!!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0) && !(navigator.userAgent.indexOf(' Edge/') >= 0));
+    if (this._getSelectedPlatform()) {
+      return this._getSelectedPlatform() === 'chrome';
     }
+
+    return (!!window.chrome && !(!!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0) && !(navigator.userAgent.indexOf(' Edge/') >= 0));
   }
 
   /**
@@ -259,11 +323,11 @@ class Platform {
    * @return {Boolean}
    */
   isIE() {
-    if (this._renderPlatform) {
-      return this._renderPlatform === 'ie';
-    } else {
-      return false || !!document.documentMode;
+    if (this._getSelectedPlatform()) {
+      return this._getSelectedPlatform() === 'ie';
     }
+
+    return false || !!document.documentMode;
   }
 
   /**
@@ -275,11 +339,11 @@ class Platform {
    * @return {Boolean}
    */
   isEdge() {
-    if (this._renderPlatform) {
-      return this._renderPlatform === 'edge';
-    } else {
-      return navigator.userAgent.indexOf(' Edge/') >= 0;
+    if (this._getSelectedPlatform()) {
+      return this._getSelectedPlatform() === 'edge';
     }
+
+    return navigator.userAgent.indexOf(' Edge/') >= 0;
   }
 
   /**

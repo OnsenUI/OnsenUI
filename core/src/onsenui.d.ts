@@ -232,6 +232,24 @@ declare namespace ons {
     function isAndroidTablet(): boolean;
 
     /**
+     * @description Returns whether app is running in UIWebView.
+     * @return {Boolean}
+     */
+    function isUIWebView(): boolean;
+
+    /**
+     * @description Returns whether app is running in iOS Safari.
+     * @return {Boolean}
+     */
+    function isIOSSafari(): boolean;
+
+    /**
+     * @description Returns whether app is running in WKWebView.
+     * @return {Boolean}
+     */
+    function isWKWebView(): boolean;
+
+    /**
      * @description Returns whether the device is iPhone
      * @return {Boolean}
      */

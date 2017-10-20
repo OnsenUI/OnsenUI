@@ -64,7 +64,6 @@ export default class Swiper {
     this._mutationObserver = new MutationObserver(() => this.refresh());
     this.updateSwipeable(swipeable);
     this.updateAutoRefresh(autoRefresh);
-    this.resizeOn();
 
     // Setup initial layout
     this._scroll = this._offset = this._lastActiveIndex = 0;
@@ -86,7 +85,7 @@ export default class Swiper {
     this._gestureDetector && this._gestureDetector.dispose();
     this.target = this.blocker = this._gestureDetector = this._mutationObserver = null;
 
-    this.resizeOff();
+    this.setupResize(false);
   }
 
   onResize() {
@@ -141,7 +140,7 @@ export default class Swiper {
     const count = this.itemCount,
       size = this.itemNumSize;
 
-    if (scroll < 0) {
+    if (scroll <= 0) {
       return 0;
     }
 
@@ -154,12 +153,17 @@ export default class Swiper {
     return count - 1;
   }
 
-  resizeOn() {
-    window.addEventListener('resize', this.onResize, true);
+  setupResize(add) {
+    window[(add ? 'add' : 'remove') + 'EventListener']('resize', this.onResize, true);
   }
 
-  resizeOff() {
-    window.removeEventListener('resize', this.onResize, true);
+  show() {
+    this.setupResize(true);
+    this.onResize();
+  }
+
+  hide() {
+    this.setupResize(false);
   }
 
   updateSwipeable(shouldUpdate) {

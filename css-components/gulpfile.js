@@ -17,6 +17,7 @@ const commonjs = require('rollup-plugin-commonjs');
 const glob = require('glob');
 const rimraf = require('rimraf');
 const path = require('path');
+const yaml = require('js-yaml');
 
 // Include these plugins outside $ to fix gulp-hub
 const plumber = require('gulp-plumber');
@@ -110,9 +111,7 @@ gulp.task('generate-preview', (done) => {
 
   if (markupToken !== lastMarkupToken) {
     runSequence('preview-assets', 'preview-js', () => {
-      const template = fs.readFileSync(__dirname + '/previewer-src/index.html.eco', 'utf-8');
-      const componentsJSON = JSON.stringify(components);
-      fs.writeFileSync(__dirname + '/build/index.html', eco.render(template, {components, componentsJSON}), 'utf-8');
+      generate(components);
       browserSync.reload();
 
       lastMarkupToken = markupToken;
@@ -125,12 +124,18 @@ gulp.task('generate-preview', (done) => {
 });
 
 gulp.task('generate-preview-force', ['preview-assets', 'preview-js'], () => {
-  const components = parseComponents();
-  const template = fs.readFileSync(__dirname + '/previewer-src/index.html.eco', 'utf-8');
-  const componentsJSON = JSON.stringify(components);
-  fs.writeFileSync(__dirname + '/build/index.html', eco.render(template, {components, componentsJSON}), 'utf-8');
+  generate(parseComponents());
   browserSync.reload();
 });
+
+function generate(components) {
+  const template = fs.readFileSync(__dirname + '/previewer-src/index.html.eco', 'utf-8');
+  const patterns = yaml.safeLoadAll(fs.readFileSync(__dirname + '/patterns.yaml', 'utf-8'));
+  const themes = glob.sync(__dirname + '/build/{*-,}onsen-css-components.css').map(filePath => path.basename(filePath, '.css'));
+  const toJSON = JSON.stringify.bind(JSON);
+
+  fs.writeFileSync(__dirname + '/build/index.html', eco.render(template, {toJSON, components, themes, patterns}), 'utf-8');
+}
 
 function identifyComponentsMarkup(componentsJSON) {
   const token = componentsJSON.map(component => {
@@ -150,7 +155,7 @@ function parseComponents() {
 // preview-assets
 ////////////////////////////////////////
 gulp.task('preview-assets', () => {
-  return gulp.src('previewer-src/*.css')
+  return gulp.src('previewer-src/*.{svg,css}')
     .pipe(gulp.dest('./build/'));
 });
 
@@ -189,7 +194,7 @@ gulp.task('serve', ['reset-console', 'build'], done => {
     runSequence('build-css', 'generate-preview', outputDevServerInfo);
   });
 
-  gulp.watch(['previewer-src/**'], () => {
+  gulp.watch(['previewer-src/**', 'patterns.yaml'], () => {
     reset();
     runSequence('generate-preview-force', outputDevServerInfo)
   });
@@ -257,4 +262,10 @@ function displayBuildCSSInfo() {
       return '.' + path.sep + path.relative(__dirname, cssPath);
     });
   }
+}
+
+function getCSSPaths() {
+  return glob.sync(__dirname + '/build/{*-,}onsen-css-components.css').map(cssPath => {
+    return '.' + path.sep + path.relative(__dirname, cssPath);
+  });
 }

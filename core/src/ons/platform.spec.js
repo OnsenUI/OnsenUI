@@ -2,7 +2,7 @@
 
 describe('ons.platform', () => {
   afterEach(() => {
-    ons.platform._renderPlatform = null;
+    ons.platform._selectedPlatform = null;
   });
 
   it('exists', () => {
@@ -12,13 +12,31 @@ describe('ons.platform', () => {
   describe('#select()', () => {
     it('sets the render platform', () => {
       ons.platform.select('android');
-      expect(ons.platform._renderPlatform).to.equal('android');
+      expect(ons.platform._selectedPlatform).to.equal('android');
     });
   });
 
   describe('#isWebView()', () => {
     it('return false if platform is not a WebView', () => {
       expect(ons.platform.isWebView()).to.be.false;
+    });
+  });
+
+  describe('#isWKWebView()', () => {
+    it('return false if platform is not a WKWebView', () => {
+      expect(ons.platform.isWKWebView()).to.be.false;
+    });
+  });
+
+  describe('#isIOSSafari()', () => {
+    it('return false if platform is not a IOS Safari', () => {
+      expect(ons.platform.isIOSSafari()).to.be.false;
+    });
+  });
+
+  describe('#isUIWebView()', () => {
+    it('return false if platform is not a UIWebView', () => {
+      expect(ons.platform.isUIWebView()).to.be.false;
     });
   });
 
