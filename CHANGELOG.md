@@ -8,6 +8,7 @@ dev
 ### New Features
 
  * css-components: Supported iPhone X with `html[onsflag-iphonex-portrait]` and `html[onsflag-iphonex-landscape]` flags.
+ * css-components: Added iOS & Material dark color scheme available as `dark-onsen-css-components.css`.
  * css-components: Refined the css-components previewer located in `css-components-src`.
  * core: Supported iOS 11.
  * ons.mockStatusBar: Now can also show Android's status bar.
