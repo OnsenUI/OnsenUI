@@ -91,6 +91,12 @@ describe('ons.platform', () => {
     });
   });
 
+  describe('#isIPhoneX()', () => {
+    it('returns false if platform is iPhone X', () => {
+      expect(ons.platform.isIPhoneX()).to.be.false;
+    });
+  });
+
   describe('#isIPad()', () => {
     it('returns false if platform is iPad', () => {
       expect(ons.platform.isIPad()).to.be.false;
