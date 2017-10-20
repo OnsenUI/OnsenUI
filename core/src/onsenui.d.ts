@@ -48,11 +48,11 @@ declare namespace ons {
    */
   function enableDeviceBackButtonHandler(): void;
   /**
-   * @description Enable status bar fill feature on iOS7 and above
+   * @description Enable status bar fill feature on iOS7 and above (except for iPhone X)
    */
   function enableAutoStatusBarFill(): void;
   /**
-   * @description Disable status bar fill feature on iOS7 and above
+   * @description Disable status bar fill feature on iOS7 and above (except for iPhone X)
    */
   function disableAutoStatusBarFill(): void;
   /**

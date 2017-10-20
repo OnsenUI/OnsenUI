@@ -162,8 +162,8 @@ ons.enableDeviceBackButtonHandler = function() {
  * @method enableAutoStatusBarFill
  * @signature enableAutoStatusBarFill()
  * @description
- *   [en]Enable status bar fill feature on iOS7 and above. Must be called before `ons.ready`.[/en]
- *   [ja]iOS7以上で、ステータスバー部分の高さを自動的に埋める処理を有効にします。[/ja]
+ *   [en]Enable status bar fill feature on iOS7 and above (except for iPhone X). Must be called before `ons.ready`.[/en]
+ *   [ja]iOS7以上（iPhone Xは除く）で、ステータスバー部分の高さを自動的に埋める処理を有効にします。[/ja]
  */
 ons.enableAutoStatusBarFill = () => {
   if (ons.isReady()) {
@@ -176,8 +176,8 @@ ons.enableAutoStatusBarFill = () => {
  * @method disableAutoStatusBarFill
  * @signature disableAutoStatusBarFill()
  * @description
- *   [en]Disable status bar fill feature on iOS7 and above. Must be called before `ons.ready`.[/en]
- *   [ja]iOS7以上で、ステータスバー部分の高さを自動的に埋める処理を無効にします。[/ja]
+ *   [en]Disable status bar fill feature on iOS7 and above (except for iPhone X). Must be called before `ons.ready`.[/en]
+ *   [ja]iOS7以上（iPhone Xは除く）で、ステータスバー部分の高さを自動的に埋める処理を無効にします。[/ja]
  */
 ons.disableAutoStatusBarFill = () => {
   if (ons.isReady()) {

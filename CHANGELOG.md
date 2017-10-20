@@ -23,6 +23,10 @@ dev
  * ons-tabbar, ons-carousel: Can now be displayed inside dialogs/modals.
  * ons-tabbar: Resizing window while tabbar is not visible should not update the tabbar.
 
+### Misc
+
+ * core: Auto status bar fill for iOS 7+ WebView is now automatically disabled on iPhone X WebView.
+
 2.6.1
 ----
 
