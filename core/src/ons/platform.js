@@ -56,7 +56,7 @@ class Platform {
     return this._ignorePlatformSelect ? null : this._selectedPlatform;
   }
 
-  runOnActualPlatform(fn) {
+  _runOnActualPlatform(fn) {
     this._ignorePlatformSelect = true;
     const result = fn();
     this._ignorePlatformSelect = false;

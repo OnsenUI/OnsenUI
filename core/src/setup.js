@@ -118,7 +118,7 @@ window.addEventListener('load', () => {
 
   const suppportTouchAction = 'touch-action' in document.body.style;
 
-  ons.platform.runOnActualPlatform(() => {
+  ons.platform._runOnActualPlatform(() => {
     if (ons.platform.isAndroid()) {
       // In Android4.4+, correct viewport settings can remove click delay.
       // So disable FastClick on Android.
