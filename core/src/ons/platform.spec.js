@@ -2,7 +2,7 @@
 
 describe('ons.platform', () => {
   afterEach(() => {
-    ons.platform._renderPlatform = null;
+    ons.platform._selectedPlatform = null;
   });
 
   it('exists', () => {
@@ -12,7 +12,7 @@ describe('ons.platform', () => {
   describe('#select()', () => {
     it('sets the render platform', () => {
       ons.platform.select('android');
-      expect(ons.platform._renderPlatform).to.equal('android');
+      expect(ons.platform._selectedPlatform).to.equal('android');
     });
   });
 
