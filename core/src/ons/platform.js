@@ -131,7 +131,9 @@ class Platform {
   isIOS() {
     if (this._getSelectedPlatform()) {
       return this._getSelectedPlatform() === 'ios';
-    } else if (typeof device === 'object' && !/browser/i.test(device.platform)) {
+    }
+
+    if (typeof device === 'object' && !/browser/i.test(device.platform)) {
       return /iOS/i.test(device.platform);
     } else {
       return /iPhone|iPad|iPod/i.test(navigator.userAgent);
@@ -149,7 +151,9 @@ class Platform {
   isAndroid() {
     if (this._getSelectedPlatform()) {
       return this._getSelectedPlatform() === 'android';
-    } else if (typeof device === 'object' && !/browser/i.test(device.platform)) {
+    }
+
+    if (typeof device === 'object' && !/browser/i.test(device.platform)) {
       return /Android/i.test(device.platform);
     } else {
       return /Android/i.test(navigator.userAgent);
@@ -186,7 +190,9 @@ class Platform {
   isWP() {
     if (this._getSelectedPlatform()) {
       return this._getSelectedPlatform() === 'wp';
-    } else if (typeof device === 'object' && !/browser/i.test(device.platform)) {
+    }
+
+    if (typeof device === 'object' && !/browser/i.test(device.platform)) {
       return /Win32NT|WinCE/i.test(device.platform);
     } else {
       return /Windows Phone|IEMobile|WPDesktop/i.test(navigator.userAgent);
@@ -235,7 +241,9 @@ class Platform {
   isBlackBerry() {
     if (this._getSelectedPlatform()) {
       return this._getSelectedPlatform() === 'blackberry';
-    } else if (typeof device === 'object' && !/browser/i.test(device.platform)) {
+    }
+
+    if (typeof device === 'object' && !/browser/i.test(device.platform)) {
       return /BlackBerry/i.test(device.platform);
     } else {
       return /BlackBerry|RIM Tablet OS|BB10/i.test(navigator.userAgent);
@@ -253,9 +261,9 @@ class Platform {
   isOpera() {
     if (this._getSelectedPlatform()) {
       return this._getSelectedPlatform() === 'opera';
-    } else {
-      return (!!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0);
     }
+
+    return (!!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0);
   }
 
   /**
@@ -269,9 +277,9 @@ class Platform {
   isFirefox() {
     if (this._getSelectedPlatform()) {
       return this._getSelectedPlatform() === 'firefox';
-    } else {
-      return (typeof InstallTrigger !== 'undefined');
     }
+
+    return (typeof InstallTrigger !== 'undefined');
   }
 
   /**
@@ -285,9 +293,9 @@ class Platform {
   isSafari() {
     if (this._getSelectedPlatform()) {
       return this._getSelectedPlatform() === 'safari';
-    } else {
-      return (Object.prototype.toString.call(window.HTMLElement).indexOf('Constructor') > 0) || (function (p) { return p.toString() === '[object SafariRemoteNotification]' })(!window['safari'] || safari.pushNotification);
     }
+
+    return (Object.prototype.toString.call(window.HTMLElement).indexOf('Constructor') > 0) || (function (p) { return p.toString() === '[object SafariRemoteNotification]' })(!window['safari'] || safari.pushNotification);
   }
 
   /**
@@ -301,9 +309,9 @@ class Platform {
   isChrome() {
     if (this._getSelectedPlatform()) {
       return this._getSelectedPlatform() === 'chrome';
-    } else {
-      return (!!window.chrome && !(!!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0) && !(navigator.userAgent.indexOf(' Edge/') >= 0));
     }
+
+    return (!!window.chrome && !(!!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0) && !(navigator.userAgent.indexOf(' Edge/') >= 0));
   }
 
   /**
@@ -317,9 +325,9 @@ class Platform {
   isIE() {
     if (this._getSelectedPlatform()) {
       return this._getSelectedPlatform() === 'ie';
-    } else {
-      return false || !!document.documentMode;
     }
+
+    return false || !!document.documentMode;
   }
 
   /**
@@ -333,9 +341,9 @@ class Platform {
   isEdge() {
     if (this._getSelectedPlatform()) {
       return this._getSelectedPlatform() === 'edge';
-    } else {
-      return navigator.userAgent.indexOf(' Edge/') >= 0;
     }
+
+    return navigator.userAgent.indexOf(' Edge/') >= 0;
   }
 
   /**
