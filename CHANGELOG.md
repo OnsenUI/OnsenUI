@@ -12,7 +12,7 @@ CHANGELOG
  * css-components: Refined the css-components previewer located in `css-components-src`.
  * core: Supported iOS 11.
  * ons.mockStatusBar: Now can also show Android's status bar.
- * ons.platform: Added `isIOSSafari()`, `isUIWebView()` and `isWKWebView()`.
+ * ons.platform: Added `isIPhoneX()`, `isIOSSafari()`, `isUIWebView()` and `isWKWebView()`.
 
 ### Bug Fixes
 
