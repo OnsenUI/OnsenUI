@@ -64,6 +64,9 @@ class Platform {
     return result;
   }
 
+  //----------------
+  // General
+  //----------------
   /**
    * @method isWebView
    * @signature isWebView()
@@ -80,125 +83,9 @@ class Platform {
     return !!(window.cordova || window.phonegap || window.PhoneGap);
   }
 
-  /**
-   * @method isWKWebView
-   * @signature isWKWebView()
-   * @description
-   *   [en]Returns whether app is running in WKWebView.[/en]
-   *   [ja]WKWebViewで実行されているかどうかを返します。[/ja]
-   * @return {Boolean}
-   */
-  isWKWebView() {
-    const lte9 = /constructor/i.test(NativeHTMLElement);
-    return !!(this.isIOS() && window.webkit && window.webkit.messageHandlers && window.indexedDB && !lte9);
-  }
-
-  /**
-   * @method isUIWebView
-   * @signature isUIWebView()
-   * @description
-   *   [en]Returns whether app is running in UIWebView.[/en]
-   *   [ja]UIWebViewで実行されているかどうかを返します。[/ja]
-   * @return {Boolean}
-   */
-  isUIWebView() {
-    return !!(this.isIOS() && !this.isIOSSafari() && !this.isWKWebView());
-  }
-
-  /**
-   * @method isIOSSafari
-   * @signature isIOSSafari()
-   * @description
-   *   [en]Returns whether app is running in iOS Safari.[/en]
-   *   [ja]iOS Safariで実行されているかどうかを返します。[/ja]
-   * @return {Boolean}
-   */
-  isIOSSafari() {
-    const navigator = window.navigator;
-    const ua = navigator.userAgent;
-
-    return !!(this.isIOS() && ua.indexOf('Safari') !== -1 && ua.indexOf('Version') !== -1 && !navigator.standalone);
-  }
-
-  /**
-   * @method isIOS
-   * @signature isIOS()
-   * @description
-   *   [en]Returns whether the OS is iOS.[/en]
-   *   [ja]iOS上で実行されているかどうかを返します。[/ja]
-   * @return {Boolean}
-   */
-  isIOS() {
-    if (this._getSelectedPlatform()) {
-      return this._getSelectedPlatform() === 'ios';
-    }
-
-    if (typeof device === 'object' && !/browser/i.test(device.platform)) {
-      return /iOS/i.test(device.platform);
-    } else {
-      return /iPhone|iPad|iPod/i.test(navigator.userAgent);
-    }
-  }
-
-  /**
-   * @method isAndroid
-   * @signature isAndroid()
-   * @description
-   *   [en]Returns whether the OS is Android.[/en]
-   *   [ja]Android上で実行されているかどうかを返します。[/ja]
-   * @return {Boolean}
-   */
-  isAndroid() {
-    if (this._getSelectedPlatform()) {
-      return this._getSelectedPlatform() === 'android';
-    }
-
-    if (typeof device === 'object' && !/browser/i.test(device.platform)) {
-      return /Android/i.test(device.platform);
-    } else {
-      return /Android/i.test(navigator.userAgent);
-    }
-  }
-
-  /**
-   * @method isAndroidPhone
-   * @signature isAndroidPhone()
-   * @description
-   *   [en]Returns whether the device is Android phone.[/en]
-   *   [ja]Android携帯上で実行されているかどうかを返します。[/ja]
-   * @return {Boolean}
-   */
-  isAndroidPhone() {
-    return /Android/i.test(navigator.userAgent) && /Mobile/i.test(navigator.userAgent);
-  }
-
-  /**
-   * @method isAndroidTablet
-   * @signature isAndroidTablet()
-   * @description
-   *   [en]Returns whether the device is Android tablet.[/en]
-   *   [ja]Androidタブレット上で実行されているかどうかを返します。[/ja]
-   * @return {Boolean}
-   */
-  isAndroidTablet() {
-    return /Android/i.test(navigator.userAgent) && !/Mobile/i.test(navigator.userAgent);
-  }
-
-  /**
-   * @return {Boolean}
-   */
-  isWP() {
-    if (this._getSelectedPlatform()) {
-      return this._getSelectedPlatform() === 'wp';
-    }
-
-    if (typeof device === 'object' && !/browser/i.test(device.platform)) {
-      return /Win32NT|WinCE/i.test(device.platform);
-    } else {
-      return /Windows Phone|IEMobile|WPDesktop/i.test(navigator.userAgent);
-    }
-  }
-
+  //----------------
+  // iOS devices
+  //----------------
   /**
    * @methos isIPhone
    * @signature isIPhone()
@@ -230,6 +117,158 @@ class Platform {
     return /iPod/i.test(navigator.userAgent);
   }
 
+  //----------------
+  // iOS versions
+  //----------------
+  /**
+   * @method isIOS
+   * @signature isIOS()
+   * @description
+   *   [en]Returns whether the OS is iOS.[/en]
+   *   [ja]iOS上で実行されているかどうかを返します。[/ja]
+   * @return {Boolean}
+   */
+  isIOS() {
+    if (this._getSelectedPlatform()) {
+      return this._getSelectedPlatform() === 'ios';
+    }
+
+    if (typeof device === 'object' && !/browser/i.test(device.platform)) {
+      return /iOS/i.test(device.platform);
+    } else {
+      return /iPhone|iPad|iPod/i.test(navigator.userAgent);
+    }
+  }
+
+  /**
+   * @method isIOS7above
+   * @signature isIOS7above()
+   * @description
+   *   [en]Returns whether the iOS version is 7 or above.[/en]
+   *   [ja]iOS7以上で実行されているかどうかを返します。[/ja]
+   * @return {Boolean}
+   */
+  isIOS7above() {
+    if (typeof device === 'object' && !/browser/i.test(device.platform)) {
+      return (/iOS/i.test(device.platform) && (parseInt(device.version.split('.')[0]) >= 7));
+    } else if(/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+      const ver = (navigator.userAgent.match(/\b[0-9]+_[0-9]+(?:_[0-9]+)?\b/) || [''])[0].replace(/_/g, '.');
+      return (parseInt(ver.split('.')[0]) >= 7);
+    }
+    return false;
+  }
+
+  //----------------
+  // iOS browsers
+  //----------------
+  /**
+   * @method isIOSSafari
+   * @signature isIOSSafari()
+   * @description
+   *   [en]Returns whether app is running in iOS Safari.[/en]
+   *   [ja]iOS Safariで実行されているかどうかを返します。[/ja]
+   * @return {Boolean}
+   */
+  isIOSSafari() {
+    const navigator = window.navigator;
+    const ua = navigator.userAgent;
+
+    return !!(this.isIOS() && ua.indexOf('Safari') !== -1 && ua.indexOf('Version') !== -1 && !navigator.standalone);
+  }
+
+  /**
+   * @method isWKWebView
+   * @signature isWKWebView()
+   * @description
+   *   [en]Returns whether app is running in WKWebView.[/en]
+   *   [ja]WKWebViewで実行されているかどうかを返します。[/ja]
+   * @return {Boolean}
+   */
+  isWKWebView() {
+    const lte9 = /constructor/i.test(NativeHTMLElement);
+    return !!(this.isIOS() && window.webkit && window.webkit.messageHandlers && window.indexedDB && !lte9);
+  }
+
+  /**
+   * @method isUIWebView
+   * @signature isUIWebView()
+   * @description
+   *   [en]Returns whether app is running in UIWebView.[/en]
+   *   [ja]UIWebViewで実行されているかどうかを返します。[/ja]
+   * @return {Boolean}
+   */
+  isUIWebView() {
+    return !!(this.isIOS() && !this.isIOSSafari() && !this.isWKWebView());
+  }
+
+  //----------------
+  // Android devices
+  //----------------
+  /**
+   * @method isAndroidPhone
+   * @signature isAndroidPhone()
+   * @description
+   *   [en]Returns whether the device is Android phone.[/en]
+   *   [ja]Android携帯上で実行されているかどうかを返します。[/ja]
+   * @return {Boolean}
+   */
+  isAndroidPhone() {
+    return /Android/i.test(navigator.userAgent) && /Mobile/i.test(navigator.userAgent);
+  }
+
+  /**
+   * @method isAndroidTablet
+   * @signature isAndroidTablet()
+   * @description
+   *   [en]Returns whether the device is Android tablet.[/en]
+   *   [ja]Androidタブレット上で実行されているかどうかを返します。[/ja]
+   * @return {Boolean}
+   */
+  isAndroidTablet() {
+    return /Android/i.test(navigator.userAgent) && !/Mobile/i.test(navigator.userAgent);
+  }
+
+  //----------------
+  // Android versions
+  //----------------
+  /**
+   * @method isAndroid
+   * @signature isAndroid()
+   * @description
+   *   [en]Returns whether the OS is Android.[/en]
+   *   [ja]Android上で実行されているかどうかを返します。[/ja]
+   * @return {Boolean}
+   */
+  isAndroid() {
+    if (this._getSelectedPlatform()) {
+      return this._getSelectedPlatform() === 'android';
+    }
+
+    if (typeof device === 'object' && !/browser/i.test(device.platform)) {
+      return /Android/i.test(device.platform);
+    } else {
+      return /Android/i.test(navigator.userAgent);
+    }
+  }
+
+  //----------------
+  // Other devices
+  //----------------
+  /**
+   * @return {Boolean}
+   */
+  isWP() {
+    if (this._getSelectedPlatform()) {
+      return this._getSelectedPlatform() === 'wp';
+    }
+
+    if (typeof device === 'object' && !/browser/i.test(device.platform)) {
+      return /Win32NT|WinCE/i.test(device.platform);
+    } else {
+      return /Windows Phone|IEMobile|WPDesktop/i.test(navigator.userAgent);
+    }
+  }
+
   /**
    * @method isBlackBerry
    * @signature isBlackBerry()
@@ -250,6 +289,9 @@ class Platform {
     }
   }
 
+  //----------------
+  // Other browsers
+  //----------------
   /**
    * @method isOpera
    * @signature isOpera()
@@ -346,24 +388,9 @@ class Platform {
     return navigator.userAgent.indexOf(' Edge/') >= 0;
   }
 
-  /**
-   * @method isIOS7above
-   * @signature isIOS7above()
-   * @description
-   *   [en]Returns whether the iOS version is 7 or above.[/en]
-   *   [ja]iOS7以上で実行されているかどうかを返します。[/ja]
-   * @return {Boolean}
-   */
-  isIOS7above() {
-    if (typeof device === 'object' && !/browser/i.test(device.platform)) {
-      return (/iOS/i.test(device.platform) && (parseInt(device.version.split('.')[0]) >= 7));
-    } else if(/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
-      const ver = (navigator.userAgent.match(/\b[0-9]+_[0-9]+(?:_[0-9]+)?\b/) || [''])[0].replace(/_/g, '.');
-      return (parseInt(ver.split('.')[0]) >= 7);
-    }
-    return false;
-  }
-
+  //----------------
+  // Utility functions
+  //----------------
   /**
    * @return {String}
    */
