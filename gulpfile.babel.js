@@ -42,25 +42,6 @@ import gulpLoadPlugins from 'gulp-load-plugins';
 const $ = gulpLoadPlugins();
 
 ////////////////////////////////////////
-// browser-sync
-////////////////////////////////////////
-gulp.task('browser-sync', () => {
-  browserSync({
-    server: {
-      baseDir: __dirname,
-      index: 'index.html',
-      directory: true
-    },
-    files: [],
-    watchOptions: {
-      //debounceDelay: 400
-    },
-    ghostMode: false,
-    notify: false
-  });
-});
-
-////////////////////////////////////////
 // bundles
 ////////////////////////////////////////
 const bundle = config => rollup(config).then(bundle => bundle.write(config.output));
@@ -421,7 +402,7 @@ gulp.task('prepare', () =>  {
       // onsenui.min.css
       .pipe($.cssmin({processImport: false}))
       .pipe($.rename({suffix: '.min'}))
-      .pipe(gulp.dest('build/css/'))
+      .pipe(gulp.dest('build/css/')),
 
     // ES Modules (raw ES source codes)
     gulp.src([
@@ -538,25 +519,39 @@ gulp.task('dist-no-build', [], distFiles);
 // serve
 ////////////////////////////////////////
 
-gulp.task('serve', ['prepare', 'watch-bundles', 'browser-sync'], () => {
-  const watched = [
-    'core/css/*.css'
-  ];
+gulp.task('serve', done => {
+  // Prepare core CSS
+  gulp.watch(['core/css/*.css'], { debounceDelay: 300 }, ['prepare']);
 
-  gulp.watch(watched, {
-    debounceDelay: 300
-  }, ['prepare']);
-
-  // for livereload
+  // Livereload
   gulp.watch([
     'build/js/*onsenui.js',
     'build/css/onsen-css-components.css',
+    'build/css/onsenui.css',
     'examples/*/*.{js,css,html}',
     'bindings/angular1/test/e2e/*/*.{js,css,html}'
   ]).on('change', changedFile => {
     gulp.src(changedFile.path)
       .pipe(browserSync.reload({stream: true, once: true}));
   });
+
+  return runSequence('prepare', 'watch-bundles', 'browser-sync', done);
+});
+
+gulp.task('browser-sync', (done) => {
+  browserSync({
+    server: {
+      baseDir: __dirname,
+      index: 'index.html',
+      directory: true
+    },
+    files: [],
+    watchOptions: {
+      //debounceDelay: 400
+    },
+    ghostMode: false,
+    notify: false
+  }, done);
 });
 
 ////////////////////////////////////////
