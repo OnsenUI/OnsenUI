@@ -116,7 +116,7 @@ ons.CardElement = CardElement;
 window.addEventListener('load', () => {
   ons.fastClick = FastClick.attach(document.body);
 
-  const suppportTouchAction = 'touch-action' in document.body.style;
+  const supportTouchAction = 'touch-action' in document.body.style;
 
   ons.platform._runOnActualPlatform(() => {
     if (ons.platform.isAndroid()) {
