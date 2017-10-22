@@ -87,7 +87,7 @@ class Platform {
   // iOS devices
   //----------------
   /**
-   * @methos isIPhone
+   * @method isIPhone
    * @signature isIPhone()
    * @description
    *   [en]Returns whether the device is iPhone.[/en]
@@ -99,7 +99,7 @@ class Platform {
   }
 
   /**
-   * @methos isIPhoneX
+   * @method isIPhoneX
    * @signature isIPhoneX()
    * @description
    *   [en]Returns whether the device is iPhone X.[/en]
