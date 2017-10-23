@@ -20,6 +20,8 @@
     }
   ],
   "scripts": {
+    "build": "gulp build",
+    "dev": "gulp serve",
     "test": "gulp test --disable-warnings",
     "test:skip-build": "gulp test --disable-warnings --skip-build"
   },
