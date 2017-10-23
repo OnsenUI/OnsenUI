@@ -63,9 +63,6 @@ const _animatorDict = {
  * @modifier rowfooter
  *   [en]Horizontally aligns the footer buttons.[/en]
  *   [ja][/ja]
- * @guide dialogs
- *   [en]Dialog components[/en]
- *   [ja]Dialog components[/ja]
  * @seealso ons-dialog
  *   [en]ons-dialog component[/en]
  *   [ja]ons-dialogコンポーネント[/ja]

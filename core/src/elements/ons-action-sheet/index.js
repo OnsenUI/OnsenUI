@@ -53,10 +53,7 @@ const _animatorDict = {
  *   [en]Display a Material Design bottom sheet.[/en]
  *   [ja][/ja]
  * @tutorial vanilla/reference/action-sheet
- * @guide dialogs
- *   [en]Dialog components[/en]
- *   [ja]Dialog components[/ja]
- * @guide using-modifier [en]More details about the `modifier` attribute[/en][ja]modifier属性の使い方[/ja]
+ * @guide theming.html#modifiers [en]More details about the `modifier` attribute[/en][ja]modifier属性の使い方[/ja]
  * @seealso ons-popover
  *   [en]`<ons-popover>` component[/en]
  *   [ja]ons-popoverコンポーネント[/ja]

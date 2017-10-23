@@ -70,15 +70,9 @@ const rewritables = {
  *   [ja][/ja]
  * @codepen yrhtv
  * @tutorial vanilla/Reference/navigator
- * @guide multiple-page-navigation
- *   [en]Guide for page navigation[/en]
- *   [ja]ページナビゲーションの概要[/ja]
- * @guide templates
- *   [en]Defining multiple pages in single html[/en]
- *   [ja]複数のページを1つのHTMLに記述する[/ja]
- * @guide creating-a-page
- *   [en]Setting up a page in its `init` event[/en]
- *   [ja]Setting up a page in its `init` event[/ja]
+ * @guide lifecycle.html#events
+ *   [en]Overview of page events[/en]
+ *   [ja]Overview of page events[/ja]
  * @seealso ons-toolbar
  *   [en]The `<ons-toolbar>` component is used to display a toolbar on the top of a page.[/en]
  *   [ja][/ja]

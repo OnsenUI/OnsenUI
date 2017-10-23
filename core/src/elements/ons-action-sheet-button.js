@@ -45,7 +45,6 @@ const scheme = {
  * @seealso ons-icon
  *   [en]The `<ons-icon>` component[/en]
  *   [ja]ons-iconコンポーネント[/ja]
- * @guide lists [en]Using lists[/en][ja]リストを使う[/ja]
  * @tutorial vanilla/Reference/action-sheet
  * @modifier material
  *   [en]Display a Material Design action sheet button.[/en]

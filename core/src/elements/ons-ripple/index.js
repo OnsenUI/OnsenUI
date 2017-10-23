@@ -44,7 +44,7 @@ const scheme = {
  * @modifier light-gray
  *   [en]Change the color of effects to light gray.[/en]
  *   [ja]エフェクトの色が明るい灰色になります。[/ja]
- * @guide cross-platform-styling
+ * @guide theming.html#cross-platform-styling-autostyling
  *  [en]Cross platform styling[/en]
  *  [ja]Cross platform styling[/ja]
  * @example
