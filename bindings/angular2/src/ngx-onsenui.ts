@@ -22,6 +22,7 @@ import {CommonModule} from '@angular/common';
 import {BrowserModule} from '@angular/platform-browser';
 
 import {OnsNavigator} from './directives/ons-navigator';
+import {OnsSegment} from './directives/ons-segment';
 import {OnsTab} from './directives/ons-tabbar';
 import {OnsSwitch} from './directives/ons-switch';
 import {OnsRange} from './directives/ons-range';
@@ -43,6 +44,7 @@ import {ComponentLoader} from './ons/component-loader';
 const directives = [
   OnsNavigator,
   OnsTab,
+  OnsSegment,
   OnsSwitch,
   OnsRange,
   OnsSelect,
