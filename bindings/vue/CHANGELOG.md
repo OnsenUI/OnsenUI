@@ -1,7 +1,7 @@
 CHANGELOG
 ====
 
-dev
+2.3.0
 ----
 
 ### New Features
