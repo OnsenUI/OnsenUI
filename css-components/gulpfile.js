@@ -42,7 +42,11 @@ gulp.task('build-css', ['css-clean', 'cssnext', 'cssmin']);
 // stylelint
 ////////////////////////////////////////
 gulp.task('stylelint', () => {
-  return gulp.src('./src/**/*.css')
+  return gulp.src([
+      './src/**/*.css',
+      '!./src/components/combination.css', // not following BEM
+      '!./src/iphonex-support/**/*.css' // not following BEM
+    ])
     .pipe(stylelint({
       failAfterError: false,
       reporters: [{formatter: 'string', console: true}]

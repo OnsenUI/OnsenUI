@@ -19,6 +19,7 @@ limitations under the License.
 import util from '../../ons/util';
 import animit from '../../ons/animit';
 import platform from '../../ons/platform';
+import iPhoneXPatch from '../../ons/iphonex-patch';
 import ToastAnimator from './animator';
 
 /**
@@ -30,7 +31,17 @@ export default class AscendToastAnimator extends ToastAnimator {
     super({ timing, delay, duration });
 
     this.messageDelay = this.duration * 0.4 + this.delay; // Delay message opacity change
-    this.ascension = platform.isAndroid() ? 48 : 64; // Toasts are always 1 line
+    if (platform.isAndroid()) {
+      this.ascension = 48; // Toasts are always 1 line
+    } else {
+      if (iPhoneXPatch.isIPhoneXPortraitPatchActive()) {
+        this.ascension = 98; // 64 + 34
+      } else if (iPhoneXPatch.isIPhoneXLandscapePatchActive()) {
+        this.ascension = 85; // 64 + 21
+      } else {
+        this.ascension = 64;
+      }
+    }
   }
 
   /**

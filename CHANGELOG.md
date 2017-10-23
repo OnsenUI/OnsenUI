@@ -2,25 +2,41 @@
 CHANGELOG
 ====
 
-dev
+2.7.0
 ----
 
 ### New Features
 
- * css-components: Reimplemented css-components previewer.
- * css-components: Changed color scheme to more iOS native-like.
- * ons: 'mockStatusBar' now can also show Android's status bar.
+ * css-components: Supported iPhone X with `html[onsflag-iphonex-portrait]` and `html[onsflag-iphonex-landscape]` flags.
+ * css-components: Added iOS & Material dark color scheme available as `dark-onsen-css-components.css`.
+ * css-components: Refined the css-components previewer located in `css-components-src`.
+ * core: Supported iOS 11.
+ * ons.mockStatusBar: Now can also show Android's status bar.
+ * ons.platform: Added `isIPhoneX()`, `isIOSSafari()`, `isUIWebView()` and `isWKWebView()`.
 
 ### Bug Fixes
 
+ * css-components: Fixed usage of alpha function. Fixed [#2220](https://github.com/OnsenUI/OnsenUI/issues/2220).
+ * css-components: Fixed wrong margin of `.action-sheet` and `.action-sheet-button`.
+ * css-components: Fixed style of `.list-title`.
+ * core: Changed to disable FastClick when it isn't needed. Fixed [#2000](https://github.com/OnsenUI/OnsenUI/issues/2000).
+ * core: Fixed `ons-loading-placeholder` attribute broken on iOS 11.
  * ons-page: Minor issue with status bar when the page is moved in DOM.
- * core: Changed to disable FastClick when it isn't needed.
- * deviceBackButton: Fixed [#2215](https://github.com/OnsenUI/OnsenUI/issues/2215).
- * templates: Firefox issue. Fixed [#2216](https://github.com/OnsenUI/OnsenUI/issues/2216).
- * dialogs: Prevent scrolling behind dialog masks due to iOS bug. Fixed [#2220](https://github.com/OnsenUI/OnsenUI/issues/2220).
  * ons-splitter: Correctly set content width on inital split mode. Fixed [#2205](https://github.com/OnsenUI/OnsenUI/issues/2205).
  * ons-tabbar, ons-carousel: Can now be displayed inside dialogs/modals.
  * ons-tabbar: Resizing window while tabbar is not visible should not update the tabbar.
+ * dialogs: Prevent scrolling behind dialog masks due to iOS bug. Fixed [#2220](https://github.com/OnsenUI/OnsenUI/issues/2220).
+ * deviceBackButton: Fixed [#2215](https://github.com/OnsenUI/OnsenUI/issues/2215).
+ * templates: Firefox issue. Fixed [#2216](https://github.com/OnsenUI/OnsenUI/issues/2216).
+
+### Misc
+
+ * core: Auto status bar fill for iOS 7+ WebView is now automatically disabled on iPhone X WebView.
+
+### BREAKING CHANGES
+
+ * css-components: Refined iOS & Material color schemes.
+     * The previous color schemes are now available as `css/old-onsen-css-components.css`.
 
 2.6.1
 ----
