@@ -2,6 +2,13 @@
 CHANGELOG
 ====
 
+dev
+----
+
+### New Features
+
+ * css-components: Added `--tap-highlight-color` variable for `-webkit-tap-highlight-color` CSS property.
+
 2.7.0
 ----
 
