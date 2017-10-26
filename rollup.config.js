@@ -77,10 +77,10 @@ export default [
 
   // Angular Bindings
   {
-    input: 'bindings/angular1/setup.js',
+    input: 'bindings/angular1/index.js',
     output: {
       file: 'build/js/angular-onsenui.js',
-      format: 'iife',
+      format: 'umd',
       name: 'angularOns',
       sourcemap: 'inline',
     },
