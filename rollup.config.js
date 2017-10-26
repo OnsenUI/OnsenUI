@@ -12,39 +12,15 @@ import progress from 'rollup-plugin-progress';
 import visualizer from 'rollup-plugin-visualizer';
 
 const stringOpt = { include: '**/*.svg', }; // SVG images
-
-const resolveOpt = {
-  jsnext: true,
-  main: true,
-  browser: true,
-};
-
-const babelOpt = {
-  // do not exclude node_modules since Onsen UI dependencies need transpiling
-  babelrc: false, // We need to deactivate modules transpiling only here
-  presets: [
-    ['env', {
-      modules: false,
-      // forceAllTransforms: true, // Full ES5
-      targets: {
-        browsers: ['iOS >= 8', 'Android >= 4.4.4', '> 1%', 'last 2 versions'],
-      },
-    }],
-    'stage-3'
-  ],
-  plugins: [
-    'external-helpers',
-  ],
-};
-
-const commonjsOpt = {
-  include: 'node_modules/**',
-};
-
+const cjsOpt = { include: 'node_modules/**' };
+const babelrc = pkg.babel;
+babelrc.babelrc = babelrc.presets[0][1].modules = false;
+babelrc.plugins = ['external-helpers'];
 
 export default [
+  // Core UMD
   {
-    input: 'core/src/setup.js',
+    input: 'core/src/index.umd.js',
     output: {
       file: 'build/js/onsenui.js',
       format: 'umd',
@@ -62,19 +38,44 @@ export default [
         ]
       }),
       string(stringOpt),
-      resolve(resolveOpt),
-      commonjs(commonjsOpt),
-      babel(babelOpt),
+      resolve(),
+      commonjs(cjsOpt),
+      babel(babelrc),
       progress(),
       filesize(),
       visualizer({
-        filename: 'module-stats.html',
+        filename: 'module-stats.umd.html',
         sourcemap: true, // Shows minified sizes
       }),
     ],
     banner: `/* ${pkg.name} v${pkg.version} - ${dateformat(new Date(), 'yyyy-mm-dd')} */\n`
   },
 
+  // Core ES Modules
+  {
+    input: 'core/src/index.es.js',
+    external: id => /\/ons\//.test(id), // Do not bundle 'ons', only polyfills/vendor
+    output: {
+      file: 'build/core-src/index.js',
+      format: 'es',
+      name: 'onsES',
+      sourcemap: 'inline',
+    },
+    plugins: [
+      resolve(),
+      commonjs(cjsOpt),
+      babel(babelrc),
+      progress(),
+      filesize(),
+      visualizer({
+        filename: 'module-stats.es.html',
+        sourcemap: false, // Unminified to show core-js size
+      }),
+    ],
+    banner: `/* ${pkg.name} v${pkg.version} - ${dateformat(new Date(), 'yyyy-mm-dd')} */\n`
+  },
+
+  // Angular Bindings
   {
     input: 'bindings/angular1/setup.js',
     output: {
@@ -93,9 +94,9 @@ export default [
           'bindings/angular1/views/**/*.js'
         ],
       }),
-      resolve(resolveOpt),
-      commonjs(commonjsOpt),
-      babel(Object.assign({}, babelOpt, { plugins: [ ['angularjs-annotate', { explicitOnly: false }] ] })),
+      resolve(),
+      commonjs(cjsOpt),
+      babel(Object.assign({}, babelrc, { plugins: [ ['angularjs-annotate', { explicitOnly: false }] ] })),
       progress(),
       filesize(),
       visualizer({
@@ -104,5 +105,5 @@ export default [
       }),
     ],
     banner: `/* angular-${pkg.name} v${pkg.version} - ${dateformat(new Date(), 'yyyy-mm-dd')} */\n`
-  }
+  },
 ];
