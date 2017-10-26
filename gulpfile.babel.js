@@ -35,9 +35,10 @@ import karma from 'karma';
 import WebdriverIOLauncher from 'webdriverio/build/lib/launcher';
 import chalk from 'chalk';
 import { rollup, watch as rollupWatch } from 'rollup';
-import rollupConfig from './rollup.config.js';
 import gulpLoadPlugins from 'gulp-load-plugins';
+import rawBundleConfig from './rollup.config.js';
 
+const rollupConfig = rawBundleConfig.reduce((r, c) => (r[c.output.name] = c) && r, {})
 const $ = gulpLoadPlugins();
 $.hub(['./css-components/gulpfile.js']); // adds 'build-css', 'css-clean' and 'cssnext' tasks
 
@@ -68,12 +69,13 @@ const watch = config => new Promise((resolve, reject) => {
   });
 });
 
-gulp.task('core', () => bundle(rollupConfig[0]));
-gulp.task('angular-bindings', () => bundle(rollupConfig[1]));
+gulp.task('core', () => bundle(rollupConfig['ons']));
+gulp.task('core-es', () => bundle(rollupConfig['onsES']));
+gulp.task('angular-bindings', () => bundle(rollupConfig['angularOns']));
 
-gulp.task('watch-core', () => watch(rollupConfig[0]));
-gulp.task('watch-angular-bindings', () => watch(rollupConfig[1]));
-gulp.task('watch-bundles', () => watch(rollupConfig[0]).then(() => watch(rollupConfig[1])));
+gulp.task('watch-core', () => watch(rollupConfig['ons']));
+gulp.task('watch-angular-bindings', () => watch(rollupConfig['angularOns']));
+gulp.task('watch-bundles', () => watch(rollupConfig['ons']).then(() => watch(rollupConfig['angularOns'])));
 
 
 ////////////////////////////////////////
@@ -396,6 +398,40 @@ gulp.task('core-css', () =>  {
 });
 
 ////////////////////////////////////////
+// core-src
+////////////////////////////////////////
+gulp.task('core-src', ['core-es'], () =>  {
+
+  const babelrc = pkg.babel;
+  babelrc.presets[0][1].modules = false;
+  babelrc.plugins = [
+    'external-helpers',
+    'transform-runtime'
+  ];
+
+  // ES Modules (transpiled ES source codes)
+  return gulp.src([
+      'core/src/**/*.js',
+      '!core/src/*.js',
+      '!core/src/core-dts-test.*',
+      '!core/src/**/*.spec.js',
+    ])
+      // SVG loader
+      .pipe(
+        $.if(/ons-back-button\.js$/,
+          $.replace(/import\s+(\w+)\s+from\s+'([./\w-]+\.svg)';/g, function(match, p1, p2) {
+            const svgPath = path.join(path.dirname(this.file.path), p2);
+            const svg = fs.readFileSync(svgPath, 'utf8');
+            return `const ${p1} = \`${svg}\`;`
+          })
+        )
+      )
+      // Transpile to ES5
+      .pipe($.babel(babelrc))
+      .pipe(gulp.dest('build/core-src/'));
+});
+
+////////////////////////////////////////
 // copy-files
 ////////////////////////////////////////
 gulp.task('copy-files', () =>  {
@@ -412,13 +448,9 @@ gulp.task('copy-files', () =>  {
     ])
       .pipe(gulp.dest('build/css-components-src/')),
 
-    // ES Modules (raw ES source codes)
-    gulp.src([
-      'core/src/**/*',
-      '!core/src/core-dts-test.*',
-      '!core/src/**/*.spec.js',
-    ])
-      .pipe(gulp.dest('build/core-src/')),
+    // These are not used (already loaded by gulp-replace)
+    // gulp.src('core/images/**/*')
+    //   .pipe(gulp.dest('build/images/')),
 
     // package.json (for the bindings which uses `build` directory)
     gulp.src([
@@ -459,10 +491,11 @@ gulp.task('build', done => {
   return runSequence(
     'clean',
     'core',
-    'angular-bindings',
+    'core-src',
     'core-css',
     'build-css',
     'copy-files',
+    'angular-bindings',
     'minify-js',
     'build-docs',
     'compress-distribution-package',
@@ -478,10 +511,11 @@ gulp.task('soft-build', done => {
   return runSequence(
     'clean',
     'core',
-    'angular-bindings',
+    'core-src',
     'core-css',
     'build-css',
     'copy-files',
+    'angular-bindings',
     'minify-js',
     done
   );
