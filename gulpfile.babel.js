@@ -487,61 +487,42 @@ gulp.task('compress-distribution-package', () => {
 ////////////////////////////////////////
 // build
 ////////////////////////////////////////
-gulp.task('build', done => {
-  return runSequence(
-    'clean',
-    'core',
-    'core-src',
-    'core-css',
-    'build-css',
-    'copy-files',
-    'angular-bindings',
-    'minify-js',
-    'build-docs',
-    'compress-distribution-package',
-    done
-  );
-});
+const buildTasks = [
+  'clean',
+  'core',
+  'core-src',
+  'core-css',
+  'build-css',
+  'copy-files',
+  'angular-bindings',
+  'minify-js',
+];
+
+gulp.task('build', done => runSequence.apply(null, buildTasks.concat(['build-docs', 'compress-distribution-package', done])));
 
 ////////////////////////////////////////
 // dist
 ////////////////////////////////////////
 
-gulp.task('soft-build', done => {
-  return runSequence(
-    'clean',
-    'core',
-    'core-src',
-    'core-css',
-    'build-css',
-    'copy-files',
-    'angular-bindings',
-    'minify-js',
-    done
-  );
-});
-
-function distFiles() {
-  return gulp.src([
+const distFiles = done => {
+  gulp.src([
     'build/**/*',
     '!build/docs/**/*',
     '!build/docs/',
-    '!build/js/angular/**/*',
-    '!build/js/angular/',
     '!build/onsenui.zip',
     '!build/package.json',
     'bower.json',
     'package.json',
     'README.md',
     'CHANGELOG.md',
-    'LICENSE'
+    'LICENSE',
   ])
-  .pipe(gulp.dest('OnsenUI-dist/'));
-}
+  .pipe(gulp.dest('OnsenUI-dist/'))
+  .on('end', done);
+};
 
-gulp.task('dist', ['soft-build'], distFiles);
-
-gulp.task('dist-no-build', [], distFiles);
+gulp.task('dist', done => runSequence.apply(null, buildTasks.concat([() => distFiles(done)])));
+gulp.task('dist-no-build', distFiles);
 
 ////////////////////////////////////////
 // serve
@@ -556,13 +537,13 @@ gulp.task('serve', done => {
     'build/css/onsen-css-components.css',
     'build/css/onsenui.css',
     'examples/*/*.{js,css,html}',
-    'bindings/angular1/test/e2e/*/*.{js,css,html}'
+    'bindings/angular1/test/e2e/*/*.{js,css,html}',
   ]).on('change', changedFile => {
     gulp.src(changedFile.path)
       .pipe(browserSync.reload({stream: true, once: true}));
   });
 
-  return runSequence('css-clean', 'cssnext', 'core-css', 'watch-bundles', 'browser-sync', done);
+  return runSequence('css-clean', ['cssnext', 'core-css'], 'watch-bundles', 'browser-sync', done);
 });
 
 gulp.task('browser-sync', (done) => {
@@ -572,6 +553,7 @@ gulp.task('browser-sync', (done) => {
       index: 'index.html',
       directory: true
     },
+    startPath: '/examples/',
     files: [],
     watchOptions: {
       //debounceDelay: 400
