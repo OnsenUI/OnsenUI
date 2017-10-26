@@ -1,6 +1,6 @@
 /**
  * MicroEvent - to make any js object an event emitter (server or browser)
- * 
+ *
  * - pure javascript - server compatible, browser compatible
  * - dont rely on the browser doms
  * - super simple - you get it immediately, no mystery, no magic involved
@@ -10,6 +10,8 @@
 */
 
 /** NOTE: This library is customized for Onsen UI. */
+
+(function() {
 
 var MicroEvent  = function(){};
 MicroEvent.prototype  = {
@@ -67,9 +69,5 @@ MicroEvent.mixin  = function(destObject){
   }
 }
 
-// export in common js
-if( typeof module !== "undefined" && ('exports' in module)){
-  module.exports  = MicroEvent;
-}
-
 window.MicroEvent = MicroEvent;
+})();
