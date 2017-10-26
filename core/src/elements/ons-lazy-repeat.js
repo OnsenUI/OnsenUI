@@ -11,6 +11,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
+import ons from '../ons/ons';
 import BaseElement from './base/base-element';
 import util from '../ons/util';
 import {LazyRepeatDelegate, LazyRepeatProvider} from '../ons/internal/lazy-repeat';
@@ -177,4 +178,5 @@ export default class LazyRepeatElement extends BaseElement {
 
 }
 
+ons.LazyRepeatElement = LazyRepeatElement;
 customElements.define('ons-lazy-repeat', LazyRepeatElement);

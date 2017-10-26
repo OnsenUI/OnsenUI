@@ -15,6 +15,7 @@ limitations under the License.
 
 */
 
+import ons from '../../ons/ons';
 import util from '../../ons/util';
 import platform from '../../ons/platform';
 import internal from '../../ons/internal';
@@ -598,4 +599,5 @@ export default class TabbarElement extends BaseElement {
   }
 }
 
+ons.TabbarElement = TabbarElement;
 customElements.define('ons-tabbar', TabbarElement);

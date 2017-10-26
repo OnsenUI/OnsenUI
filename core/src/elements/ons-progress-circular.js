@@ -15,6 +15,7 @@ limitations under the License.
 
 */
 
+import ons from '../ons/ons';
 import util from '../ons/util';
 import autoStyle from '../ons/autostyle';
 import ModifierUtil from '../ons/internal/modifier-util';
@@ -235,4 +236,5 @@ export default class ProgressCircularElement extends BaseElement {
   }
 }
 
+ons.ProgressCircularElement = ProgressCircularElement;
 customElements.define('ons-progress-circular', ProgressCircularElement);

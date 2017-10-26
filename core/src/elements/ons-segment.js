@@ -15,6 +15,7 @@ limitations under the License.
 
 */
 
+import ons from '../ons/ons';
 import util from '../ons/util';
 import autoStyle from '../ons/autostyle';
 import ModifierUtil from '../ons/internal/modifier-util';
@@ -293,4 +294,5 @@ export default class SegmentElement extends BaseElement {
   }
 }
 
+ons.SegmentElement = SegmentElement;
 customElements.define('ons-segment', SegmentElement);

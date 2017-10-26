@@ -15,6 +15,7 @@ limitations under the License.
 
 */
 
+import ons from '../ons/ons';
 import util from '../ons/util';
 import autoStyle from '../ons/autostyle';
 import contentReady from '../ons/content-ready';
@@ -126,4 +127,5 @@ export default class ActionSheetButtonElement extends BaseElement {
   }
 }
 
+ons.ActionSheetButtonElement = ActionSheetButtonElement;
 customElements.define('ons-action-sheet-button', ActionSheetButtonElement);

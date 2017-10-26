@@ -11,6 +11,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
+import ons from '../ons/ons';
 import BaseCheckboxElement from './base/base-checkbox';
 
 const scheme = {
@@ -105,4 +106,5 @@ export default class RadioElement extends BaseCheckboxElement {
    */
 }
 
+ons.RadioElement = RadioElement;
 customElements.define('ons-radio', RadioElement);

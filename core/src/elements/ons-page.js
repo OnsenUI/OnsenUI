@@ -15,6 +15,7 @@ limitations under the License.
 
 */
 
+import ons from '../ons/ons';
 import util from '../ons/util';
 import internal from '../ons/internal';
 import autoStyle from '../ons/autostyle';
@@ -448,4 +449,5 @@ export default class PageElement extends BaseElement {
    */
 }
 
+ons.PageElement = PageElement;
 customElements.define('ons-page', PageElement);

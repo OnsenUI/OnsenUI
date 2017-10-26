@@ -15,6 +15,7 @@ limitations under the License.
 
 */
 
+import ons from '../ons/ons';
 import util from '../ons/util';
 import styler from '../ons/styler';
 import autoStyle from '../ons/autostyle';
@@ -261,4 +262,5 @@ export default class ListItemElement extends BaseElement {
   }
 }
 
+ons.ListItemElement = ListItemElement;
 customElements.define('ons-list-item', ListItemElement);

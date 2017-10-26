@@ -15,6 +15,7 @@ limitations under the License.
 
 */
 
+import ons from '../ons/ons';
 import util from '../ons/util';
 import styler from '../ons/styler';
 import platform from '../ons/platform';
@@ -462,4 +463,5 @@ export default class PullHookElement extends BaseElement {
   }
 }
 
+ons.PullHookElement = PullHookElement;
 customElements.define('ons-pull-hook', PullHookElement);

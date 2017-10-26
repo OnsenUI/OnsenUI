@@ -1,5 +1,6 @@
-import setup from './setup.js'; // Order matters!
-const ons = require('./ons/ons').default; // Avoid external dependency hoisting
+import setup from './setup.js'; // Add polyfills -- Must be first
+const ons = require('./ons/ons').default; // 'require' avoids external dependency hoisting
 
-setup(ons);
+setup(ons); // Setup initial listeners
+
 export default ons;

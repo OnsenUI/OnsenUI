@@ -15,6 +15,7 @@ limitations under the License.
 
 */
 
+import ons from '../ons/ons';
 import BaseElement from './base/base-element';
 import GestureDetector from '../ons/gesture-detector';
 
@@ -58,4 +59,5 @@ export default class GestureDetectorElement extends BaseElement {
   }
 }
 
+ons.GestureDetectorElement = GestureDetectorElement;
 customElements.define('ons-gesture-detector', GestureDetectorElement);
