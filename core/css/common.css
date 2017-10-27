@@ -63,17 +63,6 @@ ons-fab, ons-speed-dial {
   z-index: 10001;
 }
 
-* {
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0) !important;
-}
-
-input, textarea {
-  -webkit-user-select: auto;
-  -moz-user-select: text;
-}
-
 ons-toolbar:not([inline]), ons-bottom-toolbar {
   position: absolute;
   left: 0;
