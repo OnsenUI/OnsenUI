@@ -48,12 +48,14 @@ figure, figcaption, footer, header, hgroup,
 menu, nav, output, ruby, section, summary,
 time, mark, audio, video {
   user-select: none;
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-tap-highlight-color: var(--tap-highlight-color);
+  -webkit-touch-callout: none;
 }
 
 input, textarea, select {
   user-select: auto;
   -moz-user-select: text;
+  -webkit-touch-callout: none;
 }
 
 a, button, input, textarea, select {

@@ -133,4 +133,7 @@
   --material-select-border-color: color(white a(88%));
   --material-popover-background-color: var(--material-alert-dialog-background-color);
   --material-popover-text-color: var(--material-text-color);
+
+  /* others */
+  --tap-highlight-color: transparent;
 }
