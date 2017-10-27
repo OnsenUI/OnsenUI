@@ -28,7 +28,7 @@ const scheme = {'': 'alert-dialog-button--*'};
  * @element ons-alert-dialog-button
  * @modifier material
  *   [en]Material Design alert-dialog button.[/en]
- *   [ja][/ja]
+ *   [ja]マテリアルデザインのボタンを表示します。[/ja]
  * @description
  *   [en][/en]
  *   [ja][/ja]
