@@ -254,5 +254,5 @@ export default class ToastElement extends BaseDialogElement {
   }
 }
 
-ons.ToastElement = ToastElement;
+ons.elements.Toast = ToastElement;
 customElements.define('ons-toast', ToastElement);

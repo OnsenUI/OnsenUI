@@ -2,11 +2,11 @@
 
 describe('ons-list-header', () => {
   it('provides \'OnsHeaderListElement\' global variable', () => {
-    expect(window.ons.ListHeaderElement).to.be.ok;
+    expect(window.ons.elements.ListHeader).to.be.ok;
   });
 
   it('classList contains \'list-header\' by default', () => {
-    const element = new ons.ListHeaderElement();
+    const element = new ons.elements.ListHeader();
     expect(element.classList.contains('list-header')).to.be.true;
     element.setAttribute('class', 'foo');
     expect(element.classList.contains('list-header')).to.be.true;
@@ -14,7 +14,7 @@ describe('ons-list-header', () => {
   });
 
   it('provides modifier attribute', () => {
-    const element = new ons.ListHeaderElement();
+    const element = new ons.elements.ListHeader();
     element.setAttribute('modifier', 'hoge');
     expect(element.classList.contains('list-header--hoge')).to.be.true;
 

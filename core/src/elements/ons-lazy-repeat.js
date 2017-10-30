@@ -178,5 +178,5 @@ export default class LazyRepeatElement extends BaseElement {
 
 }
 
-ons.LazyRepeatElement = LazyRepeatElement;
+ons.elements.LazyRepeat = LazyRepeatElement;
 customElements.define('ons-lazy-repeat', LazyRepeatElement);

@@ -109,5 +109,5 @@ export default class CheckboxElement extends BaseCheckboxElement {
    */
 }
 
-ons.CheckboxElement = CheckboxElement;
+ons.elements.Checkbox = CheckboxElement;
 customElements.define('ons-checkbox', CheckboxElement);

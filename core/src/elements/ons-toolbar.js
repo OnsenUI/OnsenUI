@@ -207,5 +207,5 @@ export default class ToolbarElement extends BaseElement {
   }
 }
 
-ons.ToolbarElement = ToolbarElement;
+ons.elements.Toolbar = ToolbarElement;
 customElements.define('ons-toolbar', ToolbarElement);

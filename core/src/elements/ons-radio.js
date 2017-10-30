@@ -106,5 +106,5 @@ export default class RadioElement extends BaseCheckboxElement {
    */
 }
 
-ons.RadioElement = RadioElement;
+ons.elements.Radio = RadioElement;
 customElements.define('ons-radio', RadioElement);

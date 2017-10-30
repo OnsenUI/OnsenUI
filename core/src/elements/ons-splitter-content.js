@@ -215,5 +215,5 @@ export default class SplitterContentElement extends BaseElement {
   }
 }
 
-ons.SplitterContentElement = SplitterContentElement;
+ons.elements.SplitterContent = SplitterContentElement;
 customElements.define('ons-splitter-content', SplitterContentElement);

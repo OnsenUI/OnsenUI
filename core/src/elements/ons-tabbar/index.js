@@ -599,5 +599,5 @@ export default class TabbarElement extends BaseElement {
   }
 }
 
-ons.TabbarElement = TabbarElement;
+ons.elements.Tabbar = TabbarElement;
 customElements.define('ons-tabbar', TabbarElement);

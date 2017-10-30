@@ -70,5 +70,5 @@ export default class ListTitleElement extends BaseElement {
   }
 }
 
-ons.ListTitleElement = ListTitleElement;
+ons.elements.ListTitle = ListTitleElement;
 customElements.define('ons-list-title', ListTitleElement);

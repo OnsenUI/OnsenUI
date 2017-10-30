@@ -2,6 +2,13 @@
 CHANGELOG
 ====
 
+dev
+----
+
+#BREAKING CHANGES
+
+ * Internal elements location has been changed. E.g. `ons.NavigatorElement` is now `ons.elements.Navigator`. This should only affect if you were registering custom animations.
+
 2.7.0
 ----
 

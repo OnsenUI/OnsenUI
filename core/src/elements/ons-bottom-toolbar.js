@@ -78,5 +78,5 @@ export default class BottomToolbarElement extends BaseElement {
 
 }
 
-ons.BottomToolbarElement = BottomToolbarElement;
+ons.elements.BottomToolbar = BottomToolbarElement;
 customElements.define('ons-bottom-toolbar', BottomToolbarElement);

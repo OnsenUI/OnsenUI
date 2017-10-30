@@ -449,5 +449,5 @@ export default class PageElement extends BaseElement {
    */
 }
 
-ons.PageElement = PageElement;
+ons.elements.Page = PageElement;
 customElements.define('ons-page', PageElement);

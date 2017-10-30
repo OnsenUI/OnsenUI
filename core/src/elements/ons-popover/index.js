@@ -534,5 +534,5 @@ export default class PopoverElement extends BaseDialogElement {
   }
 }
 
-ons.PopoverElement = PopoverElement;
+ons.elements.Popover = PopoverElement;
 customElements.define('ons-popover', PopoverElement);

@@ -21,7 +21,7 @@ describe('OnsCarouselElement', () => {
   });
 
   it('should exist', () => {
-    expect(window.ons.CarouselElement).to.be.ok;
+    expect(window.ons.elements.Carousel).to.be.ok;
   });
 
   it('compiles', () => {

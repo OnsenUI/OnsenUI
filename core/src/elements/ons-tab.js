@@ -369,5 +369,5 @@ export default class TabElement extends BaseElement {
   }
 }
 
-ons.TabElement = TabElement;
+ons.elements.Tab = TabElement;
 customElements.define('ons-tab', TabElement);

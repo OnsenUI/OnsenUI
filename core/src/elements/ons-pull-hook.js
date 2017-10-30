@@ -463,5 +463,5 @@ export default class PullHookElement extends BaseElement {
   }
 }
 
-ons.PullHookElement = PullHookElement;
+ons.elements.PullHook = PullHookElement;
 customElements.define('ons-pull-hook', PullHookElement);

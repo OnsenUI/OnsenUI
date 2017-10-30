@@ -2,7 +2,7 @@
 
 describe('OnsColElement', () => {
   it('should exist', () => {
-    expect(window.ons.ColElement).to.be.ok;
+    expect(window.ons.elements.Col).to.be.ok;
   });
 
   describe('#createdCallback()', () => {
@@ -25,7 +25,7 @@ describe('OnsColElement', () => {
 
   describe('#attributeChangedCallback()', () => {
     it('provides \'width\' attribute', () => {
-      var element = new ons.ColElement();
+      var element = new ons.elements.Col();
       element.setAttribute('width', '100px');
 
       if ('flex' in element.style) {

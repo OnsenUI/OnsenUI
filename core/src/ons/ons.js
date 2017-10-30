@@ -25,7 +25,7 @@ import internal from './internal';
 import orientation from './orientation';
 import modifier from './modifier';
 import softwareKeyboard from './software-keyboard';
-import PageAttributeExpression from './page-attribute-expression';
+import pageAttributeExpression from './page-attribute-expression';
 import deviceBackButtonDispatcher from './device-back-button-dispatcher';
 import animationOptionsParser from './animation-options-parser';
 import autoStyle from './autostyle';
@@ -41,28 +41,28 @@ import BaseAnimator from './base-animator';
  *   [ja]Onsen UIで利用できるグローバルなオブジェクトです。[/ja]
  *   [en]A global object that's used in Onsen UI. [/en]
  */
-const ons = {};
-
-ons._util = util;
-ons.animit = animit;
-ons._deviceBackButtonDispatcher = deviceBackButtonDispatcher;
-ons._internal = internal;
-ons.GestureDetector = GestureDetector;
-ons.platform = platform;
-ons.softwareKeyboard = softwareKeyboard;
-ons.pageAttributeExpression = PageAttributeExpression;
-ons.orientation = orientation;
-ons.notification = notification;
-ons.modifier = modifier;
-ons._animationOptionsParser = animationOptionsParser;
-ons._autoStyle = autoStyle;
-ons._DoorLock = DoorLock;
-ons._contentReady = contentReady;
-ons.defaultPageLoader = defaultPageLoader;
-ons.PageLoader = PageLoader;
-ons._BaseAnimator = BaseAnimator;
-
-ons._readyLock = new DoorLock();
+const ons = {
+  animit,
+  defaultPageLoader,
+  elements: {},
+  GestureDetector,
+  modifier,
+  notification,
+  orientation,
+  pageAttributeExpression,
+  PageLoader,
+  platform,
+  softwareKeyboard,
+  _animationOptionsParser: animationOptionsParser,
+  _autoStyle: autoStyle,
+  _BaseAnimator: BaseAnimator,
+  _contentReady: contentReady,
+  _deviceBackButtonDispatcher: deviceBackButtonDispatcher,
+  _DoorLock: DoorLock,
+  _internal: internal,
+  _readyLock: new DoorLock(),
+  _util: util,
+};
 
 ons.platform.select((window.location.search.match(/platform=([\w-]+)/) || [])[1]);
 

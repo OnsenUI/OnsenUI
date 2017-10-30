@@ -309,5 +309,5 @@ export default class SwitchElement extends BaseCheckboxElement {
 
 }
 
-ons.SwitchElement = SwitchElement;
+ons.elements.Switch = SwitchElement;
 customElements.define('ons-switch', SwitchElement);

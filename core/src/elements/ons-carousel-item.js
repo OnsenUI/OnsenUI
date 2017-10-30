@@ -64,5 +64,5 @@ export default class CarouselItemElement extends BaseElement {
   }
 }
 
-ons.CarouselItemElement = CarouselItemElement;
+ons.elements.CarouselItem = CarouselItemElement;
 customElements.define('ons-carousel-item', CarouselItemElement);

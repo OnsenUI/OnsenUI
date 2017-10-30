@@ -149,5 +149,5 @@ export default class ButtonElement extends BaseElement {
   }
 }
 
-ons.ButtonElement = ButtonElement;
+ons.elements.Button = ButtonElement;
 customElements.define('ons-button', ButtonElement);

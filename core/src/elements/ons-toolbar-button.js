@@ -129,5 +129,5 @@ export default class ToolbarButtonElement extends BaseElement {
   }
 }
 
-ons.ToolbarButtonElement = ToolbarButtonElement;
+ons.elements.ToolbarButton = ToolbarButtonElement;
 customElements.define('ons-toolbar-button', ToolbarButtonElement);

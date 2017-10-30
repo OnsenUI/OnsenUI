@@ -98,5 +98,5 @@ export default class SearchInputElement extends BaseInputElement {
    */
 }
 
-ons.SearchInputElement = SearchInputElement;
+ons.elements.SearchInput = SearchInputElement;
 customElements.define('ons-search-input', SearchInputElement);

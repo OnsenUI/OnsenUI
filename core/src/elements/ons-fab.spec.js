@@ -4,12 +4,12 @@ describe('OnsFabElement', () => {
   let fab;
 
   beforeEach(done => {
-    fab = new ons.FabElement();
+    fab = new ons.elements.Fab();
     ons._contentReady(fab, done);
   });
 
   it('exists', () => {
-    expect(window.ons.FabElement).to.be.ok;
+    expect(window.ons.elements.Fab).to.be.ok;
   });
 
   it('provides modifier attribute', () => {

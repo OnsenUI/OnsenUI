@@ -112,5 +112,5 @@ export default class AlertDialogButtonElement extends BaseElement {
   }
 }
 
-ons.AlertDialogButtonElement = AlertDialogButtonElement;
+ons.elements.AlertDialogButton = AlertDialogButtonElement;
 customElements.define('ons-alert-dialog-button', AlertDialogButtonElement);

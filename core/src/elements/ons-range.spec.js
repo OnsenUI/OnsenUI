@@ -4,7 +4,7 @@ describe('OnsRangeElement', () => {
   let element;
 
   beforeEach(done => {
-    element = new ons.RangeElement();
+    element = new ons.elements.Range();
     document.body.appendChild(element);
     ons._contentReady(element, done);
   });
@@ -15,7 +15,7 @@ describe('OnsRangeElement', () => {
   });
 
   it('exists', () => {
-    expect(window.ons.RangeElement).to.be.ok;
+    expect(window.ons.elements.Range).to.be.ok;
   });
 
   it('classList contains \'range\' by default', () => {

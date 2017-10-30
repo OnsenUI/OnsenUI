@@ -64,5 +64,5 @@ export default class SplitterMaskElement extends BaseElement {
   }
 }
 
-ons.SplitterMaskElement = SplitterMaskElement;
+ons.elements.SplitterMask = SplitterMaskElement;
 customElements.define('ons-splitter-mask', SplitterMaskElement);

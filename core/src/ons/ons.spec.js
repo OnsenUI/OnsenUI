@@ -107,12 +107,12 @@ describe('ons', () => {
 
     it('returns a valid element from a path', () => {
       return ons.createElement('page.html').then((element) => {
-        expect(element).to.be.instanceof(window.ons.PageElement);
+        expect(element).to.be.instanceof(window.ons.elements.Page);
       });
     });
 
     it('returns a valid element from inline HTML without promise', () => {
-      expect(ons.createElement('<ons-page></ons-page>')).to.be.instanceof(window.ons.PageElement);
+      expect(ons.createElement('<ons-page></ons-page>')).to.be.instanceof(window.ons.elements.Page);
     });
 
     it('does not attach by default', () => {

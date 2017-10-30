@@ -2,7 +2,7 @@
 
 describe('OnsSplitterMaskElement', () => {
   it('exists', () => {
-    expect(window.ons.SplitterMaskElement).to.be.ok;
+    expect(window.ons.elements.SplitterMask).to.be.ok;
   });
 
   let splitter, mask;

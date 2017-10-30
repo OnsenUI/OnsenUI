@@ -9,7 +9,7 @@ describe('OnsProgressCircularElement', () => {
   });
 
   it('exists', () => {
-    expect(window.ons.ProgressCircularElement).to.be.ok;
+    expect(window.ons.elements.ProgressCircular).to.be.ok;
   });
 
   it('provides modifier attribute', () => {
@@ -62,7 +62,7 @@ describe('OnsProgressCircularElement', () => {
 
   describe('#_compile()', () => {
     it('is called when an element is created', () => {
-      const spy = chai.spy.on(window.ons.ProgressCircularElement.prototype, '_compile');
+      const spy = chai.spy.on(window.ons.elements.ProgressCircular.prototype, '_compile');
       ons._util.createElement('<ons-progress-circular> </ons-progress-circular>');
 
       expect(spy).to.have.been.called.once;

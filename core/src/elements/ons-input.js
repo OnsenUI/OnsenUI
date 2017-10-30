@@ -210,5 +210,5 @@ export default class InputElement extends BaseInputElement {
    */
 }
 
-ons.InputElement = InputElement;
+ons.elements.Input = InputElement;
 customElements.define('ons-input', InputElement);

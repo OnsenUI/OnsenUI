@@ -127,5 +127,5 @@ export default class ActionSheetButtonElement extends BaseElement {
   }
 }
 
-ons.ActionSheetButtonElement = ActionSheetButtonElement;
+ons.elements.ActionSheetButton = ActionSheetButtonElement;
 customElements.define('ons-action-sheet-button', ActionSheetButtonElement);

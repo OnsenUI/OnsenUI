@@ -350,5 +350,5 @@ export default class RippleElement extends BaseElement {
   }
 }
 
-ons.RippleElement = RippleElement;
+ons.elements.Ripple = RippleElement;
 customElements.define('ons-ripple', RippleElement);

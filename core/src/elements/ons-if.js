@@ -118,5 +118,5 @@ export default class IfElement extends BaseElement {
   }
 }
 
-ons.IfElement = IfElement;
+ons.elements.If = IfElement;
 customElements.define('ons-if', IfElement);

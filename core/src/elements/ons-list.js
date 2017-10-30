@@ -98,5 +98,5 @@ export default class ListElement extends BaseElement {
   }
 }
 
-ons.ListElement = ListElement;
+ons.elements.List = ListElement;
 customElements.define('ons-list', ListElement);

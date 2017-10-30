@@ -345,5 +345,5 @@ export default class DialogElement extends BaseDialogElement {
   }
 }
 
-ons.DialogElement = DialogElement;
+ons.elements.Dialog = DialogElement;
 customElements.define('ons-dialog', DialogElement);

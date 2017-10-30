@@ -1027,5 +1027,5 @@ export default class NavigatorElement extends BaseElement {
   }
 }
 
-ons.NavigatorElement = NavigatorElement;
+ons.elements.Navigator = NavigatorElement;
 customElements.define('ons-navigator', NavigatorElement);

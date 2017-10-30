@@ -474,5 +474,5 @@ export default class SpeedDialElement extends BaseElement {
   }
 }
 
-ons.SpeedDialElement = SpeedDialElement;
+ons.elements.SpeedDial = SpeedDialElement;
 customElements.define('ons-speed-dial', SpeedDialElement);

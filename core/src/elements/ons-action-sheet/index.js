@@ -374,5 +374,5 @@ export default class ActionSheetElement extends BaseDialogElement {
   }
 }
 
-ons.ActionSheetElement = ActionSheetElement;
+ons.elements.ActionSheet = ActionSheetElement;
 customElements.define('ons-action-sheet', ActionSheetElement);

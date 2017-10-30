@@ -102,5 +102,5 @@ export default class CardElement extends BaseElement {
   }
 }
 
-ons.CardElement = CardElement;
+ons.elements.Card = CardElement;
 customElements.define('ons-card', CardElement);

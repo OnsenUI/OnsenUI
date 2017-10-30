@@ -262,5 +262,5 @@ export default class ListItemElement extends BaseElement {
   }
 }
 
-ons.ListItemElement = ListItemElement;
+ons.elements.ListItem = ListItemElement;
 customElements.define('ons-list-item', ListItemElement);

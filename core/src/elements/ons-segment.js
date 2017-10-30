@@ -294,5 +294,5 @@ export default class SegmentElement extends BaseElement {
   }
 }
 
-ons.SegmentElement = SegmentElement;
+ons.elements.Segment = SegmentElement;
 customElements.define('ons-segment', SegmentElement);

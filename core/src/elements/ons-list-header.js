@@ -87,5 +87,5 @@ export default class ListHeaderElement extends BaseElement {
   }
 }
 
-ons.ListHeaderElement = ListHeaderElement;
+ons.elements.ListHeader = ListHeaderElement;
 customElements.define('ons-list-header', ListHeaderElement);

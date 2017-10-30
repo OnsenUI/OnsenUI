@@ -671,5 +671,5 @@ export default class SplitterSideElement extends BaseElement {
   }
 }
 
-ons.SplitterSideElement = SplitterSideElement;
+ons.elements.SplitterSide = SplitterSideElement;
 customElements.define('ons-splitter-side', SplitterSideElement);

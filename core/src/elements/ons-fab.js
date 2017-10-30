@@ -252,5 +252,5 @@ export default class FabElement extends BaseElement {
   }
 }
 
-ons.FabElement = FabElement;
+ons.elements.Fab = FabElement;
 customElements.define('ons-fab', FabElement);

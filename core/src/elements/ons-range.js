@@ -216,5 +216,5 @@ export default class RangeElement extends BaseInputElement {
    */
 }
 
-ons.RangeElement = RangeElement;
+ons.elements.Range = RangeElement;
 customElements.define('ons-range', RangeElement);

@@ -251,5 +251,5 @@ export default class SelectElement extends BaseElement {
   }
 }
 
-ons.SelectElement = SelectElement;
+ons.elements.Select = SelectElement;
 customElements.define('ons-select', SelectElement);

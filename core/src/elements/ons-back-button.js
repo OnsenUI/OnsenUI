@@ -210,5 +210,5 @@ export default class BackButtonElement extends BaseElement {
   }
 }
 
-ons.BackButtonElement = BackButtonElement;
+ons.elements.BackButton = BackButtonElement;
 customElements.define('ons-back-button', BackButtonElement);

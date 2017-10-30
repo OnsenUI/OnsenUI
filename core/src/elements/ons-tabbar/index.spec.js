@@ -31,7 +31,7 @@ describe('OnsTabbarElement', () => {
   });
 
   it('should exist', () => {
-    expect(window.ons.TabbarElement).to.be.ok;
+    expect(window.ons.elements.Tabbar).to.be.ok;
   });
 
   it('provides \'modifier\' attribute', () => {
@@ -102,7 +102,7 @@ describe('OnsTabbarElement', () => {
   });
 
   it('has two children by default', (done) => {
-    const element = new ons.TabbarElement();
+    const element = new ons.elements.Tabbar();
     ons._contentReady(element);
 
     setImmediate(() => {

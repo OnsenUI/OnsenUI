@@ -1,11 +1,11 @@
 describe('OnsCardElement', () => {
   it('exists', () => {
-    expect(window.ons.CardElement).to.be.ok;
+    expect(window.ons.elements.Card).to.be.ok;
   });
 
   describe('class attribute', () => {
     it('should contain "card" class name automatically', () => {
-      const element = new ons.CardElement();
+      const element = new ons.elements.Card();
       element.setAttribute('class', 'foobar');
       expect(element.classList.contains('card')).to.be.ok;
       expect(element.classList.contains('foobar')).to.be.ok;

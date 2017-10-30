@@ -4,7 +4,7 @@ describe('OnsSelectElement', () => {
   let element;
 
   beforeEach(done => {
-    element = new ons.SelectElement();
+    element = new ons.elements.Select();
     document.body.appendChild(element);
     ons._contentReady(element, done);
   });
@@ -15,7 +15,7 @@ describe('OnsSelectElement', () => {
   });
 
   it('exists', () => {
-    expect(window.ons.SelectElement).to.be.ok;
+    expect(window.ons.elements.Select).to.be.ok;
   });
 
   it('classList contains \'select-input\' by default', () => {

@@ -229,5 +229,5 @@ export default class SplitterElement extends BaseElement {
   }
 }
 
-ons.SplitterElement = SplitterElement;
+ons.elements.Splitter = SplitterElement;
 customElements.define('ons-splitter', SplitterElement);

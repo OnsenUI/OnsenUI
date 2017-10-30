@@ -221,5 +221,5 @@ export default class ProgressBarElement extends BaseElement {
   }
 }
 
-ons.ProgressBarElement = ProgressBarElement;
+ons.elements.ProgressBar = ProgressBarElement;
 customElements.define('ons-progress-bar', ProgressBarElement);

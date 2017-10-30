@@ -84,5 +84,5 @@ export default class TemplateElement extends BaseElement {
   }
 }
 
-ons.TemplateElement = TemplateElement;
+ons.elements.Template = TemplateElement;
 customElements.define('ons-template', TemplateElement);

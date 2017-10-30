@@ -14,7 +14,7 @@ describe('OnsTabElement', () => {
   });
 
   it('should exist', () => {
-    expect(window.ons.TabElement).to.be.ok;
+    expect(window.ons.elements.Tab).to.be.ok;
   });
 
   it('has "page" property', () => {

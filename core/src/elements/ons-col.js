@@ -90,5 +90,5 @@ export default class ColElement extends BaseElement {
   }
 }
 
-ons.ColElement = ColElement;
+ons.elements.Col = ColElement;
 customElements.define('ons-col', ColElement);

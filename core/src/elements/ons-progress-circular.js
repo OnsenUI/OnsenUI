@@ -236,5 +236,5 @@ export default class ProgressCircularElement extends BaseElement {
   }
 }
 
-ons.ProgressCircularElement = ProgressCircularElement;
+ons.elements.ProgressCircular = ProgressCircularElement;
 customElements.define('ons-progress-circular', ProgressCircularElement);

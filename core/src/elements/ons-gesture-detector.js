@@ -59,5 +59,5 @@ export default class GestureDetectorElement extends BaseElement {
   }
 }
 
-ons.GestureDetectorElement = GestureDetectorElement;
+ons.elements.GestureDetector = GestureDetectorElement;
 customElements.define('ons-gesture-detector', GestureDetectorElement);

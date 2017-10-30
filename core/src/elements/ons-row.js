@@ -52,5 +52,5 @@ import BaseElement from './base/base-element';
 export default class RowElement extends BaseElement {
 }
 
-ons.RowElement = RowElement;
+ons.elements.Row = RowElement;
 customElements.define('ons-row', RowElement);

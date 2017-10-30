@@ -309,5 +309,5 @@ export default class ModalElement extends BaseDialogElement {
   }
 }
 
-ons.ModalElement = ModalElement;
+ons.elements.Modal = ModalElement;
 customElements.define('ons-modal', ModalElement);

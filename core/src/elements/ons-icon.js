@@ -204,5 +204,5 @@ export default class IconElement extends BaseElement {
   }
 }
 
-ons.IconElement = IconElement;
+ons.elements.Icon = IconElement;
 customElements.define('ons-icon', IconElement);
