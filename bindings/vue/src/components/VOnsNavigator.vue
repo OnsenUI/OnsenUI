@@ -124,7 +124,8 @@
     updated() {
       if (this._pageStackUpdate) {
         let currentTopPage = this.$children[this.$children.length - 1].$el;
-        let { lastLength, lastTopPage, currentLength, restoreScroll } = this._pageStackUpdate;
+        let { lastTopPage, currentLength } = this._pageStackUpdate;
+        const { lastLength, restoreScroll } = this._pageStackUpdate;
         currentLength = currentLength === false ? this.$children.length : currentLength;
 
         if (currentTopPage !== lastTopPage) {
