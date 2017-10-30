@@ -7,6 +7,8 @@
 </template>
 
 <script>
+  import 'onsenui/core-src/elements/ons-navigator';
+  import ons from 'onsenui/core-src';
   import { hasOptions, selfProvider, deriveEvents, deriveDBB } from '../mixins';
 
   export default {
@@ -41,7 +43,7 @@
       },
       _findScrollPage(page) {
         const nextPage = page._contentElement.children.length === 1
-          && this.$ons._ons._util.getTopPage(page._contentElement.children[0]);
+          && ons._util.getTopPage(page._contentElement.children[0]);
         return nextPage ? this._findScrollPage(nextPage) : page;
       },
       _setPagesVisibility(start, end, visibility) {

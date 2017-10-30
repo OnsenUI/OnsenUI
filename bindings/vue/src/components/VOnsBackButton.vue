@@ -5,6 +5,8 @@
 </template>
 
 <script>
+  import 'onsenui/core-src/elements/ons-back-button';
+
   export default {
     inject: ['navigator'],
 

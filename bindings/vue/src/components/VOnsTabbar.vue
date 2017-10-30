@@ -23,6 +23,7 @@
 </template>
 
 <script>
+  import 'onsenui/core-src/elements/ons-tabbar';
   import { deriveEvents, hasOptions, hidable, selfProvider } from '../mixins';
 
   export default {

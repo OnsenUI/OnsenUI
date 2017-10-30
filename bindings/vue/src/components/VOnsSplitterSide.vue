@@ -5,6 +5,7 @@
 </template>
 
 <script>
+  import 'onsenui/core-src/elements/ons-splitter-side';
   import { hasOptions, deriveEvents } from '../mixins';
 
   export default {

@@ -4,6 +4,8 @@
 </template>
 
 <script>
+  import 'onsenui/core-src/elements/ons-tab';
+
   export default {
     inject: ['tabbar'],
 

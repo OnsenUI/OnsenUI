@@ -13,6 +13,7 @@
 </template>
 
 <script>
+  import 'onsenui/core-src/elements/ons-carousel';
   import { hasOptions, deriveEvents } from '../mixins';
 
   export default {
