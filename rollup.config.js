@@ -53,12 +53,12 @@ export default [
 
   // Core ES Modules
   {
-    input: 'core/src/index.es.js',
+    input: 'core/src/index.esm.js',
     external: id => /\/ons\//.test(id), // Do not bundle 'ons', only polyfills/vendor
     output: {
-      file: 'build/core-src/index.js',
+      file: 'build/esm/index.js',
       format: 'es',
-      name: 'onsES',
+      name: 'onsESM',
       sourcemap: 'inline',
     },
     plugins: [
@@ -68,7 +68,7 @@ export default [
       progress(),
       filesize(),
       visualizer({
-        filename: 'module-stats.es.html',
+        filename: 'module-stats.esm.html',
         sourcemap: false, // Unminified to show core-js size
       }),
     ],

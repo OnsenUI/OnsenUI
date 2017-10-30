@@ -428,7 +428,7 @@ gulp.task('core-src', ['core-es'], () =>  {
       )
       // Transpile to ES5
       .pipe($.babel(babelrc))
-      .pipe(gulp.dest('build/core-src/'));
+      .pipe(gulp.dest('build/esm/'));
 });
 
 ////////////////////////////////////////
