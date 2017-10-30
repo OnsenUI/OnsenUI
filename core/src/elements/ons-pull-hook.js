@@ -232,8 +232,8 @@ export default class PullHookElement extends BaseElement {
   }
 
   set onAction(value) {
-    if (!(value instanceof Function) && value !== null) {
-      throw new Error('onAction must be a function or null');
+    if (value && !(value instanceof Function)) {
+      throw new Error(`'onAction' must be a function or null`);
     }
     this._onAction = value;
   }
@@ -251,7 +251,7 @@ export default class PullHookElement extends BaseElement {
 
   set onPull(value) {
     if (value && !(value instanceof Function)) {
-      throw new Error(`'onPull' must be a function.`)
+      throw new Error(`'onPull' must be a function or null.`)
     }
     this._onPull = value;
   }
