@@ -5,7 +5,7 @@
 </template>
 
 <script>
-  import 'onsenui/core-src/elements/ons-ripple';
+  import 'onsenui/esm/elements/ons-ripple';
   import { deriveEvents } from '../mixins';
 
   export default {

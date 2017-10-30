@@ -5,7 +5,7 @@
 </template>
 
 <script>
-  import 'onsenui/core-src/elements/ons-segment';
+  import 'onsenui/esm/elements/ons-segment';
   import { deriveEvents } from '../mixins';
 
   export default {

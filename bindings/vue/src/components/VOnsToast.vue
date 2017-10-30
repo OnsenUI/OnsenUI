@@ -5,7 +5,7 @@
 </template>
 
 <script>
-  import 'onsenui/core-src/elements/ons-toast';
+  import 'onsenui/esm/elements/ons-toast';
   import { deriveEvents, hidable, hasOptions, deriveDBB, portal } from '../mixins';
 
   export default {

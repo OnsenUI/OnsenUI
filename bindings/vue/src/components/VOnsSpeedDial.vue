@@ -5,7 +5,7 @@
 </template>
 
 <script>
-  import 'onsenui/core-src/elements/ons-speed-dial';
+  import 'onsenui/esm/elements/ons-speed-dial';
   import { hidable, deriveEvents } from '../mixins';
 
   export default {

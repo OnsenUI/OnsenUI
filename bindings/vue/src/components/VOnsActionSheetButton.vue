@@ -5,7 +5,7 @@
 </template>
 
 <script>
-  import 'onsenui/core-src/elements/ons-action-sheet-button';
+  import 'onsenui/esm/elements/ons-action-sheet-button';
   import { deriveEvents } from '../mixins';
 
   export default {

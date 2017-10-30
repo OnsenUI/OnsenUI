@@ -5,7 +5,7 @@
 </template>
 
 <script>
-  import 'onsenui/core-src/elements/ons-action-sheet';
+  import 'onsenui/esm/elements/ons-action-sheet';
   import { deriveEvents, hidable, hasOptions, dialogCancel, deriveDBB, portal } from '../mixins';
 
   export default {

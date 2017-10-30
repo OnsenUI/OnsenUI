@@ -5,7 +5,7 @@
 </template>
 
 <script>
-  import 'onsenui/core-src/elements/ons-row';
+  import 'onsenui/esm/elements/ons-row';
   import { deriveEvents } from '../mixins';
 
   export default {

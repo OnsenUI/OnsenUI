@@ -5,7 +5,7 @@
 </template>
 
 <script>
-  import 'onsenui/core-src/elements/ons-range';
+  import 'onsenui/esm/elements/ons-range';
   import { deriveEvents, modelInput } from '../mixins';
 
   export default {

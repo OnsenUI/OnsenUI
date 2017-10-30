@@ -4,8 +4,8 @@
 </template>
 
 <script>
-import 'onsenui/core-src/elements/ons-lazy-repeat';
-import ons from 'onsenui/core-src';
+import 'onsenui/esm/elements/ons-lazy-repeat';
+import ons from 'onsenui/esm';
 
 export default {
   props: {

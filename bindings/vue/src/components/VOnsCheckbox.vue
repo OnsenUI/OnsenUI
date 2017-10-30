@@ -5,7 +5,7 @@
 </template>
 
 <script>
-  import 'onsenui/core-src/elements/ons-checkbox';
+  import 'onsenui/esm/elements/ons-checkbox';
   import { deriveEvents, modelCheckbox } from '../mixins';
 
   export default {

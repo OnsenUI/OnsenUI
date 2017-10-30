@@ -1,4 +1,4 @@
-import ons from 'onsenui/core-src';
+import ons from 'onsenui/esm';
 
 const $ons = Object.keys(ons)
   .filter(k => [

@@ -9,7 +9,7 @@
 </template>
 
 <script>
-  import 'onsenui/core-src/elements/ons-pull-hook';
+  import 'onsenui/esm/elements/ons-pull-hook';
   import { deriveEvents } from '../mixins';
 
   export default {

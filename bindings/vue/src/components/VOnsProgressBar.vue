@@ -5,7 +5,7 @@
 </template>
 
 <script>
-  import 'onsenui/core-src/elements/ons-progress-bar';
+  import 'onsenui/esm/elements/ons-progress-bar';
   import { deriveEvents } from '../mixins';
 
   export default {

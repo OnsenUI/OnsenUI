@@ -5,7 +5,7 @@
 </template>
 
 <script>
-  import 'onsenui/core-src/elements/ons-carousel-item';
+  import 'onsenui/esm/elements/ons-carousel-item';
   import { deriveEvents } from '../mixins';
 
   export default {

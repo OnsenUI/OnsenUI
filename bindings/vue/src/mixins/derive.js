@@ -1,4 +1,4 @@
-import ons from 'onsenui/core-src';
+import ons from 'onsenui/esm';
 import { capitalize, camelize, eventToHandler, handlerToProp } from '../internal/util';
 
 /* Private */
@@ -46,9 +46,9 @@ const deriveDBB = {
 const deriveEvents = {
   computed: {
     unrecognizedListeners() {
-      const element = capitalize(camelize(this.$options._componentTag.slice(6))) + 'Element';
+      const name = camelize('-' + this.$options._componentTag.slice(6));
       return Object.keys(this.$listeners || {})
-        .filter(k => (ons[element] && ons[element].events || []).indexOf(k) === -1)
+        .filter(k => (ons.elements[name].events || []).indexOf(k) === -1)
         .reduce((r, k) => {
           r[k] = this.$listeners[k];
           return r;

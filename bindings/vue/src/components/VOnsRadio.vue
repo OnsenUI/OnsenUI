@@ -5,7 +5,7 @@
 </template>
 
 <script>
-  import 'onsenui/core-src/elements/ons-radio';
+  import 'onsenui/esm/elements/ons-radio';
   import { deriveEvents, modelRadio } from '../mixins';
 
   export default {

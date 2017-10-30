@@ -5,7 +5,7 @@
 </template>
 
 <script>
-  import 'onsenui/core-src/elements/ons-toolbar-button';
+  import 'onsenui/esm/elements/ons-toolbar-button';
   import { deriveEvents } from '../mixins';
 
   export default {

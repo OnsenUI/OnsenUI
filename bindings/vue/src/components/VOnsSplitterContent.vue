@@ -5,7 +5,7 @@
 </template>
 
 <script>
-  import 'onsenui/core-src/elements/ons-splitter-content';
+  import 'onsenui/esm/elements/ons-splitter-content';
   import { deriveEvents } from '../mixins';
 
   export default {

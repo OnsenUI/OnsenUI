@@ -7,7 +7,7 @@
 </template>
 
 <script>
-  import 'onsenui/core-src/elements/ons-select';
+  import 'onsenui/esm/elements/ons-select';
   import { modelInput } from '../mixins';
 
   export default {

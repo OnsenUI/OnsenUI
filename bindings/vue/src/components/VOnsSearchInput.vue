@@ -5,7 +5,7 @@
 </template>
 
 <script>
-  import 'onsenui/core-src/elements/ons-search-input';
+  import 'onsenui/esm/elements/ons-search-input';
   import { deriveEvents, modelInput } from '../mixins';
 
   export default {

@@ -1,5 +1,4 @@
 import Vue from 'vue';
-import 'onsenui';
 
 import '../../../build/css/onsenui.css';
 import '../../../build/css/onsen-css-components.css';

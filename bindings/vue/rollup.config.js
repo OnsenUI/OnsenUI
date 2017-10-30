@@ -28,8 +28,7 @@ export default [
       file: 'dist/vue-onsenui.js',
       format: 'umd',
       name: 'vueOnsen',
-      globals: { onsenui: 'ons' },
-      sourcemap: false,
+      globals: { 'onsenui/esm': 'ons' },
     },
     plugins: [
       eslint({
@@ -52,27 +51,28 @@ export default [
     banner: `/* ${pkg.name} v${pkg.version} - ${dateformat(new Date(), 'yyyy-mm-dd')} */\n`
   },
 
-  // Core ES Modules
-  // {
-  //   input: 'core/src/index.es.js',
-  //   external: id => /\/ons\//.test(id), // Do not bundle 'ons', only polyfills/vendor
-  //   output: {
-  //     file: 'build/core-src/index.js',
-  //     format: 'es',
-  //     name: 'onsES',
-  //     sourcemap: 'inline',
-  //   },
-  //   plugins: [
-  //     resolve(),
-  //     commonjs(cjsOpt),
-  //     babel(babelrc),
-  //     progress(),
-  //     filesize(),
-  //     visualizer({
-  //       filename: 'module-stats.es.html',
-  //       sourcemap: false, // Unminified to show core-js size
-  //     }),
-  //   ],
-  //   banner: `/* ${pkg.name} v${pkg.version} - ${dateformat(new Date(), 'yyyy-mm-dd')} */\n`
-  // },
+  // Vue bindings ES Modules
+  {
+    input: 'src/index.esm.js',
+    external: id => /onsenui/.test(id),
+    output: {
+      file: 'dist/esm/index.js',
+      format: 'es',
+      name: 'vueOnsenESM',
+      sourcemap: false,
+      globals: { 'onsenui/esm': 'ons' },
+    },
+    plugins: [
+      resolve(),
+      commonjs(cjsOpt),
+      babel(babelrc),
+      progress(),
+      filesize(),
+      visualizer({
+        filename: 'module-stats.esm.html',
+        sourcemap: false, // Unminified to show core-js size
+      }),
+    ],
+    banner: `/* ${pkg.name} v${pkg.version} - ${dateformat(new Date(), 'yyyy-mm-dd')} */\n`
+  },
 ];

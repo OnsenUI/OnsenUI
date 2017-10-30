@@ -5,7 +5,7 @@
 </template>
 
 <script>
-  import 'onsenui/core-src/elements/ons-fab';
+  import 'onsenui/esm/elements/ons-fab';
   import { deriveEvents, hidable } from '../mixins';
 
   export default {

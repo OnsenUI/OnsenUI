@@ -5,7 +5,7 @@
 </template>
 
 <script>
-  import 'onsenui/core-src/elements/ons-alert-dialog-button';
+  import 'onsenui/esm/elements/ons-alert-dialog-button';
   import { deriveEvents } from '../mixins';
 
   export default {

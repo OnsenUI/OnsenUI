@@ -5,7 +5,7 @@
 </template>
 
 <script>
-  import 'onsenui/core-src/elements/ons-list-title';
+  import 'onsenui/esm/elements/ons-list-title';
   import { deriveEvents } from '../mixins';
 
   export default {

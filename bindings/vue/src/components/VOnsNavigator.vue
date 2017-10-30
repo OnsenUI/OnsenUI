@@ -7,8 +7,8 @@
 </template>
 
 <script>
-  import 'onsenui/core-src/elements/ons-navigator';
-  import ons from 'onsenui/core-src';
+  import 'onsenui/esm/elements/ons-navigator';
+  import ons from 'onsenui/esm';
   import { hasOptions, selfProvider, deriveEvents, deriveDBB } from '../mixins';
 
   export default {

@@ -15,7 +15,7 @@
 </template>
 
 <script>
-  import 'onsenui/core-src/elements/ons-alert-dialog';
+  import 'onsenui/esm/elements/ons-alert-dialog';
   import { hidable, hasOptions, dialogCancel, deriveEvents, deriveDBB, portal } from '../mixins';
 
   export default {

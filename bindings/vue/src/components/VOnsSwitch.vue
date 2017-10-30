@@ -5,7 +5,7 @@
 </template>
 
 <script>
-  import 'onsenui/core-src/elements/ons-switch';
+  import 'onsenui/esm/elements/ons-switch';
   import { deriveEvents, modelCheckbox } from '../mixins';
 
   export default {
