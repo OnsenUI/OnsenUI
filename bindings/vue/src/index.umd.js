@@ -1,7 +1,6 @@
+import ons from 'onsenui';
 import * as components from './components';
 import { hyphenate } from './internal/util';
-
-import ons from 'onsenui';
 
 const register = (Vue, type, items) => {
   Object.keys(items).forEach((key) => {
