@@ -1,5 +1,5 @@
 import setup from './setup.js'; // Add polyfills -- Must be first
-import ons from './ons/ons'; // Add ons internals
+import ons from './ons'; // Add ons internals
 
 // Add and register Custom Elements
 import './elements/ons-template';
@@ -54,5 +54,6 @@ import './elements/ons-toolbar-button';
 import './elements/ons-toolbar';
 
 setup(ons); // Setup initial listeners
+window._superSecretOns = ons;
 
 export default ons;

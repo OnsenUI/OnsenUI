@@ -11,7 +11,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import ons from '../ons/ons';
+import ons from '../ons';
 import BaseInputElement from './base/base-input';
 import contentReady from '../ons/content-ready';
 import util from '../ons/util';

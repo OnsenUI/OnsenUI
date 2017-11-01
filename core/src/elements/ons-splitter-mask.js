@@ -15,7 +15,7 @@ limitations under the License.
 
 */
 
-import ons from '../ons/ons';
+import ons from '../ons';
 import BaseElement from './base/base-element';
 import util from '../ons/util';
 import contentReady from '../ons/content-ready';

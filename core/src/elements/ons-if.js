@@ -15,7 +15,7 @@ limitations under the License.
 
 */
 
-import ons from '../ons/ons';
+import ons from '../ons';
 import orientation from '../ons/orientation';
 import platform from '../ons/platform';
 import BaseElement from './base/base-element';

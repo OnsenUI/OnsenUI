@@ -15,7 +15,7 @@ limitations under the License.
 
 */
 
-import ons from '../../ons/ons';
+import ons from '../../ons';
 import util from '../../ons/util';
 import platform from '../../ons/platform';
 import internal from '../../ons/internal';

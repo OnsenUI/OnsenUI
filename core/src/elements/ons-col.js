@@ -15,7 +15,7 @@ limitations under the License.
 
 */
 
-import ons from '../ons/ons';
+import ons from '../ons';
 import styler from '../ons/styler';
 import BaseElement from './base/base-element';
 

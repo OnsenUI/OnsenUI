@@ -523,5 +523,4 @@ function waitDeviceReady() {
 const getCS = 'currentScript' in document ? () => document.currentScript : () => document.scripts[document.scripts.length - 1];
 ons.getScriptPage = () => getCS() && /ons-page/i.test(getCS().parentElement.tagName) && getCS().parentElement || null;
 
-window._superSecretOns = ons;
 export default ons;

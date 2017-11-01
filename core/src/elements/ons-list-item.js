@@ -15,7 +15,7 @@ limitations under the License.
 
 */
 
-import ons from '../ons/ons';
+import ons from '../ons';
 import util from '../ons/util';
 import styler from '../ons/styler';
 import autoStyle from '../ons/autostyle';
