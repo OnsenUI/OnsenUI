@@ -13,13 +13,14 @@
   import { deriveEvents } from '../mixins';
 
   export default {
+    name: 'v-ons-pull-hook',
     mixins: [deriveEvents],
 
     props: {
       action: {
         type: Function
       },
-      onSwipe: {
+      onPull: {
         type: Function
       }
     }

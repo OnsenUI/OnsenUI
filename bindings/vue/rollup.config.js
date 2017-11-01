@@ -12,23 +12,27 @@ import progress from 'rollup-plugin-progress';
 import visualizer from 'rollup-plugin-visualizer';
 import vue from 'rollup-plugin-vue';
 
-const cjsOpt = { include: 'node_modules/**' };
 const babelrc = corePkg.babel;
 babelrc.babelrc = babelrc.presets[0][1].modules = false;
 babelrc.plugins = ['external-helpers'];
 // babelrc.plugins = ['external-helpers', 'transform-runtime'];
 // babelrc.runtimeHelpers = true;
 
+const globals = { 'onsenui/esm': 'ons' },
+  external = id => /onsenui/.test(id),
+  banner = `/* ${pkg.name} v${pkg.version} - ${dateformat(new Date(), 'yyyy-mm-dd')} */\n`;
+
 export default [
   // Vue bindings UMD
   {
     input: 'src/index.umd.js',
-    external: id => /onsenui/.test(id),
+    external,
     output: {
       file: 'dist/vue-onsenui.js',
       format: 'umd',
       name: 'vueOnsen',
-      globals: { 'onsenui/esm': 'ons' },
+      sourcemap: 'inline',
+      globals,
     },
     plugins: [
       eslint({
@@ -38,41 +42,38 @@ export default [
         ],
       }),
       resolve(),
-      commonjs(cjsOpt),
       vue(),
       babel(babelrc),
       progress(),
       filesize(),
       visualizer({
         filename: 'module-stats.umd.html',
-        sourcemap: false, // Shows minified sizes
+        sourcemap: true,
       }),
     ],
-    banner: `/* ${pkg.name} v${pkg.version} - ${dateformat(new Date(), 'yyyy-mm-dd')} */\n`
+    banner,
   },
 
   // Vue bindings ES Modules
   {
     input: 'src/index.esm.js',
-    external: id => /onsenui/.test(id),
+    external,
     output: {
       file: 'dist/esm/index.js',
       format: 'es',
       name: 'vueOnsenESM',
       sourcemap: false,
-      globals: { 'onsenui/esm': 'ons' },
+      globals,
     },
     plugins: [
-      resolve(),
-      commonjs(cjsOpt),
       babel(babelrc),
       progress(),
       filesize(),
       visualizer({
         filename: 'module-stats.esm.html',
-        sourcemap: false, // Unminified to show core-js size
+        sourcemap: false,
       }),
     ],
-    banner: `/* ${pkg.name} v${pkg.version} - ${dateformat(new Date(), 'yyyy-mm-dd')} */\n`
+    banner,
   },
 ];

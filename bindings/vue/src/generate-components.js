@@ -14,6 +14,7 @@ const generate = (baseName, baseMixins = '') => {
 </template>
 
 <script>
+  /* This file is generated automatically */
   import 'onsenui/esm/elements/${domElement}';
   import { ${mixins} } from '../mixins';
 

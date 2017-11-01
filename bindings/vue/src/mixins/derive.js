@@ -1,5 +1,5 @@
 import ons from 'onsenui/esm';
-import { capitalize, camelize, eventToHandler, handlerToProp } from '../internal/util';
+import { camelize, eventToHandler, handlerToProp } from '../internal/util';
 
 /* Private */
 const _setupDBB = component => {

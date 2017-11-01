@@ -1,12 +1,11 @@
 import { $ons } from './setup';
-import { hyphenate } from './internal/util';
 import * as components from './components';
 
 const install = (Vue, params = {}) => {
   /**
    * Register components of vue-onsenui.
    */
-  Object.keys(components).forEach(key => Vue.component(hyphenate(key), components[key]));
+  Object.values(components).forEach(c => Vue.component(c.name, c));
 
   /**
    * Expose ons object.

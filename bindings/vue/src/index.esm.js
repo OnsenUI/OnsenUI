@@ -4,7 +4,7 @@ const install = (Vue, params = {}) => {
   /**
    * Expose ons object.
    */
-  Vue.prototype.$ons = $ons
+  Vue.prototype.$ons = $ons;
 };
 
 export default {
