@@ -70,7 +70,7 @@ const watch = config => new Promise((resolve, reject) => {
 });
 
 gulp.task('core', () => bundle(rollupConfig['ons']));
-gulp.task('core-es', () => bundle(rollupConfig['onsES']));
+gulp.task('core-es', () => bundle(rollupConfig['onsESM']));
 gulp.task('angular-bindings', () => bundle(rollupConfig['angularOns']));
 
 gulp.task('watch-core', () => watch(rollupConfig['ons']));
