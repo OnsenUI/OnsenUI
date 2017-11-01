@@ -9,6 +9,7 @@
   import { hidable, deriveEvents } from '../mixins';
 
   export default {
+    name: 'v-ons-speed-dial',
     mixins: [deriveEvents, hidable],
 
     props: {

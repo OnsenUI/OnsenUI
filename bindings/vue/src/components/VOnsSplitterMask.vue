@@ -9,6 +9,7 @@
   import { deriveEvents } from '../mixins';
 
   export default {
+    name: 'v-ons-splitter-mask',
     mixins: [deriveEvents]
   };
 </script>

@@ -9,6 +9,7 @@
   import { deriveEvents, modelInput } from '../mixins';
 
   export default {
+    name: 'v-ons-range',
     mixins: [deriveEvents, modelInput]
   };
 </script>

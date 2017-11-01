@@ -9,6 +9,7 @@
   import { deriveEvents, hidable, hasOptions, deriveDBB, portal } from '../mixins';
 
   export default {
+    name: 'v-ons-modal',
     mixins: [deriveEvents, hidable, hasOptions, deriveDBB, portal]
   };
 </script>

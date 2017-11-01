@@ -8,6 +8,8 @@ import 'onsenui/esm/elements/ons-lazy-repeat';
 import ons from 'onsenui/esm';
 
 export default {
+  name: 'v-ons-lazy-repeat',
+
   props: {
     renderItem: {
       type: Function,

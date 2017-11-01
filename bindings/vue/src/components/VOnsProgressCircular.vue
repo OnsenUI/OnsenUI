@@ -9,6 +9,7 @@
   import { deriveEvents } from '../mixins';
 
   export default {
+    name: 'v-ons-progress-circular',
     mixins: [deriveEvents]
   };
 </script>

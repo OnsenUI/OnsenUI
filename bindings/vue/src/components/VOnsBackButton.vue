@@ -8,6 +8,7 @@
   import 'onsenui/esm/elements/ons-back-button';
 
   export default {
+    name: 'v-ons-back-button',
     inject: ['navigator'],
 
     methods: {

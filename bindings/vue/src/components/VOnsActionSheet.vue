@@ -9,6 +9,7 @@
   import { deriveEvents, hidable, hasOptions, dialogCancel, deriveDBB, portal } from '../mixins';
 
   export default {
+    name: 'v-ons-action-sheet',
     mixins: [deriveEvents, hidable, hasOptions, dialogCancel, deriveDBB, portal]
   };
 </script>

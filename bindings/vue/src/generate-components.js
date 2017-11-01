@@ -18,6 +18,7 @@ const generate = (baseName, baseMixins = '') => {
   import { ${mixins} } from '../mixins';
 
   export default {
+    name: 'v-${domElement}',
     mixins: [${mixins}]
   };
 </script>

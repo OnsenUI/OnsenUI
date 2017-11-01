@@ -9,6 +9,7 @@
   import { deriveEvents, selfProvider, deriveDBB } from '../mixins';
 
   export default {
+    name: 'v-ons-splitter',
     mixins: [deriveEvents, selfProvider, deriveDBB]
   };
 </script>

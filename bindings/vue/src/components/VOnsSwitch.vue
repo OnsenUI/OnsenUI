@@ -9,6 +9,7 @@
   import { deriveEvents, modelCheckbox } from '../mixins';
 
   export default {
+    name: 'v-ons-switch',
     mixins: [deriveEvents, modelCheckbox]
   };
 </script>

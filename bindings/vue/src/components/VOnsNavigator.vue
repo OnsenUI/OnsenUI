@@ -12,6 +12,7 @@
   import { hasOptions, selfProvider, deriveEvents, deriveDBB } from '../mixins';
 
   export default {
+    name: 'v-ons-navigator',
     mixins: [hasOptions, selfProvider, deriveEvents, deriveDBB],
 
     props: {

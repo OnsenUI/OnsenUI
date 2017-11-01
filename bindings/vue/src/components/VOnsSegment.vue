@@ -9,6 +9,7 @@
   import { deriveEvents } from '../mixins';
 
   export default {
+    name: 'v-ons-segment',
     mixins: [deriveEvents],
 
     props: {

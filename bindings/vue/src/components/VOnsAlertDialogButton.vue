@@ -9,6 +9,7 @@
   import { deriveEvents } from '../mixins';
 
   export default {
+    name: 'v-ons-alert-dialog-button',
     mixins: [deriveEvents]
   };
 </script>

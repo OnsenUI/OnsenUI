@@ -17,6 +17,7 @@
   import { hasOptions, deriveEvents } from '../mixins';
 
   export default {
+    name: 'v-ons-carousel',
     mixins: [hasOptions, deriveEvents],
 
     props: {

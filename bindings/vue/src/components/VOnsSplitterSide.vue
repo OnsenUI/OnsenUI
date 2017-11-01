@@ -9,6 +9,7 @@
   import { hasOptions, deriveEvents } from '../mixins';
 
   export default {
+    name: 'v-ons-splitter-side',
     mixins: [hasOptions, deriveEvents],
 
     props: {

@@ -11,6 +11,7 @@
   import { modelInput } from '../mixins';
 
   export default {
+    name: 'v-ons-select',
     mixins: [modelInput]
   };
 </script>

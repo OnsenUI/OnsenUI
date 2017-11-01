@@ -9,6 +9,7 @@
   import { deriveEvents, hidable } from '../mixins';
 
   export default {
+    name: 'v-ons-fab',
     mixins: [deriveEvents, hidable]
   };
 </script>
