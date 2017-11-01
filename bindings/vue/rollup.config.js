@@ -41,7 +41,7 @@ export default [
           'src/**/*.vue',
         ],
       }),
-      resolve(),
+      resolve({ extensions: ['.js', '.vue'] }),
       vue(),
       babel(babelrc),
       progress(),
@@ -59,7 +59,7 @@ export default [
     input: 'src/index.esm.js',
     external,
     output: {
-      file: 'dist/esm/index.js',
+      file: 'esm/index.js',
       format: 'es',
       name: 'vueOnsenESM',
       sourcemap: false,
