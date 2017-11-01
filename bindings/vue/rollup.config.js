@@ -15,8 +15,6 @@ import vue from 'rollup-plugin-vue';
 const babelrc = corePkg.babel;
 babelrc.babelrc = babelrc.presets[0][1].modules = false;
 babelrc.plugins = ['external-helpers'];
-// babelrc.plugins = ['external-helpers', 'transform-runtime'];
-// babelrc.runtimeHelpers = true;
 
 const globals = { 'onsenui/esm': 'ons' },
   external = id => /onsenui/.test(id),
@@ -62,7 +60,7 @@ export default [
       file: 'esm/index.js',
       format: 'es',
       name: 'vueOnsenESM',
-      sourcemap: false,
+      sourcemap: 'inline',
       globals,
     },
     plugins: [

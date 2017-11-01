@@ -13,8 +13,11 @@ module.exports = {
   },
   resolve: {
     alias: {
-      'vue-onsenui': path.join(__dirname, 'src'),
-      'onsenui': path.join(__dirname, '..', '..', 'build', 'js', 'onsenui'),
+      // 'vue-onsenui': path.join(__dirname, 'src', 'index.umd.js'),
+      'onsenui$': path.join(__dirname, '..', '..', 'build', 'js', 'onsenui'),
+      'vue-onsenui$': path.join(__dirname, 'dist', 'vue-onsenui'),
+      'vue-onsenui': path.resolve(__dirname),
+      'onsenui': path.join(__dirname, '..', '..', 'build'),
       'vue$': 'vue/dist/vue.common.js'
     }
   },

@@ -1,11 +1,11 @@
 import 'babel-polyfill';
 
+import corePkg from '../../package.json';
 import gulp from 'gulp';
 import * as glob from 'glob';
 import path from'path';
 import {merge} from 'event-stream';
 import runSequence from 'run-sequence';
-import shell from 'gulp-shell';
 import WebpackDevServer from 'webpack-dev-server';
 import open from 'open';
 import os from 'os';
@@ -14,11 +14,65 @@ import fse from 'fs-extra';
 import yargs, {argv} from 'yargs';
 import {spawn} from 'child_process';
 import WebdriverIOLauncher from 'webdriverio/build/lib/launcher';
-import StaticServer from 'static-server';
+import { rollup, watch as rollupWatch } from 'rollup';
+import rawBundleConfig from './rollup.config.js';
 
+process.env.NODE_ENV = 'production'; // Important when bundling/transpiling
+
+const rollupConfig = rawBundleConfig.reduce((r, c) => (r[c.output.name] = c) && r, {})
 const $ = require('gulp-load-plugins')();
 
 const FLAGS = `--inline --colors --progress --display-error-details --display-cached`;
+
+////////////////////////////////////////
+// vue-bindings
+////////////////////////////////////////
+const bundle = config => rollup(config).then(bundle => bundle.write(config.output));
+
+gulp.task('vue-bindings', () => bundle(rollupConfig['vueOnsen']));
+gulp.task('vue-bindings-esm-bundle', () => bundle(rollupConfig['vueOnsenESM']));
+gulp.task('vue-bindings-esm', ['vue-bindings-esm-bundle'], () =>  {
+  const babelrc = corePkg.babel;
+  babelrc.babelrc = babelrc.presets[0][1].modules = false;
+  babelrc.plugins = [
+    'external-helpers',
+    'transform-runtime',
+  ];
+
+  // ES Modules (transpiled ES source codes)
+  return merge(
+    gulp.src([
+      'src/**/*.js',
+      '!src/*.js',
+    ])
+    .pipe($.babel(babelrc))
+    .pipe(gulp.dest('esm/')),
+
+    // Compile Vue components
+    gulp.src([
+      'src/**/*.vue',
+    ])
+    .pipe($.vueCompiler({
+      babel: babelrc,
+      newExtension: 'js',
+    }))
+    .pipe(gulp.dest('esm/'))
+
+  );
+});
+
+gulp.task('clean', () => gulp.src([ 'dist', 'esm', ], { read: false }).pipe($.clean()));
+gulp.task('minify-js', () => {
+  return gulp.src('dist/vue-onsenui.js')
+    .pipe($.uglify({ output: { comments: (node, comment) => comment.line === 1 } }))
+    .pipe($.rename(path => path.extname = '.min.js'))
+    .pipe(gulp.dest('dist/'));
+});
+
+gulp.task('build', done => {
+  return runSequence('clean', 'vue-bindings', 'vue-bindings-esm', 'minify-js', done);
+});
+
 
 // Build docs by running the parent gulpfile.
 //
@@ -51,7 +105,7 @@ gulp.task('build:core-docs', (done) => {
 //    tells
 //    (1) what tags exist in `vue-onsenui`
 //    (2) the allowed attributes and the description of each tag.
-// `vue-onsenui-attributes.json` 
+// `vue-onsenui-attributes.json`
 //    tells the type, the description and the allowed values of each attribute.
 //
 // Their schemas are defined in the corresponding tag provider in vuejs/vetur.
@@ -351,7 +405,7 @@ async function runWebdriverIO(standaloneSeleniumServer) {
       }
     } finally {
       global.WDIO_BROWSER = undefined;
-      
+
       standaloneSeleniumServer.kill(); // kill standalone Selenium server
     }
 

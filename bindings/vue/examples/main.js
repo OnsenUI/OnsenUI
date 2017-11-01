@@ -6,9 +6,7 @@ import '../../../build/css/onsen-css-components.css';
 import VueOnsen from 'vue-onsenui';
 
 import * as examples from './components';
-Vue.use(VueOnsen, {
-	components: { ...examples }
-});
+Vue.use(VueOnsen);
 
 const mainList = {
   template: `
