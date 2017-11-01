@@ -8,6 +8,7 @@ dev
 ### New Features
 
  * css-components: Added `--tap-highlight-color` variable for `-webkit-tap-highlight-color` CSS property.
+ * ons-bottom-toolbar: Added `aligned` modifier.
 
 2.7.0
 ----
