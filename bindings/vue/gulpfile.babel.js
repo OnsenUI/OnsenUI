@@ -25,7 +25,7 @@ const $ = require('gulp-load-plugins')();
 const FLAGS = `--inline --colors --progress --display-error-details --display-cached`;
 
 ////////////////////////////////////////
-// vue-bindings
+// BUILD vue-bindings
 ////////////////////////////////////////
 const bundle = config => rollup(config).then(bundle => bundle.write(config.output));
 
@@ -62,6 +62,7 @@ gulp.task('vue-bindings-esm', ['vue-bindings-esm-bundle'], () =>  {
 });
 
 gulp.task('clean', () => gulp.src([ 'dist', 'esm', ], { read: false }).pipe($.clean()));
+
 gulp.task('minify-js', () => {
   return gulp.src('dist/vue-onsenui.js')
     .pipe($.uglify({ output: { comments: (node, comment) => comment.line === 1 } }))
@@ -70,8 +71,35 @@ gulp.task('minify-js', () => {
 });
 
 gulp.task('build', done => {
-  return runSequence('clean', 'vue-bindings', 'vue-bindings-esm', 'minify-js', done);
+  return runSequence('clean', 'vue-bindings', 'vue-bindings-esm', 'minify-js', 'build:helper-json', done);
 });
+
+////////////////////////////////////////
+// WATCH vue-bindings
+////////////////////////////////////////
+gulp.task('watch-vue-bindings', () => {
+  return new Promise((resolve, reject) => rollupWatch(rawBundleConfig.devConfig).on('event', event => {
+    switch (event.code) {
+      case 'BUNDLE_START':
+        $.util.log(`Bundling ${$.util.colors.blue(path.basename(event.output[0]))} ...`);
+        break;
+      case 'BUNDLE_END':
+        $.util.log(`Finished ${$.util.colors.blue(path.basename(event.output[0]))} bundle`);
+        resolve();
+        break;
+      case 'ERROR':
+        $.util.log($.util.colors.red('Encountered an error while bundling\n', event.error));
+        resolve();
+        break;
+      case 'FATAL':
+        $.util.log($.util.colors.red('Encountered an unrecoverable error\n\n', event.error));
+        reject();
+        process.exit(1);
+        break;
+    }
+  }));
+});
+
 
 ////////////////////////////////////////
 // generate-components
@@ -318,13 +346,6 @@ gulp.task('build:helper-json', ['build:core-docs'], (done) => {
   );
 
   done();
-});
-
-gulp.task('serve', done => {
-  createDevServer('./webpack.config.js').listen('3030', '0.0.0.0', () => {
-    open('http://0.0.0.0:3030/index.html');
-    done();
-  });
 });
 
 gulp.task('test', ['e2e-test']);
