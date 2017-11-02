@@ -13,8 +13,8 @@
 (function() {
   'use strict';
 
-  var lastReady = window.ons.SplitterContentElement.rewritables.ready;
-  window.ons.SplitterContentElement.rewritables.ready = ons._waitDiretiveInit('ons-splitter-content', lastReady);
+  var lastReady = window.ons.elements.SplitterContent.rewritables.ready;
+  window.ons.elements.SplitterContent.rewritables.ready = ons._waitDiretiveInit('ons-splitter-content', lastReady);
 
   angular.module('onsen').directive('onsSplitterContent', function($compile, SplitterContent, $onsen) {
     return {

@@ -120,8 +120,8 @@
 (function() {
   'use strict';
 
-  var lastReady = window.ons.TabbarElement.rewritables.ready;
-  window.ons.TabbarElement.rewritables.ready = ons._waitDiretiveInit('ons-tabbar', lastReady);
+  var lastReady = window.ons.elements.Tabbar.rewritables.ready;
+  window.ons.elements.Tabbar.rewritables.ready = ons._waitDiretiveInit('ons-tabbar', lastReady);
 
   angular.module('onsen').directive('onsTabbar', function($onsen, $compile, $parse, TabbarView) {
 

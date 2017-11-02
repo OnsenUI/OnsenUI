@@ -20,10 +20,6 @@ limitations under the License.
 
   var module = angular.module('onsen');
 
-  module.value('TabbarNoneAnimator', ons._internal.TabbarNoneAnimator);
-  module.value('TabbarFadeAnimator', ons._internal.TabbarFadeAnimator);
-  module.value('TabbarSlideAnimator', ons._internal.TabbarSlideAnimator);
-
   module.factory('TabbarView', function($onsen) {
     var TabbarView = Class.extend({
 
@@ -35,8 +31,6 @@ limitations under the License.
         this._scope = scope;
         this._element = element;
         this._attrs = attrs;
-        this._lastPageElement = null;
-        this._lastPageScope = null;
 
         this._scope.$on('$destroy', this._destroy.bind(this));
 
@@ -46,9 +40,10 @@ limitations under the License.
 
         this._clearDerivingMethods = $onsen.deriveMethods(this, element[0], [
           'setActiveTab',
+          'show',
+          'hide',
           'setTabbarVisibility',
           'getActiveTabIndex',
-          'loadPage'
         ]);
       },
 
@@ -62,10 +57,6 @@ limitations under the License.
       }
     });
     MicroEvent.mixin(TabbarView);
-
-    TabbarView.registerAnimator = function(name, Animator) {
-      return window.ons.TabbarElement.registerAnimator(name, Animator);
-    };
 
     return TabbarView;
   });
