@@ -1,6 +1,7 @@
 import './ons/platform'; // This file must be loaded before Custom Elements polyfills.
 import './polyfills/index.js';
 import './vendor/index.js';
+import './ons/microevent.js';
 
 export default function(ons) {
   if (window.ons) {
