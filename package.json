@@ -21,7 +21,7 @@
   ],
   "scripts": {
     "build": "gulp build",
-    "dev": "gulp serve",
+    "dev": "gulp serve --css --core",
     "test": "gulp test --disable-warnings",
     "test:skip-build": "gulp test --disable-warnings --skip-build"
   },

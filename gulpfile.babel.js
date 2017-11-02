@@ -41,6 +41,7 @@ import rawBundleConfig from './rollup.config.js';
 const rollupConfig = rawBundleConfig.reduce((r, c) => (r[c.output.name] = c) && r, {})
 const $ = gulpLoadPlugins();
 $.hub(['./css-components/gulpfile.js']); // adds 'build-css', 'css-clean' and 'cssnext' tasks
+$.hub(['./bindings/vue/gulpfile.babel.js']);
 
 ////////////////////////////////////////
 // bundles
@@ -73,10 +74,11 @@ gulp.task('core', () => bundle(rollupConfig['ons']));
 gulp.task('core-es', () => bundle(rollupConfig['onsESM']));
 gulp.task('angular-bindings', () => bundle(rollupConfig['angularOns']));
 
-gulp.task('watch-core', () => watch(rollupConfig['ons']));
+gulp.task('watch-core', ['core-css'], () => {
+  gulp.watch(['core/css/*.css'], { debounceDelay: 300 }, ['core-css']);
+  return watch(rollupConfig['ons']);
+});
 gulp.task('watch-angular-bindings', () => watch(rollupConfig['angularOns']));
-gulp.task('watch-bundles', () => watch(rollupConfig['ons']).then(() => watch(rollupConfig['angularOns'])));
-
 
 ////////////////////////////////////////
 // core-dts-test
@@ -217,7 +219,7 @@ gulp.task('core-dts-test', (argv['skip-build'] ? [] : ['core']), (done) => {
 ////////////////////////////////////////
 // unit-test
 ////////////////////////////////////////
-gulp.task('unit-test', argv['skip-build'] ? [] : ['core-css', (argv.watch ? 'watch-core' : 'core')],
+gulp.task('unit-test', argv['skip-build'] ? [] : (argv.watch ? ['watch-core'] : ['core-css', 'core']),
   (done) => {
     // Usage:
     //     # run all unit tests in just one Karma server
@@ -361,10 +363,11 @@ gulp.task('minify-js', () => {
 // core-css
 ////////////////////////////////////////
 gulp.task('core-css', () =>  {
-  return merge(gulp.src([
-    'core/css/common.css',
-    'core/css/*.css'
-  ])
+  return merge(
+    gulp.src([
+      'core/css/common.css',
+      'core/css/*.css'
+    ])
     .pipe($.concat('onsenui.css'))
     .pipe($.autoprefixer({
       browsers: [ // enable CSS properties which require prefixes
@@ -529,8 +532,6 @@ gulp.task('dist-no-build', distFiles);
 ////////////////////////////////////////
 
 gulp.task('serve', done => {
-  gulp.watch(['core/css/*.css'], { debounceDelay: 300 }, ['core-css']);
-
   // Livereload
   gulp.watch([
     'build/js/*onsenui.js',
@@ -538,22 +539,38 @@ gulp.task('serve', done => {
     'build/css/onsenui.css',
     'examples/*/*.{js,css,html}',
     'bindings/angular1/test/e2e/*/*.{js,css,html}',
+    'bindings/angular1/examples/**/*.{js,css,html}',
+    'bindings/vue/examples/build.js',
   ]).on('change', changedFile => {
     gulp.src(changedFile.path)
       .pipe(browserSync.reload({stream: true, once: true}));
   });
 
-  return runSequence('css-clean', ['cssnext', 'core-css'], 'watch-bundles', 'browser-sync', done);
+  const tasks = [];
+  argv.css && tasks.push('css-clean', 'cssnext');
+  argv.core && tasks.push('watch-core');
+  (argv.angular || argv.angular1) && tasks.push('watch-angular-bindings');
+  argv.vue && tasks.push('watch-vue-bindings');
+  tasks.push('browser-sync', done);
+
+  return runSequence(...tasks);
 });
 
 gulp.task('browser-sync', (done) => {
+  const startPath =
+    argv.vue && '/bindings/vue/examples/index.html'
+    // argv.react && '/bindings/react/demo/index.html'
+    || (argv.angular || argv.angular1) && '/bindings/angular1/examples/'
+    // || (argv.ngx || argv.angular2) && '/bindings/angular2/.../'
+    || '/examples/';
+
   browserSync({
     server: {
       baseDir: __dirname,
       index: 'index.html',
       directory: true
     },
-    startPath: '/examples/',
+    startPath,
     files: [],
     watchOptions: {
       //debounceDelay: 400
