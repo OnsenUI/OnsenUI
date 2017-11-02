@@ -5,6 +5,7 @@
 </template>
 
 <script>
+  /* This file is generated automatically */
   import 'onsenui/esm/elements/ons-action-sheet';
   import { deriveEvents, hidable, hasOptions, dialogCancel, deriveDBB, portal } from '../mixins';
 

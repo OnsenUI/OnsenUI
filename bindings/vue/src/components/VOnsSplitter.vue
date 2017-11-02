@@ -5,6 +5,7 @@
 </template>
 
 <script>
+  /* This file is generated automatically */
   import 'onsenui/esm/elements/ons-splitter';
   import { deriveEvents, selfProvider, deriveDBB } from '../mixins';
 

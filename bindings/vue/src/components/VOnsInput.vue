@@ -5,6 +5,7 @@
 </template>
 
 <script>
+  /* This file is generated automatically */
   import 'onsenui/esm/elements/ons-input';
   import { deriveEvents, modelInput } from '../mixins';
 

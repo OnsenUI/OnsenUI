@@ -5,6 +5,7 @@
 </template>
 
 <script>
+  /* This file is generated automatically */
   import 'onsenui/esm/elements/ons-modal';
   import { deriveEvents, hidable, hasOptions, deriveDBB, portal } from '../mixins';
 

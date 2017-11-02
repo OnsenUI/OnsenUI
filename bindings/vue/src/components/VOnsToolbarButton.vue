@@ -5,6 +5,7 @@
 </template>
 
 <script>
+  /* This file is generated automatically */
   import 'onsenui/esm/elements/ons-toolbar-button';
   import { deriveEvents } from '../mixins';
 
