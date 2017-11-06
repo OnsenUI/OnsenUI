@@ -67,7 +67,7 @@ gulp.task('minify-js', () => {
 });
 
 gulp.task('build', done => {
-  return runSequence('clean', 'vue-bindings', 'vue-bindings-esm', 'minify-js', 'build:helper-json', done);
+  return runSequence('clean', 'vue-bindings', 'vue-bindings-esm', 'minify-js', done);
 });
 
 ////////////////////////////////////////
@@ -176,31 +176,6 @@ gulp.task('generate-components', () => {
   });
 });
 
-// Build docs by running the parent gulpfile.
-//
-// We need the files in `build/docs/` in the project root
-// to generate tags data and attributes data of `vue-onsenui` components.
-gulp.task('build:core-docs', (done) => {
-  console.log('Running parent gulpfile...');
-  spawn('node_modules/.bin/gulp', ['build-docs'],
-    {
-      cwd: path.join(__dirname, '..', '..'), // exec in the project root
-      stdio: 'inherit', // redirect stdio/stdout/stderr to this process
-    }
-  )
-  .on('error', function (error) {
-      done(new Error(error.message));
-  })
-  .on('exit', function(code) {
-    if (code !== 0) {
-      done(new Error('gulp exited with code ' + code));
-    } else {
-      console.log('Done.');
-      done();
-    }
-  });
-});
-
 // Build tags and attribute data files required for `vue-onsenui-helper-json`.
 //
 // `vue-onsenui-tags.json`
@@ -211,7 +186,7 @@ gulp.task('build:core-docs', (done) => {
 //    tells the type, the description and the allowed values of each attribute.
 //
 // Their schemas are defined in the corresponding tag provider in vuejs/vetur.
-gulp.task('build:helper-json', ['build:core-docs'], (done) => {
+gulp.task('build:helper-json', (done) => {
   const extractEnglishDescription = (description) => {
     // Extract inner characters of [en][/en]
     let match;
