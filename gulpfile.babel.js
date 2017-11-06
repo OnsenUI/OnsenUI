@@ -49,12 +49,13 @@ $.hub(['./bindings/vue/gulpfile.babel.js']);
 const bundle = config => rollup(config).then(bundle => bundle.write(config.output));
 const watch = config => new Promise((resolve, reject) => {
   rollupWatch(config).on('event', event => {
+    const filename = event.output && $.util.colors.cyan(path.basename(event.output[0]));
     switch (event.code) {
       case 'BUNDLE_START':
-        $.util.log(`Bundling ${$.util.colors.blue(path.basename(event.output[0]))} ...`);
+        $.util.log(`Bundling '${filename}' ...`);
         break;
       case 'BUNDLE_END':
-        $.util.log(`Finished ${$.util.colors.blue(path.basename(event.output[0]))} bundle`);
+        $.util.log(`Finished '${filename}' bundle`);
         resolve();
         break;
       case 'ERROR':
