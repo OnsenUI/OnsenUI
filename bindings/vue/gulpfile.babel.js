@@ -59,15 +59,8 @@ gulp.task('vue-bindings-esm', ['vue-bindings-esm-bundle'], () =>  {
 
 gulp.task('clean', () => gulp.src([ 'dist', 'esm', ], { read: false }).pipe($.clean()));
 
-gulp.task('minify-js', () => {
-  return gulp.src('dist/vue-onsenui.js')
-    .pipe($.uglify({ output: { comments: (node, comment) => comment.line === 1 } }))
-    .pipe($.rename(path => path.extname = '.min.js'))
-    .pipe(gulp.dest('dist/'));
-});
-
 gulp.task('build', done => {
-  return runSequence('clean', 'vue-bindings', 'vue-bindings-esm', 'minify-js', done);
+  return runSequence('clean', 'vue-bindings', 'vue-bindings-esm', done);
 });
 
 ////////////////////////////////////////
