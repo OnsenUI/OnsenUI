@@ -65,16 +65,19 @@
   "homepage": "https://onsen.io/",
   "babel": {
     "presets": [
-      ["env", {
-        "targets": {
-          "browsers": [
-            "iOS >= 8",
-            "Android >= 4.4.4",
-            "> 1%",
-            "last 2 versions"
-          ]
+      [
+        "env",
+        {
+          "targets": {
+            "browsers": [
+              "iOS >= 8",
+              "Android >= 4.4.4",
+              "> 1%",
+              "last 2 versions"
+            ]
+          }
         }
-      }],
+      ],
       "stage-3"
     ]
   },

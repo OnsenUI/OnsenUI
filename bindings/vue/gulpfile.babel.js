@@ -71,34 +71,6 @@ gulp.task('build', done => {
 });
 
 ////////////////////////////////////////
-// WATCH vue-bindings
-////////////////////////////////////////
-gulp.task('watch-vue-bindings', () => {
-  return new Promise((resolve, reject) => rollupWatch(rawBundleConfig.devConfig).on('event', event => {
-    const filename = event.output && $.util.colors.cyan('bindings/vue/examples/' +  path.basename(event.output[0]));
-    switch (event.code) {
-      case 'BUNDLE_START':
-        $.util.log(`Bundling '${filename}' ...`);
-        break;
-      case 'BUNDLE_END':
-        $.util.log(`Finished '${filename}' bundle`);
-        resolve();
-        break;
-      case 'ERROR':
-        $.util.log($.util.colors.red('Encountered an error while bundling\n', event.error));
-        resolve();
-        break;
-      case 'FATAL':
-        $.util.log($.util.colors.red('Encountered an unrecoverable error\n\n', event.error));
-        reject();
-        process.exit(1);
-        break;
-    }
-  }));
-});
-
-
-////////////////////////////////////////
 // generate-components
 ////////////////////////////////////////
 gulp.task('generate-components', () => {

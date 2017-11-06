@@ -36,20 +36,29 @@ import WebdriverIOLauncher from 'webdriverio/build/lib/launcher';
 import chalk from 'chalk';
 import { rollup, watch as rollupWatch } from 'rollup';
 import gulpLoadPlugins from 'gulp-load-plugins';
-import rawBundleConfig from './rollup.config.js';
+import rawCoreRollupConfig from './rollup.config.js';
 
-const rollupConfig = rawBundleConfig.reduce((r, c) => (r[c.output.name] = c) && r, {})
+const rollupConfigs = rawCoreRollupConfig.reduce((r, c) => (r[c.output.name] = c) && r, {})
+
 const $ = gulpLoadPlugins();
 $.hub(['./css-components/gulpfile.js']); // adds 'build-css', 'css-clean' and 'cssnext' tasks
-$.hub(['./bindings/vue/gulpfile.babel.js']);
+// $.hub(['./bindings/vue/gulpfile.babel.js']);
 
 ////////////////////////////////////////
 // bundles
 ////////////////////////////////////////
 const bundle = config => rollup(config).then(bundle => bundle.write(config.output));
+
+gulp.task('core', () => bundle(rollupConfigs.ons));
+gulp.task('core-es', () => bundle(rollupConfigs.onsESM));
+gulp.task('angular-bindings', () => bundle(rollupConfigs.angularOns));
+
+////////////////////////////////////////
+// watch
+////////////////////////////////////////
 const watch = config => new Promise((resolve, reject) => {
   rollupWatch(config).on('event', event => {
-    const filename = event.output && $.util.colors.cyan(path.basename(event.output[0]));
+    const filename = event.output && $.util.colors.cyan(path.relative(__dirname, event.output[0]));
     switch (event.code) {
       case 'BUNDLE_START':
         $.util.log(`Bundling '${filename}' ...`);
@@ -71,15 +80,15 @@ const watch = config => new Promise((resolve, reject) => {
   });
 });
 
-gulp.task('core', () => bundle(rollupConfig['ons']));
-gulp.task('core-es', () => bundle(rollupConfig['onsESM']));
-gulp.task('angular-bindings', () => bundle(rollupConfig['angularOns']));
-
 gulp.task('watch-core', ['core-css'], () => {
   gulp.watch(['core/css/*.css'], { debounceDelay: 300 }, ['core-css']);
-  return watch(rollupConfig['ons']);
+  return watch(rollupConfigs.ons);
 });
-gulp.task('watch-angular-bindings', () => watch(rollupConfig['angularOns']));
+gulp.task('watch-angular-bindings', () => watch(rollupConfigs.angularOns));
+gulp.task('watch-vue-bindings', () => {
+  const vueConfig = require('./bindings/vue/rollup.config.js').default.devConfig;
+  return watch(vueConfig);
+});
 
 ////////////////////////////////////////
 // core-dts-test
