@@ -476,11 +476,10 @@ gulp.task('compress-distribution-package', () => {
     path.join(__dirname, 'build/**'),
     path.join(__dirname, 'LICENSE'),
     path.join(__dirname, 'CHANGELOG.md'),
+    path.join(__dirname, 'bindings/*/esm/**'),
     path.join(__dirname, 'bindings/*/dist/**'),
     '!' + path.join(__dirname, 'build/docs/**'),
     '!' + path.join(__dirname, 'build/docs'),
-    '!' + path.join(__dirname, 'build/js/angular/**'),
-    '!' + path.join(__dirname, 'build/js/angular')
   ];
 
   return gulp.src(src)

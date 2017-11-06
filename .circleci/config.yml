@@ -36,23 +36,6 @@ jobs:
           paths:
             - ./css-components/node_modules
 
-      # OnsenUI
-      - restore_cache:
-          keys:
-            - v1-onsenui-cache-{{ .Branch }}-{{ checksum "yarn.lock" }}
-            - v1-onsenui-cache-{{ .Branch }}-
-            - v1-onsenui-cache-
-      - run:
-          name: Install dependencies
-          command: yarn install --pure-lockfile
-      - save_cache:
-          key: v1-onsenui-cache-{{ .Branch }}-{{ checksum "yarn.lock" }}
-          paths:
-            - ./node_modules
-      - run:
-          name: gulp build
-          command: gulp build
-
       # bindings/angular2
       - restore_cache:
           keys:
@@ -101,6 +84,24 @@ jobs:
           paths:
             - ./bindings/vue/node_modules
 
+      # OnsenUI
+      - restore_cache:
+          keys:
+            - v1-onsenui-cache-{{ .Branch }}-{{ checksum "yarn.lock" }}
+            - v1-onsenui-cache-{{ .Branch }}-
+            - v1-onsenui-cache-
+      - run:
+          name: Install dependencies
+          command: yarn install --pure-lockfile
+      - save_cache:
+          key: v1-onsenui-cache-{{ .Branch }}-{{ checksum "yarn.lock" }}
+          paths:
+            - ./node_modules
+      - run:
+          name: gulp build
+          command: gulp build
+
+      # Tests
       - run:
           name: Run OnsenUI Tests
           command: npm run test:skip-build
@@ -110,6 +111,7 @@ jobs:
       - run: cd bindings/react; npm test
       - run: cd bindings/react; npm run build
       - run: cd bindings/vue; npm test
+      - run: cd bindings/vue; npm run build
       - run:
           name: Save test results
           command: |
