@@ -38,7 +38,6 @@ import Util from './Util.js';
  */
 
 class SplitterSide extends BasicComponent {
-
   constructor(...args) {
     super(...args);
 

@@ -28,7 +28,7 @@ class Checkbox extends BaseInput {
 }
 
 Checkbox.propTypes = {
-    /**
+  /**
    * @name modifier
    * @type string
    * @required false

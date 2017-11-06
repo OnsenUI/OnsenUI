@@ -85,10 +85,8 @@ gulp.task('watch-core', ['core-css'], () => {
   return watch(rollupConfigs.ons);
 });
 gulp.task('watch-angular-bindings', () => watch(rollupConfigs.angularOns));
-gulp.task('watch-vue-bindings', () => {
-  const vueConfig = require('./bindings/vue/rollup.config.js').default.devConfig;
-  return watch(vueConfig);
-});
+gulp.task('watch-vue-bindings', () => watch(require('./bindings/vue/rollup.config.js').default.devConfig));
+gulp.task('watch-react-bindings', () => watch(require('./bindings/react/rollup.config.js').default.devConfig));
 
 ////////////////////////////////////////
 // core-dts-test
@@ -559,6 +557,7 @@ gulp.task('serve', done => {
   argv.css && tasks.push('css-clean', 'cssnext');
   argv.core && tasks.push('watch-core');
   (argv.angular || argv.angular1) && tasks.push('watch-angular-bindings');
+  argv.react && tasks.push('watch-react-bindings');
   argv.vue && tasks.push('watch-vue-bindings');
   tasks.push('browser-sync', done);
 
@@ -568,7 +567,7 @@ gulp.task('serve', done => {
 gulp.task('browser-sync', (done) => {
   const startPath =
     argv.vue && '/bindings/vue/examples/index.html'
-    // argv.react && '/bindings/react/demo/index.html'
+    || argv.react && '/bindings/react/examples/index.html'
     || (argv.angular || argv.angular1) && '/bindings/angular1/examples/'
     // || (argv.ngx || argv.angular2) && '/bindings/angular2/.../'
     || '/examples/';
