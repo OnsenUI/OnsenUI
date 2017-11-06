@@ -109,9 +109,7 @@ jobs:
       - run: cd bindings/angular1; gulp e2e-test # bindings/angular1 has no package.json.
       - run: cd bindings/angular2; npm test
       - run: cd bindings/react; npm test
-      - run: cd bindings/react; npm run build
       - run: cd bindings/vue; npm test
-      - run: cd bindings/vue; npm run build
       - run:
           name: Save test results
           command: |
