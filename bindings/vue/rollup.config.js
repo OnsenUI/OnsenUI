@@ -16,6 +16,8 @@ import alias from 'rollup-plugin-alias';
 import vue from 'rollup-plugin-vue';
 import execute from 'rollup-plugin-execute';
 
+const local = (...args) => path.resolve(__dirname, ...args);
+
 const babelrc = corePkg.babel;
 babelrc.babelrc = babelrc.presets[0][1].modules = false;
 babelrc.plugins = ['external-helpers'];
@@ -83,9 +85,9 @@ const builds = [
 
 // Make it work with rollup CLI and Gulp
 builds.devConfig = {
-  input: path.resolve(__dirname, 'examples/main.js'),
+  input: local('examples/main.js'),
   output: {
-    file: path.resolve(__dirname, 'examples/build.js'),
+    file: local('examples/build.js'),
     format: 'umd',
     name: 'vueOnsenDev',
     sourcemap: 'inline',
@@ -93,16 +95,16 @@ builds.devConfig = {
   plugins: [
     alias({
       resolve: ['.js', '.vue', '\/index.js'],
-      vue: path.resolve(__dirname, 'node_modules/vue/dist/vue.esm.js'),
-      'vue-onsenui/esm': path.resolve(__dirname, 'src'),
-      'vue-onsenui': path.resolve(__dirname, 'src', 'index.umd.js'),
-      'onsenui/esm': path.resolve(__dirname, '../../build/esm'),
+      vue: local('node_modules/vue/dist/vue.esm.js'),
+      'vue-onsenui/esm': local('src'),
+      'vue-onsenui': local('src', 'index.umd.js'),
+      'onsenui/esm': local('../../build/esm'),
     }),
     resolve({ extensions: ['.js', '.vue'] }),
     commonjs({ include: 'node_modules/**' }),
     replace({ 'process.env.NODE_ENV': JSON.stringify( 'development' ) }),
     vue(),
-    babel(babelrc),
+    babel(Object.assign({}, babelrc, { exclude: [local('node_modules/**'), local('../../build/**')] })),
     progress(),
     filesize(),
   ],
