@@ -1,5 +1,5 @@
 import ons from './ons'; // Add ons internals
-import setup from './setup.js'; // Add polyfills -- Must be first
+import setup from './setup'; // Add polyfil
 
 // Add and register Custom Elements
 import './elements/ons-template';

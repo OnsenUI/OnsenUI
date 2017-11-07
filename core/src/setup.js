@@ -3,7 +3,7 @@ import './polyfills/index.js';
 import './vendor/index.js';
 import './ons/microevent.js';
 
-export default function(ons) {
+export default function setup(ons) {
   if (window.ons) {
     ons._util.warn('Onsen UI is loaded more than once.');
   }
