@@ -17,9 +17,9 @@ import execute from 'rollup-plugin-execute';
 
 const local = (...args) => path.resolve(__dirname, ...args);
 
-const babelrc = corePkg.babel;
+const babelrc = Object.assign({}, corePkg.babel);
+babelrc.presets = [...babelrc.presets, 'react'];
 babelrc.babelrc = babelrc.presets[0][1].modules = false;
-babelrc.presets.push('react');
 babelrc.plugins = ['external-helpers'];
 babelrc.exclude = [local('node_modules/**'), local('../../build/**')];
 
@@ -61,7 +61,7 @@ const builds = [
         filename: 'module-stats.umd.html',
         sourcemap: true,
       }),
-      execute(`node_modules/.bin/uglifyjs dist/${pkg.name}.js ---compress --mangle --comments '/${pkg.name}/' --output dist/${pkg.name}.min.js`),
+      execute(`node_modules/.bin/uglifyjs dist/${pkg.name}.js -c -m --comments '/${pkg.name}/' --output dist/${pkg.name}.min.js`),
     ],
     banner,
   },

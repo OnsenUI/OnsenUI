@@ -18,9 +18,10 @@ import execute from 'rollup-plugin-execute';
 
 const local = (...args) => path.resolve(__dirname, ...args);
 
-const babelrc = corePkg.babel;
+const babelrc = Object.assign({}, corePkg.babel);
 babelrc.babelrc = babelrc.presets[0][1].modules = false;
 babelrc.plugins = ['external-helpers'];
+babelrc.exclude = [local('node_modules/**'), local('../../build/**')];
 
 const globals = { 'onsenui/esm': 'ons' },
   external = id => /onsenui/.test(id),
@@ -54,7 +55,7 @@ const builds = [
         filename: 'module-stats.umd.html',
         sourcemap: true,
       }),
-      execute(`node_modules/.bin/uglifyjs dist/${pkg.name}.js ---compress --mangle --comments '/${pkg.name}/' --output dist/${pkg.name}.min.js`),
+      execute(`node_modules/.bin/uglifyjs dist/${pkg.name}.js -c -m --comments '/${pkg.name}/' --output dist/${pkg.name}.min.js`),
     ],
     banner,
   },
@@ -104,7 +105,7 @@ builds.devConfig = {
     commonjs({ include: 'node_modules/**' }),
     replace({ 'process.env.NODE_ENV': JSON.stringify( 'development' ) }),
     vue(),
-    babel(Object.assign({}, babelrc, { exclude: [local('node_modules/**'), local('../../build/**')] })),
+    babel(babelrc),
     progress(),
     filesize(),
   ],
