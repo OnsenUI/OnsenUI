@@ -38,19 +38,55 @@ import { rollup, watch as rollupWatch } from 'rollup';
 import gulpLoadPlugins from 'gulp-load-plugins';
 import rawCoreRollupConfig from './rollup.config.js';
 
+// Configurations
 const rollupConfigs = rawCoreRollupConfig.reduce((r, c) => (r[c.output.name] = c) && r, {})
+const babelrc = Object.assign({}, pkg.babel);
+babelrc.babelrc = babelrc.presets[0][1].modules = false;
+babelrc.plugins = [
+  'external-helpers',
+  'transform-runtime'
+];
+const coreESFiles = [
+  'core/src/**/*.js',
+  '!core/src/*.js',
+  '!core/src/core-dts-test.*',
+  '!core/src/**/*.spec.js',
+];
+
 
 const $ = gulpLoadPlugins();
 $.hub(['./css-components/gulpfile.js']); // adds 'build-css', 'css-clean' and 'cssnext' tasks
-// $.hub(['./bindings/vue/gulpfile.babel.js']);
 
 ////////////////////////////////////////
 // bundles
 ////////////////////////////////////////
 const bundle = config => rollup(config).then(bundle => bundle.write(config.output));
+const transpileCoreSrc = files => {
+  const filePath = typeof files === 'string' ? path.relative('./core/src', files) : null;
+  $.util.log(`Transpiling core ESM files${filePath === null ? '' : ` (${$.util.colors.magenta(filePath)})`} ...`);
+  return new Promise(resolve =>
+    gulp.src(files)
+    // SVG loader
+    .pipe(
+      $.if(/ons-back-button\.js$/,
+        $.replace(/import\s+(\w+)\s+from\s+'([./\w-]+\.svg)';/g, function(match, p1, p2) {
+          const svgPath = path.join(path.dirname(this.file.path), p2);
+          const svg = fs.readFileSync(svgPath, 'utf8');
+          return `const ${p1} = \`${svg}\`;`
+        })
+      )
+    )
+    // Transpile to ES5
+    .pipe($.babel(babelrc))
+    .pipe(gulp.dest('build/esm/' + (filePath === null ? '' : path.dirname(filePath))))
+    .on('end', () => {
+      $.util.log('Finished transpiling core ESM files');
+      resolve();
+    })
+  );
+};
 
 gulp.task('core', () => bundle(rollupConfigs.ons));
-gulp.task('core-es', () => bundle(rollupConfigs.onsESM));
 gulp.task('angular-bindings', () => bundle(rollupConfigs.angularOns));
 
 ////////////////////////////////////////
@@ -68,7 +104,7 @@ const watch = config => new Promise((resolve, reject) => {
         resolve();
         break;
       case 'ERROR':
-        $.util.log($.util.colors.red('Encountered an error while bundling'));
+        $.util.log($.util.colors.red('Encountered an error while bundling\n\n', event.error));
         resolve();
         break;
       case 'FATAL':
@@ -80,6 +116,10 @@ const watch = config => new Promise((resolve, reject) => {
   });
 });
 
+gulp.task('watch-core-src', () => {
+  gulp.watch(coreESFiles).on('change', changedFile => transpileCoreSrc(changedFile.path));
+  return watch(rollupConfigs.onsESM).then(() => transpileCoreSrc(coreESFiles));
+});
 gulp.task('watch-core', ['core-css'], () => {
   gulp.watch(['core/css/*.css'], { debounceDelay: 300 }, ['core-css']);
   return watch(rollupConfigs.ons);
@@ -354,20 +394,6 @@ gulp.task('clean', () => {
 });
 
 ////////////////////////////////////////
-// minify
-////////////////////////////////////////
-gulp.task('minify-js', () => {
-  return merge(
-    gulp.src('build/js/{onsenui,angular-onsenui}.js')
-      .pipe($.uglify({ output: { comments: (node, comment) => comment.line === 1 } }))
-      .pipe($.rename(path => {
-        path.extname = '.min.js';
-      }))
-      .pipe(gulp.dest('build/js/'))
-  );
-});
-
-////////////////////////////////////////
 // core-css
 ////////////////////////////////////////
 gulp.task('core-css', () =>  {
@@ -411,35 +437,9 @@ gulp.task('core-css', () =>  {
 ////////////////////////////////////////
 // core-src
 ////////////////////////////////////////
-gulp.task('core-src', ['core-es'], () =>  {
-
-  const babelrc = pkg.babel;
-  babelrc.presets[0][1].modules = false;
-  babelrc.plugins = [
-    'external-helpers',
-    'transform-runtime'
-  ];
-
+gulp.task('core-src', () =>  {
   // ES Modules (transpiled ES source codes)
-  return gulp.src([
-      'core/src/**/*.js',
-      '!core/src/*.js',
-      '!core/src/core-dts-test.*',
-      '!core/src/**/*.spec.js',
-    ])
-      // SVG loader
-      .pipe(
-        $.if(/ons-back-button\.js$/,
-          $.replace(/import\s+(\w+)\s+from\s+'([./\w-]+\.svg)';/g, function(match, p1, p2) {
-            const svgPath = path.join(path.dirname(this.file.path), p2);
-            const svg = fs.readFileSync(svgPath, 'utf8');
-            return `const ${p1} = \`${svg}\`;`
-          })
-        )
-      )
-      // Transpile to ES5
-      .pipe($.babel(babelrc))
-      .pipe(gulp.dest('build/esm/'));
+  return bundle(rollupConfigs.onsESM).then(() => transpileCoreSrc(coreESFiles))
 });
 
 ////////////////////////////////////////
@@ -505,7 +505,6 @@ const buildTasks = [
   'build-css',
   'copy-files',
   'angular-bindings',
-  'minify-js',
 ];
 
 gulp.task('build', done => runSequence.apply(null, buildTasks.concat(['build-docs', 'compress-distribution-package', done])));
@@ -548,6 +547,7 @@ gulp.task('serve', done => {
     'bindings/angular1/test/e2e/*/*.{js,css,html}',
     'bindings/angular1/examples/**/*.{js,css,html}',
     'bindings/vue/examples/build.js',
+    'bindings/react/examples/build.js',
   ]).on('change', changedFile => {
     gulp.src(changedFile.path)
       .pipe(browserSync.reload({stream: true, once: true}));
@@ -556,6 +556,7 @@ gulp.task('serve', done => {
   const tasks = [];
   argv.css && tasks.push('css-clean', 'cssnext');
   argv.core && tasks.push('watch-core');
+  argv.coreSrc && tasks.push('watch-core-src');
   (argv.angular || argv.angular1) && tasks.push('watch-angular-bindings');
   argv.react && tasks.push('watch-react-bindings');
   argv.vue && tasks.push('watch-vue-bindings');

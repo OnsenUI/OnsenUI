@@ -10,10 +10,11 @@ import string from 'rollup-plugin-string';
 import filesize from 'rollup-plugin-filesize';
 import progress from 'rollup-plugin-progress';
 import visualizer from 'rollup-plugin-visualizer';
+import execute from 'rollup-plugin-execute';
 
 const stringOpt = { include: '**/*.svg', }; // SVG images
 const cjsOpt = { include: 'node_modules/**' };
-const babelrc = pkg.babel;
+const babelrc = Object.assign({}, pkg.babel);
 babelrc.babelrc = babelrc.presets[0][1].modules = false;
 babelrc.plugins = ['external-helpers'];
 
@@ -47,6 +48,7 @@ export default [
         filename: 'module-stats.umd.html',
         sourcemap: true, // Shows minified sizes
       }),
+      execute(`node_modules/.bin/uglifyjs build/js/${pkg.name}.js -c -m --comments '/${pkg.name} v/' --output build/js/${pkg.name}.min.js`),
     ],
     banner: `/* ${pkg.name} v${pkg.version} - ${dateformat(new Date(), 'yyyy-mm-dd')} */\n`
   },
@@ -90,8 +92,7 @@ export default [
           'bindings/angular1/js/**/*.js',
           'bindings/angular1/directives/**/*.js',
           'bindings/angular1/services/**/*.js',
-          'bindings/angular1/elements/**/*.js',
-          'bindings/angular1/views/**/*.js'
+          'bindings/angular1/views/**/*.js',
         ],
       }),
       resolve(),
@@ -103,6 +104,7 @@ export default [
         filename: 'bindings/angular1/module-stats.html',
         sourcemap: true, // Shows minified sizes
       }),
+      execute(`node_modules/.bin/uglifyjs build/js/angular-${pkg.name}.js -c -m --comments '/angular-${pkg.name} v/' --output build/js/angular-${pkg.name}.min.js`),
     ],
     banner: `/* angular-${pkg.name} v${pkg.version} - ${dateformat(new Date(), 'yyyy-mm-dd')} */\n`
   },

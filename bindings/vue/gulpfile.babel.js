@@ -28,7 +28,7 @@ const bundle = config => rollup(config).then(bundle => bundle.write(config.outpu
 gulp.task('vue-bindings', () => bundle(rollupConfig['vueOnsen']));
 gulp.task('vue-bindings-esm-bundle', () => bundle(rollupConfig['vueOnsenESM']));
 gulp.task('vue-bindings-esm', ['vue-bindings-esm-bundle'], () =>  {
-  const babelrc = corePkg.babel;
+  const babelrc = Object.assign({}, corePkg.babel);
   babelrc.babelrc = babelrc.presets[0][1].modules = false;
   babelrc.plugins = [
     'external-helpers',
