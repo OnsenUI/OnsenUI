@@ -17,10 +17,12 @@ limitations under the License.
 
 'use strict';
 
-const unwrap = string => string.slice(1, -1);
-const isObjectString = string => string.startsWith('{') && string.endsWith('}');
-const isArrayString = string => string.startsWith('[') && string.endsWith(']');
-const isQuotedString = string => (string.startsWith('\'') && string.endsWith('\'')) || (string.startsWith('"') && string.endsWith('"'));
+const startsWith = (s, c) => s.substr(0, c.length) === c;
+const endsWith = (s, c) => s.substr(s.length - c.length, c.length) === c;
+const unwrap = s => s.slice(1, -1);
+const isObjectString = s => startsWith(s, '{') && endsWith(s, '}');
+const isArrayString = s => startsWith(s, '[') && endsWith(s, ']');
+const isQuotedString = s => (startsWith(s, '\'') && endsWith(s, '\'')) || (startsWith(s, '"') && endsWith(s, '"'));
 
 const error = (token, string, originalString) => {
   throw new Error('Unexpected token \'' + token + '\' at position ' + (originalString.length - string.length - 1) + ' in string: \'' + originalString + '\'');
@@ -43,7 +45,7 @@ const processToken = (token, string, originalString) => {
 };
 
 const nextToken = (string) => {
-  string = string.trimLeft();
+  string = string.trim();
   let limit = string.length;
 
   if (string[0] === ':' || string[0] === ',') {
@@ -100,7 +102,7 @@ const parseObject = (string) => {
   while(string.length > 0) {
     previousToken = token;
     token = nextToken(string);
-    string = string.slice(token.length, string.length).trimLeft();
+    string = string.slice(token.length, string.length).trim();
 
     if ((token === ':' && (!readingKey || !previousToken || previousToken === ','))
        || (token === ',' && readingKey)
@@ -136,7 +138,7 @@ const parseArray = (string) => {
   while(string.length > 0) {
     previousToken = token;
     token = nextToken(string);
-    string = string.slice(token.length, string.length).trimLeft();
+    string = string.slice(token.length, string.length).trim();
 
     if (token === ',' && (!previousToken || previousToken === ',')) {
       error(token, string, originalString);
