@@ -10,6 +10,10 @@ dev
  * css-components: Added `--tap-highlight-color` variable for `-webkit-tap-highlight-color` CSS property.
  * ons-bottom-toolbar: Added `aligned` modifier.
 
+### Bug Fixes
+
+ * Fix template scripts on Firefox.
+
 2.7.0
 ----
 
