@@ -35,7 +35,7 @@ const builds = [
     output: {
       file: 'dist/vue-onsenui.js',
       format: 'umd',
-      name: 'vueOnsen',
+      name: 'VueOnsen',
       sourcemap: 'inline',
       globals,
     },
@@ -67,7 +67,7 @@ const builds = [
     output: {
       file: 'esm/index.js',
       format: 'es',
-      name: 'vueOnsenESM',
+      name: 'VueOnsenESM',
       sourcemap: 'inline',
       globals,
     },
@@ -90,7 +90,7 @@ builds.devConfig = {
   output: {
     file: local('examples/build.js'),
     format: 'umd',
-    name: 'vueOnsenDev',
+    name: 'VueOnsenDev',
     sourcemap: 'inline',
   },
   plugins: [

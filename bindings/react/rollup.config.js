@@ -41,7 +41,7 @@ const builds = [
     output: {
       file: 'dist/react-onsenui.js',
       format: 'umd',
-      name: 'reactOnsen',
+      name: 'Ons',
       sourcemap: 'inline',
       globals,
     },

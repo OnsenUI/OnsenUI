@@ -25,8 +25,8 @@ const FLAGS = `--inline --colors --progress --display-error-details --display-ca
 ////////////////////////////////////////
 const bundle = config => rollup(config).then(bundle => bundle.write(config.output));
 
-gulp.task('vue-bindings', () => bundle(rollupConfig['vueOnsen']));
-gulp.task('vue-bindings-esm-bundle', () => bundle(rollupConfig['vueOnsenESM']));
+gulp.task('vue-bindings', () => bundle(rollupConfig.VueOnsen));
+gulp.task('vue-bindings-esm-bundle', () => bundle(rollupConfig.VueOnsenESM));
 gulp.task('vue-bindings-esm', ['vue-bindings-esm-bundle'], () =>  {
   const babelrc = Object.assign({}, corePkg.babel);
   babelrc.babelrc = babelrc.presets[0][1].modules = false;
