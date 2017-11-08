@@ -1,0 +1,16 @@
+{
+  "name": "onsenui-helper-json",
+  "version": "0.0.0",
+  "author": "Onsen UI Team <team@monaca.io>",
+  "description": "Tags and attributes information of `onsenui`, which makes IDE / test editor plugin development easier.",
+  "private": false,
+  "files": [
+    "onsenui-tags.json",
+    "onsenui-attributes.json"
+  ],
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/OnsenUI/OnsenUI/issues"
+  },
+  "homepage": "https://github.com/OnsenUI/OnsenUI#readme"
+}
