@@ -26,8 +26,6 @@ import orientation from './orientation';
 import modifier from './modifier';
 import softwareKeyboard from './software-keyboard';
 import pageAttributeExpression from './page-attribute-expression';
-import deviceBackButtonDispatcher from './device-back-button-dispatcher';
-import animationOptionsParser from './animation-options-parser';
 import autoStyle from './autostyle';
 import DoorLock from './doorlock';
 import contentReady from './content-ready';
@@ -53,12 +51,7 @@ const ons = {
   PageLoader,
   platform,
   softwareKeyboard,
-  _animationOptionsParser: animationOptionsParser,
   _autoStyle: autoStyle,
-  _BaseAnimator: BaseAnimator,
-  _contentReady: contentReady,
-  _deviceBackButtonDispatcher: deviceBackButtonDispatcher,
-  _DoorLock: DoorLock,
   _internal: internal,
   _readyLock: new DoorLock(),
   _util: util,
@@ -140,7 +133,7 @@ ons.disableDeviceBackButtonHandler = function() {
   if (!ons.isReady()) {
     throw new Error('This method must be called after ons.isReady() is true.');
   }
-  ons._deviceBackButtonDispatcher.disable();
+  internal.dbbDispatcher.disable();
 };
 
 /**
@@ -154,7 +147,7 @@ ons.enableDeviceBackButtonHandler = function() {
   if (!ons.isReady()) {
     throw new Error('This method must be called after ons.isReady() is true.');
   }
-  ons._deviceBackButtonDispatcher.enable();
+  internal.dbbDispatcher.enable();
 };
 
 
@@ -255,7 +248,7 @@ ons._enableWarnings = () => {
  *   [en]Disable automatic styling.[/en]
  *   [ja][/ja]
  */
-ons.disableAutoStyling = ons._autoStyle.disable;
+ons.disableAutoStyling = autoStyle.disable;
 
 /**
  * @method enableAutoStyling
@@ -264,7 +257,7 @@ ons.disableAutoStyling = ons._autoStyle.disable;
  *   [en]Enable automatic styling based on OS (default).[/en]
  *   [ja][/ja]
  */
-ons.enableAutoStyling = ons._autoStyle.enable;
+ons.enableAutoStyling = autoStyle.enable;
 
 /**
  * @method forcePlatformStyling
@@ -283,7 +276,7 @@ ons.forcePlatformStyling = newPlatform => {
       if (element.tagName.toLowerCase() === 'ons-if') {
         element._platformUpdate();
       } else if (element.tagName.match(/^ons-/i)) {
-        ons._autoStyle.prepare(element, true);
+        autoStyle.prepare(element, true);
         if (element.tagName.toLowerCase() === 'ons-tabbar') {
           element._updatePosition();
         }
@@ -309,7 +302,7 @@ ons.preload = function(templates = []) {
     if (typeof template !== 'string') {
       throw new Error ('Expected string arguments but got ' + typeof template);
     }
-    return ons._internal.getTemplateHTMLAsync(template);
+    return internal.getTemplateHTMLAsync(template);
   }));
 };
 
@@ -351,7 +344,7 @@ ons.createElement = (template, options = {}) => {
     return element;
   };
 
-  return template.charAt(0) === '<' ? create(template) : ons._internal.getPageHTMLAsync(template).then(create);
+  return template.charAt(0) === '<' ? create(template) : internal.getPageHTMLAsync(template).then(create);
 };
 
 /**

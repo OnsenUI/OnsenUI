@@ -1,11 +1,11 @@
-'use strict';
+import contentReady from '../ons/content-ready';
 
 describe('OnsProgressBarElement', () => {
   let progress;
 
   beforeEach(done => {
     progress = ons._util.createElement('<ons-progress-bar></ons-progress-bar>');
-    ons._contentReady(progress, done);
+    contentReady(progress, done);
   });
 
   it('exists', () => {

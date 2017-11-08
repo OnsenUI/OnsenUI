@@ -1,12 +1,6 @@
-'use strict';
+import contentReady from './content-ready';
 
 describe('content-ready', () => {
-  const contentReady = ons._contentReady;
-
-  it('should exist', () => {
-    expect(window.ons._contentReady).to.be.ok;
-  });
-
   it('should work normally on an element have single text node', () => {
     const element = document.createElement('div');
     element.appendChild(document.createTextNode('foobar'));

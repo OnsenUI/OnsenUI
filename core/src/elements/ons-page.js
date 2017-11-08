@@ -21,7 +21,7 @@ import internal from '../ons/internal';
 import autoStyle from '../ons/autostyle';
 import ModifierUtil from '../ons/internal/modifier-util';
 import BaseElement from './base/base-element';
-import deviceBackButtonDispatcher from '../ons/device-back-button-dispatcher';
+import deviceBackButtonDispatcher from '../ons/internal/device-back-button-dispatcher';
 import contentReady from '../ons/content-ready';
 
 import './ons-toolbar'; // ensures that 'ons-toolbar' element is registered

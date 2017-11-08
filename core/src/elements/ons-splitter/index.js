@@ -23,7 +23,7 @@ import OverlaySplitterAnimator from './overlay-animator';
 import PushSplitterAnimator from './push-animator';
 import RevealSplitterAnimator from './reveal-animator';
 import BaseElement from '../base/base-element';
-import deviceBackButtonDispatcher from '../../ons/device-back-button-dispatcher';
+import deviceBackButtonDispatcher from '../../ons/internal/device-back-button-dispatcher';
 import contentReady from '../../ons/content-ready';
 
 const _animatorDict = {

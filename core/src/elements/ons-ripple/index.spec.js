@@ -1,4 +1,4 @@
-'use strict';
+import contentReady from '../../ons/content-ready';
 
 describe('OnsRippleElement', () => {
   let container, ripple, wave, background;
@@ -17,7 +17,7 @@ describe('OnsRippleElement', () => {
     ripple = container.querySelector('ons-ripple');
     ripple.removeAttribute('disabled');
 
-    ons._contentReady(ripple, () => {
+    contentReady(ripple, () => {
       wave = ripple._wave;
       background = ripple._background;
       done();
@@ -63,7 +63,7 @@ describe('OnsRippleElement', () => {
       const spy = spyOn('_compile'),
         _ = new ons.elements.Ripple();
 
-      ons._contentReady(_, () => {
+      contentReady(_, () => {
         expect(spy).to.have.been.called.once;
         done();
       });
@@ -71,7 +71,7 @@ describe('OnsRippleElement', () => {
 
     it('creates a "wave" element', done => {
       const ripple = new ons.elements.Ripple();
-      ons._contentReady(ripple, () => {
+      contentReady(ripple, () => {
         expect(ripple._wave).to.be.an.instanceof(HTMLElement);
         done();
       });
@@ -79,7 +79,7 @@ describe('OnsRippleElement', () => {
 
     it('creates a "background" element', done => {
       const ripple = new ons.elements.Ripple();
-      ons._contentReady(ripple, () => {
+      contentReady(ripple, () => {
         expect(ripple._background).to.be.an.instanceof(HTMLElement);
         done();
       });
@@ -171,7 +171,7 @@ describe('OnsRippleElement', () => {
           const spy = spyOn(calling),
             ripple = new ons.elements.Ripple();
 
-          ons._contentReady(ripple, () => {
+          contentReady(ripple, () => {
             ripple[whenUsing].apply(ripple, rest);
             expect(spy).to.have.been.called.once;
             done();

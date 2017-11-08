@@ -1,7 +1,7 @@
-'use strict';
+import BaseAnimator from './base-animator';
 
 describe('BaseAnimator', () => {
-  class TestGenericAnimator extends ons._BaseAnimator { }
+  class TestGenericAnimator extends BaseAnimator { }
   class TestFinalAnimator extends TestGenericAnimator {
     method1() {
     }

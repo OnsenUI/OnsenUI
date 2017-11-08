@@ -1,11 +1,11 @@
-'use strict';
+import contentReady from '../ons/content-ready';
 
 describe('OnsProgressCircularElement', () => {
   let progress;
 
   beforeEach(done => {
     progress = ons._util.createElement('<ons-progress-circular></ons-progress-circular>');
-    ons._contentReady(progress, done);
+    contentReady(progress, done);
   });
 
   it('exists', () => {

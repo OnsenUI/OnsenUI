@@ -1,11 +1,11 @@
-'use strict';
+import contentReady from '../ons/content-ready';
 
 describe('OnsFabElement', () => {
   let fab;
 
   beforeEach(done => {
     fab = new ons.elements.Fab();
-    ons._contentReady(fab, done);
+    contentReady(fab, done);
   });
 
   it('exists', () => {

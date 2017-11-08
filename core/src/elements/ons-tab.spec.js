@@ -1,11 +1,11 @@
-'use strict';
+import contentReady from '../ons/content-ready';
 
 describe('OnsTabElement', () => {
   let element;
 
   beforeEach(done => {
     element = ons._util.createElement(`<ons-tab></ons-tab>`);
-    ons._contentReady(element, done);
+    contentReady(element, done);
   });
 
   afterEach(() => {
@@ -113,7 +113,7 @@ describe('OnsTabElement', () => {
       tabbar.appendChild(element);
       document.body.appendChild(tabbar);
 
-      ons._contentReady(tabbar, () => {
+      contentReady(tabbar, () => {
         expect(element.querySelector('ons-icon')).not.to.be.ok;
 
         element.setAttribute('icon', 'ion-map');

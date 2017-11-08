@@ -31,9 +31,8 @@ export default function setup(ons) {
   }, false);
 
   ons.ready(function() {
-    // ons._defaultDeviceBackButtonHandler
-    ons._deviceBackButtonDispatcher.enable();
-    ons._defaultDeviceBackButtonHandler = ons._deviceBackButtonDispatcher.createHandler(window.document.body, () => {
+    ons._internal.dbbDispatcher.enable();
+    ons._defaultDeviceBackButtonHandler = ons._internal.dbbDispatcher.createHandler(window.document.body, () => {
       if (Object.hasOwnProperty.call(navigator, 'app')) {
         navigator.app.exitApp();
       } else {
@@ -46,7 +45,7 @@ export default function setup(ons) {
     if (!ons.platform.isWebView()) {
       document.body.addEventListener('keydown', function(event) {
         if (event.keyCode === 27) {
-          ons._deviceBackButtonDispatcher.fireDeviceBackButtonEvent();
+          ons._internal.dbbDispatcher.fireDeviceBackButtonEvent();
         }
       })
     }

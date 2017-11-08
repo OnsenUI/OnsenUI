@@ -5,10 +5,10 @@ describe('ons', () => {
 
   beforeEach(() => {
     template = ons._util.createElement(`
-      <ons-template id="page.html">
+      <template id="page.html">
         <ons-page>
         </ons-page>
-      </ons-template>
+      </template>
     `);
     document.body.appendChild(template);
   });
@@ -44,14 +44,14 @@ describe('ons', () => {
   describe('#disableDeviceBackButtonHandler()', () => {
     it('disables the device back button', () => {
       ons.disableDeviceBackButtonHandler();
-      expect(ons._deviceBackButtonDispatcher._isEnabled).to.be.false;
+      expect(ons._internal.dbbDispatcher._isEnabled).to.be.false;
     });
   });
 
   describe('#enableDeviceBackButtonHandler()', () => {
     it('enables the device back button', () => {
       ons.enableDeviceBackButtonHandler();
-      expect(ons._deviceBackButtonDispatcher._isEnabled).to.be.true;
+      expect(ons._internal.dbbDispatcher._isEnabled).to.be.true;
     });
   });
 

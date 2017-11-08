@@ -1,4 +1,4 @@
-'use strict';
+import contentReady from '../../ons/content-ready';
 
 describe('OnsTabbarElement', () => {
   let element;
@@ -103,7 +103,7 @@ describe('OnsTabbarElement', () => {
 
   it('has two children by default', (done) => {
     const element = new ons.elements.Tabbar();
-    ons._contentReady(element);
+    contentReady(element);
 
     setImmediate(() => {
       expect(element.children[0]).to.be.ok;

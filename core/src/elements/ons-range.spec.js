@@ -1,4 +1,4 @@
-'use strict';
+import contentReady from '../ons/content-ready';
 
 describe('OnsRangeElement', () => {
   let element;
@@ -6,7 +6,7 @@ describe('OnsRangeElement', () => {
   beforeEach(done => {
     element = new ons.elements.Range();
     document.body.appendChild(element);
-    ons._contentReady(element, done);
+    contentReady(element, done);
   });
 
   afterEach(() => {
@@ -67,7 +67,7 @@ describe('OnsRangeElement', () => {
       ons.platform.select('android');
       const range = document.createElement('ons-range');
 
-      ons._contentReady(range, () => {
+      contentReady(range, () => {
         expect(range.getAttribute('modifier')).to.equal('material');
         ons.platform.select('');
         done();

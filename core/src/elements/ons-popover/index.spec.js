@@ -1,4 +1,4 @@
-'use strict';
+import contentReady from '../../ons/content-ready';
 
 describe('OnsPopoverElement', () => {
   let popover, target;
@@ -11,7 +11,7 @@ describe('OnsPopoverElement', () => {
     document.body.appendChild(target);
     document.body.appendChild(popover);
 
-    ons._contentReady(popover, done);
+    contentReady(popover, done);
   });
 
   afterEach(() => {

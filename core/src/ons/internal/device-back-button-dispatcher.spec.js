@@ -3,15 +3,15 @@
 describe('deviceBackButtonDispatcher', () => {
   describe('#createHandler()', () => {
     it('throws an error if the first parameter is not an HTMLElement', () => {
-      expect(() => ons._deviceBackButtonDispatcher.createHandler('just a string')).to.throw(Error);
+      expect(() => ons._internal.dbbDispatcher.createHandler('just a string')).to.throw(Error);
     });
 
     it('throws an error if the first parameter is not a function', () => {
-      expect(() => ons._deviceBackButtonDispatcher.createHandler(document.createElement('div'), 'just a string')).to.throw(Error);
+      expect(() => ons._internal.dbbDispatcher.createHandler(document.createElement('div'), 'just a string')).to.throw(Error);
     });
 
     it('disables the handler', () => {
-      const handler = ons._deviceBackButtonDispatcher.createHandler(document.createElement('div'), () => { return; });
+      const handler = ons._internal.dbbDispatcher.createHandler(document.createElement('div'), () => { return; });
       expect(handler.isEnabled()).to.be.true;
       handler.disable();
       expect(handler.isEnabled()).to.be.false;
@@ -23,7 +23,7 @@ describe('deviceBackButtonDispatcher', () => {
       navigator.app = {};
       navigator.app.exitApp = () => { return; };
       const spy = chai.spy.on(navigator.app, 'exitApp');
-      ons._deviceBackButtonDispatcher._callback();
+      ons._internal.dbbDispatcher._callback();
       expect(spy).to.have.been.called.once;
     });
   });
@@ -34,7 +34,7 @@ describe('deviceBackButtonDispatcher', () => {
         document.addEventListener('backbutton', () => { resolve(); });
       });
 
-      ons._deviceBackButtonDispatcher.fireDeviceBackButtonEvent();
+      ons._internal.dbbDispatcher.fireDeviceBackButtonEvent();
 
       return expect(promise).to.eventually.be.fulfilled;
     });
