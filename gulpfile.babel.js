@@ -46,7 +46,7 @@ babelrc.plugins = [
   'external-helpers',
   'transform-runtime'
 ];
-const coreESFiles = [
+const coreESMFiles = [
   'core/src/**/*.js',
   '!core/src/*.js',
   '!core/src/core-dts-test.*',
@@ -116,9 +116,9 @@ const watch = config => new Promise((resolve, reject) => {
   });
 });
 
-gulp.task('watch-core-src', () => {
-  gulp.watch(coreESFiles).on('change', changedFile => transpileCoreSrc(changedFile.path));
-  return watch(rollupConfigs.onsESM).then(() => transpileCoreSrc(coreESFiles));
+gulp.task('watch-core-esm', () => {
+  gulp.watch(coreESMFiles).on('change', changedFile => transpileCoreSrc(changedFile.path));
+  return watch(rollupConfigs.onsESM).then(() => transpileCoreSrc(coreESMFiles));
 });
 gulp.task('watch-core', ['core-css'], () => {
   gulp.watch(['core/css/*.css'], { debounceDelay: 300 }, ['core-css']);
@@ -435,11 +435,11 @@ gulp.task('core-css', () =>  {
 });
 
 ////////////////////////////////////////
-// core-src
+// core-esm
 ////////////////////////////////////////
-gulp.task('core-src', () =>  {
+gulp.task('core-esm', () =>  {
   // ES Modules (transpiled ES source codes)
-  return bundle(rollupConfigs.onsESM).then(() => transpileCoreSrc(coreESFiles))
+  return bundle(rollupConfigs.onsESM).then(() => transpileCoreSrc(coreESMFiles))
 });
 
 ////////////////////////////////////////
@@ -500,7 +500,7 @@ gulp.task('compress-distribution-package', () => {
 const buildTasks = [
   'clean',
   'core',
-  'core-src',
+  'core-esm',
   'core-css',
   'build-css',
   'copy-files',
@@ -556,7 +556,7 @@ gulp.task('serve', done => {
   const tasks = [];
   argv.css && tasks.push('css-clean', 'cssnext');
   argv.core && tasks.push('watch-core');
-  argv.coreSrc && tasks.push('watch-core-src');
+  argv.coreEsm && tasks.push('watch-core-esm');
   (argv.angular || argv.angular1) && tasks.push('watch-angular-bindings');
   argv.react && tasks.push('watch-react-bindings');
   argv.vue && tasks.push('watch-vue-bindings');
