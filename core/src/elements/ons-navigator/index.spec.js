@@ -228,18 +228,15 @@ describe('OnsNavigatorElement', () => {
       return expect(promise).to.eventually.be.fulfilled;
     });
 
-    it('emits \'show\' event', (done) => {
-      const promise = new Promise((resolve) => {
-        nav.addEventListener('show', (event) => { resolve(event); });
+    it('emits \'show\' event', () => {
+      const deferred = ons._util.defer();
+
+      nav.pushPage('hoge').then(() => {
+        nav.addEventListener('show', deferred.resolve);
+        nav.popPage();
       });
 
-      nav.pushPage('hoge', {
-        callback: () => nav.popPage({
-          callback: () => done()
-        })
-      });
-
-      return expect(promise).to.eventually.be.fulfilled;
+      return expect(deferred.promise).to.eventually.be.fulfilled;
     });
 
     it('returns a promise that resolves to the new top page', () => {
@@ -488,15 +485,10 @@ describe('OnsNavigatorElement', () => {
         });
     });
 
-    it('returns a promise that resolves to the new top page', (done) => {
-      return nav.pushPage('hoge').then(() => {
-        return expect(nav.replacePage('fuga')).to.eventually.be.fulfilled.then(
-          page => {
-            expect(page).to.equal(nav.topPage);
-            done();
-          }
-        );
-      });
+    it('returns a promise that resolves to the new top page', () => {
+      return nav.pushPage('hoge')
+        .then(() => expect(nav.replacePage('fuga')).to.eventually.be.fulfilled)
+        .then(page => expect(page).to.equal(nav.topPage));
     });
   });
 
