@@ -18,15 +18,10 @@ import internal from './internal';
 import AnimatorFactory from './animator-factory';
 import ModifierUtil from './modifier-util';
 import deviceBackButtonDispatcher from './device-back-button-dispatcher';
-import ToastQueue from './toast-queue';
-import {LazyRepeatProvider, LazyRepeatDelegate} from './lazy-repeat';
 
 internal.AnimatorFactory = AnimatorFactory;
 internal.ModifierUtil = ModifierUtil;
 internal.dbbDispatcher = deviceBackButtonDispatcher;
-internal.ToastQueue = ToastQueue;
-internal.LazyRepeatProvider = LazyRepeatProvider;
-internal.LazyRepeatDelegate = LazyRepeatDelegate;
 
 export default internal;
 

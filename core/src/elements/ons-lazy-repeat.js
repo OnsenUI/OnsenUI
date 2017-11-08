@@ -12,9 +12,10 @@ limitations under the License.
 */
 
 import ons from '../ons';
-import BaseElement from './base/base-element';
 import util from '../ons/util';
-import {LazyRepeatDelegate, LazyRepeatProvider} from '../ons/internal/lazy-repeat';
+import internal from '../ons/internal';
+import BaseElement from './base/base-element';
+import { LazyRepeatDelegate, LazyRepeatProvider } from '../ons/internal/lazy-repeat';
 
 /**
  * @element ons-lazy-repeat
@@ -177,6 +178,9 @@ export default class LazyRepeatElement extends BaseElement {
   }
 
 }
+
+internal.LazyRepeatDelegate = LazyRepeatDelegate;
+internal.LazyRepeatProvider = LazyRepeatProvider;
 
 ons.elements.LazyRepeat = LazyRepeatElement;
 customElements.define('ons-lazy-repeat', LazyRepeatElement);
