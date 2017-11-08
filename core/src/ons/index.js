@@ -150,6 +150,9 @@ ons.enableDeviceBackButtonHandler = function() {
   internal.dbbDispatcher.enable();
 };
 
+ons.fireDeviceBackButtonEvent = function() {
+  internal.dbbDispatcher.fireDeviceBackButtonEvent();
+};
 
 /**
  * @method enableAutoStatusBarFill

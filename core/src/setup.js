@@ -31,7 +31,7 @@ export default function setup(ons) {
   }, false);
 
   ons.ready(function() {
-    ons._internal.dbbDispatcher.enable();
+    ons.enableDeviceBackButtonHandler();
     ons._defaultDeviceBackButtonHandler = ons._internal.dbbDispatcher.createHandler(window.document.body, () => {
       if (Object.hasOwnProperty.call(navigator, 'app')) {
         navigator.app.exitApp();
@@ -45,7 +45,7 @@ export default function setup(ons) {
     if (!ons.platform.isWebView()) {
       document.body.addEventListener('keydown', function(event) {
         if (event.keyCode === 27) {
-          ons._internal.dbbDispatcher.fireDeviceBackButtonEvent();
+          ons.fireDeviceBackButtonEvent();
         }
       })
     }
