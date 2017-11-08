@@ -28,9 +28,7 @@ import softwareKeyboard from './software-keyboard';
 import pageAttributeExpression from './page-attribute-expression';
 import autoStyle from './autostyle';
 import DoorLock from './doorlock';
-import contentReady from './content-ready';
-import {defaultPageLoader, PageLoader} from './page-loader';
-import BaseAnimator from './base-animator';
+import { defaultPageLoader, PageLoader } from './page-loader';
 
 /**
  * @object ons
