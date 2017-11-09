@@ -1,7 +1,7 @@
 import { $ons } from './setup';
 import * as components from './components';
 
-const install = (Vue, params = {}) => {
+$ons.install = (Vue, params = {}) => {
   /**
    * Register components of vue-onsenui.
    */
@@ -14,10 +14,7 @@ const install = (Vue, params = {}) => {
 };
 
 if (typeof window !== 'undefined' && window.Vue) {
-  window.Vue.use({install});
+  window.Vue.use({ install: $ons.install });
 }
 
-export default {
-  $ons,
-  install,
-};
+export default $ons;
