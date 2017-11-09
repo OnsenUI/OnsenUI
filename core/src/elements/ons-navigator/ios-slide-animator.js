@@ -15,7 +15,7 @@ limitations under the License.
 
 */
 
-import NavigatorTransitionAnimator from './animator';
+import NavigatorAnimator from './animator';
 import util from '../../ons/util';
 import animit from '../../ons/animit';
 import contentReady from '../../ons/content-ready';
@@ -23,7 +23,7 @@ import contentReady from '../../ons/content-ready';
 /**
  * Slide animator for navigator transition like iOS's screen slide transition.
  */
-export default class IOSSlideNavigatorTransitionAnimator extends NavigatorTransitionAnimator {
+export default class IOSSlideNavigatorAnimator extends NavigatorAnimator {
 
   constructor({timing = 'cubic-bezier(0.3, .4, 0, .9)', delay = 0, duration = 0.4} = {}) {
     super({ timing, delay, duration });

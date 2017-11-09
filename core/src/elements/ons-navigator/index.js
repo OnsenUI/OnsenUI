@@ -20,15 +20,15 @@ import util from '../../ons/util';
 import internal from '../../ons/internal';
 import SwipeReveal from '../../ons/internal/swipe-reveal';
 import AnimatorFactory from '../../ons/internal/animator-factory';
-import NavigatorTransitionAnimator from './animator';
-import IOSSlideNavigatorTransitionAnimator from './ios-slide-animator';
-import IOSSwipeNavigatorTransitionAnimator from './ios-swipe-animator';
-import IOSLiftNavigatorTransitionAnimator from './ios-lift-animator';
-import IOSFadeNavigatorTransitionAnimator from './ios-fade-animator';
-import MDSlideNavigatorTransitionAnimator from './md-slide-animator';
-import MDLiftNavigatorTransitionAnimator from './md-lift-animator';
-import MDFadeNavigatorTransitionAnimator from './md-fade-animator';
-import NoneNavigatorTransitionAnimator from './none-animator';
+import NavigatorAnimator from './animator';
+import IOSSlideNavigatorAnimator from './ios-slide-animator';
+import IOSSwipeNavigatorAnimator from './ios-swipe-animator';
+import IOSLiftNavigatorAnimator from './ios-lift-animator';
+import IOSFadeNavigatorAnimator from './ios-fade-animator';
+import MDSlideNavigatorAnimator from './md-slide-animator';
+import MDLiftNavigatorAnimator from './md-lift-animator';
+import MDFadeNavigatorAnimator from './md-fade-animator';
+import NoneNavigatorAnimator from './none-animator';
 import platform from '../../ons/platform';
 import contentReady from '../../ons/content-ready';
 import BaseElement from '../base/base-element';
@@ -36,17 +36,17 @@ import deviceBackButtonDispatcher from '../../ons/internal/device-back-button-di
 import {PageLoader, defaultPageLoader, instantPageLoader} from '../../ons/page-loader';
 
 const _animatorDict = {
-  'default': () => platform.isAndroid() ? MDFadeNavigatorTransitionAnimator : IOSSlideNavigatorTransitionAnimator,
-  'slide': () => platform.isAndroid() ? MDSlideNavigatorTransitionAnimator : IOSSlideNavigatorTransitionAnimator,
-  'lift': () => platform.isAndroid() ? MDLiftNavigatorTransitionAnimator : IOSLiftNavigatorTransitionAnimator,
-  'fade': () => platform.isAndroid() ? MDFadeNavigatorTransitionAnimator : IOSFadeNavigatorTransitionAnimator,
-  'slide-ios': IOSSlideNavigatorTransitionAnimator,
-  'slide-md': MDSlideNavigatorTransitionAnimator,
-  'lift-ios': IOSLiftNavigatorTransitionAnimator,
-  'lift-md': MDLiftNavigatorTransitionAnimator,
-  'fade-ios': IOSFadeNavigatorTransitionAnimator,
-  'fade-md': MDFadeNavigatorTransitionAnimator,
-  'none': NoneNavigatorTransitionAnimator
+  'default': () => platform.isAndroid() ? MDFadeNavigatorAnimator : IOSSlideNavigatorAnimator,
+  'slide': () => platform.isAndroid() ? MDSlideNavigatorAnimator : IOSSlideNavigatorAnimator,
+  'lift': () => platform.isAndroid() ? MDLiftNavigatorAnimator : IOSLiftNavigatorAnimator,
+  'fade': () => platform.isAndroid() ? MDFadeNavigatorAnimator : IOSFadeNavigatorAnimator,
+  'slide-ios': IOSSlideNavigatorAnimator,
+  'slide-md': MDSlideNavigatorAnimator,
+  'lift-ios': IOSLiftNavigatorAnimator,
+  'lift-md': MDLiftNavigatorAnimator,
+  'fade-ios': IOSFadeNavigatorAnimator,
+  'fade-md': MDFadeNavigatorAnimator,
+  'none': NoneNavigatorAnimator
 };
 
 const rewritables = {
@@ -298,7 +298,7 @@ export default class NavigatorElement extends BaseElement {
     this.onDeviceBackButton = this._onDeviceBackButton.bind(this);
 
     if (!platform.isAndroid() || this.getAttribute('swipeable') === 'force') {
-      this._swipeAnimator = new IOSSwipeNavigatorTransitionAnimator();
+      this._swipeAnimator = new IOSSwipeNavigatorAnimator();
 
       this._swipe = new SwipeReveal({
         element: this,
@@ -364,8 +364,8 @@ export default class NavigatorElement extends BaseElement {
   _updateAnimatorFactory() {
     this._animatorFactory = new AnimatorFactory({
       animators: _animatorDict,
-      baseClass: NavigatorTransitionAnimator,
-      baseClassName: 'NavigatorTransitionAnimator',
+      baseClass: NavigatorAnimator,
+      baseClassName: 'NavigatorAnimator',
       defaultAnimation: this.getAttribute('animation')
     });
   }
@@ -1003,8 +1003,8 @@ export default class NavigatorElement extends BaseElement {
    * @param {Function} Animator
    */
   static registerAnimator(name, Animator) {
-    if (!(Animator.prototype instanceof NavigatorTransitionAnimator)) {
-      throw new Error('"Animator" param must inherit NavigatorElement.NavigatorTransitionAnimator');
+    if (!(Animator.prototype instanceof NavigatorAnimator)) {
+      throw new Error('"Animator" param must inherit NavigatorElement.NavigatorAnimator');
     }
 
     _animatorDict[name] = Animator;
@@ -1014,8 +1014,8 @@ export default class NavigatorElement extends BaseElement {
     return _animatorDict;
   }
 
-  static get NavigatorTransitionAnimator() {
-    return NavigatorTransitionAnimator;
+  static get NavigatorAnimator() {
+    return NavigatorAnimator;
   }
 
   static get events() {

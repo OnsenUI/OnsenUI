@@ -15,9 +15,9 @@ limitations under the License.
 
 */
 
-import NavigatorTransitionAnimator from './animator';
+import NavigatorAnimator from './animator';
 
-export default class NoneNavigatorTransitionAnimator extends NavigatorTransitionAnimator {
+export default class NoneNavigatorAnimator extends NavigatorAnimator {
   constructor(options) {
     super(options);
   }

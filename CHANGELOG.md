@@ -8,6 +8,7 @@ dev
 #BREAKING CHANGES
 
  * Internal elements location has been changed. E.g. `ons.NavigatorElement` is now `ons.elements.Navigator`. This should only affect if you were registering custom animations.
+ * `NavigatorTransitionAnimator` has been renamed to `NavigatorAnimator` like all the other animators. This should only affect if you were registering custom animations.
  * Renamed `core-src` directory to `esm` in distribution. This should only affect if you were manually importing specific components instead of the whole bundle.
 
 2.7.0

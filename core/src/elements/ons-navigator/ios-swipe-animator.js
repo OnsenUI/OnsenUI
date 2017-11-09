@@ -15,14 +15,14 @@ limitations under the License.
 
 */
 
-import IOSSlideNavigatorTransitionAnimator from './ios-slide-animator';
+import IOSSlideNavigatorAnimator from './ios-slide-animator';
 import util from '../../ons/util';
 import animit from '../../ons/animit';
 
 /**
  * Swipe animator for iOS navigator transition.
  */
-export default class IOSSwipeNavigatorTransitionAnimator extends IOSSlideNavigatorTransitionAnimator {
+export default class IOSSwipeNavigatorAnimator extends IOSSlideNavigatorAnimator {
 
   constructor({ duration = 0.15, timing = 'linear', delay = 0 } = {}) {
     super({duration, timing, delay});
