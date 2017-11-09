@@ -24,7 +24,7 @@ babelrc.plugins = ['external-helpers'];
 babelrc.exclude = [local('node_modules/**'), local('../../build/**')];
 
 const banner = `/* ${pkg.name} v${pkg.version} - ${dateformat(new Date(), 'yyyy-mm-dd')} */\n`,
-  external = id => /^(onsenui|react|react-dom|prop-types)$/.test(id),
+  external = id => /^(onsenui|react|react-dom)$/.test(id),
   resolveOpt = { extensions: ['.js', '.jsx'] },
   globals = {
     'onsenui': 'ons',
@@ -42,7 +42,7 @@ const builds = [
       file: 'dist/react-onsenui.js',
       format: 'umd',
       name: 'Ons',
-      sourcemap: 'inline',
+      sourcemap: false,
       globals,
     },
     plugins: [
@@ -54,12 +54,13 @@ const builds = [
       }),
       resolve(resolveOpt),
       commonjs({ include: 'node_modules/**' }),
+      replace({ 'process.env.NODE_ENV': JSON.stringify( 'production' ) }),
       babel(babelrc),
       progress(),
       filesize(),
       visualizer({
         filename: 'module-stats.umd.html',
-        sourcemap: true,
+        sourcemap: false,
       }),
       execute(`node_modules/.bin/uglifyjs dist/${pkg.name}.js -c -m --comments '/${pkg.name}/' --output dist/${pkg.name}.min.js`),
     ],
