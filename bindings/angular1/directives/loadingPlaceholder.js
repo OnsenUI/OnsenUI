@@ -4,7 +4,6 @@
  * @description
  *   [en]Display a placeholder while the content is loading.[/en]
  *   [ja]Onsen UIが読み込まれるまでに表示するプレースホルダーを表現します。[/ja]
- * @guide UtilityAPIs [en]Other utility APIs[/en][ja]他のユーティリティAPI[/ja]
  * @example
  * <div ons-loading-placeholder="page.html">
  *   Loading...

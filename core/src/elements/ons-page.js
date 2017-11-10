@@ -46,16 +46,13 @@ const scheme = {
  *   [/en]
  *   [ja]ページ定義のためのコンポーネントです。このコンポーネントの内容はスクロールが許可されます。[/ja]
  * @tutorial vanilla/Reference/page
- * @guide creating-a-page
- *   [en]Setting up a page in its `init` event[/en]
- *   [ja]Setting up a page in its `init` event[/ja]
- * @guide templates
- *   [en]Defining multiple pages in single html[/en]
- *   [ja]複数のページを1つのHTMLに記述する[/ja]
- * @guide multiple-page-navigation
+ * @guide lifecycle.html#events
+ *   [en]Overview of page events[/en]
+ *   [ja]Overview of page events[/ja]
+ * @guide fundamentals.html#managing-pages
  *   [en]Managing multiple pages[/en]
  *   [ja]複数のページを管理する[/ja]
- * @guide using-modifier [en]More details about the `modifier` attribute[/en][ja]modifier属性の使い方[/ja]
+ * @guide theming.html#modifiers [en]More details about the `modifier` attribute[/en][ja]modifier属性の使い方[/ja]
  * @seealso ons-toolbar
  *   [en]Use the `<ons-toolbar>` element to add a navigation bar to the top of the page.[/en]
  *   [ja][/ja]

@@ -49,10 +49,7 @@ const scheme = {
  * @seealso ons-radio
  *   [en]The `<ons-radio>` element is used to display a radio button.[/en]
  *   [ja][/ja]
- * @guide adding-page-content
- *   [en]Using form components[/en]
- *   [ja]フォームを使う[/ja]
- * @guide using-modifier [en]More details about the `modifier` attribute[/en][ja]modifier属性の使い方[/ja]
+ * @guide theming.html#modifiers [en]More details about the `modifier` attribute[/en][ja]modifier属性の使い方[/ja]
  * @example
  * <ons-search-input placeholder="Search"></ons-search-input>
  */

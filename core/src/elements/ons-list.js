@@ -44,12 +44,6 @@ const scheme = {'': 'list--*'};
  * @seealso ons-lazy-repeat
  *   [en]ons-lazy-repeat component[/en]
  *   [ja]ons-lazy-repeatコンポーネント[/ja]
- * @guide lists
- *   [en]Using lists[/en]
- *   [ja]リストを使う[/ja]
- * @guide infinite-scroll
- *   [en]Loading more items on infinite scroll[/en]
- *   [ja]Loading more items on infinite scroll[/ja]
  * @codepen yxcCt
  * @tutorial vanilla/Reference/list
  * @example

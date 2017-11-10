@@ -10,9 +10,6 @@
  *     ソフトウェアキーボードが表示されているかどうかで、コンテンツを表示するかどうかを切り替えることが出来ます。
  *     このコンポーネントは、Cordovaやcom.ionic.keyboardプラグインを必要とします。
  *   [/ja]
- * @guide UtilityAPIs
- *   [en]Other utility APIs[/en]
- *   [ja]他のユーティリティAPI[/ja]
  * @example
  * <div ons-keyboard-active>
  *   This will only be displayed if the software keyboard is open.
