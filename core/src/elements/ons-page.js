@@ -180,9 +180,7 @@ export default class PageElement extends BaseElement {
       'ons-navigator',
       'ons-page',
       'ons-tabbar',
-      'ons-splitter',
-      'ons-split-view',
-      'ons-sliding-menu'
+      'ons-splitter'
     ]);
 
     const shouldSuppress = content.children.length === 1 && scrollerSet.has(content.children[0].nodeName.toLowerCase());
