@@ -242,11 +242,10 @@ class RouterNavigator extends BasicComponent {
   }
 
   render() {
-    var {...others} = this.props;
-    Util.convert(others, 'animationOptions', {fun: Util.animationOptionsConverter, newName: 'animation-options'});
+    const attrs = Util.getAttrs(this);
 
     return (
-      <ons-navigator {...others} ref={(navi) => { this._navi = navi; }}>
+      <ons-navigator { ...attrs } ref={(navi) => { this._navi = navi; }}>
         {this.props.routeConfig.routeStack.map(route => this.props.renderPage(route))}
         {this.page}
       </ons-navigator>

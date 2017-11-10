@@ -48,10 +48,18 @@ const _animatorDict = {
  *
  *     It will automatically be displayed as Material Design (bottom sheet) when running on an Android device.
  *   [/en]
- *   [ja][/ja]
+ *   [ja]
+ *     アクションシート、もしくはボトムシートを現在のスクリーン上に表示します。
+ *
+ *     この要素は、`<body>`要素に直接アタッチされるか、もしくは`ons.createElement(template, { append: true })`と`<ons-template>`タグを使ってテンプレートから動的に生成されます。
+ *
+ *     アクションシートは、選択肢のリストを表示してユーザーに尋ねるのに便利です。`ons-action-sheet-button`は、この要素の中に置くために提供されていますが、それ以外にも他のどのような要素を含むことができます。
+ *
+ *     Androidデバイスで実行されるときには、自動的にマテリアルデザイン(ボトムシート)として表示されます。
+ *   [/ja]
  * @modifier material
  *   [en]Display a Material Design bottom sheet.[/en]
- *   [ja][/ja]
+ *   [ja]マテリアルデザインのボトムシートを表示します。[/ja]
  * @tutorial vanilla/reference/action-sheet
  * @guide theming.html#modifiers [en]More details about the `modifier` attribute[/en][ja]modifier属性の使い方[/ja]
  * @seealso ons-popover
@@ -127,7 +135,7 @@ export default class ActionSheetElement extends BaseDialogElement {
    * @type {String}
    * @description
    *  [en]Optional title of the action sheet. A new element will be created containing this string.[/en]
-   *  [ja][/ja]
+   *  [ja]アクションシートのタイトルを指定します。ここで指定した文字列を含む新しい要素が作成されます。[/ja]
    */
 
   /**
@@ -142,7 +150,7 @@ export default class ActionSheetElement extends BaseDialogElement {
    * @attribute cancelable
    * @description
    *  [en]If this attribute is set the action sheet can be closed by tapping the background or by pressing the back button on Android devices.[/en]
-   *  [ja][/ja]
+   *  [ja]この属性が設定されると、アクションシートの背景やAndroidデバイスのバックボタンを推すことでアクションシートが閉じるようになります。[/ja]
    */
 
   /**
@@ -310,7 +318,7 @@ export default class ActionSheetElement extends BaseDialogElement {
    *   [ja]ダイアログを閉じます。[/ja]
    * @return {Promise}
    *   [en]Resolves to the hidden element[/en]
-   *   [ja][/ja]
+   *   [ja]隠れた要素を解決します。[/ja]
    */
 
   /**
@@ -335,7 +343,7 @@ export default class ActionSheetElement extends BaseDialogElement {
    * @type {Boolean}
    * @description
    *   [en]Whether the action sheet is cancelable or not. A cancelable action sheet can be closed by tapping the background or by pressing the back button on Android devices.[/en]
-   *   [ja][/ja]
+   *   [ja]アクションシートがキャンセル可能かどうかを設定します。キャンセル可能なアクションシートは、背景をタップしたりAndroidデバイスのバックボタンを推すことで閉じるようになります。[/ja]
    */
 
   static get observedAttributes() {

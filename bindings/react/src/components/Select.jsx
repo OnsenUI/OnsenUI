@@ -1,10 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import ReactDOM from 'react-dom';
-import BasicComponent from './BasicComponent.jsx';
+import BaseInput from './BaseInput.jsx';
 import Util from './Util.js';
-
-const EVENT_TYPES = ['change', 'input'];
 
 /**
  * @original ons-select
@@ -24,54 +21,22 @@ const EVENT_TYPES = ['change', 'input'];
  *   <option value="3">3rd option</option>
  * </Select>
  */
-class Select extends BasicComponent {
+class Select extends BaseInput {
 
-  constructor(...args) {
-    super(...args);
-
-    this.onChange = event => {
-      if (this.props.onChange) {
-        return this.props.onChange(event);
-      }
-    };
-  }
-
-  componentDidMount() {
-    super.componentDidMount();
-    var node = ReactDOM.findDOMNode(this);
-
-    EVENT_TYPES.forEach((eventType) => {
-      node.addEventListener(eventType, this.onChange);
-    });
-  }
-
-  componentWillUnmount() {
-    var node = ReactDOM.findDOMNode(this);
-
-    EVENT_TYPES.forEach((eventType) => {
-      node.removeEventListener(eventType, this.onChange);
-    });
-  }
-
-  componentWillReceiveProps(props) {
-    var node = ReactDOM.findDOMNode(this);
-
-    if (typeof props.value !== 'undefined' && node.value !== props.value) {
-      node.value = props.value;
-    }
-
-    if (typeof props.checked !== 'undefined') {
-      node.checked = props.checked;
-    }
+  get EVENT_TYPES() {
+    return ['change'];
   }
 
   render() {
-    var {checked, ...other} = this.props;
-
-    Util.convert(other, 'disabled');
+    const { value, onChange, ...props } = this.props;
+    const attrs = Util.getAttrs(this, props);
 
     return (
-      <ons-select checked={checked ? '' : null} {...other} />
+      <ons-select { ...attrs }>
+        <select>
+          {this.props.children}
+        </select>
+      </ons-select>
     );
   }
 }
@@ -108,7 +73,7 @@ Select.propTypes = {
    * @name value
    * @type string
    * @description
-   *  [en]Current value of the element.[/en]
+   *  [en]Use this prop to set the selected option value.[/en]
    *  [ja][/ja]
    */
   value: PropTypes.string,

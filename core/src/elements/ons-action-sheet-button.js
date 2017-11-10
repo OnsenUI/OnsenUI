@@ -32,10 +32,10 @@ const scheme = {
  * @category dialog
  * @modifier destructive
  *   [en]Shows a "destructive" button (only for iOS).[/en]
- *   [ja][/ja]
+ *   [ja]"destructive"なボタンを表示します(iOSでのみ有効)。[/ja]
  * @description
  *   [en]Component that represent each button of the action sheet.[/en]
- *   [ja][/ja]
+ *   [ja]アクションシートに表示される各ボタンを表現するコンポーネントです。[/ja]
  * @seealso ons-action-sheet
  *   [en]The `<ons-action-sheet>` component[/en]
  *   [ja]ons-action-sheetコンポーネント[/ja]
@@ -48,7 +48,7 @@ const scheme = {
  * @tutorial vanilla/Reference/action-sheet
  * @modifier material
  *   [en]Display a Material Design action sheet button.[/en]
- *   [ja][/ja]
+ *   [ja]マテリアルデザインのアクションシート用のボタンを表示します。[/ja]
  * @example
  * <ons-action-sheet id="sheet">
  *   <ons-action-sheet-button>Label</ons-action-sheet-button>
@@ -66,7 +66,7 @@ export default class ActionSheetButtonElement extends BaseElement {
    * @type {String}
    * @description
    *  [en]Creates an `ons-icon` component with this string. Only visible on Android.[/en]
-   *  [ja][/ja]
+   *  [ja]`ons-icon`コンポーネントを悪性します。Androidでのみ表示されます。[/ja]
    */
 
   /**
@@ -74,7 +74,7 @@ export default class ActionSheetButtonElement extends BaseElement {
    * @type {String}
    * @description
    *   [en]The appearance of the action sheet button.[/en]
-   *   [ja][/ja]
+   *   [ja]アクションシートボタンの見た目を設定します。[/ja]
    */
 
   constructor() {

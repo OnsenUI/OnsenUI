@@ -1,6 +1,6 @@
 {
   "name": "vue-onsenui",
-  "version": "2.2.1",
+  "version": "2.3.0",
   "description": "Vue.js bindings for Onsen UI",
   "author": "Onsen UI Team <team@monaca.io>",
   "scripts": {
@@ -41,8 +41,8 @@
   ],
   "homepage": "https://onsen.io/",
   "peerDependencies": {
-    "onsenui": "~2.6.0",
-    "vue": "~2.4.0"
+    "onsenui": "~2.7.0",
+    "vue": "~2.5.0"
   },
   "devDependencies": {
     "babel-core": "^6.13.2",
@@ -52,7 +52,7 @@
     "babel-preset-stage-3": "^6.22.0",
     "babel-runtime": "^6.0.0",
     "cross-env": "^1.0.8",
-    "css-loader": "^0.23.1",
+    "css-loader": "^0.28.7",
     "file-loader": "^0.8.5",
     "fs-extra": "^3.0.1",
     "glob": "^7.1.2",
@@ -63,15 +63,15 @@
     "json-loader": "^0.5.4",
     "run-sequence": "^1.2.2",
     "static-server": "^2.0.3",
-    "style-loader": "^0.13.1",
-    "url-loader": "^0.5.7",
-    "vue": "^2.4.1",
-    "vue-hot-reload-api": "^2.1.0",
+    "style-loader": "^0.19.0",
+    "url-loader": "^0.6.2",
+    "vue": "^2.5.0",
+    "vue-hot-reload-api": "^2.2.0",
     "vue-html-loader": "^1.2.4",
-    "vue-loader": "^12.2.2",
-    "vue-style-loader": "^3.0.1",
-    "vue-template-compiler": "^2.4.1",
-    "vuex": "^2.3.1",
+    "vue-loader": "^13.3.0",
+    "vue-style-loader": "^3.0.3",
+    "vue-template-compiler": "^2.5.0",
+    "vuex": "^3.0.0",
     "wdio-jasmine-framework": "^0.2.17",
     "wdio-spec-reporter": "0.0.5",
     "webdriverio": "^4.5.0",

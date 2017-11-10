@@ -42,7 +42,7 @@ export default class BaseDialogElement extends BaseElement {
 
     this._visible = false;
     this._doorLock = new DoorLock();
-    this._boundCancel = () => this._cancel();
+    this._cancel = this._cancel.bind(this);
     this._selfCamelName = util.camelize(this.tagName.slice(4));
     this._defaultDBB = e => this.cancelable ? this._cancel() : e.callParentHandler();
     this._animatorFactory = this._updateAnimatorFactory();
@@ -72,6 +72,10 @@ export default class BaseDialogElement extends BaseElement {
           () => this._running = false
         );
     }
+  }
+
+  _preventScroll(event) {
+    event.cancelable && event.preventDefault();
   }
 
   show(...args) {
@@ -166,7 +170,10 @@ export default class BaseDialogElement extends BaseElement {
     this.onDeviceBackButton = this._defaultDBB.bind(this);
 
     contentReady(this, () => {
-      this._mask && this._mask.addEventListener('click', this._boundCancel, false);
+      if (this._mask) {
+        this._mask.addEventListener('click', this._cancel, false);
+        this._mask.addEventListener('touchmove', this._preventScroll, false); // iOS fix
+      }
     });
   }
 
@@ -174,7 +181,10 @@ export default class BaseDialogElement extends BaseElement {
     this._backButtonHandler.destroy();
     this._backButtonHandler = null;
 
-    this._mask && this._mask.removeEventListener('click', this._boundCancel.bind(this), false);
+    if (this._mask) {
+      this._mask.removeEventListener('click', this._cancel, false);
+      this._mask.removeEventListener('touchmove', this._preventScroll, false);
+    }
   }
 
   static get observedAttributes() {

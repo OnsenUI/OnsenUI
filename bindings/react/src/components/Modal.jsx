@@ -1,7 +1,5 @@
-import React from 'react';
+import BaseDialog from './BaseDialog.jsx';
 import PropTypes from 'prop-types';
-import ReactDOM from 'react-dom';
-import BasicComponent from './BasicComponent.jsx';
 
 /**
  * @original ons-modal
@@ -20,65 +18,17 @@ import BasicComponent from './BasicComponent.jsx';
  *   モーダルが表示されている間はイベント通知が行われません
  * [/ja]
  * @example
-  <Page
-    renderModal={() => (
-      <Modal isOpen={this.state.isLoading}>
-        Loading ...
-      </Modal>
-    )}>
+  <Page>
     <div> Page content </div>
+
+    <Modal isOpen={this.state.isLoading}>
+      Loading ...
+    </Modal>
   </Page>
  */
-class Modal extends BasicComponent {
-  constructor(...args) {
-    super(...args);
-    this.node = null;
-  }
-
-  componentDidMount() {
-    super.componentDidMount();
-    this.node = ReactDOM.findDOMNode(this);
-
-    if (this.props.onDeviceBackButton instanceof Function) {
-      this.node.onDeviceBackButton = this.props.onDeviceBackButton;
-    }
-
-    this._update(this.props, false);
-  }
-
-  componentWillReceiveProps(newProps) {
-    this._update(newProps, this.props.isOpen);
-    if (newProps.onDeviceBackButton !== undefined) {
-      ReactDOM.findDOMNode(this).onDeviceBackButton = newProps.onDeviceBackButton;
-    }
-  }
-
-  _update(props, isOpen) {
-    const animationOptions = {
-      animation: props.animation,
-      animationOptions: props.animationOptions
-    };
-
-    if (props.isOpen && !isOpen) {
-      this.node.show(animationOptions).then(() => props.onShow && props.onShow());
-    } else if (!props.isOpen && isOpen) {
-      this.node.hide(animationOptions).then(() => props.onHide && props.onHide());
-    }
-  }
-
-  componentWillUnmount() {
-    this.node = null;
-  }
-
-  render() {
-    const {...others} = this.props;
-    return (
-      <ons-modal
-        {...others}
-      >
-        {this.props.children}
-      </ons-modal>
-    );
+class Modal extends BaseDialog {
+  _getDomNodeName() {
+    return 'ons-modal';
   }
 }
 
@@ -88,10 +38,10 @@ Modal.propTypes = {
    * @type {String}
    * @description
    *   [en]
-   *     Animation name. Available animations are `"fade"` and `"none"`.
+   *     Animation name. Available animations are `"fade"`, `"lift"` and `"none"`.
    *   [/en]
    */
-  animation: PropTypes.oneOf(['none', 'fade']),
+  animation: PropTypes.oneOf(['none', 'fade', 'lift']),
 
   /**
    * @name animationOptions
@@ -102,26 +52,48 @@ Modal.propTypes = {
   animationOptions: PropTypes.object,
 
   /**
-   * @name onShow
+   * @name onPreShow
    * @type function
    * @required false
    * @description
    *  [en]
-   *  Called Fired right after the modal is shown.
+   *  Called just before the modal is displayed.
    *  [/en]
+   *  [ja][/ja]
    */
-  onShow: PropTypes.func,
+  onPreShow: PropTypes.func,
 
   /**
-   * @name onHide
+   * @name onPostShow
    * @type function
    * @required false
    * @description
    *  [en]
-   *  Called after the modal is hidden.
+   *  Called just after the modal is displayed.
    *  [/en]
+   *  [ja][/ja]
    */
-  onHide: PropTypes.func,
+  onPostShow: PropTypes.func,
+
+  /**
+   * @name onPreHide
+   * @type function
+   * @required false
+   * @description
+   *  [en]Called just before the modal is hidden.[/en]
+   *  [ja][/ja]
+   */
+  onPreHide: PropTypes.func,
+
+  /**
+   * @name onPostHide
+   * @type function
+   * @required false
+   * @description
+   *  [en]Called just after the modal is hidden.[/en]
+   *  [ja][/ja]
+   */
+  onPostHide: PropTypes.func,
 
   /**
    * @name isOpen

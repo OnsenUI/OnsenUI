@@ -214,6 +214,12 @@
   padding-top: 0;
 }
 
+.bottom-bar--aligned {
+  display: flex;
+  flex-wrap: nowrap;
+  line-height: var(--toolbar-height);
+}
+
 .bottom-bar--transparent {
   background-color: transparent;
   background-image: none;

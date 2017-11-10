@@ -1,6 +1,13 @@
 CHANGELOG
 ====
 
+2.3.0
+----
+
+### New Features
+
+* Supported Onsen UI Core 2.7.x.
+
 2.2.1
 ----
 

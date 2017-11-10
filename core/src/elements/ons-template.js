@@ -23,9 +23,7 @@ import BaseElement from './base/base-element';
  * @category util
  * @description
  *   [en]
- *     Define a separate HTML fragment and use as a template.
- *
- *     These templates can be loaded as pages in `<ons-navigator>`, `<ons-tabbar>` and `<ons-splitter>`. They can also be used to generate dialogs.
+ *     Define a separate HTML fragment and use as a template. These templates can be loaded as pages in `<ons-navigator>`, `<ons-tabbar>` and `<ons-splitter>`. They can also be used to generate dialogs. Since Onsen UI 2.4.0, the native `<template>` element can be used instead of `<ons-template>` for better performance and features. `<ons-template>` is still supported for backward compatibility.
  *   [/en]
  *   [ja]テンプレートとして使用するためのHTMLフラグメントを定義します。この要素でHTMLを宣言すると、id属性に指定した名前をpageのURLとしてons-navigatorなどのコンポーネントから参照できます。[/ja]
  * @seealso ons-navigator
@@ -44,8 +42,7 @@ import BaseElement from './base/base-element';
  *   </ons-page>
  * </ons-template>
  *
- * <ons-navigator page="foobar.html">
- * </ons-navigator>
+ * <ons-navigator page="foobar.html"></ons-navigator>
  */
 export default class TemplateElement extends BaseElement {
 

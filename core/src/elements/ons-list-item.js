@@ -16,6 +16,7 @@ limitations under the License.
 */
 
 import util from '../ons/util';
+import styler from '../ons/styler';
 import autoStyle from '../ons/autostyle';
 import ModifierUtil from '../ons/internal/modifier-util';
 import BaseElement from './base/base-element';
@@ -176,7 +177,7 @@ export default class ListItemElement extends BaseElement {
     center.classList.add('center');
     center.classList.add('list-item__center');
 
-    this._updateRipple();
+    util.updateRipple(this);
 
     ModifierUtil.initModifier(this, scheme);
   }
@@ -194,59 +195,38 @@ export default class ListItemElement extends BaseElement {
         ModifierUtil.onModifierChanged(last, current, this, scheme);
         break;
       case 'ripple':
-        this._updateRipple();
+        util.updateRipple(this);
         break;
     }
   }
 
   connectedCallback() {
-    this.addEventListener('drag', this._onDrag);
-    this.addEventListener('touchstart', this._onTouch);
-    this.addEventListener('mousedown', this._onTouch);
-    this.addEventListener('touchend', this._onRelease);
-    this.addEventListener('touchmove', this._onRelease);
-    this.addEventListener('touchcancel', this._onRelease);
-    this.addEventListener('mouseup', this._onRelease);
-    this.addEventListener('mouseout', this._onRelease);
-    this.addEventListener('touchleave', this._onRelease);
-
+    this._setupListeners(true);
     this._originalBackgroundColor = this.style.backgroundColor;
-
     this.tapped = false;
   }
 
   disconnectedCallback() {
-    this.removeEventListener('drag', this._onDrag);
-    this.removeEventListener('touchstart', this._onTouch);
-    this.removeEventListener('mousedown', this._onTouch);
-    this.removeEventListener('touchend', this._onRelease);
-    this.removeEventListener('touchmove', this._onRelease);
-    this.removeEventListener('touchcancel', this._onRelease);
-    this.removeEventListener('mouseup', this._onRelease);
-    this.removeEventListener('mouseout', this._onRelease);
-    this.removeEventListener('touchleave', this._onRelease);
+    this._setupListeners(false);
   }
 
-  get _transition() {
-    return 'background-color 0.0s linear 0.02s, box-shadow 0.0s linear 0.02s';
-  }
-
-  get _tappable() {
-    return this.hasAttribute('tappable');
-  }
-
-  get _tapBackgroundColor() {
-    return this.getAttribute('tap-background-color') || '#d9d9d9';
-  }
-
-  _updateRipple() {
-    util.updateRipple(this);
+  _setupListeners(add) {
+    const action = (add ? 'add' : 'remove') + 'EventListener';
+    this[action]('drag', this._onDrag);
+    this[action]('touchstart', this._onTouch);
+    this[action]('mousedown', this._onTouch);
+    this[action]('touchend', this._onRelease);
+    this[action]('touchmove', this._onRelease);
+    this[action]('touchcancel', this._onRelease);
+    this[action]('mouseup', this._onRelease);
+    this[action]('mouseout', this._onRelease);
+    this[action]('touchleave', this._onRelease);
   }
 
   _onDrag(event) {
     const gesture = event.gesture;
     // Prevent vertical scrolling if the users pans left or right.
-    if (this._shouldLockOnDrag() && ['left', 'right'].indexOf(gesture.direction) > -1) {
+    if (this.hasAttribute('lock-on-drag') && ['left', 'right'].indexOf(gesture.direction) > -1) {
       gesture.preventDefault();
     }
   }
@@ -257,34 +237,24 @@ export default class ListItemElement extends BaseElement {
     }
 
     this.tapped = true;
+    const touchStyle = { transition: 'background-color 0.0s linear 0.02s, box-shadow 0.0s linear 0.02s' };
 
-    this.style.transition = this._transition;
-    this.style.webkitTransition = this._transition;
-    this.style.MozTransition = this._transition;
-
-    if (this._tappable) {
+    if (this.hasAttribute('tappable')) {
       if (this.style.backgroundColor) {
         this._originalBackgroundColor = this.style.backgroundColor;
       }
 
-      this.style.backgroundColor = this._tapBackgroundColor;
-      this.style.boxShadow = `0px -1px 0px 0px ${this._tapBackgroundColor}`;
+      touchStyle.backgroundColor = this.getAttribute('tap-background-color') || '#d9d9d9';
+      touchStyle.boxShadow = `0px -1px 0px 0px ${touchStyle.backgroundColor}`;
     }
+
+    styler(this, touchStyle);
   }
 
   _onRelease() {
     this.tapped = false;
-
-    this.style.transition = '';
-    this.style.webkitTransition = '';
-    this.style.MozTransition = '';
-
     this.style.backgroundColor = this._originalBackgroundColor || '';
-    this.style.boxShadow = '';
-  }
-
-  _shouldLockOnDrag() {
-    return this.hasAttribute('lock-on-drag');
+    styler.clear(this, 'transition boxShadow');
   }
 }
 

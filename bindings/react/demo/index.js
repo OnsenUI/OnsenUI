@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import 'onsenui';
+import ons from 'onsenui';
 
 import '../../../build/css/onsenui.css';
 import '../../../build/css/onsen-css-components.css';
@@ -168,7 +168,7 @@ class Examples extends React.Component {
         title: 'Redux Navigator',
         component: ReduxNavigatorExample
       }
-    ];
+    ].sort((a, b) => a.title < b.title ? -1 : 1);
   }
 
   goto(example) {
@@ -208,6 +208,7 @@ class App extends React.Component {
   }
 
   render() {
+    ons.mockStatusBar();
     return (
       <Navigator
         swipeable={true}

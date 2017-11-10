@@ -41,9 +41,9 @@
   @apply(--reset-font);
   cursor: default;
   position: absolute;
-  left: 9px;
-  right: 9px;
-  bottom: 7px;
+  left: 10px; /* iOS 9, 10, 11 */
+  right: 10px; /* iOS 9, 10, 11 */
+  bottom: 10px; /* iOS 9, 10, 11 */
   z-index: 2;
 }
 
@@ -92,7 +92,7 @@
 
 .action-sheet-button:last-of-type {
   border-radius: 12px;
-  margin: 7px 0 0 0;
+  margin: 8px 0 0 0; /* iOS 9, 10, 11 */
   background-color: var(--action-sheet-cancel-button-background-color);
   background-image: none;
   font-weight: 600;

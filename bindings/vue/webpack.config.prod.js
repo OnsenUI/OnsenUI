@@ -58,6 +58,9 @@ module.exports = {
       }
     ]
   },
+  vue: {
+    esModule: false
+  },
   devtool: '#source-map',
   plugins: [
     new webpack.BannerPlugin(`${pkg.name} v${pkg.version} - ${new Date()}`),

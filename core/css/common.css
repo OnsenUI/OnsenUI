@@ -24,6 +24,7 @@ ons-page, ons-navigator,
 ons-split-view, ons-sliding-menu, ons-tabbar,
 ons-gesture-detector {
   display: block;
+  touch-action: manipulation; /* Remove click delay */
 }
 
 ons-navigator,
@@ -39,6 +40,7 @@ ons-alert-dialog {
   bottom: 0;
   right: 0;
   overflow: hidden;
+  touch-action: manipulation; /* Remove click delay */
 }
 
 ons-toast {
@@ -61,31 +63,23 @@ ons-fab, ons-speed-dial {
   z-index: 10001;
 }
 
-* {
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0) !important;
-}
-
-input, textarea {
-  -webkit-user-select: auto;
-  -moz-user-select: text;
-}
-
 ons-toolbar:not([inline]), ons-bottom-toolbar {
   position: absolute;
   left: 0;
   right: 0;
   z-index: 10000;
 }
+
 ons-toolbar:not([inline]) {
   top: 0;
 }
+
 ons-bottom-toolbar {
   bottom: 0;
 }
 
-.page, .page__content {
+.page, .page__content,
+.page--material, .page--material__content {
   background-color: transparent !important;
   background: transparent !important;
 }
@@ -109,26 +103,6 @@ ons-bottom-toolbar {
 .page.overflow-visible .page__content.content-swiping .page,
 .page.overflow-visible .page__content.content-swiping .page__content {
   overflow: auto;
-}
-
-.toolbar:not(.toolbar--transparent) + .page__background,
-.toolbar:not(.toolbar--cover-content) + .page__background + .page__content {
-  top: 44px;
-}
-
-.toolbar.toolbar--cover-content + .page__background + .page__content,
-.toolbar.toolbar--cover-content + .page__background + .page__content .page__content {
-  padding-top: 44px;
-}
-
-.toolbar--material:not(.toolbar--transparent) + .page__background,
-.toolbar--material:not(.toolbar--cover-content) + .page__background + .page__content {
-  top: 56px;
-}
-
-.toolbar--material.toolbar--cover-content + .page__background + .page__content,
-.toolbar--material.toolbar--cover-content + .page__background + .page__content .page__content {
-  padding-top: 56px;
 }
 
 .page[status-bar-fill] > .page__content {
@@ -172,10 +146,6 @@ ons-tabbar[position="top"] .page[status-bar-fill] > .page__content {
 
 .toolbar + .page__background + .page__content ons-tabbar[status-bar-fill] > .tabbar--top__content {
   top: 49px;
-}
-
-.page-with-bottom-toolbar > .page__content {
-  bottom: 44px;
 }
 
 .page__content > .list:not(.list--material):first-child {
@@ -284,10 +254,29 @@ ons-carousel[fullscreen] {
   position: absolute;
   width: 100%;
   height: 20px;
+  padding: 0 16px 0 6px;
+  box-sizing: border-box;
   z-index: 30000;
   display: flex;
   justify-content: space-between;
   font-size: 12px;
   line-height: 20px;
   font-family: Arial, Helvetica;
+}
+
+.ons-status-bar-mock i {
+  padding: 0 2px;
+}
+
+.ons-status-bar-mock.android {
+  color: white;
+  background-color: #222;
+  font-family: Roboto, Arial, Helvetica;
+}
+
+.ons-status-bar-mock.android ~ * {
+  top: 20px;
+  bottom: 0;
+  position: inherit;
+  width: 100%;
 }

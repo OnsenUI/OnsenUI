@@ -48,11 +48,11 @@ declare namespace ons {
    */
   function enableDeviceBackButtonHandler(): void;
   /**
-   * @description Enable status bar fill feature on iOS7 and above
+   * @description Enable status bar fill feature on iOS7 and above (except for iPhone X)
    */
   function enableAutoStatusBarFill(): void;
   /**
-   * @description Disable status bar fill feature on iOS7 and above
+   * @description Disable status bar fill feature on iOS7 and above (except for iPhone X)
    */
   function disableAutoStatusBarFill(): void;
   /**
@@ -232,11 +232,35 @@ declare namespace ons {
     function isAndroidTablet(): boolean;
 
     /**
+     * @description Returns whether app is running in UIWebView.
+     * @return {Boolean}
+     */
+    function isUIWebView(): boolean;
+
+    /**
+     * @description Returns whether app is running in iOS Safari.
+     * @return {Boolean}
+     */
+    function isIOSSafari(): boolean;
+
+    /**
+     * @description Returns whether app is running in WKWebView.
+     * @return {Boolean}
+     */
+    function isWKWebView(): boolean;
+
+    /**
      * @description Returns whether the device is iPhone
      * @return {Boolean}
      */
     function isIPhone(): boolean;
 
+    /**
+     * @description Returns whether the device is iPhone X
+     * @return {Boolean}
+     */
+    function isIPhoneX(): boolean;
+    
     /**
      * @description Returns whether the device is iPad
      * @return {Boolean}

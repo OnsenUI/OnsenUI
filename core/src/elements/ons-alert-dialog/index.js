@@ -54,15 +54,17 @@ const _animatorDict = {
  *
  *     To use the element it can either be attached directly to the `<body>` element or dynamically created from a template using the `ons.createAlertDialog(template)` utility function and the `<ons-template>` tag.
  *   [/en]
- *   [ja][/ja]
+ *   [ja]
+ *     現在のスクリーンの上に表示するアラートダイアログです。ユーザに対する問いかけ、警告、エラーメッセージを表示するのに利用できます。タイトルやコンテンツやボタンは簡単にカスタマイズでき、実行しているプラットフォームに併せてスタイルが自動的に切り替わります。
+ *   [/ja]
  * @codepen Qwwxyp
  * @tutorial vanilla/Reference/dialog
  * @modifier material
  *   [en]Material Design style[/en]
- *   [ja][/ja]
+ *   [ja]マテリアルデザインのスタイル[/ja]
  * @modifier rowfooter
  *   [en]Horizontally aligns the footer buttons.[/en]
- *   [ja][/ja]
+ *   [ja]フッターの複数のボタンを水平に配置[/ja]
  * @seealso ons-dialog
  *   [en]ons-dialog component[/en]
  *   [ja]ons-dialogコンポーネント[/ja]
@@ -150,7 +152,7 @@ export default class AlertDialogElement extends BaseDialogElement {
    * @attribute cancelable
    * @description
    *  [en]If this attribute is set the dialog can be closed by tapping the background or by pressing the back button on Android devices.[/en]
-   *  [ja][/ja]
+   *  [ja]この属性を設定すると、ダイアログの背景をタップしたりAndroidデバイスのバックボタンを押すとダイアログが閉じるようになります。[/ja]
    */
 
   /**
@@ -298,7 +300,7 @@ export default class AlertDialogElement extends BaseDialogElement {
    * @type {Boolean}
    * @description
    *   [en]Whether the dialog is cancelable or not. A cancelable dialog can be closed by tapping the background or by pressing the back button on Android devices.[/en]
-   *   [ja][/ja]
+   *   [ja]そのダイアログがキャンセル可能かどうかを表します。キャンセル可能なダイアログは、背景をタップするかAndroidデバイスのバックボタンを押すことで閉じることが出来るようになります。[/ja]
    */
 
   /**
@@ -321,7 +323,7 @@ export default class AlertDialogElement extends BaseDialogElement {
    *   [ja]ダイアログを表示します。[/ja]
    * @return {Promise}
    *   [en]A `Promise` object that resolves to the displayed element.[/en]
-   *   [ja][/ja]
+   *   [ja]表示される要素を解決する`Promise`オブジェクトを返します。[/ja]
    */
 
   /**
@@ -344,7 +346,7 @@ export default class AlertDialogElement extends BaseDialogElement {
    *   [ja]ダイアログを閉じます。[/ja]
    * @return {Promise}
    *   [en]Resolves to the hidden element[/en]
-   *   [ja][/ja]
+   *   [ja]隠れた要素を解決する`Promise`オブジェクトを返します。[/ja]
    */
 
   /**

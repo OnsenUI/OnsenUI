@@ -32,13 +32,6 @@ describe('v-ons-switch', function() {
     xit('has `material` class if modifier="material" is set', function() {
       // TODO
     });
-
-    describe('change event', function() {
-      it('works', function() {
-        browser.click('#change-event')
-        expect(browser.getText('#change-event-message')).toBe('it works!');
-      });
-    });
   });
 
   describe('(with navigator)', function() {
