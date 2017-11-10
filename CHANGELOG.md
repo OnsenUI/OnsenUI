@@ -7,7 +7,6 @@ dev
 
 ### Bug Fixes
 
- * ons-tabbar: Fixed [#2231](https://github.com/OnsenUI/OnsenUI/issues/2231).
 
 ### New Features
 
@@ -16,8 +15,9 @@ dev
 
 ### Bug Fixes
 
- * Fix template scripts on Firefox.
- * ons-card: Fixed [#2244](https://github.com/OnsenUI/OnsenUI/issues/2244).
+ * css-components: Added `word-wrap: break-word;` to `.card`. Fixed [#2244](https://github.com/OnsenUI/OnsenUI/issues/2244).
+ * core: Fix template scripts on Firefox.
+ * core: Fixed glitch in nested `<ons-page>`. Fixed [#2231](https://github.com/OnsenUI/OnsenUI/issues/2231).
 
 ### Misc
 
