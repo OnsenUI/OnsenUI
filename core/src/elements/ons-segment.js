@@ -49,8 +49,8 @@ const generateId = (() => {
  *   [ja][/ja]
  * @codepen hLayx
  * @tutorial vanilla/Reference/segment
- * @guide using-modifier [en]More details about the `modifier` attribute[/en][ja]modifier属性の使い方[/ja]
- * @guide cross-platform-styling [en]Information about cross platform styling[/en][ja]Information about cross platform styling[/ja]
+ * @guide theming.html#modifiers [en]More details about the `modifier` attribute[/en][ja]modifier属性の使い方[/ja]
+ * @guide theming.html#cross-platform-styling-autostyling [en]Information about cross platform styling[/en][ja]Information about cross platform styling[/ja]
  * @example
  * <ons-segment>
  *   <ons-button>Label 1</ons-button>

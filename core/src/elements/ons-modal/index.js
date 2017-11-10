@@ -52,9 +52,6 @@ const _animatorDict = {
  *     画面全体をマスクするモーダル用コンポーネントです。下側にあるコンポーネントは、
  *     モーダルが表示されている間はイベント通知が行われません。
  *   [/ja]
- * @guide dialogs
- *   [en]Dialog components[/en]
- *   [ja]Dialog components[/ja]
  * @seealso ons-dialog
  *   [en]The `<ons-dialog>` component can be used to create a modal dialog.[/en]
  *   [ja][/ja]

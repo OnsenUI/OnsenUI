@@ -39,7 +39,7 @@ const scheme = {
  * @modifier mini
  *   [en]Makes the `ons-fab` smaller.[/en]
  *   [ja][/ja]
- * @guide cross-platform-styling [en]Information about cross platform styling[/en][ja]Information about cross platform styling[/ja]
+ * @guide theming.html#cross-platform-styling-autostyling [en]Information about cross platform styling[/en][ja]Information about cross platform styling[/ja]
  * @seealso ons-speed-dial
  *   [en]The `<ons-speed-dial>` component is a Floating action button that displays a menu when tapped.[/en]
  *   [ja][/ja]

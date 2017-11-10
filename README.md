@@ -109,7 +109,7 @@ You can also take the necessary files from a CDN. Some of the options are [unpkg
 
 * __Get the latest development build__
 
-Optionally, you can download the [latest development build here](https://circleci.com/api/v1/project/OnsenUI/OnsenUI/latest/artifacts/0/$CIRCLE_ARTIFACTS/onsenui.zip?branch=master&filter=successful). Be careful, usually everything there is already tested but it might be unstable sometimes.
+Optionally, you can download the [latest development build here](https://onsenui.github.io/latest-build). Be careful, usually everything there is already tested but it might be unstable sometimes.
 
 
 ## Contribution

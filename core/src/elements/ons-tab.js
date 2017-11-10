@@ -41,12 +41,9 @@ const scheme = {
  *   [/ja]
  * @codepen pGuDL
  * @tutorial vanilla/Reference/tabbar
- * @guide multiple-page-navigation
+ * @guide fundamentals.html#managing-pages
  *   [en]Managing multiple pages.[/en]
- *   [ja]Managing multiple pages[/ja]]
- * @guide templates
- *   [en]Defining multiple pages in single html[/en]
- *   [ja]複数のページを1つのHTMLに記述する[/ja]
+ *   [ja]複数のページを管理する[/ja]]
  * @seealso ons-tabbar
  *   [en]ons-tabbar component[/en]
  *   [ja]ons-tabbarコンポーネント[/ja]

@@ -32,7 +32,7 @@ import GestureDetector from '../ons/gesture-detector';
  *     - Other gestures: `touch`, `transform`, `rotate`
  *   [/en]
  *   [ja]要素内のジェスチャー操作を検知します。詳しくはガイドを参照してください。[/ja]
- * @guide gesture-detector
+ * @guide features.html#gesture-detection
  *   [en]Detecting finger gestures[/en]
  *   [ja]ジェスチャー操作の検知[/ja]
  * @example

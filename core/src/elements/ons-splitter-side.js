@@ -112,9 +112,9 @@ const widthToPx = (width, parent) => {
  *  [ja]ons-splitter-side要素は、ons-splitter要素の子要素として利用します。[/ja]
  * @codepen rOQOML
  * @tutorial vanilla/Reference/splitter
- * @guide multiple-page-navigation
+ * @guide fundamentals.html#managing-pages
  *  [en]Managing multiple pages.[/en]
- *  [ja]Managing multiple pages[/ja]
+ *  [ja]複数のページを管理する[/ja]
  * @seealso ons-splitter
  *  [en]The `<ons-splitter>` is the parent component.[/en]
  *  [ja]ons-splitterコンポーネント[/ja]

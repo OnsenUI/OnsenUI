@@ -1,4 +1,5 @@
 import util from '../util';
+import platform from '../platform';
 import animit from '../animit';
 import GestureDetector from '../gesture-detector';
 
@@ -132,7 +133,38 @@ export default class Swiper {
   setActiveIndex(index, options = {}) {
     index = Math.max(0, Math.min(index, this.itemCount - 1));
     const scroll = Math.max(0, Math.min(this.maxScroll, this._offset + this.itemNumSize * index));
-    return this._changeTo(scroll, options);
+
+    if (platform.isUIWebView()) {
+      /* Dirty fix for #2231(https://github.com/OnsenUI/OnsenUI/issues/2231). begin */
+      const concat = arrayOfArray => Array.prototype.concat.apply([], arrayOfArray);
+      const contents = concat(
+        util.arrayFrom(this.target.children).map(page => {
+          return util.arrayFrom(page.children)
+            .filter(child => child.classList.contains('page__content'));
+        })
+      );
+
+      const map = new Map();
+      return (
+        new Promise(resolve => {
+          contents.forEach(content => {
+            map.set(content, content.getAttribute('class'));
+            content.classList.add('page__content--suppress-layer-creation')
+          });
+          requestAnimationFrame(resolve);
+        })
+        .then(() => this._changeTo(scroll, options))
+        .then(() => new Promise(resolve => {
+          contents.forEach(content => {
+            content.setAttribute('class', map.get(content));
+          });
+          requestAnimationFrame(resolve);
+        }))
+      );
+      /* end */
+    } else {
+      return this._changeTo(scroll, options);
+    }
   }
 
   getActiveIndex(scroll = this._scroll) {
@@ -303,9 +335,14 @@ export default class Swiper {
       }
     }
 
-    const opt = options.animation  === 'none' ? {} :  options.animationOptions;
+    const opt = options.animation  === 'none' ? {} : options.animationOptions;
     this.scrollHook && this.itemNumSize > 0 && this.scrollHook((scroll / this.itemNumSize).toFixed(2), options.animationOptions || {});
-    return new Promise(resolve => animit(this.target).queue({ transform: this._getTransform(scroll) }, opt).play(resolve));
+
+    return new Promise(resolve =>
+      animit(this.target)
+        .queue({ transform: this._getTransform(scroll) }, opt)
+        .play(resolve)
+    );
   }
 
   _getAutoScroll(scroll, velocity, matchesDirection) {

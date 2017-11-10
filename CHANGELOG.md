@@ -2,6 +2,25 @@
 CHANGELOG
 ====
 
+2.7.1
+----
+
+### New Features
+
+ * css-components: Added `--tap-highlight-color` variable for `-webkit-tap-highlight-color` CSS property.
+ * ons-bottom-toolbar: Added `aligned` modifier.
+
+### Bug Fixes
+
+ * css-components: Added `word-wrap: break-word;` to `.card`. Fixed [#2244](https://github.com/OnsenUI/OnsenUI/issues/2244).
+ * css-components: Fixed position of `.toast` in `onsflag-iphonex-portrait` mode.
+ * core: Fix template scripts on Firefox.
+ * core: Fixed glitch in nested `<ons-page>`. Fixed [#2231](https://github.com/OnsenUI/OnsenUI/issues/2231).
+
+### Misc
+
+ * css-components: Made it easy to override `user-select`. Fixed [#2227](https://github.com/OnsenUI/OnsenUI/issues/2227).
+
 2.7.0
 ----
 
@@ -12,7 +31,7 @@ CHANGELOG
  * css-components: Refined the css-components previewer located in `css-components-src`.
  * core: Supported iOS 11.
  * ons.mockStatusBar: Now can also show Android's status bar.
- * ons.platform: Added `isIOSSafari()`, `isUIWebView()` and `isWKWebView()`.
+ * ons.platform: Added `isIPhoneX()`, `isIOSSafari()`, `isUIWebView()` and `isWKWebView()`.
 
 ### Bug Fixes
 

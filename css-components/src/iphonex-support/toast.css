@@ -1,5 +1,5 @@
 @media (orientation: portrait) {
-  html[onsflag-iphonex-landscape] .toast {
+  html[onsflag-iphonex-portrait] .toast {
     bottom: var(--iphonex-safe-area-inset-bottom-portrait);
   }
 }

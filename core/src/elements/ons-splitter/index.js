@@ -44,9 +44,9 @@ const _animatorDict = {
  *  [ja][/ja]
  * @codepen rOQOML
  * @tutorial vanilla/Reference/splitter
- * @guide multiple-page-navigation
+ * @guide fundamentals.html#managing-pages
  *  [en]Managing multiple pages.[/en]
- *  [ja]Managing multiple pages[/ja]
+ *  [ja]複数のページを管理する[/ja]
  * @seealso ons-splitter-content
  *  [en]The `<ons-splitter-content>` component contains the main content of the page.[/en]
  *  [ja]ons-splitter-contentコンポーネント[/ja]
