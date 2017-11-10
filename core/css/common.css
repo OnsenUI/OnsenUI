@@ -21,7 +21,7 @@ limitations under the License.
 
 /* custom elements */
 ons-page, ons-navigator,
-ons-split-view, ons-sliding-menu, ons-tabbar,
+ons-tabbar,
 ons-gesture-detector {
   display: block;
   touch-action: manipulation; /* Remove click delay */
@@ -55,7 +55,7 @@ ons-tab {
   transform: translate3d(0, 0, 0);
 }
 
-ons-page, ons-navigator, ons-tabbar, ons-sliding-menu, ons-split-view, ons-dialog, ons-alert-dialog, ons-action-sheet, ons-toast {
+ons-page, ons-navigator, ons-tabbar, ons-dialog, ons-alert-dialog, ons-action-sheet, ons-toast {
   z-index: 2;
 }
 
@@ -89,10 +89,6 @@ ons-bottom-toolbar {
   -webkit-overflow-scrolling: touch;
   z-index: 0;
   -ms-touch-action: pan-y;
-}
-
-.page__content--suppress-layer-creation {
-  -webkit-overflow-scrolling: auto;
 }
 
 .page.overflow-visible,
