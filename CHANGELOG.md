@@ -15,6 +15,10 @@ dev
  * Fix template scripts on Firefox.
  * ons-card: Fixed [#2244](https://github.com/OnsenUI/OnsenUI/issues/2244).
 
+### Misc
+
+ * css-components: Made it easy to override `user-select`. Fixed [#2227](https://github.com/OnsenUI/OnsenUI/issues/2227).
+
 2.7.0
 ----
 
