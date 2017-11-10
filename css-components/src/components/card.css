@@ -27,6 +27,7 @@
   margin: 8px;
   padding: 16px;
   text-align: left;
+  word-wrap: break-word;
 }
 
 .card__content {

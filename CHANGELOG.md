@@ -13,6 +13,7 @@ dev
 ### Bug Fixes
 
  * Fix template scripts on Firefox.
+ * ons-card: Fixed [#2244](https://github.com/OnsenUI/OnsenUI/issues/2244).
 
 2.7.0
 ----
