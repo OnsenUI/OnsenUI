@@ -5,6 +5,10 @@ CHANGELOG
 dev
 ----
 
+### Bug Fixes
+
+ * ons-tabbar: Fixed [#2231](https://github.com/OnsenUI/OnsenUI/issues/2231).
+
 ### New Features
 
  * css-components: Added `--tap-highlight-color` variable for `-webkit-tap-highlight-color` CSS property.
