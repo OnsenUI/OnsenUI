@@ -13,7 +13,8 @@ import filesize from 'rollup-plugin-filesize';
 import progress from 'rollup-plugin-progress';
 import visualizer from 'rollup-plugin-visualizer';
 import alias from 'rollup-plugin-alias';
-import execute from 'rollup-plugin-execute';
+import uglify from 'rollup-plugin-uglify';
+import nodeGlobals from 'rollup-plugin-node-globals';
 
 const local = (...args) => path.resolve(__dirname, ...args);
 
@@ -24,8 +25,8 @@ babelrc.plugins = ['external-helpers'];
 babelrc.exclude = [local('node_modules/**'), local('../../build/**')];
 
 const banner = `/* ${pkg.name} v${pkg.version} - ${dateformat(new Date(), 'yyyy-mm-dd')} */\n`,
-  external = id => /^(onsenui|react|react-dom)$/.test(id),
   resolveOpt = { extensions: ['.js', '.jsx'] },
+  cjsOpt = { include: 'node_modules/**' },
   globals = {
     'onsenui': 'ons',
     'react': 'React',
@@ -34,15 +35,15 @@ const banner = `/* ${pkg.name} v${pkg.version} - ${dateformat(new Date(), 'yyyy-
   };
 
 const builds = [
-  // React bindings UMD
+  // React bindings UMD development
   {
     input: 'src/index.umd.js',
-    external,
+    external: id => /^(onsenui|react|react-dom|prop-types)$/.test(id),
     output: {
       file: 'dist/react-onsenui.js',
       format: 'umd',
       name: 'Ons',
-      sourcemap: false,
+      sourcemap: 'inline',
       globals,
     },
     plugins: [
@@ -53,16 +54,37 @@ const builds = [
         ],
       }),
       resolve(resolveOpt),
-      commonjs({ include: 'node_modules/**' }),
-      replace({ 'process.env.NODE_ENV': JSON.stringify( 'production' ) }),
+      commonjs(cjsOpt),
       babel(babelrc),
       progress(),
       filesize(),
       visualizer({
         filename: 'module-stats.umd.html',
-        sourcemap: false,
+        sourcemap: true,
       }),
-      execute(`node_modules/.bin/uglifyjs dist/${pkg.name}.js -c -m --comments '/${pkg.name}/' --output dist/${pkg.name}.min.js`),
+    ],
+    banner,
+  },
+
+  // React bindings UMD production
+  {
+    input: 'src/index.umd.js',
+    external: id => /^(onsenui|react|react-dom)$/.test(id),
+    output: {
+      file: 'dist/react-onsenui.min.js',
+      format: 'umd',
+      name: 'Ons',
+      sourcemap: true,
+      globals,
+    },
+    plugins: [
+      replace({ 'process.env.NODE_ENV': JSON.stringify( 'production' ) }),
+      resolve(resolveOpt),
+      commonjs(cjsOpt),
+      babel(babelrc),
+      uglify(),
+      progress(),
+      filesize(),
     ],
     banner,
   },
@@ -90,8 +112,8 @@ builds.devConfig = {
         [local('node_modules', 'react')]: ['Component', 'Children', 'createElement'],
       },
     }),
-    replace({ 'process.env.NODE_ENV': JSON.stringify( 'development' ) }),
     babel(babelrc),
+    nodeGlobals(),
     progress(),
     filesize(),
   ],
