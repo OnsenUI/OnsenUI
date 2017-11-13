@@ -1,8 +1,7 @@
 /*
 Copyright 2013-2014 ASIAL CORPORATION
 
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
+Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
 
    http://www.apache.org/licenses/LICENSE-2.0
@@ -397,12 +396,15 @@ gulp.task('clean', () => {
 // core-css
 ////////////////////////////////////////
 gulp.task('core-css', () =>  {
-  return merge(
-    gulp.src([
+  const buildPath = 'build/css/';
+  const core = (name, fonts) => gulp.src([
+      (fonts ? '' : '!') + 'core/css/fonts.css',
       'core/css/common.css',
-      'core/css/*.css'
+      'core/css/*.css',
     ])
-    .pipe($.concat('onsenui.css'))
+    .pipe($.concat(`${name}.css`))
+    .pipe($.insert.prepend(`/*! ${pkg.name} - v${pkg.version} - ${dateformat(new Date(), 'yyyy-mm-dd')} */\n`))
+    // Transpile
     .pipe($.autoprefixer({
       browsers: [ // enable CSS properties which require prefixes
         'Android >= 4.4',
@@ -413,12 +415,20 @@ gulp.task('core-css', () =>  {
       add: true,
       remove: false, // removing prefixes can cause a bug
     }))
-    .pipe($.header('/*! <%= pkg.name %> - v<%= pkg.version %> - ' + dateformat(new Date(), 'yyyy-mm-dd') + ' */\n', {pkg: pkg}))
-    .pipe(gulp.dest('build/css/'))
-    // onsenui.min.css
-    .pipe($.cssmin({processImport: false}))
-    .pipe($.rename({suffix: '.min'}))
-    .pipe(gulp.dest('build/css/')),
+    .pipe(gulp.dest(buildPath))
+    // Minify
+    .pipe($.cssmin({ processImport: false }))
+    .pipe($.rename({ suffix: '.min' }))
+    .pipe(gulp.dest(buildPath))
+  ;
+
+  return merge(
+    core('onsenui', true),
+    core('onsenui-core', false),
+
+    gulp.src('core/css/fonts.css')
+      .pipe($.rename({ basename: 'onsenui-fonts' }))
+      .pipe(gulp.dest(buildPath)),
 
     // font-awesome fle copy
     gulp.src('core/css/font_awesome/**/*')
