@@ -2,6 +2,14 @@
 CHANGELOG
 ====
 
+dev
+----
+
+### Bug Fixes
+
+ * core: Fixed glitch in nested `<ons-page>`. Fixed [#2231](https://github.com/OnsenUI/OnsenUI/issues/2231).
+
+
 2.7.1
 ----
 
@@ -15,7 +23,7 @@ CHANGELOG
  * css-components: Added `word-wrap: break-word;` to `.card`. Fixed [#2244](https://github.com/OnsenUI/OnsenUI/issues/2244).
  * css-components: Fixed position of `.toast` in `onsflag-iphonex-portrait` mode.
  * core: Fix template scripts on Firefox.
- * core: Fixed glitch in nested `<ons-page>`. Fixed [#2231](https://github.com/OnsenUI/OnsenUI/issues/2231).
+ * ~~core: Fixed glitch in nested `<ons-page>`. Fixed #2231.~~ (incomplete)
 
 ### Misc
 
