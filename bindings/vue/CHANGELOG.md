@@ -1,6 +1,17 @@
 CHANGELOG
 ====
 
+dev
+----
+
+### New Features
+
+ * esm: A new `esm` folder is available for ES Modules environments. It allows importing specific components instead of the whole bundle. See `ES Modules in Vue apps` section in the guide for more details.
+
+### Misc
+
+ * Reduced bundle size by more than 40%! (`vue-onsenui.min.js`)
+
 2.3.0
 ----
 
