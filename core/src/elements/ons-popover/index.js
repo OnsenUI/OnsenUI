@@ -62,10 +62,7 @@ const directions = Object.keys(positions);
  *  [ja]ある要素を対象とするポップオーバーを表示するコンポーネントです。[/ja]
  * @codepen ZYYRKo
  * @tutorial vanilla/Reference/popover
- * @guide dialogs
- *  [en]Dialog components[/en]
- *  [ja]Dialog components[/ja]
- * @guide using-modifier [en]More details about the `modifier` attribute[/en][ja]modifier属性の使い方[/ja]
+ * @guide theming.html#modifiers [en]More details about the `modifier` attribute[/en][ja]modifier属性の使い方[/ja]
  * @example
  * <ons-button onclick="showPopover(this)">
  *   Click me!

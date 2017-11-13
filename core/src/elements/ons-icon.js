@@ -36,7 +36,7 @@ let autoPrefix = 'fa'; // FIXME: To be removed in v3
  *   [ja][/ja]
  * @codepen xAhvg
  * @tutorial vanilla/Reference/icon
- * @guide cross-platform-styling [en]Information about cross platform styling[/en][ja]Information about cross platform styling[/ja]
+ * @guide theming.html#cross-platform-styling-autostyling [en]Information about cross platform styling[/en][ja]Information about cross platform styling[/ja]
  * @example
  * <ons-icon
  *   icon="md-car"

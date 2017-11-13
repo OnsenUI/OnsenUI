@@ -57,9 +57,6 @@ const _animatorDict = {
  *   [/en]
  *   [ja][/ja]
  * @tutorial vanilla/Reference/dialog
- * @guide dialogs
- *   [en]Dialog components[/en]
- *   [ja]Dialog components[/ja]
  * @seealso ons-alert-dialog
  *   [en]The `<ons-alert-dialog>` component is preferred for displaying undismissable information.[/en]
  *   [ja][/ja]

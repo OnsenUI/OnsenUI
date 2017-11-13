@@ -55,10 +55,7 @@ const scheme = {
  * @seealso ons-select
  *   [en]The `<ons-select>` element is used to display a select box.[/en]
  *   [ja][/ja]
- * @guide adding-page-content
- *   [en]Using form components[/en]
- *   [ja]フォームを使う[/ja]
- * @guide using-modifier [en]More details about the `modifier` attribute[/en][ja]modifier属性の使い方[/ja]
+ * @guide theming.html#modifiers [en]More details about the `modifier` attribute[/en][ja]modifier属性の使い方[/ja]
  * @example
  * <ons-checkbox checked></ons-checkbox>
  */

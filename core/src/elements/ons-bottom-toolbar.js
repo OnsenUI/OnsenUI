@@ -28,10 +28,13 @@ const scheme = {'': 'bottom-bar--*'};
  * @element ons-bottom-toolbar
  * @category page
  * @description
- *   [en]Toolbar component that is positioned at the bottom of the page.[/en]
+ *   [en]Toolbar component that is positioned at the bottom of the page. Since bottom toolbars are very versatile elements, `ons-bottom-toolbar` does not provide any specific layout syntax for its children. Modifiers or custom CSS must be used.[/en]
  *   [ja]ページ下部に配置されるツールバー用コンポーネントです。[/ja]
  * @modifier transparent
  *   [en]Make the toolbar transparent.[/en]
+ *   [ja]ツールバーの背景を透明にして表示します。[/ja]
+ * @modifier aligned
+ *   [en]Vertically aligns its children and applies flexbox for block elements. `justify-content` CSS rule can be used to change horizontal align.[/en]
  *   [ja]ツールバーの背景を透明にして表示します。[/ja]
  * @seealso ons-toolbar [en]ons-toolbar component[/en][ja]ons-toolbarコンポーネント[/ja]
  * @example

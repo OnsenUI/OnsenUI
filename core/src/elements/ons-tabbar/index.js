@@ -62,12 +62,9 @@ const lerp = (x0, x1, t) => (1 - t) * x0 + t * x1;
  * @modifier top-border
  *   [en]Shows a static border-bottom in tabs for iOS top tabbars.[/en]
  *   [ja][/ja]
- * @guide multiple-page-navigation
+ * @guide fundamentals.html#managing-pages
  *  [en]Managing multiple pages.[/en]
- *  [ja]Managing multiple pages[/ja]
- * @guide templates
- *   [en]Defining multiple pages in single html[/en]
- *   [ja]複数のページを1つのHTMLに記述する[/ja]
+ *  [ja]複数のページを管理する[/ja]
  * @seealso ons-tab
  *   [en]The `<ons-tab>` component.[/en]
  *   [ja]ons-tabコンポーネント[/ja]

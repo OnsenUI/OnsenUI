@@ -10,6 +10,32 @@ dev
  * Internal elements location has been changed. E.g. `ons.NavigatorElement` is now `ons.elements.Navigator`. This should only affect if you were registering custom animations.
  * `NavigatorTransitionAnimator` has been renamed to `NavigatorAnimator` like all the other animators. This should only affect if you were registering custom animations.
  * Renamed `core-src` directory to `esm` in distribution. This should only affect if you were manually importing specific components instead of the whole bundle.
+2.7.2
+----
+
+### Bug Fixes
+
+ * core: Fixed glitch in nested `<ons-page>`. Fixed [#2231](https://github.com/OnsenUI/OnsenUI/issues/2231).
+
+
+2.7.1
+----
+
+### New Features
+
+ * css-components: Added `--tap-highlight-color` variable for `-webkit-tap-highlight-color` CSS property.
+ * ons-bottom-toolbar: Added `aligned` modifier.
+
+### Bug Fixes
+
+ * css-components: Added `word-wrap: break-word;` to `.card`. Fixed [#2244](https://github.com/OnsenUI/OnsenUI/issues/2244).
+ * css-components: Fixed position of `.toast` in `onsflag-iphonex-portrait` mode.
+ * core: Fix template scripts on Firefox.
+ * ~~core: Fixed glitch in nested `<ons-page>`. Fixed #2231.~~ (incomplete)
+
+### Misc
+
+ * css-components: Made it easy to override `user-select`. Fixed [#2227](https://github.com/OnsenUI/OnsenUI/issues/2227).
 
 2.7.0
 ----
