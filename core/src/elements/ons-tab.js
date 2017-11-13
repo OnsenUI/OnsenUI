@@ -45,6 +45,8 @@ const scheme = {
  * @guide fundamentals.html#managing-pages
  *   [en]Managing multiple pages.[/en]
  *   [ja]複数のページを管理する[/ja]]
+ * @guide appsize.html#removing-icon-packs [en]Removing icon packs.[/en][ja][/ja]
+ * @guide faq.html#how-can-i-use-custom-icon-packs [en]Adding custom icon packs.[/en][ja][/ja]
  * @seealso ons-tabbar
  *   [en]ons-tabbar component[/en]
  *   [ja]ons-tabbarコンポーネント[/ja]
@@ -93,7 +95,7 @@ export default class TabElement extends BaseElement {
    * @type {String}
    * @description
    *   [en]
-   *     The icon name for the tab. Can specify the same icon name as `<ons-icon>`.
+   *     The icon name for the tab. Can specify the same icon name as `<ons-icon>`. Check [See also](#seealso) section for more information.
    *   [/en]
    *   [ja]
    *     アイコン名を指定します。ons-iconと同じアイコン名を指定できます。

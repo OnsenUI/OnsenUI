@@ -60,23 +60,13 @@ export default class IconElement extends BaseElement {
    *   [en]
    *     The icon name. `"md-"` prefix for Material Icons, `"fa-"` for Font Awesome and `"ion-"` prefix for Ionicons.
    *
-   *     See all available icons on their respective sites:
-   *
-   *     * [Font Awesome](https://fortawesome.github.io/Font-Awesome/)
-   *     * [Ionicons](http://ionicons.com)
-   *     * [Material Design Iconic Font](http://zavoloklom.github.io/material-design-iconic-font/)
+   *     See all available icons on the element description (at the top).
    *
    *     Icons can also be styled based on modifier presence. Add comma-separated icons with `"modifierName:"` prefix.
    *
-   *     The code:
+   *     The code `<ons-icon icon="ion-edit, material:md-edit"></ons-icon>` will display `"md-edit"` for Material Design and `"ion-edit"` as the default icon.
    *
-   *     ```
-   *     <ons-icon
-   *       icon="ion-edit, material:md-edit">
-   *     </ons-icon>
-   *     ```
-   *
-   *     will display `"md-edit"` for Material Design and `"ion-edit"` as the default icon.
+   *     `fa-` prefix is added automatically if none is provided. Check [See also](#seealso) section for more information.
    *   [/en]
    *   [ja][/ja]
    */
