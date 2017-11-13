@@ -20,6 +20,8 @@ import util from '../ons/util';
 import autoStyle from '../ons/autostyle';
 import BaseElement from './base/base-element';
 
+let autoPrefix = 'fa'; // FIXME: To be removed in v3
+
 /**
  * @element ons-icon
  * @category visual
@@ -134,6 +136,7 @@ export default class IconElement extends BaseElement {
   }
 
   attributeChangedCallback(name, last, current) {
+    this._cleanClassAttribute(name === 'icon' ? last : this.getAttribute('icon'), name === 'modifier' ? last : undefined);
     this._update();
   }
 
@@ -143,31 +146,38 @@ export default class IconElement extends BaseElement {
   }
 
   _update() {
-    this._cleanClassAttribute();
-    const {classList, style} = this._buildClassAndStyle(this._getAttribute('icon'), this._getAttribute('size'));
+    const {classList, style} = this._buildClassAndStyle(this._parseAttr('icon'), this._parseAttr('size'));
     util.extend(this.style, style);
 
     classList.forEach(className => this.classList.add(className));
   }
 
-  _getAttribute(attr) {
-    const parts = (this.getAttribute(attr) || '').split(/\s*,\s*/);
+  _parseAttr(attrName, modifier = this.getAttribute('modifier') || '') {
+    const attr = this.getAttribute(attrName) || attrName || ''
+    const parts = attr.split(/\s*,\s*/);
     const def = parts[0];
     let md = parts[1];
     md = (md || '').split(/\s*:\s*/);
-    return (util.hasModifier(this, md[0]) ? md[1] : def) || '';
+
+    return (modifier && (RegExp(`(^|\\s+)${md[0]}($|\\s+)`, 'i').test(modifier)) ? md[1] : def) || '';
   }
 
   /**
    * Remove unneeded class value.
    */
-  _cleanClassAttribute() {
-    util.arrayFrom(this.classList)
-      .filter(className => /^(fa$|fa-|ion-|zmdi-)/.test(className))
-      .forEach(className => this.classList.remove(className));
+  _cleanClassAttribute(lastIcon, lastModifier) {
+    const { className, prefix } = this._prefixIcon(this._parseAttr(lastIcon, lastModifier));
+    const customPrefixRE = className !== prefix ? `|${prefix}$|${prefix}-` : `|${className}$` || '';
+    const re = new RegExp(`^(fa$|fa-|ion-|zmdi$|zmdi-|ons-icon--${customPrefixRE})`);
 
-    this.classList.remove('zmdi');
-    this.classList.remove('ons-icon--ion');
+    util.arrayFrom(this.classList)
+      .filter(className => re.test(className))
+      .forEach(className => this.classList.remove(className));
+  }
+
+  _prefixIcon(iconName) {
+    const className = autoPrefix + (autoPrefix ? '-' : '') + iconName;
+    return { className, prefix: className.split('-')[0] };
   }
 
   _buildClassAndStyle(iconName, size) {
@@ -185,13 +195,14 @@ export default class IconElement extends BaseElement {
       classList.push('zmdi');
       classList.push('zmdi-' + iconName.split(/-(.+)?/)[1]);
     } else {
-      classList.push('fa');
-      classList.push('fa-' + iconName);
+      const { className, prefix } = this._prefixIcon(iconName);
+      prefix && classList.push(prefix);
+      className && classList.push(className);
     }
 
     // Size
     if (size.match(/^[1-5]x|lg$/)) {
-      classList.push('fa-' + size);
+      classList.push('ons-icon--' + size);
       this.style.removeProperty('font-size');
     } else {
       style.fontSize = size;
@@ -201,6 +212,10 @@ export default class IconElement extends BaseElement {
       classList: classList,
       style: style
     };
+  }
+
+  static setAutoPrefix(prefix) {
+    autoPrefix = prefix ? (typeof prefix === 'string' && prefix || 'fa') : '';
   }
 }
 
