@@ -70,10 +70,13 @@
         {
           "targets": {
             "browsers": [
-              "iOS >= 8",
-              "Android >= 4.4.4",
               "> 1%",
-              "last 2 versions"
+              "iOS >= 8.0",
+              "Android >= 4.4",
+              "Chrome >= 30",
+              "Safari >= 9",
+              "Firefox ESR",
+              "Opera 12.1"
             ]
           }
         }

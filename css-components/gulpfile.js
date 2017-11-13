@@ -1,5 +1,6 @@
 const gulp = require('gulp');
 const pkg = require('./package.json');
+const corePkg = require('../package.json');
 const merge = require('event-stream').merge;
 const runSequence = require('run-sequence');
 const browserSync = require('browser-sync').create();
@@ -25,6 +26,9 @@ const postcss = require('gulp-postcss');
 const stylelint = require('gulp-stylelint');
 
 const prefix = __dirname + '/../build/css/';
+const babelrc = Object.assign({}, corePkg.babel);
+babelrc.babelrc = babelrc.presets[0][1].modules = false;
+babelrc.exclude = 'node_modules/**';
 
 ////////////////////////////////////////
 // build
@@ -75,13 +79,7 @@ gulp.task('cssnext', ['stylelint'], () => {
       root: __dirname + '/src/components/'
     }),
     cssnext({
-      browsers: [ // enable CSS properties which require prefixes
-        '> 1%', 'Firefox ESR', 'Opera 12.1',
-        'Android >= 4.4',
-        'iOS >= 8.0',
-        'Chrome >= 30', // equivalent to Android 4.4 WebView
-        'Safari >= 9',
-      ],
+      browsers: babelrc.presets[0][1].targets.browsers,
     }),
     reporter({
       clearAllMessages: true,
@@ -168,23 +166,17 @@ gulp.task('preview-assets', () => {
 ////////////////////////////////////////
 gulp.task('preview-js', function() {
   return rollup({
-    entry: 'previewer-src/app.js',
+    input: 'previewer-src/app.js',
     plugins: [
       commonjs,
-      babel({
-        presets: [
-          ['es2015', {'modules': false}]
-        ],
-        babelrc: false,
-        exclude: 'node_modules/**'
-      })
+      babel(babelrc)
     ]
   })
   .then(bundle => {
     return bundle.write({
-      dest: 'build/app.gen.js',
+      file: 'build/app.gen.js',
       format: 'umd',
-      sourceMap: 'inline'
+      sourcemap: 'inline'
     });
   });
 });

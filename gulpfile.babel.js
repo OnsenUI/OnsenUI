@@ -406,12 +406,7 @@ gulp.task('core-css', () =>  {
     .pipe($.insert.prepend(`/*! ${pkg.name} - v${pkg.version} - ${dateformat(new Date(), 'yyyy-mm-dd')} */\n`))
     // Transpile
     .pipe($.autoprefixer({
-      browsers: [ // enable CSS properties which require prefixes
-        'Android >= 4.4',
-        'iOS >= 8.0',
-        'Chrome >= 30', // equivalent to Android 4.4 WebView
-        'Safari >= 9',
-      ],
+      browsers: babelrc.presets[0][1].targets.browsers,
       add: true,
       remove: false, // removing prefixes can cause a bug
     }))
