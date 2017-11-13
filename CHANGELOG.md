@@ -5,11 +5,23 @@ CHANGELOG
 dev
 ----
 
+### New Features
+
+ * core: The core CSS is now available without importing default icon fonts in `onsenui-core.css` file. This can be included instead of `onsenui.css` in order to reduce app size.
+ * ons: Added `disableIconAutoPrefix` method to avoid adding `fa-` prefix to non-prefixed icons. This allows using custom icon packs.
+ * esm: A new `esm` folder is available for ES Modules environments. It allows importing specific components instead of the whole bundle. See `Reducing App Size` section in the guide for more details.
+ * angular1: `ons-modal` now exposes event handlers (`ons-preshow`, `ons-postshow`, `ons-prehide`, `ons-posthide`) and `toggle` method.
+
+### Misc
+
+ * Reduced bundle size by more than 50%!
+
 #BREAKING CHANGES
 
  * Internal elements location has been changed. E.g. `ons.NavigatorElement` is now `ons.elements.Navigator`. This should only affect if you were registering custom animations.
  * `NavigatorTransitionAnimator` has been renamed to `NavigatorAnimator` like all the other animators. This should only affect if you were registering custom animations.
- * Renamed `core-src` directory to `esm` in distribution. This should only affect if you were manually importing specific components instead of the whole bundle.
+ * `core-src` directory has been removed. `esm` can be used instead. This should only affect if you were manually importing specific components instead of the whole bundle.
+
 2.7.2
 ----
 
