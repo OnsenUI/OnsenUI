@@ -261,6 +261,20 @@ ons.disableAutoStyling = autoStyle.disable;
 ons.enableAutoStyling = autoStyle.enable;
 
 /**
+ * @method disableIconAutoPrefix
+ * @signature disableIconAutoPrefix()
+ * @description
+ *   [en]Disable adding `fa-` prefix automatically to `ons-icon` classes. Useful when including custom icon packs.[/en]
+ *   [ja][/ja]
+ */
+ons.disableIconAutoPrefix = () => {
+  if (!ons.elements.Icon) {
+    throw new Error (`Expected 'ons-icon' Custom Element to be registered before calling this method.`);
+  }
+  ons.elements.Icon.setAutoPrefix(false);
+};
+
+/**
  * @method forcePlatformStyling
  * @signature forcePlatformStyling(platform)
  * @description
