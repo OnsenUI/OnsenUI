@@ -91,6 +91,10 @@ ons-bottom-toolbar {
   -ms-touch-action: pan-y;
 }
 
+.page__content--suppress-layer-creation {
+  -webkit-overflow-scrolling: auto;
+}
+
 .page.overflow-visible,
 .page.overflow-visible .page,
 .page.overflow-visible .page__content,
