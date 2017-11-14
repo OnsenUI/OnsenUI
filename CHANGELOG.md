@@ -22,7 +22,7 @@ dev
 
 ### Misc
 
- * Reduced bundle size by more than 50%!
+ * :tada: Reduced bundle size by more than 50%!
 
 ### BREAKING CHANGES
 
@@ -62,7 +62,7 @@ dev
 
 ### New Features
 
- * css-components: Supported iPhone X with `html[onsflag-iphonex-portrait]` and `html[onsflag-iphonex-landscape]` flags.
+ * :tada: css-components: Supported iPhone X with `html[onsflag-iphonex-portrait]` and `html[onsflag-iphonex-landscape]` flags.
  * css-components: Added iOS & Material dark color scheme available as `dark-onsen-css-components.css`.
  * css-components: Refined the css-components previewer located in `css-components-src`.
  * core: Supported iOS 11.
@@ -115,7 +115,7 @@ dev
  * ons: Added `mockStatusBar` utility to create a fake iOS status bar for browser testing.
  * ons-pull-hook: Added `onPull` property function that gets the pulled distance on drag.
  * ons-carousel: Added `onSwipe` property function that gets the swiped distance on drag.
- * ons-tabbar: Tabbar can now be swiped to change pages. `swipeable` attribute enables this feature.
+ * :tada: ons-tabbar: Tabbar can now be swiped to change pages. `swipeable` attribute enables this feature.
 
 ### Bug Fixes
 
@@ -190,7 +190,7 @@ v2.5.0
 ### New Features
 
  * core: Added `ons.modifier` object with a new set of methods to alter `modifier` attributes.
- * ons-navigator: iOS Swipe-to-pop feature.
+ * :tada: ons-navigator: iOS Swipe-to-pop feature.
  * ons-modal: Added `lift` animation ([#2078](https://github.com/OnsenUI/OnsenUI/pull/2078)).
  * ons-toolbar: New `cover-content` modifier. Should be combined with `transparent` modifier.
 
@@ -243,7 +243,7 @@ v2.4.0
 
  * core: Separated files are now cached after the first request. This improves performance when pushing pages.
  * core: Added `ons.preload` method to manually cache templates. This improves performance when pushing pages.
- * core: Support for `HTMLTemplateElement` (`<template>`). The former `<ons-template>` is still supported for backward compatibility.
+ * :tada: core: Support for `HTMLTemplateElement` (`<template>`). The former `<ons-template>` is still supported for backward compatibility.
  * core: Added page life-cycle hooks (similar to life-cycle events). `<template>` elements allow `<script>` tags in their content, which is useful for initialising pages. Therefore, hooks like `pageElement.onInit`, `pageElement.onShow`, etc. have been added.
  * ons-progress-bar, ons-progress-circular: Added new appearances for iOS.
 
