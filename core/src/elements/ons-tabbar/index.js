@@ -555,7 +555,7 @@ export default class TabbarElement extends BaseElement {
 
   _show() {
     this._swiper.show();
-    setImmediate(() => this.tabs[this.getActiveTabIndex()].loaded.then(el => el && setImmediate(() => el._show())));
+    setImmediate(() => this.tabs.length > 0 && this.tabs[this.getActiveTabIndex()].loaded.then(el => el && setImmediate(() => el._show())));
   }
 
   _hide() {
