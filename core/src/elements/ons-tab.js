@@ -193,11 +193,14 @@ export default class TabElement extends BaseElement {
     if (this.hasAttribute('icon')) {
       iconWrapper = iconWrapper || util.createElement('<div class="tabbar__icon"><ons-icon></ons-icon></div>');
       const icon = iconWrapper.children[0];
-      const lastIconName = icon.getAttribute('icon');
+      const fix = (last => () => icon.attributeChangedCallback('icon', last, this.getAttribute('icon')))(icon.getAttribute('icon'));
       icon.setAttribute('icon', this.getAttribute('icon'));
       iconWrapper.parentElement !== button && button.insertBefore(iconWrapper, button.firstChild);
+
       // dirty fix for https://github.com/OnsenUI/OnsenUI/issues/1654
-      icon.attributeChangedCallback('icon', lastIconName, this.getAttribute('icon'));
+      icon.attributeChangedCallback instanceof Function
+        ? fix()
+        : setImmediate(() => icon.attributeChangedCallback instanceof Function && fix());
     } else {
       iconWrapper && iconWrapper.remove();
     }

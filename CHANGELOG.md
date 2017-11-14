@@ -15,6 +15,7 @@ dev
 ### Bug Fixes
 
  * iPhoneX support: Fixed a glitch during push/pop animations.
+ * ons-tab: Fixed [#2247](https://github.com/OnsenUI/OnsenUI/issues/2247).
  * ons-segment: Prevent possible error when linking an `ons-tabbar` placed at the same level.
  * ons-segment: Adjust style for plain `div` children (instead of `button`).
  * ons-list-item: Material chevron with right content. Fixed [#2226](https://github.com/OnsenUI/OnsenUI/issues/2226).
