@@ -1,0 +1,68 @@
+:root {
+  --notification-border-radius: 19px;
+  --notification-width: auto;
+  --notification-height: 19px;
+  --notification-min-width: 19px;
+  --notification-padding: 0 4px;
+  --notification-font-weight: var(--font-weight);
+  --notification-font-size: 16px;
+
+  --material-notification-font-size: 16px;
+  --material-notification-font-weight: 500;
+}
+
+/*~
+  name: Notification
+  category: Notification
+  markup: |
+    <span class="notification">1</span>
+    <span class="notification">10</span>
+    <span class="notification">999</span>
+*/
+
+.notification {
+  position: relative;
+  display: inline-block;
+  vertical-align: top;
+  font: inherit;
+  border: none;
+  @apply(--reset-box-model);
+  @apply(--reset-base);
+  @apply(--reset-font);
+  @apply(--reset-cursor);
+  @apply(--ellipsis);
+  text-decoration: none;
+  margin: 0;
+  padding: var(--notification-padding);
+  width: var(--notification-width);
+  height: var(--notification-height);
+  border-radius: var(--notification-border-radius);
+  background-color: var(--notification-background-color);
+  color: var(--notification-color);
+  text-align: center;
+  font-size: var(--notification-font-size);
+  min-width: var(--notification-min-width);
+  line-height: var(--notification-height);
+  font-weight: var(--notification-font-weight);
+}
+
+.notification:empty {
+  display: none;
+}
+
+/*~
+  name: Material Notification
+  category: Notification
+  markup: |
+    <span class="notification notification--material">1</span>
+    <span class="notification notification--material">10</span>
+    <span class="notification notification--material">999</span>
+*/
+
+.notification--material {
+  @apply(--material-font);
+  background-color: var(--material-notification-background-color);
+  font-size: var(--material-notification-font-size);
+  font-weight: var(--material-notification-font-weight);
+  color: var(--material-notification-color);
+}

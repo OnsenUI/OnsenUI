@@ -1,0 +1,115 @@
+:root {
+  --button-bar-active-color: var(--button-bar-active-text-color);
+  --button-bar-border-top: 1px solid var(--button-bar-color);
+  --button-bar-border-bottom: 1px solid var(--button-bar-color);
+  --button-bar-border: 0 solid var(--button-bar-color);
+  --button-bar-border-radius: 4px;
+
+  --button-bar: {
+    @apply(--reset-font);
+    display: inline-flex;
+    align-items: stretch;
+    align-content: stretch;
+    flex-wrap: nowrap;
+    margin: 0;
+    padding: 0;
+    border: none;
+  }
+
+  --button-bar__item: {
+    @apply(--reset-font);
+    border-radius: 0;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+  }
+}
+
+/*~
+  name: Button Bar
+  category: Segment
+  markup: |
+    <div class="button-bar" style="width:280px;">
+      <div class="button-bar__item">
+        <button class="button-bar__button">One</button>
+      </div>
+      <div class="button-bar__item">
+        <button class="button-bar__button">Two</button>
+      </div>
+      <div class="button-bar__item">
+        <button class="button-bar__button">Three</button>
+      </div>
+    </div>
+*/
+
+.button-bar {
+  @apply(--button-bar);
+}
+
+.button-bar__item {
+  @apply(--button-bar__item);
+  @apply(--hide-input-parent);
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.button-bar__button {
+  @apply(--reset-font);
+  border-radius: 0;
+  background-color: transparent;
+  color: var(--button-bar-color);
+  border: 1px solid var(--button-bar-color);
+  border-top-width: 1px;
+  border-bottom-width: 1px;
+  border-right-width: 1px;
+  border-left-width: 0;
+  font-weight: var(--font-weight);
+  padding: 0;
+  font-size: 13px;
+  height: 27px;
+  line-height: 27px;
+  width: 100%;
+  transition: background-color 0.2s linear, color 0.2s linear;
+  box-sizing: border-box;
+}
+
+.button-bar__button:disabled {
+  @apply(--disabled);
+}
+
+.button-bar__button:hover {
+  transition: none;
+}
+
+.button-bar__button:focus {
+  outline: 0;
+}
+
+:checked + .button-bar__button {
+  background-color: var(--button-bar-color);
+  color: var(--button-bar-active-color);
+  transition: none;
+}
+
+.button-bar__button:active,
+:active + .button-bar__button {
+  background-color: var(--button-bar-active-background-color);
+  border: var(--button-bar-border);
+  border-top: var(--button-bar-border-top);
+  border-bottom: var(--button-bar-border-bottom);
+  border-right: 1px solid var(--button-bar-color);
+  font-size: 13px;
+  width: 100%;
+  transition: none;
+}
+
+.button-bar__item:first-child > .button-bar__button {
+  border-left-width: 1px;
+  border-radius: var(--button-bar-border-radius) 0 0 var(--button-bar-border-radius);
+}
+
+.button-bar__item:last-child > .button-bar__button {
+  border-right-width: 1px;
+  border-radius: 0 var(--button-bar-border-radius) var(--button-bar-border-radius) 0;
+}
+

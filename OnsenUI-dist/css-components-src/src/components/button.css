@@ -1,0 +1,432 @@
+
+:root {
+  --button-text-color: white;
+  --button-quiet-color: var(--highlight-color);
+  --button-cta-color: white;
+  --button-large-padding: 4px 12px;
+  --button-padding: 4px 10px;
+  --button-line-height: 32px;
+  --button-large-line-height: 36px;
+  --button-active-opacity: 0.2;
+  --button-border-radius: 3px;
+
+  --button--quiet: {
+    background: transparent;
+    border: 1px solid transparent;
+    box-shadow: none;
+  }
+
+  --button--disabled: {
+    @apply(--disabled);
+  }
+
+  --button--hover: {
+    transition: none;
+  }
+
+  --button: {
+    position: relative;
+    display: inline-block;
+    @apply(--reset-box-model);
+    @apply(--reset-base);
+    @apply(--reset-font);
+    @apply(--reset-cursor);
+    @apply(--ellipsis);
+    height: auto;
+    text-decoration: none;
+    padding: var(--button-padding);
+    font-size: var(--font-size);
+    line-height: var(--button-line-height);
+    letter-spacing: 0;
+    color: var(--button-text-color);
+    vertical-align: middle;
+    background-color: var(--button-background-color);
+    border: 0 solid currentColor;
+    border-radius: var(--button-border-radius);
+    transition: none;
+  }
+
+  --button--focus: {
+    outline: 0;
+  }
+
+  --button--active: {
+    background-color: var(--button-background-color);
+    transition: none;
+    opacity: var(--button-active-opacity);
+  }
+
+  --button--material: {
+    @apply(--button);
+    @apply(--material-shadow-1);
+    @apply(--material-font);
+    min-height: 36px;
+    line-height: 36px;
+    padding: 0 16px;
+    text-align: center;
+    font-size: 14px;
+    transform: translate3d(0, 0, 0);
+    text-transform: uppercase;
+    background-color: var(--material-button-background-color);
+    color: var(--material-button-text-color);
+    font-weight: var(--font-weight--large);
+    transition: background-color 0.25s linear;
+  }
+}
+
+/*~
+  name: Button
+  category: Button
+  elements: ons-button
+  markup: |
+    <button class="button">Button</button>
+    <button class="button" disabled>Button</button>
+*/
+
+.button {
+  @apply(--button);
+}
+
+.button:hover {
+  @apply(--button--hover);
+}
+
+.button:active {
+  @apply(--button--active);
+}
+
+.button:focus {
+  @apply(--button--focus);
+}
+
+.button:disabled, .button[disabled] {
+  @apply(--button--disabled);
+}
+
+/*~
+  name: Outline Button
+  category: Button
+  elements: ons-button
+  markup: |
+    <button class="button button--outline">Button</button>
+    <button class="button button--outline" disabled>Button</button>
+*/
+
+.button--outline {
+  background-color: transparent;
+  border: 1px solid var(--button-background-color);
+  color: var(--button-background-color);
+}
+
+.button--outline:active {
+  background-color: color(var(--button-background-color) tint(var(--alpha-lighten)));
+  border: 1px solid var(--button-background-color);
+  color: var(--button-background-color);
+  opacity: 1;
+}
+
+.button--outline:hover {
+  border: 1px solid var(--button-background-color);
+  transition: 0;
+}
+
+/*~
+  name: Light Button
+  category: Button
+  elements: ons-button
+  markup: |
+    <button class="button button--light">Button</button>
+    <button class="button button--light" disabled>Button</button>
+*/
+
+.button--light {
+  background-color: transparent;
+  color: color(var(--button-light-color) a(40%));
+  border: 1px solid color(var(--button-light-color) a(20%));
+}
+
+.button--light:active {
+  background-color: color(var(--button-light-color) a(5%));
+  color: color(var(--button-light-color) a(40%));
+  border: 1px solid color(var(--button-light-color) a(20%));
+  opacity: 1;
+}
+
+/*~
+  name: Quiet Button
+  category: Button
+  elements: ons-button
+  markup: |
+    <button class="button--quiet">Button</button>
+    <button class="button--quiet" disabled>Button</button>
+*/
+
+.button--quiet {
+  @apply(--button);
+  @apply(--button--quiet);
+  background: transparent;
+  color: var(--button-quiet-color);
+  border: none;
+}
+
+.button--quiet:disabled,
+.button--quiet[disabled] {
+  @apply(--button--disabled);
+  border: none;
+}
+
+.button--quiet:hover {
+  @apply(--button--hover);
+}
+
+.button--quiet:focus {
+  @apply(--button--focus);
+}
+
+.button--quiet:active {
+  background-color: transparent;
+  border: none;
+  transition: none;
+  opacity: var(--button-active-opacity);
+  color: var(--button-quiet-color);
+}
+
+/*~
+  name: Call To Action Button
+  category: Button
+  elements: ons-button
+  markup: |
+    <button class="button--cta">Button</button>
+    <button class="button--cta" disabled>Button</button>
+*/
+
+.button--cta {
+  @apply(--button);
+  border: none;
+  background-color: var(--button-cta-background-color);
+  color: var(--button-cta-color);
+}
+
+.button--cta:hover {
+  @apply(--button--hover);
+}
+
+.button--cta:focus {
+  @apply(--button--focus);
+}
+
+.button--cta:active {
+  color: var(--button-cta-color);
+  background-color: var(--button-cta-background-color);
+  transition: none;
+  opacity: var(--button-active-opacity);
+}
+
+.button--cta:disabled,
+.button--cta[disabled] {
+  @apply(--button--disabled);
+}
+
+/*
+  name: Large Button
+  category: Button
+  elements: ons-button
+  markup: |
+    <button class="button button--large" style="width: 95%; margin: 0 auto;">Button</button>
+*/
+
+.button--large {
+  font-size: var(--font-size);
+  font-weight: var(--font-weight--large);
+  line-height: var(--button-large-line-height);
+  padding: var(--button-large-padding);
+  display: block;
+  width: 100%;
+  text-align: center;
+}
+
+.button--large:active {
+  @apply(--button--active);
+  transition: none;
+}
+
+.button--large:disabled,
+.button--large[disabled] {
+  @apply(--button--disabled);
+}
+
+.button--large:hover {
+  @apply(--button--hover);
+}
+
+.button--large:focus {
+  @apply(--button--focus);
+}
+
+/*~
+  name: Large Quiet Button
+  category: Button
+  elements: ons-button
+  markup: |
+    <button class="button--large--quiet" style="width: 95%; margin: 0 auto;">Button</button>
+*/
+
+.button--large--quiet { /* stylelint-disable-line */
+  @apply(--button);
+  font-size: var(--font-size);
+  font-weight: var(--font-weight--large);
+  line-height: var(--button-large-line-height);
+  padding: var(--button-large-padding);
+  display: block;
+  width: 100%;
+  @apply(--button--quiet);
+  color: var(--button-quiet-color);
+  text-align: center;
+}
+
+.button--large--quiet:active { /* stylelint-disable-line */
+  transition: none;
+  opacity: var(--button-active-opacity);
+  color: var(--button-quiet-color);
+  @apply(--button--quiet);
+}
+
+.button--large--quiet:disabled, .button--large--quiet[disabled] { /* stylelint-disable-line */
+  @apply(--button--disabled);
+}
+
+.button--large--quiet:hover { /* stylelint-disable-line */
+  @apply(--button--hover);
+}
+
+.button--large--quiet:focus { /* stylelint-disable-line */
+  outline: 0;
+}
+
+/*~
+  name: Large Call To Action Button
+  category: Button
+  elements: ons-button
+  markup: |
+    <button class="button--large--cta" style="width: 95%; margin: 0 auto;">Button</button>
+*/
+
+.button--large--cta { /* stylelint-disable-line */
+  @apply(--button);
+  border: none;
+  background-color: var(--button-cta-background-color);
+  color: var(--button-cta-color);
+  font-size: var(--font-size);
+  font-weight: var(--font-weight--large);
+  line-height: var(--button-large-line-height);
+  padding: var(--button-large-padding);
+  width: 100%;
+  text-align: center;
+  display: block;
+}
+
+.button--large--cta:hover { /* stylelint-disable-line */
+  @apply(--button--hover);
+}
+
+.button--large--cta:focus { /* stylelint-disable-line */
+  @apply(--button--focus);
+}
+
+.button--large--cta:active { /* stylelint-disable-line */
+  color: var(--button-cta-color);
+  background-color: var(--button-cta-background-color);
+  transition: none;
+  opacity: var(--button-active-opacity);
+}
+
+.button--large--cta:disabled, .button--large--cta[disabled] { /* stylelint-disable-line */
+  @apply(--button--disabled);
+}
+
+/*~
+  name: Material Button
+  category: Button
+  elements: ons-button
+  markup: |
+    <button class="button button--material">BUTTON</button>
+    <button class="button button--material" disabled>DISABLED</button>
+*/
+
+.button--material {
+  @apply(--button--material);
+  opacity: 1;
+  transition: all 0.25s linear;
+}
+
+.button--material:hover {
+  transition: all 0.25s linear;
+}
+
+.button--material:active {
+  @apply(--material-shadow-3);
+  background-color: var(--material-button-background-color);
+  opacity: 0.9;
+  transition: all 0.25s linear;
+}
+
+.button--material:focus {
+  @apply(--button--focus);
+}
+
+.button--material:disabled,
+.button--material[disabled] {
+  transition: none;
+  @apply(--material-shadow-0);
+  background-color: var(--material-button-disabled-background-color);
+  color: var(--material-button-disabled-color);
+  opacity: 1;
+}
+
+/*~
+  name: Material Flat Button
+  category: Button
+  elements: ons-button
+  markup: |
+    <button class="button button--material--flat">BUTTON</button>
+    <button class="button button--material--flat" disabled>DISABLED</button>
+*/
+
+.button--material--flat { /* stylelint-disable-line */
+  @apply(--button--material);
+  @apply(--material-shadow-0);
+  background-color: transparent;
+  color: var(--material-button-background-color);
+  transition: all 0.25s linear;
+}
+
+.button--material--flat:hover { /* stylelint-disable-line */
+  transition: all 0.25s linear;
+}
+
+.button--material--flat:focus { /* stylelint-disable-line */
+  @apply(--material-shadow-0);
+  background-color: transparent;
+  color: var(--material-button-background-color);
+  outline: 0;
+  opacity: 1;
+  border: none;
+}
+
+.button--material--flat:active { /* stylelint-disable-line */
+  @apply(--material-shadow-0);
+  outline: 0;
+  opacity: 1;
+  border: none;
+  background-color: var(--material-flat-button-active-background-color);
+  color: var(--material-button-background-color);
+  transition: all 0.25s linear;
+}
+
+.button--material--flat:disabled, .button--material--flat[disabled] {/* stylelint-disable-line */
+  transition: none;
+  opacity: 1;
+  @apply(--material-shadow-0);
+  background-color: transparent;
+  color: var(--material-button-disabled-color);
+}

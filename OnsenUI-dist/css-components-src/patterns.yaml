@@ -1,0 +1,376 @@
+---
+name: Basic
+markup: |
+  <div class="page">
+    <div class="toolbar">
+      <div class="toolbar__left"><span class="toolbar-button">Label</span></div>
+      <div class="toolbar__center">Title</div>
+      <div class="toolbar__right"><span class="toolbar-button">Label</span></div>
+    </div>
+
+    <div>
+      <br>
+
+      <div class="list-title">Title</div>
+
+      <ul class="list">
+        <li class="list-item">
+          <div class="list-item__center">Item</div>
+        </li>
+        <li class="list-item">
+          <div class="list-item__center">Item</div>
+        </li>
+      </ul>
+
+      <br>
+
+      <ul class="list">
+        <li class="list-item">
+          <div class="list-item__center">
+            <div class="list-item__title">
+              Title
+            </div>
+            <div class="list-item__subtitle">
+              Subtitle
+            </div>
+          </div>
+        </li>
+        <li class="list-item">
+          <div class="list-item__center">
+            <div class="list-item__title">
+              Title
+            </div>
+            <div class="list-item__subtitle">
+              Subtitle
+            </div>
+          </div>
+        </li>
+      </ul>
+
+    </div>
+    <div class="bottom-bar">
+      <div class="bottom-bar__line-height" style="text-align:center">Label</div>
+    </div>
+  </div>
+---
+name: Material Basic
+markup: |
+  <div class="page page--material">
+    <div class="toolbar toolbar--material">
+      <div class="toolbar__left toolbar--material__left"></div>
+      <div class="toolbar__center toolbar--material__center">Title</div>
+      <div class="toolbar__right toolbar--material__right"></div>
+    </div>
+
+    <div>
+      <h3 class="list-title list-title--material">Title</h3>
+      <ul class="list list--material">
+        <li class="list-item list-item--material">
+          <div class="list-item__center list-item--material__center">Item</div>
+        </li>
+        <li class="list-item list-item--material">
+          <div class="list-item__center list-item--material__center">Item</div>
+        </li>
+      </ul>
+
+      <br>
+      <ul class="list list--material">
+        <li class="list-item list-item--material">
+          <div class="list-item__center list-item--material__center">
+            <div class="list-item__title list-item--material__title">Title</div>
+            <div class="list-item__subtitle list-item--material__subtitle">Subtitle</div>
+          </div>
+        </li>
+        <li class="list-item list-item--material">
+          <div class="list-item__center list-item--material__center">
+            <div class="list-item__title list-item--material__title">Title</div>
+            <div class="list-item__subtitle list-item--material__subtitle">Subtitle</div>
+          </div>
+        </li>
+      </ul>
+
+    </div>
+  </div>
+---
+name: Settings
+markup: |
+  <div class="page">
+    <div class="toolbar">
+      <div class="toolbar__left"><span class="toolbar-button">Label</span></div>
+      <div class="toolbar__center">Title</div>
+      <div class="toolbar__right"><span class="toolbar-button">Label</span></div>
+    </div>
+
+    <div>
+      <br>
+
+      <ul class="list">
+        <li class="list-item">
+          <div class="list-item__left">
+            <i class="ion-ios-volume-low" style="font-size: 28px"></i>
+          </div>
+          <div class="list-item__center">
+            <div class="range" style="width: 100%">
+              <input type="range" class="range__input">
+            </div>
+          </div>
+          <div class="list-item__right">
+            <i class="ion-ios-volume-high" style="font-size: 28px"></i>
+          </div>
+        </li>
+      </ul>
+
+      <br>
+
+      <ul class="list">
+        <li class="list-item">
+          <div class="list-item__center">
+            Label
+          </div>
+          <div class="list-item__right">
+            <label class="switch">
+              <input type="checkbox" class="switch__input" checked>
+              <div class="switch__toggle">
+                <div class="switch__handle"></div>
+              </div>
+            </label>
+          </div>
+        </li>
+      </ul>
+
+      <br>
+
+      <ul class="list">
+        <li class="list-item list-item--tappable">
+          <div class="list-item__left">
+            <label class="checkbox checkbox--noborder">
+              <input id="s1" type="checkbox" class="checkbox__input checkbox--noborder__input">
+              <div class="checkbox__checkmark checkbox--noborder checkbox--noborder__checkmark"></div>
+            </label>
+          </div>
+          <label for="s1" class="list-item__center">
+            Checkbox
+          </label>
+        </li>
+        <li class="list-item list-item--tappable">
+          <div class="list-item__left">
+            <label class="checkbox checkbox--noborder">
+              <input id="s2" type="checkbox" class="checkbox__input checkbox--noborder__input" checked>
+              <div class="checkbox__checkmark checkbox--noborder checkbox--noborder__checkmark"></div>
+            </label>
+          </div>
+          <label for="s2" class="list-item__center">
+            Checkbox
+          </label>
+        </li>
+      </ul>
+
+    </div>
+  </div>
+---
+name: Material Settings
+markup: |
+  <div class="page page--material">
+    <div class="toolbar toolbar--material">
+      <div class="toolbar__left toolbar--material__left"></div>
+      <div class="toolbar__center toolbar--material__center">Title</div>
+      <div class="toolbar__right toolbar--material__right"></div>
+    </div>
+
+    <div>
+      
+      <br>
+
+      <ul class="list list--material">
+        <li class="list-item list-item--material">
+          <div class="list-item__left list-item--material__left" style="min-width: 0; width: 20px;">
+            <i class="ion-ios-volume-low" style="font-size: 28px"></i>
+          </div>
+          <div class="list-item__center list-item--material__center">
+            <div class="range range--material" style="width: 100%">
+              <input type="range" class="range__input range--material__input">
+            </div>
+          </div>
+          <div class="list-item__right list-item--material__right">
+            <i class="ion-ios-volume-high" style="font-size: 28px"></i>
+          </div>
+        </li>
+      </ul>
+
+      <br>
+
+      <ul class="list list--material">
+        <li class="list-item list-item--material">
+          <div class="list-item__left list-item--material__left">
+            Label
+          </div>
+          <div class="list-item__center list-item--material__center">
+          </div>
+          <div class="list-item__right list-item--material__right">
+            <label class="switch switch--material">
+              <input type="checkbox" class="switch__input switch--material__input" checked>
+              <div class="switch__toggle switch--material__toggle">
+                <div class="switch__handle switch--material__handle"></div>
+              </div>
+            </label>
+          </div>
+        </li>
+      </ul>
+
+      <br>
+
+      <ul class="list list--material">
+        <li class="list-item list-item--material">
+          <div class="list-item__left list-item--material__left">
+            <label class="checkbox checkbox--material">
+              <input type="checkbox" id="checkbox3" class="checkbox__input checkbox--material__input">
+              <div class="checkbox__checkmark checkbox--material__checkmark"></div>
+            </label>
+          </div>
+
+          <label for="checkbox3" class="list-item__center list-item--material__center">
+            <div class="list-item__title list-item--material__title">Checkbox</div>
+          </label>
+        </li>
+
+        <li class="list-item list-item--material">
+          <div class="list-item__left list-item--material__left">
+            <label class="checkbox checkbox--material">
+              <input type="checkbox" id="checkbox4" class="checkbox__input checkbox--material__input" checked="checked">
+              <div class="checkbox__checkmark checkbox--material__checkmark"></div>
+            </label>
+          </div>
+
+          <label for="checkbox4" class="list-item__center list-item--material__center">
+            <div class="list-item__title list-item--material__title">Checkbox</div>
+          </label>
+        </li>
+
+      </ul>
+
+    </div>
+  </div>
+---
+name: Tabbar
+markup: |
+  <div class="page">
+    <div class="toolbar">
+      <div class="toolbar__left"></div>
+      <div class="toolbar__center">Title</div>
+      <div class="toolbar__right"></div>
+    </div>
+
+    <div class="tabbar">
+      <label class="tabbar__item">
+        <input type="radio" name="tabbar-a" checked="checked">
+        <button class="tabbar__button">
+          <i class="tabbar__icon ion-record"></i>
+          <div class="tabbar__label">Label</div>
+        </button>
+      </label>
+
+      <label class="tabbar__item">
+        <input type="radio" name="tabbar-a">
+        <button class="tabbar__button">
+          <i class="tabbar__icon ion-record"></i>
+          <div class="tabbar__label">Label</div>
+        </button>
+      </label>
+
+      <label class="tabbar__item">
+        <input type="radio" name="tabbar-a">
+        <button class="tabbar__button">
+          <i class="tabbar__icon ion-record"></i>
+          <div class="tabbar__label">Label</div>
+        </button>
+      </label>
+    </div>
+  </div>
+---
+name: Material Tabbar
+markup: |
+  <div class="page page--material">
+    <div class="toolbar toolbar--material">
+      <div class="toolbar__left toolbar--material__left"></div>
+      <div class="toolbar__center toolbar--material__center">Title</div>
+      <div class="toolbar__right toolbar--material__right"></div>
+    </div>
+
+    <div class="tabbar tabbar--material tabbar--top">
+      <label class="tabbar__item tabbar--material__item">
+        <input type="radio" name="material-tabbar" checked="checked">
+        <button class="tabbar__button tabbar--material__button">
+          <i class="tabbar__icon tabbar--material__icon ion-record"></i>
+          <div class="tabbar__label tabbar--material__label">Label</div>
+        </button>
+      </label>
+
+      <label class="tabbar__item tabbar--material__item">
+        <input type="radio" name="material-tabbar" checked="checked">
+        <button class="tabbar__button tabbar--material__button">
+          <i class="tabbar__icon tabbar--material__icon ion-record"></i>
+          <div class="tabbar__label tabbar--material__label">Label</div>
+        </button>
+      </label>
+
+      <label class="tabbar__item tabbar--material__item">
+        <input type="radio" name="material-tabbar" checked="checked">
+        <button class="tabbar__button tabbar--material__button">
+          <i class="tabbar__icon tabbar--material__icon ion-record"></i>
+          <div class="tabbar__label tabbar--material__label">Label</div>
+        </button>
+      </label>
+    </div>
+  </div>
+---
+name: Alert Dialog
+markup: |
+  <div class="page">
+    <div class="toolbar">
+      <div class="toolbar__left"><span class="toolbar-button">Label</span></div>
+      <div class="toolbar__center">Title</div>
+      <div class="toolbar__right"><span class="toolbar-button">Label</span></div>
+    </div>
+    <div></div>
+  </div>
+  <div class="alert-dialog-mask"></div>
+  <div class="alert-dialog">
+    <div class="alert-dialog-container">
+      <div class="alert-dialog-title">Alert</div>
+
+      <div class="alert-dialog-content">
+        Hello World!
+      </div>
+
+      <div class="alert-dialog-footer">
+        <button class="alert-dialog-button alert-dialog-button--primal">OK</button>
+      </div>
+    </div>
+  </div>
+---
+name: Material Alert Dialog
+markup: |
+  <div class="page page--material">
+    <div class="toolbar toolbar--material">
+      <div class="toolbar__left toolbar--material__left"></div>
+      <div class="toolbar__center toolbar--material__center">Title</div>
+      <div class="toolbar__right toolbar--material__right"></div>
+    </div>
+    <div>
+    </div>
+  </div>
+  <div class="alert-dialog-mask alert-dialog-mask--material"></div>
+  <div class="alert-dialog alert-dialog--material">
+    <div class="alert-dialog-container alert-dialog-container--material">
+      <div class="alert-dialog-title alert-dialog-title--material">
+        Dialog title
+      </div>
+      <div class="alert-dialog-content alert-dialog-content--material">
+        Some dialog content.
+      </div>
+      <div class="alert-dialog-footer alert-dialog-footer--material">
+        <button class="alert-dialog-button alert-dialog-button--material">OK</button>
+        <button class="alert-dialog-button alert-dialog-button--material">CANCEL</button>
+      </div>
+    </div>
+  </div>

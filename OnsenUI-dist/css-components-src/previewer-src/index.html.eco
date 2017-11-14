@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1.0,maximum-scale=1,minimum-scale=1">
+  <base href="/">
+
+  <title>Onsen CSS Components</title>
+
+  <link rel="stylesheet" href="/onsen-css-components.css" id="theme-css" />
+  <link rel="stylesheet" href="https://unpkg.com/onsenui/css/font_awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://unpkg.com/onsenui/css/ionicons/css/ionicons.min.css">
+  <link rel="stylesheet" href="https://unpkg.com/onsenui/css/material-design-iconic-font/css/material-design-iconic-font.min.css">
+  <link rel="stylesheet" href="/style.css">
+
+
+</head>
+<body ontouchstart=""> <!-- Hack to activate :active CSS selector on iOS browsers.-->
+
+  <div id="app"></div>
+
+  <script src="https://unpkg.com/vue@2.4.2" async></script>
+  <script src="https://unpkg.com/page.js@4.13.3/page.js" async></script>
+  <script src="/app.gen.js" async></script>
+
+  <div id="data"
+    data-components="<%= @toJSON(@components) %>"
+    data-themes="<%= @toJSON(@themes) %>"
+    data-patterns="<%= @toJSON(@patterns) %>"></div>
+
+</body>
+</html>

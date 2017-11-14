@@ -1,0 +1,88 @@
+
+:root {
+}
+
+/*~
+  name: Toast
+  category: Toast
+  markup: |
+    <div class="toast">
+      <div class="toast__message">Message Message Message Message Message Message</div>
+      <button class="toast__button">ACTION</button>
+    </div>
+*/
+
+.toast {
+  @apply(--reset-font);
+  position: absolute;
+  z-index: 2;
+  left: 8px;
+  right: 8px;
+  bottom: 0;
+  margin: 8px 0;
+  border-radius: 8px;
+  background-color: var(--toast-background-color);
+  display: flex;
+  min-height: 48px;
+  line-height: 48px;
+  box-sizing: border-box;
+  padding: 0 16px;
+}
+
+.toast__message {
+  font-size: 14px;
+  color: var(--toast-text-color);
+  flex-grow: 1;
+  text-align: left;
+  margin: 0 16px 0 0;
+  @apply(--ellipsis);
+}
+
+.toast__button {
+  font-size: 14px;
+  color: var(--toast-button-text-color);
+  flex-grow: 0;
+  appearance: none;
+  border: none;
+  background-color: transparent;
+  cursor: default;
+  text-transform: uppercase;
+}
+
+.toast__button:focus {
+  outline: none;
+}
+
+.toast__button:active {
+  opacity: 0.4;
+}
+
+/*~
+  name: Material Toast
+  category: Toast
+  markup: |
+    <div class="toast toast--material">
+      <div class="toast__message toast--material__message">Message Message Message Message Message Message</div>
+      <button class="toast__button toast--material__button">ACTION</button>
+    </div>
+*/
+
+.toast--material {
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: 0;
+  background-color: var(--material-toast-background-color);
+  border-radius: 0;
+  padding: 0 24px;
+}
+
+.toast--material__message {
+  @apply(--material-font);
+  margin: 0 24px 0 0;
+}
+
+.toast--material__button {
+  @apply(--material-font);
+  color: var(--material-toast-button-text-color);
+}

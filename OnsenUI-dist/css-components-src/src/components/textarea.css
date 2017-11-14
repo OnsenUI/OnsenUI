@@ -1,0 +1,79 @@
+:root {
+  --textarea-color: var(--input-text-color);
+  --textarea-border: 1px solid var(--input-border-color);
+  --textarea-padding: 5px 5px 5px 5px;
+  --textarea-box-shadow: none;
+  --textarea-border-radius: 4px;
+}
+
+/*~
+  name: Textarea
+  category: Textarea
+  markup: |
+    <textarea class="textarea" rows="3" placeholder="Textarea"></textarea>
+*/
+
+.textarea {
+  @apply(--reset-box-model);
+  @apply(--reset-base);
+  @apply(--reset-font);
+  vertical-align: top;
+  resize: none;
+  outline: none;
+  padding: var(--textarea-padding);
+  font-size: var(--text-input-font-size);
+  font-weight: var(--font-weight);
+  border-radius: var(--textarea-border-radius);
+  border: var(--textarea-border);
+  background-color: var(--input-bg-color);
+  color: var(--textarea-color);
+  letter-spacing: 0;
+  box-shadow: var(--textarea-box-shadow);
+  appearance: none;
+  width: auto;
+}
+
+.textarea:disabled {
+  @apply(--disabled);
+}
+
+.textarea::placeholder {
+  color: var(--input-placeholder-color);
+}
+
+/*~
+  name: Textarea Transparent
+  category: Textarea
+  markup: |
+    <textarea class="textarea textarea--transparent" rows="3" placeholder="Textarea"></textarea>
+*/
+
+.textarea--transparent {
+  @apply(--reset-box-model);
+  @apply(--reset-base);
+  @apply(--reset-font);
+  vertical-align: top;
+  resize: none;
+  outline: none;
+  padding: var(--textarea-padding);
+  padding-left: 0;
+  padding-right: 0;
+  font-size: var(--text-input-font-size);
+  font-weight: var(--font-weight);
+  border-radius: var(--textarea-border-radius);
+  border: none;
+  background-color: transparent;
+  color: var(--textarea-color);
+  letter-spacing: 0;
+  box-shadow: var(--textarea-box-shadow);
+  appearance: none;
+  width: auto;
+}
+
+.textarea--transparent:disabled {
+  @apply(--disabled);
+}
+
+.textarea--transparent::placeholder {
+  color: var(--input-placeholder-color);
+}

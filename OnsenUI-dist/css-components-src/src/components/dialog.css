@@ -1,0 +1,79 @@
+
+/*~
+  name: Dialog
+  category: Dialog
+  elements: ons-dialog
+  markup: |
+    <div class="dialog-mask"></div>
+    <div class="dialog">
+      <div class="dialog-container">
+        <p style="text-align:center;margin-top:40px;opacity:0.4;">Content</p>
+      </div>
+    </div>
+*/
+
+.dialog {
+  @apply(--reset-box-model);
+  @apply(--reset-base);
+  @apply(--reset-cursor);
+  @apply(--reset-font);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  margin: auto auto;
+  overflow: hidden;
+  min-width: 270px;
+  min-height: 100px;
+  text-align: left;
+}
+
+.dialog-container {
+  height: inherit;
+  min-height: inherit;
+  overflow: hidden;
+  border-radius: 4px;
+  background-color: var(--dialog-background-color);
+  -webkit-mask-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAA5JREFUeNpiYGBgAAgwAAAEAAGbA+oJAAAAAElFTkSuQmCC');
+  color: var(--dialog-text-color);
+}
+
+.dialog-mask {
+  @apply(--reset-base);
+  @apply(--reset-cursor);
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+/*~
+  name: Material Dialog
+  category: Dialog
+  elements: ons-dialog
+  markup: |
+    <div class="dialog-mask dialog-mask--material"></div>
+    <div class="dialog dialog--material">
+      <div class="dialog dialog-container--material">
+        <p style="margin-left:24px;margin-right:24px">The quick brown fox jumps over the lazy dog.</p>
+      </div>
+    </div>
+*/
+
+.dialog--material {
+  @apply(--material-font);
+  text-align: left;
+  @apply(--material-shadow-5);
+}
+
+.dialog-container--material {
+  border-radius: 2px;
+  background-color: var(--material-dialog-background-color);
+  color: var(--material-dialog-text-color);
+}
+
+.dialog-mask--material {
+  background-color: rgba(0, 0, 0, 0.3);
+}

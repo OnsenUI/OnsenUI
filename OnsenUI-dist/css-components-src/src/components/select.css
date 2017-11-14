@@ -1,0 +1,203 @@
+
+:root {
+  --select-input-font-size: var(--font-size);
+  --select-input-height: 32px;
+
+  --material-select-input-font-size: 15px;
+
+  --select-input: {
+    @apply(--input);
+    @apply(--transparent);
+    position: relative;
+    font-size: var(--select-input-font-size);
+    height: var(--select-input-height);
+    line-height: var(--select-input-height);
+    border-color: var(--select-input-border-color);
+    color: var(--select-input-color);
+    appearance: none;
+    display: inline-block;
+    border-radius: 0;
+    border: none;
+  }
+
+  --select-input--disabled: {
+    @apply(--disabled);
+    @apply(--transparent);
+  }
+
+  --input-placeholder: {
+    @apply(--transparent);
+    color: var(--input-placeholder-color);
+  }
+
+  --select-input--invalid: {
+    @apply(--transparent);
+    color: var(--input-invalid-text-color);
+  }
+
+  --select-input--material-placeholder: {
+    color: var(--material-select-input-inactive-color);
+    line-height: 20px;
+  }
+}
+
+/*~
+  name: Select Input
+  category: Select Input
+  markup: |
+    <select class="select-input">
+      <option>Option 1</option>
+      <option>Option 2</option>
+      <option>Option 3</option>
+    </select>
+
+    &nbsp;
+
+    <select class="select-input" disabled>
+      <option>Option 1</option>
+      <option>Option 2</option>
+      <option>Option 3</option>
+    </select>
+*/
+
+.select-input {
+  @apply(--select-input);
+  padding: 0 20px 0 0;
+  background-color: transparent;
+  background-image: url('../img/select-arrow.svg');
+  background-repeat: no-repeat;
+  background-position: right center;
+  border-bottom: none;
+}
+
+.select-input::-ms-clear {
+  display: none;
+}
+
+.select-input::placeholder {
+  color: var(--input-placeholder-color);
+}
+
+.select-input:disabled {
+  @apply(--select-input--disabled);
+}
+
+.select-input:disabled::placeholder {
+  @apply(--input-placeholder);
+}
+
+.select-input:invalid {
+  @apply(--select-input--invalid);
+}
+
+.select-input[multiple] {
+  height: calc(var(--select-input-height) * 2);
+}
+
+/*~
+  name: Material Select Input
+  category: Select Input
+  markup: |
+    <select class="select-input select-input--material">
+      <option>Option 1</option>
+      <option>Option 2</option>
+      <option>Option 3</option>
+    </select>
+
+    &nbsp;
+
+    <select class="select-input select-input--material" disabled>
+      <option>Option 1</option>
+      <option>Option 2</option>
+      <option>Option 3</option>
+    </select>
+*/
+
+.select-input--material {
+  @apply(--material-font);
+  color: var(--material-select-input-color);
+  font-size: var(--material-select-input-font-size);
+  background-image: url('../img/select-arrow.svg'), linear-gradient(to top, var(--material-select-border-color) 50%, var(--material-select-border-color) 50%);
+  background-size: auto, 100% 1px;
+  background-repeat: no-repeat;
+  background-position: right center, left bottom;
+  border: none;
+  font-weight: 400;
+  transform: translate3d(0, 0, 0); /* prevent ios flicker */
+}
+
+.select-input--material__label {
+  @apply(--material-font);
+  color: var(--material-select-input-inactive-color);
+  position: absolute;
+  left: 0;
+  top: 2px;
+  font-size: 16px;
+  pointer-events: none;
+}
+
+.select-input--material__label--active {
+  color: var(--material-select-input-active-color);
+  transform: translate(0, -75%) scale(0.75);
+  transform-origin: left top;
+  transition: transform 0.1s ease-in, color 0.1s ease-in;
+}
+
+.select-input--material::placeholder {
+  @apply(--select-input--material-placeholder);
+}
+
+@keyframes material-select-input-animate {
+  0% {
+    background-size: 0% 2px, 100% 2px;
+  }
+
+  100% {
+    background-size: 100% 2px, 100% 2px;
+  }
+}
+
+/*~
+  name: Underbar Select Input
+  category: Select Input
+  markup: |
+    <select class="select-input select-input--underbar">
+      <option>Option 1</option>
+      <option>Option 2</option>
+      <option>Option 3</option>
+    </select>
+
+    &nbsp;
+
+    <select class="select-input select-input--underbar" disabled>
+      <option>Option 1</option>
+      <option>Option 2</option>
+      <option>Option 3</option>
+    </select>
+*/
+
+.select-input--underbar {
+  border: none;
+  border-bottom: 1px solid var(--select-input-border-color);
+}
+
+.select-input--underbar:disabled {
+  @apply(--select-input--disabled);
+  border: none;
+  background-color: transparent;
+  border-bottom: 1px solid var(--select-input-border-color);
+}
+
+.select-input--underbar:disabled::placeholder {
+  @apply(--input-placeholder);
+  border: none;
+  background-color: transparent;
+}
+
+.select-input--underbar:invalid {
+  @apply(--select-input--invalid);
+  border: none;
+  background-color: transparent;
+  border-bottom: 1px solid var(--input-invalid-border-color);
+}
+
