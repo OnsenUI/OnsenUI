@@ -1,6 +1,6 @@
 {
   "name": "react-onsenui",
-  "version": "1.8.0",
+  "version": "1.9.0",
   "description": "Onsen UI - React Components for Hybrid Cordova/PhoneGap Apps with Material Design and iOS UI components",
   "scripts": {
     "build": "cross-env NODE_ENV=production rollup -c",
