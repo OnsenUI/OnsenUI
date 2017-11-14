@@ -89,14 +89,22 @@
   }
 
   /* Outermost page__content with a toolbar */
+  html[onsflag-iphonex-portrait] .toolbar:not(.toolbar--cover-content)+.page__background,
   html[onsflag-iphonex-portrait] .toolbar:not(.toolbar--cover-content)+.page__background+.page__content {
     top: calc(var(--iphonex-safe-area-inset-top-portrait) + var(--toolbar-height));
     padding-top: 0;
   }
   /* Non-outermost */
+  html[onsflag-iphonex-portrait] .dialog .toolbar:not(.toolbar--cover-content)+.page__background,
   html[onsflag-iphonex-portrait] .dialog .toolbar:not(.toolbar--cover-content)+.page__background+.page__content, /* if wrapped with dialogs */
+
+  html[onsflag-iphonex-portrait] .modal .toolbar:not(.toolbar--cover-content)+.page__background,
   html[onsflag-iphonex-portrait] .modal .toolbar:not(.toolbar--cover-content)+.page__background+.page__content, /* if wrapped with modals */
+
+  html[onsflag-iphonex-portrait] .toolbar:not(.toolbar--cover-content)+.page__background+.page__content .toolbar:not(.toolbar--cover-content)+.page__background,
   html[onsflag-iphonex-portrait] .toolbar:not(.toolbar--cover-content)+.page__background+.page__content .toolbar:not(.toolbar--cover-content)+.page__background+.page__content, /* if wrapped with a page with a toolbar */
+
+  html[onsflag-iphonex-portrait] .tabbar--top__content .toolbar:not(.toolbar--cover-content)+.page__background,
   html[onsflag-iphonex-portrait] .tabbar--top__content .toolbar:not(.toolbar--cover-content)+.page__background+.page__content { /* if wrapped with a top tabbar */
     /* Restore original styles */
     top: var(--toolbar-height);

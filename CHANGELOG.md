@@ -14,6 +14,7 @@ dev
 
 ### Bug Fixes
 
+ * iPhoneX support: Fixed a glitch during push/pop animations.
  * ons-segment: Prevent possible error when linking an `ons-tabbar` placed at the same level.
  * ons-segment: Adjust style for plain `div` children (instead of `button`).
 
