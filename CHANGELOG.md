@@ -21,6 +21,7 @@ dev
  * ons-segment: Adjust style for plain `div` children (instead of `button`).
  * ons-list-item: Material chevron with right content. Fixed [#2226](https://github.com/OnsenUI/OnsenUI/issues/2226).
  * ons-lazy-repeat: Lists can be empty. Fixed [#2232](https://github.com/OnsenUI/OnsenUI/issues/2232).
+ * modifier: Fixed [#2237](https://github.com/OnsenUI/OnsenUI/issues/2237).
 
 ### Misc
 
