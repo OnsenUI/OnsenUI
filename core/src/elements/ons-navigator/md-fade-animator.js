@@ -15,14 +15,14 @@ limitations under the License.
 
 */
 
-import NavigatorTransitionAnimator from './animator';
+import NavigatorAnimator from './animator';
 import util from '../../ons/util';
 import animit from '../../ons/animit';
 
 /**
  * Fade-in + Lift screen transition.
  */
-export default class MDFadeNavigatorTransitionAnimator extends NavigatorTransitionAnimator {
+export default class MDFadeNavigatorAnimator extends NavigatorAnimator {
 
   constructor({timing = 'cubic-bezier(0.4, 0.0, 0.2, 1)', timingOnPop = 'cubic-bezier(0.4, 0.0, 1, 1)', delay = 0, duration = 0.2} = {}) {
     super({timing, delay, duration});

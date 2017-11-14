@@ -23,9 +23,11 @@
 </template>
 
 <script>
+  import 'onsenui/esm/elements/ons-tabbar';
   import { deriveEvents, hasOptions, hidable, selfProvider } from '../mixins';
 
   export default {
+    name: 'v-ons-tabbar',
     mixins: [deriveEvents, hasOptions, hidable, selfProvider],
 
     props: {

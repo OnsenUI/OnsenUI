@@ -34,7 +34,6 @@ import Util from './Util.js';
  */
 
 class Tabbar extends BasicComponent {
-
   constructor(...args) {
     super(...args);
 

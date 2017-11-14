@@ -101,6 +101,7 @@ jobs:
           paths:
             - ./bindings/vue/node_modules
 
+      # Tests
       - run:
           name: Run OnsenUI Tests
           command: npm run test:skip-build
@@ -108,7 +109,6 @@ jobs:
       - run: cd bindings/angular1; gulp e2e-test # bindings/angular1 has no package.json.
       - run: cd bindings/angular2; npm test
       - run: cd bindings/react; npm test
-      - run: cd bindings/react; npm run build
       - run: cd bindings/vue; npm test
       - run:
           name: Save test results

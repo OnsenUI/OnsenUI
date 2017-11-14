@@ -15,6 +15,7 @@ limitations under the License.
 
 */
 
+import ons from '../ons';
 import util from '../ons/util';
 import autoStyle from '../ons/autostyle';
 import ModifierUtil from '../ons/internal/modifier-util';
@@ -163,7 +164,7 @@ export default class SegmentElement extends BaseElement {
           throw new Error(`<ons-segment> error: no tabbar with id ${this.getAttribute('tabbar-id')} was found.`);
         }
 
-        this._tabbar.hide();
+        this._tabbar.setAttribute('hide-tabs', '');
         setImmediate(() => this._setChecked(this._tabbar.getActiveTabIndex()));
 
         this._tabbar.addEventListener('prechange', this._onTabbarPreChange);
@@ -293,4 +294,5 @@ export default class SegmentElement extends BaseElement {
   }
 }
 
+ons.elements.Segment = SegmentElement;
 customElements.define('ons-segment', SegmentElement);

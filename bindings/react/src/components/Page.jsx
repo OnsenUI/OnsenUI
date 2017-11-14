@@ -26,7 +26,6 @@ import Util from './Util.js';
   </Page>
  */
 class Page extends BasicComponent {
-
   constructor(...args) {
     super(...args);
 
@@ -75,17 +74,17 @@ class Page extends BasicComponent {
     const attrs = Util.getAttrs(this, other);
 
     return <ons-page {...attrs} >
-        {toolbar}
-        <div className='page__background'> </div>
-        <div className='page__content' style={contentStyle}>
-          {this.props.children}
-        </div>
-        <div className='page__extra' style={{zIndex: 10001}}>
-          {modal}
-        </div>
-        {fixed}
-        {bottomToolbar}
-      </ons-page>;
+      {toolbar}
+      <div className='page__background'> </div>
+      <div className='page__content' style={contentStyle}>
+        {this.props.children}
+      </div>
+      <div className='page__extra' style={{zIndex: 10001}}>
+        {modal}
+      </div>
+      {fixed}
+      {bottomToolbar}
+    </ons-page>;
   }
 }
 

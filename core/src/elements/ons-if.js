@@ -15,6 +15,7 @@ limitations under the License.
 
 */
 
+import ons from '../ons';
 import orientation from '../ons/orientation';
 import platform from '../ons/platform';
 import BaseElement from './base/base-element';
@@ -117,4 +118,5 @@ export default class IfElement extends BaseElement {
   }
 }
 
+ons.elements.If = IfElement;
 customElements.define('ons-if', IfElement);

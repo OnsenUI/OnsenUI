@@ -15,14 +15,14 @@ limitations under the License.
 
 */
 
-import NavigatorTransitionAnimator from './animator';
+import NavigatorAnimator from './animator';
 import util from '../../ons/util';
 import animit from '../../ons/animit';
 
 /**
  * Fade-in screen transition.
  */
-export default class IOSFadeNavigatorTransitionAnimator extends NavigatorTransitionAnimator {
+export default class IOSFadeNavigatorAnimator extends NavigatorAnimator {
 
   constructor({timing = 'linear', delay = 0, duration = 0.4} = {}) {
     super({ timing, delay, duration });

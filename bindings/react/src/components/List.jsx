@@ -52,7 +52,7 @@ List.propTypes = {
    */
   modifier: PropTypes.string,
 
-   /**
+  /**
    * @name dataSource
    * @type string
    * @description
@@ -63,7 +63,7 @@ List.propTypes = {
    */
   dataSource: PropTypes.array,
 
-   /**
+  /**
    * @name renderRow
    * @type function
    * @description
@@ -75,7 +75,7 @@ List.propTypes = {
    */
   renderRow: PropTypes.func,
 
-   /**
+  /**
    * @name renderHeader
    * @type function
    * @description
@@ -86,7 +86,7 @@ List.propTypes = {
    */
   renderHeader: PropTypes.func,
 
-   /**
+  /**
    * @name renderFooter
    * @type function
    * @description

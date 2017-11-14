@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" ng-app="myApp">
 <head>
   <meta charset="utf-8">
   <title>Modal | Onsen UI</title>
@@ -8,14 +8,16 @@
   <link rel="stylesheet" href="../../../../build/css/onsen-css-components.css">
 
   <script src="../../../../build/js/onsenui.js"></script>
+  <script src="../../../../node_modules/angular/angular.js"></script>
+  <script src="../../../../build/js/angular-onsenui.js"></script>
+  <script src="../app.js"></script>
 
   <script>
-    var showModal = function() {
-      var modal = document.getElementById('modal');
-      modal.show();
-
-      setTimeout(modal.hide.bind(modal), 1000);
-    };
+    angular.module('myApp').controller('PageController', function($scope) {
+      $scope.log = function(msg) {
+        console.log(msg);
+      };
+    });
   </script>
 </head>
 
@@ -26,13 +28,14 @@
     </ons-toolbar>
 
     <p style="text-align: center">
-      <ons-button modifier="light" onclick="showModal();">Open Modal</ons-button>
+      <ons-button modifier="light" ng-click="modal.toggle()">Open Modal</ons-button>
     </p>
   </ons-page>
 
-  <ons-modal id="modal">
+  <ons-modal var="modal" ons-postshow="log($event)">
     <ons-icon icon="gear" spin="true" style="line-height: 20px; vertical-align: middle;"></ons-icon>
     <span style="line-height: 20px; font-size: 15px;">Loading...</span>
+    <ons-button ng-click="modal.hide()">Close</ons-button>
   </ons-modal>
 </body>
 </html>

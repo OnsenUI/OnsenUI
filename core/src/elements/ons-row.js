@@ -15,6 +15,7 @@ limitations under the License.
 
 */
 
+import ons from '../ons';
 import BaseElement from './base/base-element';
 
 /**
@@ -51,4 +52,5 @@ import BaseElement from './base/base-element';
 export default class RowElement extends BaseElement {
 }
 
+ons.elements.Row = RowElement;
 customElements.define('ons-row', RowElement);

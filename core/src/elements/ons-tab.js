@@ -15,6 +15,7 @@ limitations under the License.
 
 */
 
+import ons from '../ons';
 import util from '../ons/util';
 import autoStyle from '../ons/autostyle';
 import ModifierUtil from '../ons/internal/modifier-util';
@@ -44,6 +45,8 @@ const scheme = {
  * @guide fundamentals.html#managing-pages
  *   [en]Managing multiple pages.[/en]
  *   [ja]複数のページを管理する[/ja]]
+ * @guide appsize.html#removing-icon-packs [en]Removing icon packs.[/en][ja][/ja]
+ * @guide faq.html#how-can-i-use-custom-icon-packs [en]Adding custom icon packs.[/en][ja][/ja]
  * @seealso ons-tabbar
  *   [en]ons-tabbar component[/en]
  *   [ja]ons-tabbarコンポーネント[/ja]
@@ -92,7 +95,7 @@ export default class TabElement extends BaseElement {
    * @type {String}
    * @description
    *   [en]
-   *     The icon name for the tab. Can specify the same icon name as `<ons-icon>`.
+   *     The icon name for the tab. Can specify the same icon name as `<ons-icon>`. Check [See also](#seealso) section for more information.
    *   [/en]
    *   [ja]
    *     アイコン名を指定します。ons-iconと同じアイコン名を指定できます。
@@ -190,11 +193,14 @@ export default class TabElement extends BaseElement {
     if (this.hasAttribute('icon')) {
       iconWrapper = iconWrapper || util.createElement('<div class="tabbar__icon"><ons-icon></ons-icon></div>');
       const icon = iconWrapper.children[0];
-      const lastIconName = icon.getAttribute('icon');
+      const fix = (last => () => icon.attributeChangedCallback('icon', last, this.getAttribute('icon')))(icon.getAttribute('icon'));
       icon.setAttribute('icon', this.getAttribute('icon'));
       iconWrapper.parentElement !== button && button.insertBefore(iconWrapper, button.firstChild);
+
       // dirty fix for https://github.com/OnsenUI/OnsenUI/issues/1654
-      icon.attributeChangedCallback('icon', lastIconName, this.getAttribute('icon'));
+      icon.attributeChangedCallback instanceof Function
+        ? fix()
+        : setImmediate(() => icon.attributeChangedCallback instanceof Function && fix());
     } else {
       iconWrapper && iconWrapper.remove();
     }
@@ -365,4 +371,5 @@ export default class TabElement extends BaseElement {
   }
 }
 
+ons.elements.Tab = TabElement;
 customElements.define('ons-tab', TabElement);

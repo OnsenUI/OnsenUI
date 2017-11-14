@@ -1,8 +1,7 @@
 /*
 Copyright 2013-2014 ASIAL CORPORATION
 
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
+Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
 
    http://www.apache.org/licenses/LICENSE-2.0
@@ -22,7 +21,6 @@ import 'babel-polyfill';
 import gulp from 'gulp';
 import path from'path';
 import glob from 'glob';
-import gulpIf from 'gulp-if';
 import pkg from './package.json';
 import {merge} from 'event-stream';
 import runSequence from 'run-sequence';
@@ -32,181 +30,102 @@ import os from 'os';
 import {spawn} from 'child_process';
 import fs from 'fs';
 import {argv} from 'yargs';
-import webpack from 'webpack';
-import ProgressBarPlugin from 'progress-bar-webpack-plugin';
 import karma from 'karma';
 import WebdriverIOLauncher from 'webdriverio/build/lib/launcher';
 import chalk from 'chalk';
+import { rollup, watch as rollupWatch } from 'rollup';
+import gulpLoadPlugins from 'gulp-load-plugins';
+import rawCoreRollupConfig from './rollup.config.js';
+
+// Configurations
+const rollupConfigs = rawCoreRollupConfig.reduce((r, c) => (r[c.output.name] = c) && r, {})
+const babelrc = Object.assign({}, pkg.babel);
+babelrc.babelrc = babelrc.presets[0][1].modules = false;
+babelrc.plugins = [
+  'external-helpers',
+  'transform-runtime'
+];
+const coreESMFiles = [
+  'core/src/**/*.js',
+  '!core/src/*.js',
+  '!core/src/core-dts-test.*',
+  '!core/src/**/*.spec.js',
+];
+
+
+const $ = gulpLoadPlugins();
+$.hub(['./css-components/gulpfile.js']); // adds 'build-css', 'css-clean' and 'cssnext' tasks
 
 ////////////////////////////////////////
+// bundles
+////////////////////////////////////////
+const bundle = config => rollup(config).then(bundle => bundle.write(config.output));
+const transpileCoreSrc = files => {
+  const filePath = typeof files === 'string' ? path.relative('./core/src', files) : null;
+  $.util.log(`Transpiling core ESM files${filePath === null ? '' : ` (${$.util.colors.magenta(filePath)})`} ...`);
+  return new Promise(resolve =>
+    gulp.src(files)
+    // SVG loader
+    .pipe(
+      $.if(/ons-back-button\.js$/,
+        $.replace(/import\s+(\w+)\s+from\s+'([./\w-]+\.svg)';/g, function(match, p1, p2) {
+          const svgPath = path.join(path.dirname(this.file.path), p2);
+          const svg = fs.readFileSync(svgPath, 'utf8');
+          return `const ${p1} = \`${svg}\`;`
+        })
+      )
+    )
+    // Transpile to ES5
+    .pipe($.babel(babelrc))
+    .pipe(gulp.dest('build/esm/' + (filePath === null ? '' : path.dirname(filePath))))
+    .on('end', () => {
+      $.util.log('Finished transpiling core ESM files');
+      resolve();
+    })
+  );
+};
 
-const $ = require('gulp-load-plugins')();
-const CORDOVA_APP = false;
+gulp.task('core', () => bundle(rollupConfigs.ons));
+gulp.task('angular-bindings', () => bundle(rollupConfigs.angularOns));
 
 ////////////////////////////////////////
-// browser-sync
+// watch
 ////////////////////////////////////////
-gulp.task('browser-sync', () => {
-  browserSync({
-    server: {
-      baseDir: __dirname,
-      index: 'index.html',
-      directory: true
-    },
-    files: [],
-    watchOptions: {
-      //debounceDelay: 400
-    },
-    ghostMode: false,
-    notify: false
+const watch = config => new Promise((resolve, reject) => {
+  rollupWatch(config).on('event', event => {
+    const filename = event.output && $.util.colors.cyan(path.relative(__dirname, event.output[0]));
+    switch (event.code) {
+      case 'BUNDLE_START':
+        $.util.log(`Bundling '${filename}' ...`);
+        break;
+      case 'BUNDLE_END':
+        $.util.log(`Finished '${filename}' bundle`);
+        resolve();
+        break;
+      case 'ERROR':
+        $.util.log($.util.colors.red('Encountered an error while bundling\n\n', event.error));
+        resolve();
+        break;
+      case 'FATAL':
+        $.util.log($.util.colors.red('Encountered an unrecoverable error\n\n', event.error));
+        reject();
+        process.exit(1);
+        break;
+    }
   });
 });
 
-////////////////////////////////////////
-// core
-////////////////////////////////////////
-gulp.task('core', function(done) {
-  try {
-    webpack(
-      { // webpack2 config
-        entry: './core/src/setup.js', // string | object | array
-        // Here the application starts executing
-        // and webpack starts bundling
-
-        output: {
-          // options related to how webpack emits results
-
-          path: path.resolve(__dirname, 'build/js'), // string
-          // the target directory for all output files
-          // must be an absolute path (use the Node.js path module)
-
-          filename: 'onsenui.js', // string
-          // the filename template for entry chunks
-
-          // publicPath: '/assets/', // string
-          // the url to the output directory resolved relative to the HTML page
-
-          library: 'ons', // string,
-          // the name of the exported library
-
-          libraryTarget: 'umd', // universal module definition
-          // the type of the exported library
-        },
-
-        module: {
-          // configuration regarding modules
-
-          rules: [
-            // rules for modules (configure loaders, parser options, etc.)
-
-            {
-              test: /\.js$/,
-              include: [
-                path.resolve(__dirname, 'core/src'),
-                path.resolve(__dirname, 'node_modules') // untranspiled ES modules must be transpiled
-              ],
-              exclude: [
-                // path.resolve(__dirname, 'app/demo-files')
-              ],
-              // these are matching conditions, each accepting a regular expression or string
-              // test and include have the same behavior, both must be matched
-              // exclude must not be matched (takes preferrence over test and include)
-              // Best practices:
-              // - Use RegExp only in test and for filename matching
-              // - Use arrays of absolute paths in include and exclude
-              // - Try to avoid exclude and prefer include
-
-              loader: 'babel-loader',
-              // the loader which should be applied, it'll be resolved relative to the context
-              // -loader suffix is no longer optional in webpack2 for clarity reasons
-              // see webpack 1 upgrade guide
-
-              options: {
-                presets: ['env', 'stage-3'],
-                plugins: ['add-module-exports']
-              }
-              // options for the loader
-            },
-
-            {
-              test: /\.svg$/,
-              loader: 'svg-inline-loader',
-              options: {
-                removingTags: ['title', 'desc', 'defs'],
-                removeSVGTagAttrs: false,
-                removingTagAttrs: ['fill'],
-                idPrefix: true
-              }
-            }
-          ]
-        },
-
-        resolve: {
-          // options for resolving module requests
-          // (does not apply to resolving to loaders)
-
-          extensions: ['.js']
-          // extensions that are used
-        },
-
-        devtool: 'cheap-module-inline-source-map', // enum
-        // enhance debugging by adding meta info for the browser devtools
-        // source-map most detailed at the expense of build speed.,
-
-        plugins: [
-          new webpack.BannerPlugin(`${pkg.name} v${pkg.version} - ${dateformat(new Date(), 'yyyy-mm-dd')}`),
-          new ProgressBarPlugin({
-            format: [':bar', chalk.green(':percent'), ':msg'].join(' '),
-            complete: chalk.bgGreen(' '),
-            incomplete: chalk.bgWhite(' '),
-            width: 40,
-            total: 100
-          })
-        ],
-
-        node: {
-            process: false,
-            setImmediate: false,
-            timers: false,
-        }
-      },
-      (err, stats) => { // called when bundling is done
-        if (err) { // if fatal error occurs
-          done(err);
-          return;
-        }
-
-        const jsonStats = stats.toJson();
-        if (jsonStats.errors.length > 0) {
-            console.log('\n' + $.util.colors.red('Errors from webpack:'));
-          for (const error of jsonStats.errors) {
-            console.log('\n' + $.util.colors.red(error));
-          }
-          done(new Error('webpack failed'));
-          return;
-        }
-        if (jsonStats.warnings.length > 0) {
-          console.log('\n' + $.util.colors.red('Warnings from webpack:'));
-          for (const warning of jsonStats.warnings) {
-            console.log('\n' + $.util.colors.yellow(warning));
-          }
-        }
-
-        browserSync.reload();
-        done();
-      }
-    );
-  } catch (e) {
-    done(e);
-  }
+gulp.task('watch-core-esm', () => {
+  gulp.watch(coreESMFiles).on('change', changedFile => transpileCoreSrc(changedFile.path));
+  return watch(rollupConfigs.onsESM).then(() => transpileCoreSrc(coreESMFiles));
 });
-
-////////////////////////////////////////
-// watch-core
-////////////////////////////////////////
-gulp.task('watch-core', ['prepare', 'core'], () => {
-  return gulp.watch(['core/src/*.js', 'core/src/**/*.js', '!core/src/*.spec.js', '!core/src/**/*.spec.js'], ['core']);
+gulp.task('watch-core', ['core-css'], () => {
+  gulp.watch(['core/css/*.css'], { debounceDelay: 300 }, ['core-css']);
+  return watch(rollupConfigs.ons);
 });
+gulp.task('watch-angular-bindings', () => watch(rollupConfigs.angularOns));
+gulp.task('watch-vue-bindings', () => watch(require('./bindings/vue/rollup.config.js').default.devConfig));
+gulp.task('watch-react-bindings', () => watch(require('./bindings/react/rollup.config.js').default.devConfig));
 
 ////////////////////////////////////////
 // core-dts-test
@@ -347,11 +266,7 @@ gulp.task('core-dts-test', (argv['skip-build'] ? [] : ['core']), (done) => {
 ////////////////////////////////////////
 // unit-test
 ////////////////////////////////////////
-gulp.task('unit-test',
-  [].concat(
-    argv['skip-build'] ? [] : (argv.watch ? ['watch-core'] : ['prepare', 'core']),
-    ['core-dts-test']
-  ),
+gulp.task('unit-test', argv['skip-build'] ? [] : (argv.watch ? ['watch-core'] : ['core-css', 'core']),
   (done) => {
     // Usage:
     //     # run all unit tests in just one Karma server
@@ -467,66 +382,6 @@ gulp.task('unit-test',
 );
 
 ////////////////////////////////////////
-// html2js
-////////////////////////////////////////
-gulp.task('html2js', () => {
-  return gulp.src('bindings/angular1/templates/*.tpl')
-    .pipe($.html2js('angular.js', {
-      adapter: 'angular',
-      base: path.join(__dirname, 'bindings/angular1'),
-      name: 'templates-main',
-      useStrict: true,
-      quoteChar: '\''
-    }))
-    .pipe($.concat('templates.js'))
-    .pipe(gulp.dest('bindings/angular1/directives/'));
-});
-
-////////////////////////////////////////
-// build-css-components
-////////////////////////////////////////
-gulp.task('build-css-components', () => {
-  return gulp.src('css-components/gulpfile.js')
-  .pipe($.chug({
-    read: false,
-    tasks: ['build']
-  }));
-});
-
-/////////////////////////////////////////
-// eslint
-////////////////////////////////////////
-gulp.task('eslint', () => {
-  return gulp.src(eslintTargets())
-    .pipe($.cached('eslint'))
-    .pipe($.eslint({useEslintrc: true}))
-    .pipe($.remember('eslint'))
-    .pipe($.eslint.format());
-});
-
-/////////////////////////////////////////
-// watch-eslint
-////////////////////////////////////////
-gulp.task('watch-eslint', ['eslint'], () => {
-  gulp.watch(eslintTargets(), ['eslint']);
-});
-
-function eslintTargets() {
-  return [
-    'gulpfile.babel.js',
-    'docs/packages/**/*.js',
-    'core/src/**/*.js',
-    '!core/src/polyfills/**/*.js',
-    '!core/src/vendor/**/*.js',
-    'bindings/angular1/js/**/*.js',
-    'bindings/angular1/directives/**/*.js',
-    'bindings/angular1/services/**/*.js',
-    'bindings/angular1/elements/**/*.js',
-    'bindings/angular1/views/**/*.js'
-  ];
-}
-
-////////////////////////////////////////
 // clean
 ////////////////////////////////////////
 gulp.task('clean', () => {
@@ -538,114 +393,37 @@ gulp.task('clean', () => {
 });
 
 ////////////////////////////////////////
-// minify
+// core-css
 ////////////////////////////////////////
-gulp.task('minify-js', () => {
-  return merge(
-    gulp.src('build/js/{onsenui,angular-onsenui}.js')
-      .pipe($.uglify({
-        mangle: false,
-        preserveComments: (node, comment) => {
-          return comment.line === 1;
-        }
-      }))
-      .pipe($.rename(path => {
-        path.extname = '.min.js';
-      }))
-      .pipe(gulp.dest('build/js/'))
-      .pipe(gulpIf(CORDOVA_APP, gulp.dest('cordova-app/www/lib/onsen/js')))
-  );
-});
-
-////////////////////////////////////////
-// prepare
-////////////////////////////////////////
-gulp.task('prepare', ['html2js'], () =>  {
-
-  let onlyES6;
-
-  return merge(
-
-    // angular-onsenui.js
-    gulp.src([
-      'bindings/angular1/vendor/*.js',
-      'bindings/angular1/lib/*.js',
-      'bindings/angular1/directives/templates.js',
-      'bindings/angular1/js/onsen.js',
-      'bindings/angular1/views/*.js',
-      'bindings/angular1/directives/*.js',
-      'bindings/angular1/services/*.js',
-      'bindings/angular1/js/*.js'
-    ])
-      .pipe($.plumber())
-      .pipe($.sourcemaps.init())
-      .pipe($.babel({ plugins: [['angularjs-annotate', { 'explicitOnly': false }]] }))
-      .pipe($.concat('angular-onsenui.js'))
-      .pipe($.header('/*! angular-onsenui.js for <%= pkg.name %> - v<%= pkg.version %> - ' + dateformat(new Date(), 'yyyy-mm-dd') + ' */\n', {pkg: pkg}))
-      .pipe($.sourcemaps.write())
-      .pipe(gulp.dest('build/js/'))
-      .pipe(gulpIf(CORDOVA_APP, gulp.dest('cordova-app/www/lib/onsen/js'))),
-
-    // onsen-css-components
-    gulp.src([
-      'build/css/**/*',
-    ])
-      .pipe(gulpIf(CORDOVA_APP, gulp.dest('cordova-app/www/lib/onsen/css'))),
-
-    // less files
-    gulp.src([
-      'css-components/**/*',
-      '!css-components/onsen-visual-design-spec.sketch',
-      '!css-components/build/',
-      '!css-components/build/**/*',
-      '!css-components/node_modules/',
-      '!css-components/node_modules/**/*',
-      '!css-components/npm-debug.log'
-    ])
-      .pipe(gulp.dest('build/css-components-src/')),
-
-    // onsenui.css
-    gulp.src([
+gulp.task('core-css', () =>  {
+  const buildPath = 'build/css/';
+  const core = (name, fonts) => gulp.src([
+      (fonts ? '' : '!') + 'core/css/fonts.css',
       'core/css/common.css',
-      'core/css/*.css'
+      'core/css/*.css',
     ])
-      .pipe($.concat('onsenui.css'))
-      .pipe($.autoprefixer({
-        browsers: [ // enable CSS properties which require prefixes
-          'Android >= 4.4',
-          'iOS >= 8.0',
-          'Chrome >= 30', // equivalent to Android 4.4 WebView
-          'Safari >= 9',
-        ],
-        add: true,
-        remove: false, // removing prefixes can cause a bug
-      }))
-      .pipe($.header('/*! <%= pkg.name %> - v<%= pkg.version %> - ' + dateformat(new Date(), 'yyyy-mm-dd') + ' */\n', {pkg: pkg}))
-      .pipe(gulp.dest('build/css/'))
-      .pipe(gulpIf(CORDOVA_APP, gulp.dest('cordova-app/www/lib/onsen/css')))
-      // onsenui.min.css
-      .pipe($.cssmin({processImport: false}))
-      .pipe($.rename({suffix: '.min'}))
-      .pipe(gulp.dest('build/css/'))
-      .pipe(gulpIf(CORDOVA_APP, gulp.dest('cordova-app/www/lib/onsen/css'))),
+    .pipe($.concat(`${name}.css`))
+    .pipe($.insert.prepend(`/*! ${pkg.name} - v${pkg.version} - ${dateformat(new Date(), 'yyyy-mm-dd')} */\n`))
+    // Transpile
+    .pipe($.autoprefixer({
+      browsers: babelrc.presets[0][1].targets.browsers,
+      add: true,
+      remove: false, // removing prefixes can cause a bug
+    }))
+    .pipe(gulp.dest(buildPath))
+    // Minify
+    .pipe($.cssmin({ processImport: false }))
+    .pipe($.rename({ suffix: '.min' }))
+    .pipe(gulp.dest(buildPath))
+  ;
 
-    // ES Modules (raw ES source codes)
-    gulp.src([
-      'core/src/**/*',
-      '!core/src/core-dts-test.*',
-      '!core/src/**/*.spec.js',
-    ])
-      .pipe(gulp.dest('build/core-src/')),
+  return merge(
+    core('onsenui', true),
+    core('onsenui-core', false),
 
-    // package.json (for the bindings which uses `build` directory)
-    gulp.src([
-      'package.json',
-    ])
-      .pipe(gulp.dest('build/')),
-
-    // angular.js copy
-    gulp.src('bindings/angular1/lib/angular/*.*')
-      .pipe(gulp.dest('build/js/angular/')),
+    gulp.src('core/css/fonts.css')
+      .pipe($.rename({ basename: 'onsenui-fonts' }))
+      .pipe(gulp.dest(buildPath)),
 
     // font-awesome fle copy
     gulp.src('core/css/font_awesome/**/*')
@@ -657,15 +435,48 @@ gulp.task('prepare', ['html2js'], () =>  {
 
     // material icons file copy
     gulp.src('core/css/material-design-iconic-font/**/*')
-      .pipe(gulp.dest('build/css/material-design-iconic-font/')),
+    .pipe(gulp.dest('build/css/material-design-iconic-font/'))
+  );
+});
+
+////////////////////////////////////////
+// core-esm
+////////////////////////////////////////
+gulp.task('core-esm', () =>  {
+  // ES Modules (transpiled ES source codes)
+  return bundle(rollupConfigs.onsESM).then(() => transpileCoreSrc(coreESMFiles))
+});
+
+////////////////////////////////////////
+// copy-files
+////////////////////////////////////////
+gulp.task('copy-files', () =>  {
+  return merge(
+    // CSS source
+    gulp.src([
+      'css-components/**/*',
+      '!css-components/onsen-visual-design-spec.sketch',
+      '!css-components/build/',
+      '!css-components/build/**/*',
+      '!css-components/node_modules/',
+      '!css-components/node_modules/**/*',
+      '!css-components/npm-debug.log'
+    ])
+      .pipe(gulp.dest('build/css-components-src/')),
+
+    // These are not used (already loaded by gulp-replace)
+    // gulp.src('core/images/**/*')
+    //   .pipe(gulp.dest('build/images/')),
+
+    // package.json (for the bindings which uses `build` directory)
+    gulp.src([
+      'package.json',
+    ])
+      .pipe(gulp.dest('build/')),
 
     // type definitions copy
     gulp.src('core/src/onsenui.d.ts')
       .pipe(gulp.dest('build/js/')),
-
-    // auto prepare
-    gulp.src('cordova-app/www/index.html')
-      .pipe(gulpIf(CORDOVA_APP, $.shell(['cd cordova-app; cordova prepare'])))
   );
 });
 
@@ -677,11 +488,10 @@ gulp.task('compress-distribution-package', () => {
     path.join(__dirname, 'build/**'),
     path.join(__dirname, 'LICENSE'),
     path.join(__dirname, 'CHANGELOG.md'),
+    path.join(__dirname, 'bindings/*/esm/**'),
     path.join(__dirname, 'bindings/*/dist/**'),
     '!' + path.join(__dirname, 'build/docs/**'),
     '!' + path.join(__dirname, 'build/docs'),
-    '!' + path.join(__dirname, 'build/js/angular/**'),
-    '!' + path.join(__dirname, 'build/js/angular')
   ];
 
   return gulp.src(src)
@@ -692,84 +502,96 @@ gulp.task('compress-distribution-package', () => {
 ////////////////////////////////////////
 // build
 ////////////////////////////////////////
-gulp.task('build', done => {
-  return runSequence(
-    'clean',
-    'core',
-    'build-css-components',
-    'prepare',
-    'minify-js',
-    'build-docs',
-    'compress-distribution-package',
-    done
-  );
-});
+const buildTasks = [
+  'clean',
+  'core',
+  'core-esm',
+  'core-css',
+  'build-css',
+  'copy-files',
+  'angular-bindings',
+];
+
+gulp.task('build', done => runSequence.apply(null, buildTasks.concat(['build-docs', 'compress-distribution-package', done])));
 
 ////////////////////////////////////////
 // dist
 ////////////////////////////////////////
 
-gulp.task('soft-build', done => {
-  return runSequence(
-    'clean',
-    'core',
-    'build-css-components',
-    'prepare',
-    'minify-js',
-    done
-  );
-});
-
-function distFiles() {
-  return gulp.src([
+const distFiles = done => {
+  gulp.src([
     'build/**/*',
     '!build/docs/**/*',
     '!build/docs/',
-    '!build/js/angular/**/*',
-    '!build/js/angular/',
     '!build/onsenui.zip',
     '!build/package.json',
     'bower.json',
     'package.json',
     'README.md',
     'CHANGELOG.md',
-    'LICENSE'
+    'LICENSE',
   ])
-  .pipe(gulp.dest('OnsenUI-dist/'));
-}
+  .pipe(gulp.dest('OnsenUI-dist/'))
+  .on('end', done);
+};
 
-gulp.task('dist', ['soft-build'], distFiles);
-
-gulp.task('dist-no-build', [], distFiles);
+gulp.task('dist', done => runSequence.apply(null, buildTasks.concat([() => distFiles(done)])));
+gulp.task('dist-no-build', distFiles);
 
 ////////////////////////////////////////
 // serve
 ////////////////////////////////////////
-gulp.task('serve', ['watch-eslint', 'prepare', 'browser-sync', 'watch-core'], () => {
-  gulp.watch(['bindings/angular1/templates/*.tpl'], ['html2js']);
 
-  const watched = [
-    'bindings/angular1/*/*',
-    'core/css/*.css'
-  ];
-
-  if (CORDOVA_APP) {
-    watched.push('cordova-app/www/*.html');
-  }
-
-  gulp.watch(watched, {
-    debounceDelay: 300
-  }, ['prepare']);
-
-  // for livereload
+gulp.task('serve', done => {
+  // Livereload
   gulp.watch([
+    'build/js/*onsenui.js',
     'build/css/onsen-css-components.css',
+    'build/css/onsenui.css',
     'examples/*/*.{js,css,html}',
-    'bindings/angular1/test/e2e/*/*.{js,css,html}'
+    'bindings/angular1/test/e2e/*/*.{js,css,html}',
+    'bindings/angular1/examples/**/*.{js,css,html}',
+    'bindings/vue/examples/build.js',
+    'bindings/react/examples/build.js',
   ]).on('change', changedFile => {
     gulp.src(changedFile.path)
       .pipe(browserSync.reload({stream: true, once: true}));
   });
+
+  const tasks = [];
+  argv.css && tasks.push('css-clean', 'cssnext');
+  argv.core && tasks.push('watch-core');
+  argv.coreEsm && tasks.push('watch-core-esm');
+  (argv.angular || argv.angular1) && tasks.push('watch-angular-bindings');
+  argv.react && tasks.push('watch-react-bindings');
+  argv.vue && tasks.push('watch-vue-bindings');
+  tasks.push('browser-sync', done);
+
+  return runSequence(...tasks);
+});
+
+gulp.task('browser-sync', (done) => {
+  const startPath =
+    argv.vue && '/bindings/vue/examples/index.html'
+    || argv.react && '/bindings/react/examples/index.html'
+    || (argv.angular || argv.angular1) && '/bindings/angular1/examples/'
+    // || (argv.ngx || argv.angular2) && '/bindings/angular2/.../'
+    || '/examples/';
+
+  browserSync({
+    server: {
+      baseDir: __dirname,
+      index: 'index.html',
+      directory: true
+    },
+    startPath,
+    files: [],
+    watchOptions: {
+      //debounceDelay: 400
+    },
+    ghostMode: false,
+    notify: false
+  }, done);
 });
 
 ////////////////////////////////////////
@@ -784,8 +606,8 @@ gulp.task('build-docs', () => {
 ////////////////////////////////////////
 // test
 ////////////////////////////////////////
-gulp.task('test', ['prepare'], function(done) {
-  return runSequence('unit-test', done);
+gulp.task('test', ['core-css'], function(done) {
+  return runSequence('core-dts-test', 'unit-test', done);
 });
 
 ////////////////////////////////////////
@@ -831,7 +653,7 @@ gulp.task('e2e-test', function(done) {
   runSequence('e2e-test-protractor', 'e2e-test-webdriverio', done);
 });
 
-gulp.task('e2e-test-protractor', ['webdriver-download', 'prepare'], function(){
+gulp.task('e2e-test-protractor', ['webdriver-download', 'core-css'], function(){
   const port = 8081;
 
   $.connect.server({
@@ -861,7 +683,7 @@ gulp.task('e2e-test-protractor', ['webdriver-download', 'prepare'], function(){
     });
 });
 
-gulp.task('e2e-test-webdriverio', ['webdriver-download', 'prepare'], function(done){
+gulp.task('e2e-test-webdriverio', ['webdriver-download', 'core-css'], function(done){
   // Usage:
   //     # run all WebdriverIO E2E tests
   //     gulp e2e-test-webdriverio

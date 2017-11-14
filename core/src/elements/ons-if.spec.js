@@ -2,11 +2,11 @@
 
 describe('ons-if', () => {
   it('provides \'OnsIfElement\' global variable', () => {
-    expect(window.ons.IfElement).to.be.ok;
+    expect(window.ons.elements.If).to.be.ok;
   });
 
   it('doesn\'t have any children', () => {
-    var element = new ons.IfElement();
+    var element = new ons.elements.If();
     expect(element.hasChildNodes()).not.to.be.true;
   });
 

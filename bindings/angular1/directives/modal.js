@@ -11,6 +11,51 @@
  *   [ja]このモーダルを参照するための名前を指定します。[/ja]
  */
 
+/**
+ * @attribute ons-preshow
+ * @initonly
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "preshow" event is fired.[/en]
+ *  [ja]"preshow"イベントが発火された時の挙動を独自に指定できます。[/ja]
+ */
+
+/**
+ * @attribute ons-prehide
+ * @initonly
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "prehide" event is fired.[/en]
+ *  [ja]"prehide"イベントが発火された時の挙動を独自に指定できます。[/ja]
+ */
+
+/**
+ * @attribute ons-postshow
+ * @initonly
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "postshow" event is fired.[/en]
+ *  [ja]"postshow"イベントが発火された時の挙動を独自に指定できます。[/ja]
+ */
+
+/**
+ * @attribute ons-posthide
+ * @initonly
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "posthide" event is fired.[/en]
+ *  [ja]"posthide"イベントが発火された時の挙動を独自に指定できます。[/ja]
+ */
+
+/**
+ * @attribute ons-destroy
+ * @initonly
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "destroy" event is fired.[/en]
+ *  [ja]"destroy"イベントが発火された時の挙動を独自に指定できます。[/ja]
+ */
+
 (function() {
   'use strict';
 
@@ -35,6 +80,7 @@
             $onsen.addModifierMethodsForCustomElements(modal, element);
 
             $onsen.declareVarAttribute(attrs, modal);
+            $onsen.registerEventHandlers(modal, 'preshow prehide postshow posthide destroy');
             element.data('ons-modal', modal);
 
             scope.$on('$destroy', function() {

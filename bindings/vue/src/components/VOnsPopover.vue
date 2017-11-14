@@ -5,9 +5,11 @@
 </template>
 
 <script>
+  import 'onsenui/esm/elements/ons-popover';
   import { hidable, hasOptions, dialogCancel, deriveEvents, deriveDBB, portal } from '../mixins';
 
   export default {
+    name: 'v-ons-popover',
     mixins: [hidable, hasOptions, dialogCancel, deriveEvents, deriveDBB, portal],
 
     props: {

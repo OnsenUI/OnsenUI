@@ -1,58 +1,50 @@
-export { default as VOnsPopover } from './VOnsPopover.vue';
-export { default as VOnsAlertDialog } from './VOnsAlertDialog.vue';
-export { default as VOnsSpeedDial } from './VOnsSpeedDial.vue';
-export { default as VOnsCarousel } from './VOnsCarousel.vue';
-export { default as VOnsTab } from './VOnsTab.vue';
-export { default as VOnsTabbar } from './VOnsTabbar.vue';
-export { default as VOnsBackButton } from './VOnsBackButton.vue';
-export { default as VOnsNavigator } from './VOnsNavigator.vue';
-export { default as VOnsSplitterSide } from './VOnsSplitterSide.vue';
-export { default as VOnsLazyRepeat } from './VOnsLazyRepeat.vue';
-export { default as VOnsSelect } from './VOnsSelect.vue';
-export { default as VOnsSegment } from './VOnsSegment.vue';
+// Generic components:
+export { default as VOnsToolbar } from './VOnsToolbar';
+export { default as VOnsBottomToolbar } from './VOnsBottomToolbar';
+export { default as VOnsToolbarButton } from './VOnsToolbarButton';
+export { default as VOnsAlertDialogButton } from './VOnsAlertDialogButton';
+export { default as VOnsButton } from './VOnsButton';
+export { default as VOnsIcon } from './VOnsIcon';
+export { default as VOnsCard } from './VOnsCard';
+export { default as VOnsList } from './VOnsList';
+export { default as VOnsListItem } from './VOnsListItem';
+export { default as VOnsListTitle } from './VOnsListTitle';
+export { default as VOnsListHeader } from './VOnsListHeader';
+export { default as VOnsRipple } from './VOnsRipple';
+export { default as VOnsRow } from './VOnsRow';
+export { default as VOnsCol } from './VOnsCol';
+export { default as VOnsProgressBar } from './VOnsProgressBar';
+export { default as VOnsProgressCircular } from './VOnsProgressCircular';
+export { default as VOnsCarouselItem } from './VOnsCarouselItem';
+export { default as VOnsSplitterMask } from './VOnsSplitterMask';
+export { default as VOnsSplitterContent } from './VOnsSplitterContent';
+export { default as VOnsSplitter } from './VOnsSplitter';
+export { default as VOnsSwitch } from './VOnsSwitch';
+export { default as VOnsCheckbox } from './VOnsCheckbox';
+export { default as VOnsInput } from './VOnsInput';
+export { default as VOnsSearchInput } from './VOnsSearchInput';
+export { default as VOnsRange } from './VOnsRange';
+export { default as VOnsRadio } from './VOnsRadio';
+export { default as VOnsFab } from './VOnsFab';
+export { default as VOnsSpeedDialItem } from './VOnsSpeedDialItem';
+export { default as VOnsDialog } from './VOnsDialog';
+export { default as VOnsActionSheet } from './VOnsActionSheet';
+export { default as VOnsActionSheetButton } from './VOnsActionSheetButton';
+export { default as VOnsModal } from './VOnsModal';
+export { default as VOnsToast } from './VOnsToast';
 
-// Generic components
-import VGeneric from './VGeneric.vue';
-import {
-  hidable, hasOptions, dialogCancel,
-  deriveDBB, deriveHandler, selfProvider,
-  portal, modelInput, modelCheckbox, modelRadio
-} from '../mixins';
-
-const extend = (component, mixins = []) => ({ name: 'v-ons-' + component, mixins, extends: VGeneric });
-
-export const VOnsToolbar = extend('toolbar');
-export const VOnsBottomToolbar = extend('bottom-toolbar');
-export const VOnsToolbarButton = extend('toolbar-button');
-export const VOnsAlertDialogButton = extend('alert-dialog-button');
-export const VOnsButton = extend('button');
-export const VOnsIcon = extend('icon');
-export const VOnsCard = extend('card');
-export const VOnsList = extend('list');
-export const VOnsListItem = extend('list-item');
-export const VOnsListTitle = extend('list-title');
-export const VOnsListHeader = extend('list-header');
-export const VOnsRipple = extend('ripple');
-export const VOnsRow = extend('row');
-export const VOnsCol = extend('col');
-export const VOnsProgressBar = extend('progress-bar');
-export const VOnsProgressCircular = extend('progress-circular');
-export const VOnsCarouselItem = extend('carousel-item');
-export const VOnsSplitterMask = extend('splitter-mask');
-export const VOnsSplitterContent = extend('splitter-content');
-export const VOnsSplitter = extend('splitter', [selfProvider, deriveDBB]);
-export const VOnsSwitch = extend('switch', [modelCheckbox]);
-export const VOnsCheckbox = extend('checkbox', [modelCheckbox]);
-export const VOnsInput = extend('input', [modelInput]);
-export const VOnsSearchInput = extend('search-input', [modelInput]);
-export const VOnsRange = extend('range', [modelInput]);
-export const VOnsRadio = extend('radio', [modelRadio]);
-export const VOnsPullHook = extend('pull-hook', [deriveHandler('onAction'), deriveHandler('onPull', true)]);
-export const VOnsFab = extend('fab', [hidable]);
-export const VOnsSpeedDialItem = extend('speed-dial-item');
-export const VOnsPage = extend('page', [deriveDBB, deriveHandler('onInfiniteScroll')]);
-export const VOnsDialog = extend('dialog', [hidable, hasOptions, dialogCancel, deriveDBB, portal]);
-export const VOnsActionSheet = extend('action-sheet', [hidable, hasOptions, dialogCancel, deriveDBB, portal]);
-export const VOnsActionSheetButton = extend('action-sheet-button');
-export const VOnsModal = extend('modal', [hidable, hasOptions, deriveDBB, portal]);
-export const VOnsToast = extend('toast', [hidable, hasOptions, deriveDBB, portal]);
+// Manual components:
+export { default as VOnsPopover } from './VOnsPopover';
+export { default as VOnsAlertDialog } from './VOnsAlertDialog';
+export { default as VOnsSpeedDial } from './VOnsSpeedDial';
+export { default as VOnsCarousel } from './VOnsCarousel';
+export { default as VOnsTab } from './VOnsTab';
+export { default as VOnsTabbar } from './VOnsTabbar';
+export { default as VOnsBackButton } from './VOnsBackButton';
+export { default as VOnsNavigator } from './VOnsNavigator';
+export { default as VOnsSplitterSide } from './VOnsSplitterSide';
+export { default as VOnsLazyRepeat } from './VOnsLazyRepeat';
+export { default as VOnsSelect } from './VOnsSelect';
+export { default as VOnsSegment } from './VOnsSegment';
+export { default as VOnsPullHook } from './VOnsPullHook';
+export { default as VOnsPage } from './VOnsPage';

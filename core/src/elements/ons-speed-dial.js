@@ -11,6 +11,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
+import ons from '../ons';
 import util from '../ons/util';
 import autoStyle from '../ons/autostyle';
 import ModifierUtil from '../ons/internal/modifier-util';
@@ -473,4 +474,5 @@ export default class SpeedDialElement extends BaseElement {
   }
 }
 
+ons.elements.SpeedDial = SpeedDialElement;
 customElements.define('ons-speed-dial', SpeedDialElement);

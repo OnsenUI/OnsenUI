@@ -18,7 +18,7 @@ describe('OnsRadioElement', () => {
   });
 
   it('should exist', () => {
-    expect(window.ons.RadioElement).to.be.ok;
+    expect(window.ons.elements.Radio).to.be.ok;
   });
 
   it('compiles correctly', () => {

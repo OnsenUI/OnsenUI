@@ -2,12 +2,12 @@
 
 describe('ons-segment', () => {
   it('provides \'OnsSegmentElement\' global variable', () => {
-    expect(window.ons.SegmentElement).to.be.ok;
+    expect(window.ons.elements.Segment).to.be.ok;
   });
 
   describe('class attribute', () => {
     it('should contains "segment" class name automatically', () => {
-      const element = new ons.SegmentElement();
+      const element = new ons.elements.Segment();
       element.setAttribute('class', 'foobar');
       expect(element.classList.contains('segment')).to.be.true;
       expect(element.classList.contains('foobar')).to.be.true;
@@ -15,7 +15,7 @@ describe('ons-segment', () => {
   });
 
   it('provides modifier attribute', () => {
-    var element = new ons.SegmentElement();
+    var element = new ons.elements.Segment();
     element.setAttribute('modifier', 'hoge');
     expect(element.classList.contains('segment--hoge')).to.be.true;
 

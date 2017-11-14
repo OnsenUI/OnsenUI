@@ -2,11 +2,11 @@
 
 describe('ons-action-sheet-button', () => {
   it('provides \'OnsActionSheetButtonElement\' global variable', () => {
-    expect(window.ons.ActionSheetButtonElement).to.be.ok;
+    expect(window.ons.elements.ActionSheetButton).to.be.ok;
   });
 
   it('classList contains \'action-sheet-button\' by default', (done) => {
-    const element = new ons.ActionSheetButtonElement();
+    const element = new ons.elements.ActionSheetButton();
     setImmediate(() => {
       expect(element.classList.contains('action-sheet-button')).to.be.true;
       element.setAttribute('class', 'foo');
@@ -17,7 +17,7 @@ describe('ons-action-sheet-button', () => {
   });
 
   it('provides modifier attribute', () => {
-    const element = new ons.ActionSheetButtonElement();
+    const element = new ons.elements.ActionSheetButton();
     element.setAttribute('modifier', 'hoge');
     expect(element.classList.contains('action-sheet-button--hoge')).to.be.true;
 

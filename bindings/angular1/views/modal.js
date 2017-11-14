@@ -20,9 +20,6 @@ limitations under the License.
 
   var module = angular.module('onsen');
 
-  module.value('ModalAnimator', ons._internal.ModalAnimator);
-  module.value('FadeModalAnimator', ons._internal.FadeModalAnimator);
-
   module.factory('ModalView', function($onsen, $parse) {
 
     var ModalView = Class.extend({
@@ -32,31 +29,30 @@ limitations under the License.
       init: function(scope, element, attrs) {
         this._scope = scope;
         this._element = element;
+        this._attrs = attrs;
         this._scope.$on('$destroy', this._destroy.bind(this));
-      },
 
-      show: function(options) {
-        return this._element[0].show(options);
-      },
+        this._clearDerivingMethods = $onsen.deriveMethods(this, this._element[0], [ 'show', 'hide', 'toggle' ]);
 
-      hide: function(options) {
-        return this._element[0].hide(options);
-      },
-
-      toggle: function(options) {
-        return this._element[0].toggle(options);
+        this._clearDerivingEvents = $onsen.deriveEvents(this, this._element[0], [
+          'preshow', 'postshow', 'prehide', 'posthide',
+        ], function(detail) {
+          if (detail.modal) {
+            detail.modal = this;
+          }
+          return detail;
+        }.bind(this));
       },
 
       _destroy: function() {
         this.emit('destroy', {page: this});
 
-        this._events = this._element = this._scope = null;
+        this._element.remove();
+        this._clearDerivingMethods();
+        this._clearDerivingEvents();
+        this._events = this._element = this._scope = this._attrs = null;
       }
     });
-
-    ModalView.registerAnimator = function(name, Animator) {
-      return window.ons.ModalElement.registerAnimator(name, Animator);
-    };
 
     MicroEvent.mixin(ModalView);
     $onsen.derivePropertiesFromElement(ModalView, ['onDeviceBackButton']);

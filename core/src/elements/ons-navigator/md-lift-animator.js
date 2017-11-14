@@ -15,14 +15,14 @@ limitations under the License.
 
 */
 
-import NavigatorTransitionAnimator from './animator';
+import NavigatorAnimator from './animator';
 import util from '../../ons/util';
 import animit from '../../ons/animit';
 
 /**
  * Lift screen transition.
  */
-export default class MDLiftNavigatorTransitionAnimator extends NavigatorTransitionAnimator {
+export default class MDLiftNavigatorAnimator extends NavigatorAnimator {
 
   constructor({timing = 'cubic-bezier(.1, .7, .1, 1)', delay = 0.05, duration = 0.4} = {}) {
     super({ timing, delay, duration });

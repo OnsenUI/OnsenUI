@@ -4,7 +4,7 @@ describe('OnsSpeedDialItemElement', () => {
   let item;
 
   beforeEach(() => {
-    item = new ons.SpeedDialItemElement();
+    item = new ons.elements.SpeedDialItem();
     document.body.appendChild(item);
   });
 
@@ -14,7 +14,7 @@ describe('OnsSpeedDialItemElement', () => {
   });
 
   it('exists', () => {
-    expect(window.ons.SpeedDialItemElement).to.be.ok;
+    expect(window.ons.elements.SpeedDialItem).to.be.ok;
   });
 
   it('provides modifier attribute', () => {
@@ -36,7 +36,7 @@ describe('OnsSpeedDialItemElement', () => {
 
   describe('"class" attribute', () => {
     it('should contain default class names automatically', () => {
-      const element = new ons.SpeedDialItemElement();
+      const element = new ons.elements.SpeedDialItem();
       expect(element.classList.contains('speed-dial__item')).to.be.true;
       expect(element.classList.contains('fab')).to.be.true;
       expect(element.classList.contains('fab--mini')).to.be.true;

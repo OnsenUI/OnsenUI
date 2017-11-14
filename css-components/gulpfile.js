@@ -1,7 +1,7 @@
 const gulp = require('gulp');
 const pkg = require('./package.json');
+const corePkg = require('../package.json');
 const merge = require('event-stream').merge;
-const gutil = require('gulp-util');
 const runSequence = require('run-sequence');
 const browserSync = require('browser-sync').create();
 const $ = require('gulp-load-plugins')();
@@ -12,7 +12,6 @@ const autoprefixer = require('autoprefixer');
 const cssnext = require('postcss-cssnext');
 const reporter = require('postcss-reporter');
 const historyApiFallback = require('connect-history-api-fallback');
-const file = require('gulp-file');
 const {rollup} = require('rollup');
 const babel = require('rollup-plugin-babel');
 const commonjs = require('rollup-plugin-commonjs');
@@ -21,7 +20,15 @@ const rimraf = require('rimraf');
 const path = require('path');
 const yaml = require('js-yaml');
 
+// Include these plugins outside $ to fix gulp-hub
+const plumber = require('gulp-plumber');
+const postcss = require('gulp-postcss');
+const stylelint = require('gulp-stylelint');
+
 const prefix = __dirname + '/../build/css/';
+const babelrc = Object.assign({}, corePkg.babel);
+babelrc.babelrc = babelrc.presets[0][1].modules = false;
+babelrc.exclude = 'node_modules/**';
 
 ////////////////////////////////////////
 // build
@@ -44,7 +51,7 @@ gulp.task('stylelint', () => {
       '!./src/components/combination.css', // not following BEM
       '!./src/iphonex-support/**/*.css' // not following BEM
     ])
-    .pipe($.stylelint({
+    .pipe(stylelint({
       failAfterError: false,
       reporters: [{formatter: 'string', console: true}]
     }));
@@ -72,13 +79,7 @@ gulp.task('cssnext', ['stylelint'], () => {
       root: __dirname + '/src/components/'
     }),
     cssnext({
-      browsers: [ // enable CSS properties which require prefixes
-        '> 1%', 'Firefox ESR', 'Opera 12.1',
-        'Android >= 4.4',
-        'iOS >= 8.0',
-        'Chrome >= 30', // equivalent to Android 4.4 WebView
-        'Safari >= 9',
-      ],
+      browsers: babelrc.presets[0][1].targets.browsers,
     }),
     reporter({
       clearAllMessages: true,
@@ -88,8 +89,8 @@ gulp.task('cssnext', ['stylelint'], () => {
   ];
 
   return gulp.src('src/{*-,}onsen-css-components.css')
-    .pipe($.plumber())
-    .pipe($.postcss(plugins))
+    .pipe(plumber())
+    .pipe(postcss(plugins))
     .pipe(gulp.dest('./build/'))
     .pipe(gulp.dest(prefix))
     .pipe(browserSync.stream());
@@ -165,23 +166,17 @@ gulp.task('preview-assets', () => {
 ////////////////////////////////////////
 gulp.task('preview-js', function() {
   return rollup({
-    entry: 'previewer-src/app.js',
+    input: 'previewer-src/app.js',
     plugins: [
       commonjs,
-      babel({
-        presets: [
-          ['es2015', {'modules': false}]
-        ],
-        babelrc: false,
-        exclude: 'node_modules/**'
-      })
+      babel(babelrc)
     ]
   })
   .then(bundle => {
     return bundle.write({
-      dest: 'build/app.gen.js',
+      file: 'build/app.gen.js',
       format: 'umd',
-      sourceMap: 'inline'
+      sourcemap: 'inline'
     });
   });
 });
@@ -222,7 +217,7 @@ gulp.task('serve', ['reset-console', 'build'], done => {
 gulp.task('reset-console', reset);
 
 function reset() {
-  process.stdout.write('\033c');
+  process.stdout.write('\x1Bc');
 }
 
 const outputDevServerInfo = (() => {
@@ -239,12 +234,12 @@ const outputDevServerInfo = (() => {
   }
 
   function output() {
-    const localUrl = browserSync.getOption('urls').get('local'); 
-    const externalUrl = browserSync.getOption('urls').get('external'); 
+    const localUrl = browserSync.getOption('urls').get('local');
+    const externalUrl = browserSync.getOption('urls').get('external');
 
     console.log('\nAccess URLs:');
-    console.log('     Local:', gutil.colors.magenta(localUrl));
-    console.log('  External:', gutil.colors.magenta(externalUrl));
+    console.log('     Local:', $.util.colors.magenta(localUrl));
+    console.log('  External:', $.util.colors.magenta(externalUrl));
     console.log();
 
     displayBuildCSSInfo();
@@ -255,7 +250,7 @@ function displayBuildCSSInfo() {
 
   console.log('Built CSS Files:')
   getCSSPaths().forEach(cssPath => {
-    console.log('  ' + gutil.colors.magenta(cssPath));
+    console.log('  ' + $.util.colors.magenta(cssPath));
   });
 
   function getCSSPaths() {

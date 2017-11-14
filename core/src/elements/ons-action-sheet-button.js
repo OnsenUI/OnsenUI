@@ -15,6 +15,7 @@ limitations under the License.
 
 */
 
+import ons from '../ons';
 import util from '../ons/util';
 import autoStyle from '../ons/autostyle';
 import contentReady from '../ons/content-ready';
@@ -46,6 +47,8 @@ const scheme = {
  *   [en]The `<ons-icon>` component[/en]
  *   [ja]ons-iconコンポーネント[/ja]
  * @tutorial vanilla/Reference/action-sheet
+ * @guide appsize.html#removing-icon-packs [en]Removing icon packs.[/en][ja][/ja]
+ * @guide faq.html#how-can-i-use-custom-icon-packs [en]Adding custom icon packs.[/en][ja][/ja]
  * @modifier material
  *   [en]Display a Material Design action sheet button.[/en]
  *   [ja]マテリアルデザインのアクションシート用のボタンを表示します。[/ja]
@@ -65,7 +68,7 @@ export default class ActionSheetButtonElement extends BaseElement {
    * @attribute icon
    * @type {String}
    * @description
-   *  [en]Creates an `ons-icon` component with this string. Only visible on Android.[/en]
+   *  [en]Creates an `ons-icon` component with this string. Only visible on Android. Check [See also](#seealso) section for more information.[/en]
    *  [ja]`ons-icon`コンポーネントを悪性します。Androidでのみ表示されます。[/ja]
    */
 
@@ -125,4 +128,5 @@ export default class ActionSheetButtonElement extends BaseElement {
   }
 }
 
+ons.elements.ActionSheetButton = ActionSheetButtonElement;
 customElements.define('ons-action-sheet-button', ActionSheetButtonElement);

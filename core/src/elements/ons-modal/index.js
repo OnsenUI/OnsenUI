@@ -15,6 +15,7 @@ limitations under the License.
 
 */
 
+import ons from '../../ons';
 import util from '../../ons/util';
 import ModifierUtil from '../../ons/internal/modifier-util';
 import AnimatorFactory from '../../ons/internal/animator-factory';
@@ -305,4 +306,5 @@ export default class ModalElement extends BaseDialogElement {
   }
 }
 
+ons.elements.Modal = ModalElement;
 customElements.define('ons-modal', ModalElement);

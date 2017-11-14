@@ -20,7 +20,7 @@ import BaseElement from './base-element';
 import ModifierUtil from '../../ons/internal/modifier-util';
 import AnimatorFactory from '../../ons/internal/animator-factory';
 import DoorLock from '../../ons/doorlock';
-import deviceBackButtonDispatcher from '../../ons/device-back-button-dispatcher';
+import deviceBackButtonDispatcher from '../../ons/internal/device-back-button-dispatcher';
 import contentReady from '../../ons/content-ready';
 
 export default class BaseDialogElement extends BaseElement {

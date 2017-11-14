@@ -15,9 +15,12 @@ limitations under the License.
 
 */
 
+import ons from '../ons';
 import util from '../ons/util';
 import autoStyle from '../ons/autostyle';
 import BaseElement from './base/base-element';
+
+let autoPrefix = 'fa'; // FIXME: To be removed in v3
 
 /**
  * @element ons-icon
@@ -33,7 +36,9 @@ import BaseElement from './base/base-element';
  *   [ja][/ja]
  * @codepen xAhvg
  * @tutorial vanilla/Reference/icon
- * @guide theming.html#cross-platform-styling-autostyling [en]Information about cross platform styling[/en][ja]Information about cross platform styling[/ja]
+ * @guide theming.html#cross-platform-styling-autostyling [en]Information about cross platform styling[/en][ja][/ja]
+ * @guide appsize.html#removing-icon-packs [en]Removing icon packs.[/en][ja][/ja]
+ * @guide faq.html#how-can-i-use-custom-icon-packs [en]Adding custom icon packs.[/en][ja][/ja]
  * @example
  * <ons-icon
  *   icon="md-car"
@@ -55,23 +60,13 @@ export default class IconElement extends BaseElement {
    *   [en]
    *     The icon name. `"md-"` prefix for Material Icons, `"fa-"` for Font Awesome and `"ion-"` prefix for Ionicons.
    *
-   *     See all available icons on their respective sites:
-   *
-   *     * [Font Awesome](https://fortawesome.github.io/Font-Awesome/)
-   *     * [Ionicons](http://ionicons.com)
-   *     * [Material Design Iconic Font](http://zavoloklom.github.io/material-design-iconic-font/)
+   *     See all available icons on the element description (at the top).
    *
    *     Icons can also be styled based on modifier presence. Add comma-separated icons with `"modifierName:"` prefix.
    *
-   *     The code:
+   *     The code `<ons-icon icon="ion-edit, material:md-edit"></ons-icon>` will display `"md-edit"` for Material Design and `"ion-edit"` as the default icon.
    *
-   *     ```
-   *     <ons-icon
-   *       icon="ion-edit, material:md-edit">
-   *     </ons-icon>
-   *     ```
-   *
-   *     will display `"md-edit"` for Material Design and `"ion-edit"` as the default icon.
+   *     `fa-` prefix is added automatically if none is provided. Check [See also](#seealso) section for more information.
    *   [/en]
    *   [ja][/ja]
    */
@@ -133,6 +128,7 @@ export default class IconElement extends BaseElement {
   }
 
   attributeChangedCallback(name, last, current) {
+    this._cleanClassAttribute(name === 'icon' ? last : this.getAttribute('icon'), name === 'modifier' ? last : undefined);
     this._update();
   }
 
@@ -142,31 +138,38 @@ export default class IconElement extends BaseElement {
   }
 
   _update() {
-    this._cleanClassAttribute();
-    const {classList, style} = this._buildClassAndStyle(this._getAttribute('icon'), this._getAttribute('size'));
+    const {classList, style} = this._buildClassAndStyle(this._parseAttr('icon'), this._parseAttr('size'));
     util.extend(this.style, style);
 
     classList.forEach(className => this.classList.add(className));
   }
 
-  _getAttribute(attr) {
-    const parts = (this.getAttribute(attr) || '').split(/\s*,\s*/);
+  _parseAttr(attrName, modifier = this.getAttribute('modifier') || '') {
+    const attr = this.getAttribute(attrName) || attrName || ''
+    const parts = attr.split(/\s*,\s*/);
     const def = parts[0];
     let md = parts[1];
     md = (md || '').split(/\s*:\s*/);
-    return (util.hasModifier(this, md[0]) ? md[1] : def) || '';
+
+    return (modifier && (RegExp(`(^|\\s+)${md[0]}($|\\s+)`, 'i').test(modifier)) ? md[1] : def) || '';
   }
 
   /**
    * Remove unneeded class value.
    */
-  _cleanClassAttribute() {
-    util.arrayFrom(this.classList)
-      .filter(className => /^(fa$|fa-|ion-|zmdi-)/.test(className))
-      .forEach(className => this.classList.remove(className));
+  _cleanClassAttribute(lastIcon, lastModifier) {
+    const { className, prefix } = this._prefixIcon(this._parseAttr(lastIcon, lastModifier));
+    const customPrefixRE = className !== prefix ? `|${prefix}$|${prefix}-` : `|${className}$` || '';
+    const re = new RegExp(`^(fa$|fa-|ion-|zmdi$|zmdi-|ons-icon--${customPrefixRE})`);
 
-    this.classList.remove('zmdi');
-    this.classList.remove('ons-icon--ion');
+    util.arrayFrom(this.classList)
+      .filter(className => re.test(className))
+      .forEach(className => this.classList.remove(className));
+  }
+
+  _prefixIcon(iconName) {
+    const className = autoPrefix + (autoPrefix ? '-' : '') + iconName;
+    return { className, prefix: className.split('-')[0] };
   }
 
   _buildClassAndStyle(iconName, size) {
@@ -182,15 +185,16 @@ export default class IconElement extends BaseElement {
       classList.push('fa');
     } else if(iconName.indexOf('md-') === 0)  {
       classList.push('zmdi');
-      classList.push('zmdi-' + iconName.split(/\-(.+)?/)[1]);
+      classList.push('zmdi-' + iconName.split(/-(.+)?/)[1]);
     } else {
-      classList.push('fa');
-      classList.push('fa-' + iconName);
+      const { className, prefix } = this._prefixIcon(iconName);
+      prefix && classList.push(prefix);
+      className && classList.push(className);
     }
 
     // Size
     if (size.match(/^[1-5]x|lg$/)) {
-      classList.push('fa-' + size);
+      classList.push('ons-icon--' + size);
       this.style.removeProperty('font-size');
     } else {
       style.fontSize = size;
@@ -201,6 +205,11 @@ export default class IconElement extends BaseElement {
       style: style
     };
   }
+
+  static setAutoPrefix(prefix) {
+    autoPrefix = prefix ? (typeof prefix === 'string' && prefix || 'fa') : '';
+  }
 }
 
+ons.elements.Icon = IconElement;
 customElements.define('ons-icon', IconElement);

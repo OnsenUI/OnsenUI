@@ -24,7 +24,7 @@ class Input extends BaseInput {
 }
 
 Input.propTypes = {
-    /**
+  /**
    * @name modifier
    * @type string
    * @required false

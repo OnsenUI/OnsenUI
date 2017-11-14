@@ -1,12 +1,12 @@
-'use strict';
+import contentReady from '../ons/content-ready';
 
 describe('OnsSelectElement', () => {
   let element;
 
   beforeEach(done => {
-    element = new ons.SelectElement();
+    element = new ons.elements.Select();
     document.body.appendChild(element);
-    ons._contentReady(element, done);
+    contentReady(element, done);
   });
 
   afterEach(() => {
@@ -15,7 +15,7 @@ describe('OnsSelectElement', () => {
   });
 
   it('exists', () => {
-    expect(window.ons.SelectElement).to.be.ok;
+    expect(window.ons.elements.Select).to.be.ok;
   });
 
   it('classList contains \'select-input\' by default', () => {
@@ -63,7 +63,7 @@ describe('OnsSelectElement', () => {
       ons.platform.select('android');
       const select = document.createElement('ons-select');
 
-      ons._contentReady(select, () => {
+      contentReady(select, () => {
         expect(select.getAttribute('modifier')).to.equal('material');
         ons.platform.select('');
         done();

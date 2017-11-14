@@ -2,11 +2,11 @@
 
 describe('OnsGestureDetectorElement', () => {
   it('should exist', () => {
-    expect(window.ons.GestureDetectorElement).to.be.ok;
+    expect(window.ons.elements.GestureDetector).to.be.ok;
   });
 
   it('is correctly created', () => {
-    expect(new ons.GestureDetectorElement()).to.be.ok;
+    expect(new ons.elements.GestureDetector()).to.be.ok;
   });
 
   describe('#_compile()', () => {

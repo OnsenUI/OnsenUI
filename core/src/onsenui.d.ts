@@ -67,8 +67,18 @@ declare namespace ons {
    * @description Enable animations (default).
    */
   function enableAnimations(): void;
+  /**
+   * @description Disable automatic styling.
+   */
   function disableAutoStyling(): void;
+  /**
+   * @description Enable automatic styling based on OS (default).
+   */
   function enableAutoStyling(): void;
+  /**
+   * @description Disable adding `fa-` prefix automatically to `ons-icon` classes. Useful when including custom icon packs.
+   */
+  function disableIconAutoPrefix(): void;
   /**
    * @description Refresh styling for the given platform. Only useful for demos. Use `ons.platform.select(...)` for development and production.
    */

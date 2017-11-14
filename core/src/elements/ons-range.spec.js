@@ -1,12 +1,12 @@
-'use strict';
+import contentReady from '../ons/content-ready';
 
 describe('OnsRangeElement', () => {
   let element;
 
   beforeEach(done => {
-    element = new ons.RangeElement();
+    element = new ons.elements.Range();
     document.body.appendChild(element);
-    ons._contentReady(element, done);
+    contentReady(element, done);
   });
 
   afterEach(() => {
@@ -15,7 +15,7 @@ describe('OnsRangeElement', () => {
   });
 
   it('exists', () => {
-    expect(window.ons.RangeElement).to.be.ok;
+    expect(window.ons.elements.Range).to.be.ok;
   });
 
   it('classList contains \'range\' by default', () => {
@@ -67,7 +67,7 @@ describe('OnsRangeElement', () => {
       ons.platform.select('android');
       const range = document.createElement('ons-range');
 
-      ons._contentReady(range, () => {
+      contentReady(range, () => {
         expect(range.getAttribute('modifier')).to.equal('material');
         ons.platform.select('');
         done();

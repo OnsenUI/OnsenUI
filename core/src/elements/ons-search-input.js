@@ -11,6 +11,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
+import ons from '../ons';
 import BaseInputElement from './base/base-input';
 
 const scheme = {
@@ -94,4 +95,5 @@ export default class SearchInputElement extends BaseInputElement {
    */
 }
 
+ons.elements.SearchInput = SearchInputElement;
 customElements.define('ons-search-input', SearchInputElement);

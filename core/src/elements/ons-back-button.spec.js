@@ -2,12 +2,12 @@
 
 describe('OnsBackButtonElement', () => {
   it('exists', () => {
-    expect(window.ons.BackButtonElement).to.be.ok;
+    expect(window.ons.elements.BackButton).to.be.ok;
   });
 
   describe('class attribute', () => {
     it('should contain "back-button" class name automatically', () => {
-      const element = new ons.BackButtonElement();
+      const element = new ons.elements.BackButton();
       element.setAttribute('class', 'foobar');
       expect(element.classList.contains('back-button')).to.be.ok;
       expect(element.classList.contains('foobar')).to.be.ok;
@@ -57,7 +57,7 @@ describe('OnsBackButtonElement', () => {
         </div>
       `);
 
-      nav = new ons.NavigatorElement();
+      nav = new ons.elements.Navigator();
       nav._options = {cancelIfRunning: false};
       document.body.appendChild(div);
       document.body.appendChild(nav);

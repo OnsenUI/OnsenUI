@@ -16,13 +16,13 @@ limitations under the License.
 */
 
 import util from '../../ons/util';
-import NavigatorTransitionAnimator from './animator';
+import NavigatorAnimator from './animator';
 import animit from '../../ons/animit';
 
 /**
  * Slide animator for navigator transition.
  */
-export default class MDSlideNavigatorTransitionAnimator extends NavigatorTransitionAnimator {
+export default class MDSlideNavigatorAnimator extends NavigatorAnimator {
 
   constructor({timing = 'cubic-bezier(.1, .7, .4, 1)', delay = 0, duration = 0.3} = {}) {
     super({timing, delay, duration});

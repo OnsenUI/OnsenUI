@@ -2,12 +2,12 @@
 
 describe('ons-button', () => {
   it('provides \'OnsButtonElement\' global variable', () => {
-    expect(window.ons.ButtonElement).to.be.ok;
+    expect(window.ons.elements.Button).to.be.ok;
   });
 
   describe('class attribute', () => {
     it('should contains "button" class name automatically', () => {
-      const element = new ons.ButtonElement();
+      const element = new ons.elements.Button();
       element.setAttribute('class', 'foobar');
       expect(element.classList.contains('button')).to.be.true;
       expect(element.classList.contains('foobar')).to.be.true;
@@ -15,7 +15,7 @@ describe('ons-button', () => {
   });
 
   it('provides modifier attribute', () => {
-    var element = new ons.ButtonElement();
+    var element = new ons.elements.Button();
     element.setAttribute('modifier', 'hoge');
     expect(element.classList.contains('button--hoge')).to.be.true;
 

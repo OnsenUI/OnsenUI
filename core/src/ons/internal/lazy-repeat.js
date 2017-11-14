@@ -219,7 +219,6 @@ export class LazyRepeatProvider {
 
       // retry to measure offset height
       // dirty fix for angular2 directive
-      const lastVisibility = this._wrapperElement.style.visibility;
       this._wrapperElement.style.visibility = 'hidden';
       item.element.style.visibility = 'hidden';
 
@@ -228,7 +227,7 @@ export class LazyRepeatProvider {
         if (this._itemHeight == 0) {
           throw Error('Invalid state: this._itemHeight must be greater than zero.');
         }
-        this._wrapperElement.style.visibility = lastVisibility;
+        this._wrapperElement.style.visibility = '';
         done();
       });
     });
@@ -267,20 +266,30 @@ export class LazyRepeatProvider {
   }
 
   _lastItemRendered() {
-    return Math.max(...Object.keys(this._renderedItems))
+    return Math.max(...Object.keys(this._renderedItems));
   }
 
   _firstItemRendered() {
-    return Math.min(...Object.keys(this._renderedItems))
+    return Math.min(...Object.keys(this._renderedItems));
   }
 
   refresh() {
+    const forceRender = { forceScrollDown: true };
     const lastItemIndex = Math.min(this._lastItemRendered(), this._countItems() - 1);
     const firstItemIndex = this._firstItemRendered();
-    this._wrapperElement.style.height = this._topPositions[firstItemIndex] + this._calculateRenderedHeight() + 'px';
-    this.padding = this._topPositions[firstItemIndex];
+
+    if (util.isInteger(lastItemIndex)) {
+      forceRender.forceLastIndex = lastItemIndex
+    }
+
+    if (util.isInteger(firstItemIndex)) {
+      this._wrapperElement.style.height = this._topPositions[firstItemIndex] + this._calculateRenderedHeight() + 'px';
+      this.padding = this._topPositions[firstItemIndex];
+      forceRender.forceFirstIndex = firstItemIndex;
+    }
+
     this._removeAllElements();
-    this._render({forceScrollDown: true, forceFirstIndex: firstItemIndex, forceLastIndex: lastItemIndex});
+    this._render(forceRender);
     this._wrapperElement.style.height = 'inherit';
   }
 
@@ -298,7 +307,7 @@ export class LazyRepeatProvider {
     const count = this._countItems();
 
     const items = [];
-    const start = forceFirstIndex || Math.max(0, this._calculateStartIndex(offset) - 30);
+    const start = forceFirstIndex || Math.max(0, this._calculateStartIndex(offset) - 30); // Recalculate for 0 or undefined
     let i = start;
 
     for(let top = this._topPositions[i]; i < count && top < limit; i++) {
@@ -322,7 +331,7 @@ export class LazyRepeatProvider {
         this._renderElement(j, isScrollUp);
       }
     } else {
-      const lastIndex = forceLastIndex || Math.max(i - 1, ...Object.keys(this._renderedItems));
+      const lastIndex = forceLastIndex || Math.max(i - 1, ...Object.keys(this._renderedItems)); // Recalculate for 0 or undefined
       for (let j = start; j <= lastIndex; j++) {
         keep[j] = true;
         this._renderElement(j, isScrollUp);

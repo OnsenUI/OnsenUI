@@ -28,7 +28,7 @@ class Radio extends BaseInput {
 }
 
 Radio.propTypes = {
-    /**
+  /**
    * @name modifier
    * @type string
    * @required false

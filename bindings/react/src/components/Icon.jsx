@@ -52,7 +52,6 @@ class Icon extends SimpleWrapper {
 
     return React.createElement(this._getDomNodeName(), attrs, this.props.children);
   }
-
 }
 
 Icon.propTypes = {

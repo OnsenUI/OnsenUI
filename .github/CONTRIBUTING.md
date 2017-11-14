@@ -41,10 +41,9 @@ Clone this repository and run the following commands to build the project:
 ```bash
 $ cd css-components
 $ yarn install
-$ gulp build
 $ cd ..
 $ yarn install
-$ gulp build
+$ yarn build
 ```
 
 The files will be built and copied into **OnsenUI/build** folder.
@@ -52,7 +51,8 @@ The files will be built and copied into **OnsenUI/build** folder.
 It is also possible to serve the files for development and running examples:
 
 ```bash
-$ gulp serve
+$ yarn dev
+$ gulp serve --css --core --angular1 --vue # Or any combination
 ```
 
 * Then navigate your browser to [http://0.0.0.0:3000/examples/index.html](http://0.0.0.0:3000/examples/index.html)

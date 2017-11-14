@@ -29,7 +29,7 @@ class Fab extends SimpleWrapper {
 }
 
 Fab.propTypes = {
-    /**
+  /**
    * @name modifier
    * @type string
    * @required false

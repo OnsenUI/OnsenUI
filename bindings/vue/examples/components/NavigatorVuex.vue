@@ -119,6 +119,3 @@
     }
 	};
 </script>
-
-<style>
-</style>

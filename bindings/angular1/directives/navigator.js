@@ -152,8 +152,8 @@
 (function() {
   'use strict';
 
-  var lastReady = window.ons.NavigatorElement.rewritables.ready;
-  window.ons.NavigatorElement.rewritables.ready = ons._waitDiretiveInit('ons-navigator', lastReady);
+  var lastReady = window.ons.elements.Navigator.rewritables.ready;
+  window.ons.elements.Navigator.rewritables.ready = ons._waitDiretiveInit('ons-navigator', lastReady);
 
   angular.module('onsen').directive('onsNavigator', function(NavigatorView, $onsen) {
     return {

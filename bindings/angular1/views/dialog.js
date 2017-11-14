@@ -60,10 +60,6 @@ limitations under the License.
       }
     });
 
-    DialogView.registerAnimator = function(name, Animator) {
-      return window.ons.DialogElement.registerAnimator(name, Animator);
-    };
-
     MicroEvent.mixin(DialogView);
     $onsen.derivePropertiesFromElement(DialogView, ['disabled', 'cancelable', 'visible', 'onDeviceBackButton']);
 

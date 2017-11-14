@@ -18,7 +18,7 @@ describe('OnsSearchInputElement', () => {
   });
 
   it('should exist', () => {
-    expect(window.ons.SearchInputElement).to.be.ok;
+    expect(window.ons.elements.SearchInput).to.be.ok;
   });
 
   it('provides \'modifier\' attribute', () => {

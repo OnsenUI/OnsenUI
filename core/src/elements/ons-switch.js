@@ -15,6 +15,7 @@ limitations under the License.
 
 */
 
+import ons from '../ons';
 import util from '../ons/util';
 import autoStyle from '../ons/autostyle';
 import ModifierUtil from '../ons/internal/modifier-util';
@@ -305,4 +306,5 @@ export default class SwitchElement extends BaseCheckboxElement {
 
 }
 
+ons.elements.Switch = SwitchElement;
 customElements.define('ons-switch', SwitchElement);

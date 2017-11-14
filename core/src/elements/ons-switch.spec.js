@@ -4,7 +4,7 @@ describe('OnsSwitchElement', () => {
   let element;
 
   beforeEach(done => {
-    element = new ons.SwitchElement();
+    element = new ons.elements.Switch();
     document.body.appendChild(element);
     setImmediate(done);
   });
@@ -15,7 +15,7 @@ describe('OnsSwitchElement', () => {
   });
 
   it('exists', () => {
-    expect(window.ons.SwitchElement).to.be.ok;
+    expect(window.ons.elements.Switch).to.be.ok;
   });
 
   describe('class attribute', () => {

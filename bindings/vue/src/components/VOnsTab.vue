@@ -4,7 +4,10 @@
 </template>
 
 <script>
+  import 'onsenui/esm/elements/ons-tab';
+
   export default {
+    name: 'v-ons-tab',
     inject: ['tabbar'],
 
     props: {

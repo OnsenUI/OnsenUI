@@ -4,7 +4,6 @@ import ReactDOM from 'react-dom';
 import Util from './Util.js';
 
 class BaseDialog extends React.Component {
-
   constructor(...args) {
     super(...args);
 
