@@ -164,7 +164,7 @@ export default class SegmentElement extends BaseElement {
           throw new Error(`<ons-segment> error: no tabbar with id ${this.getAttribute('tabbar-id')} was found.`);
         }
 
-        this._tabbar.hide();
+        this._tabbar.setAttribute('hide-tabs', '');
         setImmediate(() => this._setChecked(this._tabbar.getActiveTabIndex()));
 
         this._tabbar.addEventListener('prechange', this._onTabbarPreChange);

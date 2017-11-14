@@ -12,6 +12,11 @@ dev
  * esm: A new `esm` folder is available for ES Modules environments. It allows importing specific components instead of the whole bundle. See `Reducing App Size` section in the guide for more details.
  * angular1: `ons-modal` now exposes event handlers (`ons-preshow`, `ons-postshow`, `ons-prehide`, `ons-posthide`) and `toggle` method.
 
+### Bug Fixes
+
+ * ons-segment: Prevent possible error when linking an `ons-tabbar` placed at the same level.
+ * ons-segment: Adjust style for plain `div` children (instead of `button`).
+
 ### Misc
 
  * Reduced bundle size by more than 50%!

@@ -73,6 +73,7 @@
   width: 100%;
   transition: background-color 0.2s linear, color 0.2s linear;
   box-sizing: border-box;
+  text-align: center;
 }
 
 .segment__item:disabled {
