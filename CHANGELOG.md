@@ -18,12 +18,13 @@ dev
  * ons-segment: Prevent possible error when linking an `ons-tabbar` placed at the same level.
  * ons-segment: Adjust style for plain `div` children (instead of `button`).
  * ons-list-item: Material chevron with right content. Fixed [#2226](https://github.com/OnsenUI/OnsenUI/issues/2226).
+ * ons-lazy-repeat: Lists can be empty. Fixed [#2232](https://github.com/OnsenUI/OnsenUI/issues/2232).
 
 ### Misc
 
  * Reduced bundle size by more than 50%!
 
-#BREAKING CHANGES
+### BREAKING CHANGES
 
  * Internal elements location has been changed. E.g. `ons.NavigatorElement` is now `ons.elements.Navigator`. This should only affect if you were registering custom animations.
  * `NavigatorTransitionAnimator` has been renamed to `NavigatorAnimator` like all the other animators. This should only affect if you were registering custom animations.
