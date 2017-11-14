@@ -23,7 +23,6 @@ import autoStyle from '../../ons/autostyle';
 import Swiper from '../../ons/internal/swiper';
 import ModifierUtil from '../../ons/internal/modifier-util';
 import BaseElement from '../base/base-element';
-import TabElement from '../ons-tab';
 import contentReady from '../../ons/content-ready';
 
 const scheme = {
@@ -546,7 +545,7 @@ export default class TabbarElement extends BaseElement {
    */
   getActiveTabIndex() {
     for (let tabs = this.tabs, i = 0; i < tabs.length; i++) {
-      if (tabs[i] instanceof TabElement && tabs[i].isActive()) {
+      if (tabs[i] && tabs[i].tagName === 'ONS-TAB' && tabs[i].isActive()) {
         return i;
       }
     }
