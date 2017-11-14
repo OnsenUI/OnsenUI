@@ -2,6 +2,21 @@
 CHANGELOG
 ====
 
+dev
+----
+
+### New Features
+
+* Supported Onsen UI Core 2.8.x.
+
+### Misc
+
+ * Reduced bundle size by more than 50%! (react-onsenui.min.js)
+
+### BREAKING CHANGES
+
+ * `prop-types` package is not bundled anymore in `react-onsenui.js`. This shouldn't affect ES2015 environments since it became a direct dependency. However, this file should not be included directly in browsers anymore. Use `react-onsenui.min.js` instead (production ready).
+
 1.8.0
 ----
 

@@ -15,6 +15,8 @@ limitations under the License.
 
 */
 
+import MicroEvent from './microevent';
+
 const create = () => {
 
   /**

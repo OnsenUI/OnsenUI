@@ -15,6 +15,7 @@ limitations under the License.
 
 */
 
+import ons from '../../ons';
 import util from '../../ons/util';
 import ModifierUtil from '../../ons/internal/modifier-util';
 import AnimatorFactory from '../../ons/internal/animator-factory';
@@ -22,7 +23,7 @@ import OverlaySplitterAnimator from './overlay-animator';
 import PushSplitterAnimator from './push-animator';
 import RevealSplitterAnimator from './reveal-animator';
 import BaseElement from '../base/base-element';
-import deviceBackButtonDispatcher from '../../ons/device-back-button-dispatcher';
+import deviceBackButtonDispatcher from '../../ons/internal/device-back-button-dispatcher';
 import contentReady from '../../ons/content-ready';
 
 const _animatorDict = {
@@ -228,4 +229,5 @@ export default class SplitterElement extends BaseElement {
   }
 }
 
+ons.elements.Splitter = SplitterElement;
 customElements.define('ons-splitter', SplitterElement);

@@ -1,5 +1,3 @@
-import { _util as util } from 'onsenui';
-
 /* Private */
 const _toggleVisibility = function() {
   if (typeof this.visible === 'boolean' && this.visible !== this.$el.visible) {

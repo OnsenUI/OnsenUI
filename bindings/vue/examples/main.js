@@ -1,15 +1,14 @@
 import Vue from 'vue';
-import 'onsenui';
-
-import '../../../build/css/onsenui.css';
-import '../../../build/css/onsen-css-components.css';
-
-import VueOnsen from 'vue-onsenui';
-
 import * as examples from './components';
-Vue.use(VueOnsen, {
-	components: { ...examples }
-});
+
+import VueOnsen from 'vue-onsenui'; // umd
+// import VueOnsen from '../src/index.esm.js';
+// import VOnsPage from '../src/components/VOnsPage';
+// import VOnsToolbar from '../src/components/VOnsToolbar';
+// Vue.component(VOnsPage.name, VOnsPage);
+// Vue.component(VOnsToolbar.name, VOnsToolbar);
+
+Vue.use(VueOnsen);
 
 const mainList = {
   template: `

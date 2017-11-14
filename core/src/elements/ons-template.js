@@ -15,6 +15,7 @@ limitations under the License.
 
 */
 
+import ons from '../ons';
 import util from '../ons/util';
 import BaseElement from './base/base-element';
 
@@ -80,4 +81,5 @@ export default class TemplateElement extends BaseElement {
   }
 }
 
+ons.elements.Template = TemplateElement;
 customElements.define('ons-template', TemplateElement);

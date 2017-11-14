@@ -1,16 +1,16 @@
-'use strict';
+import animationOptionsParse from './animation-options-parser';
 
-describe('ons._animationOptionsParser', () => {
+describe('animationOptionsParser', () => {
   it('exists', () => {
-    expect(ons._util.animationOptionsParse).to.be.an.instanceOf(Function);
+    expect(animationOptionsParse).to.be.an.instanceOf(Function);
   });
 
   it('parses valid strings', () => {
-    let result = ons._util.animationOptionsParse('{ }');
+    let result = animationOptionsParse('{ }');
     expect(result).to.be.ok;
     expect(Object.keys(result).length).to.equal(0);
 
-    result = ons._util.animationOptionsParse('{ _v: false,  $qw : .1, w$_ : {x : 1e3}, \'as\' :\' a\'}');
+    result = animationOptionsParse('{ _v: false,  $qw : .1, w$_ : {x : 1e3}, \'as\' :\' a\'}');
     expect(result).to.be.ok;
     expect(Object.keys(result).length).to.equal(4);
     expect(result._v).to.equal(false);
@@ -18,7 +18,7 @@ describe('ons._animationOptionsParser', () => {
     expect(result.w$_.x).to.equal(1000);
     expect(result.as).to.equal(' a');
 
-    result = ons._util.animationOptionsParse('{_2  : [6, {x : \'%^&\'}, 8] ,  q:{x:{p:[1,2]}} , xc:"bnm"   }');
+    result = animationOptionsParse('{_2  : [6, {x : \'%^&\'}, 8] ,  q:{x:{p:[1,2]}} , xc:"bnm"   }');
     expect(result).to.be.ok;
     expect(Object.keys(result).length).to.equal(3);
     expect(result._2.length).to.equal(3);
@@ -26,11 +26,11 @@ describe('ons._animationOptionsParser', () => {
     expect(result.q.x.p.length).to.equal(2);
     expect(result.xc).to.equal('bnm');
 
-    result = ons._util.animationOptionsParse('[ ]');
+    result = animationOptionsParse('[ ]');
     expect(result).to.be.ok;
     expect(result.length).to.equal(0);
 
-    result = ons._util.animationOptionsParse('[{ i: 1},3,  "qw",\'zx\', 1e2  ]');
+    result = animationOptionsParse('[{ i: 1},3,  "qw",\'zx\', 1e2  ]');
     expect(result).to.be.ok;
     expect(result.length).to.equal(5);
     expect(result[0].i).to.equal(1);
@@ -41,10 +41,10 @@ describe('ons._animationOptionsParser', () => {
   });
 
   it('parses HTML attributes', () => {
-    const alertDialog = ons._util.createElement(
-      `<ons-alert-dialog animation="default" animation-options="{delay: 1, duration: 1, timing: 'ease-in'}">
-      </ons-alert-dialog>`
-    );
+    let alertDialog = document.createElement('div');
+    alertDialog.innerHTML = `<ons-alert-dialog animation="default" animation-options="{delay: 1, duration: 1, timing: 'ease-in'}"></ons-alert-dialog>`;
+    alertDialog = alertDialog.firstChild;
+
     const spy = chai.spy.on(alertDialog._animatorFactory, 'newAnimator');
     alertDialog.show();
     expect(spy).to.have.been.called.with({animationOptions: {delay: 1, duration: 1, timing: 'ease-in'}});
@@ -52,13 +52,13 @@ describe('ons._animationOptionsParser', () => {
   });
 
   it('throws error when the string is invalid', () => {
-    expect(() => ons._util.animationOptionsParse('q:1')).to.throw(Error);
-    expect(() => ons._util.animationOptionsParse('{@q:1}')).to.throw(Error);
-    expect(() => ons._util.animationOptionsParse('{2:1}')).to.throw(Error);
-    expect(() => ons._util.animationOptionsParse('{:1}')).to.throw(Error);
-    expect(() => ons._util.animationOptionsParse('{x: {w:1}')).to.throw(Error);
-    expect(() => ons._util.animationOptionsParse('{x: [1,2}')).to.throw(Error);
-    expect(() => ons._util.animationOptionsParse('[,,]')).to.throw(Error);
-    expect(() => ons._util.animationOptionsParse('[4,5,]')).to.throw(Error);
+    expect(() => animationOptionsParse('q:1')).to.throw(Error);
+    expect(() => animationOptionsParse('{@q:1}')).to.throw(Error);
+    expect(() => animationOptionsParse('{2:1}')).to.throw(Error);
+    expect(() => animationOptionsParse('{:1}')).to.throw(Error);
+    expect(() => animationOptionsParse('{x: {w:1}')).to.throw(Error);
+    expect(() => animationOptionsParse('{x: [1,2}')).to.throw(Error);
+    expect(() => animationOptionsParse('[,,]')).to.throw(Error);
+    expect(() => animationOptionsParse('[4,5,]')).to.throw(Error);
   });
 });

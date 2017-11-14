@@ -1,4 +1,5 @@
-import { capitalize, camelize, eventToHandler, handlerToProp } from '../internal/util';
+import ons from 'onsenui/esm';
+import { camelize, eventToHandler, handlerToProp } from '../internal/util';
 
 /* Private */
 const _setupDBB = component => {
@@ -42,36 +43,12 @@ const deriveDBB = {
   }
 };
 
-// These handlers cannot throw events for performance reasons.
-const deriveHandler = (handlerName, keepName = false) => {
-  const propName = keepName ? handlerName : handlerToProp(handlerName);
-
-  return {
-    props: {
-      [propName]: {
-        type: Function,
-        default: null
-      }
-    },
-
-    watch: {
-      [propName]() {
-        this.$el[handlerName] = this[propName];
-      }
-    },
-
-    mounted() {
-      this[propName] && (this.$el[handlerName] = this[propName]);
-    }
-  };
-};
-
 const deriveEvents = {
   computed: {
     unrecognizedListeners() {
-      const element = capitalize(camelize(this.$options._componentTag.slice(6))) + 'Element';
+      const name = camelize('-' + this.$options._componentTag.slice(6));
       return Object.keys(this.$listeners || {})
-        .filter(k => (this.$ons[element].events || []).indexOf(k) === -1)
+        .filter(k => (ons.elements[name].events || []).indexOf(k) === -1)
         .reduce((r, k) => {
           r[k] = this.$listeners[k];
           return r;
@@ -101,4 +78,4 @@ const deriveEvents = {
   }
 };
 
-export { deriveDBB, deriveHandler, deriveEvents };
+export { deriveDBB, deriveEvents };

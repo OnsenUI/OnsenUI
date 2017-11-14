@@ -26,7 +26,7 @@ class SearchInput extends BaseInput {
 }
 
 SearchInput.propTypes = {
-    /**
+  /**
    * @name modifier
    * @type string
    * @required false

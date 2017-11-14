@@ -295,60 +295,6 @@
 */
 
 /*~
-  name: List Item with Chevron
-  category: List
-  elements: ons-list ons-list-item
-  markup: |
-    <ul class="list">
-      <li class="list-item list-item--chevron">
-        <div class="list-item__center">Item A</div>
-      </li>
-      <li class="list-item list-item--chevron">
-        <div class="list-item__center">Item B</div>
-        <div class="list-item__right list-item--chevron__right">
-          <div class="list-item__label">Label</div>
-        </div>
-      </li>
-    </ul>
- */
-
-.list-item--chevron:before {
-  border-right: 2px solid var(--list-item-chevron-color);
-  border-bottom: 2px solid var(--list-item-chevron-color);
-  position: absolute;
-  content: '';
-  width: 7px;
-  height: 7px;
-  background-color: transparent;
-  transform: translateY(-50%) rotate(-45deg);
-  right: 16px;
-  top: 50%;
-  z-index: 5;
-}
-
-.list-item--chevron__right {
-  padding-right: 30px;
-}
-
-/*~
-  name: Nodivider List Item with Chevron
-  category: List
-  elements: ons-list ons-list-item
-  markup: |
-    <ul class="list">
-      <li class="list-item list-item--nodivider list-item--chevron">
-        <div class="list-item__center list-item--nodivider__center">Item A</div>
-      </li>
-      <li class="list-item list-item--nodivider list-item--chevron">
-        <div class="list-item__center list-item--nodivider__center">Item B</div>
-        <div class="list-item__right list-item--nodivider__right list-item--chevron__right">
-          <div class="list-item__label">Label</div>
-        </div>
-      </li>
-    </ul>
- */
-
-/*~
   name: Inset List
   category: List
   elements: ons-list ons-list-item
@@ -857,6 +803,61 @@
   font-size: 20px;
   padding: 0 4px;
 }
+
+/*~
+  name: List Item with Chevron
+  category: List
+  elements: ons-list ons-list-item
+  markup: |
+    <ul class="list">
+      <li class="list-item list-item--chevron">
+        <div class="list-item__center">Item A</div>
+      </li>
+      <li class="list-item list-item--chevron">
+        <div class="list-item__center">Item B</div>
+        <div class="list-item__right list-item--chevron__right">
+          <div class="list-item__label">Label</div>
+        </div>
+      </li>
+    </ul>
+ */
+
+.list-item--chevron:before {
+  border-right: 2px solid var(--list-item-chevron-color);
+  border-bottom: 2px solid var(--list-item-chevron-color);
+  position: absolute;
+  content: '';
+  width: 7px;
+  height: 7px;
+  background-color: transparent;
+  transform: translateY(-50%) rotate(-45deg);
+  right: 16px;
+  top: 50%;
+  z-index: 5;
+}
+
+.list-item--chevron__right {
+  padding-right: 30px;
+}
+
+/*~
+  name: Nodivider List Item with Chevron
+  category: List
+  elements: ons-list ons-list-item
+  markup: |
+    <ul class="list">
+      <li class="list-item list-item--nodivider list-item--chevron">
+        <div class="list-item__center list-item--nodivider__center">Item A</div>
+      </li>
+      <li class="list-item list-item--nodivider list-item--chevron">
+        <div class="list-item__center list-item--nodivider__center">Item B</div>
+        <div class="list-item__right list-item--nodivider__right list-item--chevron__right">
+          <div class="list-item__label">Label</div>
+        </div>
+      </li>
+    </ul>
+ */
+
 
 /*~
   name: List item without divider

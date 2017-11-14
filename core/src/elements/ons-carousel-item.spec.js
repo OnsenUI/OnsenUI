@@ -2,11 +2,11 @@
 
 describe('OnsCarouselItemElement', () => {
   it('exists', () => {
-    expect(window.ons.CarouselItemElement).to.be.ok;
+    expect(window.ons.elements.CarouselItem).to.be.ok;
   });
 
   it('provides \'modifier\' attribute', () => {
-    var carouselItem = new ons.CarouselItemElement();
+    var carouselItem = new ons.elements.CarouselItem();
 
     carouselItem.setAttribute('modifier', 'hoge');
     expect(carouselItem.classList.contains('carousel-item--hoge')).to.be.true;

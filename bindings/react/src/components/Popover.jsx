@@ -56,7 +56,7 @@ Popover.propTypes = {
    *  [ja][/ja]
    */
   getTarget: PropTypes.func.isRequired,
-    /**
+  /**
    * @name onCancel
    * @type function
    * @required false

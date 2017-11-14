@@ -21,7 +21,6 @@ import Util from './Util.js';
  * </Segment>
  */
 class Segment extends BasicComponent {
-
   constructor(...args) {
     super(...args);
 

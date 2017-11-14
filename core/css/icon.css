@@ -20,6 +20,8 @@ limitations under the License.
   line-height: inherit;
   font-style: normal;
   font-weight: normal;
+  font-size: inherit;
+  text-rendering: auto;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -33,7 +35,7 @@ limitations under the License.
   vertical-align: -25%;
 }
 
-ons-icon[spin] {
+.ons-icon[spin] {
   -webkit-animation: ons-icon-spin 2s infinite linear;
   -moz-animation: ons-icon-spin 2s infinite linear;
   animation: ons-icon-spin 2s infinite linear;
@@ -86,7 +88,7 @@ ons-icon[spin] {
   transform: rotate(270deg);
 }
 
-ons-icon[fixed-width] {
+.ons-icon[fixed-width] {
   width: 1.28571429em;
   text-align: center;
 }

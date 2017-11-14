@@ -35,15 +35,11 @@ limitations under the License.
         this._attrs = attrs;
 
         this._clearDerivingMethods = $onsen.deriveMethods(this, this._element[0], [
-          'show', 'hide'
+          'show', 'hide', 'toggle'
         ]);
 
         this._clearDerivingEvents = $onsen.deriveEvents(this, this._element[0], [
-          'preshow',
-          'postshow',
-          'prehide',
-          'posthide',
-          'cancel'
+          'preshow', 'postshow', 'prehide', 'posthide', 'cancel'
         ], function(detail) {
           if (detail.actionSheet) {
             detail.actionSheet = this;
@@ -65,10 +61,6 @@ limitations under the License.
       }
 
     });
-
-    ActionSheetView.registerAnimator = function(name, Animator) {
-      return window.ons.ActionSheetElement.registerAnimator(name, Animator);
-    };
 
     MicroEvent.mixin(ActionSheetView);
     $onsen.derivePropertiesFromElement(ActionSheetView, ['disabled', 'cancelable', 'visible', 'onDeviceBackButton']);

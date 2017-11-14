@@ -18,7 +18,6 @@ limitations under the License.
 import util from '../util';
 import platform from '../platform';
 import pageAttributeExpression from '../page-attribute-expression';
-import Swiper from './swiper';
 
 const internal = {};
 
@@ -29,8 +28,6 @@ internal.config = {
 };
 
 internal.nullElement = window.document.createElement('div');
-
-internal.Swiper = Swiper;
 
 /**
  * @return {Boolean}

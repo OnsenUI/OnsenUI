@@ -15,6 +15,7 @@ limitations under the License.
 
 */
 
+import ons from '../ons';
 import BaseElement from './base/base-element';
 import util from '../ons/util';
 import contentReady from '../ons/content-ready';
@@ -63,4 +64,5 @@ export default class SplitterMaskElement extends BaseElement {
   }
 }
 
+ons.elements.SplitterMask = SplitterMaskElement;
 customElements.define('ons-splitter-mask', SplitterMaskElement);

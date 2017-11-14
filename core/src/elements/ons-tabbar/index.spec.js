@@ -1,4 +1,4 @@
-'use strict';
+import contentReady from '../../ons/content-ready';
 
 describe('OnsTabbarElement', () => {
   let element;
@@ -31,7 +31,7 @@ describe('OnsTabbarElement', () => {
   });
 
   it('should exist', () => {
-    expect(window.ons.TabbarElement).to.be.ok;
+    expect(window.ons.elements.Tabbar).to.be.ok;
   });
 
   it('provides \'modifier\' attribute', () => {
@@ -102,8 +102,8 @@ describe('OnsTabbarElement', () => {
   });
 
   it('has two children by default', (done) => {
-    const element = new ons.TabbarElement();
-    ons._contentReady(element);
+    const element = new ons.elements.Tabbar();
+    contentReady(element);
 
     setImmediate(() => {
       expect(element.children[0]).to.be.ok;

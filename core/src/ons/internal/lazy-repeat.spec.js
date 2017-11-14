@@ -1,8 +1,4 @@
-'use strict';
-
-const LazyRepeatProvider = ons._internal.LazyRepeatProvider,
-  LazyRepeatDelegate = ons._internal.LazyRepeatDelegate;
-
+import { LazyRepeatProvider, LazyRepeatDelegate } from './lazy-repeat';
 
 describe('LazyRepeatDelegate', () => {
   let userDelegate, delegate;

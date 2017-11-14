@@ -15,6 +15,7 @@ limitations under the License.
 
 */
 
+import ons from '../ons';
 import util from '../ons/util';
 import internal from '../ons/internal';
 import autoStyle from '../ons/autostyle';
@@ -206,4 +207,5 @@ export default class ToolbarElement extends BaseElement {
   }
 }
 
+ons.elements.Toolbar = ToolbarElement;
 customElements.define('ons-toolbar', ToolbarElement);

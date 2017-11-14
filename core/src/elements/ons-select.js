@@ -15,6 +15,7 @@ limitations under the License.
 
 */
 
+import ons from '../ons';
 import util from '../ons/util';
 import autoStyle from '../ons/autostyle';
 import ModifierUtil from '../ons/internal/modifier-util';
@@ -225,20 +226,16 @@ export default class SelectElement extends BaseElement {
   }
 
   _deriveGetters() {
-    for (const key of ['disabled', 'length', 'multiple', 'name', 'options', 'selectedIndex', 'size', 'value']) {
-      this.__defineGetter__(key, () => {
-        return this._select[key];
+    ['disabled', 'length', 'multiple', 'name', 'options', 'selectedIndex', 'size', 'value', 'form', 'type']
+      .forEach(key => {
+        Object.defineProperty(this, key, {
+          enumerable: true,
+          get: () => this._select[key],
+          set: ['form', 'type'].indexOf(key) === -1
+            ? value => (this._select[key] = value)
+            : undefined
+        });
       });
-      this.__defineSetter__(key, (value) => {
-        this._select[key] = value;
-      });
-    }
-    this.__defineGetter__('form', () => {
-      return this._select['form'];
-    });
-    this.__defineGetter__('type', () => {
-      return this._select['type'];
-    });
   }
 
   add(option, index = null) {
@@ -250,4 +247,5 @@ export default class SelectElement extends BaseElement {
   }
 }
 
+ons.elements.Select = SelectElement;
 customElements.define('ons-select', SelectElement);

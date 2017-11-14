@@ -1,13 +1,8 @@
-'use strict';
+import ToastQueue from './toast-queue';
 
 describe('ToastQueue',() => {
-  const ToastQueue = window.ons._internal.ToastQueue;
   beforeEach(() => {
     ToastQueue.queue = [];
-  });
-
-  it('provide \'ons._internal.ToastQueue\' global variable', function() {
-    expect(!!window.ons._internal.ToastQueue).to.equal(true);
   });
 
   describe('add()', () => {

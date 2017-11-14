@@ -1,15 +1,15 @@
-'use strict';
+import contentReady from '../ons/content-ready';
 
 describe('OnsFabElement', () => {
   let fab;
 
   beforeEach(done => {
-    fab = new ons.FabElement();
-    ons._contentReady(fab, done);
+    fab = new ons.elements.Fab();
+    contentReady(fab, done);
   });
 
   it('exists', () => {
-    expect(window.ons.FabElement).to.be.ok;
+    expect(window.ons.elements.Fab).to.be.ok;
   });
 
   it('provides modifier attribute', () => {

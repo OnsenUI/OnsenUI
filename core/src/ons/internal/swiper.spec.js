@@ -1,4 +1,4 @@
-'use strict';
+import Swiper from './swiper';
 
 describe('Swiper', () => {
   let element, swiper;
@@ -17,7 +17,7 @@ describe('Swiper', () => {
       </div>
     `);
     document.body.appendChild(element);
-    swiper = new window.ons._internal.Swiper({ getElement: () => element, getAutoScrollRatio: r => r });
+    swiper = new Swiper({ getElement: () => element, getAutoScrollRatio: r => r });
     swiper.init();
 
     setImmediate(done);
@@ -27,10 +27,6 @@ describe('Swiper', () => {
     element.remove();
     swiper.dispose();
     element = swiper = null;
-  });
-
-  it('should exist', () => {
-    expect(window.ons._internal.Swiper).to.be.ok;
   });
 
   describe('#updateSwipeable()', () => {

@@ -2,7 +2,7 @@
 
 describe('OnsSplitterElement', () => {
   it('exists', () => {
-    expect(window.ons.SplitterElement).to.be.ok;
+    expect(window.ons.elements.Splitter).to.be.ok;
   });
 
   let splitter;

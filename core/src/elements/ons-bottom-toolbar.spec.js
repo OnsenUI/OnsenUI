@@ -2,11 +2,11 @@
 
 describe('ons-bottom-toolbar', () => {
   it('provides \'OnsBottomToolbarElement\' global variable', () => {
-    expect(window.ons.BottomToolbarElement).to.be.ok;
+    expect(window.ons.elements.BottomToolbar).to.be.ok;
   });
 
   it('classList contains \'bottom-bar\' by default', () => {
-    const element = new ons.BottomToolbarElement();
+    const element = new ons.elements.BottomToolbar();
     expect(element.classList.contains('bottom-bar')).to.be.true;
     element.setAttribute('class', 'foo');
     expect(element.classList.contains('bottom-bar')).to.be.true;
@@ -14,7 +14,7 @@ describe('ons-bottom-toolbar', () => {
   });
 
   it('provides \'modifier\' attribute', () => {
-    var element = new ons.BottomToolbarElement();
+    var element = new ons.elements.BottomToolbar();
     element.setAttribute('modifier', 'hoge');
     expect(element.classList.contains('bottom-bar--hoge')).to.be.true;
 
@@ -30,8 +30,8 @@ describe('ons-bottom-toolbar', () => {
   });
 
   it('ensures its page\'s class', () => {
-    var element = new ons.BottomToolbarElement(),
-      page = new ons.PageElement();
+    var element = new ons.elements.BottomToolbar(),
+      page = new ons.elements.Page();
 
     document.body.appendChild(page);
     page.appendChild(element);

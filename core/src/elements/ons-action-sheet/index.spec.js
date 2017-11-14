@@ -19,7 +19,7 @@ describe('OnsActionSheetElement', () => {
   });
 
   it('exists', () => {
-    expect(window.ons.ActionSheetElement).to.be.ok;
+    expect(window.ons.elements.ActionSheet).to.be.ok;
   });
 
   it('provides \'title\' attribute', (done) => {
@@ -236,14 +236,14 @@ describe('OnsActionSheetElement', () => {
 
   describe('#registerAnimator()', () => {
     it('throws an error if animator is not a ActionSheetAnimator', () => {
-      expect(() => window.ons.ActionSheetElement.registerAnimator('hoge', 'hoge')).to.throw(Error);
+      expect(() => window.ons.elements.ActionSheet.registerAnimator('hoge', 'hoge')).to.throw(Error);
     });
 
     it('registers a new animator', () => {
-      class MyAnimator extends window.ons.ActionSheetElement.ActionSheetAnimator {
+      class MyAnimator extends window.ons.elements.ActionSheet.ActionSheetAnimator {
       }
 
-      window.ons.ActionSheetElement.registerAnimator('hoge', MyAnimator);
+      window.ons.elements.ActionSheet.registerAnimator('hoge', MyAnimator);
     });
   });
 

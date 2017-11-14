@@ -5,9 +5,11 @@
 </template>
 
 <script>
+  import 'onsenui/esm/elements/ons-splitter-side';
   import { hasOptions, deriveEvents } from '../mixins';
 
   export default {
+    name: 'v-ons-splitter-side',
     mixins: [hasOptions, deriveEvents],
 
     props: {

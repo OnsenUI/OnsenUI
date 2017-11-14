@@ -18,7 +18,7 @@ describe('OnsCheckboxElement', () => {
   });
 
   it('should exist', () => {
-    expect(window.ons.CheckboxElement).to.be.ok;
+    expect(window.ons.elements.Checkbox).to.be.ok;
   });
 
   it('compiles correctly', () => {

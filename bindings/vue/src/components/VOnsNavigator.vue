@@ -7,9 +7,12 @@
 </template>
 
 <script>
+  import 'onsenui/esm/elements/ons-navigator';
+  import ons from 'onsenui/esm';
   import { hasOptions, selfProvider, deriveEvents, deriveDBB } from '../mixins';
 
   export default {
+    name: 'v-ons-navigator',
     mixins: [hasOptions, selfProvider, deriveEvents, deriveDBB],
 
     props: {
@@ -41,7 +44,7 @@
       },
       _findScrollPage(page) {
         const nextPage = page._contentElement.children.length === 1
-          && this.$ons._ons._util.getTopPage(page._contentElement.children[0]);
+          && ons._util.getTopPage(page._contentElement.children[0]);
         return nextPage ? this._findScrollPage(nextPage) : page;
       },
       _setPagesVisibility(start, end, visibility) {
@@ -124,7 +127,8 @@
     updated() {
       if (this._pageStackUpdate) {
         let currentTopPage = this.$children[this.$children.length - 1].$el;
-        let { lastLength, lastTopPage, currentLength, restoreScroll } = this._pageStackUpdate;
+        let { lastTopPage, currentLength } = this._pageStackUpdate;
+        const { lastLength, restoreScroll } = this._pageStackUpdate;
         currentLength = currentLength === false ? this.$children.length : currentLength;
 
         if (currentTopPage !== lastTopPage) {

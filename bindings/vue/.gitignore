@@ -1,2 +1,5 @@
 node_modules
 npm-debug.log
+dist
+esm
+examples/build.js

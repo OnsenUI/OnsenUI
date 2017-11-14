@@ -34,7 +34,7 @@ class ToolbarButton extends SimpleWrapper {
 }
 
 ToolbarButton.propTypes = {
-    /**
+  /**
    * @name modifier
    * @type string
    * @required false

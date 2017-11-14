@@ -13,7 +13,7 @@ describe('OnsPageElement', () => {
   });
 
   it('should exist', () => {
-    expect(window.ons.PageElement).to.be.ok;
+    expect(window.ons.elements.Page).to.be.ok;
   });
 
   it('has page class', () => {
@@ -184,13 +184,13 @@ describe('OnsPageElement', () => {
   describe('#_canAnimateToolbar()', () => {
     it('works with normal toolbar', () => {
       expect(element._canAnimateToolbar()).to.be.false;
-      element.insertBefore(new ons.ToolbarElement(), element.children[0]);
+      element.insertBefore(new ons.elements.Toolbar(), element.children[0]);
       expect(element._canAnimateToolbar()).to.be.true;
     });
 
     it('works with toolbar in page__content', () => {
       expect(element._canAnimateToolbar()).to.be.false;
-      element.lastChild.appendChild(new ons.ToolbarElement());
+      element.lastChild.appendChild(new ons.elements.Toolbar());
       expect(element._canAnimateToolbar()).to.be.true;
     });
   });

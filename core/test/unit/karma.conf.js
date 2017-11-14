@@ -1,6 +1,10 @@
 // Karma configuration
 // Generated on Thu Apr 09 2015 15:16:41 GMT+0900 (JST)
 
+var babelrc = require('../../../package.json').babel;
+babelrc.babelrc = babelrc.presets[0][1].modules = false;
+babelrc.plugins = ['external-helpers'];
+
 module.exports = function(config) {
   config.set({
 
@@ -28,22 +32,21 @@ module.exports = function(config) {
     ].filter(v => v != null),
 
     preprocessors: {
-      'setup.js': ['babel'],
-      '../../../core/src/**/*.spec.js': ['babel']
+      'setup.js': ['rollup'],
+      '../../../core/src/**/*.spec.js': ['rollup']
     },
 
-    babelPreprocessor: {
-      options: {
-        presets: ['es2015'],
-        sourceMap: 'inline'
-      },
-      filename: function (file) {
-        return file.originalPath.replace(/\.js$/, '.es5.js');
-      },
-      sourceFileName: function (file) {
-        return file.originalPath;
-      }
-    },
+		rollupPreprocessor: {
+			plugins: [
+        require('rollup-plugin-string')({ include: '**/*.svg'}),
+				require('rollup-plugin-node-resolve')(),
+        require('rollup-plugin-commonjs')({ include: 'node_modules/**' }),
+				require('rollup-plugin-babel')(babelrc)
+			],
+			format: 'iife',         // Helps prevent naming collisions.
+			name: 'onsTest', // Required for 'iife' format.
+			sourcemap: 'inline'     // Sensible for testing.
+		},
 
     // list of files to exclude
     exclude: [

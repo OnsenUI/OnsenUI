@@ -109,8 +109,8 @@ util._cssPropertyDict = (function() {
   for (var i = 0; i < styles.length; i++) {
 
     var key = styles[i]
-    .replace(/^[\-]+/, '')
-    .replace(/[\-][a-z]/g, upper)
+    .replace(/^[-]+/, '')
+    .replace(/[-][a-z]/g, upper)
     .replace(/^moz/, 'Moz');
 
     if (a <= key.charCodeAt(0) && z >= key.charCodeAt(0)) {

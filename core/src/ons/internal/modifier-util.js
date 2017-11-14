@@ -76,7 +76,13 @@ export default class ModifierUtil {
    */
   static applyDiffToElement(diff, element, scheme) {
     Object.keys(scheme).forEach(selector => {
-      const targetElements = !selector || util.match(element, selector) ? [element] : [].filter.call(element.querySelectorAll(selector), targetElement => !util.findParent(targetElement, element.tagName, parent => parent === element));
+      const targetElements = !selector || util.match(element, selector)
+        ? [element]
+        : Array.prototype.filter.call(
+            element.querySelectorAll(selector),
+            targetElement => !util.findParent(targetElement, element.tagName, parent => parent === element)
+          );
+
       for (let i = 0; i < targetElements.length; i++) {
         ModifierUtil.applyDiffToClassList(diff, targetElements[i].classList, scheme[selector]);
       }

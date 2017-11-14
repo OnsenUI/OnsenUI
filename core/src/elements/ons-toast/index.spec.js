@@ -19,7 +19,7 @@ describe('OnsToastElement', () => {
   });
 
   it('should exist', () => {
-    expect(window.ons.ToastElement).to.be.ok;
+    expect(window.ons.elements.Toast).to.be.ok;
   });
 
   it('is not displayed by default', () => {
@@ -50,7 +50,7 @@ describe('OnsToastElement', () => {
 
   describe('class attribute', () => {
     it('should contain a child with "toast" class name', (done) => {
-      const element = new ons.ToastElement();
+      const element = new ons.elements.Toast();
       setImmediate(() => {
         expect(element.querySelector('.toast')).to.be.ok;
         done();
@@ -174,14 +174,14 @@ describe('OnsToastElement', () => {
 
   describe('#registerAnimator()', () => {
     it('throws an error if animator is not a ToastAnimator', () => {
-      expect(() => window.ons.ToastElement.registerAnimator('hoge', 'hoge')).to.throw(Error);
+      expect(() => window.ons.elements.Toast.registerAnimator('hoge', 'hoge')).to.throw(Error);
     });
 
     it('registers a new animator', () => {
-      class MyAnimator extends window.ons.ToastElement.ToastAnimator {
+      class MyAnimator extends window.ons.elements.Toast.ToastAnimator {
       }
 
-      window.ons.ToastElement.registerAnimator('hoge', MyAnimator);
+      window.ons.elements.Toast.registerAnimator('hoge', MyAnimator);
     });
   });
 });

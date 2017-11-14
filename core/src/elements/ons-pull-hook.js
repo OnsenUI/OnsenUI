@@ -15,6 +15,7 @@ limitations under the License.
 
 */
 
+import ons from '../ons';
 import util from '../ons/util';
 import styler from '../ons/styler';
 import platform from '../ons/platform';
@@ -231,8 +232,8 @@ export default class PullHookElement extends BaseElement {
   }
 
   set onAction(value) {
-    if (!(value instanceof Function) && value !== null) {
-      throw new Error('onAction must be a function or null');
+    if (value && !(value instanceof Function)) {
+      throw new Error(`'onAction' must be a function or null`);
     }
     this._onAction = value;
   }
@@ -250,7 +251,7 @@ export default class PullHookElement extends BaseElement {
 
   set onPull(value) {
     if (value && !(value instanceof Function)) {
-      throw new Error(`'onPull' must be a function.`)
+      throw new Error(`'onPull' must be a function or null.`)
     }
     this._onPull = value;
   }
@@ -462,4 +463,5 @@ export default class PullHookElement extends BaseElement {
   }
 }
 
+ons.elements.PullHook = PullHookElement;
 customElements.define('ons-pull-hook', PullHookElement);

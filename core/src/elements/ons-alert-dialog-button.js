@@ -15,6 +15,7 @@ limitations under the License.
 
 */
 
+import ons from '../ons';
 import util from '../ons/util';
 import autoStyle from '../ons/autostyle';
 import ModifierUtil from '../ons/internal/modifier-util';
@@ -111,4 +112,5 @@ export default class AlertDialogButtonElement extends BaseElement {
   }
 }
 
+ons.elements.AlertDialogButton = AlertDialogButtonElement;
 customElements.define('ons-alert-dialog-button', AlertDialogButtonElement);

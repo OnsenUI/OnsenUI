@@ -24,7 +24,7 @@ class Switch extends BaseInput {
 }
 
 Switch.propTypes = {
-    /**
+  /**
    * @name onChange
    * @type function
    * @description

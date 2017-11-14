@@ -91,10 +91,10 @@ class LazyList extends BasicComponent {
     return (
       <ons-list {...this.props} ref={(list) => { this._list = list; }}
         class='list' style={{position: 'relative', height: this.state.height}}
-        >
+      >
         <ons-lazy-repeat ref={(lazyRepeat) => { this._lazyRepeat = lazyRepeat; }} />
         {this.state.children}
-       </ons-list>
+      </ons-list>
     );
   }
 }

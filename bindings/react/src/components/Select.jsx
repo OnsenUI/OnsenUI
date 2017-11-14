@@ -22,7 +22,6 @@ import Util from './Util.js';
  * </Select>
  */
 class Select extends BaseInput {
-
   get EVENT_TYPES() {
     return ['change'];
   }

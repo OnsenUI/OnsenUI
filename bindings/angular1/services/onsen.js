@@ -39,7 +39,7 @@ limitations under the License.
 
         util: $onsGlobal._util,
 
-        DeviceBackButtonHandler: $onsGlobal._deviceBackButtonDispatcher,
+        DeviceBackButtonHandler: $onsGlobal._internal.dbbDispatcher,
 
         _defaultDeviceBackButtonHandler: $onsGlobal._defaultDeviceBackButtonHandler,
 

@@ -1,9 +1,9 @@
-'use strict';
+import contentReady from '../../ons/content-ready';
 
 describe('OnsRippleElement', () => {
   let container, ripple, wave, background;
 
-  const spyOn = chai.spy.on.bind(chai.spy, ons.RippleElement.prototype);
+  const spyOn = chai.spy.on.bind(chai.spy, ons.elements.Ripple.prototype);
 
   beforeEach(done => {
     container = ons._util.createElement(`
@@ -17,7 +17,7 @@ describe('OnsRippleElement', () => {
     ripple = container.querySelector('ons-ripple');
     ripple.removeAttribute('disabled');
 
-    ons._contentReady(ripple, () => {
+    contentReady(ripple, () => {
       wave = ripple._wave;
       background = ripple._background;
       done();
@@ -30,12 +30,12 @@ describe('OnsRippleElement', () => {
   });
 
   it('exists', () => {
-    expect(window.ons.RippleElement).to.be.ok;
+    expect(window.ons.elements.Ripple).to.be.ok;
   });
 
   describe('class attribute', () => {
     it('should contain "ripple" class name automatically', () => {
-      const element = new ons.RippleElement();
+      const element = new ons.elements.Ripple();
       element.setAttribute('class', 'foobar');
       expect(element.classList.contains('ripple')).to.be.ok;
       expect(element.classList.contains('foobar')).to.be.ok;
@@ -43,7 +43,7 @@ describe('OnsRippleElement', () => {
   });
 
   it('provides modifier attribute', () => {
-    var element = new ons.RippleElement();
+    var element = new ons.elements.Ripple();
     element.setAttribute('modifier', 'hoge');
     expect(element.classList.contains('ripple--hoge')).to.be.true;
 
@@ -61,25 +61,25 @@ describe('OnsRippleElement', () => {
   describe('#_compile()', () => {
     it('is called when an element is created', done => {
       const spy = spyOn('_compile'),
-        _ = new ons.RippleElement();
+        _ = new ons.elements.Ripple();
 
-      ons._contentReady(_, () => {
+      contentReady(_, () => {
         expect(spy).to.have.been.called.once;
         done();
       });
     });
 
     it('creates a "wave" element', done => {
-      const ripple = new ons.RippleElement();
-      ons._contentReady(ripple, () => {
+      const ripple = new ons.elements.Ripple();
+      contentReady(ripple, () => {
         expect(ripple._wave).to.be.an.instanceof(HTMLElement);
         done();
       });
     });
 
     it('creates a "background" element', done => {
-      const ripple = new ons.RippleElement();
-      ons._contentReady(ripple, () => {
+      const ripple = new ons.elements.Ripple();
+      contentReady(ripple, () => {
         expect(ripple._background).to.be.an.instanceof(HTMLElement);
         done();
       });
@@ -91,7 +91,7 @@ describe('OnsRippleElement', () => {
 
     it('is called when an element is created', () => {
       const spy = spyOn('attributeChangedCallback'),
-        _ = new ons.RippleElement();
+        _ = new ons.elements.Ripple();
 
       expect(spy).to.have.been.called.exactly(attributes.length);
     });
@@ -169,9 +169,9 @@ describe('OnsRippleElement', () => {
       whenUsing: (whenUsing, ...rest) => {
         it(`calls ${calling}`, done => {
           const spy = spyOn(calling),
-            ripple = new ons.RippleElement();
+            ripple = new ons.elements.Ripple();
 
-          ons._contentReady(ripple, () => {
+          contentReady(ripple, () => {
             ripple[whenUsing].apply(ripple, rest);
             expect(spy).to.have.been.called.once;
             done();

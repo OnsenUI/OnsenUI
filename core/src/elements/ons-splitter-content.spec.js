@@ -21,7 +21,7 @@ describe('ons-splitter-content', () => {
   });
 
   it('provides \'OnsSplitterContentElement\' global variable', () => {
-    expect(window.ons.SplitterContentElement).to.be.ok;
+    expect(window.ons.elements.SplitterContent).to.be.ok;
   });
 
   it('provides _hide(), _show(), _destroy() methods', () => {

@@ -15,6 +15,7 @@ limitations under the License.
 
 */
 
+import ons from '../../ons';
 import util from '../../ons/util';
 import autoStyle from '../../ons/autostyle';
 import ModifierUtil from '../../ons/internal/modifier-util';
@@ -378,4 +379,5 @@ export default class ActionSheetElement extends BaseDialogElement {
   }
 }
 
+ons.elements.ActionSheet = ActionSheetElement;
 customElements.define('ons-action-sheet', ActionSheetElement);
