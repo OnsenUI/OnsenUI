@@ -9,6 +9,7 @@ dev
 
  * css-components: Use new radial-gradient syntax to avoid prefixes.
  * ons-modal: Possible issue when toggling modal visibility very quickly.
+ * ons-action-sheet: Small glitch when hiding on iPhone X.
 
 2.8.0
 ----

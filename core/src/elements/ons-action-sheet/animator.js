@@ -17,6 +17,7 @@ limitations under the License.
 
 import animit from '../../ons/animit';
 import BaseAnimator from '../../ons/base-animator'
+import iPhoneXPatch from '../../ons/iphonex-patch';
 
 export class ActionSheetAnimator extends BaseAnimator {
 
@@ -154,7 +155,13 @@ export class IOSActionSheetAnimator extends ActionSheetAnimator {
 
     this.maskTiming = 'linear';
     this.maskDuration = 0.2;
-    this.bodyHeight = document.body.clientHeight; // avoid Forced Synchronous Layout
+    if (iPhoneXPatch.isIPhoneXPortraitPatchActive()) {
+      this.liftAmount = 'calc(100% + 48px)';
+    } else if (iPhoneXPatch.isIPhoneXLandscapePatchActive()) {
+      this.liftAmount = 'calc(100% + 33px)';
+    } else {
+      this.liftAmount = document.body.clientHeight / 2.0 - 1 + 'px'; // avoid Forced Synchronous Layout
+    }
   }
 
   /**
@@ -180,7 +187,7 @@ export class IOSActionSheetAnimator extends ActionSheetAnimator {
       .saveStyle()
       .queue({
         css: {
-          transform: `translate3d(0, ${this.bodyHeight / 2.0 - 1}px, 0)`
+          transform: `translate3d(0, ${this.liftAmount}, 0)`
         },
         duration: 0
       })
@@ -230,7 +237,7 @@ export class IOSActionSheetAnimator extends ActionSheetAnimator {
       .wait(this.delay)
       .queue({
         css: {
-          transform: `translate3d(0, 100%, 0)`
+          transform: `translate3d(0, ${this.liftAmount}, 0)`
         },
         duration: this.duration,
         timing: this.timing
