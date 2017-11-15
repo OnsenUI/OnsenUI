@@ -40,6 +40,9 @@ export default class Swiper {
       return ratio;
     };
 
+    // Prevent clicks only on desktop
+    this.shouldBlock = platform._runOnActualPlatform(() => platform.getMobileOS()) === 'other';
+
     // Bind handlers
     this.onDragStart = this.onDragStart.bind(this);
     this.onDrag = this.onDrag.bind(this);
@@ -53,6 +56,10 @@ export default class Swiper {
     this.blocker = this.getElement().children[1];
     if (!this.target || !this.blocker) {
       throw new Error('Expected "target" and "blocker" elements to exist before initializing Swiper.');
+    }
+
+    if (!this.shouldBlock) {
+      this.blocker.style.display = 'none';
     }
 
     // Add classes
@@ -248,7 +255,7 @@ export default class Swiper {
             consume && consume();
             event.consumed = true;
             this._started = true; // Avoid starting drag from outside
-            this.toggleBlocker(true);
+            this.shouldBlock && this.toggleBlocker(true);
             util.preventScroll(this._gestureDetector);
           };
 
@@ -284,7 +291,7 @@ export default class Swiper {
     const scroll = this._scroll - this._getDelta(event);
     const normalizedScroll = this._normalizeScroll(scroll);
     scroll === normalizedScroll ? this._startMomentumScroll(scroll, event) : this._killOverScroll(normalizedScroll);
-    this.toggleBlocker(false);
+    this.shouldBlock && this.toggleBlocker(false);
   }
 
   _startMomentumScroll(scroll, event) {

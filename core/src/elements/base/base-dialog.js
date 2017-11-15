@@ -115,11 +115,11 @@ export default class BaseDialogElement extends BaseElement {
         const animator = this._animatorFactory.newAnimator(options);
 
         shouldShow && this._toggleStyle(true, options);
+        this._visible = shouldShow;
 
         contentReady(this, () => {
           animator[action](this, () => {
             !shouldShow && this._toggleStyle(false, options);
-            this._visible = shouldShow;
 
             unlock();
 

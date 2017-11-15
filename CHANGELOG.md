@@ -2,6 +2,16 @@
 CHANGELOG
 ====
 
+2.8.1
+----
+
+### Bug Fixes
+
+ * css-components: Use new radial-gradient syntax to avoid prefixes.
+ * ons-tabbar: Improve scrolling on devices.
+ * ons-modal: Possible issue when toggling modal visibility very quickly.
+ * ons-action-sheet: Small glitch when hiding on iPhone X.
+
 2.8.0
 ----
 
