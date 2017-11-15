@@ -2,6 +2,13 @@
 CHANGELOG
 ====
 
+dev
+----
+
+### Bug Fixes
+
+ * ons-modal: Possible issue when toggling modal visibility very quickly.
+
 2.8.0
 ----
 
