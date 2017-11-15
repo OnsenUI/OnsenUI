@@ -8,7 +8,6 @@ const $ = require('gulp-load-plugins')();
 const eco = require('eco');
 const fs = require('fs');
 const ancss = require('ancss');
-const autoprefixer = require('autoprefixer');
 const cssnext = require('postcss-cssnext');
 const reporter = require('postcss-reporter');
 const historyApiFallback = require('connect-history-api-fallback');
