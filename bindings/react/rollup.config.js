@@ -45,6 +45,7 @@ const builds = [
       name: 'Ons',
       sourcemap: 'inline',
       globals,
+      banner,
     },
     plugins: [
       eslint({
@@ -63,7 +64,6 @@ const builds = [
         sourcemap: true,
       }),
     ],
-    banner,
   },
 
   // React bindings UMD production
@@ -76,6 +76,7 @@ const builds = [
       name: 'Ons',
       sourcemap: true,
       globals,
+      banner,
     },
     plugins: [
       replace({ 'process.env.NODE_ENV': JSON.stringify( 'production' ) }),
@@ -86,7 +87,6 @@ const builds = [
       progress(),
       filesize(),
     ],
-    banner,
   },
 ];
 

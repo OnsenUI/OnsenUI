@@ -12,6 +12,7 @@ import progress from 'rollup-plugin-progress';
 import visualizer from 'rollup-plugin-visualizer';
 import execute from 'rollup-plugin-execute';
 
+const banner = name => `/* ${name} v${pkg.version} - ${dateformat(new Date(), 'yyyy-mm-dd')} */\n`;
 const stringOpt = { include: '**/*.svg', }; // SVG images
 const cjsOpt = { include: 'node_modules/**' };
 const babelrc = Object.assign({}, pkg.babel);
@@ -27,6 +28,7 @@ export default [
       format: 'umd',
       name: 'ons',
       sourcemap: 'inline',
+      banner: banner(pkg.name),
     },
     plugins: [
       eslint({
@@ -50,7 +52,6 @@ export default [
       }),
       execute(`node_modules/.bin/uglifyjs build/js/${pkg.name}.js -c -m --comments '/${pkg.name} v/' --output build/js/${pkg.name}.min.js`),
     ],
-    banner: `/* ${pkg.name} v${pkg.version} - ${dateformat(new Date(), 'yyyy-mm-dd')} */\n`
   },
 
   // Core ES Modules
@@ -62,6 +63,7 @@ export default [
       format: 'es',
       name: 'onsESM',
       sourcemap: 'inline',
+      banner: banner(pkg.name),
     },
     plugins: [
       resolve(),
@@ -74,7 +76,6 @@ export default [
         sourcemap: false, // Unminified to show core-js size
       }),
     ],
-    banner: `/* ${pkg.name} v${pkg.version} - ${dateformat(new Date(), 'yyyy-mm-dd')} */\n`
   },
 
   // Angular Bindings
@@ -85,6 +86,7 @@ export default [
       format: 'umd',
       name: 'angularOns',
       sourcemap: 'inline',
+      banner: banner('angular-' + pkg.name),
     },
     plugins: [
       eslint({
@@ -106,6 +108,5 @@ export default [
       }),
       execute(`node_modules/.bin/uglifyjs build/js/angular-${pkg.name}.js -c -m --comments '/angular-${pkg.name} v/' --output build/js/angular-${pkg.name}.min.js`),
     ],
-    banner: `/* angular-${pkg.name} v${pkg.version} - ${dateformat(new Date(), 'yyyy-mm-dd')} */\n`
   },
 ];

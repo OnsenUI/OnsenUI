@@ -38,6 +38,7 @@ const builds = [
       name: 'VueOnsen',
       sourcemap: 'inline',
       globals,
+      banner,
     },
     plugins: [
       eslint({
@@ -57,7 +58,6 @@ const builds = [
       }),
       execute(`node_modules/.bin/uglifyjs dist/${pkg.name}.js -c -m --comments '/${pkg.name}/' --output dist/${pkg.name}.min.js`),
     ],
-    banner,
   },
 
   // Vue bindings ES Modules
@@ -70,6 +70,7 @@ const builds = [
       name: 'VueOnsenESM',
       sourcemap: 'inline',
       globals,
+      banner,
     },
     plugins: [
       babel(babelrc),
@@ -80,7 +81,6 @@ const builds = [
         sourcemap: false,
       }),
     ],
-    banner,
   },
 ];
 
