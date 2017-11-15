@@ -7,6 +7,7 @@ dev
 
 ### Bug Fixes
 
+ * css-components: Use new radial-gradient syntax to avoid prefixes.
  * ons-modal: Possible issue when toggling modal visibility very quickly.
 
 2.8.0
