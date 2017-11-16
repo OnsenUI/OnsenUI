@@ -2,6 +2,13 @@
 CHANGELOG
 ====
 
+dev
+----
+
+### Bug Fixes
+
+ * ons-splitter: Fixed small glitch in 'reveal' animation.
+
 2.8.1
 ----
 
