@@ -17,7 +17,6 @@ limitations under the License.
 
 import ons from '../../ons';
 import util from '../../ons/util';
-import platform from '../../ons/platform';
 import internal from '../../ons/internal';
 import autoStyle from '../../ons/autostyle';
 import Swiper from '../../ons/internal/swiper';
@@ -168,7 +167,7 @@ export default class TabbarElement extends BaseElement {
    * @type {String}
    * @default bottom
    * @description
-   *   [en]Tabbar's position. Available values are `"bottom"` and `"top"`. Use `"auto"` to choose position depending on platform (iOS bottom, Android top).[/en]
+   *   [en]Tabbar's position. Available values are `"bottom"` and `"top"`. Use `"auto"` to choose position depending on platform (bottom for iOS flat design, top for Material Design).[/en]
    *   [ja]タブバーの位置を指定します。"bottom"もしくは"top"を選択できます。デフォルトは"bottom"です。[/ja]
    */
 
@@ -198,7 +197,7 @@ export default class TabbarElement extends BaseElement {
   /**
    * @attribute tab-border
    * @description
-   *   [en]If this attribute is set the tabs show a dynamic bottom border. Only works for iOS since the border is always visible in Material Design.[/en]
+   *   [en]If this attribute is set the tabs show a dynamic bottom border. Only works for iOS flat design since the border is always visible in Material Design.[/en]
    *   [ja][/ja]
    */
 
@@ -300,7 +299,7 @@ export default class TabbarElement extends BaseElement {
     this._autogrow = util.hasModifier(this, 'autogrow');
     this._tabsRect = this.tabs.map(tab => tab.getBoundingClientRect());
     if (this._tabbarBorder) {
-      this._tabbarBorder.style.display = this.hasAttribute('tab-border') || platform.isAndroid() ? 'block' : 'none';
+      this._tabbarBorder.style.display = this.hasAttribute('tab-border') || util.hasModifier(this, 'material') ? 'block' : 'none';
       const index = this.getActiveTabIndex();
       if (this._tabsRect.length > 0 && index >= 0) {
         this._tabbarBorder.style.width = this._tabsRect[index].width + 'px';
@@ -362,7 +361,7 @@ export default class TabbarElement extends BaseElement {
   }
 
   _updatePosition(position = this.getAttribute('position')) {
-    const top = this._top = position === 'top' || (position === 'auto' && platform.isAndroid());
+    const top = this._top = position === 'top' || (position === 'auto' && util.hasModifier(this, 'material'));
     const action = top ? util.addModifier : util.removeModifier;
 
     action(this, 'top');

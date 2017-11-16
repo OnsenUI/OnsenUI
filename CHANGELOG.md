@@ -10,6 +10,7 @@ dev
  * ons-splitter: Fixed small glitch in 'reveal' animation.
  * ons-select: Fixed custom modifier class from `select-*` to `select--*`.
  * ons-tabbar: Fixed [#2253](https://github.com/OnsenUI/OnsenUI/issues/2253).
+ * ons-tabbar: Position 'auto' and border visibility now cares about autostyling instead of the actual platform.
 
 2.8.1
 ----
