@@ -23,7 +23,7 @@ import BaseElement from './base/base-element';
 import contentReady from '../ons/content-ready';
 
 const scheme = {
-  '': 'select-*',
+  '': 'select-* select--*',
   '.select-input': 'select-input--*'
 };
 

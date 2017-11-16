@@ -8,6 +8,7 @@ dev
 ### Bug Fixes
 
  * ons-splitter: Fixed small glitch in 'reveal' animation.
+ * ons-select: Fixed custom modifier class from `select-*` to `select--*`.
 
 2.8.1
 ----
