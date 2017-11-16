@@ -477,6 +477,7 @@ export default class TabbarElement extends BaseElement {
     contentReady(this, () => {
       this._contentElement.style[this._top ? 'top' : 'bottom'] = visible ? '' : '0px';
       this._tabbarElement.style.display = visible ? '' : 'none';
+      visible && this._onRefresh();
     });
   }
 
