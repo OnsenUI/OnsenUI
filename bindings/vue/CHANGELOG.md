@@ -1,6 +1,13 @@
 CHANGELOG
 ====
 
+dev
+----
+
+ ### Bug Fixes
+
+ * VOnsPage: Restore `deviceBackButton` event handler.
+
 2.4.0
 ----
 
