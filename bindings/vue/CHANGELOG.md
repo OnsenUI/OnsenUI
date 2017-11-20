@@ -1,7 +1,7 @@
 CHANGELOG
 ====
 
-dev
+2.4.1
 ----
 
  ### Bug Fixes
