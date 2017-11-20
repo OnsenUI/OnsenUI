@@ -7,6 +7,7 @@ dev
  ### Bug Fixes
 
  * VOnsPage: Restore `deviceBackButton` event handler.
+ * Fix compatibility with old browsers (`Object.values`).
 
 2.4.0
 ----
