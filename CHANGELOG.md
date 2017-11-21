@@ -8,6 +8,7 @@ dev
 ### New Features
 
  * ons-navigator: Added `onSwipe` property function that gets the swiped distance on drag.
+ * ons-splitter-side: Added `onSwipe` property function that gets the swiped distance on drag.
 
 ### Bug Fixes
 

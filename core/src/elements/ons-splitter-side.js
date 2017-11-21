@@ -341,9 +341,18 @@ export default class SplitterSideElement extends BaseElement {
     this._swipe = new SwipeReveal({
       element: this,
       elementHandler: this.parentElement,
-      swipeMax: this.open.bind(this),
-      swipeMid: distance => this._animator.translate(distance),
-      swipeMin: this.close.bind(this),
+      swipeMax: () => {
+        this._onSwipe && this._onSwipe(1, this._animationOpt);
+        this.open();
+      },
+      swipeMid: (distance, width) => {
+        this._onSwipe && this._onSwipe(distance/width);
+        this._animator.translate(distance);
+      },
+      swipeMin: () => {
+        this._onSwipe && this._onSwipe(0, this._animationOpt);
+        this.close();
+      },
       getThreshold: () => Math.max(0, Math.min(1, parseFloat(this.getAttribute('open-threshold')) || 0.3)),
       getSide: () => this.side,
       isInitialState: () => {
@@ -378,7 +387,7 @@ export default class SplitterSideElement extends BaseElement {
 
   disconnectedCallback() {
     this._swipe && this._swipe.dispose();
-    this._animator = this._swipe = null;
+    this._animator = this._animationOpt = this._swipe = null;
   }
 
   static get observedAttributes() {
@@ -452,6 +461,10 @@ export default class SplitterSideElement extends BaseElement {
     this._animator && this._animator.deactivate();
     this._animator = this._animatorFactory.newAnimator({animation});
     this._animator.activate(this);
+    this._animationOpt = {
+      timing: this._animator.duration,
+      duration: this._animator.duration
+    };
   }
 
   _updateAnimationOptions(value = this.getAttribute('animation-options')) {
@@ -507,6 +520,24 @@ export default class SplitterSideElement extends BaseElement {
    */
   get mode() {
     return this._mode;
+  }
+
+  /**
+   * @property onSwipe
+   * @type {Function}
+   * @description
+   *   [en]Hook called whenever the user slides the splitter. It gets a decimal ratio (0-1) and an animationOptions object as arguments.[/en]
+   *   [ja][/ja]
+   */
+  get onSwipe() {
+    return this._onSwipe;
+  }
+
+  set onSwipe(value) {
+    if (value && !(value instanceof Function)) {
+      throw new Error(`'onSwipe' must be a function.`)
+    }
+    this._onSwipe = value;
   }
 
   /**
