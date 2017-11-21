@@ -1,6 +1,13 @@
 CHANGELOG
 ====
 
+dev
+----
+
+ ### Bug Fixes
+
+ * ESM: Removed `module` references from components to fix recent Webpack versions.
+
 2.4.1
 ----
 

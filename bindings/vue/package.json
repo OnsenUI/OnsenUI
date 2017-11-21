@@ -46,7 +46,7 @@
     "vue": "~2.5.0"
   },
   "devDependencies": {
-    "babel-core": "^6.13.2",
+    "babel-core": "^6.26.0",
     "babel-eslint": "^8.0.1",
     "babel-plugin-external-helpers": "^6.22.0",
     "babel-plugin-transform-runtime": "^6.23.0",
@@ -63,7 +63,7 @@
     "gulp-clean": "^0.3.2",
     "gulp-rename": "^1.2.2",
     "gulp-util": "^3.0.7",
-    "gulp-vue-compiler": "^0.0.1",
+    "gulp-vue-compiler": "^1.0.0-beta.0",
     "rollup": "~0.50.0",
     "rollup-plugin-alias": "^1.4.0",
     "rollup-plugin-babel": "^3.0.2",
