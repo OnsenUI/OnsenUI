@@ -36,7 +36,7 @@ limitations under the License.
 
         var userDelegate = this._scope.$eval(this._attrs.onsLazyRepeat);
 
-        var internalDelegate = new AngularLazyRepeatDelegate(userDelegate, element[0], element.scope());
+        var internalDelegate = new AngularLazyRepeatDelegate(userDelegate, element[0], scope || element.scope());
 
         this._provider = new ons._internal.LazyRepeatProvider(element[0].parentNode, internalDelegate);
 
