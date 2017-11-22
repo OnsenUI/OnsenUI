@@ -138,7 +138,7 @@
     "mkpath": "^1.0.0",
     "mocha": "^4.0.1",
     "protractor": "^4.0.10",
-    "rollup": "~0.50.0",
+    "rollup": "^0.51.8",
     "rollup-plugin-babel": "^3.0.2",
     "rollup-plugin-commonjs": "^8.2.1",
     "rollup-plugin-eslint": "^4.0.0",
