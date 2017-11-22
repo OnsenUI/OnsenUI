@@ -33,7 +33,6 @@ export default class RevealSplitterAnimator extends SplitterAnimator {
 
   activate(sideElement) {
     super.activate(sideElement);
-    this.maxWidth = this._getMaxWidth();
     if (sideElement.mode === 'collapse') {
       this._setStyles(sideElement);
     }
@@ -159,7 +158,7 @@ export default class RevealSplitterAnimator extends SplitterAnimator {
             done && done();
           }),
       );
-    }, 0);
+    }, 1000/60);
   }
 
   /**

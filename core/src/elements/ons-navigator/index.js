@@ -293,12 +293,23 @@ export default class NavigatorElement extends BaseElement {
 
     if (!platform.isAndroid() || this.getAttribute('swipeable') === 'force') {
       this._swipeAnimator = new IOSSwipeNavigatorAnimator();
+      const pushAnimation = { duration: this._swipeAnimator.duration, timing: this._swipeAnimator.timing };
+      const popAnimation = { duration: this._swipeAnimator.durationRestore, timing: this._swipeAnimator.timing };
 
       this._swipe = new SwipeReveal({
         element: this,
-        swipeMax: () => this[this.swipeMax ? 'swipeMax' : 'popPage']({ animator: this._swipeAnimator }),
-        swipeMid: (distance, width) => this._swipeAnimator.translate(distance, width, this.topPage.previousElementSibling, this.topPage),
-        swipeMin: () => this._swipeAnimator.restore(this.topPage.previousElementSibling, this.topPage),
+        swipeMax: () => {
+          this._onSwipe && this._onSwipe(1, pushAnimation);
+          this[this.swipeMax ? 'swipeMax' : 'popPage']({ animator: this._swipeAnimator });
+        },
+        swipeMid: (distance, width) => {
+          this._onSwipe && this._onSwipe(distance/width);
+          this._swipeAnimator.translate(distance, width, this.topPage.previousElementSibling, this.topPage);
+        },
+        swipeMin: () => {
+          this._onSwipe && this._onSwipe(0, popAnimation);
+          this._swipeAnimator.restore(this.topPage.previousElementSibling, this.topPage);
+        },
         getThreshold: () => Math.max(0.2, parseFloat(this.getAttribute('swipe-threshold')) || 0),
         ignoreSwipe: (event, distance) => {
           if (/ons-back-button/i.test(event.target.tagName) || util.findParent(event.target, 'ons-back-button', p => /ons-page/i.test(p.tagName))) {
@@ -925,6 +936,24 @@ export default class NavigatorElement extends BaseElement {
   get pages() {
     return util.arrayFrom(this.children)
       .filter(element => element.tagName === 'ONS-PAGE');
+  }
+
+  /**
+   * @property onSwipe
+   * @type {Function}
+   * @description
+   *   [en]Hook called whenever the user slides the navigator (swipe-to-pop). It gets a decimal ratio (0-1) and an animationOptions object as arguments.[/en]
+   *   [ja][/ja]
+   */
+  get onSwipe() {
+    return this._onSwipe;
+  }
+
+  set onSwipe(value) {
+    if (value && !(value instanceof Function)) {
+      throw new Error(`'onSwipe' must be a function.`)
+    }
+    this._onSwipe = value;
   }
 
   /**

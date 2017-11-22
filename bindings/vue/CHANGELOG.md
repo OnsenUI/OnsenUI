@@ -1,6 +1,21 @@
 CHANGELOG
 ====
 
+2.4.2
+----
+
+ ### Bug Fixes
+
+ * ESM: Removed `module` references from components to fix recent Webpack versions.
+
+2.4.1
+----
+
+ ### Bug Fixes
+
+ * VOnsPage: Restore `deviceBackButton` event handler.
+ * Fix compatibility with old browsers (`Object.values`).
+
 2.4.0
 ----
 

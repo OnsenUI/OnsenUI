@@ -18,10 +18,6 @@
 .toolbar+.page__background {
   top: var(--toolbar-height);
 }
-/* All page__background with a transparent toolbar */
-.toolbar.toolbar--transparent+.page__background {
-  top: 0;
-}
 
 /* All page__content without toolbars */
 .page__content {
@@ -40,13 +36,44 @@
   bottom: 44px;
 }
 
+/* -------- */
+/* Material */
+/* -------- */
+
+/* All page__background with a material toolbar */
+.toolbar.toolbar--material+.page__background {
+  top: var(--toolbar-material-height);
+}
+/* All page__content with a material toolbar */
+.toolbar.toolbar--material+.page__background+.page__content {
+  top: var(--toolbar-material-height);
+  padding-top: 0;
+}
+
+/* -------- */
+/*  Others  */
+/* -------- */
+
+/* All page__background with a transparent toolbar */
+.toolbar.toolbar--transparent+.page__background {
+  top: 0;
+}
 /* All page__content with a transparent cover-content toolbar and its direct descendant page_content */
 .toolbar.toolbar--transparent.toolbar--cover-content+.page__background+.page__content,
 .toolbar.toolbar--transparent.toolbar--cover-content+.page__background+.page__content .page_content {
   top: 0;
   padding-top: var(--toolbar-height);
 }
+/* All page__content with a material transparent cover-content toolbar and its direct descendant page_content */
+.toolbar.toolbar--material.toolbar--transparent.toolbar--cover-content+.page__background+.page__content,
+.toolbar.toolbar--material.toolbar--transparent.toolbar--cover-content+.page__background+.page__content .page_content {
+  top: 0;
+  padding-top: var(--toolbar-material-height);
+}
 
+/* -------- */
+/*  Tabbar  */
+/* -------- */
 
 /* All top tabbar */
 .tabbar--top {
@@ -57,24 +84,3 @@
   padding-bottom: 0;
 }
 
-/* -------- */
-/* Material */
-/* -------- */
-
-/* All page__background with a material toolbar */
-.toolbar.toolbar--material+.page__background {
-  top: var(--toolbar-material-height);
-}
-
-/* All page__content with a material toolbar */
-.toolbar.toolbar--material+.page__background+.page__content {
-  top: var(--toolbar-material-height);
-  padding-top: 0;
-}
-
-/* All page__content with a material transparent cover-content toolbar and its direct descendant page_content */
-.toolbar.toolbar--material.toolbar--transparent.toolbar--cover-content+.page__background+.page__content,
-.toolbar.toolbar--material.toolbar--transparent.toolbar--cover-content+.page__background+.page__content .page_content {
-  top: 0;
-  padding-top: var(--toolbar-material-height);
-}

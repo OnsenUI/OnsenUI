@@ -506,10 +506,10 @@ const buildTasks = [
   'clean',
   'core',
   'core-esm',
+  'angular-bindings',
   'core-css',
   'build-css',
   'copy-files',
-  'angular-bindings',
 ];
 
 gulp.task('build', done => runSequence.apply(null, buildTasks.concat(['build-docs', 'compress-distribution-package', done])));

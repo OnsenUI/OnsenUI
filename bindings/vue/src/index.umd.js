@@ -5,7 +5,8 @@ $ons.install = (Vue, params = {}) => {
   /**
    * Register components of vue-onsenui.
    */
-  Object.values(components).forEach(c => Vue.component(c.name, c));
+  Object.keys(components)
+    .forEach(key => Vue.component(components[key].name, components[key]));
 
   /**
    * Expose ons object.

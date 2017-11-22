@@ -2,6 +2,23 @@
 CHANGELOG
 ====
 
+2.8.2
+----
+
+### New Features
+
+ * ons-navigator: Added `onSwipe` property function that gets the swiped distance on drag.
+ * ons-splitter-side: Added `onSwipe` property function that gets the swiped distance on drag.
+
+### Bug Fixes
+
+ * ons-splitter: Fixed small glitch in 'reveal' animation.
+ * ons-select: Fixed custom modifier class from `select-*` to `select--*`.
+ * ons-tabbar: Fixed [#2253](https://github.com/OnsenUI/OnsenUI/issues/2253).
+ * ons-tabbar: Position 'auto' and border visibility now cares about autostyling instead of the actual platform.
+ * ons-toolbar: Fix 'transparent' modifier when combined with 'material' (regression).
+ * angular1: Remove `element.scope()` call that depends on AngularJS Debug Data.
+
 2.8.1
 ----
 
