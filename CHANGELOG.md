@@ -9,6 +9,10 @@ dev
 
  * ons-carousel: Fixed [#2260](https://github.com/OnsenUI/OnsenUI/issues/2260).
 
+ ### Misc
+
+ * Show warning when Onsen UI is loaded more than once (UMD - ESM).
+
 2.8.2
 ----
 

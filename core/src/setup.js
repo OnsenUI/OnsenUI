@@ -4,9 +4,10 @@ import './vendor/index.js';
 import './ons/microevent.js';
 
 export default function setup(ons) {
-  if (window.ons) {
+  if (window._onsLoaded) {
     ons._util.warn('Onsen UI is loaded more than once.');
   }
+  window._onsLoaded = true;
 
   // fastclick
   window.addEventListener('load', () => {
