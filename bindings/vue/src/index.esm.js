@@ -1,4 +1,7 @@
-import { $ons } from './setup';
+import ons from 'onsenui/esm';
+import setup from './setup';
+
+const $ons = setup(ons);
 
 $ons.install = (Vue, params = {}) => {
   /**

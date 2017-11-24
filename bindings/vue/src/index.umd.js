@@ -1,5 +1,8 @@
-import { $ons } from './setup';
+import ons from 'onsenui';
+import setup from './setup';
 import * as components from './components';
+
+const $ons = setup(ons);
 
 $ons.install = (Vue, params = {}) => {
   /**
