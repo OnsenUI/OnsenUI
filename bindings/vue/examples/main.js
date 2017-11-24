@@ -2,7 +2,10 @@ import Vue from 'vue';
 import * as examples from './components';
 
 import VueOnsen from 'vue-onsenui'; // umd
-// import VueOnsen from '../src/index.esm.js';
+
+// import VueOnsen from 'vue-onsenui/esm'; // esm
+// // import * as VOns from 'vue-onsenui/esm/components';
+// // Object.values(VOns).forEach(component => Vue.component(component.name, component));
 // import VOnsPage from '../src/components/VOnsPage';
 // import VOnsToolbar from '../src/components/VOnsToolbar';
 // Vue.component(VOnsPage.name, VOnsPage);
