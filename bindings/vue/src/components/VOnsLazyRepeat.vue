@@ -5,7 +5,6 @@
 
 <script>
 import 'onsenui/esm/elements/ons-lazy-repeat';
-import ons from 'onsenui/esm';
 
 export default {
   name: 'v-ons-lazy-repeat',
@@ -43,14 +42,14 @@ export default {
     _setup() {
       this.provider && this.provider.destroy();
 
-      const delegate = new ons._internal.LazyRepeatDelegate({
+      const delegate = new this.$ons._ons._internal.LazyRepeatDelegate({
         calculateItemHeight: this.calculateItemHeight,
         createItemContent: i => this.renderItem(i).$mount().$el,
         destroyItem: (i, { element }) => element.__vue__.$destroy(),
         countItems: () => this.length
       }, null);
 
-      this.provider = new ons._internal.LazyRepeatProvider(this.$parent.$el, delegate);
+      this.provider = new this.$ons._ons._internal.LazyRepeatProvider(this.$parent.$el, delegate);
     },
     refresh() {
       return this.provider.refresh();
