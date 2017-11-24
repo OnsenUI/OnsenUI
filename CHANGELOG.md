@@ -2,6 +2,13 @@
 CHANGELOG
 ====
 
+dev
+----
+
+ ### Bug Fixes
+
+ * ons-carousel: Fixed [#2260](https://github.com/OnsenUI/OnsenUI/issues/2260).
+
 2.8.2
 ----
 

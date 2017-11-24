@@ -245,7 +245,7 @@ export default class CarouselElement extends BaseElement {
         preChangeHook: this._onChange.bind(this, 'prechange'),
         postChangeHook: this._onChange.bind(this, 'postchange'),
         refreshHook: this._onRefresh.bind(this),
-        scrollHook: this._onSwipe
+        scrollHook: (...args) => this._onSwipe && this._onSwipe(...args)
       });
 
       contentReady(this, () => this._swiper.init({
