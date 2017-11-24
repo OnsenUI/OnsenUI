@@ -23,7 +23,7 @@ babelrc.babelrc = babelrc.presets[0][1].modules = false;
 babelrc.plugins = ['external-helpers'];
 babelrc.exclude = [local('node_modules/**'), local('../../build/**')];
 
-const globals = { 'onsenui/esm': 'ons' },
+const globals = { 'onsenui': 'ons', 'onsenui/esm': 'ons' },
   external = id => /onsenui/.test(id),
   banner = `/* ${pkg.name} v${pkg.version} - ${dateformat(new Date(), 'yyyy-mm-dd')} */\n`;
 
@@ -48,6 +48,11 @@ const builds = [
         ],
       }),
       resolve({ extensions: ['.js', '.vue'] }),
+      replace({
+        // Remove undefined imports to slightly reduce UMD bundle size
+        include: './src/components/*.vue',
+        'import \'onsenui/esm/elements/': '// \'',
+      }),
       vue(),
       babel(babelrc),
       progress(),
@@ -97,13 +102,18 @@ builds.devConfig = {
     alias({
       resolve: ['.js', '.vue', '\/index.js'],
       vue: local('node_modules/vue/dist/vue.esm.js'),
-      'vue-onsenui/esm': local('src'),
+      'vue-onsenui/esm/components': local('src', 'components'),
+      'vue-onsenui/esm': local('src', 'index.esm.js'),
       'vue-onsenui': local('src', 'index.umd.js'),
       'onsenui/esm': local('../../build/esm'),
+      'onsenui': local('../../build/js/onsenui'),
     }),
     resolve({ extensions: ['.js', '.vue'] }),
-    commonjs({ include: 'node_modules/**' }),
-    replace({ 'process.env.NODE_ENV': JSON.stringify( 'development' ) }),
+    replace({
+      'import \'onsenui/esm/elements/': '// \'',
+      'process.env.NODE_ENV': JSON.stringify( 'development' )
+    }),
+    commonjs({ include: ['node_modules/**', local('../../build/js/*')] }),
     vue(),
     babel(babelrc),
     progress(),
