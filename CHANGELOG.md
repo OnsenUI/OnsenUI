@@ -8,6 +8,7 @@ dev
  ### Bug Fixes
 
  * ons-carousel: Fixed [#2260](https://github.com/OnsenUI/OnsenUI/issues/2260).
+ * ons-progress-circular: Fixed [#1860](https://github.com/OnsenUI/OnsenUI/issues/1860).
 
  ### Misc
 
