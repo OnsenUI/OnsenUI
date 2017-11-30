@@ -9,6 +9,7 @@ dev
 
  * ons-carousel: Fixed [#2260](https://github.com/OnsenUI/OnsenUI/issues/2260).
  * ons-progress-circular: Fixed [#1860](https://github.com/OnsenUI/OnsenUI/issues/1860).
+ * css/polyfills: Fixed [#2266](https://github.com/OnsenUI/OnsenUI/issues/2266).
 
  ### Misc
 
