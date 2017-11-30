@@ -108,6 +108,11 @@ export default class RippleElement extends BaseElement {
   constructor() {
     super();
 
+    this._onTap = this._onTap.bind(this);
+    this._onHold = this._onHold.bind(this);
+    this._onDragStart = this._onDragStart.bind(this);
+    this._onRelease = this._onRelease.bind(this);
+
     contentReady(this, () => this._compile());
 
     this._animator = new Animator();
@@ -214,7 +219,8 @@ export default class RippleElement extends BaseElement {
   }
 
   _onTap(e) {
-    if (!this.disabled) {
+    if (!this.disabled && !e.ripple) {
+      e.ripple = true;
       this._updateParent();
       this._rippleAnimation(e.gesture.srcEvent).then(() => {
         this._animator.fade(this._wave);
@@ -224,15 +230,17 @@ export default class RippleElement extends BaseElement {
   }
 
   _onHold(e) {
-    if (!this.disabled) {
+    if (!this.disabled && !e.ripple) {
+      e.ripple = true;
       this._updateParent();
       this._holding = this._rippleAnimation(e.gesture.srcEvent, 2000);
-      document.addEventListener('release', this._boundOnRelease);
+      document.addEventListener('release', this._onRelease);
     }
   }
 
   _onRelease(e) {
-    if (this._holding) {
+    if (this._holding && !e.ripple) {
+      e.ripple = true;
       this._holding.speed(300).then(() => {
         this._animator.stopAll({stopNext: true});
         this._animator.fade(this._wave);
@@ -242,7 +250,7 @@ export default class RippleElement extends BaseElement {
       this._holding = false;
     }
 
-    document.removeEventListener('release', this._boundOnRelease);
+    document.removeEventListener('release', this._onRelease);
   }
 
   _onDragStart(e) {
@@ -256,25 +264,21 @@ export default class RippleElement extends BaseElement {
 
   connectedCallback() {
     this._parentNode = this.parentNode;
-    this._boundOnTap = this._onTap.bind(this);
-    this._boundOnHold = this._onHold.bind(this);
-    this._boundOnDragStart = this._onDragStart.bind(this);
-    this._boundOnRelease = this._onRelease.bind(this);
 
     if (internal.config.animationsDisabled) {
       this.disabled = true;
     } else {
-      this._parentNode.addEventListener('tap', this._boundOnTap);
-      this._parentNode.addEventListener('hold', this._boundOnHold);
-      this._parentNode.addEventListener('dragstart', this._boundOnDragStart);
+      this._parentNode.addEventListener('tap', this._onTap);
+      this._parentNode.addEventListener('hold', this._onHold);
+      this._parentNode.addEventListener('dragstart', this._onDragStart);
     }
   }
 
   disconnectedCallback() {
     const pn = this._parentNode || this.parentNode;
-    pn.removeEventListener('tap', this._boundOnTap);
-    pn.removeEventListener('hold', this._boundOnHold);
-    pn.removeEventListener('dragstart', this._boundOnDragStart);
+    pn.removeEventListener('tap', this._onTap);
+    pn.removeEventListener('hold', this._onHold);
+    pn.removeEventListener('dragstart', this._onDragStart);
   }
 
   static get observedAttributes() {
