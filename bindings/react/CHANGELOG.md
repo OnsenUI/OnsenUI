@@ -2,6 +2,13 @@
 CHANGELOG
 ====
 
+dev
+----
+
+### New Features
+
+  * Page: Added 'onInfiniteScroll' prop.
+
 1.9.0
 ----
 

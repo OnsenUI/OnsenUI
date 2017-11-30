@@ -10,6 +10,7 @@ import './polyfill-switches';
 import 'core-js/fn/object/set-prototype-of';
 import 'core-js/fn/set';
 import 'core-js/fn/map';
+import 'core-js/fn/weak-map';
 
 // Polyfill Custom Elements v1 with global namespace pollution
 import '@onsenui/custom-elements/src/custom-elements';
