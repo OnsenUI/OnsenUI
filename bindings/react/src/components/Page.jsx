@@ -200,7 +200,7 @@ Page.propTypes = {
    * @required false
    * @description
    *  [en]
-   *  Called when scrolling to the bottom of the page.
+   *  Called when scrolling to the bottom of the page. It gets a 'done' callback (first argument) that must be called when it's finished.
    *  [/en]
    *  [ja][/ja]
    */
