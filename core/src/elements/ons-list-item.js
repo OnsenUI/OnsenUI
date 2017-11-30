@@ -36,6 +36,27 @@ const scheme = {
   '.list-item__icon': 'list-item--*__icon'
 };
 
+const excludeEventTargets = [
+  'ONS-BUTTON',
+  'ONS-SELECT',
+  'ONS-INPUT',
+  'ONS-CHECKBOX',
+  'ONS-RADIO',
+  'ONS-SWITCH',
+  'ONS-RANGE',
+  'ONS-SEARCH-INPUT',
+  'ONS-BACK-BUTTON',
+  'ONS-SELECT-DIAL',
+  'ONS-SELECT-DIAL-ITEM',
+  'ONS-ACTION-SHEET-BUTTON',
+  'BUTTON',
+  'INPUT',
+  'SELECT',
+  'OPTION',
+  'A',
+  'TEXTAREA'
+]
+
 /**
  * @element ons-list-item
  * @category list
@@ -232,8 +253,12 @@ export default class ListItemElement extends BaseElement {
     }
   }
 
-  _onTouch() {
+  _onTouch(e) {
+
     if (this.tapped) {
+      return;
+    }
+    if (excludeEventTargets.indexOf(e.target.nodeName) > -1) {
       return;
     }
 
