@@ -49,11 +49,17 @@ class Page extends BasicComponent {
     if (this.props.onDeviceBackButton instanceof Function) {
       node.onDeviceBackButton = this.props.onDeviceBackButton;
     }
+    if (this.props.onInfiniteScroll instanceof Function) {
+      node.onInfiniteScroll = this.props.onInfiniteScroll;
+    }
   }
 
   componentWillReceiveProps(newProps) {
     if (newProps.onDeviceBackButton !== undefined) {
       ReactDOM.findDOMNode(this).onDeviceBackButton = newProps.onDeviceBackButton;
+    }
+    if (newProps.onInfiniteScroll !== undefined) {
+      ReactDOM.findDOMNode(this).onInfiniteScroll = newProps.onInfiniteScroll;
     }
   }
 
@@ -187,6 +193,18 @@ Page.propTypes = {
    *  [ja][/ja]
    */
   onHide: PropTypes.func,
+
+  /**
+   * @name onInfiniteScroll
+   * @type function
+   * @required false
+   * @description
+   *  [en]
+   *  Called when scrolling to the bottom of the page.
+   *  [/en]
+   *  [ja][/ja]
+   */
+  onInfiniteScroll: PropTypes.func,
 
   /**
    * @name onDeviceBackButton
