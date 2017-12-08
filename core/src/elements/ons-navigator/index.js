@@ -493,6 +493,107 @@ export default class NavigatorElement extends BaseElement {
     }).catch(() => this._isRunning = false);
   }
 
+  /**
+   * @method popToTop
+   * @signature popToTop([options])
+   * @param {Object} [options]
+   *   [en]Parameter object.[/en]
+   *   [ja]オプションを指定するオブジェクト。[/ja]
+   * @param {String} [options.animation]
+   *   [en]
+   *     Animation name. Available animations are `"slide"`, `"lift"`, `"fade"` and `"none"`.
+   *
+   *     These are platform based animations. For fixed animations, add `"-ios"` or `"-md"` suffix to the animation name. E.g. `"lift-ios"`, `"lift-md"`. Defaults values are `"slide-ios"` and `"fade-md"`.
+   *   [/en]
+   *   [ja][/ja]
+   * @param {String} [options.animationOptions]
+   *   [en]Specify the animation's duration, delay and timing. E.g. `{duration: 0.2, delay: 0.4, timing: 'ease-in'}`.[/en]
+   *   [ja]アニメーション時のduration, delay, timingを指定します。e.g. {duration: 0.2, delay: 0.4, timing: 'ease-in'}[/ja]
+   * @param {Function} [options.callback]
+   *   [en]Function that is called when the transition has ended.[/en]
+   *   [ja]このメソッドによる画面遷移が終了した際に呼び出される関数オブジェクトを指定します。[/ja]
+   * @param {Object} [options.data]
+   *   [en]Custom data that will be stored in the new page element.[/en]
+   *   [ja][/ja]
+   * @return {Promise}
+   *   [en]Promise which resolves to the revealed page.[/en]
+   *   [ja]明らかにしたページを解決するPromiseを返します。[/ja]
+   * @description
+   *   [en]Pops the current page from the page stack. The previous page will be displayed.[/en]
+   *   [ja]現在表示中のページをページスタックから取り除きます。一つ前のページに戻ります。[/ja]
+   */
+  popToTop(options = {}) {
+    ({options} = this._preparePageAndOptions(null, options));
+
+    const popUpdate = () => new Promise((resolve) => {
+      let index;
+      for (index = 1; index <= this.pages.length - 1; index++) {
+        this._pageLoader.unload(this.pages[index]);
+      }
+      resolve();
+    });
+
+    return this._popToTop(options, popUpdate);
+  }
+
+  _popToTop(options, update = () => Promise.resolve()) {
+    if (this._isRunning) {
+      return Promise.reject('popPage is already running.');
+    }
+
+    if (this.pages.length <= 1) {
+      return Promise.reject('ons-navigator\'s page stack is empty.');
+    }
+
+    if (this._emitPrePopEvent()) {
+      return Promise.reject('Canceled in prepop event.');
+    }
+
+    const length = this.pages.length;
+
+    this._isRunning = true;
+
+    let index;
+    for (index = 1; index <= this.pages.length - 2; index++) {
+      this.pages[index].style.visibility = 'hidden';
+    }
+
+    return new Promise(resolve => {
+      const leavePage = this.pages[length - 1];
+      const enterPage = this.pages[0];
+
+      options.animation = options.animation || (leavePage.pushedOptions ? leavePage.pushedOptions.animation : undefined);
+      options.animationOptions = util.extend(
+        {},
+        leavePage.pushedOptions ? leavePage.pushedOptions.animationOptions : {},
+        options.animationOptions || {}
+      );
+
+      if (options.data) {
+        enterPage.data = util.extend({}, enterPage.data || {}, options.data || {});
+      }
+
+      const callback = () => {
+        update().then(() => {
+          this._isRunning = false;
+
+          enterPage._show();
+          util.triggerElementEvent(this, 'postpop', {leavePage, enterPage, navigator: this});
+
+          if (typeof options.callback === 'function') {
+            options.callback();
+          }
+
+          resolve(enterPage);
+        });
+      };
+
+      leavePage._hide();
+      const animator = options.animator || this._animatorFactory.newAnimator(options);
+      animator.pop(this.pages[0], this.pages[length - 1], callback);
+    }).catch(() => this._isRunning = false);
+  }
+
 
   /**
    * @method pushPage

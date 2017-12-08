@@ -157,6 +157,15 @@
   },
   "dependencies": {
     "@onsenui/custom-elements": "1.0.0",
-    "core-js": "^2.5.1"
+    "ancss": "^0.1.5",
+    "core-js": "^2.5.1",
+    "eco": "^1.1.0-rc-3",
+    "gulp-plumber": "^1.1.0",
+    "gulp-postcss": "^7.0.0",
+    "gulp-stylelint": "^3.9.0",
+    "postcss-base64": "^0.7.1",
+    "postcss-cssnext": "^3.0.2",
+    "postcss-import": "^11.0.0",
+    "postcss-reporter": "^5.0.0"
   }
 }
