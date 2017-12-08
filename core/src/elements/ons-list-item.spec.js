@@ -58,11 +58,29 @@ describe('OnsListItemElement', () => {
     it('should add change the background color.', () => {
       const color = 'rgb(250, 250, 250)';
 
+      var e1 = ons._util.createElement('<ons-button>content</ons-button>');
+      var e2 = ons._util.createElement('<div>content</div>');
+
+      listItem.appendChild(e1);
+      listItem.appendChild(e2);
+
+      const dummyEvent1 = {
+        target: e1
+      };
+      const dummyEvent2 = {
+        target: e2
+      };
+
       listItem.setAttribute('tappable', true);
       listItem.setAttribute('tap-background-color', color);
       expect(listItem.style.backgroundColor).not.to.equal(color);
-      listItem._onTouch();
+      listItem._onTouch(dummyEvent1);
+      expect(listItem.style.backgroundColor).not.to.equal(color);
+      listItem._onTouch(dummyEvent2);
       expect(listItem.style.backgroundColor).to.equal(color);
+
+      listItem.removeChild(e1);
+      listItem.removeChild(e2);
     });
   });
 
@@ -71,13 +89,23 @@ describe('OnsListItemElement', () => {
       const origColor = 'rgb(250, 250, 250)';
       const newColor = 'rgb(255, 255, 255)';
 
+      var elt = ons._util.createElement('<div>content</div>')
+
+      listItem.appendChild(elt);
+      
+      const dummyEvent = {
+        target: elt
+      };
+
       listItem.setAttribute('tappable', true);
       listItem.setAttribute('tap-background-color', newColor);
       listItem.style.backgroundColor = origColor;
-      listItem._onTouch();
+      listItem._onTouch(dummyEvent);
       expect(listItem.style.backgroundColor).to.equal(newColor);
       listItem._onRelease();
       expect(listItem.style.backgroundColor).to.equal(origColor);
+
+      listItem.removeChild(elt);
     });
   });
 
