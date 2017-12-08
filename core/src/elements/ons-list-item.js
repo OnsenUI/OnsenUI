@@ -36,27 +36,6 @@ const scheme = {
   '.list-item__icon': 'list-item--*__icon'
 };
 
-const excludeEventTargets = [
-  'ONS-BUTTON',
-  'ONS-SELECT',
-  'ONS-INPUT',
-  'ONS-CHECKBOX',
-  'ONS-RADIO',
-  'ONS-SWITCH',
-  'ONS-RANGE',
-  'ONS-SEARCH-INPUT',
-  'ONS-BACK-BUTTON',
-  'ONS-SELECT-DIAL',
-  'ONS-SELECT-DIAL-ITEM',
-  'ONS-ACTION-SHEET-BUTTON',
-  'BUTTON',
-  'INPUT',
-  'SELECT',
-  'OPTION',
-  'A',
-  'TEXTAREA'
-]
-
 /**
  * @element ons-list-item
  * @category list
@@ -253,12 +232,26 @@ export default class ListItemElement extends BaseElement {
     }
   }
 
+  isExcludedTarget(target) {
+
+    if (target.tagName.indexOf('ONS-') === 0) {
+      return true;
+    }
+    if (target.hasAttribute('prevent-tap')) {
+      return true;
+    }
+    if (target.parentElement !== this) {
+      return this.isExcludedTarget(target.parentElement);
+    }
+    return false;
+  }
+
   _onTouch(e) {
 
     if (this.tapped) {
       return;
     }
-    if (excludeEventTargets.indexOf(e.target.nodeName) > -1) {
+    if (this.isExcludedTarget(e.target)) {
       return;
     }
 
