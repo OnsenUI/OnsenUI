@@ -232,8 +232,26 @@ export default class ListItemElement extends BaseElement {
     }
   }
 
-  _onTouch() {
+  isExcludedTarget(target) {
+
+    if (target.tagName.indexOf('ONS-') === 0) {
+      return true;
+    }
+    if (target.hasAttribute('prevent-tap')) {
+      return true;
+    }
+    if (target.parentElement !== this) {
+      return this.isExcludedTarget(target.parentElement);
+    }
+    return false;
+  }
+
+  _onTouch(e) {
+
     if (this.tapped) {
+      return;
+    }
+    if (this.isExcludedTarget(e.target)) {
       return;
     }
 
