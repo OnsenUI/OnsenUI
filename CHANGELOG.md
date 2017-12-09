@@ -5,6 +5,10 @@ CHANGELOG
 dev
 ----
 
+ ### New Features
+
+ * ons-list-item: Skip tappable effect on children with `prevent-tap` attribute or `ons-*` elements.
+
  ### Bug Fixes
 
  * ons-carousel: Fixed [#2260](https://github.com/OnsenUI/OnsenUI/issues/2260).

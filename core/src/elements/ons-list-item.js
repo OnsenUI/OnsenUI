@@ -113,7 +113,7 @@ export default class ListItemElement extends BaseElement {
    * @attribute tappable
    * @type {Boolean}
    * @description
-   *   [en]Makes the element react to taps.[/en]
+   *   [en]Makes the element react to taps. `prevent-tap` attribute can be added to child elements like buttons or inputs to prevent this effect. `ons-*` elements are ignored by default.[/en]
    *   [ja][/ja]
    */
 
