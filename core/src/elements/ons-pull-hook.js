@@ -413,7 +413,7 @@ export default class PullHookElement extends BaseElement {
       this._gestureDetector[action]('drag', this._onDrag);
       this._gestureDetector[action]('dragstart', this._onDragStart);
       this._gestureDetector[action]('dragend', this._onDragEnd);
-      this._gestureDetector[action]('touchmove', this._preventScroll);
+      this._gestureDetector[action]('touchmove', this._preventScroll, { passive: true });
     };
 
     if (this._gestureDetector) {
