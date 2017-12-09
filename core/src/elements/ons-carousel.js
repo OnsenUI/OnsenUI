@@ -212,6 +212,17 @@ export default class CarouselElement extends BaseElement {
   constructor() {
     super();
 
+    Object.defineProperty(this.style, 'display', {
+      enumerable: true,
+      get: () => this.style.getPropertyValue('display'),
+      set: value => {
+        this.style.setProperty('display', value);
+        if (this._swiper && this._swiper.itemNumSize === 0) {
+          this._swiper._setupInitialIndex();
+        }
+      },
+    });
+
     contentReady(this, () => this._compile());
   }
 
