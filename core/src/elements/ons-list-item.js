@@ -251,6 +251,7 @@ export default class ListItemElement extends BaseElement {
     if (this.tapped) {
       return;
     }
+
     if (this !== e.target && this.isExcludedTarget(e.target)) {
       return;
     }
