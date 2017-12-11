@@ -76,7 +76,26 @@ class Navigator extends BasicComponent {
     if (this.isRunning()) {
       return Promise.reject('Navigator is already running animation.');
     }
+    const renderPage = (route) => {
+      return this.props.renderPage(route, this);
+    };
+    if (options.pop) {
+      return new Promise((resolve) => {
+        this.routesBeforePop = this.routes.slice();
+        this.routesAfterPop = routes;
+        this.routes = routes.concat([this.routes[this.routes.length - 1]]);
 
+        const update = () => {
+          this.pages.pop();
+          this.routes = routes;
+          return new Promise((resolve) => this.forceUpdate(resolve));
+        };
+
+        this.update(this.pages).then(() => {
+          this._navi._popPage(options, update);
+        });
+      });
+    }
     return new Promise((resolve) => {
       var lastRoute = routes[routes.length - 1];
       var newPage = this.props.renderPage(lastRoute, this);
@@ -89,10 +108,6 @@ class Navigator extends BasicComponent {
 
       this._navi._pushPage(options, update).then(() => {
         this.routes = routes;
-
-        var renderPage = (route) => {
-          return this.props.renderPage(route, this);
-        };
 
         this.pages = routes.map(renderPage);
         this.update(this.pages).then(resolve);
