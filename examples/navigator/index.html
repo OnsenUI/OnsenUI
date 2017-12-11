@@ -35,7 +35,9 @@
 </head>
 
 <body>
-  <ons-navigator id="myNavigator" swipeable>
+  <ons-navigator id="myNavigator" swipeable page="page0.html"></ons-navigator>
+
+  <template id="page0.html">
     <ons-page id="page0">
       <ons-toolbar>
         <div class="center">Navigator</div>
@@ -49,8 +51,7 @@
         </ons-button>
       </div>
     </ons-page>
-
-  </ons-navigator>
+  </template>
 
   <template id="page1.html">
     <ons-page id="page1">
@@ -73,6 +74,11 @@
         <ons-button
           onclick="myNavigator.popPage()">
           Pop Page
+        </ons-button>
+
+        <ons-button
+          onclick="myNavigator.resetToPage('page0.html', { pop: true })">
+          Go Home
         </ons-button>
       </div>
 

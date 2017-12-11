@@ -733,6 +733,9 @@ export default class NavigatorElement extends BaseElement {
    * @return {Promise}
    *   [en]Promise which resolves to the new top page.[/en]
    *   [ja]新しいトップページを解決するPromiseを返します。[/ja]
+   * @param {Boolean} [options.pop]
+   *   [en]Performs 'pop' effect if `true` instead of 'push' or none. This also sets `options.animation` value to `default` instead of `none`.[/en]
+   *   [ja][/ja]
    * @description
    *   [en]Clears page stack and adds the specified page to the stack. Extends `pushPage()` parameters.[/en]
    *   [ja]ページスタックをリセットし、指定したページを表示します。[/ja]
@@ -740,8 +743,22 @@ export default class NavigatorElement extends BaseElement {
   resetToPage(page, options = {}) {
     ({page, options} = this._preparePageAndOptions(page, options));
 
-    if (!options.animator && !options.animation) {
+    if (!options.animator && !options.animation && !options.pop) {
       options.animation = 'none';
+    }
+
+    if (!options.page && !options.pageHTML && this._getPageTarget()) {
+      page = options.page = this._getPageTarget();
+    }
+
+    if (options.pop) {
+      for (let i = this.pages.length - 2; i >= 0; i--) {
+        this._pageMap.delete(this.pages[i]);
+        this._pageLoader.unload(this.pages[i]);
+      }
+
+      return this.insertPage(0, page, options)
+        .then(() => this.popPage(options));
     }
 
     const callback = options.callback;
@@ -754,10 +771,6 @@ export default class NavigatorElement extends BaseElement {
       this.pages[0].updateBackButton(false);
       callback && callback();
     };
-
-    if (!options.page && !options.pageHTML && this._getPageTarget()) {
-      page = options.page = this._getPageTarget();
-    }
 
     return this.pushPage(page, options);
   }
