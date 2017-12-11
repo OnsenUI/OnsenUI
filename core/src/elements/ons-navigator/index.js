@@ -472,16 +472,14 @@ export default class NavigatorElement extends BaseElement {
         enterPage.data = util.extend({}, enterPage.data || {}, options.data || {});
       }
 
-      const callback = () => {
+      const done = () => {
         update().then(() => {
           this._isRunning = false;
 
           enterPage._show();
           util.triggerElementEvent(this, 'postpop', {leavePage, enterPage, navigator: this});
 
-          if (typeof options.callback === 'function') {
-            options.callback();
-          }
+          options.callback && options.callback(enterPage);
 
           resolve(enterPage);
         });
@@ -489,7 +487,7 @@ export default class NavigatorElement extends BaseElement {
 
       leavePage._hide();
       const animator = options.animator || this._animatorFactory.newAnimator(options);
-      animator.pop(this.pages[length - 2], this.pages[length - 1], callback);
+      animator.pop(this.pages[length - 2], this.pages[length - 1], done);
     }).catch(() => this._isRunning = false);
   }
 
@@ -600,9 +598,7 @@ export default class NavigatorElement extends BaseElement {
           options.show !== false && setImmediate(() => enterPage._show());
           util.triggerElementEvent(this, 'postpush', {leavePage, enterPage, navigator: this});
 
-          if (typeof options.callback === 'function') {
-            options.callback();
-          }
+          options.callback && options.callback(enterPage);
 
           resolve(enterPage);
         };
@@ -751,25 +747,26 @@ export default class NavigatorElement extends BaseElement {
       page = options.page = this._getPageTarget();
     }
 
-    if (options.pop) {
-      for (let i = this.pages.length - 2; i >= 0; i--) {
-        this._pageMap.delete(this.pages[i]);
-        this._pageLoader.unload(this.pages[i]);
+    const reset = () => {
+      const pages = this.pages;
+      for (let i = pages.length - 2; i >= 0; i--) {
+        this._pageMap.delete(pages[i]);
+        this._pageLoader.unload(pages[i]);
       }
+    };
 
-      return this.insertPage(0, page, options)
+    if (options.pop) {
+      reset();
+      return this.insertPage(0, page, { data: options.data })
         .then(() => this.popPage(options));
     }
 
+    // Tip: callback runs before resolved promise
     const callback = options.callback;
-
-    options.callback = () => {
-      while (this.pages.length > 1) {
-        this._pageLoader.unload(this.pages[0]);
-      }
-
-      this.pages[0].updateBackButton(false);
-      callback && callback();
+    options.callback = newPage => {
+      reset();
+      newPage.updateBackButton(false);
+      callback && callback(newPage);
     };
 
     return this.pushPage(page, options);
