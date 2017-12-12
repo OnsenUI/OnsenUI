@@ -203,6 +203,7 @@ class Navigator extends BasicComponent {
     }
 
     this.routesBeforePop = this.routes.slice();
+    this.routesAfterPop = this.routesBeforePop.slice(0, this.routesBeforePop.length - 1);
 
     const update = () => {
       return new Promise((resolve) => {
@@ -244,7 +245,7 @@ class Navigator extends BasicComponent {
 
     event.routes = {
       poppedRoute: this.routesBeforePop[this.routesBeforePop.length - 1],
-      routes: this.routesBeforePop.slice(0, this.routesBeforePop.length - 1)
+      routes: this.routesAfterPop
     };
 
     this.props.onPostPop(event);
