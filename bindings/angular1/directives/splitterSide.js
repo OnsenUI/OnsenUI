@@ -3,6 +3,15 @@
  */
 
 /**
+ * @attribute var
+ * @initonly
+ * @type {String}
+ * @description
+ *   [en]Variable name to refer this splitter side.[/en]
+ *   [ja]このスプリッターコンポーネントを参照するための名前を指定します。[/ja]
+ */
+
+/**
  * @attribute ons-destroy
  * @initonly
  * @type {Expression}
