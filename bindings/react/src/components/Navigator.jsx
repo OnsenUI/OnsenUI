@@ -173,6 +173,35 @@ class Navigator extends BasicComponent {
   }
 
   /**
+   * @method popToTop
+   * @signature popToTop(options = {})
+   * @return {Promise}
+   *   [en] Promise which resolves to the revealed page.[/en]
+   *   [ja]明らかにしたページを解決するPromiseを返します。[/ja]
+   * @description
+   *   [en] Pops all pages out of the page stack except the top page[/en]
+   *   [ja][/ja]
+   */
+  popToTop(options = {}) {
+    if (this.isRunning()) {
+      return Promise.reject('Navigator is already running animation.');
+    }
+
+    this.routesBeforePop = this.routes.slice();
+
+    const update = () => {
+      return new Promise((resolve) => {
+        this.pages.splice(1, this.pages.length - 1);
+        this.routes.splice(1, this.routes.length - 1);
+
+        this.forceUpdate(resolve);
+      });
+    };
+
+    return this._navi._popToTop(options, update);
+  }
+
+  /**
    * @method popPage
    * @signature popPage(options = {})
    * @return {Promise}
