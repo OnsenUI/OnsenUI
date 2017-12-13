@@ -48,7 +48,7 @@ limitations under the License.
     });
 
     MicroEvent.mixin(SplitterSide);
-    $onsen.derivePropertiesFromElement(SplitterSide, ['page', 'mode', 'isOpen']);
+    $onsen.derivePropertiesFromElement(SplitterSide, ['page', 'mode', 'isOpen', 'onSwipe', 'pageLoader']);
 
     return SplitterSide;
   });

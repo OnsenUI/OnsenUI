@@ -16,6 +16,7 @@ dev
  ### Misc
 
  * Show warning when Onsen UI is loaded more than once (UMD - ESM).
+ * angular1: Revised the exposed DOM properties for carousel, modal, navigator, popover, pullHook, splitter, splitterSide, switch and tabbar.
 
 2.8.2
 ----
