@@ -89,7 +89,7 @@ export default class PullHookElement extends BaseElement {
    * @attribute threshold-height
    * @type {String}
    * @description
-   *   [en]Specify the threshold height. The component automatically switches to the "action" state when pulled further than this value. The default value is "96px". A negative value or a value less than the height will disable this property.[/en]
+   *   [en]Specify the threshold height. The component automatically switches to the "action" state when pulled further than this value. The default value is "96px". A negative value will disable this property. If this value is lower than the height, it will skip "preaction" state.[/en]
    *   [ja]閾値となる高さを指定します。この値で指定した高さよりもpull downすると、このコンポーネントは自動的に"action"状態に移行します。[/ja]
    */
 
@@ -180,7 +180,9 @@ export default class PullHookElement extends BaseElement {
 
     const scroll = Math.max(event.gesture.deltaY - this._startScroll, 0);
     if (scroll !== this._currentTranslation) {
-      if (this._thresholdHeightEnabled() && scroll >= this.thresholdHeight) {
+
+      const th = this.thresholdHeight;
+      if (th > 0 && scroll >= th) {
         event.gesture.stopDetect();
         setImmediate(() => this._finish());
 
@@ -302,11 +304,6 @@ export default class PullHookElement extends BaseElement {
 
   get thresholdHeight() {
     return parseInt(this.getAttribute('threshold-height') || '96', 10);
-  }
-
-  _thresholdHeightEnabled() {
-    const th = this.thresholdHeight;
-    return th > 0 && th >= this.height;
   }
 
   _setState(state, noEvent) {

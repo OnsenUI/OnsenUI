@@ -16,6 +16,7 @@ dev
  ### Misc
 
  * Show warning when Onsen UI is loaded more than once (UMD - ESM).
+ * ons-pull-hook: `threshold-height` is not disabled anymore when its value is lower than the height.
 
 2.8.2
 ----
