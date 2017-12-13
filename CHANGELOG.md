@@ -5,6 +5,10 @@ CHANGELOG
 dev
 ----
 
+ ### New Features
+
+ * ons-list-item: Skip tappable effect on children with `prevent-tap` attribute or `ons-*` elements.
+
  ### Bug Fixes
 
  * ons-carousel: Fixed [#2260](https://github.com/OnsenUI/OnsenUI/issues/2260).
@@ -12,10 +16,13 @@ dev
  * css/polyfills: Fixed [#2266](https://github.com/OnsenUI/OnsenUI/issues/2266).
  * ons-ripple: The effect does not propagate to other `ons-ripple` parents anymore.
  * ons-carousel: Prevent error state when hidden during the first rendering.
+ * angular1: `ons-scope` directive works when placed on the same element as `var` attribute.
 
  ### Misc
 
  * Show warning when Onsen UI is loaded more than once (UMD - ESM).
+ * ons-pull-hook: `threshold-height` is not disabled anymore when its value is lower than the height.
+ * angular1: Revised the exposed DOM properties for carousel, modal, navigator, popover, pullHook, splitter, splitterSide, switch and tabbar.
 
 2.8.2
 ----

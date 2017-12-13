@@ -542,18 +542,29 @@ limitations under the License.
             set(ons.componentBase, names, object);
           }
 
-          // Attach to ancestor with ons-scope attribute.
+          var getScope = function(el) {
+            return angular.element(el).data('_scope');
+          };
+
           var element = object._element[0];
 
-          while (element.parentNode) {
+          // Current element might not have data('_scope')
+          if (element.hasAttribute('ons-scope')) {
+            set(getScope(element) || object._scope, names, object);
+            element = null;
+            return;
+          }
+
+          // Ancestors
+          while (element.parentElement) {
+            element = element.parentElement;
             if (element.hasAttribute('ons-scope')) {
-              set(angular.element(element).data('_scope'), names, object);
+              set(getScope(element), names, object);
               element = null;
               return;
             }
-
-            element = element.parentNode;
           }
+
           element = null;
 
           // If no ons-scope element was found, attach to $rootScope.

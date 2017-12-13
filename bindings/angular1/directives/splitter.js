@@ -7,8 +7,8 @@
  * @initonly
  * @type {String}
  * @description
- *   [en]Variable name to refer this split view.[/en]
- *   [ja]このスプリットビューコンポーネントを参照するための名前を指定します。[/ja]
+ *   [en]Variable name to refer this splitter.[/en]
+ *   [ja]このスプリッターコンポーネントを参照するための名前を指定します。[/ja]
  */
 
 /**

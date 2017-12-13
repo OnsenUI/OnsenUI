@@ -62,7 +62,7 @@ limitations under the License.
     });
 
     MicroEvent.mixin(SwitchView);
-    $onsen.derivePropertiesFromElement(SwitchView, ['disabled', 'checked', 'checkbox']);
+    $onsen.derivePropertiesFromElement(SwitchView, ['disabled', 'checked', 'checkbox', 'value']);
 
     return SwitchView;
   });
