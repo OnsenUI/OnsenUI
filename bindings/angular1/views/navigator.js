@@ -98,7 +98,7 @@ limitations under the License.
     });
 
     MicroEvent.mixin(NavigatorView);
-    $onsen.derivePropertiesFromElement(NavigatorView, ['pages', 'topPage']);
+    $onsen.derivePropertiesFromElement(NavigatorView, ['pages', 'topPage', 'onSwipe', 'options', 'onDeviceBackButton', 'pageLoader']);
 
     return NavigatorView;
   });
