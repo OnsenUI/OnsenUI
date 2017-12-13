@@ -48,6 +48,13 @@ $ yarn build
 
 The files will be built and copied into **OnsenUI/build** folder.
 
+If you want to work with some bindings, like `vue`, you need to run the following commands:
+
+```
+$ cd bindings/vue
+$ yarn install
+```
+
 It is also possible to serve the files for development and running examples:
 
 ```bash
