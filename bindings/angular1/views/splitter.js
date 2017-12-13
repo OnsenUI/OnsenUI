@@ -36,10 +36,10 @@ limitations under the License.
     MicroEvent.mixin(Splitter);
     $onsen.derivePropertiesFromElement(Splitter, ['onDeviceBackButton']);
 
-    ['left', 'right', 'content', 'mask'].forEach((prop, i) => {
+    ['left', 'right', 'side', 'content', 'mask'].forEach((prop, i) => {
       Object.defineProperty(Splitter.prototype, prop, {
         get: function () {
-          var tagName = `ons-splitter-${i < 2 ? 'side' : prop}`;
+          var tagName = `ons-splitter-${i < 3 ? 'side' : prop}`;
           return angular.element(this._element[0][prop]).data(tagName);
         }
       });
