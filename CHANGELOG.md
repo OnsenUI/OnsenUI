@@ -16,6 +16,7 @@ dev
  * css/polyfills: Fixed [#2266](https://github.com/OnsenUI/OnsenUI/issues/2266).
  * ons-ripple: The effect does not propagate to other `ons-ripple` parents anymore.
  * ons-carousel: Prevent error state when hidden during the first rendering.
+ * angular1: `ons-scope` directive works when placed on the same element as `var` attribute.
 
  ### Misc
 
