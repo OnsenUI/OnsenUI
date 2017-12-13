@@ -179,6 +179,10 @@ export default class Swiper {
     const count = this.itemCount,
       size = this.itemNumSize;
 
+    if (this.itemNumSize === 0 || !util.isInteger(scroll)) {
+      return this._lastActiveIndex;
+    }
+
     if (scroll <= 0) {
       return 0;
     }
@@ -397,8 +401,12 @@ export default class Swiper {
     this._reset();
     this._updateLayout();
 
-    const scroll = this._normalizeScroll(this._scroll);
-    scroll !== this._scroll ? this._killOverScroll(scroll) : this._changeTo(scroll);
+    if (util.isInteger(this._scroll)) {
+      const scroll = this._normalizeScroll(this._scroll);
+      scroll !== this._scroll ? this._killOverScroll(scroll) : this._changeTo(scroll);
+    } else {
+      this._setupInitialIndex();
+    }
 
     this.refreshHook();
   }

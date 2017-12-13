@@ -229,6 +229,7 @@ export default class SelectElement extends BaseElement {
     ['disabled', 'length', 'multiple', 'name', 'options', 'selectedIndex', 'size', 'value', 'form', 'type']
       .forEach(key => {
         Object.defineProperty(this, key, {
+          configurable: true,
           enumerable: true,
           get: () => this._select[key],
           set: ['form', 'type'].indexOf(key) === -1

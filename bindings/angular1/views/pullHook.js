@@ -60,7 +60,8 @@ limitations under the License.
     });
 
     MicroEvent.mixin(PullHookView);
-    $onsen.derivePropertiesFromElement(PullHookView, ['state', 'pullDistance', 'height', 'thresholdHeight', 'disabled']);
+
+    $onsen.derivePropertiesFromElement(PullHookView, ['state', 'onPull', 'pullDistance', 'height', 'thresholdHeight', 'disabled']);
 
     return PullHookView;
   });

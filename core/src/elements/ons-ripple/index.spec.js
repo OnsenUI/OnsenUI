@@ -128,7 +128,7 @@ describe('OnsRippleElement', () => {
 
 
   describe('#_calculateCoords()', () => {
-    const e = {
+    const srcEvent = {
       changedTouches: [{
         clientX: 350,
         clientY: 250
@@ -146,7 +146,7 @@ describe('OnsRippleElement', () => {
     it('can do math', () => {
       ons._util.extend(ripple.style, style);
 
-      const coords = ripple._calculateCoords(e);
+      const coords = ripple._calculateCoords(srcEvent);
 
       expect(coords.x).to.equal(250);
       expect(coords.y).to.equal(150);
@@ -181,7 +181,7 @@ describe('OnsRippleElement', () => {
     };
   };
 
-  const e = {
+  const newEvent = () => ({
     gesture: {
       direction: 'left',
       srcEvent: {
@@ -191,13 +191,13 @@ describe('OnsRippleElement', () => {
         }]
       }
     }
-  };
+  });
 
   describe('#_rippleAnimation()', () => {
     it('changes the location of the wave', () => {
       const {left, top} = wave.style;
 
-      ripple._rippleAnimation(e.gesture.srcEvent);
+      ripple._rippleAnimation(newEvent().gesture.srcEvent);
 
       expect(wave.style.left).not.to.equal(left);
       expect(wave.style.top).not.to.equal(top);
@@ -206,34 +206,32 @@ describe('OnsRippleElement', () => {
   });
 
   describe('#_onTap()', () => {
-    itCalls('_rippleAnimation').whenUsing('_onTap', e);
+    itCalls('_rippleAnimation').whenUsing('_onTap', newEvent());
   });
 
   describe('#_onHold()', () => {
     it('sets _holding', () => {
       expect(ripple._holding).to.not.be.ok;
-      ripple._onHold(e);
+      ripple._onHold(newEvent());
       expect(ripple._holding).to.be.ok;
     });
   });
 
   describe('#_onDragStart()', () => {
-    itCalls('_rippleAnimation').whenUsing('_onDragStart', e);
+    itCalls('_rippleAnimation').whenUsing('_onDragStart', newEvent());
 
-    it('calls _onRelease', () => {
-      const spy = spyOn('_onRelease');
-
-      ripple._onHold(e);
-      ripple._onDragStart(e);
-      expect(spy).to.have.been.called.once;
+    it('releases', () => {
+      ripple._onHold(newEvent());
+      ripple._onDragStart(newEvent());
+      expect(ripple._holding).to.equal(false);
     });
   });
 
   describe('#_onRelease()', () => {
     it('unsets _holding', () => {
-      ripple._onHold(e);
+      ripple._onHold(newEvent());
       expect(ripple._holding).to.be.ok;
-      ripple._onRelease(e);
+      ripple._onRelease(newEvent());
       expect(ripple._holding).to.not.be.ok;
     });
   });

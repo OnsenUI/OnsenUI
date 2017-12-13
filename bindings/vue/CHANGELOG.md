@@ -1,6 +1,13 @@
 CHANGELOG
 ====
 
+dev
+----
+
+ ### Misc
+
+ * Ensure `vue-onsenui` UMD only imports `onsenui` UMD.
+
 2.4.2
 ----
 

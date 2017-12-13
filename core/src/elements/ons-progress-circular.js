@@ -32,8 +32,8 @@ const scheme = {
 const template = util.createElement(`
   <svg class="progress-circular">
     <circle class="progress-circular__background" />
-    <circle class="progress-circular__secondary" />
-    <circle class="progress-circular__primary" />
+    <circle class="progress-circular__secondary" cx="50%" cy="50%" r="40%" />
+    <circle class="progress-circular__primary" cx="50%" cy="50%" r="40%" />
   </svg>
 `);
 

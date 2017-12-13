@@ -62,7 +62,7 @@
   --toast-text-color: #000;
   --toast-button-text-color: #000;
   --select-input-color: var(--text-color);
-  --select-input-border-color: var(--input-border-color);
+  --select-input-border-color: var(--border-color);
 
   /* variables for Material Design components */
   --material-background-color: #303030;

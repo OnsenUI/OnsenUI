@@ -14,8 +14,8 @@ See the License for the specific language governing permissions and
 limitations under the License.
 
 */
-const readyMap = new WeakMap();
-const queueMap = new WeakMap();
+
+let readyMap, queueMap;
 
 function isContentReady(element) {
   if (element.childNodes.length > 0) {
@@ -42,6 +42,11 @@ function consumeQueue(element) {
 }
 
 export default function contentReady(element, fn = () => {}) {
+  if (readyMap === undefined) {
+    readyMap = new WeakMap();
+    queueMap = new WeakMap();
+  }
+
   addCallback(element, fn);
 
   if (isContentReady(element)) {

@@ -1,4 +1,3 @@
-import ons from 'onsenui/esm';
 import { camelize, eventToHandler, handlerToProp } from '../internal/util';
 
 /* Private */
@@ -48,7 +47,7 @@ const deriveEvents = {
     unrecognizedListeners() {
       const name = camelize('-' + this.$options._componentTag.slice(6));
       return Object.keys(this.$listeners || {})
-        .filter(k => (ons.elements[name].events || []).indexOf(k) === -1)
+        .filter(k => (this.$ons.elements[name].events || []).indexOf(k) === -1)
         .reduce((r, k) => {
           r[k] = this.$listeners[k];
           return r;

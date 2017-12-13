@@ -95,7 +95,7 @@
     background-color: transparent;
   }
 
-  @custom-media --retina-query (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi);
+  @custom-media --retina-query (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi), (min-resolution: 2dppx);
 
   --material-font: {
     font-family: 'Roboto', 'Noto', sans-serif;
