@@ -8,6 +8,7 @@ dev
  ### New Features
 
  * ons-list-item: Skip tappable effect on children with `prevent-tap` attribute or `ons-*` elements.
+ * ons-navigator: `resetToPage` can now perform 'pop' animation if `options.pop` is `true`.
 
  ### Bug Fixes
 
