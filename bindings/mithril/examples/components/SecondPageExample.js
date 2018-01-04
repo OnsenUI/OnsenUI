@@ -8,6 +8,7 @@ class SecondPageExample {
 	view(vnode) {
 		return m(Page, [
 			m('ons-toolbar', [
+				m('ons-back-button', 'Back'),
 				m('div', {class: 'center'}, 'Title'),
 				m('div', {class: 'right'},
 					m('ons-toolbar-button',

@@ -1,5 +1,5 @@
 import m from 'mithril';
-import {Navigator, Page} from 'mithril-onsenui'
+import {Navigator, Page, Splitter} from 'mithril-onsenui'
 import SecondPageExample from './SecondPageExample'
 
 class PageExample {
@@ -15,7 +15,7 @@ class PageExample {
 			m('ons-toolbar', [
 				m('div', {class: 'center'}, 'Title'),
 				m('div', {class: 'right'},
-					m('ons-toolbar-button',
+					m('ons-toolbar-button', {onclick: this.toggleMenu},
 						m('ons-icon', {icon: 'ion-navicon, material:md-menu'})
 					)
 				)
