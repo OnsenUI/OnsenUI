@@ -1,0 +1,8 @@
+{
+  extends: [
+    '../../.eslintrc'
+  ],
+  rules: {
+    // override if necessary
+  }
+}
