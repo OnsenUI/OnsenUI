@@ -126,6 +126,7 @@ gulp.task('watch-core', ['core-css'], () => {
 gulp.task('watch-angular-bindings', () => watch(rollupConfigs.angularOns));
 gulp.task('watch-vue-bindings', () => watch(require('./bindings/vue/rollup.config.js').default.devConfig));
 gulp.task('watch-react-bindings', () => watch(require('./bindings/react/rollup.config.js').default.devConfig));
+gulp.task('watch-mithril-bindings', () => watch(require('./bindings/mithril/rollup.config.js').default.devConfig));
 
 ////////////////////////////////////////
 // core-dts-test
@@ -553,6 +554,7 @@ gulp.task('serve', done => {
     'bindings/angular1/examples/**/*.{js,css,html}',
     'bindings/vue/examples/build.js',
     'bindings/react/examples/build.js',
+    'bindings/mithril/examples/build.js',
   ]).on('change', changedFile => {
     gulp.src(changedFile.path)
       .pipe(browserSync.reload({stream: true, once: true}));
@@ -564,6 +566,7 @@ gulp.task('serve', done => {
   argv.coreEsm && tasks.push('watch-core-esm');
   (argv.angular || argv.angular1) && tasks.push('watch-angular-bindings');
   argv.react && tasks.push('watch-react-bindings');
+  argv.mithril && tasks.push('watch-mithril-bindings');
   argv.vue && tasks.push('watch-vue-bindings');
   tasks.push('browser-sync', done);
 
@@ -574,6 +577,7 @@ gulp.task('browser-sync', (done) => {
   const startPath =
     argv.vue && '/bindings/vue/examples/index.html'
     || argv.react && '/bindings/react/examples/index.html'
+    || argv.mithril && '/bindings/mithril/examples/index.html'
     || (argv.angular || argv.angular1) && '/bindings/angular1/examples/'
     // || (argv.ngx || argv.angular2) && '/bindings/angular2/.../'
     || '/examples/';
