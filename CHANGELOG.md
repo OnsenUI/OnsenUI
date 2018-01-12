@@ -2,6 +2,13 @@
 CHANGELOG
 ====
 
+dev
+----
+
+ ### Misc
+
+ * css-components: Expose Action Sheet variables for Theme Roller.
+
 2.8.3
 ----
 
