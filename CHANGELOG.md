@@ -5,6 +5,10 @@ CHANGELOG
 dev
 ----
 
+ ### Bug Fixes
+
+ * ons-tab: Fixed [#2307](https://github.com/OnsenUI/OnsenUI/issues/2307).
+
  ### Misc
 
  * css-components: Expose Action Sheet variables for Theme Roller.

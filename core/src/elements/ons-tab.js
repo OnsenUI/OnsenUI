@@ -288,12 +288,12 @@ export default class TabElement extends BaseElement {
   }
 
   disconnectedCallback() {
-    this.loaded = null;
     this.removeEventListener('click', this._boundOnClick, false);
     if (this._loadedPage) {
       this._pageLoader.unload(this._loadedPage);
       this._loadedPage = null;
       this._hasLoaded = false;
+      this.loaded = null;
     }
   }
 
@@ -333,7 +333,7 @@ export default class TabElement extends BaseElement {
             const parentTarget = tabbar._targetElement;
             const dummyPage = util.create('div', { height: '100%', width: '100%', backgroundColor: 'transparent' });
             parentTarget.insertBefore(dummyPage, parentTarget.children[index]); // Ensure position
-            return this._loadPageElement(parentTarget, pageTarget).then(deferred.resolve)
+            return this._loadPageElement(parentTarget, pageTarget).then(deferred.resolve);
           }
 
           return deferred.resolve(this.pageElement);
