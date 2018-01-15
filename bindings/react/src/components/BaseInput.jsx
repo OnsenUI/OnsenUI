@@ -25,6 +25,8 @@ class BaseInput extends BasicComponent {
 
     if (this.props.value !== undefined) {
       node.value = this.props.value;
+    } else if (this.props.defaultValue !== undefined) {
+      node.value = this.props.defaultValue;
     }
 
     this.EVENT_TYPES.forEach(eventType => node.addEventListener(eventType, this.onChange));
