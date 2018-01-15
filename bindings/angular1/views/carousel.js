@@ -64,7 +64,7 @@ limitations under the License.
     MicroEvent.mixin(CarouselView);
 
     $onsen.derivePropertiesFromElement(CarouselView, [
-      'centered', 'overscrollable', 'disabled', 'autoScroll', 'swipeable', 'autoScrollRatio', 'itemCount'
+      'centered', 'overscrollable', 'disabled', 'autoScroll', 'swipeable', 'autoScrollRatio', 'itemCount', 'onSwipe'
     ]);
 
     return CarouselView;

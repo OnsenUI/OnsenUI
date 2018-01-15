@@ -56,7 +56,10 @@ limitations under the License.
         this._element = this._scope = this._attrs = null;
       }
     });
+
     MicroEvent.mixin(TabbarView);
+
+    $onsen.derivePropertiesFromElement(TabbarView, ['visible', 'swipeable', 'onSwipe']);
 
     return TabbarView;
   });
