@@ -75,6 +75,10 @@ export default class IOSSwipeNavigatorAnimator extends IOSSlideNavigatorAnimator
   }
 
   translate(distance, maxWidth, enterPage, leavePage) {
+    if (enterPage.style.display === 'none') {
+      enterPage.style.display = '';
+    }
+
     if (this.isDragStart) {
       this.maxWidth = maxWidth;
       this._dragStartSetup(enterPage, leavePage);
@@ -253,6 +257,7 @@ export default class IOSSwipeNavigatorAnimator extends IOSSlideNavigatorAnimator
           })
           .queue(done => {
             this._reset(this.target.enter, this.target.leave);
+            enterPage.style.display = 'none';
             callback && callback();
             done();
           })
@@ -282,6 +287,7 @@ export default class IOSSwipeNavigatorAnimator extends IOSSlideNavigatorAnimator
         })
         .queue(done => {
           this._reset(enterPage, leavePage);
+          enterPage.style.display = 'none';
           callback && callback();
           done();
         })

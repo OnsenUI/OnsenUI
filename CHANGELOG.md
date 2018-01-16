@@ -8,6 +8,8 @@ dev
  ### Bug Fixes
 
  * ons-tab: Fixed [#2307](https://github.com/OnsenUI/OnsenUI/issues/2307).
+ * ons-navigator: Fixed[#2286](https://github.com/OnsenUI/OnsenUI/issues/2286).
+ * ons-navigator: Fixed[#1992](https://github.com/OnsenUI/OnsenUI/issues/1992).
 
  ### Misc
 

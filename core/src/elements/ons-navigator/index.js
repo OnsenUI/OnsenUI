@@ -486,6 +486,8 @@ export default class NavigatorElement extends BaseElement {
       };
 
       leavePage._hide();
+      enterPage.style.display = '';
+
       const animator = options.animator || this._animatorFactory.newAnimator(options);
       animator.pop(this.pages[length - 2], this.pages[length - 1], done);
     }).catch(() => this._isRunning = false);
@@ -598,6 +600,10 @@ export default class NavigatorElement extends BaseElement {
           options.show !== false && setImmediate(() => enterPage._show());
           util.triggerElementEvent(this, 'postpush', {leavePage, enterPage, navigator: this});
 
+          if (leavePage) {
+            leavePage.style.display = 'none';
+          }
+
           options.callback && options.callback(enterPage);
 
           resolve(enterPage);
@@ -678,6 +684,7 @@ export default class NavigatorElement extends BaseElement {
           options.animationOptions || {}
         );
 
+        pageElement.style.display = 'none';
         this.insertBefore(pageElement, this.pages[index]);
         this.topPage.updateBackButton(true);
 
@@ -810,6 +817,7 @@ export default class NavigatorElement extends BaseElement {
       return Promise.reject('Canceled in prepush event.');
     }
 
+    page.style.display = '';
     page.style.visibility = 'hidden';
     page.parentNode.appendChild(page);
     return this._pushPage(options);
