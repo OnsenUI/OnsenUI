@@ -46,11 +46,6 @@
           && this.$ons._ons._util.getTopPage(page._contentElement.children[0]);
         return nextPage ? this._findScrollPage(nextPage) : page;
       },
-      _setPagesVisibility(start, end, visibility) {
-        for (let i = start; i < end; i++) {
-          this.$children[i].$el.style.visibility = visibility;
-        }
-      },
       _reattachPage(pageElement, position = null, restoreScroll) {
         this.$el.insertBefore(pageElement, position);
         restoreScroll instanceof Function && restoreScroll();
@@ -70,11 +65,14 @@
             isReattached = true;
             lastLength--;
           }
-          this._setPagesVisibility(lastLength, currentLength, 'hidden');
+
+          currentTopPage.style.visibility = 'hidden'; // Avoid flickerings
+          for (let i = lastLength; i < currentLength - 1; i++) {
+            this.$children[i].$el.style.display = 'none'; // Avoid flickerings and perf
+          }
 
           return this.$el._pushPage({ ...this.options, leavePage: lastTopPage })
             .then(() => {
-              this._setPagesVisibility(lastLength, currentLength, '');
               if (isReattached) {
                 this._redetachPage(lastTopPage);
               }
@@ -88,7 +86,7 @@
         }
 
         // Replace page
-        currentTopPage.style.visibility = 'hidden';
+        currentTopPage.style.visibility = 'hidden'; // Avoid flickerings
         this._reattachPage(lastTopPage, currentTopPage, restoreScroll);
         return this.$el._pushPage({ ...this.options, _replacePage: true }).then(() => this._redetachPage(lastTopPage));
       },

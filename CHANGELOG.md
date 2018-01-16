@@ -9,6 +9,9 @@ dev
 
  * ons-tab: Fixed [#2307](https://github.com/OnsenUI/OnsenUI/issues/2307).
  * ons-list-item: Fixed [#2292](https://github.com/OnsenUI/OnsenUI/issues/2292).
+ * ons-navigator: Fixed[#2286](https://github.com/OnsenUI/OnsenUI/issues/2286).
+ * ons-navigator: Fixed[#1992](https://github.com/OnsenUI/OnsenUI/issues/1992).
+ * css-components: Fixed [#2045](https://github.com/OnsenUI/OnsenUI/issues/2045).
 
  ### Misc
 
