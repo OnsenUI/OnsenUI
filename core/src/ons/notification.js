@@ -18,6 +18,7 @@ limitations under the License.
 import util from './util';
 import contentReady from './content-ready';
 import ToastQueue from './internal/toast-queue';
+import ons from './index';
 
 const _setAttributes = (element, options) => {
   ['id', 'class', 'animation']
@@ -66,6 +67,12 @@ const _setAttributes = (element, options) => {
 const notification = {};
 
 notification._createAlertDialog = options => {
+  const missing = util.checkMissingImport(ons.elements.AlertDialog, 'OnsAlertDialog') ||
+    util.checkMissingImport(ons.elements.AlertDialogButton, 'OnsAlertDialogButton');
+  if (missing) {
+    return missing;
+  }
+
   // Prompt input string
   let inputString = '';
   if (options.isPrompt) {
@@ -468,6 +475,11 @@ notification.prompt = (message, options) => {
  *   [ja][/ja]
  */
 notification.toast = (message, options) => {
+  const missing = util.checkMissingImport(ons.elements.Toast, 'OnsToast');
+  if (missing) {
+    return missing;
+  }
+
   options = _normalizeArguments(message, options, {
     timeout: 0,
     force: false

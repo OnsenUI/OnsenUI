@@ -16,6 +16,7 @@ limitations under the License.
 */
 
 import util from './util';
+import ons from './index';
 
 // Validate parameters
 const checkOptions = options => {
@@ -35,6 +36,11 @@ const checkOptions = options => {
 
 // Action Sheet
 export default (options = {}) => {
+  const missing = util.checkMissingImport(ons.elements.ActionSheet, 'OnsActionSheet');
+  if (missing) {
+    return missing;
+  }
+
   checkOptions(options);
 
   // Main component

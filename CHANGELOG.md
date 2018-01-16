@@ -7,12 +7,17 @@ dev
 
  ### Bug Fixes
 
- * ons-tab: Fixed [#2307](https://github.com/OnsenUI/OnsenUI/issues/2307).
  * fastclick: Use Onsen UI fork of FastClick. Fixes [#2254](https://github.com/OnsenUI/OnsenUI/issues/2254), [#2304](https://github.com/OnsenUI/OnsenUI/issues/2304).
+ * ons-tab: Fixed [#2307](https://github.com/OnsenUI/OnsenUI/issues/2307).
+ * ons-list-item: Fixed [#2292](https://github.com/OnsenUI/OnsenUI/issues/2292).
+ * ons-navigator: Fixed[#2286](https://github.com/OnsenUI/OnsenUI/issues/2286).
+ * ons-navigator: Fixed[#1992](https://github.com/OnsenUI/OnsenUI/issues/1992).
+ * css-components: Fixed [#2045](https://github.com/OnsenUI/OnsenUI/issues/2045).
 
  ### Misc
 
  * css-components: Expose Action Sheet variables for Theme Roller.
+ * ons.notification: Display error message when needed imports are missing (AlertDialog, AlertDialogButton, Toast, ActionSheet).
 
 2.8.3
 ----
