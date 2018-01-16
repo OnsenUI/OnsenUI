@@ -24,7 +24,24 @@ import animationOptionsParse from './animation-options-parser';
 const util = {};
 
 util.globals = {
-  fabOffset: 0
+  fabOffset: 0,
+  supportsPassive: false
+};
+
+try {
+  const opts = Object.defineProperty({}, 'passive', {
+    get() { util.globals.supportsPassive = true; }
+  });
+  window.addEventListener('testPassive', null, opts);
+  window.removeEventListener('testPassive', null, opts);
+} catch (e) { null; }
+
+util.addEventListener = (el, name, handler, opt = {}) => {
+  el.addEventListener(name, handler, util.globals.supportsPassive ? opt : opt.capture);
+};
+
+util.removeEventListener = (el, name, handler, opt = {}) => {
+  el.removeEventListener(name, handler, util.globals.supportsPassive ? opt : opt.capture);
 };
 
 /**

@@ -213,15 +213,15 @@ export default class ListItemElement extends BaseElement {
 
   _setupListeners(add) {
     const action = (add ? 'add' : 'remove') + 'EventListener';
-    this[action]('drag', this._onDrag);
-    this[action]('touchstart', this._onTouch);
-    this[action]('mousedown', this._onTouch);
-    this[action]('touchend', this._onRelease);
-    this[action]('touchmove', this._onRelease);
+    util[action](this, 'touchstart', this._onTouch, { passive: true });
+    util[action](this, 'touchmove', this._onRelease, { passive: true });
     this[action]('touchcancel', this._onRelease);
+    this[action]('touchend', this._onRelease);
+    this[action]('touchleave', this._onRelease);
+    this[action]('drag', this._onDrag);
+    this[action]('mousedown', this._onTouch);
     this[action]('mouseup', this._onRelease);
     this[action]('mouseout', this._onRelease);
-    this[action]('touchleave', this._onRelease);
   }
 
   _onDrag(event) {
