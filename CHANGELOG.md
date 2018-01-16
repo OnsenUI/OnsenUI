@@ -8,6 +8,7 @@ dev
  ### Bug Fixes
 
  * ons-tab: Fixed [#2307](https://github.com/OnsenUI/OnsenUI/issues/2307).
+ * ons.notification: Display error message when needed imports are missing (AlertDialog, AlertDialogButton, Toast, ActionSheet).
 
  ### Misc
 
