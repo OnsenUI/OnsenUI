@@ -16,6 +16,7 @@ dev
  ### Misc
 
  * css-components: Expose Action Sheet variables for Theme Roller.
+ * ons.notification: Display error message when needed imports are missing (AlertDialog, AlertDialogButton, Toast, ActionSheet).
 
 2.8.3
 ----

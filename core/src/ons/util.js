@@ -487,4 +487,10 @@ util.preventScroll = gd => {
  */
 util.isValidGesture = event => event.gesture !== undefined && (event.gesture.distance <= 15 || event.gesture.deltaTime <= 100);
 
+util.checkMissingImport = (importName, stringName) => {
+  if (!importName) {
+    return Promise.reject(stringName + ' is not imported');
+  }
+}
+
 export default util;
