@@ -8,6 +8,7 @@ dev
  ### Bug Fixes
 
  * ons-tab: Fixed [#2307](https://github.com/OnsenUI/OnsenUI/issues/2307).
+ * css-components: Fixed [#2045](https://github.com/OnsenUI/OnsenUI/issues/2045).
 
  ### Misc
 
