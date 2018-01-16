@@ -68,6 +68,13 @@ describe('ons.notification', () => {
 
       dialog.querySelector('ons-alert-dialog-button').click();
     });
+
+    it('throws an error if AlertDialog is not imported', () => {
+      const alertDialog = ons.elements.AlertDialog;
+      ons.elements.AlertDialog = undefined;
+      expect(ons.notification.alert('test')).to.eventually.be.rejected;
+      ons.elements.AlertDialog = alertDialog;
+    });
   });
 
   describe('#confirm()', () => {
@@ -262,6 +269,13 @@ describe('ons.notification', () => {
       return ons.notification.toast({message: 'hoge', timeout: 10, force: true}).then(index => {
         expect(index).to.equal(-1);
       });
+    });
+
+    it('throws an error if Toast is not imported', () => {
+      const toast = ons.elements.Toast;
+      ons.elements.Toast = undefined;
+      expect(ons.notification.toast('test')).to.eventually.be.rejected;
+      ons.elements.Toast = toast;
     });
   });
 
