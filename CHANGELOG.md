@@ -7,6 +7,7 @@ dev
 
  ### Bug Fixes
 
+ * fastclick: Use Onsen UI fork of FastClick. Fixes [#2254](https://github.com/OnsenUI/OnsenUI/issues/2254), [#2304](https://github.com/OnsenUI/OnsenUI/issues/2304).
  * ons-tab: Fixed [#2307](https://github.com/OnsenUI/OnsenUI/issues/2307).
  * ons-list-item: Fixed [#2292](https://github.com/OnsenUI/OnsenUI/issues/2292).
  * ons-navigator: Fixed[#2286](https://github.com/OnsenUI/OnsenUI/issues/2286).
