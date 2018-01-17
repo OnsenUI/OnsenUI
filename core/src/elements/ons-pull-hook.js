@@ -193,13 +193,21 @@ export default class PullHookElement extends BaseElement {
         this._setState(STATE_INITIAL);
       }
 
-      this._pulling = true;
+      if (!this._pulling) {
+        this._pulling = true;
+        this._gestureDetector.on('touchmove', this._preventScroll);
+      }
+
       this._translateTo(scroll);
     }
   }
 
   _onDragEnd(event) {
-    this._pulling = false;
+    if (this._pulling) {
+      this._pulling = false;
+      this._gestureDetector.off('touchmove', this._preventScroll);
+    }
+
     if (!event.gesture || this.disabled || this._ignoreDrag) {
       return;
     }
@@ -219,7 +227,7 @@ export default class PullHookElement extends BaseElement {
 
   _preventScroll(event) {
     // Fix for Android & iOS when starting from scrollTop > 0 or pulling back
-    this._pulling && event.cancelable && event.preventDefault();
+    event.cancelable && event.preventDefault();
   }
 
   /**
@@ -410,7 +418,6 @@ export default class PullHookElement extends BaseElement {
       this._gestureDetector[action]('drag', this._onDrag);
       this._gestureDetector[action]('dragstart', this._onDragStart);
       this._gestureDetector[action]('dragend', this._onDragEnd);
-      this._gestureDetector[action]('touchmove', this._preventScroll);
     };
 
     if (this._gestureDetector) {
