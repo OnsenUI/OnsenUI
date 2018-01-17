@@ -20,6 +20,7 @@ import internal from './internal';
 import autoStyle from './autostyle';
 import ModifierUtil from './internal/modifier-util';
 import animationOptionsParse from './animation-options-parser';
+import platform from './platform';
 
 const util = {};
 
@@ -27,6 +28,8 @@ util.globals = {
   fabOffset: 0,
   supportsPassive: false
 };
+
+platform._runOnActualPlatform(() => util.globals.actualMobileOS = platform.getMobileOS());
 
 try {
   const opts = Object.defineProperty({}, 'passive', {
@@ -486,6 +489,10 @@ util.warn = (...args) => {
  * @param {gd} GestureDetector instance
  */
 util.preventScroll = gd => {
+  if (util.globals.actualMobileOS !== 'ios') {
+    return;
+  }
+
   const prevent = e => e.cancelable && e.preventDefault();
 
   const clean = (e) => {
