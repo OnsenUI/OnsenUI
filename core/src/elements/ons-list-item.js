@@ -128,6 +128,10 @@ export default class ListItemElement extends BaseElement {
   constructor() {
     super();
 
+    // Elements ignored when tapping
+    const re = /^ons-(?!col$|row$)/i;
+    this._shouldIgnoreTap = e => e.hasAttribute('prevent-tap') || re.test(e.tagName);
+
     contentReady(this, () => {
       this._compile();
     });
@@ -232,16 +236,9 @@ export default class ListItemElement extends BaseElement {
     }
   }
 
-  _tapCheck() {
-    return [
-      e => e.hasAttribute('prevent-tap') || /^ons-(?!col$|row$)/i.test(e.tagName),
-      e => e === this
-    ];
-  }
-
   _onTouch(e) {
-    if (this.tapped || !this._tapCheck()[1](e.target) &&
-      (this._tapCheck()[0](e.target) || util.findParent(e.target, ...this._tapCheck))
+    if (this.tapped || this !== e.target &&
+      (this._shouldIgnoreTap(e.target) || util.findParent(e.target, this._shouldIgnoreTap, p => p === this))
     ) {
       return; // Ignore tap
     }
