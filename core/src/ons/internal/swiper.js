@@ -260,7 +260,7 @@ export default class Swiper {
             event.consumed = true;
             this._started = true; // Avoid starting drag from outside
             this.shouldBlock && this.toggleBlocker(true);
-            util.preventScroll(this._gestureDetector);
+            util.iosPreventScroll(this._gestureDetector);
           };
 
         // Let parent elements consume the gesture or consume it right away

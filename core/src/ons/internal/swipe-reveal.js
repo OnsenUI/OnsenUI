@@ -66,7 +66,7 @@ export default class SwipeReveal {
       this._width = widthToPx(this.element.style.width || '100%');
       this._startDistance = this._distance = (!(this.isInitialState instanceof Function) || this.isInitialState()) ? 0 : this._width;
 
-      util.preventScroll(this.gestureDetector);
+      util.iosPreventScroll(this.gestureDetector);
     }
   }
 

@@ -483,25 +483,37 @@ util.warn = (...args) => {
   }
 };
 
+
+const prevent = e => e.cancelable && e.preventDefault();
+
 /**
- * Prevent scrolling while draging horizontally.
+ * Prevent scrolling while draging horizontally on iOS.
  *
  * @param {gd} GestureDetector instance
  */
-util.preventScroll = gd => {
-  if (util.globals.actualMobileOS !== 'ios') {
-    return;
+util.iosPreventScroll = gd => {
+  if (util.globals.actualMobileOS === 'ios') {
+    const clean = (e) => {
+      gd.off('touchmove', prevent);
+      gd.off('dragend', clean);
+    };
+
+    gd.on('touchmove', prevent);
+    gd.on('dragend', clean);
   }
+};
 
-  const prevent = e => e.cancelable && e.preventDefault();
-
-  const clean = (e) => {
-    gd.off('touchmove', prevent);
-    gd.off('dragend', clean);
-  };
-
-  gd.on('touchmove', prevent);
-  gd.on('dragend', clean);
+/**
+ * Prevents dialog's masks scroll on iOS. See #2220 #1949
+ *
+ * @param {el} HTMLElement that prevents the events
+ * @param {add} Boolean Add or remove event listeners
+ */
+util.iosScrollFix = (el, add) => {
+  if (util.globals.actualMobileOS === 'ios') {
+    const action = (add ? 'add' : 'remove') + 'EventListener';
+    el[action]('touchmove', prevent, false);
+  }
 };
 
 /**
