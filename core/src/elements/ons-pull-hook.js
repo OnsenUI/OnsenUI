@@ -103,6 +103,8 @@ export default class PullHookElement extends BaseElement {
   constructor() {
     super();
 
+    this._shouldFixScroll = util.globals.actualMobileOS !== 'other';
+
     this._onDrag = this._onDrag.bind(this);
     this._onDragStart = this._onDragStart.bind(this);
     this._onDragEnd = this._onDragEnd.bind(this);
@@ -173,9 +175,11 @@ export default class PullHookElement extends BaseElement {
     // Hack to make it work on Android 4.4 WebView and iOS UIWebView. Scrolls manually
     // near the top of the page so there will be no inertial scroll when scrolling down.
     // Allowing default scrolling will kill all 'touchmove' events.
-    this._pageElement.scrollTop = this._startScroll - event.gesture.deltaY;
-    if (this._pageElement.scrollTop < window.innerHeight && event.gesture.direction !== 'up') {
-      event.gesture.preventDefault();
+    if (this._shouldFixScroll) {
+      this._pageElement.scrollTop = this._startScroll - event.gesture.deltaY;
+      if (this._pageElement.scrollTop < window.innerHeight && event.gesture.direction !== 'up') {
+        event.gesture.preventDefault();
+      }
     }
 
     const scroll = Math.max(event.gesture.deltaY - this._startScroll, 0);
@@ -193,7 +197,7 @@ export default class PullHookElement extends BaseElement {
         this._setState(STATE_INITIAL);
       }
 
-      if (!this._pulling) {
+      if (!this._pulling && this._shouldFixScroll) {
         this._pulling = true;
         this._gestureDetector.on('touchmove', this._preventScroll);
       }
@@ -203,7 +207,7 @@ export default class PullHookElement extends BaseElement {
   }
 
   _onDragEnd(event) {
-    if (this._pulling) {
+    if (this._pulling && this._shouldFixScroll) {
       this._pulling = false;
       this._gestureDetector.off('touchmove', this._preventScroll);
     }
