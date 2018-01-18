@@ -39,12 +39,18 @@ try {
   window.removeEventListener('testPassive', null, opts);
 } catch (e) { null; }
 
-util.addEventListener = (el, name, handler, opt = {}) => {
-  el.addEventListener(name, handler, util.globals.supportsPassive ? opt : opt.capture);
+/**
+ * @param {Element} el Target
+ * @param {String} name Event name
+ * @param {Function} handler Event handler
+ * @param {Object} [opt] Event options (passive, capture...)
+ * @param {Boolean} [isGD] If comes from GestureDetector. Just for testing.
+ */
+util.addEventListener = (el, name, handler, opt, isGD) => {
+  el.addEventListener(name, handler, util.globals.supportsPassive ? opt : (opt || {}).capture);
 };
-
-util.removeEventListener = (el, name, handler, opt = {}) => {
-  el.removeEventListener(name, handler, util.globals.supportsPassive ? opt : opt.capture);
+util.removeEventListener = (el, name, handler, opt, isGD) => {
+  el.removeEventListener(name, handler, util.globals.supportsPassive ? opt : (opt || {}).capture);
 };
 
 /**
