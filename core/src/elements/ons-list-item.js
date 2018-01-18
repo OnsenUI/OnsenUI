@@ -129,7 +129,7 @@ export default class ListItemElement extends BaseElement {
     super();
 
     // Elements ignored when tapping
-    const re = /^ons-(?!col$|row$)/i;
+    const re = /^ons-(?!col$|row$|if$)/i;
     this._shouldIgnoreTap = e => e.hasAttribute('prevent-tap') || re.test(e.tagName);
 
     contentReady(this, () => {
