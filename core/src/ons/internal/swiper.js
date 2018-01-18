@@ -41,13 +41,15 @@ export default class Swiper {
     };
 
     // Prevent clicks only on desktop
-    this.shouldBlock = platform._runOnActualPlatform(() => platform.getMobileOS()) === 'other';
+    this.shouldBlock = util.globals.actualMobileOS !== 'other';
 
     // Bind handlers
     this.onDragStart = this.onDragStart.bind(this);
     this.onDrag = this.onDrag.bind(this);
     this.onDragEnd = this.onDragEnd.bind(this);
     this.onResize = this.onResize.bind(this);
+
+    this._shouldFixScroll = util.globals.actualMobileOS === 'ios';
   }
 
   init({ swipeable, autoRefresh } = {}) {
@@ -68,7 +70,9 @@ export default class Swiper {
     this.blocker.classList.add('ons-swiper-blocker');
 
     // Setup listeners
-    this._gestureDetector = new GestureDetector(this.getElement(), { dragMinDistance: 1, dragLockToAxis: true });
+    this._gestureDetector = new GestureDetector(this.getElement(),
+      { dragMinDistance: 1, dragLockToAxis: true, passive: !this._shouldFixScroll }
+    );
     this._mutationObserver = new MutationObserver(() => this.refresh());
     this.updateSwipeable(swipeable);
     this.updateAutoRefresh(autoRefresh);

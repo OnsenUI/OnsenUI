@@ -186,7 +186,6 @@ export default class RangeElement extends BaseInputElement {
     util[action](this, 'touchstart', this._onTouchStart, { passive: true });
     this[action]('mousedown', this._onMouseDown);
     this[action]('mouseup', this._onMouseUp);
-    this[action]('touchstart', this._onTouchStart);
     this[action]('touchend', this._onTouchEnd);
     this[action]('dragstart', this._onDragstart);
     this[action]('dragend', this._onDragend);

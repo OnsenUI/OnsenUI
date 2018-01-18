@@ -419,9 +419,10 @@ export default class PullHookElement extends BaseElement {
   _setupListeners(add) {
     const scrollToggle = action => this._pageElement[`${action}EventListener`]('scroll', this._onScroll, false);
     const gdToggle = action => {
-      this._gestureDetector[action]('drag', this._onDrag);
-      this._gestureDetector[action]('dragstart', this._onDragStart);
-      this._gestureDetector[action]('dragend', this._onDragEnd);
+      const passive = { passive: true };
+      this._gestureDetector[action]('drag', this._onDrag, passive);
+      this._gestureDetector[action]('dragstart', this._onDragStart, passive);
+      this._gestureDetector[action]('dragend', this._onDragEnd, passive);
     };
 
     if (this._gestureDetector) {
@@ -435,7 +436,8 @@ export default class PullHookElement extends BaseElement {
       this._gestureDetector = new GestureDetector(this._pageElement, {
         dragMinDistance: 1,
         dragDistanceCorrection: false,
-        dragLockToAxis: !this._dragLockDisabled
+        dragLockToAxis: !this._dragLockDisabled,
+        passive: !this._shouldFixScroll
       });
 
       gdToggle('on');

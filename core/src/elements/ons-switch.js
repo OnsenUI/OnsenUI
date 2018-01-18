@@ -149,7 +149,6 @@ export default class SwitchElement extends BaseCheckboxElement {
 
   _onDrag(e) {
     e.stopPropagation();
-    e.gesture.preventDefault();
     this._handle.style.left = this._getPosition(e) + 'px';
   }
 
@@ -195,7 +194,7 @@ export default class SwitchElement extends BaseCheckboxElement {
     this.addEventListener('hold', this._onHold);
     this.addEventListener('tap', this.click);
     this.addEventListener('click', this._onClick);
-    this._gestureDetector = new GestureDetector(this, {dragMinDistance: 1, holdTimeout: 251});
+    this._gestureDetector = new GestureDetector(this, { dragMinDistance: 1, holdTimeout: 251, passive: true });
   }
 
   disconnectedCallback() {
