@@ -55,7 +55,7 @@ export default class GestureDetectorElement extends BaseElement {
   constructor() {
     super();
 
-    this._gestureDetector = new GestureDetector(this);
+    this._gestureDetector = new GestureDetector(this, { passive: true });
   }
 }
 

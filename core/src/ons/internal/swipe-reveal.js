@@ -34,11 +34,13 @@ export default class SwipeReveal {
     this.getSide = params.getSide || (() => 'left');
 
     this.handleGesture = this.handleGesture.bind(this);
+
+    this._shouldFixScroll = util.globals.actualMobileOS === 'ios';
   }
 
   update(swipeable = this.element.hasAttribute('swipeable')) {
     if (!this.gestureDetector) {
-      this.gestureDetector = new GestureDetector(this.elementHandler, {dragMinDistance: 1});
+      this.gestureDetector = new GestureDetector(this.elementHandler, { dragMinDistance: 1, passive: !this._shouldFixScroll });
     }
 
     const action = swipeable ? 'on' : 'off';
@@ -66,13 +68,12 @@ export default class SwipeReveal {
       this._width = widthToPx(this.element.style.width || '100%');
       this._startDistance = this._distance = (!(this.isInitialState instanceof Function) || this.isInitialState()) ? 0 : this._width;
 
-      util.preventScroll(this.gestureDetector);
+      util.iosPreventScroll(this.gestureDetector);
     }
   }
 
   onDrag(event) {
     event.stopPropagation();
-    event.gesture.preventDefault();
 
     const delta = this.getSide() === 'left' ? event.gesture.deltaX : -event.gesture.deltaX;
     const distance = Math.max(0, Math.min(this._width, this._startDistance + delta));

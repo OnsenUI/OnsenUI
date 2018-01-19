@@ -23,7 +23,6 @@ import internal from '../ons/internal';
 import ModifierUtil from '../ons/internal/modifier-util';
 import BaseElement from './base/base-element';
 import SplitterAnimator from './ons-splitter/animator';
-import GestureDetector from '../ons/gesture-detector';
 import SwipeReveal from '../ons/internal/swipe-reveal';
 import DoorLock from '../ons/doorlock';
 import contentReady from '../ons/content-ready';
@@ -629,6 +628,7 @@ export default class SplitterSideElement extends BaseElement {
 
     return new Promise(resolve => {
       this._animator[action](() => {
+        util.iosScrollFix(shouldOpen);
         this._state = FINAL_STATE;
         unlock();
         this._emitEvent(`post${action}`);
