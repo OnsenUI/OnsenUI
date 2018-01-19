@@ -510,15 +510,14 @@ util.iosPreventScroll = gd => {
 };
 
 /**
- * Prevents dialog's masks scroll on iOS. See #2220 #1949
+ * Prevents dialog's masks scroll on iOS. See #2274 #2220 #1949
  *
  * @param {el} HTMLElement that prevents the events
  * @param {add} Boolean Add or remove event listeners
  */
-util.iosScrollFix = (el, add) => {
+util.iosScrollFix = toggle => {
   if (util.globals.actualMobileOS === 'ios') {
-    const action = (add ? 'add' : 'remove') + 'EventListener';
-    el[action]('touchmove', prevent, false);
+    document.body.classList.toggle('ons-ios-scroll-fix', toggle);
   }
 };
 

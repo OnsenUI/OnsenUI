@@ -262,3 +262,13 @@ ons-carousel[fullscreen] {
   position: inherit;
   width: 100%;
 }
+
+/* iOS scrolling events jumps to beneath pages. Related #2274 #2220 #1949 */
+.ons-ios-scroll-fix .page__content {
+  overflow-y: hidden;
+}
+.ons-ios-scroll-fix ons-modal .page__content,
+.ons-ios-scroll-fix ons-dialog .page__content,
+  .ons-ios-scroll-fix ons-splitter-side .page__content {
+  overflow-y: auto;
+}

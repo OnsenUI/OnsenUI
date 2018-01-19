@@ -191,12 +191,10 @@ export default class ModalElement extends BaseDialogElement {
 
   connectedCallback() {
     super.connectedCallback();
-    util.iosScrollFix(this, true);
   }
 
   disconnectedCallback() {
     super.disconnectedCallback();
-    util.iosScrollFix(this, false);
   }
 
   /**
