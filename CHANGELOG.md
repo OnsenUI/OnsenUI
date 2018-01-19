@@ -5,6 +5,10 @@ CHANGELOG
 dev
 ----
 
+ ### New Features
+
+ * ons-navigator: `popPage` method now supports `options.times` to pop several pages with one single animation.
+
  ### Bug Fixes
 
  * fastclick: Use Onsen UI fork of FastClick. Fixes [#2254](https://github.com/OnsenUI/OnsenUI/issues/2254), [#2304](https://github.com/OnsenUI/OnsenUI/issues/2304).
