@@ -41,7 +41,7 @@ export default class Swiper {
     };
 
     // Prevent clicks only on desktop
-    this.shouldBlock = util.globals.actualMobileOS !== 'other';
+    this.shouldBlock = util.globals.actualMobileOS === 'other';
 
     // Bind handlers
     this.onDragStart = this.onDragStart.bind(this);
