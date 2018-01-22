@@ -19,6 +19,7 @@ dev
  * css-components: Fixed [#2045](https://github.com/OnsenUI/OnsenUI/issues/2045).
  * ons.platform: Fixed [#2279](https://github.com/OnsenUI/OnsenUI/issues/2279).
  * ons-page: Fixed [#2255](https://github.com/OnsenUI/OnsenUI/issues/2255).
+ * ons-tab: Fixed [#2324](https://github.com/OnsenUI/OnsenUI/issues/2324).
 
  ### Misc
 
