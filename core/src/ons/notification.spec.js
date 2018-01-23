@@ -22,10 +22,7 @@ describe('ons.notification', () => {
     });
 
     it('requires a message', () => {
-      expect(() => ons.notification.alert()).to.throw(Error);
-    });
-
-    it('requires a message', () => {
+      expect(ons.notification.alert()).to.eventually.be.rejected;
       expect(() => ons.notification.alert('test')).to.be.ok;
     });
 
@@ -94,7 +91,7 @@ describe('ons.notification', () => {
     });
 
     it('requires a message', () => {
-      expect(() => ons.notification.confirm()).to.throw(Error);
+      expect(ons.notification.confirm()).to.eventually.be.rejected;
     });
 
     it('accepts a \'messageHTML\' parameter', () => {
@@ -155,7 +152,7 @@ describe('ons.notification', () => {
     });
 
     it('requires a message', () => {
-      expect(() => ons.notification.prompt()).to.throw(Error);
+      expect(ons.notification.prompt()).to.eventually.be.rejected;
     });
 
     it('accepts a \'messageHTML\' parameter', () => {
@@ -235,7 +232,7 @@ describe('ons.notification', () => {
     });
 
     it('requires a message', () => {
-      expect(() => ons.notification.toast({force: true})).to.throw(Error);
+      expect(ons.notification.toast({force: true})).to.eventually.be.rejected;
       expect(() => ons.notification.toast('test', {force: true})).to.be.ok;
     });
 
