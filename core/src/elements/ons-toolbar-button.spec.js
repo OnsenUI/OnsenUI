@@ -54,13 +54,16 @@ describe('ons-toolbar-button', () => {
   });
 
   describe('autoStyling', () => {
-    it('adds \'material\' modifiers and effects on Android', () => {
+    it('adds \'material\' modifiers and effects on Android', (done) => {
       ons.platform.select('android');
       let e = document.createElement('ons-toolbar-button');
-      expect(e.getAttribute('modifier')).to.equal('material');
-      e = ons._util.createElement('<ons-toolbar-button modifier="outline"></ons-toolbar-button>');
-      expect(e.getAttribute('modifier')).to.contain('material--flat');
-      ons.platform.select('');
+      setImmediate(() => {
+        expect(e.getAttribute('modifier')).to.equal('material');
+        e = ons._util.createElement('<ons-toolbar-button modifier="outline"></ons-toolbar-button>');
+        expect(e.getAttribute('modifier')).to.contain('material--flat');
+        ons.platform.select('');
+        done();
+      });
     });
   });
 });
