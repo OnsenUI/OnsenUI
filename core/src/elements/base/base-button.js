@@ -60,6 +60,7 @@ export default class BaseButtonElement extends BaseElement {
     this.classList.add(this._defaultClassName);
 
     if (!this._icon && this.hasAttribute('icon')) {
+      util.checkMissingImport('Icon');
       const icon = util.createElement(`<ons-icon icon="${this.getAttribute('icon')}"></ons-icon>`);
       icon.classList.add(this._defaultClassName.replace('button', 'icon'));
       this.insertBefore(icon, this.firstChild);

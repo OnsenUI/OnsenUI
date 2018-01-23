@@ -269,9 +269,7 @@ ons.enableAutoStyling = autoStyle.enable;
  *   [ja][/ja]
  */
 ons.disableIconAutoPrefix = () => {
-  if (!elements.Icon) {
-    throw new Error (`Expected 'ons-icon' Custom Element to be registered before calling this method.`);
-  }
+  util.checkMissingImport('Icon');
   elements.Icon.setAutoPrefix(false);
 };
 
