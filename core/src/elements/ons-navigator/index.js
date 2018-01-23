@@ -15,7 +15,7 @@ limitations under the License.
 
 */
 
-import ons from '../../ons';
+import onsElements from '../../ons/elements';
 import util from '../../ons/util';
 import internal from '../../ons/internal';
 import SwipeReveal from '../../ons/internal/swipe-reveal';
@@ -1078,5 +1078,5 @@ export default class NavigatorElement extends BaseElement {
   }
 }
 
-ons.elements.Navigator = NavigatorElement;
+onsElements.Navigator = NavigatorElement;
 customElements.define('ons-navigator', NavigatorElement);

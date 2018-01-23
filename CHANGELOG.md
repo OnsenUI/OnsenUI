@@ -8,6 +8,7 @@ dev
  ### New Features
 
  * ons-navigator: `popPage` method now supports `options.times` to pop several pages with one single animation.
+ * ons-toolbar-button: Added `icon` attribute to automatically create an `ons-icon` element.
 
  ### Bug Fixes
 

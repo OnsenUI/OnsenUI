@@ -11,7 +11,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import ons from '../ons';
+import onsElements from '../ons/elements';
 import BaseInputElement from './base/base-input';
 
 const scheme = {
@@ -216,5 +216,5 @@ export default class RangeElement extends BaseInputElement {
    */
 }
 
-ons.elements.Range = RangeElement;
+onsElements.Range = RangeElement;
 customElements.define('ons-range', RangeElement);
