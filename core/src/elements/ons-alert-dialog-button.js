@@ -16,14 +16,7 @@ limitations under the License.
 */
 
 import ons from '../ons';
-import util from '../ons/util';
-import autoStyle from '../ons/autostyle';
-import ModifierUtil from '../ons/internal/modifier-util';
-import BaseElement from './base/base-element';
-
-const defaultClassName = 'alert-dialog-button';
-
-const scheme = {'': 'alert-dialog-button--*'};
+import BaseButtonElement from './base/base-button';
 
 /**
  * @element ons-alert-dialog-button
@@ -48,7 +41,7 @@ const scheme = {'': 'alert-dialog-button--*'};
  *    </div>
  *  </ons-alert-dialog>
  */
-export default class AlertDialogButtonElement extends BaseElement {
+export default class AlertDialogButtonElement extends BaseButtonElement {
 
   /**
    * @attribute modifier
@@ -65,12 +58,6 @@ export default class AlertDialogButtonElement extends BaseElement {
    *   [ja]ボタンを無効化する場合は指定してください。[/ja]
    */
 
-  constructor() {
-    super();
-
-    this._compile();
-  }
-
   /**
    * @property disabled
    * @type {Boolean}
@@ -78,37 +65,17 @@ export default class AlertDialogButtonElement extends BaseElement {
    *   [en]Whether the element is disabled or not.[/en]
    *   [ja]無効化されている場合に`true`。[/ja]
    */
-  set disabled(value) {
-    return util.toggleAttribute(this, 'disabled', value);
+
+  get _scheme() {
+    return { '': 'alert-dialog-button--*' };
   }
 
-  get disabled() {
-    return this.hasAttribute('disabled');
+  get _defaultClassName() {
+    return 'alert-dialog-button';
   }
 
-  _compile() {
-    autoStyle.prepare(this);
-
-    this.classList.add(defaultClassName);
-
-    util.updateRipple(this, undefined, {'modifier': 'light-gray'});
-
-    ModifierUtil.initModifier(this, scheme);
-  }
-
-  static get observedAttributes() {
-    return ['modifier', 'class'];
-  }
-
-  attributeChangedCallback(name, last, current) {
-    switch (name) {
-      case 'class':
-        util.restoreClass(this, defaultClassName, scheme);
-        break;
-      case 'modifier':
-        ModifierUtil.onModifierChanged(last, current, this, scheme);
-        break;
-    }
+  get _rippleOpt() {
+    return [this, undefined, { 'modifier': 'light-gray' }];
   }
 }
 
