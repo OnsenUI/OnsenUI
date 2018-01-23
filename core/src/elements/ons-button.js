@@ -16,14 +16,7 @@ limitations under the License.
 */
 
 import ons from '../ons';
-import util from '../ons/util';
-import autoStyle from '../ons/autostyle';
-import ModifierUtil from '../ons/internal/modifier-util';
-import BaseElement from './base/base-element';
-
-const scheme = {'': 'button--*'};
-
-const defaultClassName = 'button';
+import BaseButtonElement from './base/base-button';
 
 /**
  * @element ons-button
@@ -72,7 +65,7 @@ const defaultClassName = 'button';
  * </ons-button>
  */
 
-export default class ButtonElement extends BaseElement {
+export default class ButtonElement extends BaseButtonElement {
 
   /**
    * @attribute modifier
@@ -96,29 +89,6 @@ export default class ButtonElement extends BaseElement {
    *   [ja]ボタンを無効化する場合は指定します。[/ja]
    */
 
-  constructor() {
-    super();
-
-    this._compile();
-  }
-
-  static get observedAttributes() {
-    return ['modifier', 'ripple', 'class'];
-  }
-
-  attributeChangedCallback(name, last, current) {
-    switch (name) {
-      case 'class':
-        util.restoreClass(this, defaultClassName, scheme);
-        break;
-      case 'modifier':
-        ModifierUtil.onModifierChanged(last, current, this, scheme);
-        break;
-      case 'ripple':
-        this._updateRipple();
-    }
-  }
-
   /**
    * @property disabled
    * @type {Boolean}
@@ -126,26 +96,13 @@ export default class ButtonElement extends BaseElement {
    *   [en]Whether the button is disabled or not.[/en]
    *   [ja]無効化されている場合に`true`。[/ja]
    */
-  set disabled(value) {
-    return util.toggleAttribute(this, 'disabled', value);
+
+  get _scheme() {
+    return { '': 'button--*' };
   }
 
-  get disabled() {
-    return this.hasAttribute('disabled');
-  }
-
-  _compile() {
-    autoStyle.prepare(this);
-
-    this.classList.add(defaultClassName);
-
-    this._updateRipple();
-
-    ModifierUtil.initModifier(this, scheme);
-  }
-
-  _updateRipple() {
-    util.updateRipple(this);
+  get _defaultClassName() {
+    return 'button';
   }
 }
 
