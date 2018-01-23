@@ -15,7 +15,7 @@ limitations under the License.
 
 */
 
-import ons from '../ons';
+import onsElements from '../ons/elements';
 import util from '../ons/util';
 import internal from '../ons/internal';
 import ModifierUtil from '../ons/internal/modifier-util';
@@ -215,5 +215,5 @@ export default class SplitterContentElement extends BaseElement {
   }
 }
 
-ons.elements.SplitterContent = SplitterContentElement;
+onsElements.SplitterContent = SplitterContentElement;
 customElements.define('ons-splitter-content', SplitterContentElement);

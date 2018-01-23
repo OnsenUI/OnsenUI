@@ -16,6 +16,7 @@ limitations under the License.
 */
 
 import util from './util';
+import elements from './elements'
 import animit from './animit'
 import GestureDetector from './gesture-detector';
 import platform from './platform';
@@ -40,7 +41,7 @@ import { defaultPageLoader, PageLoader } from './page-loader';
 const ons = {
   animit,
   defaultPageLoader,
-  elements: {},
+  elements,
   GestureDetector,
   modifier,
   notification,
@@ -268,10 +269,10 @@ ons.enableAutoStyling = autoStyle.enable;
  *   [ja][/ja]
  */
 ons.disableIconAutoPrefix = () => {
-  if (!ons.elements.Icon) {
+  if (!elements.Icon) {
     throw new Error (`Expected 'ons-icon' Custom Element to be registered before calling this method.`);
   }
-  ons.elements.Icon.setAutoPrefix(false);
+  elements.Icon.setAutoPrefix(false);
 };
 
 /**

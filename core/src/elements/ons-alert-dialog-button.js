@@ -15,7 +15,7 @@ limitations under the License.
 
 */
 
-import ons from '../ons';
+import onsElements from '../ons/elements';
 import BaseButtonElement from './base/base-button';
 
 /**
@@ -79,5 +79,5 @@ export default class AlertDialogButtonElement extends BaseButtonElement {
   }
 }
 
-ons.elements.AlertDialogButton = AlertDialogButtonElement;
+onsElements.AlertDialogButton = AlertDialogButtonElement;
 customElements.define('ons-alert-dialog-button', AlertDialogButtonElement);

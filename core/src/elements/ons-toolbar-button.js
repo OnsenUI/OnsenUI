@@ -15,7 +15,7 @@ limitations under the License.
 
 */
 
-import ons from '../ons';
+import onsElements from '../ons/elements';
 import BaseButtonElement from './base/base-button';
 
 /**
@@ -104,5 +104,5 @@ export default class ToolbarButtonElement extends BaseButtonElement {
   }
 }
 
-ons.elements.ToolbarButton = ToolbarButtonElement;
+onsElements.ToolbarButton = ToolbarButtonElement;
 customElements.define('ons-toolbar-button', ToolbarButtonElement);

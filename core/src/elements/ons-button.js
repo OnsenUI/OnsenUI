@@ -15,7 +15,7 @@ limitations under the License.
 
 */
 
-import ons from '../ons';
+import onsElements from '../ons/elements';
 import BaseButtonElement from './base/base-button';
 
 /**
@@ -106,5 +106,5 @@ export default class ButtonElement extends BaseButtonElement {
   }
 }
 
-ons.elements.Button = ButtonElement;
+onsElements.Button = ButtonElement;
 customElements.define('ons-button', ButtonElement);

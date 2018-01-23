@@ -15,7 +15,7 @@ limitations under the License.
 
 */
 
-import ons from '../ons';
+import onsElements from '../ons/elements';
 import BaseButtonElement from './base/base-button';
 
 /**
@@ -86,5 +86,5 @@ export default class ActionSheetButtonElement extends BaseButtonElement {
   }
 }
 
-ons.elements.ActionSheetButton = ActionSheetButtonElement;
+onsElements.ActionSheetButton = ActionSheetButtonElement;
 customElements.define('ons-action-sheet-button', ActionSheetButtonElement);
