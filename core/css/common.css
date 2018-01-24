@@ -134,6 +134,10 @@ ons-tabbar[position="top"] .page[status-bar-fill] > .page__content {
   margin-top: -1px; /* Avoid double border with toolbar */
 }
 
+.page--wrapper > .page__background {
+  display: none;
+}
+
 ons-action-sheet[disabled],
 ons-dialog[disabled],
 ons-alert-dialog[disabled],

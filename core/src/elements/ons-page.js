@@ -149,7 +149,9 @@ export default class PageElement extends BaseElement {
 
     this._deriveHooks();
 
+    this._defaultClassName = defaultClassName;
     this.classList.add(defaultClassName);
+
     this._initialized = false;
 
     this._contentObserver = new MutationObserver(() => {
@@ -213,13 +215,12 @@ export default class PageElement extends BaseElement {
     this._tryToFillStatusBar(content); // Must run before child pages try to fill status bar.
     this.insertBefore(content, background.nextSibling); // Can trigger attached connectedCallbacks
 
-    // Make wrapper pages transparent for animations
-    if (!background.style.backgroundColor
-      && (!toolbar || !util.hasModifier(toolbar, 'transparent'))
+    if ((!toolbar || !util.hasModifier(toolbar, 'transparent'))
       && content.children.length === 1
       && util.isPageControl(content.children[0])
     ) {
-        background.style.backgroundColor = 'transparent';
+      this._defaultClassName += ' page--wrapper';
+      this.attributeChangedCallback('class');
     }
 
     ModifierUtil.initModifier(this, scheme);
@@ -396,7 +397,7 @@ export default class PageElement extends BaseElement {
   attributeChangedCallback(name, last, current) {
     switch (name) {
       case 'class':
-        util.restoreClass(this, defaultClassName, scheme);
+        util.restoreClass(this, this._defaultClassName, scheme);
         break;
       case 'modifier':
         ModifierUtil.onModifierChanged(last, current, this, scheme);
