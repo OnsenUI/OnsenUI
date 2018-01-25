@@ -15,7 +15,7 @@ limitations under the License.
 
 */
 
-import ons from '../../ons';
+import onsElements from '../../ons/elements';
 import util from '../../ons/util';
 import internal from '../../ons/internal';
 import SwipeReveal from '../../ons/internal/swipe-reveal';
@@ -420,6 +420,9 @@ export default class NavigatorElement extends BaseElement {
    * @param {Object} [options.data]
    *   [en]Custom data that will be stored in the new page element.[/en]
    *   [ja][/ja]
+   * @param {Number} [options.times]
+   *   [en]Number of pages to be popped. Only one animation will be shown.[/en]
+   *   [ja][/ja]
    * @return {Promise}
    *   [en]Promise which resolves to the revealed page.[/en]
    *   [ja]明らかにしたページを解決するPromiseを返します。[/ja]
@@ -429,6 +432,10 @@ export default class NavigatorElement extends BaseElement {
    */
   popPage(options = {}) {
     ({options} = this._preparePageAndOptions(null, options));
+
+    if (util.isInteger(options.times) && options.times > 1) {
+      this._removePages(options.times);
+    }
 
     const popUpdate = () => new Promise((resolve) => {
       this._pageLoader.unload(this.pages[this.pages.length - 1]);
@@ -754,16 +761,8 @@ export default class NavigatorElement extends BaseElement {
       page = options.page = this._getPageTarget();
     }
 
-    const reset = () => {
-      const pages = this.pages;
-      for (let i = pages.length - 2; i >= 0; i--) {
-        this._pageMap.delete(pages[i]);
-        this._pageLoader.unload(pages[i]);
-      }
-    };
-
     if (options.pop) {
-      reset();
+      this._removePages()
       return this.insertPage(0, page, { data: options.data })
         .then(() => this.popPage(options));
     }
@@ -771,7 +770,7 @@ export default class NavigatorElement extends BaseElement {
     // Tip: callback runs before resolved promise
     const callback = options.callback;
     options.callback = newPage => {
-      reset();
+      this._removePages()
       newPage.updateBackButton(false);
       callback && callback(newPage);
     };
@@ -835,6 +834,17 @@ export default class NavigatorElement extends BaseElement {
     options = util.extend({}, this.options || {}, options, {page});
 
     return {page, options};
+  }
+
+  _removePages(times) {
+    const pages = this.pages;
+    let until = times === undefined ? 0 : pages.length - times;
+    until = until < 0 ? 1 : until;
+
+    for (let i = pages.length - 2; i >= until; i--) {
+      this._pageMap.delete(pages[i]);
+      this._pageLoader.unload(pages[i]);
+    }
   }
 
   _updateLastPageBackButton() {
@@ -1068,5 +1078,5 @@ export default class NavigatorElement extends BaseElement {
   }
 }
 
-ons.elements.Navigator = NavigatorElement;
+onsElements.Navigator = NavigatorElement;
 customElements.define('ons-navigator', NavigatorElement);

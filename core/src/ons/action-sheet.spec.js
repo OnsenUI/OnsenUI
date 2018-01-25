@@ -41,7 +41,7 @@ describe('ons.openActionSheet', () => {
     });
 
     it('requires buttons array', () => {
-      expect(() => ons.openActionSheet()).to.throw(Error);
+      expect(ons.openActionSheet()).to.eventually.be.rejected;
     });
 
     it('requires a buttons array', () => {

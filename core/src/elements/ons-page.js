@@ -15,7 +15,7 @@ limitations under the License.
 
 */
 
-import ons from '../ons';
+import onsElements from '../ons/elements';
 import util from '../ons/util';
 import internal from '../ons/internal';
 import autoStyle from '../ons/autostyle';
@@ -154,43 +154,13 @@ export default class PageElement extends BaseElement {
 
     this._initialized = false;
 
-    this._contentObserver = new MutationObserver(() => {
-      this._tryToSuppressLayerCreation();
-    });
-
     contentReady(this, () => {
       this._compile();
 
       this._isShown = false;
       this._contentElement = this._getContentElement();
       this._backgroundElement = this._getBackgroundElement();
-
-      this._contentObserver.observe(this._contentElement, {childList: true});
-      this._tryToSuppressLayerCreation();
     });
-  }
-
-  _tryToSuppressLayerCreation() {
-    if (!this._contentElement) {
-      return;
-    }
-
-    const content = this._contentElement;
-    const scrollerSet = new Set([
-      'ons-navigator',
-      'ons-page',
-      'ons-tabbar',
-      'ons-splitter'
-    ]);
-
-    const shouldSuppress = content.children.length === 1 && scrollerSet.has(content.children[0].nodeName.toLowerCase());
-
-    // If content element has only one element and the element has scroll content, there is no need for layer creation in this content element.
-    if (shouldSuppress) {
-      content.classList.add('page__content--suppress-layer-creation');
-    } else {
-      content.classList.remove('page__content--suppress-layer-creation');
-    }
   }
 
   _compile() {
@@ -280,7 +250,6 @@ export default class PageElement extends BaseElement {
           setImmediate(() => this._show());
         }
       }
-
     });
   }
 
@@ -481,5 +450,5 @@ export default class PageElement extends BaseElement {
    */
 }
 
-ons.elements.Page = PageElement;
+onsElements.Page = PageElement;
 customElements.define('ons-page', PageElement);

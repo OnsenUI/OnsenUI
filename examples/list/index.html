@@ -30,7 +30,10 @@
     <ons-list-title>Tappable List</ons-list-title>
     <ons-list>
       <ons-list-item tappable>One</ons-list-item>
-      <ons-list-item tappable>Two</ons-list-item>
+      <ons-list-item tappable>
+        <div class="left"><ons-checkbox></ons-checkbox><ons-switch></ons-switch></div>
+        <div class="center">Two -<span prevent-tap>- Not here</span><ons-button>Not here</ons-button></div>
+      </ons-list-item>
       <ons-list-item tappable>Three</ons-list-item>
     </ons-list>
 

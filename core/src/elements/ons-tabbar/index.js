@@ -15,7 +15,7 @@ limitations under the License.
 
 */
 
-import ons from '../../ons';
+import onsElements from '../../ons/elements';
 import util from '../../ons/util';
 import internal from '../../ons/internal';
 import autoStyle from '../../ons/autostyle';
@@ -212,6 +212,7 @@ export default class TabbarElement extends BaseElement {
   constructor() {
     super();
     contentReady(this, () => this._compile());
+    this._loadInactive = util.defer(); // Improves #2324
   }
 
   connectedCallback() {
@@ -235,7 +236,13 @@ export default class TabbarElement extends BaseElement {
       });
     }
 
-    contentReady(this, () => this._updatePosition());
+    contentReady(this, () => {
+      this._updatePosition();
+
+      if (!util.findParent(this, 'ons-page', p => p === document.body)) {
+        this._show(); // This tabbar is the top component
+      }
+    });
   }
 
   disconnectedCallback() {
@@ -544,8 +551,8 @@ export default class TabbarElement extends BaseElement {
    *   [en]Returns tab index on current active tab. If active tab is not found, returns -1.[/en]
    *   [ja]現在アクティブになっているタブのインデックスを返します。現在アクティブなタブがない場合には-1を返します。[/ja]
    */
-  getActiveTabIndex() {
-    for (let tabs = this.tabs, i = 0; i < tabs.length; i++) {
+  getActiveTabIndex(tabs = this.tabs) {
+    for (let i = 0; i < tabs.length; i++) {
       if (tabs[i] && tabs[i].tagName === 'ONS-TAB' && tabs[i].isActive()) {
         return i;
       }
@@ -555,7 +562,15 @@ export default class TabbarElement extends BaseElement {
 
   _show() {
     this._swiper.show();
-    setImmediate(() => this.tabs.length > 0 && this.tabs[this.getActiveTabIndex()].loaded.then(el => el && setImmediate(() => el._show())));
+
+    setImmediate(() => {
+      const tabs = this.tabs;
+      const activeIndex = this.getActiveTabIndex(tabs);
+      this._loadInactive.resolve();
+      if (tabs.length > 0 && activeIndex >= 0) {
+        tabs[activeIndex].loaded.then(el => el && setImmediate(() => el._show()));
+      }
+    });
   }
 
   _hide() {
@@ -596,5 +611,5 @@ export default class TabbarElement extends BaseElement {
   }
 }
 
-ons.elements.Tabbar = TabbarElement;
+onsElements.Tabbar = TabbarElement;
 customElements.define('ons-tabbar', TabbarElement);

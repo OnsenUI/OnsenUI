@@ -15,15 +15,8 @@ limitations under the License.
 
 */
 
-import ons from '../ons';
-import util from '../ons/util';
-import autoStyle from '../ons/autostyle';
-import ModifierUtil from '../ons/internal/modifier-util';
-import BaseElement from './base/base-element';
-
-const defaultClassName = 'toolbar-button';
-
-const scheme = {'': 'toolbar-button--*'};
+import onsElements from '../ons/elements';
+import BaseButtonElement from './base/base-button';
 
 /**
  * @element ons-toolbar-button
@@ -65,7 +58,7 @@ const scheme = {'': 'toolbar-button--*'};
  *   </div>
  * </ons-toolbar>
  */
-export default class ToolbarButtonElement extends BaseElement {
+export default class ToolbarButtonElement extends BaseButtonElement {
 
   /**
    * @attribute modifier
@@ -76,17 +69,19 @@ export default class ToolbarButtonElement extends BaseElement {
    */
 
   /**
+   * @attribute icon
+   * @type {String}
+   * @description
+   *  [en]Creates an `ons-icon` component with this string.[/en]
+   *  [ja]`ons-icon`コンポーネントを悪性します。[/ja]
+   */
+
+  /**
    * @attribute disabled
    * @description
    *   [en]Specify if button should be disabled.[/en]
    *   [ja]ボタンを無効化する場合は指定してください。[/ja]
    */
-
-  constructor() {
-    super();
-
-    this._compile();
-  }
 
   /**
    * @property disabled
@@ -95,39 +90,19 @@ export default class ToolbarButtonElement extends BaseElement {
    *   [en]Whether the element is disabled or not.[/en]
    *   [ja]無効化されている場合に`true`。[/ja]
    */
-  set disabled(value) {
-    return util.toggleAttribute(this, 'disabled', value);
+
+  get _scheme() {
+    return { '': 'toolbar-button--*' };
   }
 
-  get disabled() {
-    return this.hasAttribute('disabled');
+  get _defaultClassName() {
+    return 'toolbar-button';
   }
 
-  _compile() {
-    autoStyle.prepare(this);
-
-    this.classList.add(defaultClassName);
-
-    util.updateRipple(this, undefined, {center: '', 'size': 'contain', 'background': 'transparent'});
-
-    ModifierUtil.initModifier(this, scheme);
-  }
-
-  static get observedAttributes() {
-    return ['modifier', 'class'];
-  }
-
-  attributeChangedCallback(name, last, current) {
-    switch (name) {
-      case 'class':
-        util.restoreClass(this, defaultClassName, scheme);
-        break;
-      case 'modifier':
-        ModifierUtil.onModifierChanged(last, current, this, scheme);
-        break;
-    }
+  get _rippleOpt() {
+    return [this, undefined, { center: '', 'size': 'contain', 'background': 'transparent' }];
   }
 }
 
-ons.elements.ToolbarButton = ToolbarButtonElement;
+onsElements.ToolbarButton = ToolbarButtonElement;
 customElements.define('ons-toolbar-button', ToolbarButtonElement);

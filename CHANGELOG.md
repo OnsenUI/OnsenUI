@@ -8,6 +8,8 @@ dev
  ### New Features
 
  * :tada: Use passive event listeners whenever possible. PWA score++.
+ * ons-navigator: `popPage` method now supports `options.times` to pop several pages with one single animation.
+ * ons-toolbar-button: Added `icon` attribute to automatically create an `ons-icon` element.
 
  ### Bug Fixes
 
@@ -17,8 +19,10 @@ dev
  * ons-navigator: Fixed [#2286](https://github.com/OnsenUI/OnsenUI/issues/2286).
  * ons-navigator: Fixed [#1992](https://github.com/OnsenUI/OnsenUI/issues/1992).
  * css-components: Fixed [#2045](https://github.com/OnsenUI/OnsenUI/issues/2045).
- * ons-switch: Prevents two `click` events in a row when placed inside a `label` tag.
  * ons.platform: Fixed [#2279](https://github.com/OnsenUI/OnsenUI/issues/2279).
+ * ons-page: Fixed [#2255](https://github.com/OnsenUI/OnsenUI/issues/2255).
+ * ons-tab: Fixed [#2324](https://github.com/OnsenUI/OnsenUI/issues/2324).
+ * ons-switch: Prevents two `click` events in a row when placed inside a `label` tag.
  * iOS scroll issues: Related [#2220](https://github.com/OnsenUI/OnsenUI/issues/2220), [#2279](https://github.com/OnsenUI/OnsenUI/issues/2279), [#1949](https://github.com/OnsenUI/OnsenUI/issues/1949) - Fixed in WKWebView/iOS Safari. For UIWebView, a new `ons.forceUIWebViewScrollFix()` method is available which may negatively affect momentum scroll in some situations. Also, a `ons-ios-scroll` class is added to `document.body` when dialogs are visible to apply custom fixes.
 
  ### Misc

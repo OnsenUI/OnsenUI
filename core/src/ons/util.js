@@ -15,6 +15,7 @@ limitations under the License.
 
 */
 
+import onsElements from './elements';
 import styler from './styler';
 import internal from './internal';
 import autoStyle from './autostyle';
@@ -23,9 +24,11 @@ import animationOptionsParse from './animation-options-parser';
 import platform from './platform';
 
 const util = {};
+const errorPrefix = '[Onsen UI]';
 
 util.globals = {
   fabOffset: 0,
+  errorPrefix,
   supportsPassive: false
 };
 
@@ -197,7 +200,7 @@ util.createElement = (html) => {
   }
 
   if (wrapper.children.length > 1) {
-    throw new Error('"html" must be one wrapper element.');
+    throw new Error(`${errorPrefix} "html" must be one wrapper element.`);
   }
 
   const element = wrapper.children[0];
@@ -489,7 +492,7 @@ util.defer = () => {
  */
 util.warn = (...args) => {
   if (!internal.config.warningsDisabled) {
-    console.warn(...args);
+    console.warn(errorPrefix, ...args);
   }
 };
 
@@ -541,10 +544,12 @@ util.iosMaskScrollFix = (el, add) => { // Half fix - only prevents scroll on mas
  */
 util.isValidGesture = event => event.gesture !== undefined && (event.gesture.distance <= 15 || event.gesture.deltaTime <= 100);
 
-util.checkMissingImport = (importName, stringName) => {
-  if (!importName) {
-    return Promise.reject(stringName + ' is not imported');
-  }
+util.checkMissingImport = (...elementNames) => {
+  elementNames.forEach(name => {
+    if (!onsElements[name]) {
+      throw new Error(`${errorPrefix} Ons${name} is required but was not imported (Custom Elements).`);
+    }
+  });
 }
 
 export default util;
