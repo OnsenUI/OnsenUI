@@ -2,7 +2,7 @@
 CHANGELOG
 ====
 
-dev
+2.9.0
 ----
 
  ### New Features
