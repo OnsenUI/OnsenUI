@@ -419,6 +419,7 @@ export default class PageElement extends BaseElement {
   _show() {
     if (!this._isShown && util.isAttached(this)) {
       this._isShown = true;
+      this.setAttribute('shown', '');
       this.onShow && this.onShow();
       util.triggerElementEvent(this, 'show');
       util.propagateAction(this, '_show');
@@ -428,6 +429,7 @@ export default class PageElement extends BaseElement {
   _hide() {
     if (this._isShown) {
       this._isShown = false;
+      this.removeAttribute('shown');
       this.onHide && this.onHide();
       util.triggerElementEvent(this, 'hide');
       util.propagateAction(this, '_hide');
