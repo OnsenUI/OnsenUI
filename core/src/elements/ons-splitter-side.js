@@ -628,6 +628,7 @@ export default class SplitterSideElement extends BaseElement {
 
     return new Promise(resolve => {
       this._animator[action](() => {
+        util.iosPageScrollFix(shouldOpen);
         this._state = FINAL_STATE;
         unlock();
         this._emitEvent(`post${action}`);

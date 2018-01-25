@@ -275,6 +275,18 @@ ons.disableIconAutoPrefix = () => {
 };
 
 /**
+ * @method forceUIWebViewScrollFix
+ * @signature forceUIWebViewScrollFix()
+ * @param {Boolean} force Enable or disable the fix.
+ * @description
+ *   [en]Applies a fix for iOS UIWebView which prevents scroll events jumping to pages under the top layer. This may visually affect normal scrolling of UIWebView if you open a dialog/menu before the scroll momentum finished. Disabled by default.[/en]
+ *   [ja][/ja]
+ */
+ons.forceUIWebViewScrollFix = (force = true) => {
+  internal.config.forceUIWebViewScrollFix = force;
+};
+
+/**
  * @method forcePlatformStyling
  * @signature forcePlatformStyling(platform)
  * @description

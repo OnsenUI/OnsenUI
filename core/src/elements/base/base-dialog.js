@@ -112,6 +112,7 @@ export default class BaseDialogElement extends BaseElement {
 
         shouldShow && this._toggleStyle(true, options);
         this._visible = shouldShow;
+        util.iosPageScrollFix(shouldShow);
 
         contentReady(this, () => {
           animator[action](this, () => {
@@ -168,7 +169,7 @@ export default class BaseDialogElement extends BaseElement {
     contentReady(this, () => {
       if (this._mask) {
         this._mask.addEventListener('click', this._cancel, false);
-        util.iosScrollFix(this._mask, true);
+        util.iosMaskScrollFix(this._mask, true);
       }
     });
   }
@@ -179,7 +180,7 @@ export default class BaseDialogElement extends BaseElement {
 
     if (this._mask) {
       this._mask.removeEventListener('click', this._cancel, false);
-      util.iosScrollFix(this._mask, false);
+      util.iosMaskScrollFix(this._mask, false);
     }
   }
 
