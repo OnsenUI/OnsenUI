@@ -32,7 +32,11 @@ util.globals = {
   supportsPassive: false
 };
 
-platform._runOnActualPlatform(() => util.globals.actualMobileOS = platform.getMobileOS());
+platform._runOnActualPlatform(() => {
+  util.globals.actualMobileOS = platform.getMobileOS();
+  util.globals.isUIWebView = platform.isUIWebView();
+  util.globals.isWKWebView = platform.isWKWebView();
+});
 
 try {
   const opts = Object.defineProperty({}, 'passive', {
@@ -513,13 +517,21 @@ util.iosPreventScroll = gd => {
 };
 
 /**
- * Prevents dialog's masks scroll on iOS. See #2220 #1949
+ * Prevents scroll in underlying pages on iOS. See #2220 #2274 #1949
  *
  * @param {el} HTMLElement that prevents the events
  * @param {add} Boolean Add or remove event listeners
  */
-util.iosScrollFix = (el, add) => {
+util.iosPageScrollFix = (add) => { // Full fix - May cause issues with UIWebView's momentum scroll
   if (util.globals.actualMobileOS === 'ios') {
+    document.body.classList.toggle('ons-ios-scroll', add); // Allows custom and localized fixes (#2274)
+    if (!util.globals.isUIWebView || internal.config.forceUIWebViewScrollFix) {
+      document.body.classList.toggle('ons-ios-scroll-fix', add);
+    }
+  }
+};
+util.iosMaskScrollFix = (el, add) => { // Half fix - only prevents scroll on masks
+  if (util.globals.isUIWebView) {
     const action = (add ? 'add' : 'remove') + 'EventListener';
     el[action]('touchmove', prevent, false);
   }
