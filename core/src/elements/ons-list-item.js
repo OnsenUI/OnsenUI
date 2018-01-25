@@ -237,8 +237,8 @@ export default class ListItemElement extends BaseElement {
   }
 
   _onTouch(e) {
-    if (this.tapped || this !== e.target &&
-      (this._shouldIgnoreTap(e.target) || util.findParent(e.target, this._shouldIgnoreTap, p => p === this))
+    if (this.tapped ||
+      (this !== e.target && (this._shouldIgnoreTap(e.target) || util.findParent(e.target, this._shouldIgnoreTap, p => p === this)))
     ) {
       return; // Ignore tap
     }
