@@ -15,7 +15,7 @@ limitations under the License.
 
 */
 
-import ons from '../ons';
+import onsElements from '../ons/elements';
 import util from '../ons/util';
 import BaseElement from './base/base-element';
 import contentReady from '../ons/content-ready';
@@ -627,5 +627,5 @@ export default class CarouselElement extends BaseElement {
   }
 }
 
-ons.elements.Carousel = CarouselElement;
+onsElements.Carousel = CarouselElement;
 customElements.define('ons-carousel', CarouselElement);

@@ -16,31 +16,23 @@ limitations under the License.
 */
 
 import util from './util';
-import ons from './index';
 
 // Validate parameters
 const checkOptions = options => {
-  if (!Object.hasOwnProperty.call(options, 'buttons') || !(options.buttons instanceof Array)) {
-    throw new Error('"options.buttons" must be an instance of Array.')
-  }
-  if (Object.hasOwnProperty.call(options, 'callback') && !(options.callback instanceof Function)) {
-    throw new Error('"options.callback" must be an instance of Function.')
-  }
-  if (Object.hasOwnProperty.call(options, 'compile') && !(options.compile instanceof Function)) {
-    throw new Error('"options.compile" must be an instance of Function.')
-  }
-  if (Object.hasOwnProperty.call(options, 'destroy') && !(options.destroy instanceof Function)) {
-    throw new Error('"options.destroy" must be an instance of Function.')
-  }
+  const err = (prop, type = 'Function') => { throw new Error(`"options.${prop}" must be an instance of ${type}.`); };
+  const hasOwnProperty = prop => Object.hasOwnProperty.call(options, prop);
+  const instanceOf = (prop, type = Function) => options[prop] instanceof type;
+
+  const b = 'buttons', cb = 'callback', c = 'compile', d = 'destroy';
+  (!hasOwnProperty(b) || !instanceOf(b, Array)) && err(b, 'Array');
+  (hasOwnProperty(cb) && !instanceOf(cb)) && err(cb);
+  (hasOwnProperty(c) && !instanceOf(c)) && err(c);
+  (hasOwnProperty(d) && !instanceOf(d)) && err(d);
 };
 
 // Action Sheet
-export default (options = {}) => {
-  const missing = util.checkMissingImport(ons.elements.ActionSheet, 'OnsActionSheet');
-  if (missing) {
-    return missing;
-  }
-
+export default (options = {}) => new Promise(resolve => {
+  util.checkMissingImport('ActionSheet');
   checkOptions(options);
 
   // Main component
@@ -58,22 +50,21 @@ export default (options = {}) => {
   `);
 
   // Resolve action and clean up
-  const deferred = util.defer();
-  const resolver = (event, index = -1) => {
+  const finish = (event, index = -1) => {
     if (actionSheet) {
       options.destroy && options.destroy(actionSheet);
 
-      actionSheet.removeEventListener('dialog-cancel', resolver, false);
+      actionSheet.removeEventListener('dialog-cancel', finish, false);
       actionSheet.remove();
       actionSheet = null;
 
       options.callback && options.callback(index);
-      deferred.resolve(index);
+      resolve(index);
     }
   };
 
   // Link cancel handler
-  actionSheet.addEventListener('dialog-cancel', resolver, false);
+  actionSheet.addEventListener('dialog-cancel', finish, false);
 
   // Create buttons and link action handler
   const buttons = document.createDocumentFragment();
@@ -92,7 +83,7 @@ export default (options = {}) => {
       </ons-action-sheet-button>
     `);
 
-    button.onclick = event => actionSheet.hide().then(() => resolver(event, index));
+    button.onclick = event => actionSheet.hide().then(() => finish(event, index));
     buttons.appendChild(button);
   });
 
@@ -106,6 +97,4 @@ export default (options = {}) => {
     animation: options.animation,
     animationOptions: options.animationOptions
   }));
-
-  return deferred.promise;
-};
+});

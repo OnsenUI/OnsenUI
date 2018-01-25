@@ -11,7 +11,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import ons from '../ons';
+import onsElements from '../ons/elements';
 import BaseCheckboxElement from './base/base-checkbox';
 
 const scheme = {
@@ -106,5 +106,5 @@ export default class CheckboxElement extends BaseCheckboxElement {
    */
 }
 
-ons.elements.Checkbox = CheckboxElement;
+onsElements.Checkbox = CheckboxElement;
 customElements.define('ons-checkbox', CheckboxElement);

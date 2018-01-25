@@ -15,7 +15,7 @@ limitations under the License.
 
 */
 
-import ons from '../../ons';
+import onsElements from '../../ons/elements';
 import util from '../../ons/util';
 import internal from '../../ons/internal';
 import BaseElement from '../base/base-element';
@@ -354,5 +354,5 @@ export default class RippleElement extends BaseElement {
   }
 }
 
-ons.elements.Ripple = RippleElement;
+onsElements.Ripple = RippleElement;
 customElements.define('ons-ripple', RippleElement);

@@ -15,7 +15,7 @@ limitations under the License.
 
 */
 
-import ons from '../ons';
+import onsElements from '../ons/elements';
 import util from '../ons/util';
 import autoStyle from '../ons/autostyle';
 import ModifierUtil from '../ons/internal/modifier-util';
@@ -86,5 +86,5 @@ export default class ListHeaderElement extends BaseElement {
   }
 }
 
-ons.elements.ListHeader = ListHeaderElement;
+onsElements.ListHeader = ListHeaderElement;
 customElements.define('ons-list-header', ListHeaderElement);

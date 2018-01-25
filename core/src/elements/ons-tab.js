@@ -15,7 +15,7 @@ limitations under the License.
 
 */
 
-import ons from '../ons';
+import onsElements from '../ons/elements';
 import util from '../ons/util';
 import autoStyle from '../ons/autostyle';
 import ModifierUtil from '../ons/internal/modifier-util';
@@ -257,8 +257,15 @@ export default class TabElement extends BaseElement {
 
   _loadPageElement(parent, page) {
     this._hasLoaded = true;
+
     return new Promise(resolve => {
       this._pageLoader.load({ parent, page }, pageElement => {
+
+        if (!this.isActive()) { // Perf, fixes #2324 when active tab is 0
+          pageElement.style.visibility = 'hidden';
+          this._tabbar._loadInactive.promise.then(() => pageElement.style.visibility = '');
+        }
+
         parent.replaceChild(pageElement, parent.children[this.index]); // Ensure position
         this._loadedPage = pageElement;
         resolve(pageElement);
@@ -331,7 +338,7 @@ export default class TabElement extends BaseElement {
           const pageTarget = this.page || this.getAttribute('page');
           if (!this.pageElement && pageTarget) {
             const parentTarget = tabbar._targetElement;
-            const dummyPage = util.create('div', { height: '100%', width: '100%', backgroundColor: 'transparent' });
+            const dummyPage = util.create('div', { height: '100%', width: '100%', visibility: 'hidden' });
             parentTarget.insertBefore(dummyPage, parentTarget.children[index]); // Ensure position
             return this._loadPageElement(parentTarget, pageTarget).then(deferred.resolve);
           }
@@ -371,5 +378,5 @@ export default class TabElement extends BaseElement {
   }
 }
 
-ons.elements.Tab = TabElement;
+onsElements.Tab = TabElement;
 customElements.define('ons-tab', TabElement);
