@@ -5,6 +5,13 @@ describe('ons.openActionSheet', () => {
     expect(ons.openActionSheet).to.be.ok;
   });
 
+  it('throws an error if ActionSheet is not imported', () => {
+    const actionSheet = ons.elements.ActionSheet;
+    ons.elements.ActionSheet = undefined;
+    expect(ons.openActionSheet()).to.eventually.be.rejected;
+    ons.elements.ActionSheet = actionSheet;
+  })
+
   describe('#actionSheet()', () => {
     let dialog,
       resolvePromise;
@@ -34,7 +41,7 @@ describe('ons.openActionSheet', () => {
     });
 
     it('requires buttons array', () => {
-      expect(() => ons.openActionSheet()).to.throw(Error);
+      expect(ons.openActionSheet()).to.eventually.be.rejected;
     });
 
     it('requires a buttons array', () => {

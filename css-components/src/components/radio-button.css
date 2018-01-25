@@ -154,7 +154,7 @@
 */
 
 .radio-button--material {
-  line-height: var(--material-radio-button-size) + 2px;
+  line-height: calc(var(--material-radio-button-size) + 2px);
   @apply(--material-font);
 }
 

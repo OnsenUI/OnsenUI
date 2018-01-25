@@ -59,6 +59,10 @@
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/@onsenui/custom-elements/-/custom-elements-1.0.0.tgz#8e2b5c8968b8d94da70c6e92ecc56b47f79a0ff3"
 
+"@onsenui/fastclick@^1.1.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@onsenui/fastclick/-/fastclick-1.1.0.tgz#6294390b46ea975e1a7d65b1c014665140b73c4f"
+
 "@types/jasmine@^2.5.36":
   version "2.5.36"
   resolved "https://registry.yarnpkg.com/@types/jasmine/-/jasmine-2.5.36.tgz#6d804b79a57e9380d766a2680e9362c17d9556d2"

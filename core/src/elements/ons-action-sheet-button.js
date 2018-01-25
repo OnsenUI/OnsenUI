@@ -15,18 +15,8 @@ limitations under the License.
 
 */
 
-import ons from '../ons';
-import util from '../ons/util';
-import autoStyle from '../ons/autostyle';
-import contentReady from '../ons/content-ready';
-import ModifierUtil from '../ons/internal/modifier-util';
-import BaseElement from './base/base-element';
-
-const defaultClassName = 'action-sheet-button';
-const scheme = {
-  '': 'action-sheet-button--*',
-  '.action-sheet-icon': 'action-sheet-icon--*'
-};
+import onsElements from '../ons/elements';
+import BaseButtonElement from './base/base-button';
 
 /**
  * @element ons-action-sheet-button
@@ -62,7 +52,7 @@ const scheme = {
  *   document.getElementById('sheet').show();
  * </script>
  */
-export default class ActionSheetButtonElement extends BaseElement {
+export default class ActionSheetButtonElement extends BaseButtonElement {
 
   /**
    * @attribute icon
@@ -80,53 +70,21 @@ export default class ActionSheetButtonElement extends BaseElement {
    *   [ja]アクションシートボタンの見た目を設定します。[/ja]
    */
 
-  constructor() {
-    super();
-
-    contentReady(this, () => this._compile());
+  get _scheme() {
+    return {
+      '': 'action-sheet-button--*',
+      '.action-sheet-icon': 'action-sheet-icon--*'
+    };
   }
 
-  get _icon() {
-    return util.findChild(this, '.action-sheet-icon');
+  get _defaultClassName() {
+    return 'action-sheet-button';
   }
 
-  _compile() {
-    autoStyle.prepare(this);
-    this.classList.add(defaultClassName);
-
-    if (!this._icon && this.hasAttribute('icon')) {
-      const icon = util.createElement(`<ons-icon icon="${this.getAttribute('icon')}"></ons-icon>`);
-      icon.classList.add('action-sheet-icon');
-      this.insertBefore(icon, this.firstChild);
-    }
-
-    ModifierUtil.initModifier(this, scheme);
-  }
-
-  _updateIcon() {
-    if (this._icon) {
-      this._icon.setAttribute('icon', this.getAttribute('icon'));
-    }
-  }
-
-  static get observedAttributes() {
-    return ['modifier', 'class', 'icon'];
-  }
-
-  attributeChangedCallback(name, last, current) {
-    switch (name) {
-      case 'class':
-        util.restoreClass(this, defaultClassName, scheme);
-        break;
-      case 'modifier':
-        ModifierUtil.onModifierChanged(last, current, this, scheme);
-        break;
-      case 'icon':
-        this._updateIcon();
-        break;
-    }
+  get _rippleOpt() {
+    return undefined;
   }
 }
 
-ons.elements.ActionSheetButton = ActionSheetButtonElement;
+onsElements.ActionSheetButton = ActionSheetButtonElement;
 customElements.define('ons-action-sheet-button', ActionSheetButtonElement);

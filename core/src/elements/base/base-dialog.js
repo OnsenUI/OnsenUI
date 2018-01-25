@@ -74,10 +74,6 @@ export default class BaseDialogElement extends BaseElement {
     }
   }
 
-  _preventScroll(event) {
-    event.cancelable && event.preventDefault();
-  }
-
   show(...args) {
     return this._setVisible(true, ...args);
   }
@@ -116,6 +112,7 @@ export default class BaseDialogElement extends BaseElement {
 
         shouldShow && this._toggleStyle(true, options);
         this._visible = shouldShow;
+        util.iosPageScrollFix(shouldShow);
 
         contentReady(this, () => {
           animator[action](this, () => {
@@ -172,7 +169,7 @@ export default class BaseDialogElement extends BaseElement {
     contentReady(this, () => {
       if (this._mask) {
         this._mask.addEventListener('click', this._cancel, false);
-        this._mask.addEventListener('touchmove', this._preventScroll, false); // iOS fix
+        util.iosMaskScrollFix(this._mask, true);
       }
     });
   }
@@ -183,7 +180,7 @@ export default class BaseDialogElement extends BaseElement {
 
     if (this._mask) {
       this._mask.removeEventListener('click', this._cancel, false);
-      this._mask.removeEventListener('touchmove', this._preventScroll, false);
+      util.iosMaskScrollFix(this._mask, false);
     }
   }
 

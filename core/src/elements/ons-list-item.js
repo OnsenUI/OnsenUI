@@ -15,7 +15,7 @@ limitations under the License.
 
 */
 
-import ons from '../ons';
+import onsElements from '../ons/elements';
 import util from '../ons/util';
 import styler from '../ons/styler';
 import autoStyle from '../ons/autostyle';
@@ -128,6 +128,10 @@ export default class ListItemElement extends BaseElement {
   constructor() {
     super();
 
+    // Elements ignored when tapping
+    const re = /^ons-(?!col$|row$|if$)/i;
+    this._shouldIgnoreTap = e => e.hasAttribute('prevent-tap') || re.test(e.tagName);
+
     contentReady(this, () => {
       this._compile();
     });
@@ -213,15 +217,15 @@ export default class ListItemElement extends BaseElement {
 
   _setupListeners(add) {
     const action = (add ? 'add' : 'remove') + 'EventListener';
-    this[action]('drag', this._onDrag);
-    this[action]('touchstart', this._onTouch);
-    this[action]('mousedown', this._onTouch);
-    this[action]('touchend', this._onRelease);
-    this[action]('touchmove', this._onRelease);
+    util[action](this, 'touchstart', this._onTouch, { passive: true });
+    util[action](this, 'touchmove', this._onRelease, { passive: true });
     this[action]('touchcancel', this._onRelease);
+    this[action]('touchend', this._onRelease);
+    this[action]('touchleave', this._onRelease);
+    this[action]('drag', this._onDrag);
+    this[action]('mousedown', this._onTouch);
     this[action]('mouseup', this._onRelease);
     this[action]('mouseout', this._onRelease);
-    this[action]('touchleave', this._onRelease);
   }
 
   _onDrag(event) {
@@ -232,28 +236,11 @@ export default class ListItemElement extends BaseElement {
     }
   }
 
-  isExcludedTarget(target) {
-
-    if (target.tagName.indexOf('ONS-') === 0) {
-      return true;
-    }
-    if (target.hasAttribute('prevent-tap')) {
-      return true;
-    }
-    if (target.parentElement !== this) {
-      return this.isExcludedTarget(target.parentElement);
-    }
-    return false;
-  }
-
   _onTouch(e) {
-
-    if (this.tapped) {
-      return;
-    }
-
-    if (this !== e.target && this.isExcludedTarget(e.target)) {
-      return;
+    if (this.tapped ||
+      (this !== e.target && (this._shouldIgnoreTap(e.target) || util.findParent(e.target, this._shouldIgnoreTap, p => p === this)))
+    ) {
+      return; // Ignore tap
     }
 
     this.tapped = true;
@@ -278,5 +265,5 @@ export default class ListItemElement extends BaseElement {
   }
 }
 
-ons.elements.ListItem = ListItemElement;
+onsElements.ListItem = ListItemElement;
 customElements.define('ons-list-item', ListItemElement);

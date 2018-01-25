@@ -15,7 +15,7 @@ limitations under the License.
 
 */
 
-import ons from '../../ons';
+import onsElements from '../../ons/elements';
 import util from '../../ons/util';
 import ModifierUtil from '../../ons/internal/modifier-util';
 import AnimatorFactory from '../../ons/internal/animator-factory';
@@ -191,12 +191,10 @@ export default class ModalElement extends BaseDialogElement {
 
   connectedCallback() {
     super.connectedCallback();
-    this.addEventListener('touchmove', super._preventScroll, false); // iOS fix
   }
 
   disconnectedCallback() {
     super.disconnectedCallback();
-    this.removeEventListener('touchmove', super._preventScroll, false);
   }
 
   /**
@@ -306,5 +304,5 @@ export default class ModalElement extends BaseDialogElement {
   }
 }
 
-ons.elements.Modal = ModalElement;
+onsElements.Modal = ModalElement;
 customElements.define('ons-modal', ModalElement);

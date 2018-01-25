@@ -1,3 +1,4 @@
+import { FastClick } from '@onsenui/fastclick';
 import './ons/platform'; // This file must be loaded before Custom Elements polyfills.
 import './polyfills/index.js';
 import './vendor/index.js';
@@ -40,7 +41,7 @@ export default function setup(ons) {
         console.warn('Could not close the app. Is \'cordova.js\' included?\nError: \'window.navigator.app\' is undefined.');
       }
     });
-    document.body._gestureDetector = new ons.GestureDetector(document.body);
+    document.body._gestureDetector = new ons.GestureDetector(document.body, { passive: true });
 
     // Simulate Device Back Button on ESC press
     if (!ons.platform.isWebView()) {

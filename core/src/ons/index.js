@@ -16,6 +16,7 @@ limitations under the License.
 */
 
 import util from './util';
+import elements from './elements'
 import animit from './animit'
 import GestureDetector from './gesture-detector';
 import platform from './platform';
@@ -40,7 +41,7 @@ import { defaultPageLoader, PageLoader } from './page-loader';
 const ons = {
   animit,
   defaultPageLoader,
-  elements: {},
+  elements,
   GestureDetector,
   modifier,
   notification,
@@ -268,10 +269,20 @@ ons.enableAutoStyling = autoStyle.enable;
  *   [ja][/ja]
  */
 ons.disableIconAutoPrefix = () => {
-  if (!ons.elements.Icon) {
-    throw new Error (`Expected 'ons-icon' Custom Element to be registered before calling this method.`);
-  }
-  ons.elements.Icon.setAutoPrefix(false);
+  util.checkMissingImport('Icon');
+  elements.Icon.setAutoPrefix(false);
+};
+
+/**
+ * @method forceUIWebViewScrollFix
+ * @signature forceUIWebViewScrollFix()
+ * @param {Boolean} force Enable or disable the fix.
+ * @description
+ *   [en]Applies a fix for iOS UIWebView which prevents scroll events jumping to pages under the top layer. This may visually affect normal scrolling of UIWebView if you open a dialog/menu before the scroll momentum finished. Disabled by default.[/en]
+ *   [ja][/ja]
+ */
+ons.forceUIWebViewScrollFix = (force = true) => {
+  internal.config.forceUIWebViewScrollFix = force;
 };
 
 /**

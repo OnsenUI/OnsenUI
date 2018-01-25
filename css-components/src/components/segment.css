@@ -11,18 +11,18 @@
   category: Segment
   markup: |
     <div class="segment" style="width: 280px; margin: 0 auto;">
-      <button class="segment__item">
+      <div class="segment__item">
         <input type="radio" class="segment__input" name="segment-a" checked>
         <div class="segment__button">One</div>
-      </button>
-      <button class="segment__item">
+      </div>
+      <div class="segment__item">
         <input type="radio" class="segment__input" name="segment-a">
         <div class="segment__button">Two</div>
-      </button>
-      <button class="segment__item">
+      </div>
+      <div class="segment__item">
         <input type="radio" class="segment__input" name="segment-a">
         <div class="segment__button">Three</div>
-      </button>
+      </div>
     </div>
 */
 
@@ -120,18 +120,18 @@
   category: Segment
   markup: |
     <div class="segment segment--material" style="width: 280px; margin: 0 auto;">
-      <button class="segment__item segment--material__item">
+      <div class="segment__item segment--material__item">
         <input type="radio" class="segment__input segment--material__input" name="segment-b" checked>
         <div class="segment__button segment--material__button">One</div>
-      </button>
-      <button class="segment__item segment--material__item">
+      </div>
+      <div class="segment__item segment--material__item">
         <input type="radio" class="segment__input segment--material__input" name="segment-b">
         <div class="segment__button segment--material__button">Two</div>
-      </button>
-      <button class="segment__item segment--material__item">
+      </div>
+      <div class="segment__item segment--material__item">
         <input type="radio" class="segment__input segment--material__input" name="segment-b">
         <div class="segment__button segment--material__button">Three</div>
-      </button>
+      </div>
     </div>
 */
 

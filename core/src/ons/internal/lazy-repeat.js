@@ -455,7 +455,7 @@ export class LazyRepeatProvider {
     this._pageContent.addEventListener('scroll', this._boundOnChange, true);
 
     if (platform.isIOS()) {
-      this._pageContent.addEventListener('touchmove', this._boundOnChange, true);
+      util.addEventListener(this._pageContent, 'touchmove', this._boundOnChange, { capture: true, passive: true });
       this._pageContent.addEventListener('touchend', this._boundDoubleFireOnTouchend, true);
     }
 
@@ -466,7 +466,7 @@ export class LazyRepeatProvider {
     this._pageContent.removeEventListener('scroll', this._boundOnChange, true);
 
     if (platform.isIOS()) {
-      this._pageContent.removeEventListener('touchmove', this._boundOnChange, true);
+      util.removeEventListener(this._pageContent, 'touchmove', this._boundOnChange, { capture: true, passive: true });
       this._pageContent.removeEventListener('touchend', this._boundDoubleFireOnTouchend, true);
     }
 
