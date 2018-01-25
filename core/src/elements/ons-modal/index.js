@@ -191,12 +191,12 @@ export default class ModalElement extends BaseDialogElement {
 
   connectedCallback() {
     super.connectedCallback();
-    this.addEventListener('touchmove', super._preventScroll, false); // iOS fix
+    util.iosScrollFix(this, true);
   }
 
   disconnectedCallback() {
     super.disconnectedCallback();
-    this.removeEventListener('touchmove', super._preventScroll, false);
+    util.iosScrollFix(this, false);
   }
 
   /**

@@ -7,17 +7,19 @@ dev
 
  ### New Features
 
+ * :tada: Use passive event listeners whenever possible. PWA score++.
  * ons-navigator: `popPage` method now supports `options.times` to pop several pages with one single animation.
  * ons-toolbar-button: Added `icon` attribute to automatically create an `ons-icon` element.
 
  ### Bug Fixes
 
- * fastclick: Use Onsen UI fork of FastClick. Fixes [#2254](https://github.com/OnsenUI/OnsenUI/issues/2254), [#2304](https://github.com/OnsenUI/OnsenUI/issues/2304).
+ * :tada: fastclick: Use Onsen UI fork of FastClick. Fixes [#2254](https://github.com/OnsenUI/OnsenUI/issues/2254), [#2304](https://github.com/OnsenUI/OnsenUI/issues/2304).
  * ons-tab: Fixed [#2307](https://github.com/OnsenUI/OnsenUI/issues/2307).
  * ons-list-item: Fixed [#2292](https://github.com/OnsenUI/OnsenUI/issues/2292).
  * ons-navigator: Fixed[#2286](https://github.com/OnsenUI/OnsenUI/issues/2286).
  * ons-navigator: Fixed[#1992](https://github.com/OnsenUI/OnsenUI/issues/1992).
  * css-components: Fixed [#2045](https://github.com/OnsenUI/OnsenUI/issues/2045).
+ * ons-switch: Prevents two `click` events in a row when placed inside a `label` tag.
  * ons.platform: Fixed [#2279](https://github.com/OnsenUI/OnsenUI/issues/2279).
  * ons-page: Fixed [#2255](https://github.com/OnsenUI/OnsenUI/issues/2255).
  * ons-tab: Fixed [#2324](https://github.com/OnsenUI/OnsenUI/issues/2324).

@@ -12,6 +12,7 @@ limitations under the License.
 */
 
 import onsElements from '../ons/elements';
+import util from '../ons/util';
 import BaseInputElement from './base/base-input';
 
 const scheme = {
@@ -51,13 +52,13 @@ export default class RangeElement extends BaseInputElement {
   constructor() {
     super();
 
-    this._boundOnMouseDown = this._onMouseDown.bind(this);
-    this._boundOnMouseUp = this._onMouseUp.bind(this);
-    this._boundOnTouchStart = this._onTouchStart.bind(this);
-    this._boundOnTouchEnd = this._onTouchEnd.bind(this);
-    this._boundOnInput = this._update.bind(this);
-    this._boundOnDragstart = this._onDragstart.bind(this);
-    this._boundOnDragend = this._onDragend.bind(this);
+    this._onMouseDown = this._onMouseDown.bind(this);
+    this._onMouseUp = this._onMouseUp.bind(this);
+    this._onTouchStart = this._onTouchStart.bind(this);
+    this._onTouchEnd = this._onTouchEnd.bind(this);
+    this._onInput = this._update.bind(this);
+    this._onDragstart = this._onDragstart.bind(this);
+    this._onDragend = this._onDragend.bind(this);
   }
 
   _compile() {
@@ -173,23 +174,22 @@ export default class RangeElement extends BaseInputElement {
   }
 
   connectedCallback() {
-    this.addEventListener('mousedown', this._boundOnMouseDown);
-    this.addEventListener('mouseup', this._boundOnMouseUp);
-    this.addEventListener('touchstart', this._boundOnTouchStart);
-    this.addEventListener('touchend', this._boundOnTouchEnd);
-    this.addEventListener('dragstart', this._boundOnDragstart);
-    this.addEventListener('dragend', this._boundOnDragend);
-    this.addEventListener('input', this._boundOnInput);
+    this._setupListeners(true);
   }
 
   disconnectedCallback() {
-    this.removeEventListener('mousedown', this._boundOnMouseDown);
-    this.removeEventListener('mouseup', this._boundOnMouseUp);
-    this.removeEventListener('touchstart', this._boundOnTouchStart);
-    this.removeEventListener('touchend', this._boundOnTouchEnd);
-    this.removeEventListener('dragstart', this._boundOnDragstart);
-    this.removeEventListener('dragend', this._boundOnDragend);
-    this.removeEventListener('input', this._boundOnInput);
+    this._setupListeners(false);
+  }
+
+  _setupListeners(add) {
+    const action = (add ? 'add' : 'remove') + 'EventListener';
+    util[action](this, 'touchstart', this._onTouchStart, { passive: true });
+    this[action]('mousedown', this._onMouseDown);
+    this[action]('mouseup', this._onMouseUp);
+    this[action]('touchend', this._onTouchEnd);
+    this[action]('dragstart', this._onDragstart);
+    this[action]('dragend', this._onDragend);
+    this[action]('input', this._onInput);
   }
 
   /**

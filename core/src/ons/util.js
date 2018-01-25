@@ -21,13 +21,39 @@ import internal from './internal';
 import autoStyle from './autostyle';
 import ModifierUtil from './internal/modifier-util';
 import animationOptionsParse from './animation-options-parser';
+import platform from './platform';
 
 const util = {};
 const errorPrefix = '[Onsen UI]';
 
 util.globals = {
   fabOffset: 0,
-  errorPrefix
+  errorPrefix,
+  supportsPassive: false
+};
+
+platform._runOnActualPlatform(() => util.globals.actualMobileOS = platform.getMobileOS());
+
+try {
+  const opts = Object.defineProperty({}, 'passive', {
+    get() { util.globals.supportsPassive = true; }
+  });
+  window.addEventListener('testPassive', null, opts);
+  window.removeEventListener('testPassive', null, opts);
+} catch (e) { null; }
+
+/**
+ * @param {Element} el Target
+ * @param {String} name Event name
+ * @param {Function} handler Event handler
+ * @param {Object} [opt] Event options (passive, capture...)
+ * @param {Boolean} [isGD] If comes from GestureDetector. Just for testing.
+ */
+util.addEventListener = (el, name, handler, opt, isGD) => {
+  el.addEventListener(name, handler, util.globals.supportsPassive ? opt : (opt || {}).capture);
+};
+util.removeEventListener = (el, name, handler, opt, isGD) => {
+  el.removeEventListener(name, handler, util.globals.supportsPassive ? opt : (opt || {}).capture);
 };
 
 /**
@@ -466,21 +492,37 @@ util.warn = (...args) => {
   }
 };
 
+
+const prevent = e => e.cancelable && e.preventDefault();
+
 /**
- * Prevent scrolling while draging horizontally.
+ * Prevent scrolling while draging horizontally on iOS.
  *
  * @param {gd} GestureDetector instance
  */
-util.preventScroll = gd => {
-  const prevent = e => e.cancelable && e.preventDefault();
+util.iosPreventScroll = gd => {
+  if (util.globals.actualMobileOS === 'ios') {
+    const clean = (e) => {
+      gd.off('touchmove', prevent);
+      gd.off('dragend', clean);
+    };
 
-  const clean = (e) => {
-    gd.off('touchmove', prevent);
-    gd.off('dragend', clean);
-  };
+    gd.on('touchmove', prevent);
+    gd.on('dragend', clean);
+  }
+};
 
-  gd.on('touchmove', prevent);
-  gd.on('dragend', clean);
+/**
+ * Prevents dialog's masks scroll on iOS. See #2220 #1949
+ *
+ * @param {el} HTMLElement that prevents the events
+ * @param {add} Boolean Add or remove event listeners
+ */
+util.iosScrollFix = (el, add) => {
+  if (util.globals.actualMobileOS === 'ios') {
+    const action = (add ? 'add' : 'remove') + 'EventListener';
+    el[action]('touchmove', prevent, false);
+  }
 };
 
 /**
