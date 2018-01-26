@@ -8,6 +8,7 @@ dev
  ### Bug Fixes
 
  * ons-tab: Ensure `click` event listener is added to nested tabbars.
+ * ons.notification: `toast` method error.
 
 2.9.0
 ----
