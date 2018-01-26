@@ -2,6 +2,13 @@
 CHANGELOG
 ====
 
+dev
+----
+
+ ### Bug Fixes
+
+ * ons-tab: Ensure `click` event listener is added to nested tabbars.
+
 2.9.0
 ----
 
