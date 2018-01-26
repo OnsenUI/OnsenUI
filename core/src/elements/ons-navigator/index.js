@@ -468,12 +468,7 @@ export default class NavigatorElement extends BaseElement {
       const leavePage = this.pages[length - 1];
       const enterPage = this.pages[length - 2];
 
-      options.animation = options.animation || (leavePage.pushedOptions ? leavePage.pushedOptions.animation : undefined);
-      options.animationOptions = util.extend(
-        {},
-        leavePage.pushedOptions ? leavePage.pushedOptions.animationOptions : {},
-        options.animationOptions || {}
-      );
+      options = util.extend({}, this.options || {}, leavePage.pushedOptions || {}, options);
 
       if (options.data) {
         enterPage.data = util.extend({}, enterPage.data || {}, options.data || {});
