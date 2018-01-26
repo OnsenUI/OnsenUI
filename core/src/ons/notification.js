@@ -505,7 +505,7 @@ notification.toast = (message, options) => {
       });
     };
 
-    options.force ? show() : ToastQueue.add(show, promise);
+    setImmediate(() => options.force ? show() : ToastQueue.add(show, promise))
   });
 
   return promise;
