@@ -97,7 +97,7 @@ const rewritables = {
  *   </ons-page>
  * </ons-navigator>
  *
- * <ons-template id="page.html">
+ * <template id="page.html">
  *   <ons-page>
  *     <ons-toolbar>
  *       <div class="left">
@@ -108,7 +108,7 @@ const rewritables = {
  *       </div>
  *     </ons-toolbar>
  *   </ons-page>
- * </ons-template>
+ * </template>
  */
 export default class NavigatorElement extends BaseElement {
 
@@ -468,12 +468,7 @@ export default class NavigatorElement extends BaseElement {
       const leavePage = this.pages[length - 1];
       const enterPage = this.pages[length - 2];
 
-      options.animation = options.animation || (leavePage.pushedOptions ? leavePage.pushedOptions.animation : undefined);
-      options.animationOptions = util.extend(
-        {},
-        leavePage.pushedOptions ? leavePage.pushedOptions.animationOptions : {},
-        options.animationOptions || {}
-      );
+      options = util.extend({}, this.options || {}, leavePage.pushedOptions || {}, options);
 
       if (options.data) {
         enterPage.data = util.extend({}, enterPage.data || {}, options.data || {});
@@ -505,8 +500,8 @@ export default class NavigatorElement extends BaseElement {
    * @method pushPage
    * @signature pushPage(page, [options])
    * @param {String} page
-   *   [en]Page URL. Can be either a HTML document or a template defined with the `<ons-template>` tag.[/en]
-   *   [ja]pageのURLか、もしくはons-templateで宣言したテンプレートのid属性の値を指定できます。[/ja]
+   *   [en]Page URL. Can be either a HTML document or a template defined with the `<template>` tag.[/en]
+   *   [ja]pageのURLか、もしくは`<template>`で宣言したテンプレートのid属性の値を指定できます。[/ja]
    * @param {Object} [options]
    *   [en]Parameter object.[/en]
    *   [ja]オプションを指定するオブジェクト。[/ja]

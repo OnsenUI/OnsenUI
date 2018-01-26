@@ -2,12 +2,14 @@
 CHANGELOG
 ====
 
-dev
+2.9.1
 ----
 
  ### Bug Fixes
 
  * ons-tab: Ensure `click` event listener is added to nested tabbars.
+ * ons-navigator: It now uses default `options` property also for `popPage`.
+ * ons.notification: `toast` method error.
 
 2.9.0
 ----

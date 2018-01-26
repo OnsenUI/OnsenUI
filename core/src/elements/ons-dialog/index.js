@@ -44,7 +44,7 @@ const _animatorDict = {
  *   [en]
  *     Dialog that is displayed on top of current screen. As opposed to the `<ons-alert-dialog>` element, this component can contain any kind of content.
  *
- *     To use the element it can either be attached directly to the `<body>` element or dynamically created from a template using the `ons.createDialog(template)` utility function and the `<ons-template>` tag.
+ *     To use the element it can either be attached directly to the `<body>` element or dynamically created from a template using the `ons.createDialog(template)` utility function and the `<template>` tag.
  *
  *     The dialog is useful for displaying menus, additional information or to ask the user to make a decision.
  *
