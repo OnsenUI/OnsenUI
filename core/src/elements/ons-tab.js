@@ -144,7 +144,7 @@ export default class TabElement extends BaseElement {
     }
 
     this._pageLoader = defaultPageLoader;
-    this._boundOnClick = this._onClick.bind(this);
+    this._onClick = this._onClick.bind(this);
   }
 
   set pageLoader(loader) {
@@ -295,7 +295,7 @@ export default class TabElement extends BaseElement {
   }
 
   disconnectedCallback() {
-    this.removeEventListener('click', this._boundOnClick, false);
+    this.removeEventListener('click', this._onClick, false);
     if (this._loadedPage) {
       this._pageLoader.unload(this._loadedPage);
       this._loadedPage = null;
@@ -305,6 +305,8 @@ export default class TabElement extends BaseElement {
   }
 
   connectedCallback() {
+    this.addEventListener('click', this._onClick, false);
+
     if (!util.isAttached(this) || this.loaded) {
       return; // ons-tabbar compilation may trigger this
     }
@@ -346,8 +348,6 @@ export default class TabElement extends BaseElement {
           return deferred.resolve(this.pageElement);
         });
       }
-
-      this.addEventListener('click', this._boundOnClick, false);
     });
   }
 
