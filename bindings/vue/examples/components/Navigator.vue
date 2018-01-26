@@ -9,6 +9,7 @@
       @push="pageStack = [...pageStack, $event]"
       @reset="pageStack = [pageStack[0]]"
       @pop="pageStack.pop()"
+      @replace="pageStack = [...pageStack.slice(0, -1), $event]"
     >
     </v-ons-navigator>
   </v-ons-page>
@@ -40,12 +41,14 @@
     methods: {
       log,
       replace() {
-        this.$emit('pop');
-        this.$emit('push', page1);
+        this.$emit('replace', page1);
       },
       reset() {
         this.$emit('reset')
       }
+    },
+    onsNavigatorOptions: {
+      animation: 'fade'
     },
     components: { myToolbar },
   };
@@ -66,6 +69,16 @@
         this.$emit('push', page3);
         this.$emit('push', page3);
       }
+    },
+    _asd: {
+      animation: 'fade'
+    },
+    data() {
+      return {
+        onsNavigatorOptions: {
+          animation: 'lift',
+        }
+      };
     },
     components: { myToolbar },
     mounted() {

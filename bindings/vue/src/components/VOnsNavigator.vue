@@ -1,5 +1,5 @@
 <template>
-  <ons-navigator @postpop.self="_checkSwipe" v-on="unrecognizedListeners">
+  <ons-navigator @postpop.self="_checkSwipe" :options.prop="options" v-on="unrecognizedListeners">
     <slot>
       <component v-for="page in pageStack" :is="page" :key="page.key || page.name" v-on="unrecognizedListeners"></component>
     </slot>
@@ -46,9 +46,9 @@
           && this.$ons._ons._util.getTopPage(page._contentElement.children[0]);
         return nextPage ? this._findScrollPage(nextPage) : page;
       },
-      _setPagesVisibility(start, end, property, value) {
+      _eachPage(start, end, cb) {
         for (let i = start; i < end; i++) {
-          this.$children[i].$el.style[property] = value;
+          cb(this.$children[i].$el);
         }
       },
       _reattachPage(pageElement, position = null, restoreScroll) {
@@ -61,6 +61,9 @@
         return Promise.resolve();
       },
       _animate({ lastLength, currentLength, lastTopPage, currentTopPage, restoreScroll }) {
+        const pushedOptions = this.pageStack[this.pageStack.length - 1].onsNavigatorOptions
+          || currentTopPage.__vue__.onsNavigatorOptions
+          || {};
 
         // Push
         if (currentLength > lastLength) {
@@ -70,12 +73,17 @@
             isReattached = true;
             lastLength--;
           }
-          this._setPagesVisibility(lastLength, currentLength, 'visibility', 'hidden');
 
-          return this.$el._pushPage({ ...this.options, leavePage: lastTopPage })
+          this._eachPage(lastLength, currentLength, el => { el.style.visibility = 'hidden' });
+          this._eachPage(lastLength, currentLength - 1, el => { el.pushedOptions = pushedOptions });
+
+          return this.$el._pushPage({ ...pushedOptions, leavePage: lastTopPage })
             .then(() => {
-              this._setPagesVisibility(lastLength, currentLength, 'visibility', '');
-              this._setPagesVisibility(lastLength, currentLength - 1, 'display', 'none');
+              setImmediate(() => {
+                this._eachPage(lastLength, currentLength, el => { el.style.visibility = '' });
+                this._eachPage(lastLength - 1, currentLength - 1, el => { el.style.display = 'none' });
+              });
+
               if (isReattached) {
                 this._redetachPage(lastTopPage);
               }
@@ -85,13 +93,14 @@
         // Pop
         if (currentLength < lastLength) {
           this._reattachPage(lastTopPage, null, restoreScroll);
-          return this.$el._popPage({ ...this.options }, () => this._redetachPage(lastTopPage));
+          return this.$el._popPage({ }, () => this._redetachPage(lastTopPage));
         }
 
         // Replace page
         currentTopPage.style.visibility = 'hidden';
         this._reattachPage(lastTopPage, currentTopPage, restoreScroll);
-        return this.$el._pushPage({ ...this.options, _replacePage: true }).then(() => this._redetachPage(lastTopPage));
+        return this.$el._pushPage({ ...pushedOptions, _replacePage: true })
+          .then(() => this._redetachPage(lastTopPage));
       },
       _checkSwipe(event) {
         if (this.$el.hasAttribute('swipeable') &&
