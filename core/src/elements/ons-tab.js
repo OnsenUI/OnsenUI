@@ -70,13 +70,13 @@ const scheme = {
  *   </ons-tab>
  * </ons-tabbar>
  *
- * <ons-template id="home.html">
+ * <template id="home.html">
  *   ...
- * </ons-template>
+ * </template>
  *
- * <ons-template id="settings.html">
+ * <template id="settings.html">
  *   ...
- * </ons-template>
+ * </template>
 
  */
 export default class TabElement extends BaseElement {

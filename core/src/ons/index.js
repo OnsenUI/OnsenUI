@@ -336,7 +336,7 @@ ons.preload = function(templates = []) {
  * @method createElement
  * @signature createElement(template, options)
  * @param {String} template
- *   [en]Either an HTML file path, an `<ons-template>` id or an HTML string such as `'<div id="foo">hoge</div>'`.[/en]
+ *   [en]Either an HTML file path, a `<template>` id or an HTML string such as `'<div id="foo">hoge</div>'`.[/en]
  *   [ja][/ja]
  * @param {Object} [options]
  *   [en]Parameter object.[/en]
@@ -377,8 +377,8 @@ ons.createElement = (template, options = {}) => {
  * @method createPopover
  * @signature createPopover(page, [options])
  * @param {String} page
- *   [en]Page name. Can be either an HTML file or an <ons-template> containing a <ons-dialog> component.[/en]
- *   [ja]pageのURLか、もしくはons-templateで宣言したテンプレートのid属性の値を指定できます。[/ja]
+ *   [en]Page name. Can be either an HTML file or a <template> containing a <ons-dialog> component.[/en]
+ *   [ja]pageのURLか、もしくは`<template>`で宣言したテンプレートのid属性の値を指定できます。[/ja]
  * @param {Object} [options]
  *   [en]Parameter object.[/en]
  *   [ja]オプションを指定するオブジェクト。[/ja]
@@ -396,8 +396,8 @@ ons.createElement = (template, options = {}) => {
  * @method createDialog
  * @signature createDialog(page, [options])
  * @param {String} page
- *   [en]Page name. Can be either an HTML file or an <ons-template> containing a <ons-dialog> component.[/en]
- *   [ja]pageのURLか、もしくはons-templateで宣言したテンプレートのid属性の値を指定できます。[/ja]
+ *   [en]Page name. Can be either an HTML file or an `<template>` containing a <ons-dialog> component.[/en]
+ *   [ja]pageのURLか、もしくは`<template>`で宣言したテンプレートのid属性の値を指定できます。[/ja]
  * @param {Object} [options]
  *   [en]Parameter object.[/en]
  *   [ja]オプションを指定するオブジェクト。[/ja]
@@ -412,8 +412,8 @@ ons.createElement = (template, options = {}) => {
  * @method createAlertDialog
  * @signature createAlertDialog(page, [options])
  * @param {String} page
- *   [en]Page name. Can be either an HTML file or an <ons-template> containing a <ons-alert-dialog> component.[/en]
- *   [ja]pageのURLか、もしくはons-templateで宣言したテンプレートのid属性の値を指定できます。[/ja]
+ *   [en]Page name. Can be either an HTML file or an `<template>` containing a <ons-alert-dialog> component.[/en]
+ *   [ja]pageのURLか、もしくは`<template>`で宣言したテンプレートのid属性の値を指定できます。[/ja]
  * @param {Object} [options]
  *   [en]Parameter object.[/en]
  *   [ja]オプションを指定するオブジェクト。[/ja]
@@ -470,7 +470,7 @@ ons.openActionSheet = actionSheet;
  * @signature resolveLoadingPlaceholder(page)
  * @param {String} page
  *   [en]Page name. Can be either an HTML file or a `<template>` id.[/en]
- *   [ja]pageのURLか、もしくはons-templateで宣言したテンプレートのid属性の値を指定できます。[/ja]
+ *   [ja]pageのURLか、もしくは`<template>`で宣言したテンプレートのid属性の値を指定できます。[/ja]
  * @description
  *   [en]If no page is defined for the `ons-loading-placeholder` attribute it will wait for this method being called before loading the page.[/en]
  *   [ja]ons-loading-placeholderの属性値としてページが指定されていない場合は、ページロード前に呼ばれるons.resolveLoadingPlaceholder処理が行われるまで表示されません。[/ja]

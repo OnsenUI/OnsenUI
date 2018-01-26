@@ -642,8 +642,8 @@ export default class SplitterSideElement extends BaseElement {
    * @method load
    * @signature load(page, [options])
    * @param {String} page
-   *   [en]Page URL. Can be either an HTML document or an <ons-template>.[/en]
-   *   [ja]pageのURLか、ons-templateで宣言したテンプレートのid属性の値を指定します。[/ja]
+   *   [en]Page URL. Can be either an HTML document or a `<template>`.[/en]
+   *   [ja]pageのURLか、`<template>`で宣言したテンプレートのid属性の値を指定します。[/ja]
    * @param {Object} [options]
    * @param {Function} [options.callback]
    * @description

@@ -83,13 +83,13 @@ const lerp = (x0, x1, t) => (1 - t) * x0 + t * x1;
  *   </ons-tab>
  * </ons-tabbar>
  *
- * <ons-template id="home.html">
+ * <template id="home.html">
  *   ...
- * </ons-template>
+ * </template>
  *
- * <ons-template id="settings.html">
+ * <template id="settings.html">
  *   ...
- * </ons-template>
+ * </template>
  */
 export default class TabbarElement extends BaseElement {
 
