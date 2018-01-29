@@ -2,6 +2,11 @@
 CHANGELOG
 ====
 
+dev
+---
+
+ * ons-tabbar: Fixed [#2316](https://github.com/OnsenUI/OnsenUI/issues/2316).
+
 2.9.1
 ----
 

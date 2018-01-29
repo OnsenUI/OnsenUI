@@ -141,7 +141,12 @@ export default class Swiper {
     this._scrollTo(this._scroll);
   }
 
+  _setPageVisibility(toggle) {
+    this.target.classList.toggle('swiping', toggle); // Hides everything except shown pages
+  }
+
   setActiveIndex(index, options = {}) {
+    this._setPageVisibility(true);
     index = Math.max(0, Math.min(index, this.itemCount - 1));
     const scroll = Math.max(0, Math.min(this.maxScroll, this._offset + this.itemNumSize * index));
 
@@ -264,6 +269,7 @@ export default class Swiper {
             event.consumed = true;
             this._started = true; // Avoid starting drag from outside
             this.shouldBlock && this.toggleBlocker(true);
+            this._setPageVisibility(true);
             util.iosPreventScroll(this._gestureDetector);
           };
 
@@ -330,8 +336,10 @@ export default class Swiper {
 
     return this._scrollTo(this._scroll, options).then(() => {
       if (scroll === this._scroll && !canceled) {
+        this._setPageVisibility(false);
         change && this.postChangeHook(e);
       } else if (options.reject) {
+        this._setPageVisibility(false);
         return Promise.reject('Canceled');
       }
     });
