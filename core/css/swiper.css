@@ -40,7 +40,7 @@ limitations under the License.
   position: relative !important;
 }
 
-.ons-swiper-target:not(.swiping) > .page:not([shown]) {
+.ons-swiper-target.active:not(.swiping) > .page:not([shown]) {
   visibility: hidden;
 }
 
