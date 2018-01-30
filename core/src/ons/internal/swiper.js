@@ -212,7 +212,7 @@ export default class Swiper {
   show() {
     this.setupResize(true);
     this.onResize();
-    setTimeout(() => this.target.classList.add('active'), 1000/60); // Hide elements after animations
+    setTimeout(() => this.target && this.target.classList.add('active'), 1000/60); // Hide elements after animations
   }
 
   hide() {
