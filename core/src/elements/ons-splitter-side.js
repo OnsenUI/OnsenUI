@@ -399,6 +399,7 @@ export default class SplitterSideElement extends BaseElement {
         this._swipe && this._swipe.update();
         break;
       case 'width':
+        current = this.getAttribute('width'); // Sometimes undefined. CE bug?
         this.style.width = /^\d+(px|%)$/.test(current) ? current : '80%';
         break;
       default:
