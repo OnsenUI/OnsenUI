@@ -224,7 +224,9 @@ notification._createAlertDialog = (...params) => new Promise(resolve => {
     el.dialog.show()
       .then(() => {
         if (el.input && options.isPrompt && options.autofocus) {
+          var strLength = el.input.value.length;
           el.input.focus();
+          el.input.setSelectionRange(strLength, strLength);
         }
       });
   });
