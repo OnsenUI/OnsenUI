@@ -35,9 +35,9 @@ export default class IOSSwipeNavigatorAnimator extends NavigatorAnimator {
       util.throwAbstract();
     }
 
-    this.durationRestore = 0.1;
-    this.durationSwipe = 0.15;
-    this.timingSwipe = 'linear';
+    this.durationRestore = durationRestore;
+    this.durationSwipe = durationSwipe;
+    this.timingSwipe = timingSwipe;
 
     this.swipeShadow = util.createElement(`
       <div style="position: absolute; height: 100%; width: 12px; right: 100%; top: 0; bottom: 0; z-index: -1;
