@@ -26,11 +26,11 @@ import contentReady from '../../ons/content-ready';
 export default class BaseDialogElement extends BaseElement {
 
   get _scheme() {
-    throw new Error('_scheme getter must be implemented.');
+    util.throwMember();
   }
 
   _updateAnimatorFactory() {
-    throw new Error('_updateAnimatorFactory method must be implemented.');
+    util.throwMember();
   }
 
   _toggleStyle(shouldShow) {
@@ -39,6 +39,10 @@ export default class BaseDialogElement extends BaseElement {
 
   constructor() {
     super();
+
+    if (this.constructor === BaseDialogElement) {
+      util.throwAbstract();
+    }
 
     this._visible = false;
     this._doorLock = new DoorLock();

@@ -25,11 +25,11 @@ import BaseElement from './base-element';
 export default class BaseButtonElement extends BaseElement {
 
   get _scheme() {
-    throw new Error('_scheme getter must be implemented.');
+    util.throwMember();
   }
 
   get _defaultClassName() {
-    throw new Error('_defaultClassName getter must be implemented.');
+    util.throwMember();
   }
 
   get _rippleOpt() {
@@ -38,6 +38,10 @@ export default class BaseButtonElement extends BaseElement {
 
   constructor() {
     super();
+
+    if (this.constructor === BaseButtonElement) {
+      util.throwAbstract();
+    }
 
     contentReady(this, () => this._compile());
   }

@@ -418,12 +418,8 @@ export default class PopoverElement extends BaseDialogElement {
       options.target = options.target.target;
     }
 
-    if (typeof options.target === 'undefined') {
-      throw new Error('A target or options.target argument must be defined for the popover.');
-    }
-
     if (!(options.target instanceof HTMLElement)) {
-     throw new Error('Invalid target for popover.');
+     util.throw('Invalid target type or undefined');
     }
 
     return super.show(options);
@@ -517,7 +513,7 @@ export default class PopoverElement extends BaseDialogElement {
    */
   static registerAnimator(name, Animator) {
     if (!(Animator.prototype instanceof PopoverAnimator)) {
-      throw new Error('"Animator" param must inherit PopoverAnimator');
+      util.throwAnimator('Popover');
     }
     _animatorDict[name] = Animator;
   }

@@ -44,19 +44,23 @@ export default class BaseInputElement extends BaseElement {
   _update() {} // Optionally implemented
 
   get _scheme() {
-    throw new Error('_scheme getter must be implemented.');
+    util.throwMember();
   }
 
   get _template() {
-    throw new Error('_template getter must be implemented.');
+    util.throwMember();
   }
 
   get type() {
-    throw new Error('type getter must be implemented.');
+    util.throwMember();
   }
 
   constructor() {
     super();
+
+    if (this.constructor === BaseInputElement) {
+      util.throwAbstract();
+    }
 
     contentReady(this, () => this._compile());
     this._boundDelegateEvent = this._delegateEvent.bind(this);

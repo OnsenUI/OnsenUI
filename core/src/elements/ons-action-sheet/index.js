@@ -365,7 +365,7 @@ export default class ActionSheetElement extends BaseDialogElement {
    */
   static registerAnimator(name, Animator) {
     if (!(Animator.prototype instanceof ActionSheetAnimator)) {
-      throw new Error('"Animator" param must inherit OnsActionSheetElement.ActionSheetAnimator');
+      util.throwAnimator('ActionSheet');
     }
     _animatorDict[name] = Animator;
   }

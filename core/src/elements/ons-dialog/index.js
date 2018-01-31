@@ -328,7 +328,7 @@ export default class DialogElement extends BaseDialogElement {
    */
   static registerAnimator(name, Animator) {
     if (!(Animator.prototype instanceof DialogAnimator)) {
-      throw new Error('"Animator" param must inherit OnsDialogElement.DialogAnimator');
+      util.throwAnimator('Dialog');
     }
     _animatorDict[name] = Animator;
   }

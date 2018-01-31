@@ -151,7 +151,7 @@ export default class LazyRepeatElement extends BaseElement {
   }
 
   get delegate() {
-    throw new Error('This property can only be used to set the delegate object.');
+    util.throw('No delegate getter');
   }
 
   /**

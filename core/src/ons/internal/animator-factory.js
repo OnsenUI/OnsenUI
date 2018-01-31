@@ -36,7 +36,7 @@ export default class AnimatorFactory {
     this._animationOptions = opts.defaultAnimationOptions || {};
 
     if (!this._animators[this._animation]) {
-      throw new Error('No such animation: ' + this._animation);
+      util.throw('No such animation: ' + this._animation);
     }
   }
 
@@ -109,7 +109,7 @@ export default class AnimatorFactory {
     }
 
     if (!(animator instanceof this._baseClass)) {
-      throw new Error('"animator" is not an instance of ' + this._baseClassName + '.');
+      util.throw(`"animator" is not an instance of ${this._baseClassName}`);
     }
 
     return animator;

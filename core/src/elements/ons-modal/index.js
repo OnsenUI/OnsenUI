@@ -290,7 +290,7 @@ export default class ModalElement extends BaseDialogElement {
    */
   static registerAnimator(name, Animator) {
     if (!(Animator.prototype instanceof ModalAnimator)) {
-      throw new Error('"Animator" param must inherit OnsModalElement.ModalAnimator');
+      util.throwAnimator('Modal');
     }
     _animatorDict[name] = Animator;
   }

@@ -32,7 +32,7 @@ export default class IOSSwipeNavigatorAnimator extends NavigatorAnimator {
     super({...rest});
 
     if (this.constructor === IOSSwipeNavigatorAnimator) {
-      throw Error('Cannot instantiate abstract class IOSSwipeNavigatorAnimator.');
+      util.throwAbstract();
     }
 
     this.durationRestore = 0.1;
@@ -48,15 +48,15 @@ export default class IOSSwipeNavigatorAnimator extends NavigatorAnimator {
   }
 
   _decompose() {
-    throw new Error('_decompose method must be implemented.');
+    util.throwMember();
   }
 
   _shouldAnimateToolbar() {
-    throw new Error('_shouldAnimateToolbar method must be implemented.');
+    util.throwMember();
   }
 
   _calculateDelta() {
-    throw new Error('_calculateDelta method must be implemented.');
+    util.throwMember();
   }
 
   _dragStartSetup(enterPage, leavePage) {
