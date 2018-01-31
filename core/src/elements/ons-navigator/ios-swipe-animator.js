@@ -15,18 +15,29 @@ limitations under the License.
 
 */
 
-import IOSSlideNavigatorAnimator from './ios-slide-animator';
+import NavigatorAnimator from './animator';
 import util from '../../ons/util';
 import animit from '../../ons/animit';
 
 /**
- * Swipe animator for iOS navigator transition.
+ * Abstract swipe animator for iOS navigator transition.
  */
-export default class IOSSwipeNavigatorAnimator extends IOSSlideNavigatorAnimator {
+export default class IOSSwipeNavigatorAnimator extends NavigatorAnimator {
 
-  constructor({ duration = 0.15, timing = 'linear', delay = 0 } = {}) {
-    super({duration, timing, delay});
+  static get swipeable() {
+    return true;
+  }
+
+  constructor({ durationRestore = 0.1, durationSwipe = 0.15, timingSwipe = 'linear', ...rest } = {}) {
+    super({...rest});
+
+    if (this.constructor === IOSSwipeNavigatorAnimator) {
+      throw Error('Cannot instantiate abstract class IOSSwipeNavigatorAnimator.');
+    }
+
     this.durationRestore = 0.1;
+    this.durationSwipe = 0.15;
+    this.timingSwipe = 'linear';
 
     this.swipeShadow = util.createElement(`
       <div style="position: absolute; height: 100%; width: 12px; right: 100%; top: 0; bottom: 0; z-index: -1;
@@ -34,6 +45,18 @@ export default class IOSSwipeNavigatorAnimator extends IOSSlideNavigatorAnimator
     `);
 
     this.isDragStart = true;
+  }
+
+  _decompose() {
+    throw new Error('_decompose method must be implemented.');
+  }
+
+  _shouldAnimateToolbar() {
+    throw new Error('_shouldAnimateToolbar method must be implemented.');
+  }
+
+  _calculateDelta() {
+    throw new Error('_calculateDelta method must be implemented.');
   }
 
   _dragStartSetup(enterPage, leavePage) {
@@ -75,6 +98,8 @@ export default class IOSSwipeNavigatorAnimator extends IOSSlideNavigatorAnimator
   }
 
   translate(distance, maxWidth, enterPage, leavePage) {
+    this.isSwiping = true;
+
     if (enterPage.style.display === 'none') {
       enterPage.style.display = '';
     }
@@ -185,14 +210,14 @@ export default class IOSSwipeNavigatorAnimator extends IOSSlideNavigatorAnimator
             transform: 'translate3d(-25%, 0, 0)',
             opacity: 0.9
           }, {
-            timing: this.timing,
+            timing: this.timingSwipe,
             duration: this.durationRestore
           }),
 
         animit(this.decomp.enter.toolbarCenter)
           .queue({
             transform: `translate3d(-${this.delta.title}px, 0, 0)`,
-            transition: `opacity ${this.durationRestore}s linear, transform ${this.durationRestore}s ${this.timing}`,
+            transition: `opacity ${this.durationRestore}s linear, transform ${this.durationRestore}s ${this.timingSwipe}`,
             opacity: 0
           }),
 
@@ -200,7 +225,7 @@ export default class IOSSwipeNavigatorAnimator extends IOSSlideNavigatorAnimator
           .queue({
             transform: `translate3d(-${this.delta.label}px, 0, 0)`
           }, {
-            timing: this.timing,
+            timing: this.timingSwipe,
             duration: this.durationRestore
           }),
 
@@ -208,7 +233,7 @@ export default class IOSSwipeNavigatorAnimator extends IOSSlideNavigatorAnimator
           .queue({
             opacity: 0
           }, {
-            timing: this.timing,
+            timing: this.timingSwipe,
             duration: this.durationRestore
           }),
 
@@ -218,7 +243,7 @@ export default class IOSSwipeNavigatorAnimator extends IOSSlideNavigatorAnimator
           .queue({
             transform: `translate3d(0, 0px, 0px)`
           }, {
-            timing: this.timing,
+            timing: this.timingSwipe,
             duration: this.durationRestore
           }),
 
@@ -226,7 +251,7 @@ export default class IOSSwipeNavigatorAnimator extends IOSSlideNavigatorAnimator
           .queue({
             opacity: 1
           }, {
-            timing: this.timing,
+            timing: this.timingSwipe,
             duration: this.durationRestore
           }),
 
@@ -234,7 +259,7 @@ export default class IOSSwipeNavigatorAnimator extends IOSSlideNavigatorAnimator
           .queue({
             transform: `translate3d(0, 0, 0)`
           }, {
-            timing: this.timing,
+            timing: this.timingSwipe,
             duration: this.durationRestore
           }),
 
@@ -242,7 +267,7 @@ export default class IOSSwipeNavigatorAnimator extends IOSSlideNavigatorAnimator
           .queue({
             opacity: 1,
             transform: `translate3d(0, 0, 0)`,
-            transition: `opacity ${this.durationRestore}s linear, transform ${this.durationRestore}s ${this.timing}`
+            transition: `opacity ${this.durationRestore}s linear, transform ${this.durationRestore}s ${this.timingSwipe}`
           }),
 
 
@@ -252,7 +277,7 @@ export default class IOSSwipeNavigatorAnimator extends IOSSlideNavigatorAnimator
           .queue({
             opacity: 0
           }, {
-            timing: this.timing,
+            timing: this.timingSwipe,
             duration: this.durationRestore
           })
           .queue(done => {
@@ -273,7 +298,7 @@ export default class IOSSwipeNavigatorAnimator extends IOSSlideNavigatorAnimator
             transform: 'translate3D(-25%, 0px, 0px)',
             opacity: 0.9
           },
-          timing: this.timing,
+          timing: this.timingSwipe,
           duration: this.durationRestore
         }),
 
@@ -282,7 +307,7 @@ export default class IOSSwipeNavigatorAnimator extends IOSSlideNavigatorAnimator
           css: {
             transform: 'translate3D(0px, 0px, 0px)'
           },
-          timing: this.timing,
+          timing: this.timingSwipe,
           duration: this.durationRestore
         })
         .queue(done => {
@@ -295,7 +320,7 @@ export default class IOSSwipeNavigatorAnimator extends IOSSlideNavigatorAnimator
     }
   }
 
-  pop(enterPage, leavePage, callback) {
+  popSwipe(enterPage, leavePage, callback) {
     if (this.isDragStart) {
       return;
     }
@@ -311,14 +336,14 @@ export default class IOSSwipeNavigatorAnimator extends IOSSlideNavigatorAnimator
             transform: 'translate3d(0, 0, 0)',
             opacity: 1
           }, {
-            timing: this.timing,
-            duration: this.duration
+            timing: this.timingSwipe,
+            duration: this.durationSwipe
           }),
 
         animit(this.decomp.enter.toolbarCenter)
           .queue({
             transform: `translate3d(0, 0, 0)`,
-            transition: `opacity ${this.duration}s linear, transform ${this.duration}s ${this.timing}`,
+            transition: `opacity ${this.durationSwipe}s linear, transform ${this.durationSwipe}s ${this.timingSwipe}`,
             opacity: 1
           }),
 
@@ -326,16 +351,16 @@ export default class IOSSwipeNavigatorAnimator extends IOSSlideNavigatorAnimator
           .queue({
             transform: `translate3d(0, 0, 0)`
           }, {
-            timing: this.timing,
-            duration: this.duration
+            timing: this.timingSwipe,
+            duration: this.durationSwipe
           }),
 
         animit(this.decomp.enter.other)
           .queue({
             opacity: 1
           }, {
-            timing: this.timing,
-            duration: this.duration
+            timing: this.timingSwipe,
+            duration: this.durationSwipe
           }),
 
         /* Leave page */
@@ -344,31 +369,31 @@ export default class IOSSwipeNavigatorAnimator extends IOSSlideNavigatorAnimator
           .queue({
             transform: `translate3d(100%, 0px, 0px)`
           }, {
-            timing: this.timing,
-            duration: this.duration
+            timing: this.timingSwipe,
+            duration: this.durationSwipe
           }),
 
         animit(this.decomp.leave.toolbar)
           .queue({
             opacity: 0
           }, {
-            timing: this.timing,
-            duration: this.duration
+            timing: this.timingSwipe,
+            duration: this.durationSwipe
           }),
 
         animit(this.decomp.leave.toolbarCenter)
           .queue({
             transform: `translate3d(125%, 0, 0)`
           }, {
-            timing: this.timing,
-            duration: this.duration
+            timing: this.timingSwipe,
+            duration: this.durationSwipe
           }),
 
         animit(this.decomp.leave.backButtonLabel)
           .queue({
             opacity: 0,
             transform: `translate3d(${this.delta.title}px, 0, 0)`,
-            transition: `opacity ${this.duration}s linear, transform ${this.duration}s ${this.timing}`
+            transition: `opacity ${this.durationSwipe}s linear, transform ${this.durationSwipe}s ${this.timingSwipe}`
           }),
 
 
@@ -379,8 +404,8 @@ export default class IOSSwipeNavigatorAnimator extends IOSSlideNavigatorAnimator
             opacity: 0,
             transform: `translate3d(${this.maxWidth}px, 0px, 0px)`
           }, {
-            timing: this.timing,
-            duration: this.duration
+            timing: this.timingSwipe,
+            duration: this.durationSwipe
           })
           .queue(done => {
             this._reset(this.target.enter, this.target.leave);
@@ -398,8 +423,8 @@ export default class IOSSwipeNavigatorAnimator extends IOSSlideNavigatorAnimator
             transform: 'translate3D(0px, 0px, 0px)',
             opacity: 1.0
           },
-          duration: this.duration,
-          timing: this.timing
+          duration: this.durationSwipe,
+          timing: this.timingSwipe
         }),
 
         animit(leavePage)
@@ -407,8 +432,8 @@ export default class IOSSwipeNavigatorAnimator extends IOSSlideNavigatorAnimator
           css: {
             transform: 'translate3D(100%, 0px, 0px)'
           },
-          duration: this.duration,
-          timing: this.timing
+          duration: this.durationSwipe,
+          timing: this.timingSwipe
         })
         .queue(done => {
           this._reset(enterPage, leavePage);
@@ -446,6 +471,7 @@ export default class IOSSwipeNavigatorAnimator extends IOSSlideNavigatorAnimator
   }
 
   _reset(...args) {
+    this.isSwiping = false;
     this._savedStyle && this._restoreStyle(...args);
     this.unblock && this.unblock();
     this.swipeShadow.remove();

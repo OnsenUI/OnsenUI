@@ -15,7 +15,7 @@ limitations under the License.
 
 */
 
-import NavigatorAnimator from './animator';
+import IOSSwipeNavigatorAnimator from './ios-swipe-animator';
 import util from '../../ons/util';
 import animit from '../../ons/animit';
 import contentReady from '../../ons/content-ready';
@@ -23,10 +23,10 @@ import contentReady from '../../ons/content-ready';
 /**
  * Slide animator for navigator transition like iOS's screen slide transition.
  */
-export default class IOSSlideNavigatorAnimator extends NavigatorAnimator {
+export default class IOSSlideNavigatorAnimator extends IOSSwipeNavigatorAnimator {
 
-  constructor({timing = 'cubic-bezier(0.3, .4, 0, .9)', delay = 0, duration = 0.4} = {}) {
-    super({ timing, delay, duration });
+  constructor({ timing = 'cubic-bezier(0.3, .4, 0, .9)', delay = 0, duration = 0.4, ...rest } = {}) {
+    super({ timing, delay, duration, ...rest });
 
     this.backgroundMask = util.createElement(`
       <div style="position: absolute; width: 100%; height: 100%;
@@ -352,6 +352,10 @@ export default class IOSSlideNavigatorAnimator extends NavigatorAnimator {
    * @param {Function} callback
    */
   pop(enterPage, leavePage, callback) {
+    if (this.isSwiping) {
+      return this.popSwipe(enterPage, leavePage, callback);
+    }
+
     this.backgroundMask.remove();
     enterPage.parentNode.insertBefore(this.backgroundMask, enterPage);
 

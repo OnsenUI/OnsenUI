@@ -22,7 +22,6 @@ import SwipeReveal from '../../ons/internal/swipe-reveal';
 import AnimatorFactory from '../../ons/internal/animator-factory';
 import NavigatorAnimator from './animator';
 import IOSSlideNavigatorAnimator from './ios-slide-animator';
-import IOSSwipeNavigatorAnimator from './ios-swipe-animator';
 import IOSLiftNavigatorAnimator from './ios-lift-animator';
 import IOSFadeNavigatorAnimator from './ios-fade-animator';
 import MDSlideNavigatorAnimator from './md-slide-animator';
@@ -292,31 +291,54 @@ export default class NavigatorElement extends BaseElement {
     this.onDeviceBackButton = this._onDeviceBackButton.bind(this);
 
     if (!platform.isAndroid() || this.getAttribute('swipeable') === 'force') {
-      this._swipeAnimator = new IOSSwipeNavigatorAnimator();
-      const pushAnimation = { duration: this._swipeAnimator.duration, timing: this._swipeAnimator.timing };
-      const popAnimation = { duration: this._swipeAnimator.durationRestore, timing: this._swipeAnimator.timing };
+      let swipeAnimator;
 
       this._swipe = new SwipeReveal({
         element: this,
+        getThreshold: () => Math.max(0.2, parseFloat(this.getAttribute('swipe-threshold')) || 0),
+
         swipeMax: () => {
-          this._onSwipe && this._onSwipe(1, pushAnimation);
-          this[this.swipeMax ? 'swipeMax' : 'popPage']({ animator: this._swipeAnimator });
+          this._onSwipe && this._onSwipe(1, { duration: swipeAnimator.durationSwipe, timing: swipeAnimator.timingSwipe });
+          this[this.swipeMax ? 'swipeMax' : 'popPage']({ animator: swipeAnimator });
+          swipeAnimator = null;
         },
         swipeMid: (distance, width) => {
           this._onSwipe && this._onSwipe(distance/width);
-          this._swipeAnimator.translate(distance, width, this.topPage.previousElementSibling, this.topPage);
+          swipeAnimator.translate(distance, width, this.topPage.previousElementSibling, this.topPage);
         },
         swipeMin: () => {
-          this._onSwipe && this._onSwipe(0, popAnimation);
-          this._swipeAnimator.restore(this.topPage.previousElementSibling, this.topPage);
+          this._onSwipe && this._onSwipe(0, { duration: swipeAnimator.durationRestore, timing: swipeAnimator.timingSwipe });
+          swipeAnimator.restore(this.topPage.previousElementSibling, this.topPage);
+          swipeAnimator = null;
         },
-        getThreshold: () => Math.max(0.2, parseFloat(this.getAttribute('swipe-threshold')) || 0),
+
         ignoreSwipe: (event, distance) => {
-          if (/ons-back-button/i.test(event.target.tagName) || util.findParent(event.target, 'ons-back-button', p => /ons-page/i.test(p.tagName))) {
-            return true;
+          // Basic conditions
+          if (!this._isRunning && this.children.length > 1) {
+
+            // Area or directional issues
+            const area = parseInt(this.getAttribute('swipe-target-width') || 25, 10);
+            if (event.gesture.direction ===  'right' && area > distance) {
+
+              // Swipes on ons-back-button and its children
+              const isBB = el => /ons-back-button/i.test(el.tagName);
+              if (!isBB(event.target) && !util.findParent(event.target, isBB, p => /ons-page/i.test(p.tagName))) {
+
+                // Animaor is swipeable
+                const animation = (this.topPage.pushedOptions || {}).animation || this.animatorFactory._animation;
+                const Animator = _animatorDict[animation] instanceof Function
+                  ? _animatorDict[animation].call()
+                  : _animatorDict[animation];
+
+                if (Animator.swipeable) {
+                  swipeAnimator = new Animator(); // Prepare for the swipe
+                  return false;
+                }
+              }
+            }
           }
-          const area = parseInt(this.getAttribute('swipe-target-width') || 25, 10);
-          return event.gesture.direction !==  'right' || area <= distance || this._isRunning || this.children.length <= 1;
+
+          return true; // Ignore swipe
         }
       });
 
@@ -380,7 +402,7 @@ export default class NavigatorElement extends BaseElement {
     this._backButtonHandler = null;
 
     this._swipe && this._swipe.dispose();
-    this._swipe = this._swipeAnimator = null;
+    this._swipe = null;
   }
 
   static get observedAttributes() {
