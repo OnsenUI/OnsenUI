@@ -20,6 +20,8 @@ import util from '../../ons/util';
 import animit from '../../ons/animit';
 import contentReady from '../../ons/content-ready';
 
+const translate3d = (x = 0, y = 0, z = 0) => `translate3d(${x}, ${y}, ${z})`;
+
 /**
  * Slide animator for navigator transition like iOS's screen slide transition.
  */
@@ -28,11 +30,12 @@ export default class IOSSlideNavigatorAnimator extends IOSSwipeNavigatorAnimator
   constructor({ timing = 'cubic-bezier(0.3, .4, 0, .9)', delay = 0, duration = 0.4, ...rest } = {}) {
     super({ timing, delay, duration, ...rest });
 
-    this.backgroundMask = util.createElement(`
-      <div style="position: absolute; width: 100%; height: 100%;
-        background-color: black; z-index: 2"></div>
-    `);
+    this.backgroundMask = util.createElement(
+      `<div style="position: absolute; width: 100%; height: 100%;` +
+        `background-color: black; z-index: 2"></div>`
+    );
 
+    this.opt = { duration, timing, delay };
   }
 
   _decompose(page) {
@@ -122,114 +125,42 @@ export default class IOSSlideNavigatorAnimator extends IOSSwipeNavigatorAnimator
 
         animit.runAll(
 
-          animit([enterPageDecomposition.content, enterPageDecomposition.bottomToolbar, enterPageDecomposition.background])
-            .saveStyle()
-            .queue({
-              css: {
-                transform: 'translate3D(100%, 0px, 0px)',
-              },
-              duration: 0
-            })
-            .wait(this.delay)
-            .queue({
-              css: {
-                transform: 'translate3D(0px, 0px, 0px)',
-              },
-              duration: this.duration,
-              timing: this.timing
-            })
-            .restoreStyle(),
+          animit([enterPageDecomposition.content, enterPageDecomposition.bottomToolbar, enterPageDecomposition.background], this.opt)
+            .default(
+              { transform: translate3d('100%') },
+              { transform: translate3d() }
+            ),
 
-          animit(enterPageDecomposition.toolbar)
-            .saveStyle()
-            .queue({
-              css: {
-                opacity: 0
-              },
-              duration: 0
-            })
-            .queue({
-              css: {
-                opacity: 1
-              },
-              duration: this.duration,
-              timing: this.timing
-            })
-            .restoreStyle(),
+          animit(enterPageDecomposition.toolbar, this.opt)
+            .default({ opacity: 0 }, { opacity: 1 }),
 
-          animit(enterPageDecomposition.toolbarCenter)
-            .saveStyle()
-            .queue({
-              css: {
-                transform: 'translate3d(125%, 0, 0)',
-                opacity: 1
-              },
-              duration: 0
-            })
-            .wait(this.delay)
-            .queue({
-              css: {
-                transform: 'translate3d(0, 0, 0)',
-                opacity: 1
-              },
-              duration: this.duration,
-              timing: this.timing
-            })
-            .restoreStyle(),
+          animit(enterPageDecomposition.toolbarCenter, this.opt)
+            .default(
+              { transform: translate3d('125%'), opacity: 1 },
+              { transform: translate3d(), opacity: 1 }
+            ),
 
-          animit(enterPageDecomposition.backButtonLabel)
-            .saveStyle()
-            .queue({
-              css: {
-                transform: `translate3d(${delta.title}px, 0, 0)`,
-                opacity: 0
-              },
-              duration: 0
-            })
-            .wait(this.delay)
-            .queue({
-              css: {
-                transform: 'translate3d(0, 0, 0)',
-                opacity: 1.0,
+          animit(enterPageDecomposition.backButtonLabel, this.opt)
+            .default(
+              { transform: translate3d(`${delta.title}px`), opacity: 0 },
+              {
+                transform: translate3d(),
+                opacity: 1,
                 transition: `opacity ${this.duration}s linear, transform ${this.duration}s ${this.timing}`
-              },
-              duration: this.duration
-            })
-            .restoreStyle(),
+              }
+            ),
 
-          animit(enterPageDecomposition.other)
-            .saveStyle()
-            .queue({
-              css: {opacity: 0},
-              duration: 0
-            })
-            .wait(this.delay)
-            .queue({
-              css: {opacity: 1},
-              duration: this.duration,
-              timing: 'linear'
-            })
-            .restoreStyle(),
+          animit(enterPageDecomposition.other, this.opt)
+            .default(
+              { opacity: 0 },
+              { css: { opacity: 1 }, timing: 'linear' }
+            ),
 
-          animit([leavePageDecomposition.content, leavePageDecomposition.bottomToolbar, leavePageDecomposition.background])
-            .saveStyle()
-            .queue({
-              css: {
-                transform: 'translate3D(0, 0, 0)',
-                opacity: 1
-              },
-              duration: 0
-            })
-            .wait(this.delay)
-            .queue({
-              css: {
-                transform: 'translate3D(-25%, 0px, 0px)',
-                opacity: 0.9
-              },
-              duration: this.duration,
-              timing: this.timing
-            })
-            .restoreStyle()
+          animit([leavePageDecomposition.content, leavePageDecomposition.bottomToolbar, leavePageDecomposition.background], this.opt)
+            .default(
+              { transform: translate3d(), opacity: 1 },
+              { transform: translate3d('-25%'), opacity: 0.9 }
+            )
             .queue(done => {
               this.backgroundMask.remove();
               unblock();
@@ -237,59 +168,24 @@ export default class IOSSlideNavigatorAnimator extends IOSSwipeNavigatorAnimator
               done();
             }),
 
-          animit(leavePageDecomposition.toolbarCenter)
-            .saveStyle()
-            .queue({
-              css: {
-                transform: 'translate3d(0, 0, 0)',
-                opacity: 1.0
-              },
-              duration: 0
-            })
-            .wait(this.delay)
-            .queue({
-              css: {
-                transform: `translate3d(-${delta.title}px, 0, 0)`,
+          animit(leavePageDecomposition.toolbarCenter, this.opt)
+            .default(
+              { transform: translate3d(), opacity: 1 },
+              {
+                transform: translate3d(`-${delta.title}px`),
                 opacity: 0,
                 transition: `opacity ${this.duration}s linear, transform ${this.duration}s ${this.timing}`
-              },
-              duration: this.duration
-            })
-            .restoreStyle(),
+              }
+            ),
 
-          animit(leavePageDecomposition.backButtonLabel)
-            .saveStyle()
-            .queue({
-              css: {
-                transform: 'translate3d(0, 0, 0)',
-                opacity: 1.0
-              },
-              duration: 0
-            })
-            .wait(this.delay)
-            .queue({
-              css: {
-                transform: 'translate3d(-' + delta.label + 'px, 0, 0)',
-                opacity: 0,
-              },
-              duration: this.duration,
-              timing: this.timing
-            })
-            .restoreStyle(),
+          animit(leavePageDecomposition.backButtonLabel, this.opt)
+            .default(
+              { transform: translate3d(), opacity: 1 },
+              { transform: translate3d(`-${delta.label}px`), opacity: 0 }
+            ),
 
-          animit(leavePageDecomposition.other)
-            .saveStyle()
-            .queue({
-              css: {opacity: 1},
-              duration: 0
-            })
-            .wait(this.delay)
-            .queue({
-              css: {opacity: 0},
-              duration: this.duration,
-              timing: 'linear'
-            })
-            .restoreStyle()
+          animit(leavePageDecomposition.other, this.opt)
+            .default( { opacity: 1 }, { css: { opacity: 0 }, timing: 'linear' })
 
         );
 
@@ -297,43 +193,11 @@ export default class IOSSlideNavigatorAnimator extends IOSSwipeNavigatorAnimator
 
         animit.runAll(
 
-          animit(enterPage)
-            .saveStyle()
-            .queue({
-              css: {
-                transform: 'translate3D(100%, 0px, 0px)',
-              },
-              duration: 0
-            })
-            .wait(this.delay)
-            .queue({
-              css: {
-                transform: 'translate3D(0px, 0px, 0px)',
-              },
-              duration: this.duration,
-              timing: this.timing
-            })
-            .restoreStyle(),
+          animit(enterPage, this.opt)
+            .default( { transform: translate3d('100%'), }, { transform: translate3d() }),
 
-          animit(leavePage)
-            .saveStyle()
-            .queue({
-              css: {
-                transform: 'translate3D(0, 0, 0)',
-                opacity: 1
-              },
-              duration: 0
-            })
-            .wait(this.delay)
-            .queue({
-              css: {
-                transform: 'translate3D(-25%, 0px, 0px)',
-                opacity: 0.9
-              },
-              duration: this.duration,
-              timing: this.timing
-            })
-            .restoreStyle()
+          animit(leavePage, this.opt)
+            .default( { transform: translate3d(), opacity: 1 }, { transform: translate3d('-25%'), opacity: .9 })
             .queue(done => {
               this.backgroundMask.remove();
               unblock();
@@ -373,93 +237,39 @@ export default class IOSSlideNavigatorAnimator extends IOSSwipeNavigatorAnimator
     if (shouldAnimateToolbar) {
       animit.runAll(
 
-        animit([enterPageDecomposition.content, enterPageDecomposition.bottomToolbar, enterPageDecomposition.background])
-          .saveStyle()
-          .queue({
-            css: {
-              transform: 'translate3D(-25%, 0px, 0px)',
-              opacity: 0.9
-            },
-            duration: 0
-          })
-          .wait(this.delay)
-          .queue({
-            css: {
-              transform: 'translate3D(0px, 0px, 0px)',
-              opacity: 1
-            },
-            duration: this.duration,
-            timing: this.timing
-          })
-          .restoreStyle(),
+        animit([enterPageDecomposition.content, enterPageDecomposition.bottomToolbar, enterPageDecomposition.background], this.opt)
+          .default(
+            { transform: translate3d('-25%'), opacity: .9 },
+            { transform: translate3d(), opacity: 1 }
+          ),
 
-        animit(enterPageDecomposition.toolbarCenter)
-          .saveStyle()
-          .queue({
-            css: {
-              transform: 'translate3d(-' + delta.title + 'px, 0, 0)',
-              opacity: 0
-            },
-            duration: 0
-          })
-          .wait(this.delay)
-          .queue({
-            css: {
-              transform: 'translate3d(0, 0, 0)',
-              opacity: 1.0,
+        animit(enterPageDecomposition.toolbarCenter, this.opt)
+          .default(
+            { transform: translate3d(`-${delta.title}px`), opacity: 0 },
+            {
+              transform: translate3d(),
+              opacity: 1,
               transition: `opacity ${this.duration}s linear, transform ${this.duration}s ${this.timing}`
-            },
-            duration: this.duration
-          })
-          .restoreStyle(),
+            }
+          ),
 
-        animit(enterPageDecomposition.backButtonLabel)
-          .saveStyle()
-          .queue({
-            css: {
-              transform: 'translate3d(-' + delta.label + 'px, 0, 0)'
-            },
-            duration: 0
-          })
-          .wait(this.delay)
-          .queue({
-            css: {
-              transform: 'translate3d(0, 0, 0)'
-            },
-            duration: this.duration,
-            timing: this.timing
-          })
-          .restoreStyle(),
+        animit(enterPageDecomposition.backButtonLabel, this.opt)
+          .default(
+            { transform: translate3d(`-${delta.label}px`) },
+            { transform: translate3d() }
+          ),
 
-        animit(enterPageDecomposition.other)
-          .saveStyle()
-          .queue({
-            css: {opacity: 0},
-            duration: 0
-          })
-          .wait(this.delay)
-          .queue({
-            css: {opacity: 1},
-            duration: this.duration,
-            timing: 'linear'
-          })
-          .restoreStyle(),
+        animit(enterPageDecomposition.other, this.opt)
+          .default(
+            { opacity: 0 },
+            { css: { opacity: 1 }, timing: 'linear' }
+          ),
 
-        animit([leavePageDecomposition.content, leavePageDecomposition.bottomToolbar, leavePageDecomposition.background])
-          .queue({
-            css: {
-              transform: 'translate3D(0px, 0px, 0px)'
-            },
-            duration: 0
-          })
-          .wait(this.delay)
-          .queue({
-            css: {
-              transform: 'translate3D(100%, 0px, 0px)'
-            },
-            duration: this.duration,
-            timing: this.timing
-          })
+        animit([leavePageDecomposition.content, leavePageDecomposition.bottomToolbar, leavePageDecomposition.background], this.opt)
+          .default(
+            { transform: translate3d() },
+            { transform: translate3d('100%') }
+          )
           .wait(0)
           .queue(done => {
             this.backgroundMask.remove();
@@ -468,93 +278,42 @@ export default class IOSSlideNavigatorAnimator extends IOSSwipeNavigatorAnimator
             done();
           }),
 
-        animit(leavePageDecomposition.toolbar)
-          .queue({
-            css: {
-              opacity: 1
-            },
-            duration: 0
-          })
-          .queue({
-            css: {
-              opacity: 0
-            },
-            duration: this.duration,
-            timing: this.timing
-          }),
+        animit(leavePageDecomposition.toolbar, this.opt)
+          .default(
+            { opacity: 1 },
+            { opacity: 0 }
+          ),
 
-        animit(leavePageDecomposition.toolbarCenter)
-          .queue({
-            css: {
-              transform: 'translate3d(0, 0, 0)'
-            },
-            duration: 0
-          })
-          .wait(this.delay)
-          .queue({
-            css: {
-              transform: 'translate3d(125%, 0, 0)'
-            },
-            duration: this.duration,
-            timing: this.timing
-          }),
+        animit(leavePageDecomposition.toolbarCenter, this.opt)
+          .default(
+            { transform: translate3d() },
+            { transform: translate3d('125%') }
+          ),
 
-        animit(leavePageDecomposition.backButtonLabel)
-          .queue({
-            css: {
-              transform: 'translate3d(0, 0, 0)',
-              opacity: 1
-            },
-            duration: 0
-          })
-          .wait(this.delay)
-          .queue({
-            css: {
-              transform: 'translate3d(' + delta.title + 'px, 0, 0)',
+        animit(leavePageDecomposition.backButtonLabel, this.opt)
+          .default(
+            { transform: translate3d(), opacity: 1 },
+            {
+              transform: translate3d(`${delta.title}px`),
               opacity: 0,
               transition: `opacity ${this.duration}s linear, transform ${this.duration}s ${this.timing}`
-            },
-            duration: this.duration
-          })
+            }
+          )
       );
     } else {
       animit.runAll(
 
-        animit(enterPage)
-          .saveStyle()
-          .queue({
-            css: {
-              transform: 'translate3D(-25%, 0px, 0px)',
-              opacity: 0.9
-            },
-            duration: 0
-          })
-          .wait(this.delay)
-          .queue({
-            css: {
-              transform: 'translate3D(0px, 0px, 0px)',
-              opacity: 1.0
-            },
-            duration: this.duration,
-            timing: this.timing
-          })
-          .restoreStyle(),
+        animit(enterPage, this.opt)
+          .default(
+            { transform: translate3d('-25%'), opacity: .9 },
+            { transform: translate3d(), opacity: 1 }
+          ),
 
-        animit(leavePage)
-          .queue({
-            css: {
-              transform: 'translate3D(0px, 0px, 0px)'
-            },
-            duration: 0
-          })
-          .wait(this.delay)
-          .queue({
-            css: {
-              transform: 'translate3D(100%, 0px, 0px)'
-            },
-            duration: this.duration,
-            timing: this.timing
-          })
+        animit(leavePage, this.opt)
+          .default(
+            { transform: translate3d() },
+            { transform: translate3d('100%') }
+          )
           .queue(done => {
             this.backgroundMask.remove();
             unblock();
