@@ -59,38 +59,15 @@ export class AndroidAlertDialogAnimator extends AlertDialogAnimator {
 
     animit.runAll(
 
-      animit(dialog._mask)
-        .queue({
-          opacity: 0
-        })
-        .wait(this.delay)
-        .queue({
-          opacity: 1.0
-        }, {
-          duration: this.duration,
-          timing: this.timing
-        }),
+      animit(dialog._mask, this.def)
+        .default({ opacity: 0 }, { opacity: 1 }),
 
-      animit(dialog._dialog)
-        .saveStyle()
-        .queue({
-          css: {
-            transform: 'translate3d(-50%, -50%, 0) scale3d(0.9, 0.9, 1.0)',
-            opacity: 0.0
-          },
-          duration: 0
-        })
-        .wait(this.delay)
-        .queue({
-          css: {
-            transform: 'translate3d(-50%, -50%, 0) scale3d(1.0, 1.0, 1.0)',
-            opacity: 1.0
-          },
-          duration: this.duration,
-          timing: this.timing
-        })
-        .restoreStyle()
-        .queue(function(done) {
+      animit(dialog._dialog, this.def)
+        .default(
+          { transform: 'translate3d(-50%, -50%, 0) scale3d(.9, .9, 1)', opacity: 0 },
+          { transform: 'translate3d(-50%, -50%, 0) scale3d(1, 1, 1)', opacity: 1 }
+        )
+        .queue(done => {
           callback();
           done();
         })
@@ -106,38 +83,15 @@ export class AndroidAlertDialogAnimator extends AlertDialogAnimator {
 
     animit.runAll(
 
-      animit(dialog._mask)
-        .queue({
-          opacity: 1.0
-        })
-        .wait(this.delay)
-        .queue({
-          opacity: 0
-        }, {
-          duration: this.duration,
-          timing: this.timing
-        }),
+      animit(dialog._mask, this.def)
+        .default({ opacity: 1 }, { opacity: 0 }),
 
-      animit(dialog._dialog)
-        .saveStyle()
-        .queue({
-          css: {
-            transform: 'translate3d(-50%, -50%, 0) scale3d(1.0, 1.0, 1.0)',
-            opacity: 1.0
-          },
-          duration: 0
-        })
-        .wait(this.delay)
-        .queue({
-          css: {
-            transform: 'translate3d(-50%, -50%, 0) scale3d(0.9, 0.9, 1.0)',
-            opacity: 0.0
-          },
-          duration: this.duration,
-          timing: this.timing
-        })
-        .restoreStyle()
-        .queue(function(done) {
+      animit(dialog._dialog, this.def)
+        .default(
+          { transform: 'translate3d(-50%, -50%, 0) scale3d(1, 1, 1)', opacity: 1 },
+          { transform: 'translate3d(-50%, -50%, 0) scale3d(.9, .9, 1)', opacity: 0 }
+        )
+        .queue(done => {
           callback();
           done();
         })
@@ -163,38 +117,15 @@ export class IOSAlertDialogAnimator extends AlertDialogAnimator {
 
     animit.runAll(
 
-      animit(dialog._mask)
-        .queue({
-          opacity: 0
-        })
-        .wait(this.delay)
-        .queue({
-          opacity: 1.0
-        }, {
-          duration: this.duration,
-          timing: this.timing
-        }),
+      animit(dialog._mask, this.def)
+        .default({ opacity: 0 }, { opacity: 1 }),
 
-      animit(dialog._dialog)
-        .saveStyle()
-        .queue({
-          css: {
-            transform: 'translate3d(-50%, -50%, 0) scale3d(1.3, 1.3, 1.0)',
-            opacity: 0.0
-          },
-          duration: 0
-        })
-        .wait(this.delay)
-        .queue({
-          css: {
-            transform: 'translate3d(-50%, -50%, 0) scale3d(1.0, 1.0, 1.0)',
-            opacity: 1.0
-          },
-          duration: this.duration,
-          timing: this.timing
-        })
-        .restoreStyle()
-        .queue(function(done) {
+      animit(dialog._dialog, this.def)
+        .default(
+          { transform: 'translate3d(-50%, -50%, 0) scale3d(1.3, 1.3, 1)', opacity: 0 },
+          { transform: 'translate3d(-50%, -50%, 0) scale3d(1, 1, 1)', opacity: 1 }
+        )
+        .queue(done => {
           callback();
           done();
         })
@@ -210,40 +141,15 @@ export class IOSAlertDialogAnimator extends AlertDialogAnimator {
 
     animit.runAll(
 
-      animit(dialog._mask)
-        .queue({
-          opacity: 1.0
-        })
-        .wait(this.delay)
-        .queue({
-          opacity: 0
-        }, {
-          duration: this.duration,
-          timing: this.timing
-        }),
+      animit(dialog._mask, this.def)
+        .default({ opacity: 1 }, { opacity: 0 }),
 
-      animit(dialog._dialog)
-        .saveStyle()
-        .queue({
-          css: {
-            opacity: 1.0
-          },
-          duration: 0
-        })
-        .wait(this.delay)
-        .queue({
-          css: {
-            opacity: 0.0
-          },
-          duration: this.duration,
-          timing: this.timing
-        })
-        .restoreStyle()
-        .queue(function(done) {
+      animit(dialog._dialog, this.def)
+        .default({ opacity: 1 }, { opacity: 0 })
+        .queue(done => {
           callback();
           done();
         })
-
     );
   }
 }
