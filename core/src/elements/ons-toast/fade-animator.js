@@ -35,20 +35,9 @@ export default class FadeToastAnimator extends ToastAnimator {
   show(toast, callback) {
     callback = callback ? callback : function() {};
 
-    animit(toast)
-      .saveStyle()
-      .queue({
-        opacity: 0
-      })
-      .wait(this.delay)
-      .queue({
-        opacity: 1.0
-      }, {
-        duration: this.duration,
-        timing: this.timing
-      })
-      .restoreStyle()
-      .queue(function(done) {
+    animit(toast, this.def)
+      .default({ opacity: 0 }, { opacity: 1 })
+      .queue(done => {
         callback();
         done();
       })
@@ -62,20 +51,9 @@ export default class FadeToastAnimator extends ToastAnimator {
   hide(toast, callback) {
     callback = callback ? callback : function() {};
 
-    animit(toast)
-      .saveStyle()
-      .queue({
-        opacity: 1
-      })
-      .wait(this.delay)
-      .queue({
-        opacity: 0
-      }, {
-        duration: this.duration,
-        timing: this.timing
-      })
-      .restoreStyle()
-      .queue(function(done) {
+    animit(toast, this.def)
+      .default({ opacity: 1 }, { opacity: 0 })
+      .queue(done => {
         callback();
         done();
       })
