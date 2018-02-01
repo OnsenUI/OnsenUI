@@ -103,7 +103,7 @@ export default class RevealSplitterAnimator extends SplitterAnimator {
     animit.runAll(
       animit(this._slidingElements)
         .queue({
-          transform: `translate3d(${this.minus + distance}px, 0px, 0px)`
+          transform: `translate3d(${this.minus + distance}px, 0, 0)`
         }),
       animit(this._side._content)
         .queue(menuStyle.content),
@@ -127,11 +127,8 @@ export default class RevealSplitterAnimator extends SplitterAnimator {
         animit(this._slidingElements)
           .wait(this.delay)
           .queue({
-            transform: `translate3d(${this.minus + this.maxWidth}px, 0px, 0px)`
-          }, {
-            duration: this.duration,
-            timing: this.timing
-          }),
+            transform: `translate3d(${this.minus + this.maxWidth}px, 0, 0)`
+          }, this.def),
 
         animit(this._mask)
           .wait(this.delay)
@@ -141,17 +138,11 @@ export default class RevealSplitterAnimator extends SplitterAnimator {
 
         animit(this._side._content)
           .wait(this.delay)
-          .queue(menuStyle.content, {
-            duration: this.duration,
-            timing: this.timing
-          }),
+          .queue(menuStyle.content, this.def),
 
         animit(this._side)
           .wait(this.delay)
-          .queue(menuStyle.container, {
-            duration: this.duration,
-            timing: this.timing
-          })
+          .queue(menuStyle.container, this.def)
           .queue(callback => {
             this._slidingElements = null;
             callback();
@@ -172,11 +163,8 @@ export default class RevealSplitterAnimator extends SplitterAnimator {
       animit(this._slidingElements)
         .wait(this.delay)
         .queue({
-          transform: 'translate3d(0px, 0px, 0px)'
-        }, {
-          duration: this.duration,
-          timing: this.timing
-        }),
+          transform: 'translate3d(0, 0, 0)'
+        }, this.def),
 
       animit(this._mask)
         .wait(this.delay)
@@ -186,17 +174,11 @@ export default class RevealSplitterAnimator extends SplitterAnimator {
 
       animit(this._side._content)
         .wait(this.delay)
-        .queue(menuStyle.content, {
-          duration: this.duration,
-          timing: this.timing
-        }),
+        .queue(menuStyle.content, this.def),
 
       animit(this._side)
         .wait(this.delay)
-        .queue(menuStyle.container, {
-          duration: this.duration,
-          timing: this.timing
-        })
+        .queue(menuStyle.container, this.def)
         .queue(callback => {
           this._slidingElements = null;
           this._side.style.zIndex = 0;
