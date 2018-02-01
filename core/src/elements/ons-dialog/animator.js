@@ -124,7 +124,7 @@ export class IOSDialogAnimator extends DialogAnimator {
 
       animit(dialog._dialog, this.def)
         .default(
-          { transform:  `translate3d(-50%, ${this.bodyHeight / 2.0 - 1}px, 0)` },
+          { transform: `translate3d(-50%, ${this.bodyHeight / 2.0 - 1}px, 0)` },
           { transform: 'translate3d(-50%, -50%, 0)' }
         )
         .queue(done => {
@@ -149,7 +149,7 @@ export class IOSDialogAnimator extends DialogAnimator {
       animit(dialog._dialog, this.def)
         .default(
           { transform: 'translate3d(-50%, -50%, 0)' },
-          { transform:  `translate3d(-50%, ${this.bodyHeight / 2.0 - 1}px, 0)` }
+          { transform: `translate3d(-50%, ${this.bodyHeight / 2.0 - 1}px, 0)` }
         )
         .queue(done => {
           callback();
