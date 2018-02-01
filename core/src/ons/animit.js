@@ -286,7 +286,7 @@ Animit.prototype = {
         duration: duration,
         timing: timing
       };
-    };
+    }
 
     return this.saveStyle()
       .queue(step(from, 0, this.defaults.timing))
