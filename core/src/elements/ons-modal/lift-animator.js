@@ -26,6 +26,7 @@ export default class LiftModalAnimator extends ModalAnimator
 {
   constructor({timing = 'cubic-bezier( .1, .7, .1, 1)', delay = 0, duration = 0.4} = {}) {
     super({ timing, delay, duration });
+    this.opt = { timing, delay, duration };
   }
 
   /**
@@ -35,24 +36,12 @@ export default class LiftModalAnimator extends ModalAnimator
   show(modal, callback) {
     callback = callback ? callback : function() {};
 
-    animit(modal)
-      .saveStyle()
-      .queue({
-        css: {
-          transform: 'translate3D(0, 100%, 0)',
-        },
-        duration: 0
-      })
-      .wait(this.delay)
-      .queue({
-        css: {
-          transform: 'translate3D(0, 0, 0)',
-        },
-        duration: this.duration,
-        timing: this.timing
-      })
-      .restoreStyle()
-      .queue(function(done) {
+    animit(modal, this.opt)
+      .default(
+        { transform: 'translate3d(0, 100%, 0)' },
+        { transform: 'translate3d(0, 0, 0)' }
+      )
+      .queue(done => {
         callback();
         done();
       })
@@ -66,24 +55,12 @@ export default class LiftModalAnimator extends ModalAnimator
   hide(modal, callback) {
     callback = callback ? callback : function() {};
 
-   animit(modal)
-      .saveStyle()
-      .queue({
-        css: {
-          transform: 'translate3D(0, 0, 0)'
-        },
-        duration: 0
-      })
-      .wait(this.delay)
-      .queue({
-        css: {
-          transform: 'translate3D(0, 100%, 0)'
-        },
-        duration: this.duration,
-        timing: this.timing
-      })
-      .restoreStyle()
-      .queue(function(done) {
+   animit(modal, this.opt)
+      .default(
+        { transform: 'translate3d(0, 0, 0)' },
+        { transform: 'translate3d(0, 100%, 0)' }
+      )
+      .queue(done => {
         callback();
         done();
       })
