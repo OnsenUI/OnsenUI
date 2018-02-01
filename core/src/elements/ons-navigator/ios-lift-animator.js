@@ -50,21 +50,21 @@ export default class IOSLiftNavigatorAnimator extends NavigatorAnimator {
 
       animit(enterPage, this.opt)
         .default(
-          { transform:  'translate3D(0, 100%, 0)' },
-          { transform:  'translate3D(0, 0, 0)' }
+          { transform: 'translate3D(0, 100%, 0)' },
+          { transform: 'translate3D(0, 0, 0)' }
+        ),
+
+      animit(leavePage, this.opt)
+        .default(
+          { transform: 'translate3D(0, 0, 0)', opacity: 1 },
+          { transform: 'translate3D(0, -10%, 0)', opacity: .9 }
         )
         .queue(done => {
           this.backgroundMask.remove();
           unblock();
           callback();
           done();
-        }),
-
-      animit(leavePage, this.opt)
-        .default(
-          { transform:  'translate3D(0, 0, 0)', opacity: 1 },
-          { transform:  'translate3D(0, -10%, 0)', opacity: .9 }
-        )
+        })
     );
   }
 
@@ -83,8 +83,8 @@ export default class IOSLiftNavigatorAnimator extends NavigatorAnimator {
 
       animit(enterPage, this.opt)
         .default(
-          { transform:  'translate3D(0, -43px, 0)', opacity: .9 },
-          { transform:  'translate3D(0, 0, 0)', opacity: 1 }
+          { transform: 'translate3D(0, -43px, 0)', opacity: .9 },
+          { transform: 'translate3D(0, 0, 0)', opacity: 1 }
         )
         .queue(done => {
           this.backgroundMask.remove();
@@ -95,8 +95,8 @@ export default class IOSLiftNavigatorAnimator extends NavigatorAnimator {
 
       animit(leavePage, this.opt)
         .default(
-          { transform:  'translate3D(0, 0, 0)' },
-          { transform:  'translate3D(0, 100%, 0)' }
+          { transform: 'translate3D(0, 0, 0)' },
+          { transform: 'translate3D(0, 100%, 0)' }
         )
     );
   }
