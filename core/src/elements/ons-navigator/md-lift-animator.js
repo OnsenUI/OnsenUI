@@ -31,8 +31,6 @@ export default class MDLiftNavigatorAnimator extends NavigatorAnimator {
       '<div style="position: absolute; width: 100%; height: 100%;' +
         'background-color: black;"></div>'
     );
-
-    this.opt = { duration, timing, delay };
   }
 
   /**
@@ -57,13 +55,13 @@ export default class MDLiftNavigatorAnimator extends NavigatorAnimator {
 
       maskClear,
 
-      animit(enterPage, this.opt)
+      animit(enterPage, this.def)
         .default(
           { transform: 'translate3d(0, 100%, 0)' },
           { transform: 'translate3d(0, 0, 0)' }
         ),
 
-      animit(leavePage, this.opt)
+      animit(leavePage, this.def)
         .default({ opacity: 1 }, { opacity: .4 })
         .queue(done => {
           unblock();
@@ -93,7 +91,7 @@ export default class MDLiftNavigatorAnimator extends NavigatorAnimator {
           done();
         }),
 
-      animit(enterPage, this.opt)
+      animit(enterPage, this.def)
         .default({ opacity: .4 }, { opacity: 1 })
         .queue(done => {
           unblock();
@@ -101,7 +99,7 @@ export default class MDLiftNavigatorAnimator extends NavigatorAnimator {
           done();
         }),
 
-      animit(leavePage, this.opt)
+      animit(leavePage, this.def)
         .default(
           { transform: 'translate3d(0, 0, 0)' },
           { transform: 'translate3d(0, 100%, 0)' }

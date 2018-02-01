@@ -34,8 +34,6 @@ export default class IOSSlideNavigatorAnimator extends IOSSwipeNavigatorAnimator
       `<div style="position: absolute; width: 100%; height: 100%;` +
         `background-color: black; z-index: 2"></div>`
     );
-
-    this.opt = { duration, timing, delay };
   }
 
   _decompose(page) {
@@ -125,22 +123,22 @@ export default class IOSSlideNavigatorAnimator extends IOSSwipeNavigatorAnimator
 
         animit.runAll(
 
-          animit([enterPageDecomposition.content, enterPageDecomposition.bottomToolbar, enterPageDecomposition.background], this.opt)
+          animit([enterPageDecomposition.content, enterPageDecomposition.bottomToolbar, enterPageDecomposition.background], this.def)
             .default(
               { transform: translate3d('100%') },
               { transform: translate3d() }
             ),
 
-          animit(enterPageDecomposition.toolbar, this.opt)
+          animit(enterPageDecomposition.toolbar, this.def)
             .default({ opacity: 0 }, { opacity: 1 }),
 
-          animit(enterPageDecomposition.toolbarCenter, this.opt)
+          animit(enterPageDecomposition.toolbarCenter, this.def)
             .default(
               { transform: translate3d('125%'), opacity: 1 },
               { transform: translate3d(), opacity: 1 }
             ),
 
-          animit(enterPageDecomposition.backButtonLabel, this.opt)
+          animit(enterPageDecomposition.backButtonLabel, this.def)
             .default(
               { transform: translate3d(`${delta.title}px`), opacity: 0 },
               {
@@ -150,13 +148,13 @@ export default class IOSSlideNavigatorAnimator extends IOSSwipeNavigatorAnimator
               }
             ),
 
-          animit(enterPageDecomposition.other, this.opt)
+          animit(enterPageDecomposition.other, this.def)
             .default(
               { opacity: 0 },
               { css: { opacity: 1 }, timing: 'linear' }
             ),
 
-          animit([leavePageDecomposition.content, leavePageDecomposition.bottomToolbar, leavePageDecomposition.background], this.opt)
+          animit([leavePageDecomposition.content, leavePageDecomposition.bottomToolbar, leavePageDecomposition.background], this.def)
             .default(
               { transform: translate3d(), opacity: 1 },
               { transform: translate3d('-25%'), opacity: 0.9 }
@@ -168,7 +166,7 @@ export default class IOSSlideNavigatorAnimator extends IOSSwipeNavigatorAnimator
               done();
             }),
 
-          animit(leavePageDecomposition.toolbarCenter, this.opt)
+          animit(leavePageDecomposition.toolbarCenter, this.def)
             .default(
               { transform: translate3d(), opacity: 1 },
               {
@@ -178,13 +176,13 @@ export default class IOSSlideNavigatorAnimator extends IOSSwipeNavigatorAnimator
               }
             ),
 
-          animit(leavePageDecomposition.backButtonLabel, this.opt)
+          animit(leavePageDecomposition.backButtonLabel, this.def)
             .default(
               { transform: translate3d(), opacity: 1 },
               { transform: translate3d(`-${delta.label}px`), opacity: 0 }
             ),
 
-          animit(leavePageDecomposition.other, this.opt)
+          animit(leavePageDecomposition.other, this.def)
             .default( { opacity: 1 }, { css: { opacity: 0 }, timing: 'linear' })
 
         );
@@ -193,10 +191,10 @@ export default class IOSSlideNavigatorAnimator extends IOSSwipeNavigatorAnimator
 
         animit.runAll(
 
-          animit(enterPage, this.opt)
+          animit(enterPage, this.def)
             .default( { transform: translate3d('100%'), }, { transform: translate3d() }),
 
-          animit(leavePage, this.opt)
+          animit(leavePage, this.def)
             .default( { transform: translate3d(), opacity: 1 }, { transform: translate3d('-25%'), opacity: .9 })
             .queue(done => {
               this.backgroundMask.remove();
@@ -237,13 +235,13 @@ export default class IOSSlideNavigatorAnimator extends IOSSwipeNavigatorAnimator
     if (shouldAnimateToolbar) {
       animit.runAll(
 
-        animit([enterPageDecomposition.content, enterPageDecomposition.bottomToolbar, enterPageDecomposition.background], this.opt)
+        animit([enterPageDecomposition.content, enterPageDecomposition.bottomToolbar, enterPageDecomposition.background], this.def)
           .default(
             { transform: translate3d('-25%'), opacity: .9 },
             { transform: translate3d(), opacity: 1 }
           ),
 
-        animit(enterPageDecomposition.toolbarCenter, this.opt)
+        animit(enterPageDecomposition.toolbarCenter, this.def)
           .default(
             { transform: translate3d(`-${delta.title}px`), opacity: 0 },
             {
@@ -253,19 +251,19 @@ export default class IOSSlideNavigatorAnimator extends IOSSwipeNavigatorAnimator
             }
           ),
 
-        animit(enterPageDecomposition.backButtonLabel, this.opt)
+        animit(enterPageDecomposition.backButtonLabel, this.def)
           .default(
             { transform: translate3d(`-${delta.label}px`) },
             { transform: translate3d() }
           ),
 
-        animit(enterPageDecomposition.other, this.opt)
+        animit(enterPageDecomposition.other, this.def)
           .default(
             { opacity: 0 },
             { css: { opacity: 1 }, timing: 'linear' }
           ),
 
-        animit([leavePageDecomposition.content, leavePageDecomposition.bottomToolbar, leavePageDecomposition.background], this.opt)
+        animit([leavePageDecomposition.content, leavePageDecomposition.bottomToolbar, leavePageDecomposition.background], this.def)
           .default(
             { transform: translate3d() },
             { transform: translate3d('100%') }
@@ -278,19 +276,19 @@ export default class IOSSlideNavigatorAnimator extends IOSSwipeNavigatorAnimator
             done();
           }),
 
-        animit(leavePageDecomposition.toolbar, this.opt)
+        animit(leavePageDecomposition.toolbar, this.def)
           .default(
             { opacity: 1 },
             { opacity: 0 }
           ),
 
-        animit(leavePageDecomposition.toolbarCenter, this.opt)
+        animit(leavePageDecomposition.toolbarCenter, this.def)
           .default(
             { transform: translate3d() },
             { transform: translate3d('125%') }
           ),
 
-        animit(leavePageDecomposition.backButtonLabel, this.opt)
+        animit(leavePageDecomposition.backButtonLabel, this.def)
           .default(
             { transform: translate3d(), opacity: 1 },
             {
@@ -303,13 +301,13 @@ export default class IOSSlideNavigatorAnimator extends IOSSwipeNavigatorAnimator
     } else {
       animit.runAll(
 
-        animit(enterPage, this.opt)
+        animit(enterPage, this.def)
           .default(
             { transform: translate3d('-25%'), opacity: .9 },
             { transform: translate3d(), opacity: 1 }
           ),
 
-        animit(leavePage, this.opt)
+        animit(leavePage, this.def)
           .default(
             { transform: translate3d() },
             { transform: translate3d('100%') }

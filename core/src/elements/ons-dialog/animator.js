@@ -22,7 +22,6 @@ export class DialogAnimator extends BaseAnimator {
 
   constructor({timing = 'linear', delay = 0, duration = 0.2} = {}) {
     super({ timing, delay, duration })
-    this.opt = { duration, timing, delay };
   }
 
   /**
@@ -60,10 +59,10 @@ export class AndroidDialogAnimator extends DialogAnimator {
 
     animit.runAll(
 
-      animit(dialog._mask, this.opt)
+      animit(dialog._mask, this.def)
         .default({ opacity: 0 }, { opacity: 1 }),
 
-      animit(dialog._dialog, this.opt)
+      animit(dialog._dialog, this.def)
         .default(
           { transform: 'translate3d(-50%, -60%, 0)', opacity: 0 },
           { transform: 'translate3d(-50%, -50%, 0)', opacity: 1 }
@@ -84,10 +83,10 @@ export class AndroidDialogAnimator extends DialogAnimator {
 
     animit.runAll(
 
-      animit(dialog._mask, this.opt)
+      animit(dialog._mask, this.def)
         .default({ opacity: 1 }, { opacity: 0 }),
 
-      animit(dialog._dialog, this.opt)
+      animit(dialog._dialog, this.def)
         .default(
           { transform: 'translate3d(-50%, -50%, 0)', opacity: 1 },
           { transform: 'translate3d(-50%, -60%, 0)', opacity: 0 }
@@ -120,10 +119,10 @@ export class IOSDialogAnimator extends DialogAnimator {
 
     animit.runAll(
 
-      animit(dialog._mask, this.opt)
+      animit(dialog._mask, this.def)
         .default({ opacity: 0 }, { opacity: 1 }),
 
-      animit(dialog._dialog, this.opt)
+      animit(dialog._dialog, this.def)
         .default(
           { transform:  `translate3d(-50%, ${this.bodyHeight / 2.0 - 1}px, 0)` },
           { transform: 'translate3d(-50%, -50%, 0)' }
@@ -144,10 +143,10 @@ export class IOSDialogAnimator extends DialogAnimator {
 
     animit.runAll(
 
-      animit(dialog._mask, this.opt)
+      animit(dialog._mask, this.def)
         .default({ opacity: 1 }, { opacity: 0 }),
 
-      animit(dialog._dialog, this.opt)
+      animit(dialog._dialog, this.def)
         .default(
           { transform: 'translate3d(-50%, -50%, 0)' },
           { transform:  `translate3d(-50%, ${this.bodyHeight / 2.0 - 1}px, 0)` }
@@ -180,10 +179,10 @@ export class SlideDialogAnimator extends DialogAnimator {
 
     animit.runAll(
 
-      animit(dialog._mask, this.opt)
+      animit(dialog._mask, this.def)
         .default({ opacity: 0 }, { opacity: 1 }),
 
-      animit(dialog._dialog, this.opt)
+      animit(dialog._dialog, this.def)
         .default(
           // FIXME: This should avoid Forced Synchronous Layout. Otherwise, fade animation of mask will be broken.
           { transform: `translate3d(-50%, ${- (this.bodyHeight / 2.0) + 1 - dialog._dialog.clientHeight}px, 0)` },
@@ -205,10 +204,10 @@ export class SlideDialogAnimator extends DialogAnimator {
 
     animit.runAll(
 
-      animit(dialog._mask, this.opt)
+      animit(dialog._mask, this.def)
         .default({ opacity: 1 }, { opacity: 0 }),
 
-      animit(dialog._dialog, this.opt)
+      animit(dialog._dialog, this.def)
         .default(
           { transform: 'translate3d(-50%, -50%, 0)' },
           // FIXME: This should avoid Forced Synchronous Layout. Otherwise, fade animation of mask will be broken.

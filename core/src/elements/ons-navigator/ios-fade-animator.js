@@ -28,8 +28,6 @@ export default class IOSFadeNavigatorAnimator extends NavigatorAnimator {
 
   constructor({timing = 'linear', delay = 0, duration = 0.4} = {}) {
     super({ timing, delay, duration });
-
-    this.opt = { duration, timing, delay };
   }
 
   /**
@@ -42,7 +40,7 @@ export default class IOSFadeNavigatorAnimator extends NavigatorAnimator {
 
     animit.runAll(
 
-      animit(enterPage, this.opt)
+      animit(enterPage, this.def)
         .default(
           { transform, opacity: 0 },
           { transform, opacity: 1 }
@@ -66,7 +64,7 @@ export default class IOSFadeNavigatorAnimator extends NavigatorAnimator {
 
     animit.runAll(
 
-      animit(leavePage, this.opt)
+      animit(leavePage, this.def)
         .default(
           { transform, opacity: 1 },
           { transform, opacity: 0 }

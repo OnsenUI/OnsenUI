@@ -26,7 +26,6 @@ export default class FadeModalAnimator extends ModalAnimator {
 
   constructor({timing = 'linear', delay = 0, duration = 0.3} = {}) {
     super({ timing, delay, duration });
-    this.opt = { duration, timing, delay };
   }
 
   /**
@@ -36,7 +35,7 @@ export default class FadeModalAnimator extends ModalAnimator {
   show(modal, callback) {
     callback = callback ? callback : function() {};
 
-    animit(modal, this.opt)
+    animit(modal, this.def)
       .default({ opacity: 0 }, { opacity: 1 })
       .queue(done => {
         callback();
@@ -52,7 +51,7 @@ export default class FadeModalAnimator extends ModalAnimator {
   hide(modal, callback) {
     callback = callback ? callback : function() {};
 
-    animit(modal, this.opt)
+    animit(modal, this.def)
       .default({ opacity: 1 }, { opacity: 0 })
       .queue(done => {
         callback();

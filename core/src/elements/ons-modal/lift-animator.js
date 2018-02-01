@@ -26,7 +26,6 @@ export default class LiftModalAnimator extends ModalAnimator
 {
   constructor({timing = 'cubic-bezier( .1, .7, .1, 1)', delay = 0, duration = 0.4} = {}) {
     super({ timing, delay, duration });
-    this.opt = { timing, delay, duration };
   }
 
   /**
@@ -36,7 +35,7 @@ export default class LiftModalAnimator extends ModalAnimator
   show(modal, callback) {
     callback = callback ? callback : function() {};
 
-    animit(modal, this.opt)
+    animit(modal, this.def)
       .default(
         { transform: 'translate3d(0, 100%, 0)' },
         { transform: 'translate3d(0, 0, 0)' }
@@ -55,7 +54,7 @@ export default class LiftModalAnimator extends ModalAnimator
   hide(modal, callback) {
     callback = callback ? callback : function() {};
 
-   animit(modal, this.opt)
+    animit(modal, this.def)
       .default(
         { transform: 'translate3d(0, 0, 0)' },
         { transform: 'translate3d(0, 100%, 0)' }

@@ -32,8 +32,6 @@ export default class MDSlideNavigatorAnimator extends NavigatorAnimator {
       '<div style="position: absolute; width: 100%; height: 100%; z-index: 2;' +
         'background-color: black; opacity: 0;"></div>'
     );
-
-    this.opt = { duration, timing, delay };
   }
 
   /**
@@ -49,7 +47,7 @@ export default class MDSlideNavigatorAnimator extends NavigatorAnimator {
 
     animit.runAll(
 
-      animit(this.backgroundMask, this.opt)
+      animit(this.backgroundMask, this.def)
         .default(
           { transform: 'translate3d(0, 0, 0)', opacity: 0 },
           { opacity: this.blackMaskOpacity }
@@ -59,13 +57,13 @@ export default class MDSlideNavigatorAnimator extends NavigatorAnimator {
           done();
         }),
 
-      animit(enterPage, this.opt)
+      animit(enterPage, this.def)
         .default(
           { transform: 'translate3d(100%, 0, 0)' },
           { transform: 'translate3d(0, 0, 0)' }
         ),
 
-      animit(leavePage, this.opt)
+      animit(leavePage, this.def)
         .default(
           { transform: 'translate3d(0, 0, 0)' },
           { transform: 'translate3d(-45%, 0, 0)' }
@@ -91,7 +89,7 @@ export default class MDSlideNavigatorAnimator extends NavigatorAnimator {
 
     animit.runAll(
 
-      animit(this.backgroundMask, this.opt)
+      animit(this.backgroundMask, this.def)
         .default(
           { transform: 'translate3d(0, 0, 0)', opacity: this.blackMaskOpacity },
           { opacity: 0 }
@@ -101,13 +99,13 @@ export default class MDSlideNavigatorAnimator extends NavigatorAnimator {
           done();
         }),
 
-      animit(enterPage, this.opt)
+      animit(enterPage, this.def)
         .default(
           { transform: 'translate3d(-45%, 0, 0)', opacity: .9 },
           { transform: 'translate3d(0, 0, 0)', opacity: 1 }
         ),
 
-      animit(leavePage, this.opt)
+      animit(leavePage, this.def)
         .default(
           { transform: 'translate3d(0, 0, 0)' },
           { transform: 'translate3d(100%, 0, 0)' }
