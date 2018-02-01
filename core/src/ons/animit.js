@@ -277,7 +277,7 @@ Animit.prototype = {
       if (params.duration !== undefined) {
         duration = params.duration;
       }
-      if (timing.duration !== undefined) {
+      if (params.timing !== undefined) {
         timing = params.timing;
       }
 
