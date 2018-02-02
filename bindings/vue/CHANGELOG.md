@@ -1,6 +1,13 @@
 CHANGELOG
 ====
 
+2.5.1
+----
+
+ ### New Features
+
+ * VOnsNavigator: Navigator can now pass props to pages throw the `onsNavigatorProps` property in page components.
+
 2.5.0
 ----
 

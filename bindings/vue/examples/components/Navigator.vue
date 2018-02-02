@@ -58,7 +58,7 @@
     template: `
       <v-ons-page p2 @init="log('init!')">
         <my-toolbar>Page 2</my-toolbar>
-        Page 2
+        <p>Page 2 {{ myProp }}</p>
         <v-ons-button @click="push">Push 3 pages</v-ons-button>
       </v-ons-page>
     `,
@@ -70,8 +70,11 @@
         this.$emit('push', page3);
       }
     },
-    _asd: {
-      animation: 'fade'
+    props: {
+      myProp: {
+        type: String,
+        required: true
+      }
     },
     data() {
       return {
@@ -97,7 +100,12 @@
     methods: {
       log,
       push() {
-        this.$emit('push', page2);
+        this.$emit('push', {
+          extends: page2,
+          onsNavigatorProps: {
+            myProp: 'This is a navigator prop'
+          }
+        });
       }
     },
     components: { myToolbar },
