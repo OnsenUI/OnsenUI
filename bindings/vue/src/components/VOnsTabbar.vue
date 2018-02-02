@@ -2,8 +2,9 @@
   <ons-tabbar
     :on-swipe.prop="onSwipe"
     :activeIndex="index"
-    @prechange.self="$nextTick(() => !$event.detail.canceled && $emit('update:index', $event.index))"
+    :modifier="normalizedModifier"
     v-on="unrecognizedListeners"
+    @prechange.self="$nextTick(() => !$event.detail.canceled && $emit('update:index', $event.index))"
   >
     <div class="tabbar__content">
       <div>
@@ -24,11 +25,11 @@
 
 <script>
   import 'onsenui/esm/elements/ons-tabbar';
-  import { deriveEvents, hasOptions, hidable, selfProvider } from '../mixins';
+  import { deriveEvents, hasOptions, hidable, selfProvider, modifier } from '../mixins';
 
   export default {
     name: 'v-ons-tabbar',
-    mixins: [deriveEvents, hasOptions, hidable, selfProvider],
+    mixins: [deriveEvents, hasOptions, hidable, selfProvider, modifier],
 
     props: {
       index: {

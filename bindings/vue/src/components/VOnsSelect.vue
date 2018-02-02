@@ -1,5 +1,5 @@
 <template>
-  <ons-select v-on="$listeners">
+  <ons-select v-on="$listeners" :modifier="normalizedModifier">
     <select>
       <slot></slot>
     </select>
@@ -8,10 +8,10 @@
 
 <script>
   import 'onsenui/esm/elements/ons-select';
-  import { modelInput } from '../mixins';
+  import { modelInput, modifier } from '../mixins';
 
   export default {
     name: 'v-ons-select',
-    mixins: [modelInput]
+    mixins: [modelInput, modifier]
   };
 </script>
