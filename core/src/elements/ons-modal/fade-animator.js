@@ -35,18 +35,9 @@ export default class FadeModalAnimator extends ModalAnimator {
   show(modal, callback) {
     callback = callback ? callback : function() {};
 
-    animit(modal)
-      .queue({
-        opacity: 0
-      })
-      .wait(this.delay)
-      .queue({
-        opacity: 1.0
-      }, {
-        duration: this.duration,
-        timing: this.timing
-      })
-      .queue(function(done) {
+    animit(modal, this.def)
+      .default({ opacity: 0 }, { opacity: 1 })
+      .queue(done => {
         callback();
         done();
       })
@@ -60,18 +51,9 @@ export default class FadeModalAnimator extends ModalAnimator {
   hide(modal, callback) {
     callback = callback ? callback : function() {};
 
-    animit(modal)
-      .queue({
-        opacity: 1
-      })
-      .wait(this.delay)
-      .queue({
-        opacity: 0
-      }, {
-        duration: this.duration,
-        timing: this.timing
-      })
-      .queue(function(done) {
+    animit(modal, this.def)
+      .default({ opacity: 1 }, { opacity: 0 })
+      .queue(done => {
         callback();
         done();
       })

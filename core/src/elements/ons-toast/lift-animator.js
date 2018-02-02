@@ -46,21 +46,11 @@ export default class LiftToastAnimator extends ToastAnimator {
     toast = toast._toast;
 
     animit.runAll(
-      animit(toast)
-        .saveStyle()
-        .queue({
-          transform: `translate3d(0, ${this.liftAmount}, 0)`,
-          opacity: 0
-        })
-        .wait(this.delay)
-        .queue({
-          transform: 'translate3d(0, 0, 0)',
-          opacity: 1.0
-        }, {
-          duration: this.duration,
-          timing: this.timing
-        })
-        .restoreStyle()
+      animit(toast, this.def)
+        .default(
+          { transform: `translate3d(0, ${this.liftAmount}, 0)`, opacity: 0 },
+          { transform: 'translate3d(0, 0, 0)', opacity: 1 }
+        )
         .queue(done => {
           callback && callback();
           done();
@@ -76,21 +66,11 @@ export default class LiftToastAnimator extends ToastAnimator {
     toast = toast._toast;
 
     animit.runAll(
-      animit(toast)
-        .saveStyle()
-        .queue({
-          transform: 'translate3d(0, 0, 0)',
-          opacity: 1.0
-        })
-        .wait(this.delay)
-        .queue({
-          transform: `translate3d(0, ${this.liftAmount}, 0)`,
-          opacity: 0
-        }, {
-          duration: this.duration,
-          timing: this.timing
-        })
-        .restoreStyle()
+      animit(toast, this.def)
+        .default(
+          { transform: 'translate3d(0, 0, 0)', opacity: 1 },
+          { transform: `translate3d(0, ${this.liftAmount}, 0)`, opacity: 0 }
+        )
         .queue(done => {
           callback && callback();
           done();

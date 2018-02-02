@@ -31,8 +31,6 @@ export default class IOSLiftNavigatorAnimator extends NavigatorAnimator {
       '<div style="position: absolute; width: 100%; height: 100%;' +
         'background: linear-gradient(black, white);"></div>'
     );
-
-    this.opt = { duration, timing, delay };
   }
 
   /**
@@ -48,13 +46,13 @@ export default class IOSLiftNavigatorAnimator extends NavigatorAnimator {
 
     animit.runAll(
 
-      animit(enterPage, this.opt)
+      animit(enterPage, this.def)
         .default(
           { transform: 'translate3D(0, 100%, 0)' },
           { transform: 'translate3D(0, 0, 0)' }
         ),
 
-      animit(leavePage, this.opt)
+      animit(leavePage, this.def)
         .default(
           { transform: 'translate3D(0, 0, 0)', opacity: 1 },
           { transform: 'translate3D(0, -10%, 0)', opacity: .9 }
@@ -81,7 +79,7 @@ export default class IOSLiftNavigatorAnimator extends NavigatorAnimator {
 
     animit.runAll(
 
-      animit(enterPage, this.opt)
+      animit(enterPage, this.def)
         .default(
           { transform: 'translate3D(0, -43px, 0)', opacity: .9 },
           { transform: 'translate3D(0, 0, 0)', opacity: 1 }
@@ -93,7 +91,7 @@ export default class IOSLiftNavigatorAnimator extends NavigatorAnimator {
           done();
         }),
 
-      animit(leavePage, this.opt)
+      animit(leavePage, this.def)
         .default(
           { transform: 'translate3D(0, 0, 0)' },
           { transform: 'translate3D(0, 100%, 0)' }

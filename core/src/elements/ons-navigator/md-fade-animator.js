@@ -27,8 +27,6 @@ export default class MDFadeNavigatorAnimator extends NavigatorAnimator {
   constructor({timing = 'cubic-bezier(0.4, 0, 0.2, 1)', timingPop = 'cubic-bezier(0.4, 0, 1, 1)', delay = 0, duration = 0.2} = {}) {
     super({timing, delay, duration});
     this.timingPop = timingPop;
-
-    this.opt = { duration, timing, delay };
   }
 
   /**
@@ -41,7 +39,7 @@ export default class MDFadeNavigatorAnimator extends NavigatorAnimator {
 
     animit.runAll(
 
-      animit(enterPage, this.opt)
+      animit(enterPage, this.def)
         .default(
           { transform: 'translate3D(0, 42px, 0)', opacity: 0 },
           { transform: 'translate3D(0, 0, 0)', opacity: 1 }
@@ -65,7 +63,7 @@ export default class MDFadeNavigatorAnimator extends NavigatorAnimator {
 
     animit.runAll(
 
-      animit(leavePage, this.opt)
+      animit(leavePage, this.def)
         .default(
           { transform: 'translate3D(0, 0, 0)', opacity: 1 },
           { css: { transform: 'translate3D(0, 38px, 0)', opacity: 0 }, timing: this.timingPop }
