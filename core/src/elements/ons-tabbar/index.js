@@ -536,7 +536,7 @@ export default class TabbarElement extends BaseElement {
 
   set onSwipe(value) {
     if (value && !(value instanceof Function)) {
-      throw new Error(`'onSwipe' must be a function.`)
+      util.throw(`"onSwipe" must be a function`)
     }
     this._onSwipe = value;
   }

@@ -32,7 +32,7 @@ const _normalizeArguments = (message, options = {}, defaults = {}) => {
   options = { ...options };
   typeof message === 'string' ? (options.message = message) : (options = message);
   if (!options || !options.message && !options.messageHTML) {
-    throw new Error('Notifications must contain a message.');
+    util.throw('Notifications must contain a message');
   }
 
   if (options.hasOwnProperty('buttonLabels') || options.hasOwnProperty('buttonLabel')) {

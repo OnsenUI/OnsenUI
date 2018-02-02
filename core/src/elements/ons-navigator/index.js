@@ -22,7 +22,6 @@ import SwipeReveal from '../../ons/internal/swipe-reveal';
 import AnimatorFactory from '../../ons/internal/animator-factory';
 import NavigatorAnimator from './animator';
 import IOSSlideNavigatorAnimator from './ios-slide-animator';
-import IOSSwipeNavigatorAnimator from './ios-swipe-animator';
 import IOSLiftNavigatorAnimator from './ios-lift-animator';
 import IOSFadeNavigatorAnimator from './ios-fade-animator';
 import MDSlideNavigatorAnimator from './md-slide-animator';
@@ -58,6 +57,8 @@ const rewritables = {
     callback();
   }
 };
+
+const verifyPageElement = el => (el.nodeName !== 'ONS-PAGE') && util.throw( 'Only page elements can be children of navigator');
 
 /**
  * @element ons-navigator
@@ -264,7 +265,7 @@ export default class NavigatorElement extends BaseElement {
 
   set pageLoader(pageLoader) {
     if (!(pageLoader instanceof PageLoader)) {
-      throw Error('First parameter must be an instance of PageLoader.');
+      util.throwPageLoader();
     }
     this._pageLoader = pageLoader;
   }
@@ -292,31 +293,54 @@ export default class NavigatorElement extends BaseElement {
     this.onDeviceBackButton = this._onDeviceBackButton.bind(this);
 
     if (!platform.isAndroid() || this.getAttribute('swipeable') === 'force') {
-      this._swipeAnimator = new IOSSwipeNavigatorAnimator();
-      const pushAnimation = { duration: this._swipeAnimator.duration, timing: this._swipeAnimator.timing };
-      const popAnimation = { duration: this._swipeAnimator.durationRestore, timing: this._swipeAnimator.timing };
+      let swipeAnimator;
 
       this._swipe = new SwipeReveal({
         element: this,
+        getThreshold: () => Math.max(0.2, parseFloat(this.getAttribute('swipe-threshold')) || 0),
+
         swipeMax: () => {
-          this._onSwipe && this._onSwipe(1, pushAnimation);
-          this[this.swipeMax ? 'swipeMax' : 'popPage']({ animator: this._swipeAnimator });
+          this._onSwipe && this._onSwipe(1, { duration: swipeAnimator.durationSwipe, timing: swipeAnimator.timingSwipe });
+          this[this.swipeMax ? 'swipeMax' : 'popPage']({ animator: swipeAnimator });
+          swipeAnimator = null;
         },
         swipeMid: (distance, width) => {
           this._onSwipe && this._onSwipe(distance/width);
-          this._swipeAnimator.translate(distance, width, this.topPage.previousElementSibling, this.topPage);
+          swipeAnimator.translate(distance, width, this.topPage.previousElementSibling, this.topPage);
         },
         swipeMin: () => {
-          this._onSwipe && this._onSwipe(0, popAnimation);
-          this._swipeAnimator.restore(this.topPage.previousElementSibling, this.topPage);
+          this._onSwipe && this._onSwipe(0, { duration: swipeAnimator.durationRestore, timing: swipeAnimator.timingSwipe });
+          swipeAnimator.restore(this.topPage.previousElementSibling, this.topPage);
+          swipeAnimator = null;
         },
-        getThreshold: () => Math.max(0.2, parseFloat(this.getAttribute('swipe-threshold')) || 0),
+
         ignoreSwipe: (event, distance) => {
-          if (/ons-back-button/i.test(event.target.tagName) || util.findParent(event.target, 'ons-back-button', p => /ons-page/i.test(p.tagName))) {
-            return true;
+          // Basic conditions
+          if (!this._isRunning && this.children.length > 1) {
+
+            // Area or directional issues
+            const area = parseInt(this.getAttribute('swipe-target-width') || 25, 10);
+            if (event.gesture.direction ===  'right' && area > distance) {
+
+              // Swipes on ons-back-button and its children
+              const isBB = el => /ons-back-button/i.test(el.tagName);
+              if (!isBB(event.target) && !util.findParent(event.target, isBB, p => /ons-page/i.test(p.tagName))) {
+
+                // Animaor is swipeable
+                const animation = (this.topPage.pushedOptions || {}).animation || this.animatorFactory._animation;
+                const Animator = _animatorDict[animation] instanceof Function
+                  ? _animatorDict[animation].call()
+                  : _animatorDict[animation];
+
+                if (Animator.swipeable) {
+                  swipeAnimator = new Animator(); // Prepare for the swipe
+                  return false;
+                }
+              }
+            }
           }
-          const area = parseInt(this.getAttribute('swipe-target-width') || 25, 10);
-          return event.gesture.direction !==  'right' || area <= distance || this._isRunning || this.children.length <= 1;
+
+          return true; // Ignore swipe
         }
       });
 
@@ -340,9 +364,7 @@ export default class NavigatorElement extends BaseElement {
         this.pushPage(this._getPageTarget(), options).then(() => deferred.resolve());
       } else if (this.pages.length > 0) {
         for (var i = 0; i < this.pages.length; i++) {
-          if (this.pages[i].nodeName !== 'ONS-PAGE') {
-            throw new Error('The children of <ons-navigator> need to be of type <ons-page>');
-          }
+          verifyPageElement(this.pages[i]);
         }
 
         if (this.topPage) {
@@ -380,7 +402,7 @@ export default class NavigatorElement extends BaseElement {
     this._backButtonHandler = null;
 
     this._swipe && this._swipe.dispose();
-    this._swipe = this._swipeAnimator = null;
+    this._swipe = null;
   }
 
   static get observedAttributes() {
@@ -538,7 +560,7 @@ export default class NavigatorElement extends BaseElement {
     ({page, options} = this._preparePageAndOptions(page, options));
 
     const prepare = pageElement => {
-      this._verifyPageElement(pageElement);
+      verifyPageElement(pageElement);
       this._pageMap.set(pageElement, page);
       pageElement = util.extend(pageElement, {
         data: options.data
@@ -585,9 +607,7 @@ export default class NavigatorElement extends BaseElement {
       const enterPage  = this.pages[pageLength - 1];
       const leavePage = options.leavePage || this.pages[pageLength - 2];
 
-      if (enterPage.nodeName !== 'ONS-PAGE') {
-        throw new Error('Only elements of type <ons-page> can be pushed to the navigator');
-      }
+      verifyPageElement(enterPage);
 
       enterPage.updateBackButton(pageLength > (options._replacePage ? 2 : 1));
 
@@ -673,7 +693,7 @@ export default class NavigatorElement extends BaseElement {
 
     return new Promise(resolve => {
       loader.load({page, parent: this}, pageElement => {
-        this._verifyPageElement(pageElement);
+        verifyPageElement(pageElement);
         this._pageMap.set(pageElement, page);
         pageElement = util.extend(pageElement, {
           data: options.data,
@@ -788,7 +808,7 @@ export default class NavigatorElement extends BaseElement {
    */
   bringPageTop(item, options = {}) {
     if (['number', 'string'].indexOf(typeof item) === -1) {
-      throw new Error('First argument must be a page name or the index of an existing page. You supplied ' + item);
+      util.throw('First argument must be a page name or the index of an existing page. You supplied ' + item);
     }
     const index = typeof item === 'number' ? this._normalizeIndex(item) : this._lastIndexOfPage(item);
     const page = this.pages[index];
@@ -802,7 +822,7 @@ export default class NavigatorElement extends BaseElement {
       return Promise.resolve(page);
     }
     if (!page) {
-      throw new Error('Failed to find item ' + item);
+      util.throw('Failed to find item ' + item);
     }
     if (this._isRunning) {
       return Promise.reject('pushPage is already running.');
@@ -819,7 +839,7 @@ export default class NavigatorElement extends BaseElement {
 
   _preparePageAndOptions(page, options = {}) {
     if (typeof options != 'object') {
-      throw new Error('options must be an object. You supplied ' + options);
+      util.throw('options must be an object. You supplied ' + options);
     }
 
     if ((page === null || page === undefined) && options.page) {
@@ -865,7 +885,7 @@ export default class NavigatorElement extends BaseElement {
     let index;
     for (index = this.pages.length - 1; index >= 0; index--) {
       if (!this._pageMap.has(this.pages[index])) {
-        throw Error('This is bug.');
+        util.throw('Incorrect state of pageMap');
       }
 
       if (pageName === this._pageMap.get(this.pages[index])) {
@@ -902,17 +922,8 @@ export default class NavigatorElement extends BaseElement {
   // TODO: 書き直す
   _createPageElement(templateHTML) {
     const pageElement = util.createElement(internal.normalizePageHTML(templateHTML));
-    this._verifyPageElement(pageElement);
+    verifyPageElement(pageElement);
     return pageElement;
-  }
-
-  /**
-   * @param {Element} element
-   */
-  _verifyPageElement(element) {
-    if (element.nodeName.toLowerCase() !== 'ons-page') {
-      throw new Error('You must supply an "ons-page" element to "ons-navigator".');
-    }
   }
 
   /**
@@ -974,7 +985,7 @@ export default class NavigatorElement extends BaseElement {
 
   set onSwipe(value) {
     if (value && !(value instanceof Function)) {
-      throw new Error(`'onSwipe' must be a function.`)
+      util.throw('"onSwipe" must be a function');
     }
     this._onSwipe = value;
   }
@@ -1050,7 +1061,7 @@ export default class NavigatorElement extends BaseElement {
    */
   static registerAnimator(name, Animator) {
     if (!(Animator.prototype instanceof NavigatorAnimator)) {
-      throw new Error('"Animator" param must inherit NavigatorElement.NavigatorAnimator');
+      util.throwAnimator('Navigator');
     }
 
     _animatorDict[name] = Animator;

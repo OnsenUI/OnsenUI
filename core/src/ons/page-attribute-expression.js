@@ -16,6 +16,9 @@ limitations under the License.
 */
 
 import platform from './platform';
+import util from './util';
+
+const error = message => util.throw(`In PageAttributeExpression: ${message}`);
 
 const pageAttributeExpression = {
   _variables: {},
@@ -29,13 +32,13 @@ const pageAttributeExpression = {
    */
   defineVariable: function(name, value, overwrite=false) {
     if (typeof name !== 'string') {
-      throw new Error('Variable name must be a string.');
+      error('Variable name must be a string');
     }
     else if (typeof value !== 'string' && typeof value !== 'function') {
-      throw new Error('Variable value must be a string or a function.');
+      error('Variable value must be a string or a function');
     }
     else if (this._variables.hasOwnProperty(name) && !overwrite) {
-      throw new Error(`"${name}" is already defined.`);
+      error(`"${name}" is already defined`);
     }
     this._variables[name] = value;
   },
@@ -79,7 +82,7 @@ const pageAttributeExpression = {
     const tokens = [];
 
     if (part.length === 0) {
-      throw new Error('Unable to parse empty string.');
+      error('Unable to parse empty string');
     }
 
     for (let i = 0; i < part.length; i++) {
@@ -87,7 +90,7 @@ const pageAttributeExpression = {
 
       if (c === '$' && part.charAt(i + 1) === '{') {
         if (inInterpolation) {
-          throw new Error('Nested interpolation not supported.');
+          error('Nested interpolation not supported');
         }
 
         const token = part.substring(currentIndex, i);
@@ -100,7 +103,7 @@ const pageAttributeExpression = {
       }
       else if (c === '}') {
         if (!inInterpolation) {
-          throw new Error('} must be preceeded by ${');
+          error('} must be preceeded by ${');
         }
 
         const token = part.substring(currentIndex, i + 1);
@@ -114,7 +117,7 @@ const pageAttributeExpression = {
     }
 
     if (inInterpolation) {
-      throw new Error('Unterminated interpolation.');
+      error('Unterminated interpolation');
     }
 
     tokens.push(part.substring(currentIndex, part.length));
@@ -130,7 +133,7 @@ const pageAttributeExpression = {
       const variable = this.getVariable(name);
 
       if (variable === null) {
-        throw new Error(`Variable "${name}" does not exist.`);
+        error(`Variable "${name}" does not exist`);
       }
       else if (typeof variable === 'string') {
         return variable;
@@ -139,7 +142,7 @@ const pageAttributeExpression = {
         const rv = variable();
 
         if (typeof rv !== 'string') {
-          throw new Error('Must return a string.');
+          error('Must return a string');
         }
 
         return rv;

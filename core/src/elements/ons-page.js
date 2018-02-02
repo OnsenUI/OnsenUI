@@ -279,7 +279,7 @@ export default class PageElement extends BaseElement {
    */
   set onInfiniteScroll(value) {
     if (value && !(value instanceof Function)) {
-      throw new Error('onInfiniteScroll must be a function or null');
+      util.throw('"onInfiniteScroll" must be function or null');
     }
 
     contentReady(this, () => {
@@ -340,7 +340,7 @@ export default class PageElement extends BaseElement {
     if (result) {
       return result;
     }
-    throw Error('fail to get ".page__content" element.');
+    util.throw('Fail to get ".page__content" element');
   }
 
   _getBackgroundElement() {
@@ -348,7 +348,7 @@ export default class PageElement extends BaseElement {
     if (result) {
       return result;
     }
-    throw Error('fail to get ".page__background" element.');
+    util.throw('Fail to get ".page__background" element');
   }
 
   _getBottomToolbarElement() {
@@ -429,7 +429,7 @@ export default class PageElement extends BaseElement {
         get: () => this[`_${key}`],
         set: value => {
           if (!(value instanceof Function)) {
-            throw new Error(`${key} hook must be a function`);
+            util.throw(`"${key}" hook must be a function`);
           }
           this[`_${key}`] = value.bind(this);
         }

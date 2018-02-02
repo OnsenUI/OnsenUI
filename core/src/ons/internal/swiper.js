@@ -35,7 +35,7 @@ export default class Swiper {
       let ratio = params.getAutoScrollRatio && params.getAutoScrollRatio(...args);
       ratio = typeof ratio === 'number' && ratio === ratio ? ratio : .5;
       if (ratio < 0.0 || ratio > 1.0) {
-        throw new Error('Invalid auto-scroll-ratio ' + ratio + '. Must be between 0 and 1');
+        util.throw('Invalid auto-scroll-ratio ' + ratio + '. Must be between 0 and 1');
       }
       return ratio;
     };
@@ -57,7 +57,7 @@ export default class Swiper {
     this.target = this.getElement().children[0];
     this.blocker = this.getElement().children[1];
     if (!this.target || !this.blocker) {
-      throw new Error('Expected "target" and "blocker" elements to exist before initializing Swiper.');
+      util.throw('Expected "target" and "blocker" elements to exist before initializing Swiper');
     }
 
     if (!this.shouldBlock) {
@@ -127,7 +127,7 @@ export default class Swiper {
     const matches = this.itemSize.match(/^(\d+)(px|%)/);
 
     if (!matches) {
-      throw new Error(`Invalid state: swiper's size unit must be '%' or 'px'`);
+      util.throw(`Invalid state: swiper's size unit must be '%' or 'px'`);
     }
 
     const value = parseInt(matches[1], 10);

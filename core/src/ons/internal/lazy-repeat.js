@@ -22,12 +22,12 @@ export class LazyRepeatDelegate {
 
   constructor(userDelegate, templateElement = null) {
     if (typeof userDelegate !== 'object' || userDelegate === null) {
-      throw Error('"delegate" parameter must be an object.');
+      util.throw('"delegate" parameter must be an object');
     }
     this._userDelegate = userDelegate;
 
     if (!(templateElement instanceof Element) && templateElement !== null) {
-      throw Error('"templateElement" parameter must be an instance of Element or null.');
+      util.throw('"templateElement" parameter must be an instance of Element or null');
     }
     this._templateElement = templateElement;
   }
@@ -60,7 +60,7 @@ export class LazyRepeatDelegate {
     } else {
       const element = this._userDelegate.createItemContent(index, this._templateElement);
       if (!(element instanceof Element)) {
-        throw Error('createItemContent() must return an instance of Element.');
+        util.throw('"createItemContent" must return an instance of Element');
       }
 
       done({element});
@@ -73,7 +73,7 @@ export class LazyRepeatDelegate {
   countItems() {
     const count = this._userDelegate.countItems();
     if (typeof count !== 'number') {
-      throw Error('countItems() must return a number.');
+      util.throw('"countItems" must return a number');
     }
     return count;
   }
@@ -97,7 +97,7 @@ export class LazyRepeatDelegate {
       const height = this._userDelegate.calculateItemHeight(index);
 
       if (typeof height !== 'number') {
-        throw Error('calculateItemHeight() must return a number.');
+        util.throw('"calculateItemHeight" must return a number');
       }
 
       return height;
@@ -139,7 +139,7 @@ export class LazyRepeatProvider {
    */
   constructor(wrapperElement, delegate) {
     if (!(delegate instanceof LazyRepeatDelegate)) {
-      throw Error('"delegate" parameter must be an instance of LazyRepeatDelegate.');
+      util.throw('"delegate" parameter must be an instance of LazyRepeatDelegate');
     }
 
     this._wrapperElement = wrapperElement;
@@ -153,7 +153,7 @@ export class LazyRepeatProvider {
     this._pageContent = this._findPageContentElement(wrapperElement);
 
     if (!this._pageContent) {
-      throw new Error('ons-lazy-repeat must be a descendant of an <ons-page> or an element.');
+      util.throw('LazyRepeat must be descendant of a Page element');
     }
 
     this.lastScrollTop = this._pageContent.scrollTop;
@@ -198,7 +198,7 @@ export class LazyRepeatProvider {
   _checkItemHeight(callback) {
     this._delegate.loadItemElement(0, item => {
       if (!this._unknownItemHeight) {
-        throw Error('Invalid state');
+        util.throw('Invalid state');
       }
 
       this._wrapperElement.appendChild(item.element);
@@ -225,7 +225,7 @@ export class LazyRepeatProvider {
       setImmediate(() => {
         this._itemHeight = item.element.offsetHeight;
         if (this._itemHeight == 0) {
-          throw Error('Invalid state: this._itemHeight must be greater than zero.');
+          util.throw('Invalid state: "itemHeight" must be greater than zero');
         }
         this._wrapperElement.style.visibility = '';
         done();

@@ -215,7 +215,7 @@ export default class SplitterElement extends BaseElement {
 
   static registerAnimator(name, Animator) {
     if (!(Animator instanceof SplitterAnimator)) {
-      throw new Error('Animator parameter must be an instance of SplitterAnimator.');
+      util.throwAnimator('Splitter');
     }
     _animatorDict[name] = Animator;
   }
