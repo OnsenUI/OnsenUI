@@ -1,7 +1,13 @@
 <template>
   <ons-navigator @postpop.self="_checkSwipe" :options.prop="options" v-on="unrecognizedListeners">
     <slot>
-      <component v-for="page in pageStack" :is="page" :key="page.key || page.name" v-on="unrecognizedListeners"></component>
+      <component
+        v-for="page in pageStack"
+        :is="page"
+        :key="page.key || page.name"
+        v-on="unrecognizedListeners"
+        v-bind="page.onsNavigatorProps"
+      ></component>
     </slot>
   </ons-navigator>
 </template>

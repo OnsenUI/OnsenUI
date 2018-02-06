@@ -211,9 +211,9 @@ util.transitionPropertyName = (function() {
 /**
  * @param {HTMLElement} element
  */
-var Animit = function(element) {
+var Animit = function(element, defaults) {
   if (!(this instanceof Animit)) {
-    return new Animit(element);
+    return new Animit(element, defaults);
   }
 
   if (element instanceof HTMLElement) {
@@ -225,6 +225,7 @@ var Animit = function(element) {
     throw new Error('First argument must be an array or an instance of HTMLElement.');
   }
 
+  this.defaults = defaults;
   this.transitionQueue = [];
   this.lastStyleAttributeDict = [];
 };
@@ -242,6 +243,11 @@ Animit.prototype = {
   elements: undefined,
 
   /**
+   * @property {Object}
+   */
+  defaults: undefined,
+
+  /**
    * Start animation sequence with passed animations.
    *
    * @param {Function} callback
@@ -257,6 +263,36 @@ Animit.prototype = {
     this.startAnimation();
 
     return this;
+  },
+
+  /**
+   * Most of the animations follow this default process.
+   *
+   * @param {from} css or options object containing css
+   * @param {to} css or options object containing css
+   * @param {delay} delay to wait
+   */
+  default: function(from, to, delay) {
+    function step(params, duration, timing) {
+      if (params.duration !== undefined) {
+        duration = params.duration;
+      }
+      if (params.timing !== undefined) {
+        timing = params.timing;
+      }
+
+      return {
+        css: params.css || params,
+        duration: duration,
+        timing: timing
+      };
+    }
+
+    return this.saveStyle()
+      .queue(step(from, 0, this.defaults.timing))
+      .wait(delay === undefined ? this.defaults.delay : delay)
+      .queue(step(to, this.defaults.duration, this.defaults.timing))
+      .restoreStyle();
   },
 
   /**
@@ -592,5 +628,5 @@ Animit.Transition.prototype = {
   }
 };
 
-export default  Animit;
+export default Animit;
 

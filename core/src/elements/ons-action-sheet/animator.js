@@ -62,36 +62,18 @@ export class MDActionSheetAnimator extends ActionSheetAnimator {
 
     animit.runAll(
       animit(dialog._mask)
-        .queue({
-          opacity: 0
-        })
+        .queue({ opacity: 0 })
         .wait(this.delay)
-        .queue({
-          opacity: 1.0
-        }, {
+        .queue({ opacity: 1.0 }, {
           duration: this.maskDuration,
           timing: this.maskTiming
         }),
 
-      animit(dialog._sheet)
-        .saveStyle()
-        .queue({
-          css: {
-            transform: `translate3d(0, 80%, 0)`,
-            opacity: 0
-          },
-          duration: 0
-        })
-        .wait(this.delay)
-        .queue({
-          css: {
-            transform: 'translate3d(0, 0, 0)',
-            opacity: 1.0
-          },
-          duration: this.duration,
-          timing: this.timing
-        })
-        .restoreStyle()
+      animit(dialog._sheet, this.def)
+        .default(
+          { transform: `translate3d(0, 80%, 0)`, opacity: 0 },
+          { transform: 'translate3d(0, 0, 0)', opacity: 1 }
+        )
         .queue(done => {
           callback && callback();
           done();
@@ -107,36 +89,18 @@ export class MDActionSheetAnimator extends ActionSheetAnimator {
     animit.runAll(
 
       animit(dialog._mask)
-        .queue({
-          opacity: 1.0
-        })
+        .queue({ opacity: 1 })
         .wait(this.delay)
-        .queue({
-          opacity: 0
-        }, {
+        .queue({ opacity: 0 }, {
           duration: this.maskDuration,
           timing: this.maskTiming
         }),
 
-      animit(dialog._sheet)
-        .saveStyle()
-        .queue({
-          css: {
-            transform: 'translate3d(0, 0, 0)',
-            opacity: 1.0
-          },
-          duration: 0
-        })
-        .wait(this.delay)
-        .queue({
-          css: {
-            transform: 'translate3d(0, 80%, 0)',
-            opacity: 0
-          },
-          duration: this.duration,
-          timing: this.timing
-        })
-        .restoreStyle()
+      animit(dialog._sheet, this.def)
+        .default(
+          { transform: 'translate3d(0, 0, 0)', opacity: 1 },
+          { transform: `translate3d(0, 80%, 0)`, opacity: 0 }
+        )
         .queue(done => {
           callback && callback();
           done();
@@ -172,38 +136,22 @@ export class IOSActionSheetAnimator extends ActionSheetAnimator {
     animit.runAll(
 
       animit(dialog._mask)
-      .queue({
-        opacity: 0
-      })
+      .queue({ opacity: 0 })
       .wait(this.delay)
-      .queue({
-        opacity: 1.0
-      }, {
+      .queue({ opacity: 1 }, {
         duration: this.maskDuration,
         timing: this.maskTiming
       }),
 
-      animit(dialog._sheet)
-      .saveStyle()
-      .queue({
-        css: {
-          transform: `translate3d(0, ${this.liftAmount}, 0)`
-        },
-        duration: 0
-      })
-      .wait(this.delay)
-      .queue({
-        css: {
-          transform: 'translate3d(0, 0, 0)'
-        },
-        duration: this.duration,
-        timing: this.timing
-      })
-      .restoreStyle()
-      .queue(function(done) {
-        callback && callback();
-        done();
-      })
+      animit(dialog._sheet, this.def)
+        .default(
+          { transform: `translate3d(0, ${this.liftAmount}, 0)` },
+          { transform: 'translate3d(0, 0, 0)' }
+        )
+        .queue(done => {
+          callback && callback();
+          done();
+        })
     );
   }
 
@@ -215,38 +163,22 @@ export class IOSActionSheetAnimator extends ActionSheetAnimator {
     animit.runAll(
 
       animit(dialog._mask)
-      .queue({
-        opacity: 1.0
-      })
+      .queue({ opacity: 1 })
       .wait(this.delay)
-      .queue({
-        opacity: 0
-      }, {
+      .queue({ opacity: 0 }, {
         duration: this.maskDuration,
         timing: this.maskTiming
       }),
 
-      animit(dialog._sheet)
-      .saveStyle()
-      .queue({
-        css: {
-          transform: 'translate3d(0, 0, 0)'
-        },
-        duration: 0
-      })
-      .wait(this.delay)
-      .queue({
-        css: {
-          transform: `translate3d(0, ${this.liftAmount}, 0)`
-        },
-        duration: this.duration,
-        timing: this.timing
-      })
-      .restoreStyle()
-      .queue(function(done) {
-        callback && callback();
-        done();
-      })
+      animit(dialog._sheet, this.def)
+        .default(
+          { transform: 'translate3d(0, 0, 0)' },
+          { transform: `translate3d(0, ${this.liftAmount}, 0)` }
+        )
+        .queue(done => {
+          callback && callback();
+          done();
+        })
     );
   }
 }

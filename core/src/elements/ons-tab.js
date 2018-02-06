@@ -149,7 +149,7 @@ export default class TabElement extends BaseElement {
 
   set pageLoader(loader) {
     if (!(loader instanceof PageLoader)) {
-      throw Error('First parameter must be an instance of PageLoader.');
+      util.throwPageLoader();
     }
     this._pageLoader = loader;
   }
@@ -318,7 +318,7 @@ export default class TabElement extends BaseElement {
       const index = this.index;
       const tabbar = this._tabbar;
       if (!tabbar) {
-        throw new Error('This ons-tab element must be child of ons-tabbar element.');
+        util.throw('Tab elements must be children of Tabbar');
       }
 
       if (tabbar.hasAttribute('modifier')) {

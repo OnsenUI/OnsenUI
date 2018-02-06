@@ -25,7 +25,7 @@ export default class OverlaySplitterAnimator extends SplitterAnimator {
 
     animit(this._side)
       .queue({
-        transform: `translate3d(${this.minus + distance}px, 0px, 0px)`
+        transform: `translate3d(${this.minus + distance}px, 0, 0)`
       })
       .play();
   }
@@ -38,11 +38,8 @@ export default class OverlaySplitterAnimator extends SplitterAnimator {
       animit(this._side)
         .wait(this.delay)
         .queue({
-          transform: `translate3d(${this.minus}100%, 0px, 0px)`
-        }, {
-          duration: this.duration,
-          timing: this.timing
-        })
+          transform: `translate3d(${this.minus}100%, 0, 0)`
+        }, this.def)
         .queue(callback => {
           callback();
           done && done();
@@ -71,11 +68,8 @@ export default class OverlaySplitterAnimator extends SplitterAnimator {
       animit(this._side)
         .wait(this.delay)
         .queue({
-          transform: 'translate3d(0px, 0px, 0px)'
-        }, {
-          duration: this.duration,
-          timing: this.timing
-        })
+          transform: 'translate3d(0, 0, 0)'
+        }, this.def)
         .queue(callback => {
           done && done();
           callback();

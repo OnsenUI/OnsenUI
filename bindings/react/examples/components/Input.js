@@ -55,7 +55,9 @@ export default class extends React.Component {
         <p>
         Please enter a text
         </p>
-          <Input disabled={false} value={this.state.text} float onChange={event => this.setState({text: event.target.value}) } modifier='material' placeholder='Username'></Input>
+          <Input disabled={false} value={this.state.text} float onChange={event => this.setState({text: event.target.value}) } modifier='material' placeholder='Username' />
+
+          <Input readOnly={true} disabled={false} value={this.state.text} float onChange={event => this.setState({text: event.target.value}) } modifier='material' placeholder='Username (read-only)' />
 
           <input value={this.state.text} onChange={event => this.setState({text: event.target.value})} />
 

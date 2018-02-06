@@ -5,7 +5,14 @@ CHANGELOG
 dev
 ---
 
+ ### Bug Fixes
+ 
  * ons-tabbar: Fixed [#2316](https://github.com/OnsenUI/OnsenUI/issues/2316).
+ * ons-splitter-side: Fixed [#2271](https://github.com/OnsenUI/OnsenUI/issues/2271).
+ * ons-navigator: Fixed [#2333](https://github.com/OnsenUI/OnsenUI/issues/2333).
+ 
+ ### Misc
+ 
  * core, react: Pointed reference pages to new tutorials.
 
 2.9.1

@@ -373,7 +373,7 @@ export default class AlertDialogElement extends BaseDialogElement {
    */
   static registerAnimator(name, Animator) {
     if (!(Animator.prototype instanceof AlertDialogAnimator)) {
-      throw new Error('"Animator" param must inherit OnsAlertDialogElement.AlertDialogAnimator');
+      util.throwAnimator('AlertDialog');
     }
     _animatorDict[name] = Animator;
   }

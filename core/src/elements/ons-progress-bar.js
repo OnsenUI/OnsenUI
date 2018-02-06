@@ -171,7 +171,7 @@ export default class ProgressBarElement extends BaseElement {
    */
   set value(value) {
     if (typeof value !== 'number' || value < 0 || value > 100) {
-      throw new Error('Invalid value');
+      util.throw('Invalid value');
     }
 
     this.setAttribute('value', Math.floor(value));
@@ -190,7 +190,7 @@ export default class ProgressBarElement extends BaseElement {
    */
   set secondaryValue(value) {
     if (typeof value !== 'number' || value < 0 || value > 100) {
-      throw new Error('Invalid value');
+      util.throw('Invalid value');
     }
 
     this.setAttribute('secondary-value', Math.floor(value));

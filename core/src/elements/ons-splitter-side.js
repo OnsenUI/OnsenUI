@@ -334,7 +334,7 @@ export default class SplitterSideElement extends BaseElement {
 
   connectedCallback() {
     if (!util.match(this.parentNode, 'ons-splitter')) {
-      throw new Error('Parent must be an ons-splitter element.');
+      util.throw('Parent must be an ons-splitter element');
     }
 
     this._swipe = new SwipeReveal({
@@ -399,6 +399,7 @@ export default class SplitterSideElement extends BaseElement {
         this._swipe && this._swipe.update();
         break;
       case 'width':
+        current = this.getAttribute('width'); // Sometimes undefined. CE bug?
         this.style.width = /^\d+(px|%)$/.test(current) ? current : '80%';
         break;
       default:
@@ -504,7 +505,7 @@ export default class SplitterSideElement extends BaseElement {
 
   set pageLoader(loader) {
     if (!(loader instanceof PageLoader)) {
-      throw Error('First parameter must be an instance of PageLoader.');
+      util.throwPageLoader();
     }
     this._pageLoader = loader;
   }
@@ -534,7 +535,7 @@ export default class SplitterSideElement extends BaseElement {
 
   set onSwipe(value) {
     if (value && !(value instanceof Function)) {
-      throw new Error(`'onSwipe' must be a function.`)
+      util.throw('"onSwipe" must be a function')
     }
     this._onSwipe = value;
   }

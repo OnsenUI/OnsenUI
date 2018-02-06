@@ -237,7 +237,7 @@ export default class ToastElement extends BaseDialogElement {
    */
   static registerAnimator(name, Animator) {
     if (!(Animator.prototype instanceof ToastAnimator)) {
-      throw new Error('"Animator" param must inherit OnsToastElement.ToastAnimator');
+      util.throw('"Animator" param must inherit OnsToastElement.ToastAnimator');
     }
     _animatorDict[name] = Animator;
   }

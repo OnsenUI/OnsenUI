@@ -60,6 +60,8 @@ ons.platform.select((window.location.search.match(/platform=([\w-]+)/) || [])[1]
 
 waitDeviceReady();
 
+const readyError = after => util.throw(`This method must be called ${after ? 'after' : 'before'} ons.isReady() is true`);
+
 /**
  * @method isReady
  * @signature isReady()
@@ -116,7 +118,7 @@ ons.ready = callback => {
  */
 ons.setDefaultDeviceBackButtonListener = function(listener) {
   if (!ons.isReady()) {
-    throw new Error('This method must be called after ons.isReady() is true.');
+    readyError(true);
   }
   ons._defaultDeviceBackButtonHandler.setListener(listener);
 };
@@ -130,7 +132,7 @@ ons.setDefaultDeviceBackButtonListener = function(listener) {
  */
 ons.disableDeviceBackButtonHandler = function() {
   if (!ons.isReady()) {
-    throw new Error('This method must be called after ons.isReady() is true.');
+    readyError(true);
   }
   internal.dbbDispatcher.disable();
 };
@@ -144,7 +146,7 @@ ons.disableDeviceBackButtonHandler = function() {
  */
 ons.enableDeviceBackButtonHandler = function() {
   if (!ons.isReady()) {
-    throw new Error('This method must be called after ons.isReady() is true.');
+    readyError(true);
   }
   internal.dbbDispatcher.enable();
 };
@@ -162,7 +164,7 @@ ons.fireDeviceBackButtonEvent = function() {
  */
 ons.enableAutoStatusBarFill = () => {
   if (ons.isReady()) {
-    throw new Error('This method must be called before ons.isReady() is true.');
+    readyError(false);
   }
   internal.config.autoStatusBarFill = true;
 };
@@ -176,7 +178,7 @@ ons.enableAutoStatusBarFill = () => {
  */
 ons.disableAutoStatusBarFill = () => {
   if (ons.isReady()) {
-    throw new Error('This method must be called before ons.isReady() is true.');
+    readyError(false);
   }
   internal.config.autoStatusBarFill = false;
 };
@@ -190,7 +192,7 @@ ons.disableAutoStatusBarFill = () => {
  */
 ons.mockStatusBar = () => {
   if (ons.isReady()) {
-    throw new Error('This method must be called before ons.isReady() is true.');
+    readyError(false);
   }
 
   const mock = () => {
@@ -326,7 +328,7 @@ ons.forcePlatformStyling = newPlatform => {
 ons.preload = function(templates = []) {
   return Promise.all((templates instanceof Array ? templates : [templates]).map(template => {
     if (typeof template !== 'string') {
-      throw new Error ('Expected string arguments but got ' + typeof template);
+      util.throw('Expected string arguments but got ' + typeof template);
     }
     return internal.getTemplateHTMLAsync(template);
   }));
@@ -478,7 +480,7 @@ ons.openActionSheet = actionSheet;
 ons.resolveLoadingPlaceholder = (page, link) => {
   const elements = ons._util.arrayFrom(window.document.querySelectorAll('[ons-loading-placeholder]'));
   if (elements.length === 0) {
-    throw new Error('No ons-loading-placeholder exists.');
+    util.throw('No ons-loading-placeholder exists');
   }
 
   elements

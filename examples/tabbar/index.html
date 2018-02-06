@@ -36,50 +36,66 @@
   </head>
 
   <body>
-    <ons-page id="tabbar-page">
-      <ons-toolbar>
-        <div class="center">WhatsApp</div>
-        <div class="right">
-          <ons-toolbar-button>
-            <ons-icon icon="md-search"></ons-icon>
-          </ons-toolbar-button>
-          <ons-toolbar-button>
-            <ons-icon icon="md-more-vert"></ons-icon>
-          </ons-toolbar-button>
-        </div>
-      </ons-toolbar>
+    <ons-navigator swipeable id="navi">
+      <ons-page>
+        <ons-toolbar>
+          <div class="left">
+            <ons-toolbar-button icon="plus" onclick="navi.pushPage('tabbar.html')"></ons-toolbar-button>
+          </div>
+          <div class="center">Back</div>
+        </ons-toolbar>
+      </ons-page>
+    </ons-navigator>
 
-      <ons-tabbar position="auto"
-        modifier="autogrow"
-        swipeable
-      >
-        <ons-tab page="page1.html"
-          active
-          icon="ion-camera"
-          style="max-width: 60px"
+    <template id="tabbar.html">
+      <ons-page id="tabbar-page">
+        <ons-toolbar>
+          <div class="left"><ons-back-button>Back</ons-back-button></div>
+          <div class="center">WhatsApp</div>
+          <div class="right">
+            <ons-toolbar-button>
+              <ons-icon icon="md-search"></ons-icon>
+            </ons-toolbar-button>
+            <ons-toolbar-button>
+              <ons-icon icon="md-more-vert"></ons-icon>
+            </ons-toolbar-button>
+          </div>
+        </ons-toolbar>
+
+        <ons-tabbar position="auto"
+          modifier="autogrow"
+          swipeable
         >
-        </ons-tab>
-        <ons-tab
-          label="Chats"
-          badge="99+"
-          page="page2.html"></ons-tab>
-        <ons-tab
-          label="Status"
-          page="page3.html"></ons-tab>
-        <ons-tab
-          label="Calls"
-          page="page4.html"></ons-tab>
-      </ons-tabbar>
-    </ons-page>
+          <ons-tab page="page1.html"
+            active
+            icon="ion-camera"
+            style="max-width: 60px"
+          >
+          </ons-tab>
+          <ons-tab
+            label="Chats"
+            badge="99+"
+            page="page2.html"></ons-tab>
+          <ons-tab
+            label="Status"
+            page="page3.html"></ons-tab>
+          <ons-tab
+            label="Calls"
+            page="page4.html"></ons-tab>
+        </ons-tabbar>
+      </ons-page>
+    </template>
 
     <template id="page1.html">
       <ons-page id="tab1">
         <div class="background" style="background-color: lightgray"></div>
+        <ons-input value="Tabs here shouldn't jump" modifier="underbar"></ons-input>
       </ons-page>
     </template>
 
     <template id="page2.html">
       <ons-page id="tab2">
+        <ons-input value="Second input" modifier="underbar"></ons-input>
         <ons-list></ons-list>
         <script>
           ons.getScriptPage().onInit = generateElements;
@@ -92,5 +108,14 @@
         <div style="margin-top: 20px; text-align: center; font-size: 20px; color: gray">My Status</div>
       </ons-page>
     </template>
+
+
+    <script>
+      // Start in tabbar page
+      navi.pushPage('tabbar.html', { animation: 'none' })
+        .then(function(page) {
+          page.pushedOptions.animation = 'slide';
+        });
+    </script>
   </body>
 </html>

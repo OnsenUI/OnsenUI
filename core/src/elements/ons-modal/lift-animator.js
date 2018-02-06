@@ -35,24 +35,12 @@ export default class LiftModalAnimator extends ModalAnimator
   show(modal, callback) {
     callback = callback ? callback : function() {};
 
-    animit(modal)
-      .saveStyle()
-      .queue({
-        css: {
-          transform: 'translate3D(0, 100%, 0)',
-        },
-        duration: 0
-      })
-      .wait(this.delay)
-      .queue({
-        css: {
-          transform: 'translate3D(0, 0, 0)',
-        },
-        duration: this.duration,
-        timing: this.timing
-      })
-      .restoreStyle()
-      .queue(function(done) {
+    animit(modal, this.def)
+      .default(
+        { transform: 'translate3d(0, 100%, 0)' },
+        { transform: 'translate3d(0, 0, 0)' }
+      )
+      .queue(done => {
         callback();
         done();
       })
@@ -66,24 +54,12 @@ export default class LiftModalAnimator extends ModalAnimator
   hide(modal, callback) {
     callback = callback ? callback : function() {};
 
-   animit(modal)
-      .saveStyle()
-      .queue({
-        css: {
-          transform: 'translate3D(0, 0, 0)'
-        },
-        duration: 0
-      })
-      .wait(this.delay)
-      .queue({
-        css: {
-          transform: 'translate3D(0, 100%, 0)'
-        },
-        duration: this.duration,
-        timing: this.timing
-      })
-      .restoreStyle()
-      .queue(function(done) {
+    animit(modal, this.def)
+      .default(
+        { transform: 'translate3d(0, 0, 0)' },
+        { transform: 'translate3d(0, 100%, 0)' }
+      )
+      .queue(done => {
         callback();
         done();
       })
