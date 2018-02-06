@@ -59,7 +59,7 @@ const _animatorDict = {
  *     現在のスクリーンの上に表示するアラートダイアログです。ユーザに対する問いかけ、警告、エラーメッセージを表示するのに利用できます。タイトルやコンテンツやボタンは簡単にカスタマイズでき、実行しているプラットフォームに併せてスタイルが自動的に切り替わります。
  *   [/ja]
  * @codepen Qwwxyp
- * @tutorial vanilla/Reference/dialog
+ * @tutorial vanilla/Reference/alert-dialog
  * @modifier material
  *   [en]Material Design style[/en]
  *   [ja]マテリアルデザインのスタイル[/ja]

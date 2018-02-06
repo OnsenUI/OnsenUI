@@ -6,6 +6,7 @@ dev
 ---
 
  * ons-tabbar: Fixed [#2316](https://github.com/OnsenUI/OnsenUI/issues/2316).
+ * core, react: Pointed reference pages to new tutorials.
 
 2.9.1
 ----

@@ -57,7 +57,7 @@ const scheme = {
  *   [/en]
  *   [ja]ナビゲーションで使用するツールバー用コンポーネントです。クラス名により、左、中央、右のコンテナを指定できます。[/ja]
  * @codepen aHmGL
- * @tutorial vanilla/Reference/page
+ * @tutorial vanilla/Reference/toolbar
  * @guide compilation.html#toolbar-compilation [en]Adding a toolbar[/en][ja]ツールバーの追加[/ja]
  * @seealso ons-bottom-toolbar
  *   [en]The `<ons-bottom-toolbar>` displays a toolbar on the bottom of the page.[/en]

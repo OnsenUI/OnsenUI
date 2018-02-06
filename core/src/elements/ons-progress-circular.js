@@ -48,7 +48,7 @@ const INDET = 'indeterminate';
  *   [/en]
  *   [ja][/ja]
  * @codepen EVzMjR
- * @tutorial vanilla/Reference/progress
+ * @tutorial vanilla/Reference/progress-circular
  * @seealso ons-progress-bar
  *   [en]The `<ons-progress-bar>` component displays a bar progress indicator.[/en]
  *   [ja][/ja]

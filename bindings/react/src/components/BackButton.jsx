@@ -5,7 +5,7 @@ import ReactDOM from 'react-dom';
 /**
  * @original ons-back-button
  * @category navigation
- * @tutorial react/Reference/navigator
+ * @tutorial react/Reference/back-button
  * @description
  * [en]
  *   Back button component for Toolbar. It enables to automatically to pop the top page of the navigator. When only presented with one page, the button is hidden automatically.

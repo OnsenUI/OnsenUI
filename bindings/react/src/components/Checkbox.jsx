@@ -4,7 +4,7 @@ import BaseInput from './BaseInput.jsx';
 /**
  * @original ons-checkbox
  * @category form
- * @tutorial react/Reference/input
+ * @tutorial react/Reference/checkbox
  * @description
  * [en]
  *  A checkbox element. The component will automatically render as a Material Design checkbox on Android devices.

@@ -31,7 +31,7 @@ const scheme = {
  *    Most attributes that can be used for a normal `<input>` element can also be used on the `<ons-search-input>` element.
  *  [/en]
  *  [ja][/ja]
- * @tutorial vanilla/Reference/input
+ * @tutorial vanilla/Reference/search-input
  * @seealso ons-input
  *   [en]The `<ons-input>` element is used to display a text input.[/en]
  *   [ja][/ja]
