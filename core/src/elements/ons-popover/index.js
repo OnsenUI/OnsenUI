@@ -246,7 +246,12 @@ export default class PopoverElement extends BaseDialogElement {
   _positionPopover(target) {
     const {_radius: radius, _content: contentElement, _margin: margin} = this;
     const safeAreaLengths = iPhoneXPatch.getSafeAreaLengths();
-    const safeAreaRect = iPhoneXPatch.getSafeAreaDOMRect();
+    const safeAreaRect = iPhoneXPatch.isIPhoneXPortraitPatchActive() || iPhoneXPatch.isIPhoneXLandscapePatchActive() ? iPhoneXPatch.getSafeAreaDOMRect() : {
+      left: 0,
+      top: 0,
+      bottom: this.closest('ons-page').offsetHeight,
+      right: this.closest('ons-page').offsetWidth
+    };
     const targetRect = target.getBoundingClientRect();
     const isMD = util.hasModifier(this, 'material');
     const cover = isMD && this.hasAttribute('cover-target');
