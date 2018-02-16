@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 /**
  * @original ons-toast
  * @category dialog
- * @tutorial react/Reference/dialog
+ * @tutorial react/Reference/toast
  * @description
  * [en]
  *  The Toast or Snackbar component is useful for displaying dismissable information or simple actions at (normally) the bottom of the page.

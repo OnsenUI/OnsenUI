@@ -54,7 +54,7 @@ const _normalizeArguments = (message, options = {}, defaults = {}) => {
 /**
  * @object ons.notification
  * @category dialog
- * @tutorial vanilla/Reference/dialog
+ * @tutorial vanilla/Reference/notification
  * @description
  *   [en]
  *     Utility methods to create different kinds of notifications. There are three methods available:

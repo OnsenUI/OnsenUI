@@ -17,6 +17,10 @@ dev
  * ons-navigator: Fixed [#2333](https://github.com/OnsenUI/OnsenUI/issues/2333).
  * ons-select (fastclick): Fixed [#2352](https://github.com/OnsenUI/OnsenUI/issues/2352).
  * ons-switch: Fixed [#2341](https://github.com/OnsenUI/OnsenUI/issues/2341).
+ 
+ ### Misc
+ 
+ * core, react: Pointed reference pages to new tutorials.
 
 2.9.1
 ----

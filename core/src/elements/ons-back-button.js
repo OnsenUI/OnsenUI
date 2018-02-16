@@ -43,7 +43,7 @@ const scheme = {
  *   [/en]
  *   [ja][/ja]
  * @codepen aHmGL
- * @tutorial vanilla/Reference/navigator
+ * @tutorial vanilla/Reference/back-button
  * @modifier material
  *   [en]Material Design style[/en]
  *   [ja][/ja]

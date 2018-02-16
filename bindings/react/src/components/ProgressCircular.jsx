@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 /**
  * @original ons-progress-circular
  * @category visual
- * @tutorial react/Reference/progress
+ * @tutorial react/Reference/progress-circular
  * @description
  * [en] This component displays a circular progress indicator. It can either be used to show how much of a task has been completed or to show a looping animation to indicate that an operation is currently running.
  * [/en]
