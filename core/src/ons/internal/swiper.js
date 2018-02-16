@@ -84,8 +84,9 @@ export default class Swiper {
     setImmediate(() => this.initialized && this._setupInitialIndex());
 
     // Fix rendering glitch on Android 4.1
-    if (this.offsetHeight === 0) {
-      setImmediate(() => this.refresh());
+    // Fix for iframes where the width is inconsistent at the beginning
+    if (window !== window.parent || this.offsetHeight === 0) {
+      window.requestAnimationFrame(() => this.initialized && this.onResize());
     }
   }
 
