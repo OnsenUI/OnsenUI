@@ -35,7 +35,7 @@ export default class Swiper {
       let ratio = params.getAutoScrollRatio && params.getAutoScrollRatio(...args);
       ratio = typeof ratio === 'number' && ratio === ratio ? ratio : .5;
       if (ratio < 0.0 || ratio > 1.0) {
-        throw new Error('Invalid auto-scroll-ratio ' + ratio + '. Must be between 0 and 1');
+        util.throw('Invalid auto-scroll-ratio ' + ratio + '. Must be between 0 and 1');
       }
       return ratio;
     };
@@ -57,7 +57,7 @@ export default class Swiper {
     this.target = this.getElement().children[0];
     this.blocker = this.getElement().children[1];
     if (!this.target || !this.blocker) {
-      throw new Error('Expected "target" and "blocker" elements to exist before initializing Swiper.');
+      util.throw('Expected "target" and "blocker" elements to exist before initializing Swiper');
     }
 
     if (!this.shouldBlock) {
@@ -84,8 +84,9 @@ export default class Swiper {
     setImmediate(() => this.initialized && this._setupInitialIndex());
 
     // Fix rendering glitch on Android 4.1
-    if (this.offsetHeight === 0) {
-      setImmediate(() => this.refresh());
+    // Fix for iframes where the width is inconsistent at the beginning
+    if (window !== window.parent || this.offsetHeight === 0) {
+      window.requestAnimationFrame(() => this.initialized && this.onResize());
     }
   }
 
@@ -127,7 +128,7 @@ export default class Swiper {
     const matches = this.itemSize.match(/^(\d+)(px|%)/);
 
     if (!matches) {
-      throw new Error(`Invalid state: swiper's size unit must be '%' or 'px'`);
+      util.throw(`Invalid state: swiper's size unit must be '%' or 'px'`);
     }
 
     const value = parseInt(matches[1], 10);
@@ -141,7 +142,12 @@ export default class Swiper {
     this._scrollTo(this._scroll);
   }
 
+  _setSwiping(toggle) {
+    this.target.classList.toggle('swiping', toggle); // Hides everything except shown pages
+  }
+
   setActiveIndex(index, options = {}) {
+    this._setSwiping(true);
     index = Math.max(0, Math.min(index, this.itemCount - 1));
     const scroll = Math.max(0, Math.min(this.maxScroll, this._offset + this.itemNumSize * index));
 
@@ -207,10 +213,12 @@ export default class Swiper {
   show() {
     this.setupResize(true);
     this.onResize();
+    setTimeout(() => this.target && this.target.classList.add('active'), 1000/60); // Hide elements after animations
   }
 
   hide() {
     this.setupResize(false);
+    this.target.classList.remove('active'); // Show elements before animations
   }
 
   updateSwipeable(shouldUpdate) {
@@ -264,6 +272,7 @@ export default class Swiper {
             event.consumed = true;
             this._started = true; // Avoid starting drag from outside
             this.shouldBlock && this.toggleBlocker(true);
+            this._setSwiping(true);
             util.iosPreventScroll(this._gestureDetector);
           };
 
@@ -330,8 +339,10 @@ export default class Swiper {
 
     return this._scrollTo(this._scroll, options).then(() => {
       if (scroll === this._scroll && !canceled) {
+        this._setSwiping(false);
         change && this.postChangeHook(e);
       } else if (options.reject) {
+        this._setSwiping(false);
         return Promise.reject('Canceled');
       }
     });

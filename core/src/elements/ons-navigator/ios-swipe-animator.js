@@ -15,25 +15,51 @@ limitations under the License.
 
 */
 
-import IOSSlideNavigatorAnimator from './ios-slide-animator';
+import NavigatorAnimator from './animator';
 import util from '../../ons/util';
 import animit from '../../ons/animit';
 
 /**
- * Swipe animator for iOS navigator transition.
+ * Abstract swipe animator for iOS navigator transition.
  */
-export default class IOSSwipeNavigatorAnimator extends IOSSlideNavigatorAnimator {
+export default class IOSSwipeNavigatorAnimator extends NavigatorAnimator {
 
-  constructor({ duration = 0.15, timing = 'linear', delay = 0 } = {}) {
-    super({duration, timing, delay});
-    this.durationRestore = 0.1;
+  static get swipeable() {
+    return true;
+  }
 
-    this.swipeShadow = util.createElement(`
-      <div style="position: absolute; height: 100%; width: 12px; right: 100%; top: 0; bottom: 0; z-index: -1;
-        background: linear-gradient(to right, transparent 0, rgba(0,0,0,.04) 40%, rgba(0,0,0,.12) 80%, rgba(0,0,0,.16) 100%);"></div>
-    `);
+  constructor({ durationRestore = 0.1, durationSwipe = 0.15, timingSwipe = 'linear', ...rest } = {}) {
+    super({...rest});
+
+    if (this.constructor === IOSSwipeNavigatorAnimator) {
+      util.throwAbstract();
+    }
+
+    this.durationRestore = durationRestore;
+    this.durationSwipe = durationSwipe;
+    this.timingSwipe = timingSwipe;
+
+    this.optSwipe = { timing: timingSwipe, duration: durationSwipe };
+    this.optRestore = { timing: timingSwipe, duration: durationRestore };
+
+    this.swipeShadow = util.createElement(
+      `<div style="position: absolute; height: 100%; width: 12px; right: 100%; top: 0; bottom: 0; z-index: -1;` +
+        `background: linear-gradient(to right, transparent 0, rgba(0,0,0,.04) 40%, rgba(0,0,0,.12) 80%, rgba(0,0,0,.16) 100%);"></div>`
+    );
 
     this.isDragStart = true;
+  }
+
+  _decompose() {
+    util.throwMember();
+  }
+
+  _shouldAnimateToolbar() {
+    util.throwMember();
+  }
+
+  _calculateDelta() {
+    util.throwMember();
   }
 
   _dragStartSetup(enterPage, leavePage) {
@@ -75,6 +101,8 @@ export default class IOSSwipeNavigatorAnimator extends IOSSlideNavigatorAnimator
   }
 
   translate(distance, maxWidth, enterPage, leavePage) {
+    this.isSwiping = true;
+
     if (enterPage.style.display === 'none') {
       enterPage.style.display = '';
     }
@@ -119,7 +147,7 @@ export default class IOSSwipeNavigatorAnimator extends IOSSlideNavigatorAnimator
 
         animit([this.decomp.leave.content, this.decomp.leave.bottomToolbar, this.decomp.leave.background, this.swipeShadow])
           .queue({
-            transform: `translate3d(${distance}px, 0px, 0px)`
+            transform: `translate3d(${distance}px, 0, 0)`
           }),
 
         animit(this.decomp.leave.toolbar)
@@ -152,7 +180,7 @@ export default class IOSSwipeNavigatorAnimator extends IOSSlideNavigatorAnimator
       animit.runAll(
         animit(leavePage)
           .queue({
-            transform: `translate3d(${distance}px, 0px, 0px)`
+            transform: `translate3d(${distance}px, 0, 0)`
           }),
 
         animit(enterPage)
@@ -184,65 +212,47 @@ export default class IOSSwipeNavigatorAnimator extends IOSSlideNavigatorAnimator
           .queue({
             transform: 'translate3d(-25%, 0, 0)',
             opacity: 0.9
-          }, {
-            timing: this.timing,
-            duration: this.durationRestore
-          }),
+          }, this.optRestore),
 
         animit(this.decomp.enter.toolbarCenter)
           .queue({
             transform: `translate3d(-${this.delta.title}px, 0, 0)`,
-            transition: `opacity ${this.durationRestore}s linear, transform ${this.durationRestore}s ${this.timing}`,
+            transition: `opacity ${this.durationRestore}s linear, transform ${this.durationRestore}s ${this.timingSwipe}`,
             opacity: 0
           }),
 
         animit(this.decomp.enter.backButtonLabel)
           .queue({
             transform: `translate3d(-${this.delta.label}px, 0, 0)`
-          }, {
-            timing: this.timing,
-            duration: this.durationRestore
-          }),
+          }, this.optRestore),
 
         animit(this.decomp.enter.other)
           .queue({
             opacity: 0
-          }, {
-            timing: this.timing,
-            duration: this.durationRestore
-          }),
+          }, this.optRestore),
 
         /* Leave page */
 
         animit([this.decomp.leave.content, this.decomp.leave.bottomToolbar, this.decomp.leave.background, this.swipeShadow])
           .queue({
-            transform: `translate3d(0, 0px, 0px)`
-          }, {
-            timing: this.timing,
-            duration: this.durationRestore
-          }),
+            transform: `translate3d(0, 0, 0)`
+          }, this.optRestore),
 
         animit(this.decomp.leave.toolbar)
           .queue({
             opacity: 1
-          }, {
-            timing: this.timing,
-            duration: this.durationRestore
-          }),
+          }, this.optRestore),
 
         animit(this.decomp.leave.toolbarCenter)
           .queue({
             transform: `translate3d(0, 0, 0)`
-          }, {
-            timing: this.timing,
-            duration: this.durationRestore
-          }),
+          }, this.optRestore),
 
         animit(this.decomp.leave.backButtonLabel)
           .queue({
             opacity: 1,
             transform: `translate3d(0, 0, 0)`,
-            transition: `opacity ${this.durationRestore}s linear, transform ${this.durationRestore}s ${this.timing}`
+            transition: `opacity ${this.durationRestore}s linear, transform ${this.durationRestore}s ${this.timingSwipe}`
           }),
 
 
@@ -251,10 +261,7 @@ export default class IOSSwipeNavigatorAnimator extends IOSSlideNavigatorAnimator
         animit(this.swipeShadow)
           .queue({
             opacity: 0
-          }, {
-            timing: this.timing,
-            duration: this.durationRestore
-          })
+          }, this.optRestore)
           .queue(done => {
             this._reset(this.target.enter, this.target.leave);
             enterPage.style.display = 'none';
@@ -269,22 +276,14 @@ export default class IOSSwipeNavigatorAnimator extends IOSSlideNavigatorAnimator
 
         animit(enterPage)
         .queue({
-          css: {
-            transform: 'translate3D(-25%, 0px, 0px)',
-            opacity: 0.9
-          },
-          timing: this.timing,
-          duration: this.durationRestore
-        }),
+          transform: 'translate3D(-25%, 0, 0)',
+          opacity: 0.9
+        }, this.optRestore),
 
         animit(leavePage)
         .queue({
-          css: {
-            transform: 'translate3D(0px, 0px, 0px)'
-          },
-          timing: this.timing,
-          duration: this.durationRestore
-        })
+          transform: 'translate3D(0, 0, 0)'
+        }, this.optRestore)
         .queue(done => {
           this._reset(enterPage, leavePage);
           enterPage.style.display = 'none';
@@ -295,7 +294,7 @@ export default class IOSSwipeNavigatorAnimator extends IOSSlideNavigatorAnimator
     }
   }
 
-  pop(enterPage, leavePage, callback) {
+  popSwipe(enterPage, leavePage, callback) {
     if (this.isDragStart) {
       return;
     }
@@ -310,65 +309,47 @@ export default class IOSSwipeNavigatorAnimator extends IOSSlideNavigatorAnimator
           .queue({
             transform: 'translate3d(0, 0, 0)',
             opacity: 1
-          }, {
-            timing: this.timing,
-            duration: this.duration
-          }),
+          }, this.optSwipe),
 
         animit(this.decomp.enter.toolbarCenter)
           .queue({
             transform: `translate3d(0, 0, 0)`,
-            transition: `opacity ${this.duration}s linear, transform ${this.duration}s ${this.timing}`,
+            transition: `opacity ${this.durationSwipe}s linear, transform ${this.durationSwipe}s ${this.timingSwipe}`,
             opacity: 1
           }),
 
         animit(this.decomp.enter.backButtonLabel)
           .queue({
             transform: `translate3d(0, 0, 0)`
-          }, {
-            timing: this.timing,
-            duration: this.duration
-          }),
+          }, this.optSwipe),
 
         animit(this.decomp.enter.other)
           .queue({
             opacity: 1
-          }, {
-            timing: this.timing,
-            duration: this.duration
-          }),
+          }, this.optSwipe),
 
         /* Leave page */
 
         animit([this.decomp.leave.content, this.decomp.leave.bottomToolbar, this.decomp.leave.background])
           .queue({
-            transform: `translate3d(100%, 0px, 0px)`
-          }, {
-            timing: this.timing,
-            duration: this.duration
-          }),
+            transform: `translate3d(100%, 0, 0)`
+          }, this.optSwipe),
 
         animit(this.decomp.leave.toolbar)
           .queue({
             opacity: 0
-          }, {
-            timing: this.timing,
-            duration: this.duration
-          }),
+          }, this.optSwipe),
 
         animit(this.decomp.leave.toolbarCenter)
           .queue({
             transform: `translate3d(125%, 0, 0)`
-          }, {
-            timing: this.timing,
-            duration: this.duration
-          }),
+          }, this.optSwipe),
 
         animit(this.decomp.leave.backButtonLabel)
           .queue({
             opacity: 0,
             transform: `translate3d(${this.delta.title}px, 0, 0)`,
-            transition: `opacity ${this.duration}s linear, transform ${this.duration}s ${this.timing}`
+            transition: `opacity ${this.durationSwipe}s linear, transform ${this.durationSwipe}s ${this.timingSwipe}`
           }),
 
 
@@ -377,11 +358,8 @@ export default class IOSSwipeNavigatorAnimator extends IOSSlideNavigatorAnimator
         animit(this.swipeShadow)
           .queue({
             opacity: 0,
-            transform: `translate3d(${this.maxWidth}px, 0px, 0px)`
-          }, {
-            timing: this.timing,
-            duration: this.duration
-          })
+            transform: `translate3d(${this.maxWidth}px, 0, 0)`
+          }, this.optSwipe)
           .queue(done => {
             this._reset(this.target.enter, this.target.leave);
             callback && callback();
@@ -394,22 +372,14 @@ export default class IOSSwipeNavigatorAnimator extends IOSSlideNavigatorAnimator
 
         animit(enterPage)
         .queue({
-          css: {
-            transform: 'translate3D(0px, 0px, 0px)',
-            opacity: 1.0
-          },
-          duration: this.duration,
-          timing: this.timing
-        }),
+          transform: 'translate3D(0, 0, 0)',
+          opacity: 1.0
+        }, this.optSwipe),
 
         animit(leavePage)
         .queue({
-          css: {
-            transform: 'translate3D(100%, 0px, 0px)'
-          },
-          duration: this.duration,
-          timing: this.timing
-        })
+          transform: 'translate3D(100%, 0, 0)'
+        }, this.optSwipe)
         .queue(done => {
           this._reset(enterPage, leavePage);
           callback && callback();
@@ -446,6 +416,7 @@ export default class IOSSwipeNavigatorAnimator extends IOSSlideNavigatorAnimator
   }
 
   _reset(...args) {
+    this.isSwiping = false;
     this._savedStyle && this._restoreStyle(...args);
     this.unblock && this.unblock();
     this.swipeShadow.remove();

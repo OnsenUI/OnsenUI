@@ -232,7 +232,6 @@ export default class TabbarElement extends BaseElement {
       contentReady(this, () => {
         this._tabbarBorder = util.findChild(this._tabbarElement, '.tabbar__border');
         this._swiper.init({ swipeable: this.hasAttribute('swipeable') });
-        setTimeout(() => this._onRefresh(), 1000/60); // Fix tabbar border in some iframes
       });
     }
 
@@ -536,7 +535,7 @@ export default class TabbarElement extends BaseElement {
 
   set onSwipe(value) {
     if (value && !(value instanceof Function)) {
-      throw new Error(`'onSwipe' must be a function.`)
+      util.throw(`"onSwipe" must be a function`)
     }
     this._onSwipe = value;
   }

@@ -200,7 +200,7 @@ util.createElement = (html) => {
   }
 
   if (wrapper.children.length > 1) {
-    throw new Error(`${errorPrefix} "html" must be one wrapper element.`);
+    util.throw('HTML template must contain a single root element')
   }
 
   const element = wrapper.children[0];
@@ -496,6 +496,15 @@ util.warn = (...args) => {
   }
 };
 
+util.throw = (message) => {
+  throw new Error(`${errorPrefix} ${message}`);
+};
+
+util.throwAbstract = () => util.throw('Cannot instantiate abstract class');
+util.throwMember = () => util.throw('Class member must be implemented');
+util.throwPageLoader = () => util.throw('First parameter should be an instance of PageLoader');
+util.throwAnimator = (el) => util.throw(`"Animator" param must inherit ${el}Animator`);
+
 
 const prevent = e => e.cancelable && e.preventDefault();
 
@@ -547,7 +556,7 @@ util.isValidGesture = event => event.gesture !== undefined && (event.gesture.dis
 util.checkMissingImport = (...elementNames) => {
   elementNames.forEach(name => {
     if (!onsElements[name]) {
-      throw new Error(`${errorPrefix} Ons${name} is required but was not imported (Custom Elements).`);
+      util.throw(`Ons${name} is required but was not imported (Custom Elements)`);
     }
   });
 }

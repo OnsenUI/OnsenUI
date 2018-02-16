@@ -29,6 +29,12 @@ export default class BaseAnimator {
     this.timing = options.timing || 'linear';
     this.duration = options.duration || 0;
     this.delay = options.delay || 0;
+
+    this.def = {
+      timing: this.timing,
+      duration: this.duration,
+      delay: this.delay
+    };
   }
 
   static extend(properties = {}) {

@@ -221,13 +221,12 @@ describe('OnsTabElement', () => {
 
   describe('#connectedCallback', () => {
     it('should be child of \'ons-tabbar\' element', () => {
-      const error = 'ons-tabbar';
-      expect(() => document.body.appendChild(element)).to.throw(error);
+      expect(() => document.body.appendChild(element)).to.throw();
 
       const tabbar = document.createElement('ons-tabbar');
       document.body.appendChild(tabbar);
 
-      expect(() => tabbar.appendChild(element)).not.to.throw(error);
+      expect(() => tabbar.appendChild(element)).not.to.throw();
       tabbar.remove();
     });
 

@@ -1,5 +1,5 @@
 <template>
-  <ons-alert-dialog v-on="unrecognizedListeners">
+  <ons-alert-dialog v-on="unrecognizedListeners" :modifier="normalizedModifier">
     <div class="alert-dialog-title">
       <slot name="title">{{title}}</slot>
     </div>
@@ -16,11 +16,11 @@
 
 <script>
   import 'onsenui/esm/elements/ons-alert-dialog';
-  import { hidable, hasOptions, dialogCancel, deriveEvents, deriveDBB, portal } from '../mixins';
+  import { hidable, hasOptions, dialogCancel, deriveEvents, deriveDBB, portal, modifier } from '../mixins';
 
   export default {
     name: 'v-ons-alert-dialog',
-    mixins: [hidable, hasOptions, dialogCancel, deriveEvents, deriveDBB, portal],
+    mixins: [hidable, hasOptions, dialogCancel, deriveEvents, deriveDBB, portal, modifier],
 
     props: {
       title: {

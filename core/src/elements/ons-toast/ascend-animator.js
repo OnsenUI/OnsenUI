@@ -53,19 +53,11 @@ export default class AscendToastAnimator extends ToastAnimator {
     util.globals.fabOffset = this.ascension;
 
     animit.runAll(
-      animit(toast)
-        .saveStyle()
-        .queue({
-          transform: `translate3d(0, ${this.ascension}px, 0)`
-        })
-        .wait(this.delay)
-        .queue({
-          transform: 'translate3d(0, 0, 0)'
-        }, {
-          duration: this.duration,
-          timing: this.timing
-        })
-        .restoreStyle()
+      animit(toast, this.def)
+        .default(
+          { transform: `translate3d(0, ${this.ascension}px, 0)` },
+          { transform: 'translate3d(0, 0, 0)' }
+        )
         .queue(done => {
           callback && callback();
           done();
@@ -73,26 +65,10 @@ export default class AscendToastAnimator extends ToastAnimator {
 
       animit(this._getFabs())
         .wait(this.delay)
-        .queue({
-          transform: `translate3d(0, -${this.ascension}px, 0) scale(1)`
-        }, {
-          duration: this.duration,
-          timing: this.timing
-        }),
+        .queue({ transform: `translate3d(0, -${this.ascension}px, 0) scale(1)` }, this.def),
 
-      animit(util.arrayFrom(toast.children))
-        .saveStyle()
-        .queue({
-          opacity: 0
-        })
-        .wait(this.messageDelay)
-        .queue({
-          opacity: 1.0
-        }, {
-          duration: this.duration,
-          timing: this.timing
-        })
-        .restoreStyle()
+      animit(util.arrayFrom(toast.children), this.def)
+        .default({ opacity: 0 }, { opacity: 1 })
       );
   }
 
@@ -105,46 +81,22 @@ export default class AscendToastAnimator extends ToastAnimator {
     util.globals.fabOffset = 0;
 
     animit.runAll(
-      animit(toast)
-        .saveStyle()
-        .queue({
-          transform: 'translate3d(0, 0, 0)'
-        })
-        .wait(this.delay)
-        .queue({
-          transform: `translate3d(0, ${this.ascension}px, 0)`
-        }, {
-          duration: this.duration,
-          timing: this.timing
-        })
-        .restoreStyle()
+      animit(toast, this.def)
+        .default(
+          { transform: 'translate3d(0, 0, 0)' },
+          { transform: `translate3d(0, ${this.ascension}px, 0)` }
+        )
         .queue(done => {
           callback && callback();
           done();
         }),
 
-      animit(this._getFabs())
+      animit(this._getFabs(), this.def)
         .wait(this.delay)
-        .queue({
-          transform: 'translate3d(0, 0, 0) scale(1)'
-        }, {
-          duration: this.duration,
-          timing: this.timing
-        }),
+        .queue({ transform: `translate3d(0, 0, 0) scale(1)` }, this.def),
 
-      animit(util.arrayFrom(toast.children))
-        .saveStyle()
-        .queue({
-          opacity: 1.0
-        })
-        .wait(this.delay)
-        .queue({
-          opacity: 0
-        }, {
-          duration: this.duration,
-          timing: this.timing
-        })
-        .restoreStyle()
+      animit(util.arrayFrom(toast.children), this.def)
+        .default({ opacity: 1 }, { opacity: 0 })
     );
   }
 

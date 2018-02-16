@@ -38,7 +38,7 @@ export default class PushSplitterAnimator extends SplitterAnimator {
 
     animit(this._slidingElements)
       .queue({
-        transform: `translate3d(${this.minus + distance}px, 0px, 0px)`
+        transform: `translate3d(${this.minus + distance}px, 0, 0)`
       })
       .play();
   }
@@ -54,11 +54,8 @@ export default class PushSplitterAnimator extends SplitterAnimator {
       animit(this._slidingElements)
         .wait(this.delay)
         .queue({
-          transform: `translate3d(${this.minus + max}px, 0px, 0px)`
-        }, {
-          duration: this.duration,
-          timing: this.timing
-        })
+          transform: `translate3d(${this.minus + max}px, 0, 0)`
+        }, this.def)
         .queue(callback => {
           this._slidingElements = null;
           callback();
@@ -83,11 +80,8 @@ export default class PushSplitterAnimator extends SplitterAnimator {
       animit(this._slidingElements)
         .wait(this.delay)
         .queue({
-          transform: 'translate3d(0px, 0px, 0px)'
-        }, {
-          duration: this.duration,
-          timing: this.timing
-        })
+          transform: 'translate3d(0, 0, 0)'
+        }, this.def)
         .queue(callback => {
           this._slidingElements = null;
           super.clearTransition();

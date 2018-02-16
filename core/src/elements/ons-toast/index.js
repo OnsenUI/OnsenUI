@@ -56,7 +56,7 @@ const _animatorDict = {
  *     This component does not block user input, allowing the app to continue its flow. For simple toasts, consider `ons.notification.toast` instead.
  *   [/en]
  *   [ja][/ja]
- * @tutorial vanilla/Reference/dialog
+ * @tutorial vanilla/Reference/toast
  * @seealso ons-alert-dialog
  *   [en]The `<ons-alert-dialog>` component is preferred for displaying undismissable information.[/en]
  *   [ja][/ja]
@@ -237,7 +237,7 @@ export default class ToastElement extends BaseDialogElement {
    */
   static registerAnimator(name, Animator) {
     if (!(Animator.prototype instanceof ToastAnimator)) {
-      throw new Error('"Animator" param must inherit OnsToastElement.ToastAnimator');
+      util.throw('"Animator" param must inherit OnsToastElement.ToastAnimator');
     }
     _animatorDict[name] = Animator;
   }

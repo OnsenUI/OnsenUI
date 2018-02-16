@@ -71,10 +71,11 @@ gulp.task('generate-components', () => {
   const generate = (baseName, baseMixins = '') => {
     const domElement = 'ons-' + baseName;
     const mixins = 'deriveEvents' + (baseMixins ? `, ${baseMixins.trim().split(/\s+/).join(', ')}` : '');
+    const modifier = mixins.indexOf('modifier') !== -1;
 
     return `
 <template>
-  <${domElement} v-on="unrecognizedListeners">
+  <${domElement} v-on="unrecognizedListeners"${modifier ? ' :modifier="normalizedModifier"' : ''}>
     <slot></slot>
   </${domElement}>
 </template>
@@ -93,39 +94,39 @@ gulp.task('generate-components', () => {
   };
 
   const components = {
-    'toolbar': '',
-    'bottom-toolbar': '',
-    'toolbar-button': '',
-    'alert-dialog-button': '',
-    'button': '',
-    'icon': '',
-    'card': '',
-    'list': '',
-    'list-item': '',
-    'list-title': '',
-    'list-header': '',
+    'toolbar': 'modifier',
+    'bottom-toolbar': 'modifier',
+    'toolbar-button': 'modifier',
+    'alert-dialog-button': 'modifier',
+    'button': 'modifier',
+    'icon': 'modifier',
+    'card': 'modifier',
+    'list': 'modifier',
+    'list-item': 'modifier',
+    'list-title': 'modifier',
+    'list-header': 'modifier',
     'ripple': '',
     'row': '',
     'col': '',
-    'progress-bar': '',
-    'progress-circular': '',
+    'progress-bar': 'modifier',
+    'progress-circular': 'modifier',
     'carousel-item': '',
     'splitter-mask': '',
     'splitter-content': '',
     'splitter': 'selfProvider deriveDBB',
-    'switch': 'modelCheckbox',
-    'checkbox': 'modelCheckbox',
-    'input': 'modelInput',
-    'search-input': 'modelInput',
-    'range': 'modelInput',
-    'radio': 'modelRadio',
-    'fab': 'hidable',
-    'speed-dial-item': '',
-    'dialog': 'hidable hasOptions dialogCancel deriveDBB portal',
-    'action-sheet': 'hidable hasOptions dialogCancel deriveDBB portal',
-    'action-sheet-button': '',
-    'modal': 'hidable hasOptions deriveDBB portal',
-    'toast': 'hidable hasOptions deriveDBB portal',
+    'switch': 'modelCheckbox modifier',
+    'checkbox': 'modelCheckbox modifier',
+    'input': 'modelInput modifier',
+    'search-input': 'modelInput modifier',
+    'range': 'modelInput modifier',
+    'radio': 'modelRadio modifier',
+    'fab': 'hidable modifier',
+    'speed-dial-item': 'modifier',
+    'dialog': 'hidable hasOptions dialogCancel deriveDBB portal modifier',
+    'action-sheet': 'hidable hasOptions dialogCancel deriveDBB portal modifier',
+    'action-sheet-button': 'modifier',
+    'modal': 'hidable hasOptions deriveDBB portal modifier',
+    'toast': 'hidable hasOptions deriveDBB portal modifier',
   };
 
   Object.keys(components).forEach(key => {

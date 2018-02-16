@@ -4,7 +4,7 @@ import BaseInput from './BaseInput.jsx';
 /**
  * @original ons-search-input
  * @category form
- * @tutorial react/Reference/input
+ * @tutorial react/Reference/search-input
  * @description
  * [en]
  *  A search input component. The component will automatically render as a Material Design search input on Android devices.

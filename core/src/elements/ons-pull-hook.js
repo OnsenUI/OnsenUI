@@ -27,6 +27,8 @@ const STATE_INITIAL = 'initial';
 const STATE_PREACTION = 'preaction';
 const STATE_ACTION = 'action';
 
+const throwType = (el, type) => util.throw(`"${el}" must be ${type}`);
+
 /**
  * @element ons-pull-hook
  * @category control
@@ -247,7 +249,7 @@ export default class PullHookElement extends BaseElement {
 
   set onAction(value) {
     if (value && !(value instanceof Function)) {
-      throw new Error(`'onAction' must be a function or null`);
+      throwType('onAction', 'function or null');
     }
     this._onAction = value;
   }
@@ -265,7 +267,7 @@ export default class PullHookElement extends BaseElement {
 
   set onPull(value) {
     if (value && !(value instanceof Function)) {
-      throw new Error(`'onPull' must be a function or null.`)
+      throwType('onPull', 'function or null');
     }
     this._onPull = value;
   }
@@ -289,7 +291,7 @@ export default class PullHookElement extends BaseElement {
    */
   set height(value) {
     if (!util.isInteger(value)) {
-      throw new Error('The height must be an integer');
+      throwType('height', 'integer');
     }
 
     this.setAttribute('height', `${value}px`);
@@ -308,7 +310,7 @@ export default class PullHookElement extends BaseElement {
    */
   set thresholdHeight(value) {
     if (!util.isInteger(value)) {
-      throw new Error('The threshold height must be an integer');
+      throwType('thresholdHeight', 'integer');
     }
 
     this.setAttribute('threshold-height', `${value}px`);

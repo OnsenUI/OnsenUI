@@ -1,6 +1,14 @@
 CHANGELOG
 ====
 
+dev
+----
+
+ ### New Features
+
+ * VOnsNavigator: Navigator can now pass props to pages throw the `onsNavigatorProps` property in page components.
+ * `modifier` prop now supports object and array syntax just like `class` prop.
+
 2.5.0
 ----
 

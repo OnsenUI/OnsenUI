@@ -346,16 +346,13 @@ export default class CarouselElement extends BaseElement {
    *   [ja][/ja]
    */
   setActiveIndex(index, options = {}) {
-    if (options && typeof options != 'object') {
-      throw new Error('options must be an object. You supplied ' + options);
-    }
-
-    options.animation = options.animation || this.getAttribute('animation');
-    options.animationOptions = util.extend(
-      { duration: .3, timing: 'cubic-bezier(.4, .7, .5, 1)' },
-      options.animationOptions || {},
-      this.hasAttribute('animation-options') ? util.animationOptionsParse(this.getAttribute('animation-options')) : {}
-    );
+    options = {
+      animation: this.getAttribute('animation'),
+      animationOptions: this.hasAttribute('animation-options')
+        ? util.animationOptionsParse(this.getAttribute('animation-options'))
+        : { duration: .3, timing: 'cubic-bezier(.4, .7, .5, 1)' },
+      ...options
+    };
 
     return this._swiper.setActiveIndex(index, options)
       .then(() => {
@@ -533,7 +530,7 @@ export default class CarouselElement extends BaseElement {
 
   set onSwipe(value) {
     if (value && !(value instanceof Function)) {
-      throw new Error(`'onSwipe' must be a function.`)
+      util.throw(`"onSwipe" must be a function`)
     }
     this._onSwipe = value;
   }

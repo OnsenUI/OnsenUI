@@ -36,7 +36,7 @@ const scheme = {
  *    Most attributes that can be used for a normal `<input type="checkbox">` element can also be used on the `<ons-checkbox>` element.
  *  [/en]
  *  [ja][/ja]
- * @tutorial vanilla/Reference/input
+ * @tutorial vanilla/Reference/checkbox
  * @seealso ons-switch
  *   [en]The `<ons-switch>` element is used to display a draggable toggle switch.[/en]
  *   [ja][/ja]

@@ -98,7 +98,7 @@ export default class SplitterContentElement extends BaseElement {
 
   connectedCallback() {
     if (!util.match(this.parentNode, 'ons-splitter')) {
-      throw new Error(`"ons-splitter-content" must have "ons-splitter" as parentNode.`);
+      util.throw('"ons-splitter-content" must have "ons-splitter" as parent');
     }
   }
 
@@ -150,7 +150,7 @@ export default class SplitterContentElement extends BaseElement {
 
   set pageLoader(loader) {
     if (!(loader instanceof PageLoader)) {
-      throw Error('First parameter must be an instance of PageLoader');
+      util.throwPageLoader();
     }
     this._pageLoader = loader;
   }

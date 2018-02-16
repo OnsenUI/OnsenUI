@@ -2,11 +2,12 @@
 CHANGELOG
 ====
 
-dev
+1.10.0
 ----
 
 ### New Features
 
+  * Support Onsen UI Core 2.9.x.
   * Page: Added 'onInfiniteScroll' prop.
 
 1.9.0

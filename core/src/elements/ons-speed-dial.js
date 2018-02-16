@@ -251,7 +251,7 @@ export default class SpeedDialElement extends BaseElement {
         }
         break;
       default:
-        throw new Error('Argument must be one of up, down, left or right.');
+        util.throw('Argument must be one of up, down, left or right.');
     }
   }
 

@@ -19,7 +19,7 @@ import util from './util';
 
 // Validate parameters
 const checkOptions = options => {
-  const err = (prop, type = 'Function') => { throw new Error(`"options.${prop}" must be an instance of ${type}.`); };
+  const err = (prop, type = 'Function') => util.throw(`"options.${prop}" must be an instance of ${type}`);
   const hasOwnProperty = prop => Object.hasOwnProperty.call(options, prop);
   const instanceOf = (prop, type = Function) => options[prop] instanceof type;
 
