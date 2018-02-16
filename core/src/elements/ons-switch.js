@@ -68,6 +68,7 @@ export default class SwitchElement extends BaseCheckboxElement {
 
     this._onChange = this._onChange.bind(this);
     this._onRelease = this._onRelease.bind(this);
+    this._lastTimeStamp = 0;
   }
 
   get _scheme() {
@@ -118,7 +119,7 @@ export default class SwitchElement extends BaseCheckboxElement {
 
   _onClick(ev) {
     if (ev.target.classList.contains(`${this.defaultElementClass}__touch`)
-      || ev.timeStamp === this._lastTimeStamp // Prevent second click triggered by <label>
+      || (ev.timeStamp - this._lastTimeStamp < 50) // Prevent second click triggered by <label>
     ) {
       ev.preventDefault();
     }
@@ -170,10 +171,11 @@ export default class SwitchElement extends BaseCheckboxElement {
     ModifierUtil.removeModifier(this, 'active');
   }
 
-  click() {
+  click(ev = {}) {
     if (!this.disabled) {
       this.checked = !this.checked;
       this._emitChangeEvent();
+      this._lastTimeStamp = ev.timeStamp || 0;
     }
   }
 

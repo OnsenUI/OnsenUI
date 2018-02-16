@@ -21,9 +21,9 @@ class BasicComponent extends React.Component {
         node.className = node.className.replace(this.lastClass, ' ');
       }
 
-      this.lastClass = ' ' + this.props.className.trim();
+      this.lastClass = this.props.className.trim();
 
-      node.className = node.className.trim() + this.lastClass;
+      node.className = node.className.trim() + ' ' + this.lastClass;
     }
 
     if (!ons) {

@@ -99,6 +99,13 @@ export default class ToolbarElement extends BaseElement {
    */
 
   /**
+   * @attribute static
+   * @description
+   *   [en]Static toolbars are not animated by `ons-navigator` when pushing or popping pages. This can be useful to improve performance in some situations.[/en]
+   *   [ja][/ja]
+   */
+
+  /**
    * @attribute modifier
    * @description
    *   [en]The appearance of the toolbar.[/en]
