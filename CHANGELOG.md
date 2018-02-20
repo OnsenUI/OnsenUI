@@ -7,6 +7,7 @@ dev
 
  ### Bug Fixes
 
+ * onsenui.d.ts: Fixed [#2354](https://github.com/OnsenUI/OnsenUI/issues/2354).
  * ons-toolbar: `static` attribute works with iOS status bar.
 
 2.9.2

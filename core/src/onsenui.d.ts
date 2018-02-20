@@ -1125,7 +1125,7 @@ interface AlertOptions {
   message?: string;
   messageHTML?: string;
   buttonLabel?: string;
-  buttonLabels?: [string];
+  buttonLabels?: string[];
   primaryButtonIndex?: number;
   cancelable?: boolean;
   animation?: string;
