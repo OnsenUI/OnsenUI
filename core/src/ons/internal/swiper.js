@@ -143,7 +143,10 @@ export default class Swiper {
   }
 
   _setSwiping(toggle) {
-    this.target.classList.toggle('swiping', toggle); // Hides everything except shown pages
+    if (this.target && this.target.classList) {
+      this.target.classList.toggle('swiping', toggle); // Hides everything except shown pages
+    }
+
   }
 
   setActiveIndex(index, options = {}) {
