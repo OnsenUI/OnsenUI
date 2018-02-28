@@ -1,6 +1,22 @@
 CHANGELOG
 ====
 
+2.5.1
+----
+
+ ### New Features
+
+ * VOnsNavigator: Navigator can now pass props to pages throw the `onsNavigatorProps` property in page components.
+ * `modifier` prop now supports object and array syntax just like `class` prop.
+
+2.5.0
+----
+
+ ### New Features
+
+ * Support Onsen UI Core 2.9.x.
+ * VOnsNavigator: Navigator's options can now be specified in `onsNavigatorOptions` property in child pages (animation, animationOptions, etc.). This property can be either inside components' `data` property (in the object returned) or at the same level as `data` and `methods`.
+
 2.4.3
 ----
 

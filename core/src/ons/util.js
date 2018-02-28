@@ -15,16 +15,49 @@ limitations under the License.
 
 */
 
+import onsElements from './elements';
 import styler from './styler';
 import internal from './internal';
 import autoStyle from './autostyle';
 import ModifierUtil from './internal/modifier-util';
 import animationOptionsParse from './animation-options-parser';
+import platform from './platform';
 
 const util = {};
+const errorPrefix = '[Onsen UI]';
 
 util.globals = {
-  fabOffset: 0
+  fabOffset: 0,
+  errorPrefix,
+  supportsPassive: false
+};
+
+platform._runOnActualPlatform(() => {
+  util.globals.actualMobileOS = platform.getMobileOS();
+  util.globals.isUIWebView = platform.isUIWebView();
+  util.globals.isWKWebView = platform.isWKWebView();
+});
+
+try {
+  const opts = Object.defineProperty({}, 'passive', {
+    get() { util.globals.supportsPassive = true; }
+  });
+  window.addEventListener('testPassive', null, opts);
+  window.removeEventListener('testPassive', null, opts);
+} catch (e) { null; }
+
+/**
+ * @param {Element} el Target
+ * @param {String} name Event name
+ * @param {Function} handler Event handler
+ * @param {Object} [opt] Event options (passive, capture...)
+ * @param {Boolean} [isGD] If comes from GestureDetector. Just for testing.
+ */
+util.addEventListener = (el, name, handler, opt, isGD) => {
+  el.addEventListener(name, handler, util.globals.supportsPassive ? opt : (opt || {}).capture);
+};
+util.removeEventListener = (el, name, handler, opt, isGD) => {
+  el.removeEventListener(name, handler, util.globals.supportsPassive ? opt : (opt || {}).capture);
 };
 
 /**
@@ -167,7 +200,7 @@ util.createElement = (html) => {
   }
 
   if (wrapper.children.length > 1) {
-    throw new Error('"html" must be one wrapper element.');
+    util.throw('HTML template must contain a single root element')
   }
 
   const element = wrapper.children[0];
@@ -459,25 +492,58 @@ util.defer = () => {
  */
 util.warn = (...args) => {
   if (!internal.config.warningsDisabled) {
-    console.warn(...args);
+    console.warn(errorPrefix, ...args);
+  }
+};
+
+util.throw = (message) => {
+  throw new Error(`${errorPrefix} ${message}`);
+};
+
+util.throwAbstract = () => util.throw('Cannot instantiate abstract class');
+util.throwMember = () => util.throw('Class member must be implemented');
+util.throwPageLoader = () => util.throw('First parameter should be an instance of PageLoader');
+util.throwAnimator = (el) => util.throw(`"Animator" param must inherit ${el}Animator`);
+
+
+const prevent = e => e.cancelable && e.preventDefault();
+
+/**
+ * Prevent scrolling while draging horizontally on iOS.
+ *
+ * @param {gd} GestureDetector instance
+ */
+util.iosPreventScroll = gd => {
+  if (util.globals.actualMobileOS === 'ios') {
+    const clean = (e) => {
+      gd.off('touchmove', prevent);
+      gd.off('dragend', clean);
+    };
+
+    gd.on('touchmove', prevent);
+    gd.on('dragend', clean);
   }
 };
 
 /**
- * Prevent scrolling while draging horizontally.
+ * Prevents scroll in underlying pages on iOS. See #2220 #2274 #1949
  *
- * @param {gd} GestureDetector instance
+ * @param {el} HTMLElement that prevents the events
+ * @param {add} Boolean Add or remove event listeners
  */
-util.preventScroll = gd => {
-  const prevent = e => e.cancelable && e.preventDefault();
-
-  const clean = (e) => {
-    gd.off('touchmove', prevent);
-    gd.off('dragend', clean);
-  };
-
-  gd.on('touchmove', prevent);
-  gd.on('dragend', clean);
+util.iosPageScrollFix = (add) => { // Full fix - May cause issues with UIWebView's momentum scroll
+  if (util.globals.actualMobileOS === 'ios') {
+    document.body.classList.toggle('ons-ios-scroll', add); // Allows custom and localized fixes (#2274)
+    if (!util.globals.isUIWebView || internal.config.forceUIWebViewScrollFix) {
+      document.body.classList.toggle('ons-ios-scroll-fix', add);
+    }
+  }
+};
+util.iosMaskScrollFix = (el, add) => { // Half fix - only prevents scroll on masks
+  if (util.globals.isUIWebView) {
+    const action = (add ? 'add' : 'remove') + 'EventListener';
+    el[action]('touchmove', prevent, false);
+  }
 };
 
 /**
@@ -486,5 +552,13 @@ util.preventScroll = gd => {
  * @param {event}
  */
 util.isValidGesture = event => event.gesture !== undefined && (event.gesture.distance <= 15 || event.gesture.deltaTime <= 100);
+
+util.checkMissingImport = (...elementNames) => {
+  elementNames.forEach(name => {
+    if (!onsElements[name]) {
+      util.throw(`Ons${name} is required but was not imported (Custom Elements)`);
+    }
+  });
+}
 
 export default util;

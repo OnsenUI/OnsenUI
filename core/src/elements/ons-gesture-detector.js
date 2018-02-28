@@ -15,7 +15,7 @@ limitations under the License.
 
 */
 
-import ons from '../ons';
+import onsElements from '../ons/elements';
 import BaseElement from './base/base-element';
 import GestureDetector from '../ons/gesture-detector';
 
@@ -55,9 +55,9 @@ export default class GestureDetectorElement extends BaseElement {
   constructor() {
     super();
 
-    this._gestureDetector = new GestureDetector(this);
+    this._gestureDetector = new GestureDetector(this, { passive: true });
   }
 }
 
-ons.elements.GestureDetector = GestureDetectorElement;
+onsElements.GestureDetector = GestureDetectorElement;
 customElements.define('ons-gesture-detector', GestureDetectorElement);

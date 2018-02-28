@@ -15,7 +15,7 @@ limitations under the License.
 
 */
 
-import ons from '../ons';
+import onsElements from '../ons/elements';
 import util from '../ons/util';
 import autoStyle from '../ons/autostyle';
 import ModifierUtil from '../ons/internal/modifier-util';
@@ -66,8 +66,9 @@ export default class SwitchElement extends BaseCheckboxElement {
       this.attributeChangedCallback('modifier', null, this.getAttribute('modifier'));
     });
 
-    this._boundOnChange = this._onChange.bind(this);
-    this._boundOnRelease = this._onRelease.bind(this);
+    this._onChange = this._onChange.bind(this);
+    this._onRelease = this._onRelease.bind(this);
+    this._lastTimeStamp = 0;
   }
 
   get _scheme() {
@@ -117,15 +118,18 @@ export default class SwitchElement extends BaseCheckboxElement {
   }
 
   _onClick(ev) {
-    if (ev.target.classList.contains(`${this.defaultElementClass}__touch`)) {
+    if (ev.target.classList.contains(`${this.defaultElementClass}__touch`)
+      || (ev.timeStamp - this._lastTimeStamp < 50) // Prevent second click triggered by <label>
+    ) {
       ev.preventDefault();
     }
+    this._lastTimeStamp = ev.timeStamp;
   }
 
   _onHold(e) {
     if (!this.disabled) {
       ModifierUtil.addModifier(this, 'active');
-      document.addEventListener('release', this._boundOnRelease);
+      document.addEventListener('release', this._onRelease);
     }
   }
 
@@ -141,12 +145,11 @@ export default class SwitchElement extends BaseCheckboxElement {
     this._startX = this._locations[this.checked ? 1 : 0];// - e.gesture.deltaX;
 
     this.addEventListener('drag', this._onDrag);
-    document.addEventListener('release', this._boundOnRelease);
+    document.addEventListener('release', this._onRelease);
   }
 
   _onDrag(e) {
     e.stopPropagation();
-    e.gesture.preventDefault();
     this._handle.style.left = this._getPosition(e) + 'px';
   }
 
@@ -162,16 +165,17 @@ export default class SwitchElement extends BaseCheckboxElement {
     }
 
     this.removeEventListener('drag', this._onDrag);
-    document.removeEventListener('release', this._boundOnRelease);
+    document.removeEventListener('release', this._onRelease);
 
     this._handle.style.left = '';
     ModifierUtil.removeModifier(this, 'active');
   }
 
-  click() {
+  click(ev = {}) {
     if (!this.disabled) {
       this.checked = !this.checked;
       this._emitChangeEvent();
+      this._lastTimeStamp = ev.timeStamp || 0;
     }
   }
 
@@ -185,19 +189,19 @@ export default class SwitchElement extends BaseCheckboxElement {
 
   connectedCallback() {
     contentReady(this, () => {
-      this._input.addEventListener('change', this._boundOnChange);
+      this._input.addEventListener('change', this._onChange);
     });
 
     this.addEventListener('dragstart', this._onDragStart);
     this.addEventListener('hold', this._onHold);
     this.addEventListener('tap', this.click);
     this.addEventListener('click', this._onClick);
-    this._gestureDetector = new GestureDetector(this, {dragMinDistance: 1, holdTimeout: 251});
+    this._gestureDetector = new GestureDetector(this, { dragMinDistance: 1, holdTimeout: 251, passive: true });
   }
 
   disconnectedCallback() {
     contentReady(this, () => {
-      this._input.removeEventListener('change', this._boundOnChange);
+      this._input.removeEventListener('change', this._onChange);
     });
 
     this.removeEventListener('dragstart', this._onDragStart);
@@ -306,5 +310,5 @@ export default class SwitchElement extends BaseCheckboxElement {
 
 }
 
-ons.elements.Switch = SwitchElement;
+onsElements.Switch = SwitchElement;
 customElements.define('ons-switch', SwitchElement);

@@ -1,5 +1,5 @@
 <template>
-  <ons-icon v-on="unrecognizedListeners">
+  <ons-icon v-on="unrecognizedListeners" :modifier="normalizedModifier">
     <slot></slot>
   </ons-icon>
 </template>
@@ -7,10 +7,10 @@
 <script>
   /* This file is generated automatically */
   import 'onsenui/esm/elements/ons-icon';
-  import { deriveEvents } from '../mixins';
+  import { deriveEvents, modifier } from '../mixins';
 
   export default {
     name: 'v-ons-icon',
-    mixins: [deriveEvents]
+    mixins: [deriveEvents, modifier]
   };
 </script>

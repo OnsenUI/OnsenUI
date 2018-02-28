@@ -1,12 +1,12 @@
 import m from 'mithril';
 import {Navigator, Page, NavigatorController} from 'mithril-onsenui'
-import SplitterExample from './SplitterExample';
+// import SplitterExample from './SplitterExample';
 import PageExample from './PageExample';
-import SecondPageExample from './SecondPageExample';
+// import SecondPageExample from './SecondPageExample';
 
 var navigatorController = new NavigatorController();
 var pageStack = [
-	[SplitterExample, {navigator: navigatorController}, 'Contents 1']
+	[PageExample, {navigator: navigatorController}, 'Page 1']
 ];
 
 class NavigatorExample {

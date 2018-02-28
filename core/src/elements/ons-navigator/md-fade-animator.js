@@ -24,9 +24,9 @@ import animit from '../../ons/animit';
  */
 export default class MDFadeNavigatorAnimator extends NavigatorAnimator {
 
-  constructor({timing = 'cubic-bezier(0.4, 0.0, 0.2, 1)', timingOnPop = 'cubic-bezier(0.4, 0.0, 1, 1)', delay = 0, duration = 0.2} = {}) {
+  constructor({timing = 'cubic-bezier(0.4, 0, 0.2, 1)', timingPop = 'cubic-bezier(0.4, 0, 1, 1)', delay = 0, duration = 0.2} = {}) {
     super({timing, delay, duration});
-    this.timingOnPop = timingOnPop;
+    this.timingPop = timingPop;
   }
 
   /**
@@ -39,25 +39,11 @@ export default class MDFadeNavigatorAnimator extends NavigatorAnimator {
 
     animit.runAll(
 
-      animit(enterPage)
-        .saveStyle()
-        .queue({
-          css: {
-            transform: 'translate3D(0, 42px, 0)',
-            opacity: 0
-          },
-          duration: 0
-        })
-        .wait(this.delay)
-        .queue({
-          css: {
-            transform: 'translate3D(0, 0, 0)',
-            opacity: 1
-          },
-          duration: this.duration,
-          timing: this.timing
-        })
-        .restoreStyle()
+      animit(enterPage, this.def)
+        .default(
+          { transform: 'translate3D(0, 42px, 0)', opacity: 0 },
+          { transform: 'translate3D(0, 0, 0)', opacity: 1 }
+        )
         .queue(done => {
           unblock();
           callback();
@@ -77,23 +63,11 @@ export default class MDFadeNavigatorAnimator extends NavigatorAnimator {
 
     animit.runAll(
 
-      animit(leavePage)
-        .queue({
-          css: {
-            transform: 'translate3D(0, 0, 0)',
-            opacity: 1
-          },
-          duration: 0
-        })
-        .wait(0.15)
-        .queue({
-          css: {
-            transform: 'translate3D(0, 38px, 0)',
-            opacity: 0
-          },
-          duration: this.duration,
-          timing: this.timingOnPop,
-        })
+      animit(leavePage, this.def)
+        .default(
+          { transform: 'translate3D(0, 0, 0)', opacity: 1 },
+          { css: { transform: 'translate3D(0, 38px, 0)', opacity: 0 }, timing: this.timingPop }
+        )
         .queue(done => {
           unblock();
           callback();

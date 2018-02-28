@@ -158,7 +158,7 @@ internal.getTemplateHTMLAsync = function(page) {
         }
       };
       xhr.onerror = function() {
-        throw new Error(`The page is not found: ${page}`);
+        util.throw(`Page template not found: ${page}`);
       };
       xhr.send(null);
     });

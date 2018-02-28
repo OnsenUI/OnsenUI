@@ -15,7 +15,7 @@ limitations under the License.
 
 */
 
-import ons from '../ons';
+import onsElements from '../ons/elements';
 import util from '../ons/util';
 import internal from '../ons/internal';
 import autoStyle from '../ons/autostyle';
@@ -149,12 +149,10 @@ export default class PageElement extends BaseElement {
 
     this._deriveHooks();
 
+    this._defaultClassName = defaultClassName;
     this.classList.add(defaultClassName);
-    this._initialized = false;
 
-    this._contentObserver = new MutationObserver(() => {
-      this._tryToSuppressLayerCreation();
-    });
+    this._initialized = false;
 
     contentReady(this, () => {
       this._compile();
@@ -162,33 +160,7 @@ export default class PageElement extends BaseElement {
       this._isShown = false;
       this._contentElement = this._getContentElement();
       this._backgroundElement = this._getBackgroundElement();
-
-      this._contentObserver.observe(this._contentElement, {childList: true});
-      this._tryToSuppressLayerCreation();
     });
-  }
-
-  _tryToSuppressLayerCreation() {
-    if (!this._contentElement) {
-      return;
-    }
-
-    const content = this._contentElement;
-    const scrollerSet = new Set([
-      'ons-navigator',
-      'ons-page',
-      'ons-tabbar',
-      'ons-splitter'
-    ]);
-
-    const shouldSuppress = content.children.length === 1 && scrollerSet.has(content.children[0].nodeName.toLowerCase());
-
-    // If content element has only one element and the element has scroll content, there is no need for layer creation in this content element.
-    if (shouldSuppress) {
-      content.classList.add('page__content--suppress-layer-creation');
-    } else {
-      content.classList.remove('page__content--suppress-layer-creation');
-    }
   }
 
   _compile() {
@@ -213,13 +185,12 @@ export default class PageElement extends BaseElement {
     this._tryToFillStatusBar(content); // Must run before child pages try to fill status bar.
     this.insertBefore(content, background.nextSibling); // Can trigger attached connectedCallbacks
 
-    // Make wrapper pages transparent for animations
-    if (!background.style.backgroundColor
-      && (!toolbar || !util.hasModifier(toolbar, 'transparent'))
+    if ((!toolbar || !util.hasModifier(toolbar, 'transparent'))
       && content.children.length === 1
       && util.isPageControl(content.children[0])
     ) {
-        background.style.backgroundColor = 'transparent';
+      this._defaultClassName += ' page--wrapper';
+      this.attributeChangedCallback('class');
     }
 
     ModifierUtil.initModifier(this, scheme);
@@ -250,6 +221,7 @@ export default class PageElement extends BaseElement {
     if (util.findChild(this, 'ons-toolbar')) {
       return true;
     }
+
     return !!util.findChild(content, el => {
       return util.match(el, 'ons-toolbar') && !el.hasAttribute('inline');
     });
@@ -279,7 +251,6 @@ export default class PageElement extends BaseElement {
           setImmediate(() => this._show());
         }
       }
-
     });
   }
 
@@ -309,7 +280,7 @@ export default class PageElement extends BaseElement {
    */
   set onInfiniteScroll(value) {
     if (value && !(value instanceof Function)) {
-      throw new Error('onInfiniteScroll must be a function or null');
+      util.throw('"onInfiniteScroll" must be function or null');
     }
 
     contentReady(this, () => {
@@ -370,7 +341,7 @@ export default class PageElement extends BaseElement {
     if (result) {
       return result;
     }
-    throw Error('fail to get ".page__content" element.');
+    util.throw('Fail to get ".page__content" element');
   }
 
   _getBackgroundElement() {
@@ -378,7 +349,7 @@ export default class PageElement extends BaseElement {
     if (result) {
       return result;
     }
-    throw Error('fail to get ".page__background" element.');
+    util.throw('Fail to get ".page__background" element');
   }
 
   _getBottomToolbarElement() {
@@ -396,7 +367,7 @@ export default class PageElement extends BaseElement {
   attributeChangedCallback(name, last, current) {
     switch (name) {
       case 'class':
-        util.restoreClass(this, defaultClassName, scheme);
+        util.restoreClass(this, this._defaultClassName, scheme);
         break;
       case 'modifier':
         ModifierUtil.onModifierChanged(last, current, this, scheme);
@@ -418,6 +389,7 @@ export default class PageElement extends BaseElement {
   _show() {
     if (!this._isShown && util.isAttached(this)) {
       this._isShown = true;
+      this.setAttribute('shown', '');
       this.onShow && this.onShow();
       util.triggerElementEvent(this, 'show');
       util.propagateAction(this, '_show');
@@ -427,6 +399,7 @@ export default class PageElement extends BaseElement {
   _hide() {
     if (this._isShown) {
       this._isShown = false;
+      this.removeAttribute('shown');
       this.onHide && this.onHide();
       util.triggerElementEvent(this, 'hide');
       util.propagateAction(this, '_hide');
@@ -457,7 +430,7 @@ export default class PageElement extends BaseElement {
         get: () => this[`_${key}`],
         set: value => {
           if (!(value instanceof Function)) {
-            throw new Error(`${key} hook must be a function`);
+            util.throw(`"${key}" hook must be a function`);
           }
           this[`_${key}`] = value.bind(this);
         }
@@ -478,5 +451,5 @@ export default class PageElement extends BaseElement {
    */
 }
 
-ons.elements.Page = PageElement;
+onsElements.Page = PageElement;
 customElements.define('ons-page', PageElement);

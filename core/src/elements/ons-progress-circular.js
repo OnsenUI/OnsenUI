@@ -15,7 +15,7 @@ limitations under the License.
 
 */
 
-import ons from '../ons';
+import onsElements from '../ons/elements';
 import util from '../ons/util';
 import autoStyle from '../ons/autostyle';
 import ModifierUtil from '../ons/internal/modifier-util';
@@ -48,7 +48,7 @@ const INDET = 'indeterminate';
  *   [/en]
  *   [ja][/ja]
  * @codepen EVzMjR
- * @tutorial vanilla/Reference/progress
+ * @tutorial vanilla/Reference/progress-circular
  * @seealso ons-progress-bar
  *   [en]The `<ons-progress-bar>` component displays a bar progress indicator.[/en]
  *   [ja][/ja]
@@ -149,7 +149,7 @@ export default class ProgressCircularElement extends BaseElement {
    */
   set value(value) {
     if (typeof value !== 'number' || value < 0 || value > 100) {
-      throw new Error('Invalid value');
+      util.throw('Invalid value');
     }
 
     this.setAttribute('value', Math.floor(value));
@@ -168,7 +168,7 @@ export default class ProgressCircularElement extends BaseElement {
    */
   set secondaryValue(value) {
     if (typeof value !== 'number' || value < 0 || value > 100) {
-      throw new Error('Invalid value');
+      util.throw('Invalid value');
     }
 
     this.setAttribute('secondary-value', Math.floor(value));
@@ -236,5 +236,5 @@ export default class ProgressCircularElement extends BaseElement {
   }
 }
 
-ons.elements.ProgressCircular = ProgressCircularElement;
+onsElements.ProgressCircular = ProgressCircularElement;
 customElements.define('ons-progress-circular', ProgressCircularElement);

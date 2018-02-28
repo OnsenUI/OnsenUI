@@ -28,10 +28,33 @@ const _setAttributes = (element, options) => {
   }
 };
 
+const _normalizeArguments = (message, options = {}, defaults = {}) => {
+  options = { ...options };
+  typeof message === 'string' ? (options.message = message) : (options = message);
+  if (!options || !options.message && !options.messageHTML) {
+    util.throw('Notifications must contain a message');
+  }
+
+  if (options.hasOwnProperty('buttonLabels') || options.hasOwnProperty('buttonLabel')) {
+    options.buttonLabels = options.buttonLabels || options.buttonLabel;
+    if (!Array.isArray(options.buttonLabels)) {
+      options.buttonLabels = [options.buttonLabels || '']
+    }
+  }
+
+  return util.extend({
+      compile: param => param,
+      callback: param => param,
+      animation: 'default',
+      cancelable: false,
+      primaryButtonIndex: (options.buttonLabels || defaults.buttonLabels || []).length - 1
+    }, defaults, options);
+};
+
 /**
  * @object ons.notification
  * @category dialog
- * @tutorial vanilla/Reference/dialog
+ * @tutorial vanilla/Reference/notification
  * @description
  *   [en]
  *     Utility methods to create different kinds of notifications. There are three methods available:
@@ -65,7 +88,10 @@ const _setAttributes = (element, options) => {
  */
 const notification = {};
 
-notification._createAlertDialog = options => {
+notification._createAlertDialog = (...params) => new Promise(resolve => {
+  const options = _normalizeArguments(...params);
+  util.checkMissingImport('AlertDialog', 'AlertDialogButton');
+
   // Prompt input string
   let inputString = '';
   if (options.isPrompt) {
@@ -88,7 +114,7 @@ notification._createAlertDialog = options => {
         class="
           ${index === options.primaryButtonIndex ? ' alert-dialog-button--primal' : ''}
           ${options.buttonLabels.length <= 2 ? ' alert-dialog-button--rowfooter' : ''}
-        " 
+        "
         style="position: relative;">
         ${label}
       </ons-alert-dialog-button>
@@ -136,8 +162,6 @@ notification._createAlertDialog = options => {
   // Set attributes
   _setAttributes(el.dialog, options);
 
-  const deferred = util.defer();
-
   // Prompt events
   if (options.isPrompt && options.submitOnEnter) {
     el.input = el.dialog.querySelector('.text-input');
@@ -149,7 +173,7 @@ notification._createAlertDialog = options => {
               const resolveValue = el.input.value;
               _destroyDialog();
               options.callback(resolveValue);
-              deferred.resolve(resolveValue);
+              resolve(resolveValue);
             }
           });
       }
@@ -170,7 +194,7 @@ notification._createAlertDialog = options => {
               el.dialog.remove();
               _destroyDialog();
               options.callback(resolveValue);
-              deferred.resolve(resolveValue);
+              resolve(resolveValue);
             }
           });
     };
@@ -188,7 +212,7 @@ notification._createAlertDialog = options => {
       });
       const resolveValue = options.isPrompt ? null : -1;
       options.callback(resolveValue);
-      deferred.resolve(resolveValue);
+      resolve(resolveValue);
     };
     el.dialog.addEventListener('dialog-cancel', el.dialog.onDialogCancel, false);
   }
@@ -200,36 +224,13 @@ notification._createAlertDialog = options => {
     el.dialog.show()
       .then(() => {
         if (el.input && options.isPrompt && options.autofocus) {
+          const strLength = el.input.value.length;
           el.input.focus();
+          el.input.setSelectionRange(strLength, strLength);
         }
       });
   });
-
-  return deferred.promise;
-};
-
-const _normalizeArguments = (message, options = {}, defaults = {}) => {
-  options = { ...options };
-  typeof message === 'string' ? (options.message = message) : (options = message);
-  if (!options.message && !options.messageHTML) {
-    throw new Error('Notifications must contain a message.');
-  }
-
-  if (options.hasOwnProperty('buttonLabels') || options.hasOwnProperty('buttonLabel')) {
-    options.buttonLabels = options.buttonLabels || options.buttonLabel;
-    if (!Array.isArray(options.buttonLabels)) {
-      options.buttonLabels = [options.buttonLabels || '']
-    }
-  }
-
-  return util.extend({
-      compile: param => param,
-      callback: param => param,
-      animation: 'default',
-      cancelable: false,
-      primaryButtonIndex: (options.buttonLabels || defaults.buttonLabels || []).length - 1
-    }, defaults, options);
-};
+});
 
 /**
  * @method alert
@@ -297,14 +298,11 @@ const _normalizeArguments = (message, options = {}, defaults = {}) => {
  *     このメソッドの引数には、options.messageもしくはoptions.messageHTMLのどちらかを必ず指定する必要があります。
  *   [/ja]
  */
-notification.alert = (message, options) => {
-  options = _normalizeArguments(message, options, {
+notification.alert = (message, options) =>
+  notification._createAlertDialog(message, options, {
     buttonLabels: ['OK'],
     title: 'Alert'
   });
-
-  return notification._createAlertDialog(options);
-};
 
 /**
  * @method confirm
@@ -343,14 +341,11 @@ notification.alert = (message, options) => {
  *     このメソッドの引数には、options.messageもしくはoptions.messageHTMLのどちらかを必ず指定する必要があります。
  *   [/ja]
  */
-notification.confirm = (message, options) => {
-  options = _normalizeArguments(message, options, {
+notification.confirm = (message, options) =>
+  notification._createAlertDialog(message, options, {
     buttonLabels: ['Cancel', 'OK'],
     title: 'Confirm'
   });
-
-  return notification._createAlertDialog(options);
-};
 
 /**
  * @method prompt
@@ -403,17 +398,14 @@ notification.confirm = (message, options) => {
  *     このメソッドの引数には、options.messageもしくはoptions.messageHTMLのどちらかを必ず指定する必要があります。
  *   [/ja]
  */
-notification.prompt = (message, options) => {
-  options = _normalizeArguments(message, options, {
+notification.prompt = (message, options) =>
+  notification._createAlertDialog(message, options, {
     buttonLabels: ['OK'],
     title: 'Alert',
     isPrompt: true,
     autofocus: true,
     submitOnEnter: true
   });
-
-  return notification._createAlertDialog(options);
-};
 
 /**
  * @method toast
@@ -468,54 +460,57 @@ notification.prompt = (message, options) => {
  *   [ja][/ja]
  */
 notification.toast = (message, options) => {
-  options = _normalizeArguments(message, options, {
-    timeout: 0,
-    force: false
-  });
+  const promise = new Promise(resolve => {
+    util.checkMissingImport('Toast'); // Throws error, must be inside promise
 
-  let toast = util.createElement(`
-    <ons-toast>
-      ${options.message}
-      ${options.buttonLabels ? `<button>${options.buttonLabels[0]}</button>` : ''}
-    </ons-toast>
-  `);
+    options = _normalizeArguments(message, options, {
+      timeout: 0,
+      force: false
+    });
 
-  _setAttributes(toast, options);
+    let toast = util.createElement(`
+      <ons-toast>
+        ${options.message}
+        ${options.buttonLabels ? `<button>${options.buttonLabels[0]}</button>` : ''}
+      </ons-toast>
+    `);
 
-  const deferred = util.defer();
-  const resolve = value => {
-    if (toast) {
-      toast
-      .hide()
-      .then(() => {
-        if (toast) {
-          toast.remove();
-          toast = null;
-          options.callback(value);
-          deferred.resolve(value);
+    _setAttributes(toast, options);
+
+    const finish = value => {
+      if (toast) {
+        toast
+        .hide()
+        .then(() => {
+          if (toast) {
+            toast.remove();
+            toast = null;
+            options.callback(value);
+            resolve(value);
+          }
+        });
+      }
+    };
+
+    if (options.buttonLabels) {
+      util.findChild(toast._toast, 'button').onclick = () => finish(0);
+    }
+
+    document.body.appendChild(toast);
+    options.compile(toast);
+
+    const show = () => {
+      toast.parentElement && toast.show(options).then(() => {
+        if (options.timeout) {
+          setTimeout(() => finish(-1), options.timeout)
         }
       });
-    }
-  };
+    };
 
-  if (options.buttonLabels) {
-    util.findChild(toast._toast, 'button').onclick = () => resolve(0);
-  }
+    setImmediate(() => options.force ? show() : ToastQueue.add(show, promise))
+  });
 
-  document.body.appendChild(toast);
-  options.compile(toast);
-
-  const show = () => {
-    toast.parentElement && toast.show(options).then(() => {
-      if (options.timeout) {
-        setTimeout(() => resolve(-1), options.timeout)
-      }
-    });
-  };
-
-  options.force ? show() : ToastQueue.add(show, deferred.promise);
-
-  return deferred.promise;
+  return promise;
 };
 
 export default notification;

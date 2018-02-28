@@ -160,19 +160,29 @@
 
 .tabbar__label {
   @apply(--reset-font);
+  display: inline-block;
 }
 
-.tabbar__badge.notification { /* FIXME */
-  position: absolute;
-  top: 5px;
+.tabbar__badge.notification {
+  vertical-align: text-bottom;
+  top: -1px;
+  margin-left: 5px;
   z-index: 10;
   font-size: 12px;
   height: 16px;
+  min-width: 16px;
   line-height: 16px;
   border-radius: 8px;
 }
 
+.tabbar__icon ~ .tabbar__badge.notification {
+  position: absolute;
+  top: 5px;
+  margin-left: 0;
+}
+
 .tabbar__icon + .tabbar__label {
+  display: block;
   font-size: 10px;
   line-height: 1;
   margin: 0;

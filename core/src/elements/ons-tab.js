@@ -15,7 +15,7 @@ limitations under the License.
 
 */
 
-import ons from '../ons';
+import onsElements from '../ons/elements';
 import util from '../ons/util';
 import autoStyle from '../ons/autostyle';
 import ModifierUtil from '../ons/internal/modifier-util';
@@ -70,13 +70,13 @@ const scheme = {
  *   </ons-tab>
  * </ons-tabbar>
  *
- * <ons-template id="home.html">
+ * <template id="home.html">
  *   ...
- * </ons-template>
+ * </template>
  *
- * <ons-template id="settings.html">
+ * <template id="settings.html">
  *   ...
- * </ons-template>
+ * </template>
 
  */
 export default class TabElement extends BaseElement {
@@ -144,12 +144,12 @@ export default class TabElement extends BaseElement {
     }
 
     this._pageLoader = defaultPageLoader;
-    this._boundOnClick = this._onClick.bind(this);
+    this._onClick = this._onClick.bind(this);
   }
 
   set pageLoader(loader) {
     if (!(loader instanceof PageLoader)) {
-      throw Error('First parameter must be an instance of PageLoader.');
+      util.throwPageLoader();
     }
     this._pageLoader = loader;
   }
@@ -257,8 +257,15 @@ export default class TabElement extends BaseElement {
 
   _loadPageElement(parent, page) {
     this._hasLoaded = true;
+
     return new Promise(resolve => {
       this._pageLoader.load({ parent, page }, pageElement => {
+
+        if (!this.isActive()) { // Perf, fixes #2324 when active tab is 0
+          pageElement.style.visibility = 'hidden';
+          this._tabbar._loadInactive.promise.then(() => pageElement.style.visibility = '');
+        }
+
         parent.replaceChild(pageElement, parent.children[this.index]); // Ensure position
         this._loadedPage = pageElement;
         resolve(pageElement);
@@ -288,16 +295,18 @@ export default class TabElement extends BaseElement {
   }
 
   disconnectedCallback() {
-    this.loaded = null;
-    this.removeEventListener('click', this._boundOnClick, false);
+    this.removeEventListener('click', this._onClick, false);
     if (this._loadedPage) {
       this._pageLoader.unload(this._loadedPage);
       this._loadedPage = null;
       this._hasLoaded = false;
+      this.loaded = null;
     }
   }
 
   connectedCallback() {
+    this.addEventListener('click', this._onClick, false);
+
     if (!util.isAttached(this) || this.loaded) {
       return; // ons-tabbar compilation may trigger this
     }
@@ -309,7 +318,7 @@ export default class TabElement extends BaseElement {
       const index = this.index;
       const tabbar = this._tabbar;
       if (!tabbar) {
-        throw new Error('This ons-tab element must be child of ons-tabbar element.');
+        util.throw('Tab elements must be children of Tabbar');
       }
 
       if (tabbar.hasAttribute('modifier')) {
@@ -331,16 +340,14 @@ export default class TabElement extends BaseElement {
           const pageTarget = this.page || this.getAttribute('page');
           if (!this.pageElement && pageTarget) {
             const parentTarget = tabbar._targetElement;
-            const dummyPage = util.create('div', { height: '100%', width: '100%', backgroundColor: 'transparent' });
+            const dummyPage = util.create('div', { height: '100%', width: '100%', visibility: 'hidden' });
             parentTarget.insertBefore(dummyPage, parentTarget.children[index]); // Ensure position
-            return this._loadPageElement(parentTarget, pageTarget).then(deferred.resolve)
+            return this._loadPageElement(parentTarget, pageTarget).then(deferred.resolve);
           }
 
           return deferred.resolve(this.pageElement);
         });
       }
-
-      this.addEventListener('click', this._boundOnClick, false);
     });
   }
 
@@ -371,5 +378,5 @@ export default class TabElement extends BaseElement {
   }
 }
 
-ons.elements.Tab = TabElement;
+onsElements.Tab = TabElement;
 customElements.define('ons-tab', TabElement);

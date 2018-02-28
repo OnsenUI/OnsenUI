@@ -89,4 +89,34 @@ const portal = {
   }
 };
 
-export { hidable, hasOptions, selfProvider, dialogCancel, portal };
+const modifier = {
+  props: {
+    modifier: {
+      type: [String, Array, Object]
+    },
+  },
+
+  computed: {
+    normalizedModifier() {
+      const modifier = this.modifier;
+
+      if (typeof modifier === 'string') {
+       return modifier;
+      }
+
+      if (Array.isArray(modifier)) {
+        return modifier.join(' ');
+      }
+
+      if (typeof modifier === 'object') {
+        return Object.keys(modifier)
+          .reduce((acc, key) => (acc + (modifier[key] ? ` ${key}` : '')), '')
+          .trim();
+      }
+
+      return false;
+    }
+  }
+};
+
+export { hidable, hasOptions, selfProvider, dialogCancel, portal, modifier };

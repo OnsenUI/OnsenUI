@@ -11,7 +11,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import ons from '../ons';
+import onsElements from '../ons/elements';
 import BaseInputElement from './base/base-input';
 
 const scheme = {
@@ -31,7 +31,7 @@ const scheme = {
  *    Most attributes that can be used for a normal `<input>` element can also be used on the `<ons-search-input>` element.
  *  [/en]
  *  [ja][/ja]
- * @tutorial vanilla/Reference/input
+ * @tutorial vanilla/Reference/search-input
  * @seealso ons-input
  *   [en]The `<ons-input>` element is used to display a text input.[/en]
  *   [ja][/ja]
@@ -95,5 +95,5 @@ export default class SearchInputElement extends BaseInputElement {
    */
 }
 
-ons.elements.SearchInput = SearchInputElement;
+onsElements.SearchInput = SearchInputElement;
 customElements.define('ons-search-input', SearchInputElement);

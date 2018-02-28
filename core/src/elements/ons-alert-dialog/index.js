@@ -15,7 +15,7 @@ limitations under the License.
 
 */
 
-import ons from '../../ons';
+import onsElements from '../../ons/elements';
 import util from '../../ons/util';
 import autoStyle from '../../ons/autostyle';
 import ModifierUtil from '../../ons/internal/modifier-util';
@@ -53,13 +53,13 @@ const _animatorDict = {
  *   [en]
  *     Alert dialog that is displayed on top of the current screen. Useful for displaying questions, warnings or error messages to the user. The title, content and buttons can be easily customized and it will automatically switch style based on the platform.
  *
- *     To use the element it can either be attached directly to the `<body>` element or dynamically created from a template using the `ons.createAlertDialog(template)` utility function and the `<ons-template>` tag.
+ *     To use the element it can either be attached directly to the `<body>` element or dynamically created from a template using the `ons.createAlertDialog(template)` utility function and the `<template>` tag.
  *   [/en]
  *   [ja]
  *     現在のスクリーンの上に表示するアラートダイアログです。ユーザに対する問いかけ、警告、エラーメッセージを表示するのに利用できます。タイトルやコンテンツやボタンは簡単にカスタマイズでき、実行しているプラットフォームに併せてスタイルが自動的に切り替わります。
  *   [/ja]
  * @codepen Qwwxyp
- * @tutorial vanilla/Reference/dialog
+ * @tutorial vanilla/Reference/alert-dialog
  * @modifier material
  *   [en]Material Design style[/en]
  *   [ja]マテリアルデザインのスタイル[/ja]
@@ -373,7 +373,7 @@ export default class AlertDialogElement extends BaseDialogElement {
    */
   static registerAnimator(name, Animator) {
     if (!(Animator.prototype instanceof AlertDialogAnimator)) {
-      throw new Error('"Animator" param must inherit OnsAlertDialogElement.AlertDialogAnimator');
+      util.throwAnimator('AlertDialog');
     }
     _animatorDict[name] = Animator;
   }
@@ -387,5 +387,5 @@ export default class AlertDialogElement extends BaseDialogElement {
   }
 }
 
-ons.elements.AlertDialog = AlertDialogElement;
+onsElements.AlertDialog = AlertDialogElement;
 customElements.define('ons-alert-dialog', AlertDialogElement);

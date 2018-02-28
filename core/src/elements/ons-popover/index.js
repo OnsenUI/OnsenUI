@@ -15,7 +15,7 @@ limitations under the License.
 
 */
 
-import ons from '../../ons';
+import onsElements from '../../ons/elements';
 import util from '../../ons/util';
 import autoStyle from '../../ons/autostyle';
 import ModifierUtil from '../../ons/internal/modifier-util';
@@ -55,7 +55,7 @@ const directions = Object.keys(positions);
  *  [en]
  *    A component that displays a popover next to an element. The popover can be used to display extra information about a component or a tooltip.
  *
- *    To use the element it can either be attached directly to the `<body>` element or dynamically created from a template using the `ons.createPopover(template)` utility function and the `<ons-template>` tag.
+ *    To use the element it can either be attached directly to the `<body>` element or dynamically created from a template using the `ons.createPopover(template)` utility function and the `<template>` tag.
  *
  *    Another common way to use the popover is to display a menu when a button on the screen is tapped. For Material Design, popover looks exactly as a dropdown menu.
  *  [/en]
@@ -418,12 +418,8 @@ export default class PopoverElement extends BaseDialogElement {
       options.target = options.target.target;
     }
 
-    if (typeof options.target === 'undefined') {
-      throw new Error('A target or options.target argument must be defined for the popover.');
-    }
-
     if (!(options.target instanceof HTMLElement)) {
-     throw new Error('Invalid target for popover.');
+     util.throw('Invalid target type or undefined');
     }
 
     return super.show(options);
@@ -517,7 +513,7 @@ export default class PopoverElement extends BaseDialogElement {
    */
   static registerAnimator(name, Animator) {
     if (!(Animator.prototype instanceof PopoverAnimator)) {
-      throw new Error('"Animator" param must inherit PopoverAnimator');
+      util.throwAnimator('Popover');
     }
     _animatorDict[name] = Animator;
   }
@@ -531,5 +527,5 @@ export default class PopoverElement extends BaseDialogElement {
   }
 }
 
-ons.elements.Popover = PopoverElement;
+onsElements.Popover = PopoverElement;
 customElements.define('ons-popover', PopoverElement);

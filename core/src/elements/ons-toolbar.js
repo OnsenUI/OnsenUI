@@ -15,7 +15,7 @@ limitations under the License.
 
 */
 
-import ons from '../ons';
+import onsElements from '../ons/elements';
 import util from '../ons/util';
 import internal from '../ons/internal';
 import autoStyle from '../ons/autostyle';
@@ -57,7 +57,7 @@ const scheme = {
  *   [/en]
  *   [ja]ナビゲーションで使用するツールバー用コンポーネントです。クラス名により、左、中央、右のコンテナを指定できます。[/ja]
  * @codepen aHmGL
- * @tutorial vanilla/Reference/page
+ * @tutorial vanilla/Reference/toolbar
  * @guide compilation.html#toolbar-compilation [en]Adding a toolbar[/en][ja]ツールバーの追加[/ja]
  * @seealso ons-bottom-toolbar
  *   [en]The `<ons-bottom-toolbar>` displays a toolbar on the bottom of the page.[/en]
@@ -96,6 +96,13 @@ export default class ToolbarElement extends BaseElement {
    * @description
    *   [en]Display the toolbar as an inline element.[/en]
    *   [ja]ツールバーをインラインに置きます。スクロール領域内にそのまま表示されます。[/ja]
+   */
+
+  /**
+   * @attribute static
+   * @description
+   *   [en]Static toolbars are not animated by `ons-navigator` when pushing or popping pages. This can be useful to improve performance in some situations.[/en]
+   *   [ja][/ja]
    */
 
   /**
@@ -207,5 +214,5 @@ export default class ToolbarElement extends BaseElement {
   }
 }
 
-ons.elements.Toolbar = ToolbarElement;
+onsElements.Toolbar = ToolbarElement;
 customElements.define('ons-toolbar', ToolbarElement);

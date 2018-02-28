@@ -76,42 +76,43 @@ class Navigator extends BasicComponent {
     if (this.isRunning()) {
       return Promise.reject('Navigator is already running animation.');
     }
-    const renderPage = (route) => {
-      return this.props.renderPage(route, this);
+
+    const hidePages = () => {
+      const pageElements = this._navi.pages;
+      for (let i = pageElements.length - 2; i >= 0; i--) {
+        pageElements[i].style.display = 'none';
+      }
     };
+
     if (options.pop) {
-      return new Promise((resolve) => {
-        this.routesBeforePop = this.routes.slice();
-        this.routesAfterPop = routes;
-        this.routes = routes.concat([this.routes[this.routes.length - 1]]);
-
-        const update = () => {
-          this.pages.pop();
-          this.routes = routes;
-          return new Promise((resolve) => this.forceUpdate(resolve));
-        };
-
-        this.update(this.pages).then(() => {
-          this._navi._popPage(options, update);
-        });
-      });
-    }
-    return new Promise((resolve) => {
-      var lastRoute = routes[routes.length - 1];
-      var newPage = this.props.renderPage(lastRoute, this);
-      this.routes.push(lastRoute);
+      this.routesBeforePop = this.routes.slice();
+      this.routesAfterPop = routes;
+      this.routes = routes.concat([this.routes[this.routes.length - 1]]);
 
       const update = () => {
-        this.pages.push(newPage);
+        this.pages.pop();
+        this.routes = routes;
         return new Promise((resolve) => this.forceUpdate(resolve));
       };
 
-      this._navi._pushPage(options, update).then(() => {
-        this.routes = routes;
+      return this.update(this.pages)
+        .then(() => this._navi._popPage(options, update))
+        .then(() => hidePages());
+    }
 
-        this.pages = routes.map(renderPage);
-        this.update(this.pages).then(resolve);
-      });
+    const lastRoute = routes[routes.length - 1];
+    const newPage = this.props.renderPage(lastRoute, this);
+    this.routes.push(lastRoute);
+
+    const update = () => {
+      this.pages.push(newPage);
+      return new Promise((resolve) => this.forceUpdate(resolve));
+    };
+
+    return this._navi._pushPage(options, update).then(() => {
+      this.routes = routes;
+      this.pages = routes.map(route => this.props.renderPage(route, this));
+      return this.update(this.pages).then(() => hidePages());
     });
   }
 

@@ -15,7 +15,7 @@ limitations under the License.
 
 */
 
-import ons from '../../ons';
+import onsElements from '../../ons/elements';
 import util from '../../ons/util';
 import autoStyle from '../../ons/autostyle';
 import ModifierUtil from '../../ons/internal/modifier-util';
@@ -44,7 +44,7 @@ const _animatorDict = {
  *   [en]
  *     Dialog that is displayed on top of current screen. As opposed to the `<ons-alert-dialog>` element, this component can contain any kind of content.
  *
- *     To use the element it can either be attached directly to the `<body>` element or dynamically created from a template using the `ons.createDialog(template)` utility function and the `<ons-template>` tag.
+ *     To use the element it can either be attached directly to the `<body>` element or dynamically created from a template using the `ons.createDialog(template)` utility function and the `<template>` tag.
  *
  *     The dialog is useful for displaying menus, additional information or to ask the user to make a decision.
  *
@@ -328,7 +328,7 @@ export default class DialogElement extends BaseDialogElement {
    */
   static registerAnimator(name, Animator) {
     if (!(Animator.prototype instanceof DialogAnimator)) {
-      throw new Error('"Animator" param must inherit OnsDialogElement.DialogAnimator');
+      util.throwAnimator('Dialog');
     }
     _animatorDict[name] = Animator;
   }
@@ -342,5 +342,5 @@ export default class DialogElement extends BaseDialogElement {
   }
 }
 
-ons.elements.Dialog = DialogElement;
+onsElements.Dialog = DialogElement;
 customElements.define('ons-dialog', DialogElement);

@@ -15,7 +15,7 @@ limitations under the License.
 
 */
 
-import ons from '../ons';
+import onsElements from '../ons/elements';
 import util from '../ons/util';
 import styler from '../ons/styler';
 import platform from '../ons/platform';
@@ -26,6 +26,8 @@ import animit from '../ons/animit';
 const STATE_INITIAL = 'initial';
 const STATE_PREACTION = 'preaction';
 const STATE_ACTION = 'action';
+
+const throwType = (el, type) => util.throw(`"${el}" must be ${type}`);
 
 /**
  * @element ons-pull-hook
@@ -103,6 +105,8 @@ export default class PullHookElement extends BaseElement {
   constructor() {
     super();
 
+    this._shouldFixScroll = util.globals.actualMobileOS !== 'other';
+
     this._onDrag = this._onDrag.bind(this);
     this._onDragStart = this._onDragStart.bind(this);
     this._onDragEnd = this._onDragEnd.bind(this);
@@ -173,9 +177,11 @@ export default class PullHookElement extends BaseElement {
     // Hack to make it work on Android 4.4 WebView and iOS UIWebView. Scrolls manually
     // near the top of the page so there will be no inertial scroll when scrolling down.
     // Allowing default scrolling will kill all 'touchmove' events.
-    this._pageElement.scrollTop = this._startScroll - event.gesture.deltaY;
-    if (this._pageElement.scrollTop < window.innerHeight && event.gesture.direction !== 'up') {
-      event.gesture.preventDefault();
+    if (this._shouldFixScroll) {
+      this._pageElement.scrollTop = this._startScroll - event.gesture.deltaY;
+      if (this._pageElement.scrollTop < window.innerHeight && event.gesture.direction !== 'up') {
+        event.gesture.preventDefault();
+      }
     }
 
     const scroll = Math.max(event.gesture.deltaY - this._startScroll, 0);
@@ -193,13 +199,21 @@ export default class PullHookElement extends BaseElement {
         this._setState(STATE_INITIAL);
       }
 
-      this._pulling = true;
+      if (!this._pulling && this._shouldFixScroll) {
+        this._pulling = true;
+        this._gestureDetector.on('touchmove', this._preventScroll);
+      }
+
       this._translateTo(scroll);
     }
   }
 
   _onDragEnd(event) {
-    this._pulling = false;
+    if (this._pulling && this._shouldFixScroll) {
+      this._pulling = false;
+      this._gestureDetector.off('touchmove', this._preventScroll);
+    }
+
     if (!event.gesture || this.disabled || this._ignoreDrag) {
       return;
     }
@@ -219,7 +233,7 @@ export default class PullHookElement extends BaseElement {
 
   _preventScroll(event) {
     // Fix for Android & iOS when starting from scrollTop > 0 or pulling back
-    this._pulling && event.cancelable && event.preventDefault();
+    event.cancelable && event.preventDefault();
   }
 
   /**
@@ -235,7 +249,7 @@ export default class PullHookElement extends BaseElement {
 
   set onAction(value) {
     if (value && !(value instanceof Function)) {
-      throw new Error(`'onAction' must be a function or null`);
+      throwType('onAction', 'function or null');
     }
     this._onAction = value;
   }
@@ -253,7 +267,7 @@ export default class PullHookElement extends BaseElement {
 
   set onPull(value) {
     if (value && !(value instanceof Function)) {
-      throw new Error(`'onPull' must be a function or null.`)
+      throwType('onPull', 'function or null');
     }
     this._onPull = value;
   }
@@ -277,7 +291,7 @@ export default class PullHookElement extends BaseElement {
    */
   set height(value) {
     if (!util.isInteger(value)) {
-      throw new Error('The height must be an integer');
+      throwType('height', 'integer');
     }
 
     this.setAttribute('height', `${value}px`);
@@ -296,7 +310,7 @@ export default class PullHookElement extends BaseElement {
    */
   set thresholdHeight(value) {
     if (!util.isInteger(value)) {
-      throw new Error('The threshold height must be an integer');
+      throwType('thresholdHeight', 'integer');
     }
 
     this.setAttribute('threshold-height', `${value}px`);
@@ -407,10 +421,10 @@ export default class PullHookElement extends BaseElement {
   _setupListeners(add) {
     const scrollToggle = action => this._pageElement[`${action}EventListener`]('scroll', this._onScroll, false);
     const gdToggle = action => {
-      this._gestureDetector[action]('drag', this._onDrag);
-      this._gestureDetector[action]('dragstart', this._onDragStart);
-      this._gestureDetector[action]('dragend', this._onDragEnd);
-      this._gestureDetector[action]('touchmove', this._preventScroll);
+      const passive = { passive: true };
+      this._gestureDetector[action]('drag', this._onDrag, passive);
+      this._gestureDetector[action]('dragstart', this._onDragStart, passive);
+      this._gestureDetector[action]('dragend', this._onDragEnd, passive);
     };
 
     if (this._gestureDetector) {
@@ -424,7 +438,8 @@ export default class PullHookElement extends BaseElement {
       this._gestureDetector = new GestureDetector(this._pageElement, {
         dragMinDistance: 1,
         dragDistanceCorrection: false,
-        dragLockToAxis: !this._dragLockDisabled
+        dragLockToAxis: !this._dragLockDisabled,
+        passive: !this._shouldFixScroll
       });
 
       gdToggle('on');
@@ -460,5 +475,5 @@ export default class PullHookElement extends BaseElement {
   }
 }
 
-ons.elements.PullHook = PullHookElement;
+onsElements.PullHook = PullHookElement;
 customElements.define('ons-pull-hook', PullHookElement);

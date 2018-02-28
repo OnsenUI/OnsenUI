@@ -15,7 +15,7 @@ limitations under the License.
 
 */
 
-import ons from '../ons';
+import onsElements from '../ons/elements';
 import util from '../ons/util';
 import autoStyle from '../ons/autostyle';
 import ModifierUtil from '../ons/internal/modifier-util';
@@ -161,7 +161,7 @@ export default class SegmentElement extends BaseElement {
         const page = util.findParent(this, 'ons-page');
         this._tabbar = page && page.querySelector('#' + this.getAttribute('tabbar-id'));
         if (!this._tabbar || this._tabbar.tagName !== 'ONS-TABBAR') {
-          throw new Error(`<ons-segment> error: no tabbar with id ${this.getAttribute('tabbar-id')} was found.`);
+          util.throw(`No tabbar with id ${this.getAttribute('tabbar-id')} was found.`);
         }
 
         this._tabbar.setAttribute('hide-tabs', '');
@@ -294,5 +294,5 @@ export default class SegmentElement extends BaseElement {
   }
 }
 
-ons.elements.Segment = SegmentElement;
+onsElements.Segment = SegmentElement;
 customElements.define('ons-segment', SegmentElement);

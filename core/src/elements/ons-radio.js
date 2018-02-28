@@ -11,7 +11,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import ons from '../ons';
+import onsElements from '../ons/elements';
 import BaseCheckboxElement from './base/base-checkbox';
 
 const scheme = {
@@ -33,7 +33,7 @@ const scheme = {
  *    Most attributes that can be used for a normal `<input type="radio">` element can also be used on the `<ons-radio>` element.
  *  [/en]
  *  [ja][/ja]
- * @tutorial vanilla/Reference/input
+ * @tutorial vanilla/Reference/radio
  * @seealso ons-select
  *   [en]The `<ons-select>` element is used to display a select box.[/en]
  *   [ja][/ja]
@@ -103,5 +103,5 @@ export default class RadioElement extends BaseCheckboxElement {
    */
 }
 
-ons.elements.Radio = RadioElement;
+onsElements.Radio = RadioElement;
 customElements.define('ons-radio', RadioElement);

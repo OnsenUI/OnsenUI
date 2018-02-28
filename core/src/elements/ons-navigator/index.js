@@ -15,14 +15,13 @@ limitations under the License.
 
 */
 
-import ons from '../../ons';
+import onsElements from '../../ons/elements';
 import util from '../../ons/util';
 import internal from '../../ons/internal';
 import SwipeReveal from '../../ons/internal/swipe-reveal';
 import AnimatorFactory from '../../ons/internal/animator-factory';
 import NavigatorAnimator from './animator';
 import IOSSlideNavigatorAnimator from './ios-slide-animator';
-import IOSSwipeNavigatorAnimator from './ios-swipe-animator';
 import IOSLiftNavigatorAnimator from './ios-lift-animator';
 import IOSFadeNavigatorAnimator from './ios-fade-animator';
 import MDSlideNavigatorAnimator from './md-slide-animator';
@@ -58,6 +57,8 @@ const rewritables = {
     callback();
   }
 };
+
+const verifyPageElement = el => (el.nodeName !== 'ONS-PAGE') && util.throw( 'Only page elements can be children of navigator');
 
 /**
  * @element ons-navigator
@@ -97,7 +98,7 @@ const rewritables = {
  *   </ons-page>
  * </ons-navigator>
  *
- * <ons-template id="page.html">
+ * <template id="page.html">
  *   <ons-page>
  *     <ons-toolbar>
  *       <div class="left">
@@ -108,7 +109,7 @@ const rewritables = {
  *       </div>
  *     </ons-toolbar>
  *   </ons-page>
- * </ons-template>
+ * </template>
  */
 export default class NavigatorElement extends BaseElement {
 
@@ -264,7 +265,7 @@ export default class NavigatorElement extends BaseElement {
 
   set pageLoader(pageLoader) {
     if (!(pageLoader instanceof PageLoader)) {
-      throw Error('First parameter must be an instance of PageLoader.');
+      util.throwPageLoader();
     }
     this._pageLoader = pageLoader;
   }
@@ -292,31 +293,54 @@ export default class NavigatorElement extends BaseElement {
     this.onDeviceBackButton = this._onDeviceBackButton.bind(this);
 
     if (!platform.isAndroid() || this.getAttribute('swipeable') === 'force') {
-      this._swipeAnimator = new IOSSwipeNavigatorAnimator();
-      const pushAnimation = { duration: this._swipeAnimator.duration, timing: this._swipeAnimator.timing };
-      const popAnimation = { duration: this._swipeAnimator.durationRestore, timing: this._swipeAnimator.timing };
+      let swipeAnimator;
 
       this._swipe = new SwipeReveal({
         element: this,
+        getThreshold: () => Math.max(0.2, parseFloat(this.getAttribute('swipe-threshold')) || 0),
+
         swipeMax: () => {
-          this._onSwipe && this._onSwipe(1, pushAnimation);
-          this[this.swipeMax ? 'swipeMax' : 'popPage']({ animator: this._swipeAnimator });
+          this._onSwipe && this._onSwipe(1, { duration: swipeAnimator.durationSwipe, timing: swipeAnimator.timingSwipe });
+          this[this.swipeMax ? 'swipeMax' : 'popPage']({ animator: swipeAnimator });
+          swipeAnimator = null;
         },
         swipeMid: (distance, width) => {
           this._onSwipe && this._onSwipe(distance/width);
-          this._swipeAnimator.translate(distance, width, this.topPage.previousElementSibling, this.topPage);
+          swipeAnimator.translate(distance, width, this.topPage.previousElementSibling, this.topPage);
         },
         swipeMin: () => {
-          this._onSwipe && this._onSwipe(0, popAnimation);
-          this._swipeAnimator.restore(this.topPage.previousElementSibling, this.topPage);
+          this._onSwipe && this._onSwipe(0, { duration: swipeAnimator.durationRestore, timing: swipeAnimator.timingSwipe });
+          swipeAnimator.restore(this.topPage.previousElementSibling, this.topPage);
+          swipeAnimator = null;
         },
-        getThreshold: () => Math.max(0.2, parseFloat(this.getAttribute('swipe-threshold')) || 0),
+
         ignoreSwipe: (event, distance) => {
-          if (/ons-back-button/i.test(event.target.tagName) || util.findParent(event.target, 'ons-back-button', p => /ons-page/i.test(p.tagName))) {
-            return true;
+          // Basic conditions
+          if (!this._isRunning && this.children.length > 1) {
+
+            // Area or directional issues
+            const area = parseInt(this.getAttribute('swipe-target-width') || 25, 10);
+            if (event.gesture.direction ===  'right' && area > distance) {
+
+              // Swipes on ons-back-button and its children
+              const isBB = el => /ons-back-button/i.test(el.tagName);
+              if (!isBB(event.target) && !util.findParent(event.target, isBB, p => /ons-page/i.test(p.tagName))) {
+
+                // Animaor is swipeable
+                const animation = (this.topPage.pushedOptions || {}).animation || this.animatorFactory._animation;
+                const Animator = _animatorDict[animation] instanceof Function
+                  ? _animatorDict[animation].call()
+                  : _animatorDict[animation];
+
+                if (Animator.swipeable) {
+                  swipeAnimator = new Animator(); // Prepare for the swipe
+                  return false;
+                }
+              }
+            }
           }
-          const area = parseInt(this.getAttribute('swipe-target-width') || 25, 10);
-          return event.gesture.direction !==  'right' || area <= distance || this._isRunning || this.children.length <= 1;
+
+          return true; // Ignore swipe
         }
       });
 
@@ -340,9 +364,7 @@ export default class NavigatorElement extends BaseElement {
         this.pushPage(this._getPageTarget(), options).then(() => deferred.resolve());
       } else if (this.pages.length > 0) {
         for (var i = 0; i < this.pages.length; i++) {
-          if (this.pages[i].nodeName !== 'ONS-PAGE') {
-            throw new Error('The children of <ons-navigator> need to be of type <ons-page>');
-          }
+          verifyPageElement(this.pages[i]);
         }
 
         if (this.topPage) {
@@ -380,7 +402,7 @@ export default class NavigatorElement extends BaseElement {
     this._backButtonHandler = null;
 
     this._swipe && this._swipe.dispose();
-    this._swipe = this._swipeAnimator = null;
+    this._swipe = null;
   }
 
   static get observedAttributes() {
@@ -420,6 +442,9 @@ export default class NavigatorElement extends BaseElement {
    * @param {Object} [options.data]
    *   [en]Custom data that will be stored in the new page element.[/en]
    *   [ja][/ja]
+   * @param {Number} [options.times]
+   *   [en]Number of pages to be popped. Only one animation will be shown.[/en]
+   *   [ja][/ja]
    * @return {Promise}
    *   [en]Promise which resolves to the revealed page.[/en]
    *   [ja]明らかにしたページを解決するPromiseを返します。[/ja]
@@ -429,6 +454,10 @@ export default class NavigatorElement extends BaseElement {
    */
   popPage(options = {}) {
     ({options} = this._preparePageAndOptions(null, options));
+
+    if (util.isInteger(options.times) && options.times > 1) {
+      this._removePages(options.times);
+    }
 
     const popUpdate = () => new Promise((resolve) => {
       this._pageLoader.unload(this.pages[this.pages.length - 1]);
@@ -461,12 +490,7 @@ export default class NavigatorElement extends BaseElement {
       const leavePage = this.pages[length - 1];
       const enterPage = this.pages[length - 2];
 
-      options.animation = options.animation || (leavePage.pushedOptions ? leavePage.pushedOptions.animation : undefined);
-      options.animationOptions = util.extend(
-        {},
-        leavePage.pushedOptions ? leavePage.pushedOptions.animationOptions : {},
-        options.animationOptions || {}
-      );
+      options = util.extend({}, this.options || {}, leavePage.pushedOptions || {}, options);
 
       if (options.data) {
         enterPage.data = util.extend({}, enterPage.data || {}, options.data || {});
@@ -486,6 +510,8 @@ export default class NavigatorElement extends BaseElement {
       };
 
       leavePage._hide();
+      enterPage.style.display = '';
+
       const animator = options.animator || this._animatorFactory.newAnimator(options);
       animator.pop(this.pages[length - 2], this.pages[length - 1], done);
     }).catch(() => this._isRunning = false);
@@ -496,8 +522,8 @@ export default class NavigatorElement extends BaseElement {
    * @method pushPage
    * @signature pushPage(page, [options])
    * @param {String} page
-   *   [en]Page URL. Can be either a HTML document or a template defined with the `<ons-template>` tag.[/en]
-   *   [ja]pageのURLか、もしくはons-templateで宣言したテンプレートのid属性の値を指定できます。[/ja]
+   *   [en]Page URL. Can be either a HTML document or a template defined with the `<template>` tag.[/en]
+   *   [ja]pageのURLか、もしくは`<template>`で宣言したテンプレートのid属性の値を指定できます。[/ja]
    * @param {Object} [options]
    *   [en]Parameter object.[/en]
    *   [ja]オプションを指定するオブジェクト。[/ja]
@@ -534,7 +560,7 @@ export default class NavigatorElement extends BaseElement {
     ({page, options} = this._preparePageAndOptions(page, options));
 
     const prepare = pageElement => {
-      this._verifyPageElement(pageElement);
+      verifyPageElement(pageElement);
       this._pageMap.set(pageElement, page);
       pageElement = util.extend(pageElement, {
         data: options.data
@@ -581,9 +607,7 @@ export default class NavigatorElement extends BaseElement {
       const enterPage  = this.pages[pageLength - 1];
       const leavePage = options.leavePage || this.pages[pageLength - 2];
 
-      if (enterPage.nodeName !== 'ONS-PAGE') {
-        throw new Error('Only elements of type <ons-page> can be pushed to the navigator');
-      }
+      verifyPageElement(enterPage);
 
       enterPage.updateBackButton(pageLength > (options._replacePage ? 2 : 1));
 
@@ -597,6 +621,10 @@ export default class NavigatorElement extends BaseElement {
 
           options.show !== false && setImmediate(() => enterPage._show());
           util.triggerElementEvent(this, 'postpush', {leavePage, enterPage, navigator: this});
+
+          if (leavePage) {
+            leavePage.style.display = 'none';
+          }
 
           options.callback && options.callback(enterPage);
 
@@ -665,7 +693,7 @@ export default class NavigatorElement extends BaseElement {
 
     return new Promise(resolve => {
       loader.load({page, parent: this}, pageElement => {
-        this._verifyPageElement(pageElement);
+        verifyPageElement(pageElement);
         this._pageMap.set(pageElement, page);
         pageElement = util.extend(pageElement, {
           data: options.data,
@@ -678,6 +706,7 @@ export default class NavigatorElement extends BaseElement {
           options.animationOptions || {}
         );
 
+        pageElement.style.display = 'none';
         this.insertBefore(pageElement, this.pages[index]);
         this.topPage.updateBackButton(true);
 
@@ -747,16 +776,8 @@ export default class NavigatorElement extends BaseElement {
       page = options.page = this._getPageTarget();
     }
 
-    const reset = () => {
-      const pages = this.pages;
-      for (let i = pages.length - 2; i >= 0; i--) {
-        this._pageMap.delete(pages[i]);
-        this._pageLoader.unload(pages[i]);
-      }
-    };
-
     if (options.pop) {
-      reset();
+      this._removePages()
       return this.insertPage(0, page, { data: options.data })
         .then(() => this.popPage(options));
     }
@@ -764,7 +785,7 @@ export default class NavigatorElement extends BaseElement {
     // Tip: callback runs before resolved promise
     const callback = options.callback;
     options.callback = newPage => {
-      reset();
+      this._removePages()
       newPage.updateBackButton(false);
       callback && callback(newPage);
     };
@@ -787,7 +808,7 @@ export default class NavigatorElement extends BaseElement {
    */
   bringPageTop(item, options = {}) {
     if (['number', 'string'].indexOf(typeof item) === -1) {
-      throw new Error('First argument must be a page name or the index of an existing page. You supplied ' + item);
+      util.throw('First argument must be a page name or the index of an existing page. You supplied ' + item);
     }
     const index = typeof item === 'number' ? this._normalizeIndex(item) : this._lastIndexOfPage(item);
     const page = this.pages[index];
@@ -801,7 +822,7 @@ export default class NavigatorElement extends BaseElement {
       return Promise.resolve(page);
     }
     if (!page) {
-      throw new Error('Failed to find item ' + item);
+      util.throw('Failed to find item ' + item);
     }
     if (this._isRunning) {
       return Promise.reject('pushPage is already running.');
@@ -810,6 +831,7 @@ export default class NavigatorElement extends BaseElement {
       return Promise.reject('Canceled in prepush event.');
     }
 
+    page.style.display = '';
     page.style.visibility = 'hidden';
     page.parentNode.appendChild(page);
     return this._pushPage(options);
@@ -817,7 +839,7 @@ export default class NavigatorElement extends BaseElement {
 
   _preparePageAndOptions(page, options = {}) {
     if (typeof options != 'object') {
-      throw new Error('options must be an object. You supplied ' + options);
+      util.throw('options must be an object. You supplied ' + options);
     }
 
     if ((page === null || page === undefined) && options.page) {
@@ -827,6 +849,17 @@ export default class NavigatorElement extends BaseElement {
     options = util.extend({}, this.options || {}, options, {page});
 
     return {page, options};
+  }
+
+  _removePages(times) {
+    const pages = this.pages;
+    let until = times === undefined ? 0 : pages.length - times;
+    until = until < 0 ? 1 : until;
+
+    for (let i = pages.length - 2; i >= until; i--) {
+      this._pageMap.delete(pages[i]);
+      this._pageLoader.unload(pages[i]);
+    }
   }
 
   _updateLastPageBackButton() {
@@ -852,7 +885,7 @@ export default class NavigatorElement extends BaseElement {
     let index;
     for (index = this.pages.length - 1; index >= 0; index--) {
       if (!this._pageMap.has(this.pages[index])) {
-        throw Error('This is bug.');
+        util.throw('Incorrect state of pageMap');
       }
 
       if (pageName === this._pageMap.get(this.pages[index])) {
@@ -889,17 +922,8 @@ export default class NavigatorElement extends BaseElement {
   // TODO: 書き直す
   _createPageElement(templateHTML) {
     const pageElement = util.createElement(internal.normalizePageHTML(templateHTML));
-    this._verifyPageElement(pageElement);
+    verifyPageElement(pageElement);
     return pageElement;
-  }
-
-  /**
-   * @param {Element} element
-   */
-  _verifyPageElement(element) {
-    if (element.nodeName.toLowerCase() !== 'ons-page') {
-      throw new Error('You must supply an "ons-page" element to "ons-navigator".');
-    }
   }
 
   /**
@@ -961,7 +985,7 @@ export default class NavigatorElement extends BaseElement {
 
   set onSwipe(value) {
     if (value && !(value instanceof Function)) {
-      throw new Error(`'onSwipe' must be a function.`)
+      util.throw('"onSwipe" must be a function');
     }
     this._onSwipe = value;
   }
@@ -1037,7 +1061,7 @@ export default class NavigatorElement extends BaseElement {
    */
   static registerAnimator(name, Animator) {
     if (!(Animator.prototype instanceof NavigatorAnimator)) {
-      throw new Error('"Animator" param must inherit NavigatorElement.NavigatorAnimator');
+      util.throwAnimator('Navigator');
     }
 
     _animatorDict[name] = Animator;
@@ -1060,5 +1084,5 @@ export default class NavigatorElement extends BaseElement {
   }
 }
 
-ons.elements.Navigator = NavigatorElement;
+onsElements.Navigator = NavigatorElement;
 customElements.define('ons-navigator', NavigatorElement);

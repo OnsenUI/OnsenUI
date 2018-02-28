@@ -19,6 +19,10 @@ export default class BaseCheckboxElement extends BaseInputElement {
   constructor() {
     super();
 
+    if (this.constructor === BaseCheckboxElement) {
+      util.throwAbstract();
+    }
+
     contentReady(this, () => {
       this.attributeChangedCallback('checked', null, this.getAttribute('checked'));
     });

@@ -16,6 +16,7 @@ limitations under the License.
 */
 
 import util from './util';
+import elements from './elements'
 import animit from './animit'
 import GestureDetector from './gesture-detector';
 import platform from './platform';
@@ -40,7 +41,7 @@ import { defaultPageLoader, PageLoader } from './page-loader';
 const ons = {
   animit,
   defaultPageLoader,
-  elements: {},
+  elements,
   GestureDetector,
   modifier,
   notification,
@@ -58,6 +59,8 @@ const ons = {
 ons.platform.select((window.location.search.match(/platform=([\w-]+)/) || [])[1]);
 
 waitDeviceReady();
+
+const readyError = after => util.throw(`This method must be called ${after ? 'after' : 'before'} ons.isReady() is true`);
 
 /**
  * @method isReady
@@ -115,7 +118,7 @@ ons.ready = callback => {
  */
 ons.setDefaultDeviceBackButtonListener = function(listener) {
   if (!ons.isReady()) {
-    throw new Error('This method must be called after ons.isReady() is true.');
+    readyError(true);
   }
   ons._defaultDeviceBackButtonHandler.setListener(listener);
 };
@@ -129,7 +132,7 @@ ons.setDefaultDeviceBackButtonListener = function(listener) {
  */
 ons.disableDeviceBackButtonHandler = function() {
   if (!ons.isReady()) {
-    throw new Error('This method must be called after ons.isReady() is true.');
+    readyError(true);
   }
   internal.dbbDispatcher.disable();
 };
@@ -143,7 +146,7 @@ ons.disableDeviceBackButtonHandler = function() {
  */
 ons.enableDeviceBackButtonHandler = function() {
   if (!ons.isReady()) {
-    throw new Error('This method must be called after ons.isReady() is true.');
+    readyError(true);
   }
   internal.dbbDispatcher.enable();
 };
@@ -161,7 +164,7 @@ ons.fireDeviceBackButtonEvent = function() {
  */
 ons.enableAutoStatusBarFill = () => {
   if (ons.isReady()) {
-    throw new Error('This method must be called before ons.isReady() is true.');
+    readyError(false);
   }
   internal.config.autoStatusBarFill = true;
 };
@@ -175,7 +178,7 @@ ons.enableAutoStatusBarFill = () => {
  */
 ons.disableAutoStatusBarFill = () => {
   if (ons.isReady()) {
-    throw new Error('This method must be called before ons.isReady() is true.');
+    readyError(false);
   }
   internal.config.autoStatusBarFill = false;
 };
@@ -189,7 +192,7 @@ ons.disableAutoStatusBarFill = () => {
  */
 ons.mockStatusBar = () => {
   if (ons.isReady()) {
-    throw new Error('This method must be called before ons.isReady() is true.');
+    readyError(false);
   }
 
   const mock = () => {
@@ -268,10 +271,20 @@ ons.enableAutoStyling = autoStyle.enable;
  *   [ja][/ja]
  */
 ons.disableIconAutoPrefix = () => {
-  if (!ons.elements.Icon) {
-    throw new Error (`Expected 'ons-icon' Custom Element to be registered before calling this method.`);
-  }
-  ons.elements.Icon.setAutoPrefix(false);
+  util.checkMissingImport('Icon');
+  elements.Icon.setAutoPrefix(false);
+};
+
+/**
+ * @method forceUIWebViewScrollFix
+ * @signature forceUIWebViewScrollFix()
+ * @param {Boolean} force Enable or disable the fix.
+ * @description
+ *   [en]Applies a fix for iOS UIWebView which prevents scroll events jumping to pages under the top layer. This may visually affect normal scrolling of UIWebView if you open a dialog/menu before the scroll momentum finished. Disabled by default.[/en]
+ *   [ja][/ja]
+ */
+ons.forceUIWebViewScrollFix = (force = true) => {
+  internal.config.forceUIWebViewScrollFix = force;
 };
 
 /**
@@ -315,7 +328,7 @@ ons.forcePlatformStyling = newPlatform => {
 ons.preload = function(templates = []) {
   return Promise.all((templates instanceof Array ? templates : [templates]).map(template => {
     if (typeof template !== 'string') {
-      throw new Error ('Expected string arguments but got ' + typeof template);
+      util.throw('Expected string arguments but got ' + typeof template);
     }
     return internal.getTemplateHTMLAsync(template);
   }));
@@ -325,7 +338,7 @@ ons.preload = function(templates = []) {
  * @method createElement
  * @signature createElement(template, options)
  * @param {String} template
- *   [en]Either an HTML file path, an `<ons-template>` id or an HTML string such as `'<div id="foo">hoge</div>'`.[/en]
+ *   [en]Either an HTML file path, a `<template>` id or an HTML string such as `'<div id="foo">hoge</div>'`.[/en]
  *   [ja][/ja]
  * @param {Object} [options]
  *   [en]Parameter object.[/en]
@@ -366,8 +379,8 @@ ons.createElement = (template, options = {}) => {
  * @method createPopover
  * @signature createPopover(page, [options])
  * @param {String} page
- *   [en]Page name. Can be either an HTML file or an <ons-template> containing a <ons-dialog> component.[/en]
- *   [ja]pageのURLか、もしくはons-templateで宣言したテンプレートのid属性の値を指定できます。[/ja]
+ *   [en]Page name. Can be either an HTML file or a <template> containing a <ons-dialog> component.[/en]
+ *   [ja]pageのURLか、もしくは`<template>`で宣言したテンプレートのid属性の値を指定できます。[/ja]
  * @param {Object} [options]
  *   [en]Parameter object.[/en]
  *   [ja]オプションを指定するオブジェクト。[/ja]
@@ -385,8 +398,8 @@ ons.createElement = (template, options = {}) => {
  * @method createDialog
  * @signature createDialog(page, [options])
  * @param {String} page
- *   [en]Page name. Can be either an HTML file or an <ons-template> containing a <ons-dialog> component.[/en]
- *   [ja]pageのURLか、もしくはons-templateで宣言したテンプレートのid属性の値を指定できます。[/ja]
+ *   [en]Page name. Can be either an HTML file or an `<template>` containing a <ons-dialog> component.[/en]
+ *   [ja]pageのURLか、もしくは`<template>`で宣言したテンプレートのid属性の値を指定できます。[/ja]
  * @param {Object} [options]
  *   [en]Parameter object.[/en]
  *   [ja]オプションを指定するオブジェクト。[/ja]
@@ -401,8 +414,8 @@ ons.createElement = (template, options = {}) => {
  * @method createAlertDialog
  * @signature createAlertDialog(page, [options])
  * @param {String} page
- *   [en]Page name. Can be either an HTML file or an <ons-template> containing a <ons-alert-dialog> component.[/en]
- *   [ja]pageのURLか、もしくはons-templateで宣言したテンプレートのid属性の値を指定できます。[/ja]
+ *   [en]Page name. Can be either an HTML file or an `<template>` containing a <ons-alert-dialog> component.[/en]
+ *   [ja]pageのURLか、もしくは`<template>`で宣言したテンプレートのid属性の値を指定できます。[/ja]
  * @param {Object} [options]
  *   [en]Parameter object.[/en]
  *   [ja]オプションを指定するオブジェクト。[/ja]
@@ -459,7 +472,7 @@ ons.openActionSheet = actionSheet;
  * @signature resolveLoadingPlaceholder(page)
  * @param {String} page
  *   [en]Page name. Can be either an HTML file or a `<template>` id.[/en]
- *   [ja]pageのURLか、もしくはons-templateで宣言したテンプレートのid属性の値を指定できます。[/ja]
+ *   [ja]pageのURLか、もしくは`<template>`で宣言したテンプレートのid属性の値を指定できます。[/ja]
  * @description
  *   [en]If no page is defined for the `ons-loading-placeholder` attribute it will wait for this method being called before loading the page.[/en]
  *   [ja]ons-loading-placeholderの属性値としてページが指定されていない場合は、ページロード前に呼ばれるons.resolveLoadingPlaceholder処理が行われるまで表示されません。[/ja]
@@ -467,7 +480,7 @@ ons.openActionSheet = actionSheet;
 ons.resolveLoadingPlaceholder = (page, link) => {
   const elements = ons._util.arrayFrom(window.document.querySelectorAll('[ons-loading-placeholder]'));
   if (elements.length === 0) {
-    throw new Error('No ons-loading-placeholder exists.');
+    util.throw('No ons-loading-placeholder exists');
   }
 
   elements

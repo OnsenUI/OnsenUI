@@ -2,6 +2,71 @@
 CHANGELOG
 ====
 
+dev
+---
+
+ ### Bug Fixes
+
+ * onsenui.d.ts: Fixed [#2354](https://github.com/OnsenUI/OnsenUI/issues/2354).
+ * ons-toolbar: `static` attribute works with iOS status bar.
+
+2.9.2
+---
+
+ ### New features
+
+ * ons-toolbar: Added new `static` attribute to avoid animations in the toolbar when pushing or popping pages.
+
+ ### Bug Fixes
+
+ * ons-tabbar: Fixed [#2316](https://github.com/OnsenUI/OnsenUI/issues/2316).
+ * ons-tabbar: Fixed [#2343](https://github.com/OnsenUI/OnsenUI/issues/2343).
+ * ons-splitter-side: Fixed [#2271](https://github.com/OnsenUI/OnsenUI/issues/2271).
+ * ons-navigator: Fixed [#2333](https://github.com/OnsenUI/OnsenUI/issues/2333).
+ * ons-select (fastclick): Fixed [#2352](https://github.com/OnsenUI/OnsenUI/issues/2352).
+ * ons-switch: Fixed [#2341](https://github.com/OnsenUI/OnsenUI/issues/2341).
+
+ ### Misc
+
+ * core, react: Pointed reference pages to new tutorials.
+
+2.9.1
+----
+
+ ### Bug Fixes
+
+ * ons-tab: Ensure `click` event listener is added to nested tabbars.
+ * ons-navigator: It now uses default `options` property also for `popPage`.
+ * ons.notification: `toast` method error.
+
+2.9.0
+----
+
+ ### New Features
+
+ * :tada: Use passive event listeners whenever possible. PWA score++.
+ * ons-navigator: `popPage` method now supports `options.times` to pop several pages with one single animation.
+ * ons-toolbar-button: Added `icon` attribute to automatically create an `ons-icon` element.
+
+ ### Bug Fixes
+
+ * :tada: fastclick: Use Onsen UI fork of FastClick. Fixes [#2254](https://github.com/OnsenUI/OnsenUI/issues/2254), [#2304](https://github.com/OnsenUI/OnsenUI/issues/2304).
+ * ons-tab: Fixed [#2307](https://github.com/OnsenUI/OnsenUI/issues/2307).
+ * ons-list-item: Fixed [#2292](https://github.com/OnsenUI/OnsenUI/issues/2292).
+ * ons-navigator: Fixed [#2286](https://github.com/OnsenUI/OnsenUI/issues/2286).
+ * ons-navigator: Fixed [#1992](https://github.com/OnsenUI/OnsenUI/issues/1992).
+ * css-components: Fixed [#2045](https://github.com/OnsenUI/OnsenUI/issues/2045).
+ * ons.platform: Fixed [#2279](https://github.com/OnsenUI/OnsenUI/issues/2279).
+ * ons-page: Fixed [#2255](https://github.com/OnsenUI/OnsenUI/issues/2255).
+ * ons-tab: Fixed [#2324](https://github.com/OnsenUI/OnsenUI/issues/2324).
+ * ons-switch: Prevents two `click` events in a row when placed inside a `label` tag.
+ * iOS scroll issues: Related [#2220](https://github.com/OnsenUI/OnsenUI/issues/2220), [#2279](https://github.com/OnsenUI/OnsenUI/issues/2279), [#1949](https://github.com/OnsenUI/OnsenUI/issues/1949) - Fixed in WKWebView/iOS Safari. For UIWebView, a new `ons.forceUIWebViewScrollFix()` method is available which may negatively affect momentum scroll in some situations. Also, a `ons-ios-scroll` class is added to `document.body` when dialogs are visible to apply custom fixes.
+
+ ### Misc
+
+ * css-components: Expose Action Sheet variables for Theme Roller.
+ * ons.notification: Display error message when needed imports are missing (AlertDialog, AlertDialogButton, Toast, ActionSheet).
+
 2.8.3
 ----
 

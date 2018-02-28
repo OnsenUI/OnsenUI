@@ -15,7 +15,7 @@ limitations under the License.
 
 */
 
-import ons from '../ons';
+import onsElements from '../ons/elements';
 import util from '../ons/util';
 import AnimatorFactory from '../ons/internal/animator-factory';
 import orientation from '../ons/orientation';
@@ -23,7 +23,6 @@ import internal from '../ons/internal';
 import ModifierUtil from '../ons/internal/modifier-util';
 import BaseElement from './base/base-element';
 import SplitterAnimator from './ons-splitter/animator';
-import GestureDetector from '../ons/gesture-detector';
 import SwipeReveal from '../ons/internal/swipe-reveal';
 import DoorLock from '../ons/doorlock';
 import contentReady from '../ons/content-ready';
@@ -335,7 +334,7 @@ export default class SplitterSideElement extends BaseElement {
 
   connectedCallback() {
     if (!util.match(this.parentNode, 'ons-splitter')) {
-      throw new Error('Parent must be an ons-splitter element.');
+      util.throw('Parent must be an ons-splitter element');
     }
 
     this._swipe = new SwipeReveal({
@@ -400,6 +399,7 @@ export default class SplitterSideElement extends BaseElement {
         this._swipe && this._swipe.update();
         break;
       case 'width':
+        current = this.getAttribute('width'); // Sometimes undefined. CE bug?
         this.style.width = /^\d+(px|%)$/.test(current) ? current : '80%';
         break;
       default:
@@ -505,7 +505,7 @@ export default class SplitterSideElement extends BaseElement {
 
   set pageLoader(loader) {
     if (!(loader instanceof PageLoader)) {
-      throw Error('First parameter must be an instance of PageLoader.');
+      util.throwPageLoader();
     }
     this._pageLoader = loader;
   }
@@ -535,7 +535,7 @@ export default class SplitterSideElement extends BaseElement {
 
   set onSwipe(value) {
     if (value && !(value instanceof Function)) {
-      throw new Error(`'onSwipe' must be a function.`)
+      util.throw('"onSwipe" must be a function')
     }
     this._onSwipe = value;
   }
@@ -629,6 +629,7 @@ export default class SplitterSideElement extends BaseElement {
 
     return new Promise(resolve => {
       this._animator[action](() => {
+        util.iosPageScrollFix(shouldOpen);
         this._state = FINAL_STATE;
         unlock();
         this._emitEvent(`post${action}`);
@@ -642,8 +643,8 @@ export default class SplitterSideElement extends BaseElement {
    * @method load
    * @signature load(page, [options])
    * @param {String} page
-   *   [en]Page URL. Can be either an HTML document or an <ons-template>.[/en]
-   *   [ja]pageのURLか、ons-templateで宣言したテンプレートのid属性の値を指定します。[/ja]
+   *   [en]Page URL. Can be either an HTML document or a `<template>`.[/en]
+   *   [ja]pageのURLか、`<template>`で宣言したテンプレートのid属性の値を指定します。[/ja]
    * @param {Object} [options]
    * @param {Function} [options.callback]
    * @description
@@ -702,5 +703,5 @@ export default class SplitterSideElement extends BaseElement {
   }
 }
 
-ons.elements.SplitterSide = SplitterSideElement;
+onsElements.SplitterSide = SplitterSideElement;
 customElements.define('ons-splitter-side', SplitterSideElement);

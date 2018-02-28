@@ -15,7 +15,7 @@ limitations under the License.
 
 */
 
-import ons from '../ons';
+import onsElements from '../ons/elements';
 import util from '../ons/util';
 import autoStyle from '../ons/autostyle';
 import ModifierUtil from '../ons/internal/modifier-util';
@@ -171,7 +171,7 @@ export default class ProgressBarElement extends BaseElement {
    */
   set value(value) {
     if (typeof value !== 'number' || value < 0 || value > 100) {
-      throw new Error('Invalid value');
+      util.throw('Invalid value');
     }
 
     this.setAttribute('value', Math.floor(value));
@@ -190,7 +190,7 @@ export default class ProgressBarElement extends BaseElement {
    */
   set secondaryValue(value) {
     if (typeof value !== 'number' || value < 0 || value > 100) {
-      throw new Error('Invalid value');
+      util.throw('Invalid value');
     }
 
     this.setAttribute('secondary-value', Math.floor(value));
@@ -221,5 +221,5 @@ export default class ProgressBarElement extends BaseElement {
   }
 }
 
-ons.elements.ProgressBar = ProgressBarElement;
+onsElements.ProgressBar = ProgressBarElement;
 customElements.define('ons-progress-bar', ProgressBarElement);

@@ -4,6 +4,8 @@
 
 'use strict';
 
+import util from './util';
+
 var Event, Utils, Detection, PointerEvent;
 
 /**
@@ -177,7 +179,7 @@ GestureDetector.gestures = GestureDetector.gestures || {};
  * this function is called when creating an new instance
  * @private
  */
-function setup() {
+function setup(opts) {
   if(GestureDetector.READY) {
     return;
   }
@@ -191,8 +193,8 @@ function setup() {
   });
 
   // Add touch events on the document
-  Event.onTouch(GestureDetector.DOCUMENT, EVENT_MOVE, Detection.detect);
-  Event.onTouch(GestureDetector.DOCUMENT, EVENT_END, Detection.detect);
+  Event.onTouch(GestureDetector.DOCUMENT, EVENT_MOVE, Detection.detect, opts);
+  Event.onTouch(GestureDetector.DOCUMENT, EVENT_END, Detection.detect, opts);
 
   // GestureDetector is ready...!
   GestureDetector.READY = true;
@@ -228,8 +230,8 @@ Utils = GestureDetector.utils = {
    * @param {String} type
    * @param {Function} handler
    */
-  on: function on(element, type, handler) {
-    element.addEventListener(type, handler, false);
+  on: function on(element, type, handler, opt) {
+    util.addEventListener(element, type, handler, opt, true);
   },
 
   /**
@@ -238,8 +240,8 @@ Utils = GestureDetector.utils = {
    * @param {String} type
    * @param {Function} handler
    */
-  off: function off(element, type, handler) {
-    element.removeEventListener(type, handler, false);
+  off: function off(element, type, handler, opt) {
+    util.removeEventListener(element, type, handler, opt, true);
   },
 
   /**
@@ -582,13 +584,14 @@ Event = GestureDetector.event = {
    * @param {HTMLElement} element
    * @param {String} type
    * @param {Function} handler
+   * @param {Object} [opt]
    * @param {Function} [hook]
    * @param {Object} hook.type
    */
-  on: function on(element, type, handler, hook) {
+  on: function on(element, type, handler, opt, hook) {
     var types = type.split(' ');
     Utils.each(types, function(type) {
-      Utils.on(element, type, handler);
+      Utils.on(element, type, handler, opt);
       hook && hook(type);
     });
   },
@@ -598,13 +601,14 @@ Event = GestureDetector.event = {
    * @param {HTMLElement} element
    * @param {String} type
    * @param {Function} handler
+   * @param {Object} [opt]
    * @param {Function} [hook]
    * @param {Object} hook.type
    */
-  off: function off(element, type, handler, hook) {
+  off: function off(element, type, handler, opt, hook) {
     var types = type.split(' ');
     Utils.each(types, function(type) {
-      Utils.off(element, type, handler);
+      Utils.off(element, type, handler, opt);
       hook && hook(type);
     });
   },
@@ -617,7 +621,7 @@ Event = GestureDetector.event = {
    * @param {Function} handler
    * @return onTouchHandler {Function} the core event handler
    */
-  onTouch: function onTouch(element, eventType, handler) {
+  onTouch: function onTouch(element, eventType, handler, opt) {
     var self = this;
 
     var onTouchHandler = function onTouchHandler(ev) {
@@ -667,7 +671,7 @@ Event = GestureDetector.event = {
       }
     };
 
-    this.on(element, EVENT_TYPES[eventType], onTouchHandler);
+    this.on(element, EVENT_TYPES[eventType], onTouchHandler, opt);
     return onTouchHandler;
   },
 
@@ -1181,10 +1185,11 @@ Detection = GestureDetector.detection = {
  */
 GestureDetector.Instance = function(element, options) {
   var self = this;
+  var listenerOptions = (options && options.passive) ? { passive: true } : undefined;
 
   // setup GestureDetectorJS window events and register all gestures
   // this also sets up the default options
-  setup();
+  setup(listenerOptions);
 
   /**
    * @property element
@@ -1211,6 +1216,7 @@ GestureDetector.Instance = function(element, options) {
   });
 
   this.options = Utils.extend(Utils.extend({}, GestureDetector.defaults), options || {});
+  this.options.listenerOptions = listenerOptions;
 
   // add some css to the element to prevent the browser from doing its native behavior
   if(this.options.behavior) {
@@ -1228,7 +1234,7 @@ GestureDetector.Instance = function(element, options) {
     } else if(ev.eventType == EVENT_TOUCH) {
       Detection.detect(ev);
     }
-  });
+  }, listenerOptions);
 
   /**
    * keep a list of user event handlers which needs to be removed when calling 'dispose'
@@ -1252,9 +1258,10 @@ GestureDetector.Instance.prototype = {
    *   [en]An event handling function.[/en]
    *   [ja]イベントハンドラとなる関数オブジェクトを指定します。[/ja]
    */
-  on: function onEvent(gestures, handler) {
+  on: function onEvent(gestures, handler, opt) {
     var self = this;
-    Event.on(self.element, gestures, handler, function(type) {
+
+    Event.on(self.element, gestures, handler, util.extend({}, self.options.listenerOptions, opt), function(type) {
       self.eventHandlers.push({ gesture: type, handler: handler });
     });
     return self;
@@ -1273,10 +1280,10 @@ GestureDetector.Instance.prototype = {
    *   [en]An event handling function.[/en]
    *   [ja]イベントハンドラとなる関数オブジェクトを指定します。[/ja]
    */
-  off: function offEvent(gestures, handler) {
+  off: function offEvent(gestures, handler, opt) {
     var self = this;
 
-    Event.off(self.element, gestures, handler, function(type) {
+    Event.off(self.element, gestures, handler, util.extend({}, self.options.listenerOptions, opt), function(type) {
       var index = Utils.inArray(self.eventHandlers, { gesture: type, handler: handler }, true);
       if(index >= 0) {
         self.eventHandlers.splice(index, 1);

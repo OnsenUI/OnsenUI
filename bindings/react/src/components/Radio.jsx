@@ -4,7 +4,7 @@ import BaseInput from './BaseInput.jsx';
 /**
  * @original ons-radio
  * @category form
- * @tutorial react/Reference/input
+ * @tutorial react/Reference/radio
  * @description
  * [en]
  *  A radio button element. The component will automatically render as a Material Design radio button on Android devices.

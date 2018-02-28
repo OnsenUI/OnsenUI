@@ -27,11 +27,11 @@ export default class MDSlideNavigatorAnimator extends NavigatorAnimator {
   constructor({timing = 'cubic-bezier(.1, .7, .4, 1)', delay = 0, duration = 0.3} = {}) {
     super({timing, delay, duration});
 
-    this.backgroundMask = util.createElement(`
-      <div style="position: absolute; width: 100%; height: 100%; z-index: 2;
-        background-color: black; opacity: 0;"></div>
-    `);
     this.blackMaskOpacity = 0.4;
+    this.backgroundMask = util.createElement(
+      '<div style="position: absolute; width: 100%; height: 100%; z-index: 2;' +
+        'background-color: black; opacity: 0;"></div>'
+    );
   }
 
   /**
@@ -47,61 +47,27 @@ export default class MDSlideNavigatorAnimator extends NavigatorAnimator {
 
     animit.runAll(
 
-      animit(this.backgroundMask)
-        .saveStyle()
-        .queue({
-          opacity: 0,
-          transform: 'translate3d(0, 0, 0)'
-        })
-        .wait(this.delay)
-        .queue({
-          opacity: this.blackMaskOpacity
-        }, {
-          duration: this.duration,
-          timing: this.timing
-        })
-        .restoreStyle()
+      animit(this.backgroundMask, this.def)
+        .default(
+          { transform: 'translate3d(0, 0, 0)', opacity: 0 },
+          { opacity: this.blackMaskOpacity }
+        )
         .queue(done => {
           this.backgroundMask.remove();
           done();
         }),
 
-      animit(enterPage)
-        .saveStyle()
-        .queue({
-          css: {
-            transform: 'translate3D(100%, 0, 0)',
-          },
-          duration: 0
-        })
-        .wait(this.delay)
-        .queue({
-          css: {
-            transform: 'translate3D(0, 0, 0)',
-          },
-          duration: this.duration,
-          timing: this.timing
-        })
-        .restoreStyle(),
+      animit(enterPage, this.def)
+        .default(
+          { transform: 'translate3d(100%, 0, 0)' },
+          { transform: 'translate3d(0, 0, 0)' }
+        ),
 
-      animit(leavePage)
-        .saveStyle()
-        .queue({
-          css: {
-            transform: 'translate3D(0, 0, 0)'
-          },
-          duration: 0
-        })
-        .wait(this.delay)
-        .queue({
-          css: {
-            transform: 'translate3D(-45%, 0px, 0px)'
-          },
-          duration: this.duration,
-          timing: this.timing
-        })
-        .restoreStyle()
-        .wait(0.2)
+      animit(leavePage, this.def)
+        .default(
+          { transform: 'translate3d(0, 0, 0)' },
+          { transform: 'translate3d(-45%, 0, 0)' }
+        )
         .queue(done => {
           unblock();
           callback();
@@ -123,61 +89,27 @@ export default class MDSlideNavigatorAnimator extends NavigatorAnimator {
 
     animit.runAll(
 
-      animit(this.backgroundMask)
-        .saveStyle()
-        .queue({
-          opacity: this.blackMaskOpacity,
-          transform: 'translate3d(0, 0, 0)'
-        })
-        .wait(this.delay)
-        .queue({
-          opacity: 0
-        }, {
-          duration: this.duration,
-          timing: this.timing
-        })
-        .restoreStyle()
+      animit(this.backgroundMask, this.def)
+        .default(
+          { transform: 'translate3d(0, 0, 0)', opacity: this.blackMaskOpacity },
+          { opacity: 0 }
+        )
         .queue(done => {
           this.backgroundMask.remove();
           done();
         }),
 
-      animit(enterPage)
-        .saveStyle()
-        .queue({
-          css: {
-            transform: 'translate3D(-45%, 0px, 0px)',
-            opacity: 0.9
-          },
-          duration: 0
-        })
-        .wait(this.delay)
-        .queue({
-          css: {
-            transform: 'translate3D(0px, 0px, 0px)',
-            opacity: 1.0
-          },
-          duration: this.duration,
-          timing: this.timing
-        })
-        .restoreStyle(),
+      animit(enterPage, this.def)
+        .default(
+          { transform: 'translate3d(-45%, 0, 0)', opacity: .9 },
+          { transform: 'translate3d(0, 0, 0)', opacity: 1 }
+        ),
 
-      animit(leavePage)
-        .queue({
-          css: {
-            transform: 'translate3D(0px, 0px, 0px)'
-          },
-          duration: 0
-        })
-        .wait(this.delay)
-        .queue({
-          css: {
-            transform: 'translate3D(100%, 0px, 0px)'
-          },
-          duration: this.duration,
-          timing: this.timing
-        })
-        .wait(0.2)
+      animit(leavePage, this.def)
+        .default(
+          { transform: 'translate3d(0, 0, 0)' },
+          { transform: 'translate3d(100%, 0, 0)' }
+        )
         .queue(done => {
           unblock();
           callback();

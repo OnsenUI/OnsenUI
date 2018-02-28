@@ -11,7 +11,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import ons from '../ons';
+import onsElements from '../ons/elements';
 import util from '../ons/util';
 import autoStyle from '../ons/autostyle';
 import ModifierUtil from '../ons/internal/modifier-util';
@@ -251,7 +251,7 @@ export default class SpeedDialElement extends BaseElement {
         }
         break;
       default:
-        throw new Error('Argument must be one of up, down, left or right.');
+        util.throw('Argument must be one of up, down, left or right.');
     }
   }
 
@@ -474,5 +474,5 @@ export default class SpeedDialElement extends BaseElement {
   }
 }
 
-ons.elements.SpeedDial = SpeedDialElement;
+onsElements.SpeedDial = SpeedDialElement;
 customElements.define('ons-speed-dial', SpeedDialElement);

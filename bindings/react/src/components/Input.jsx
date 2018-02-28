@@ -44,6 +44,15 @@ Input.propTypes = {
   disabled: PropTypes.bool,
 
   /**
+   * @name readOnly
+   * @type bool
+   * @description
+   *  [en]Specifies whether the input is read-only.[/en]
+   *  [ja][/ja]
+   */
+  readOnly: PropTypes.bool,
+
+  /**
    * @name onChange
    * @type function
    * @description

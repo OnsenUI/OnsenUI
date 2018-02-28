@@ -1,6 +1,6 @@
 {
   "name": "onsenui",
-  "version": "2.8.3",
+  "version": "2.9.2",
   "description": "HTML5 Mobile Framework & UI Components",
   "private": false,
   "author": "@kruyvanna",
@@ -157,7 +157,8 @@
   },
   "dependencies": {
     "@onsenui/custom-elements": "1.0.0",
+    "@onsenui/fastclick": "1.1.1",
     "core-js": "^2.5.1",
-    "yargs": "^10.0.3"
+    "yargs": "^11.0.0"
   }
 }

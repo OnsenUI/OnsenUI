@@ -15,7 +15,7 @@ limitations under the License.
 
 */
 
-import ons from '../../ons';
+import onsElements from '../../ons/elements';
 import util from '../../ons/util';
 import internal from '../../ons/internal';
 import BaseElement from '../base/base-element';
@@ -155,6 +155,7 @@ export default class RippleElement extends BaseElement {
     let x, y, h, w, r;
     const b = this.getBoundingClientRect();
     const size = this._getEffectSize();
+    const error = () => util.throw('Ripple invalid state');
 
     if (this._center) {
       x = b.width / 2;
@@ -165,7 +166,7 @@ export default class RippleElement extends BaseElement {
       } else if (size === 'contain') {
         r = Math.min(x, y);
       } else {
-        throw Error('Invalid state. If this errors is shown, leport to GitHub issues.');
+        error();
       }
     } else {
       x = (typeof e.clientX === 'number' ? e.clientX : e.changedTouches[0].clientX) - b.left;
@@ -178,7 +179,7 @@ export default class RippleElement extends BaseElement {
       } else if (size === 'contain') {
         r = Math.min(Math.round(h / 2), Math.round(w / 2));
       } else {
-        throw Error('Invalid state. If this errors is shown, leport to GitHub issues.');
+        error();
       }
     }
 
@@ -354,5 +355,5 @@ export default class RippleElement extends BaseElement {
   }
 }
 
-ons.elements.Ripple = RippleElement;
+onsElements.Ripple = RippleElement;
 customElements.define('ons-ripple', RippleElement);

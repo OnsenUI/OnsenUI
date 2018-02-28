@@ -26,11 +26,11 @@ import contentReady from '../../ons/content-ready';
 export default class BaseDialogElement extends BaseElement {
 
   get _scheme() {
-    throw new Error('_scheme getter must be implemented.');
+    util.throwMember();
   }
 
   _updateAnimatorFactory() {
-    throw new Error('_updateAnimatorFactory method must be implemented.');
+    util.throwMember();
   }
 
   _toggleStyle(shouldShow) {
@@ -39,6 +39,10 @@ export default class BaseDialogElement extends BaseElement {
 
   constructor() {
     super();
+
+    if (this.constructor === BaseDialogElement) {
+      util.throwAbstract();
+    }
 
     this._visible = false;
     this._doorLock = new DoorLock();
@@ -72,10 +76,6 @@ export default class BaseDialogElement extends BaseElement {
           () => this._running = false
         );
     }
-  }
-
-  _preventScroll(event) {
-    event.cancelable && event.preventDefault();
   }
 
   show(...args) {
@@ -116,6 +116,7 @@ export default class BaseDialogElement extends BaseElement {
 
         shouldShow && this._toggleStyle(true, options);
         this._visible = shouldShow;
+        util.iosPageScrollFix(shouldShow);
 
         contentReady(this, () => {
           animator[action](this, () => {
@@ -172,7 +173,7 @@ export default class BaseDialogElement extends BaseElement {
     contentReady(this, () => {
       if (this._mask) {
         this._mask.addEventListener('click', this._cancel, false);
-        this._mask.addEventListener('touchmove', this._preventScroll, false); // iOS fix
+        util.iosMaskScrollFix(this._mask, true);
       }
     });
   }
@@ -183,7 +184,7 @@ export default class BaseDialogElement extends BaseElement {
 
     if (this._mask) {
       this._mask.removeEventListener('click', this._cancel, false);
-      this._mask.removeEventListener('touchmove', this._preventScroll, false);
+      util.iosMaskScrollFix(this._mask, false);
     }
   }
 

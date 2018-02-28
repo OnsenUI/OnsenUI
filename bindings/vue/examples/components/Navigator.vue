@@ -9,6 +9,7 @@
       @push="pageStack = [...pageStack, $event]"
       @reset="pageStack = [pageStack[0]]"
       @pop="pageStack.pop()"
+      @replace="pageStack = [...pageStack.slice(0, -1), $event]"
     >
     </v-ons-navigator>
   </v-ons-page>
@@ -40,12 +41,14 @@
     methods: {
       log,
       replace() {
-        this.$emit('pop');
-        this.$emit('push', page1);
+        this.$emit('replace', page1);
       },
       reset() {
         this.$emit('reset')
       }
+    },
+    onsNavigatorOptions: {
+      animation: 'fade'
     },
     components: { myToolbar },
   };
@@ -55,7 +58,7 @@
     template: `
       <v-ons-page p2 @init="log('init!')">
         <my-toolbar>Page 2</my-toolbar>
-        Page 2
+        <p>Page 2 {{ myProp }}</p>
         <v-ons-button @click="push">Push 3 pages</v-ons-button>
       </v-ons-page>
     `,
@@ -66,6 +69,19 @@
         this.$emit('push', page3);
         this.$emit('push', page3);
       }
+    },
+    props: {
+      myProp: {
+        type: String,
+        required: true
+      }
+    },
+    data() {
+      return {
+        onsNavigatorOptions: {
+          animation: 'lift',
+        }
+      };
     },
     components: { myToolbar },
     mounted() {
@@ -84,7 +100,12 @@
     methods: {
       log,
       push() {
-        this.$emit('push', page2);
+        this.$emit('push', {
+          extends: page2,
+          onsNavigatorProps: {
+            myProp: 'This is a navigator prop'
+          }
+        });
       }
     },
     components: { myToolbar },

@@ -50,6 +50,13 @@
   --dialog-text-color: var(--text-color);
   --popover-background-color: white;
   --popover-text-color: #1f1f21;
+  --action-sheet-title-color: #8f8e94;
+  --action-sheet-button-separator-color: rgba(0, 0, 0, 0.1);
+  --action-sheet-button-color: var(--highlight-color);
+  --action-sheet-button-destructive-color: #fe3824;
+  --action-sheet-button-background-color: rgba(255, 255, 255, 0.9);
+  --action-sheet-button-active-background-color: #e9e9e9;
+  --action-sheet-cancel-button-background-color: #fff;
   --notification-background-color: #fe3824;
   --notification-color: white;
   --search-input-background-color: rgba(3, 3, 3, 0.09);
@@ -133,6 +140,7 @@
   --material-select-border-color: color(black a(12%));
   --material-popover-background-color: #fafafa;
   --material-popover-text-color: var(--material-text-color);
+  --material-action-sheet-text-color: #686868;
 
   /* others */
   --tap-highlight-color: transparent;
