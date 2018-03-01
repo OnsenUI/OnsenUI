@@ -42,7 +42,11 @@ describe('OnsPullHookElement', () => {
         direction: 'down',
         interimDirection: 'down',
         deltaY: 10,
-        preventDefault: () => null
+        preventDefault: () => null,
+        center: {
+          clientX: 20,
+          clientY: 20
+        }
       }
     };
 
