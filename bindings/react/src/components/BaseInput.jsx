@@ -23,6 +23,12 @@ class BaseInput extends BasicComponent {
     super.componentDidMount();
     const node = ReactDOM.findDOMNode(this);
 
+    if (this.props.defaultValue !== undefined) {
+      node.value = this.props.defaultValue;
+    }
+    if (this.props.defaultChecked !== undefined) {
+      node.checked = this.props.defaultChecked;
+    }
     if (this.props.value !== undefined) {
       node.value = this.props.value;
     }
@@ -49,7 +55,8 @@ class BaseInput extends BasicComponent {
 
   render() {
     const { onChange, ...props } = this.props;
-    return React.createElement(this._getDomNodeName(), Util.getAttrs(this, props));
+    var p = Util.getAttrs(this, props);
+    return React.createElement(this._getDomNodeName(), p);
   }
 }
 
@@ -57,7 +64,7 @@ BaseInput.propTypes = {
   modifier: PropTypes.string,
   disabled: PropTypes.bool,
   onChange: PropTypes.func,
-  defaultValue: PropTypes.oneOfType([
+  defaultvalue: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.instanceOf(Date)
   ]),
