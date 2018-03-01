@@ -53,25 +53,25 @@ Input.propTypes = {
   onChange: PropTypes.func,
 
   /**
-   * @name defaultValue
+   * @name value
    * @type string
    * @description
-   *  [en]Content of the input.[/en]
+   *  [en]Content of the input (controlled).[/en]
    *  [ja][/ja]
    */
-  defaultValue: PropTypes.oneOfType([
+  value: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.instanceOf(Date)
   ]),
 
   /**
-   * @name value
+   * @name defaultValue
    * @type string
    * @description
-   *  [en]Content of the input.[/en]
+   *  [en]Content of the input at first render (uncontrolled).[/en]
    *  [ja][/ja]
    */
-  value: PropTypes.oneOfType([
+  defaultValue: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.instanceOf(Date)
   ]),
