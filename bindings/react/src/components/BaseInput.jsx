@@ -55,8 +55,7 @@ class BaseInput extends BasicComponent {
 
   render() {
     const { onChange, ...props } = this.props;
-    var p = Util.getAttrs(this, props);
-    return React.createElement(this._getDomNodeName(), p);
+    return React.createElement(this._getDomNodeName(), Util.getAttrs(this, props));
   }
 }
 
@@ -64,7 +63,7 @@ BaseInput.propTypes = {
   modifier: PropTypes.string,
   disabled: PropTypes.bool,
   onChange: PropTypes.func,
-  defaultvalue: PropTypes.oneOfType([
+  defaultValue: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.instanceOf(Date)
   ]),
