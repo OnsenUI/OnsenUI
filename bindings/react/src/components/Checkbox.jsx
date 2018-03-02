@@ -74,10 +74,19 @@ Checkbox.propTypes = {
    * @name checked
    * @type boolean
    * @description
-   *  [en]Controls the state of the checkbox.[/en]
+   *  [en]Controls the state of the checkbox (controlled).[/en]
    *  [ja][/ja]
    */
   checked: PropTypes.bool,
+
+  /**
+   * @name checked
+   * @type boolean
+   * @description
+   *  [en]Defined the state of the radio button at first render for uncontrolled inputs.[/en]
+   *  [ja][/ja]
+   */
+  defaultChecked: PropTypes.bool,
 
   /**
    * @name inputId
