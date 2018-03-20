@@ -63,6 +63,52 @@ class Navigator extends BasicComponent {
 		}));
 	}
 
+	resetPage(page, options = {}) {
+		this.resetPageStack([page], options);
+	}
+
+	resetPageStack(stack, options = {}) {
+		if (this.vnode.dom._isRunning) {
+			return Promise.reject('Navigator is already running animation.');
+		}
+
+		const hidePages = () => {
+			for(let i = this.pageStack.length-2; i>=0; --i) {
+				this.pageStack[1].style = this.pageStack[1].style || {};
+				this.pageStack[1].style.display = 'none';
+			}
+		};
+
+		if(options.pop) {
+			const update = () => {
+				this.pageStack.pop();
+				m.redraw();
+				return new Promise((resolve) => {
+					m.redraw();
+					resolve();
+				});
+			};
+
+			return this.update(this.pageStack)
+				.then(() => this.vnode.dom._popPage(options, update))
+				.then(() => hidePages());
+		}
+
+		const update = () => {
+			this.pageStack = stack;
+			return new Promise((resolve) => {
+				m.redraw();
+				resolve();
+			});
+		}
+
+		return this.vnode.dom._pushPage(options, update)
+			.then(() => {
+				m.redraw();
+				hidePages();
+			});
+
+	}
 
 	/* Onsen functions */
 
@@ -180,10 +226,6 @@ class Navigator extends BasicComponent {
 				throw error;
 			});
 		});
-	}
-
-	resetPage() {
-
 	}
 
 	onDeviceBackButton(event) {

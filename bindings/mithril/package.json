@@ -1,5 +1,5 @@
 {
-  "name": "mitrhil-onsenui",
+  "name": "mithril-onsenui",
   "version": "2.2.1",
   "description": "Mithril bindings for Onsen UI",
   "author": "Onsen UI Team <team@monaca.io>",
@@ -8,7 +8,7 @@
     "build": "cross-env NODE_ENV=production rollup -c",
     "prepublish": "npm run build"
   },
-  "main": "dist/mitrhil-onsenui.js",
+  "main": "dist/mithril-onsenui.js",
   "files": [
     "dist/mithril-onsenui.*",
     "src"
