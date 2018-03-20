@@ -1,6 +1,6 @@
 {
   "name": "mithril-onsenui",
-  "version": "2.2.1",
+  "version": "2.2.2",
   "description": "Mithril bindings for Onsen UI",
   "author": "Onsen UI Team <team@monaca.io>",
   "scripts": {
