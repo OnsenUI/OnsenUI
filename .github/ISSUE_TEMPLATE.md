@@ -14,7 +14,7 @@ Reporting a bug?
 
 - Whenever possible, it is required to provide a working demo where the issue is reproduced. In order to quickly do this, please proceed as follows:
 
-1. Go to https://tutorial.onsen.io/
+1. Go to https://onsen.io/playground/
 2. Select a framework and a template
 3. Modify the template until the issue is visible
 4. Hit "Report an issue" button to open Github issue page. You need to be logged in on Github.

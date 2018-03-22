@@ -8,7 +8,7 @@
 
 It can be used to build hybrid apps with [Cordova](https://cordova.apache.org/) and [PhoneGap](http://phonegap.com/) but can also run in the browser.
 
-We have build a [Tutorial Website](http://tutorial.onsen.io/?framework=react&category=Getting%20started&module=Using%20the%20components) where you can see live examples of OnsenUI without installing it. If you find any issues, feel free to report at [our OpenSource Repository](https://github.com/OnsenUI/tutorial). Also pull requests are welcome.
+We have built a [Tutorial Website](https://onsen.io/playground/?framework=react&category=Getting%20started&module=Using%20the%20components) where you can see live examples of OnsenUI without installing it. If you find any issues, feel free to report at [our OpenSource Repository](https://github.com/OnsenUI/tutorial). Also pull requests are welcome.
 
 To learn how to use these components, please refer to [the documentation](https://onsen.io/v2/docs/guide/react/index.html). You can also check out our [kitchensink example](https://github.com/OnsenUI/react-onsenui-kitchensink) to learn how to use this or you can [click here](http://onsenui.github.io/react-onsenui-kitchensink/demo.html) for a quick demo.
 
