@@ -1,18 +1,9 @@
 <!--
-Got a question?
-===============
-The issue list of this repo is **exclusively** for bug reports and feature requests. For simple questions, please use the following resources:
-
-- Read the docs: https://onsen.io/docs/guide/js/
-- Ask in the Gitter chat room: https://gitter.im/OnsenUI/OnsenUI
-- Ask on the forums: https://community.onsen.io/
-- Look for/ask questions on stack overflow: https://stackoverflow.com/questions/tagged/onsen-ui
+The issue list of this repo is **exclusively** for bug reports and feature requests. For simple questions, please read the docs (https://onsen.io/docs/guide/js/), or ask a question on Discord (https://discord.gg/JWhBbnE) or the forums (https://community.onsen.io/).
 
 Reporting a bug?
 ================
-- Try to search for your issue, it may have already been answered or even fixed in master branch.
-
-- Whenever possible, it is required to provide a working demo where the issue is reproduced. In order to quickly do this, please proceed as follows:
+Where possible, you must provide a working demo where the issue is reproduced. In order to quickly do this, follow these steps:
 
 1. Go to https://onsen.io/playground/
 2. Select a framework and a template
@@ -21,51 +12,35 @@ Reporting a bug?
 
 This uses the latest release of Onsen UI. In case the issue is not reproducible in desktop browsers, just follow the previous steps and also modify the platform version at the end (you can also open the mentioned site on a device).
 
-If for some reason the issue cannot be submitted with the previous steps, please just fill the following template.
+If you cannot reproduce the issue on the Playground, please fill out the template below with as much detail as possible.
 -->
 
-__Environment__ <!-- Please choose your environment. -->
+__Environment__
 
-```
-[Core]
-    onsenui 2.1.0
+Onsen UI Version:
+<!-- e.g. 2.9.2 -->
+- 
 
-[Framework]
-    none
-    angular1 1.5.9
-    angular2 2.2.4
-    react 15.4.1
-    vue 2.1.10
+Framework:
+<!-- e.g. Vue 2.5.0 -->
+- 
 
-[Framework binding]
-    none
-    angular-onsenui 2.1.0
-    angular2-onsenui 1.0.0-rc.5
-    react-onsenui 1.1.0
-    vue-onsenui 2.0.0-alpha.0
+Framework binding:
+<!-- e.g. vue-onsenui 2.5.1 -->
+- 
 
-[Additional libraries]
-    none
-    jQuery 3.1.1
+Additional libraries:
+<!-- e.g. jQuery 3.3.1 -->
+- 
 
-[Platform]
-    Mobile - Android 7.1
-    Mobile - iOS 10.1.1
-    Desktop - Linux
-    Desktop - macOS Sierra
-    Desktop - Windows 10
-
-[Browser]
-    Mobile - Android WebView
-    Mobile - Android Chrome 54.0.2840.85
-    Mobile - iOS UIWebView
-    Mobile - iOS Safari
-    Desktop - Chrome 55.0.2883.75
-    Desktop - Safari 10.0 (12602.1.50.0.10)
-```
+Platform:
+<!-- e.g. Android 8.1 Cordova, iOS 11.3 Safari, Windows 10 Chrome -->
+- 
 
 __Encountered problem__
+<!-- Outline the behaviour you're seeing, and what you would expect to see -->
 
 
 __How to reproduce__
+<!-- Write a detailed step-by-step on how to reproduce your issue ->
 
