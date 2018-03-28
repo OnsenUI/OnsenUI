@@ -5,6 +5,10 @@ CHANGELOG
 dev
 ---
 
+ ### New Features
+
+ * ons.notification: Add `maskColor` configuration for `alert`, `confirm` and `prompt` ([#2358](https://github.com/OnsenUI/OnsenUI/issues/2358))
+
  ### Bug Fixes
 
  * onsenui.d.ts: Fixed [#2354](https://github.com/OnsenUI/OnsenUI/issues/2354).
