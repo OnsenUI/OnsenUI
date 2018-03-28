@@ -14,6 +14,7 @@ dev
  * onsenui.d.ts: Fixed [#2354](https://github.com/OnsenUI/OnsenUI/issues/2354).
  * ons-toolbar: `static` attribute works with iOS status bar.
  * ons-pull-hook: Improve scroll behavior in UIWebView. Fixed [#2353](https://github.com/OnsenUI/OnsenUI/issues/2353) and [#2357](https://github.com/OnsenUI/OnsenUI/issues/2357).
+ * ons-navigator: Fixed [#2376](https://github.com/OnsenUI/OnsenUI/issues/2376).
 
 2.9.2
 ---

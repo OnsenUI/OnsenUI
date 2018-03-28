@@ -326,13 +326,13 @@ export default class NavigatorElement extends BaseElement {
               const isBB = el => /ons-back-button/i.test(el.tagName);
               if (!isBB(event.target) && !util.findParent(event.target, isBB, p => /ons-page/i.test(p.tagName))) {
 
-                // Animaor is swipeable
+                // Animator is swipeable
                 const animation = (this.topPage.pushedOptions || {}).animation || this.animatorFactory._animation;
                 const Animator = _animatorDict[animation] instanceof Function
                   ? _animatorDict[animation].call()
                   : _animatorDict[animation];
 
-                if (Animator.swipeable) {
+                if (typeof Animator !== 'undefined' && Animator.swipeable) {
                   swipeAnimator = new Animator(); // Prepare for the swipe
                   return false;
                 }
