@@ -42,5 +42,5 @@ __Encountered problem__
 
 
 __How to reproduce__
-<!-- Write a detailed step-by-step on how to reproduce your issue ->
+<!-- Write a detailed step-by-step on how to reproduce your issue -->
 
