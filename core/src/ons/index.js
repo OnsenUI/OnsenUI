@@ -30,6 +30,7 @@ import pageAttributeExpression from './page-attribute-expression';
 import autoStyle from './autostyle';
 import DoorLock from './doorlock';
 import { defaultPageLoader, PageLoader } from './page-loader';
+import contentReady from './content-ready';
 
 /**
  * @object ons
@@ -54,6 +55,7 @@ const ons = {
   _internal: internal,
   _readyLock: new DoorLock(),
   _util: util,
+  _contentReady: contentReady,
 };
 
 ons.platform.select((window.location.search.match(/platform=([\w-]+)/) || [])[1]);
