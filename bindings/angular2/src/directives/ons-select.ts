@@ -18,7 +18,7 @@ import * as ons from 'onsenui';
  * @selector ons-select
  * @description
  *   [en]Angular directive for `<ons-select>` component.[/en]
- *   [ja]`<ons-select>`要素のAngularディレクティブです。[/en]
+ *   [ja]`<ons-select>`要素のAngularディレクティブです。[/ja]
  * @example
  *   <ons-select [(ngModel)]="selectedValue">
  *     <option value="Item A">Item A</option>
@@ -40,18 +40,18 @@ export class OnsSelect implements OnDestroy, ControlValueAccessor {
   private _element: any;
   private _boundOnChange: Function;
   private _propagateChange = (_: any) => { };
-  
+
   constructor(private _elementRef: ElementRef) {
     this._boundOnChange = this._onChange.bind(this);
     this._element = _elementRef.nativeElement;
 
     this._element.addEventListener('change', this._boundOnChange);
   }
-  
+
   _onChange(event: any) {
     this._propagateChange(event.target.value);
   }
-  
+
   get element(): any {
     return this._element;
   }
@@ -67,11 +67,7 @@ export class OnsSelect implements OnDestroy, ControlValueAccessor {
   }
 
   writeValue(obj: any) {
-    // When this statement is first evaluated, the inner <select> element is not ready,
-    // so contentReady is required in this case
-    (<any>ons)._contentReady(this._element, () => {
-      this._element.value = obj;
-    });
+    this._element.value = obj;
   }
 
   registerOnChange(fn: any) {

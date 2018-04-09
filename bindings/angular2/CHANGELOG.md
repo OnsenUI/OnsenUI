@@ -1,6 +1,13 @@
 CHANGELOG
 ====
 
+dev
+---
+
+### Bug Fixes
+
+ * OnsSelect: Fix for the previous `NgModel` fix ([#2251](https://github.com/OnsenUI/OnsenUI/issues/2251)).
+
 4.1.0
 ----
 
