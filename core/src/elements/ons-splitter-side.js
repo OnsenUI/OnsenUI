@@ -458,13 +458,15 @@ export default class SplitterSideElement extends BaseElement {
   }
 
   _updateAnimation(animation = this.getAttribute('animation')) {
-    this._animator && this._animator.deactivate();
-    this._animator = this._animatorFactory.newAnimator({animation});
-    this._animator.activate(this);
-    this._animationOpt = {
-      timing: this._animator.duration,
-      duration: this._animator.duration
-    };
+    if(this.parentNode) {
+      this._animator && this._animator.deactivate();
+      this._animator = this._animatorFactory.newAnimator({animation});
+      this._animator.activate(this);
+      this._animationOpt = {
+        timing: this._animator.duration,
+        duration: this._animator.duration
+      };
+    }
   }
 
   _updateAnimationOptions(value = this.getAttribute('animation-options')) {
