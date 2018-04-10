@@ -132,6 +132,8 @@ export default class ListItemElement extends BaseElement {
     const re = /^ons-(?!col$|row$|if$)/i;
     this._shouldIgnoreTap = e => e.hasAttribute('prevent-tap') || re.test(e.tagName);
 
+    this._expanded = false;
+
     contentReady(this, () => {
       this._compile();
     });
@@ -141,8 +143,13 @@ export default class ListItemElement extends BaseElement {
     autoStyle.prepare(this);
 
     this.classList.add(defaultClassName);
+    if (this.hasAttribute('expandable')) {
+      this.classList.add('not-expanded');
+    }
 
-    let left, center, right;
+    let left, center, right, expandableContent;
+
+    this._top = document.createElement('div');
 
     for (let i = 0; i < this.children.length; i++) {
       const el = this.children[i];
@@ -158,33 +165,77 @@ export default class ListItemElement extends BaseElement {
         el.classList.add('list-item__right');
         right = el;
       }
+      else if (el.classList.contains('expandable-content')) {
+        el.classList.add('list-item__expandable-content');
+        expandableContent = el;
+      }
     }
 
     if (!center) {
       center = document.createElement('div');
 
-      if (!left && !right) {
+      if (!right && this.hasAttribute('expandable')) {
+        right = document.createElement('div');
+        right.classList.add('list-item__right');
+        right.classList.add('right');
+
+        this._expandIcon = document.createElement('ons-icon');
+        this._expandIcon.setAttribute('icon', 'ion-chevron-down');
+        right.appendChild(this._expandIcon);
+      }
+
+      if (!left && !right && !expandableContent) {
         while (this.childNodes[0]) {
           center.appendChild(this.childNodes[0]);
         }
       } else {
         for (let i = this.childNodes.length - 1; i >= 0; i--) {
           const el = this.childNodes[i];
-          if (el !== left && el !== right) {
+          if (el !== left && el !== right && el !== expandableContent) {
             center.insertBefore(el, center.firstChild);
           }
         }
       }
-
-      this.insertBefore(center, right || null);
     }
 
     center.classList.add('center');
     center.classList.add('list-item__center');
 
+    this._top.classList.add('top');
+    this._top.classList.add('list-item__top');
+    this.appendChild(this._top);
+
+    this._top.appendChild(center);
+    if (left) {
+      this._top.appendChild(left);
+    }
+    if (right) {
+      this._top.appendChild(right);
+    }
+
     util.updateRipple(this);
 
     ModifierUtil.initModifier(this, scheme);
+  }
+
+  show() {
+    if (this.hasAttribute('expandable')) {
+      this.classList.remove('not-expanded');
+      this._expanded = true;
+      if (this._expandIcon) {
+        this._expandIcon.setAttribute('icon', 'ion-chevron-up');
+      }
+    }
+  }
+
+  hide() {
+    if (this.hasAttribute('expandable')) {
+      this.classList.add('not-expanded');
+      this._expanded = false;
+      if (this._expandIcon) {
+        this._expandIcon.setAttribute('icon', 'ion-chevron-down');
+      }
+    }
   }
 
   static get observedAttributes() {
@@ -226,6 +277,13 @@ export default class ListItemElement extends BaseElement {
     this[action]('mousedown', this._onTouch);
     this[action]('mouseup', this._onRelease);
     this[action]('mouseout', this._onRelease);
+    this._top[action]('touchstart', this._toggle.bind(this));
+    this._top[action]('mousedown', this._toggle.bind(this));
+  }
+
+  // toggle expanded content
+  _toggle() {
+    this._expanded ? this.hide() : this.show();
   }
 
   _onDrag(event) {
