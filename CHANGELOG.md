@@ -17,6 +17,7 @@ dev
  * ons-navigator: Fixed [#2376](https://github.com/OnsenUI/OnsenUI/issues/2376).
  * ons-select: Fixed [#2251](https://github.com/OnsenUI/OnsenUI/issues/2251) for all bindings.
  * ons-splitter-side: Fixed regression of ([#2026](https://github.com/OnsenUI/OnsenUI/issues/2026)).
+ * ons-popover: Fixed incorrect placement of popover when page is not full width ([#2386](https://github.com/OnsenUI/OnsenUI/issues/2386)).
 
 2.9.2
 ---
