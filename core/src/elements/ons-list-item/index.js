@@ -15,13 +15,16 @@ limitations under the License.
 
 */
 
-import onsElements from '../ons/elements';
-import util from '../ons/util';
-import styler from '../ons/styler';
-import autoStyle from '../ons/autostyle';
-import ModifierUtil from '../ons/internal/modifier-util';
-import BaseElement from './base/base-element';
-import contentReady from '../ons/content-ready';
+import onsElements from '../../ons/elements';
+import animit from '../../ons/animit';
+import util from '../../ons/util';
+import styler from '../../ons/styler';
+import autoStyle from '../../ons/autostyle';
+import ModifierUtil from '../../ons/internal/modifier-util';
+import AnimatorFactory from '../../ons/internal/animator-factory';
+import { ListItemAnimator, SlideListItemAnimator } from './animator';
+import BaseElement from '../base/base-element';
+import contentReady from '../../ons/content-ready';
 
 const defaultClassName = 'list-item';
 const scheme = {
@@ -34,6 +37,11 @@ const scheme = {
   '.list-item__subtitle': 'list-item--*__subtitle',
   '.list-item__thumbnail': 'list-item--*__thumbnail',
   '.list-item__icon': 'list-item--*__icon'
+};
+
+const _animatorDict = {
+  'default': SlideListItemAnimator,
+  'none': ListItemAnimator
 };
 
 /**
@@ -128,11 +136,11 @@ export default class ListItemElement extends BaseElement {
   constructor() {
     super();
 
+    this._animatorFactory = this._updateAnimatorFactory();
+
     // Elements ignored when tapping
     const re = /^ons-(?!col$|row$|if$)/i;
     this._shouldIgnoreTap = e => e.hasAttribute('prevent-tap') || re.test(e.tagName);
-
-    this._expanded = false;
 
     contentReady(this, () => {
       this._compile();
@@ -143,13 +151,12 @@ export default class ListItemElement extends BaseElement {
     autoStyle.prepare(this);
 
     this.classList.add(defaultClassName);
-    if (this.hasAttribute('expandable')) {
-      this.classList.add('not-expanded');
+
+    if(this.hasAttribute('expandable')) {
+      this.classList.add('list-item--expandable');
     }
 
     let left, center, right, expandableContent;
-
-    this._top = document.createElement('div');
 
     for (let i = 0; i < this.children.length; i++) {
       const el = this.children[i];
@@ -171,18 +178,19 @@ export default class ListItemElement extends BaseElement {
       }
     }
 
+    if (!right && this.hasAttribute('expandable')) {
+      right = document.createElement('div');
+      right.classList.add('list-item__right', 'right');
+
+      // We cannot use a pseudo-element for this chevron, as we cannot animate it using
+      // JS. So, we make a chevron span instead.
+      const chevron = document.createElement('span');
+      chevron.classList.add('list-item__expand-chevron');
+      right.appendChild(chevron);
+    }
+
     if (!center) {
       center = document.createElement('div');
-
-      if (!right && this.hasAttribute('expandable')) {
-        right = document.createElement('div');
-        right.classList.add('list-item__right');
-        right.classList.add('right');
-
-        this._expandIcon = document.createElement('ons-icon');
-        this._expandIcon.setAttribute('icon', 'ion-chevron-down');
-        right.appendChild(this._expandIcon);
-      }
 
       if (!left && !right && !expandableContent) {
         while (this.childNodes[0]) {
@@ -196,21 +204,26 @@ export default class ListItemElement extends BaseElement {
           }
         }
       }
+
+      if(!expandableContent) {
+        this.insertBefore(center, right || null);
+      }
     }
 
-    center.classList.add('center');
-    center.classList.add('list-item__center');
+    center.classList.add('center', 'list-item__center');
 
-    this._top.classList.add('top');
-    this._top.classList.add('list-item__top');
-    this.appendChild(this._top);
+    if(expandableContent) {
+      this._top = document.createElement('div');
+      this._top.classList.add('top', 'list-item__top');
+      this.appendChild(this._top);
 
-    this._top.appendChild(center);
-    if (left) {
-      this._top.appendChild(left);
-    }
-    if (right) {
-      this._top.appendChild(right);
+      this._top.appendChild(center);
+      if (left) {
+        this._top.appendChild(left);
+      }
+      if (right) {
+        this._top.appendChild(right);
+      }
     }
 
     util.updateRipple(this);
@@ -218,28 +231,53 @@ export default class ListItemElement extends BaseElement {
     ModifierUtil.initModifier(this, scheme);
   }
 
-  show() {
-    if (this.hasAttribute('expandable')) {
-      this.classList.remove('not-expanded');
-      this._expanded = true;
-      if (this._expandIcon) {
-        this._expandIcon.setAttribute('icon', 'ion-chevron-up');
-      }
+  showExpansion() {
+    if (this.hasAttribute('expandable') && !this._expanding) {
+      this._expanding = true;
+
+      const animator = this._animatorFactory.newAnimator();
+      animator.showExpansion(this, () => {
+        this.classList.add('expanded');
+        this._expanding = false;
+      });
     }
   }
 
-  hide() {
-    if (this.hasAttribute('expandable')) {
-      this.classList.add('not-expanded');
-      this._expanded = false;
-      if (this._expandIcon) {
-        this._expandIcon.setAttribute('icon', 'ion-chevron-down');
-      }
+  hideExpansion() {
+    if (this.hasAttribute('expandable') && !this._expanding) {
+      this._expanding = true;
+
+      const animator = this._animatorFactory.newAnimator();
+      animator.hideExpansion(this, () => {
+        this.classList.remove('expanded');
+        this._expanding = false;
+      });
     }
+  }
+
+  toggleExpansion() {
+    this.classList.contains('expanded') ? this.hideExpansion() : this.showExpansion();
+  }
+
+  _updateAnimatorFactory() {
+    return new AnimatorFactory({
+      animators: _animatorDict,
+      baseClass: ListItemAnimator,
+      baseClassName: 'ListItemAnimator',
+      defaultAnimation: this.getAttribute('animation') || 'default'
+    });
   }
 
   static get observedAttributes() {
-    return ['modifier', 'class', 'ripple'];
+    return ['modifier', 'class', 'ripple', 'animation'];
+  }
+
+  get expandableContent() {
+    return this.querySelector('.list-item__expandable-content');
+  }
+
+  get expandChevron() {
+    return this.querySelector('.list-item__expand-chevron');
   }
 
   attributeChangedCallback(name, last, current) {
@@ -252,6 +290,9 @@ export default class ListItemElement extends BaseElement {
         break;
       case 'ripple':
         util.updateRipple(this);
+        break;
+      case 'animation':
+        this._animatorFactory = this._updateAnimatorFactory();
         break;
     }
   }
@@ -277,13 +318,10 @@ export default class ListItemElement extends BaseElement {
     this[action]('mousedown', this._onTouch);
     this[action]('mouseup', this._onRelease);
     this[action]('mouseout', this._onRelease);
-    this._top[action]('touchstart', this._toggle.bind(this));
-    this._top[action]('mousedown', this._toggle.bind(this));
-  }
 
-  // toggle expanded content
-  _toggle() {
-    this._expanded ? this.hide() : this.show();
+    if(this._top) {
+      this._top[action]('click', this.toggleExpansion.bind(this));
+    }
   }
 
   _onDrag(event) {

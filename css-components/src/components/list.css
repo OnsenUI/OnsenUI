@@ -5,7 +5,8 @@
   --list-border: 1px solid var(--list-item-separator-color);
   --list-item-min-height: 44px;
   --list-item-margin: 0 0 -1px 0;
-  --list-item-padding: 0 0 0 14px;
+  --list-item-padding-side: 14px;
+  --list-item-padding: 0 0 0 var(--list-item-padding-side);
   --list-border-top: 1px solid var(--list-item-separator-color);
   --list-border-bottom: 1px solid var(--list-item-separator-color);
   --list-header-color: var(--text-color);
@@ -19,13 +20,14 @@
   --list-title-font-weight: 500;
   --list-title-line-height: 24px;
   --list-title-padding: 0 0 0 16px;
+  --material-list-item-side-padding: 16px;
   --material-list-item-min-height: 48px;
-  --material-list-item-padding: 0 0 0 16px;
+  --material-list-item-padding: 0 0 0 var(--material-list-item-side-padding);
   --material-list-title-color: #757575;
   --material-list-title-font-size: 14px;
   --material-list-title-font-weight: 500;
   --material-list-title-line-height: 24px;
-  --material-list-title-padding: 12px 0 12px 16px;
+  --material-list-title-padding: 12px 0 12px var(--material-list-item-side-padding);
 
   --retina-list-item-border: {
     border-bottom: none;
@@ -108,11 +110,7 @@
 }
 
 .list-item {
-  display: flex;
-  flex-direction: column;
-}
-
-.list-item__top {
+  position: relative;
   width: 100%;
   position: relative;
   list-style: none;
@@ -125,32 +123,36 @@
   margin: var(--list-item-margin);
   color: var(--list-item-color);
   transition: background-color 0.2s linear;
+}
+
+.list-item__top {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
   order: 0;
+  width: 100%;
+}
+
+.list-item--expandable {
+  display: flex;
+  flex-direction: column;
+  @apply(--retina-list-item-border);
+  background-position-x: var(--list-item-padding-side);
 }
 
 .list-item__expandable-content {
+  display: none;
   width: 100%;
-  position: relative;
-  list-style: none;
-  display: flex;
-  flex-direction: row;
-  box-sizing: content-box;
-  justify-content: flex-start;
-  align-items: center;
-  padding: var(--list-item-padding);
-  margin: var(--list-item-margin);
-  color: var(--list-item-color);
-  transition: background-color 0.2s linear;
-  transition: min-height 0.2s linear;
-  min-height: var(--list-item-min-height);
+  padding: 12px 14px 12px 0;
+  box-sizing: border-box;
   order: 1;
+  overflow: hidden;
 }
 
-.not-expanded > .list-item__expandable-content {
-  max-height: 0;
-  min-height: 0;
-  opacity: 0;
-  margin: 0;
+.list-item.expanded > .list-item__expandable-content {
+  display: block;
+  height: auto;
 }
 
 .list-item__left {
@@ -674,7 +676,15 @@
   min-height: var(--material-list-item-min-height);
 }
 
-.list-item--material.list-item--longdivider {
+.list-item--material.list-item--expandable {
+  border-bottom: 1px solid var(--material-list-item-separator-color);
+  @apply(--retina-material-list-item-border);
+  background-position-x: var(--material-list-item-side-padding);
+}
+
+.list-item--material.list-item--longdivider,
+.list-item--material.list-item--expandable.list-item--longdivider
+ {
   border-bottom: 1px solid var(--material-list-item-separator-color);
   @apply(--retina-material-list-item-border);
 }
@@ -853,18 +863,31 @@
     </ul>
  */
 
-.list-item--chevron:before {
+.list-item--chevron::before,
+.list-item__expand-chevron {
   border-right: 2px solid var(--list-item-chevron-color);
   border-bottom: 2px solid var(--list-item-chevron-color);
-  position: absolute;
-  content: '';
   width: 7px;
   height: 7px;
   background-color: transparent;
-  transform: translateY(-50%) rotate(-45deg);
+  z-index: 5;
+}
+
+.list-item--chevron::before {
+  position: absolute;
+  content: '';
   right: 16px;
   top: 50%;
-  z-index: 5;
+  transform: translateY(-50%) rotate(-45deg);
+}
+
+.list-item__expand-chevron {
+  transform: rotate(45deg);
+  margin: 1px; /* this improves alignment with normal chevrons */
+}
+
+.list-item--expandable.expanded .list-item__expand-chevron {
+  transform: rotate(225deg);
 }
 
 .list-item--chevron__right {
@@ -905,8 +928,9 @@
 
 .list-item--nodivider__center,
 .list-item--nodivider__right,
-[expandable] .list-item__center,
-[expandable] .list-item__right {
+.list-item--nodivider.list-item--expandable,
+.list-item--expandable .list-item__center,
+.list-item--expandable .list-item__right {
   border: none;
   background-image: none;
 }
@@ -925,8 +949,7 @@
     </ul>
  */
 
-.list-item--longdivider,
-.list-item[expandable] {
+.list-item--longdivider {
   border-bottom: var(--list-border);
   @apply(--retina-list-item-border);
 }
