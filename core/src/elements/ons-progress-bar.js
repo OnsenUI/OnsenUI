@@ -40,6 +40,9 @@ const INDET = 'indeterminate';
 /**
  * @element ons-progress-bar
  * @category visual
+ * @modifier material
+ *   [en]Display a Material Design progress bar.[/en]
+ *   [ja]マテリアルデザインのスタイルでプログレスバーを表示します。[/ja]
  * @description
  *   [en]
  *     The component is used to display a linear progress bar. It can either display a progress bar that shows the user how much of a task has been completed. In the case where the percentage is not known it can be used to display an animated progress bar so the user can see that an operation is in progress.
