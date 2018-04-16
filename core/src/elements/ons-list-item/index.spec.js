@@ -191,11 +191,8 @@ describe('OnsListItemElement', () => {
     let animatorMock;
 
     beforeEach(() => {
-      animatorMock = {
-        showExpansion: chai.spy()
-      };
-      //chai.spy.on(listItem._animatorFactory, 'newAnimator', () => animatorMock);
-      listItem._animatorFactory.newAnimator = () => animatorMock; //TODO do this with a spy
+      animatorMock = chai.spy.interface('animatorMock', ['showExpansion']);
+      chai.spy.on(listItem._animatorFactory, 'newAnimator', () => animatorMock);
     });
 
     it('calls animator.showExpansion when expandable is set', () => {
@@ -214,11 +211,8 @@ describe('OnsListItemElement', () => {
     let animatorMock;
 
     beforeEach(() => {
-      animatorMock = {
-        hideExpansion: chai.spy()
-      };
-      //chai.spy.on(listItem._animatorFactory, 'newAnimator', () => animatorMock);
-      listItem._animatorFactory.newAnimator = () => animatorMock; //TODO do this with a spy
+      animatorMock = chai.spy.interface('animatorMock', ['hideExpansion']);
+      chai.spy.on(listItem._animatorFactory, 'newAnimator', () => animatorMock);
     });
 
     it('calls animator.hideExpansion when expandable is set', () => {

@@ -200,6 +200,7 @@ describe('OnsPageElement', () => {
       var spy = chai.spy.on(ons._internal.ModifierUtil, 'onModifierChanged');
       element.attributeChangedCallback('modifier', 'fuga', 'piyo');
       expect(spy).to.have.been.called.once;
+      chai.spy.restore(ons._internal.ModifierUtil, 'onModifierChanged');
     });
 
     it('sets _onInfiniteScroll', () => {

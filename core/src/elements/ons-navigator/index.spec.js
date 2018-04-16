@@ -171,10 +171,10 @@ describe('OnsNavigatorElement', () => {
           done();
         }
       };
+      var spy = chai.spy.on(nav, '_popPage');
 
       nav.pushPage('hoge', {
         callback: () => {
-          var spy = chai.spy.on(nav, '_popPage');
           var promise1 = nav.popPage().then((happy) => {
             finished(0);
           });
