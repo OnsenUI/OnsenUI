@@ -102,7 +102,7 @@ gulp.task('generate-components', () => {
     'icon': 'modifier',
     'card': 'modifier',
     'list': 'modifier',
-    'list-item': 'modifier',
+    'list-item': 'modifier hidable',
     'list-title': 'modifier',
     'list-header': 'modifier',
     'ripple': '',
@@ -290,4 +290,3 @@ gulp.task('test', (done) => {
   // WIP
   done();
 });
-

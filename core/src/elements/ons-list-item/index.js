@@ -143,6 +143,10 @@ export default class ListItemElement extends BaseElement {
     const re = /^ons-(?!col$|row$|if$)/i;
     this._shouldIgnoreTap = e => e.hasAttribute('prevent-tap') || re.test(e.tagName);
 
+    // show and hide functions for Vue hidable mixin
+    this.show = this.showExpansion;
+    this.hide = this.hideExpansion;
+
     contentReady(this, () => {
       this._compile();
     });
@@ -234,6 +238,7 @@ export default class ListItemElement extends BaseElement {
 
   showExpansion() {
     if (this.hasAttribute('expandable') && !this._expanding) {
+      this.visible = true;
       this._expanding = true;
 
       const animator = this._animatorFactory.newAnimator();
@@ -246,6 +251,7 @@ export default class ListItemElement extends BaseElement {
 
   hideExpansion() {
     if (this.hasAttribute('expandable') && !this._expanding) {
+      this.visible = false;
       this._expanding = true;
 
       const animator = this._animatorFactory.newAnimator();
