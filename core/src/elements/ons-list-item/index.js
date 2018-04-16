@@ -137,6 +137,7 @@ export default class ListItemElement extends BaseElement {
     super();
 
     this._animatorFactory = this._updateAnimatorFactory();
+    this.toggleExpansion = this.toggleExpansion.bind(this);
 
     // Elements ignored when tapping
     const re = /^ons-(?!col$|row$|if$)/i;
@@ -298,9 +299,11 @@ export default class ListItemElement extends BaseElement {
   }
 
   connectedCallback() {
-    this._setupListeners(true);
-    this._originalBackgroundColor = this.style.backgroundColor;
-    this.tapped = false;
+    contentReady(this, () => {
+      this._setupListeners(true);
+      this._originalBackgroundColor = this.style.backgroundColor;
+      this.tapped = false;
+    });
   }
 
   disconnectedCallback() {
@@ -320,7 +323,7 @@ export default class ListItemElement extends BaseElement {
     this[action]('mouseout', this._onRelease);
 
     if(this._top) {
-      this._top[action]('click', this.toggleExpansion.bind(this));
+      this._top[action]('click', this.toggleExpansion);
     }
   }
 
