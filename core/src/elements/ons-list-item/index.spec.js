@@ -36,6 +36,48 @@ describe('OnsListItemElement', () => {
     expect(listItem.classList.contains('list-item--fuga')).to.be.true;
   });
 
+  describe('attribute expandable', () => {
+    beforeEach(done => {
+      listItem = ons._util.createElement('<ons-list-item expandable>content<div class="expandable-content">expanded</div></ons-list-item>');
+
+      setImmediate(done);
+    });
+
+    it('has class \'list-item--expandable\'', () => {
+      expect(listItem.classList.contains('list-item--expandable')).to.be.true;
+    });
+
+    it('has top div', () => {
+      expect(listItem.querySelector('.top')).to.not.be.null;
+    });
+
+    it('has left div inside top div if left div is defined', () => {
+      listItem = ons._util.createElement('<ons-list-item expandable>content<div class="expandable-content">expanded</div><div class="left">left</div></ons-list-item>');
+      expect(listItem.querySelector('.left').parentNode.classList.contains('top')).to.be.true;
+    });
+
+    it('has right div inside top div if right div is defined', () => {
+      listItem = ons._util.createElement('<ons-list-item expandable>content<div class="expandable-content">expanded</div><div class="right">right</div></ons-list-item>');
+      expect(listItem.querySelector('.right').parentNode.classList.contains('top')).to.be.true;
+    });
+
+    it('has center div inside top div if center div is defined', () => {
+      listItem = ons._util.createElement('<ons-list-item expandable>content<div class="expandable-content">expanded</div><div class="center">center</div></ons-list-item>');
+      expect(listItem.querySelector('.center').parentNode.classList.contains('top')).to.be.true;
+    });
+
+    it('has dropdown icon if right div is not already defined', () => {
+      const right = listItem.querySelector('.right');
+      expect(right.childNodes[0].classList.contains('list-item__expand-chevron')).to.be.true;
+    });
+
+    it('does not have dropdown icon if right div if already defined', () => {
+      listItem = ons._util.createElement('<ons-list-item expandable>content<div class="expandable-content">expanded</div><div class="right">right</div></ons-list-item>');
+      const right = listItem.querySelector('.right');
+      expect(right.innerHTML === 'right').to.be.true;
+    });
+  });
+
   describe('#_onDrag()', () => {
     it('should prevent default if \'lock-on-drag\' attribute is present', () => {
       listItem.setAttribute('lock-on-drag', '');
@@ -92,7 +134,7 @@ describe('OnsListItemElement', () => {
       var elt = ons._util.createElement('<div>content</div>')
 
       listItem.appendChild(elt);
-      
+
       const dummyEvent = {
         target: elt
       };
@@ -127,6 +169,67 @@ describe('OnsListItemElement', () => {
       expect(e.hasAttribute('ripple')).to.be.true;
       expect(e.children[0].tagName.toLowerCase()).to.equal('ons-ripple');
       ons.platform.select('');
+    });
+  });
+
+  describe('toggleExpansion', () => {
+    it('calls hideExpansion when already expanded', () => {
+      const spy = chai.spy.on(listItem, 'hideExpansion');
+      listItem.classList.add('expanded');
+      listItem.toggleExpansion();
+      expect(spy).to.have.been.called.once;
+    });
+
+    it('calls showExpansion when not expanded', () => {
+      const spy = chai.spy.on(listItem, 'showExpansion');
+      listItem.toggleExpansion();
+      expect(spy).to.have.been.called.once;
+    });
+  });
+
+  describe('showExpansion', () => {
+    let animatorMock;
+
+    beforeEach(() => {
+      animatorMock = {
+        showExpansion: chai.spy()
+      };
+      //chai.spy.on(listItem._animatorFactory, 'newAnimator', () => animatorMock);
+      listItem._animatorFactory.newAnimator = () => animatorMock; //TODO do this with a spy
+    });
+
+    it('calls animator.showExpansion when expandable is set', () => {
+      listItem.setAttribute('expandable');
+      listItem.showExpansion();
+      expect(animatorMock.showExpansion).to.have.been.called.once;
+    });
+
+    it('does not call animator.showExpansion when expandable is not set', () => {
+      listItem.showExpansion();
+      expect(animatorMock.showExpansion).to.not.have.been.called;
+    });
+  });
+
+  describe('hideExpansion', () => {
+    let animatorMock;
+
+    beforeEach(() => {
+      animatorMock = {
+        hideExpansion: chai.spy()
+      };
+      //chai.spy.on(listItem._animatorFactory, 'newAnimator', () => animatorMock);
+      listItem._animatorFactory.newAnimator = () => animatorMock; //TODO do this with a spy
+    });
+
+    it('calls animator.hideExpansion when expandable is set', () => {
+      listItem.setAttribute('expandable');
+      listItem.hideExpansion();
+      expect(animatorMock.hideExpansion).to.have.been.called.once;
+    });
+
+    it('does not call animator.hideExpansion when expandable is not set', () => {
+      listItem.hideExpansion();
+      expect(animatorMock.hideExpansion).to.not.have.been.called;
     });
   });
 });
