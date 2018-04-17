@@ -63,6 +63,36 @@ export default class extends React.Component {
             <ListItem><Button modifier="quiet" onClick={this.add.bind(this)}>Add more</Button></ListItem>
           )}
         />
+        <ListTitle>Expandable List Items</ListTitle>
+        <List>
+          <ListItem expandable>
+            Tap to expand
+            <div className="expandable-content">
+              I have been expanded!
+            </div>
+          </ListItem>
+          <ListItem expandable tappable>
+            Tap to expand (tappable)
+            <div className="expandable-content">
+              I have also been expanded!
+            </div>
+          </ListItem>
+          <ListItem expandable>
+            Expandable with custom icon
+            <div className="right">...</div>
+            <div className="expandable-content">
+              How do you like the icon?
+            </div>
+          </ListItem>
+        </List>
+
+        <ListTitle>Expansion Panel</ListTitle>
+        <List>
+          <ListItem expandable>
+            Click
+            <div className="expandable-content">Hi</div>
+          </ListItem>
+        </List>
       </Page>
     );
   }
