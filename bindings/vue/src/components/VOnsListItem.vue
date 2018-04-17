@@ -5,12 +5,23 @@
 </template>
 
 <script>
-  /* This file is generated automatically */
   import 'onsenui/esm/elements/ons-list-item';
-  import { deriveEvents, modifier, hidable } from '../mixins';
+  import { deriveEvents, modifier } from '../mixins';
 
   export default {
     name: 'v-ons-list-item',
-    mixins: [deriveEvents, modifier, hidable]
+    mixins: [deriveEvents, modifier],
+    props: {
+      expanded: {
+        type: Boolean
+      }
+    },
+
+    watch: {
+      expanded() {
+        const action = this.expanded ? 'show' : 'hide';
+        this.$el[action + 'Expansion']();
+      }
+    }
   };
 </script>
