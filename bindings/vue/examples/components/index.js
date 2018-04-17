@@ -9,4 +9,5 @@ export { default as Dialogs } from './Dialogs.vue';
 export { default as Carousel } from './Carousel.vue';
 export { default as Forms } from './Forms.vue';
 export { default as InfiniteScroll } from './InfiniteScroll.vue';
+export { default as Lists } from './Lists.vue';
 export { default as Segment } from './Segment.vue';
