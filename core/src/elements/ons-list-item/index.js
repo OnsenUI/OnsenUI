@@ -64,17 +64,18 @@ const _animatorDict = {
  *   [ja][/ja]
  * @description
  *   [en]
- *     Component that represents each item in a list. The list item is composed of three parts that are represented with the `left`, `center` and `right` classes. These classes can be used to ensure that the content of the list items is properly aligned.
+ *     Component that represents each item in a list. The list item is composed of four parts that are represented with the `left`, `center`, `right` and `expandable-content` classes. These classes can be used to ensure that the content of the list items is properly aligned.
  *
  *     ```
  *     <ons-list-item>
  *       <div class="left">Left</div>
  *       <div class="center">Center</div>
  *       <div class="right">Right</div>
+ *       <div class="expandable-content">Expandable content</div>
  *     </ons-list-item>
  *     ```
  *
- *     There is also a number of classes (prefixed with `list-item__*`) that help when putting things like icons and thumbnails into the list items.
+ *     There are also a number of classes (prefixed with `list-item__*`) that help when putting things like icons and thumbnails into the list items.
  *   [/en]
  *   [ja][/ja]
  * @seealso ons-list
@@ -131,6 +132,23 @@ export default class ListItemElement extends BaseElement {
    * @description
    *   [en] Changes the background color when tapped. For this to work, the attribute "tappable" needs to be set. The default color is "#d9d9d9". It will display as a ripple effect on Android.[/en]
    *   [ja][/ja]
+   */
+
+  /**
+   * @attribute expandable
+   * @type {Boolean}
+   * @description
+   *   [en]Makes the element able to be expanded to reveal extra content. For this to work, the expandable content must be defined in `div.expandable-content`.[/en]
+   *   [ja][/ja]
+   */
+
+  /**
+   * @attribute animation
+   * @type {String}
+   * @default default
+   * @description
+   *  [en]The animation used when showing and hiding the expandable content. Can be either `"default"` or `"none"`.[/en]
+   *  [ja][/ja]
    */
 
   constructor() {
@@ -218,6 +236,8 @@ export default class ListItemElement extends BaseElement {
     center.classList.add('center', 'list-item__center');
 
     if(expandableContent) {
+      // create 'top' div
+      // this holds everything except the expandable content
       this._top = document.createElement('div');
       this._top.classList.add('top', 'list-item__top');
       this.appendChild(this._top);
@@ -236,6 +256,13 @@ export default class ListItemElement extends BaseElement {
     ModifierUtil.initModifier(this, scheme);
   }
 
+  /**
+   * @method showExpansion
+   * @signature showExpansion()
+   * @description
+   *   [en]Show the expandable content if the element is expandable.[/en]
+   *   [ja][/ja]
+   */
   showExpansion() {
     if (this.hasAttribute('expandable') && !this._expanding) {
       this.visible = true;
@@ -249,6 +276,13 @@ export default class ListItemElement extends BaseElement {
     }
   }
 
+  /**
+   * @method hideExpansion
+   * @signature hideExpansion()
+   * @description
+   *   [en]Hide the expandable content if the element expandable.[/en]
+   *   [ja][/ja]
+   */
   hideExpansion() {
     if (this.hasAttribute('expandable') && !this._expanding) {
       this.visible = false;

@@ -16,12 +16,23 @@
 
     <v-ons-list-header>Expandable</v-ons-list-header>
     <v-ons-list>
-      <v-ons-list-item expandable>
+      <v-ons-list-item expandable :expanded.sync="itemExpanded">
         Tap to expand
         <div class="expandable-content">
           I have been expanded!
         </div>
       </v-ons-list-item>
     </v-ons-list>
+    <v-ons-button @click="itemExpanded = !itemExpanded">Click to expand list item</v-ons-button>
   </v-ons-page>
 </template>
+
+<script>
+  export default {
+    data() {
+      return {
+        itemExpanded: false
+      }
+    }
+  };
+</script>
