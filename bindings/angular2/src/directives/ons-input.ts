@@ -90,9 +90,7 @@ export class OnsInput implements OnChanges, OnDestroy, ControlValueAccessor {
   }
 
   writeValue(obj: any) {
-    if (obj) {
-      this._element.value = obj;
-    }
+    this._element.value = obj;
   }
  
   registerOnChange(fn: any) {
