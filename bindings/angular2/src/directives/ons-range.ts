@@ -8,8 +8,10 @@ import {
   EventEmitter,
   OnChanges,
   OnDestroy,
-  SimpleChange
+  SimpleChange,
+  forwardRef
 } from '@angular/core';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 /**
  * @element ons-range
@@ -22,11 +24,19 @@ import {
  *   <ons-range [(value)]="foo"></ons-range>
  */
 @Directive({
-  selector: 'ons-range'
+  selector: 'ons-range',
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => OnsRange),
+      multi: true,
+    }
+  ]
 })
-export class OnsRange implements OnChanges, OnDestroy {
+export class OnsRange implements OnChanges, OnDestroy, ControlValueAccessor {
   private _element: any;
   private _boundOnChange: Function;
+  private _propagateChange = (_: any) => { };
 
   /**
    * @input value
@@ -55,6 +65,7 @@ export class OnsRange implements OnChanges, OnDestroy {
 
   _onChange(event: any) {
     this._valueChange.emit(this._element.value);
+    this._propagateChange(this._element.value);
   }
 
   ngOnChanges(changeRecord: {[key: string]: SimpleChange;}) {
@@ -75,4 +86,14 @@ export class OnsRange implements OnChanges, OnDestroy {
 
     this._element = null;
   }
+
+  writeValue(obj: any) {
+    this._element.value = obj;
+  }
+ 
+  registerOnChange(fn: any) {
+     this._propagateChange = fn;
+  }
+ 
+  registerOnTouched() { }
 }
