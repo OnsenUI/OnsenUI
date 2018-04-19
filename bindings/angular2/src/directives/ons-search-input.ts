@@ -8,8 +8,10 @@ import {
   EventEmitter,
   OnChanges,
   OnDestroy,
-  SimpleChange
+  SimpleChange,
+  forwardRef
 } from '@angular/core';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 /**
  * @element ons-search-input
@@ -22,11 +24,19 @@ import {
  *   <ons-search-input [(value)]="value"></ons-search-input>
  */
 @Directive({
-  selector: 'ons-search-input'
+  selector: 'ons-search-input',
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => OnsSearchInput),
+      multi: true,
+    }
+  ]
 })
-export class OnsSearchInput implements OnChanges, OnDestroy {
+export class OnsSearchInput implements OnChanges, OnDestroy, ControlValueAccessor {
   private _element: any;
   private _boundOnChange: Function;
+  private _propagateChange = (_: any) => { };
 
   /**
    * @input value
@@ -55,6 +65,7 @@ export class OnsSearchInput implements OnChanges, OnDestroy {
 
   _onChange(event: any) {
     this._valueChange.emit(this._element.value);
+    this._propagateChange(this._element.value);
   }
 
   ngOnChanges(changeRecord: {[key: string]: SimpleChange;}) {
@@ -77,4 +88,14 @@ export class OnsSearchInput implements OnChanges, OnDestroy {
 
     this._element = null;
   }
+
+  writeValue(obj: any) {
+    this._element.value = obj;
+  }
+ 
+  registerOnChange(fn: any) {
+     this._propagateChange = fn;
+  }
+ 
+  registerOnTouched() { }
 }
