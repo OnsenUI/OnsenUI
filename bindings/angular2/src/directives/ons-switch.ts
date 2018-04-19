@@ -8,8 +8,10 @@ import {
   EventEmitter,
   OnChanges,
   OnDestroy,
-  SimpleChanges
+  SimpleChanges,
+  forwardRef
 } from '@angular/core';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 /**
  * @element ons-switch
@@ -22,11 +24,19 @@ import {
  *   <ons-switch [(value)]="target"></ons-switch>
  */
 @Directive({
-  selector: 'ons-switch'
+  selector: 'ons-switch',
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => OnsSwitch),
+      multi: true,
+    }
+  ]
 })
-export class OnsSwitch implements OnChanges, OnDestroy {
+export class OnsSwitch implements OnChanges, OnDestroy, ControlValueAccessor {
   private _element: any;
   private _boundOnChange: Function;
+  private _propagateChange = (_: any) => { };
 
   /**
    * @input value
@@ -57,6 +67,7 @@ export class OnsSwitch implements OnChanges, OnDestroy {
 
   _onChange(event: any) {
     this._valueChange.emit(this._element.checked);
+    this._propagateChange(this._element.checked);
   }
 
   ngOnChanges(changeRecord: SimpleChanges) {
@@ -76,4 +87,14 @@ export class OnsSwitch implements OnChanges, OnDestroy {
     this._element.removeEventListener('change', this._boundOnChange);
     this._element = null;
   }
+
+  writeValue(obj: any) {
+    this._element.checked = obj;
+  }
+
+  registerOnChange(fn: any) {
+    this._propagateChange = fn;
+  }
+
+  registerOnTouched() { }
 }
