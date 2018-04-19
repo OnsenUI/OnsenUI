@@ -11,11 +11,7 @@ import {
   SimpleChange,
   forwardRef
 } from '@angular/core';
-import { 
-  ControlValueAccessor,
-  FormControl,
-  NG_VALUE_ACCESSOR
-} from '@angular/forms';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 /**
  * @element ons-input
@@ -40,6 +36,7 @@ import {
 export class OnsInput implements OnChanges, OnDestroy, ControlValueAccessor {
   private _element: any;
   private _boundOnChange: Function;
+  private _propagateChange = (_: any) => { };
 
   /**
    * @input value
@@ -66,25 +63,9 @@ export class OnsInput implements OnChanges, OnDestroy, ControlValueAccessor {
     this._element.addEventListener('input', this._boundOnChange);
   }
 
-
-  private propagateChange = (_: any) => { };
-
-  public writeValue(obj: any) {
-   if (obj) {
-     this._element.value = obj;
-   }
-  }
-
-  public registerOnChange(fn: any) {
-    this.propagateChange = fn;
-  }
-
-  public registerOnTouched() { }
-
-
   _onChange(event: any) {
     this._valueChange.emit(this._element.value);
-    this.propagateChange(this._element.value);
+    this._propagateChange(this._element.value);
   }
 
   ngOnChanges(changeRecord: {[key: string]: SimpleChange;}) {
@@ -107,4 +88,16 @@ export class OnsInput implements OnChanges, OnDestroy, ControlValueAccessor {
 
     this._element = null;
   }
+
+  writeValue(obj: any) {
+    if (obj) {
+      this._element.value = obj;
+    }
+  }
+ 
+  registerOnChange(fn: any) {
+     this._propagateChange = fn;
+  }
+ 
+  registerOnTouched() { }
 }
