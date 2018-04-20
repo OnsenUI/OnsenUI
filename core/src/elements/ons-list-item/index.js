@@ -265,7 +265,7 @@ export default class ListItemElement extends BaseElement {
    */
   showExpansion() {
     if (this.hasAttribute('expandable') && !this._expanding) {
-      this.visible = true;
+      this.expanded = true;
       this._expanding = true;
 
       const animator = this._animatorFactory.newAnimator();
@@ -285,7 +285,7 @@ export default class ListItemElement extends BaseElement {
    */
   hideExpansion() {
     if (this.hasAttribute('expandable') && !this._expanding) {
-      this.visible = false;
+      this.expanded = false;
       this._expanding = true;
 
       const animator = this._animatorFactory.newAnimator();
