@@ -8,6 +8,7 @@ dev
  ### New Features
 
  * ons.notification: Add `maskColor` configuration for `alert`, `confirm` and `prompt` ([#2358](https://github.com/OnsenUI/OnsenUI/issues/2358))
+ * ons-list-item: Expandable list items
 
  ### Bug Fixes
 
