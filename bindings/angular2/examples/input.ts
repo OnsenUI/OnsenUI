@@ -5,7 +5,7 @@ import {
   CUSTOM_ELEMENTS_SCHEMA
 } from '../src/ngx-onsenui';
 import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
-import {FormsModule} from '@angular/forms';
+import { ReactiveFormsModule, FormControl, FormGroup, FormsModule} from '@angular/forms';
 
 @Component({
   selector: 'app',
@@ -16,28 +16,53 @@ import {FormsModule} from '@angular/forms';
     </ons-toolbar>
     <div class="background"></div>
     <div class="content">
-      <div style="padding: 10px">
-        <p>
+      <ons-list>
+        <ons-list-header>Template-driven form</ons-list-header>
+        <ons-list-item>
           <ons-input id="text" placeholder="Type here" [(value)]="target"></ons-input>
+        </ons-list-item>
+        <ons-list-item>
           <input id="native-text" placeholder="Type here" [(ngModel)]="target">
-        </p>
+        </ons-list-item>
 
-        <p id="target">
+        <ons-list-item id="target">
           {{target}}
-        </p>
+        </ons-list-item>
 
         <!-- type="password" works just same as type="text". No test is needed. -->
-      </div>
+      </ons-list>
+
+      <ons-list>
+        <ons-list-header>Reactive Form</ons-list-header>
+        <form [formGroup]="exampleForm" style="margin: 0">
+          <ons-list-item>
+          <ons-input id="reactive-name" placeholder="Enter your name" formControlName="name"></ons-input>
+          </ons-list-item>
+
+          <ons-list-item>
+          <ons-input id="reactive-job" placeholder="Enter your job" formControlName="job"></ons-input>
+          </ons-list-item>
+        </form>
+        <ons-list-item>Form value: <span id="form-value">{{exampleForm.value | json}}</span></ons-list-item>
+      </ons-list>
     </div>
   </ons-page>
   `
 })
 export class AppComponent{
+  exampleForm: FormGroup;
   target: string = '';
+
+  constructor() {
+    this.exampleForm = new FormGroup({
+      name: new FormControl(''),
+      job: new FormControl('')
+    });
+  }
 }
 
 @NgModule({
-  imports: [OnsenModule, FormsModule],
+  imports: [OnsenModule, FormsModule, ReactiveFormsModule],
   declarations: [AppComponent],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
