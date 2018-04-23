@@ -5,6 +5,7 @@ import {
   ElementRef,
   Input,
   Output,
+  HostListener,
   EventEmitter,
   OnChanges,
   OnDestroy,
@@ -37,6 +38,7 @@ export class OnsSwitch implements OnChanges, OnDestroy, ControlValueAccessor {
   private _element: any;
   private _boundOnChange: Function;
   private _propagateChange = (_: any) => { };
+  private _propagateTouched = () => {};
 
   /**
    * @input value
@@ -70,6 +72,11 @@ export class OnsSwitch implements OnChanges, OnDestroy, ControlValueAccessor {
     this._propagateChange(this._element.checked);
   }
 
+  @HostListener('blur')
+  _onBlur() {
+    this._propagateTouched();
+  }
+
   ngOnChanges(changeRecord: SimpleChanges) {
     const value = !!(<any>changeRecord).value.currentValue;
     this._element.checked = value;
@@ -96,5 +103,7 @@ export class OnsSwitch implements OnChanges, OnDestroy, ControlValueAccessor {
     this._propagateChange = fn;
   }
 
-  registerOnTouched() { }
+  registerOnTouched(fn: any) {
+    this. _propagateTouched = fn;
+  }
 }

@@ -5,6 +5,7 @@ import {
   ElementRef,
   Input,
   Output,
+  HostListener,
   EventEmitter,
   OnChanges,
   OnDestroy,
@@ -37,6 +38,7 @@ export class OnsRange implements OnChanges, OnDestroy, ControlValueAccessor {
   private _element: any;
   private _boundOnChange: Function;
   private _propagateChange = (_: any) => { };
+  private _propagateTouched = () => {};
 
   /**
    * @input value
@@ -68,6 +70,11 @@ export class OnsRange implements OnChanges, OnDestroy, ControlValueAccessor {
     this._propagateChange(this._element.value);
   }
 
+  @HostListener('blur')
+  _onBlur() {
+    this._propagateTouched();
+  }
+
   ngOnChanges(changeRecord: {[key: string]: SimpleChange;}) {
     const value = changeRecord['_value'].currentValue;
     this._element.value = value;
@@ -95,5 +102,7 @@ export class OnsRange implements OnChanges, OnDestroy, ControlValueAccessor {
      this._propagateChange = fn;
   }
  
-  registerOnTouched() { }
+  registerOnTouched(fn: any) {
+    this. _propagateTouched = fn;
+  }
 }

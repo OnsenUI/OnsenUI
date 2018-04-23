@@ -5,6 +5,7 @@ import {
   ElementRef,
   Input,
   Output,
+  HostListener,
   EventEmitter,
   OnChanges,
   OnDestroy,
@@ -37,6 +38,7 @@ export class OnsSearchInput implements OnChanges, OnDestroy, ControlValueAccesso
   private _element: any;
   private _boundOnChange: Function;
   private _propagateChange = (_: any) => { };
+  private _propagateTouched = () => {};
 
   /**
    * @input value
@@ -61,6 +63,11 @@ export class OnsSearchInput implements OnChanges, OnDestroy, ControlValueAccesso
     this._element = _elementRef.nativeElement;
 
     this._element.addEventListener('input', this._boundOnChange);
+  }
+
+  @HostListener('blur')
+  _onBlur() {
+    this._propagateTouched();
   }
 
   _onChange(event: any) {
@@ -97,5 +104,7 @@ export class OnsSearchInput implements OnChanges, OnDestroy, ControlValueAccesso
      this._propagateChange = fn;
   }
  
-  registerOnTouched() { }
+  registerOnTouched(fn: any) {
+    this. _propagateTouched = fn;
+  }
 }
