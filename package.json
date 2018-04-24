@@ -99,7 +99,7 @@
     "browser-sync": "^2.18.13",
     "chai": "^3.4.1",
     "chai-as-promised": "^5.2.0",
-    "chai-spies": "^0.7.1",
+    "chai-spies": "^1.0.0",
     "chalk": "^2.3.0",
     "dateformat": "^3.0.2",
     "eslint": "^4.10.0",

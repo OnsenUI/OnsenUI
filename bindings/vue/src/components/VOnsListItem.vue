@@ -11,6 +11,18 @@
 
   export default {
     name: 'v-ons-list-item',
-    mixins: [deriveEvents, modifier]
+    mixins: [deriveEvents, modifier],
+    props: {
+      expanded: {
+        type: Boolean
+      }
+    },
+
+    watch: {
+      expanded() {
+        const action = this.expanded ? 'show' : 'hide';
+        this.$el[action + 'Expansion']();
+      }
+    }
   };
 </script>

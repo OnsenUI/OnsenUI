@@ -102,7 +102,6 @@ gulp.task('generate-components', () => {
     'icon': 'modifier',
     'card': 'modifier',
     'list': 'modifier',
-    'list-item': 'modifier',
     'list-title': 'modifier',
     'list-header': 'modifier',
     'ripple': '',
