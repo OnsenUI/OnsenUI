@@ -222,7 +222,7 @@ export default class ListItemElement extends BaseElement {
       } else {
         for (let i = this.childNodes.length - 1; i >= 0; i--) {
           const el = this.childNodes[i];
-          if (el !== left && el !== right && el !== expandableContent) {
+          if (el !== left && el !== right && el !== expandableContent && el.tagName !== 'ONS-RIPPLE') {
             center.insertBefore(el, center.firstChild);
           }
         }

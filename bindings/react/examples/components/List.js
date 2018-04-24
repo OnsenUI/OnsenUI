@@ -85,14 +85,6 @@ export default class extends React.Component {
             </div>
           </ListItem>
         </List>
-
-        <ListTitle>Expansion Panel</ListTitle>
-        <List>
-          <ListItem expandable>
-            Click
-            <div className="expandable-content">Hi</div>
-          </ListItem>
-        </List>
       </Page>
     );
   }
