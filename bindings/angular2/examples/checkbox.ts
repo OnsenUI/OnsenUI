@@ -5,7 +5,7 @@ import {
   CUSTOM_ELEMENTS_SCHEMA
 } from '../src/ngx-onsenui';
 import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
-import {FormsModule} from '@angular/forms';
+import { FormsModule, ReactiveFormsModule, FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app',
@@ -16,23 +16,31 @@ import {FormsModule} from '@angular/forms';
     </ons-toolbar>
     <div class="background"></div>
     <div class="content">
-      <div style="padding: 10px">
-        <div *ngFor="let color of colors; let i = index">
+      <ons-list>
+        <ons-list-header>Template-driven form</ons-list-header>
+        <ons-list-item *ngFor="let color of colors; let i = index">
           <ons-checkbox
             [attr.input-id]="'radio-' + i"
             [attr.value]="color"
             [(ngModel)]="checkedColors"
+            class="left"
           >
           </ons-checkbox>
-          <label [attr.for]="'radio-' + i">
+          <label [attr.for]="'radio-' + i" class="center">
             {{ color }}
           </label>
-        </div>
-        
-        <p id="checked-colors">
+        </ons-list-item>
+
+        <ons-list-item id="checked-colors">
           {{ checkedColors }}
-        </p>
-      </div>
+        </ons-list-item>
+
+        <ons-list-header>Reactive Form</ons-list-header>
+        <ons-list-item>
+          <ons-checkbox id="reactive-checkbox" class="form-control left" [formControl]="exampleControl"></ons-checkbox>
+          <div class="center" id="reactive-checked">{{ exampleControl.value ? 'Checked' : 'Not checked' }}</div>
+        </ons-list-item>
+      </ons-list>
     </div>
   </ons-page>
   `
@@ -40,10 +48,11 @@ import {FormsModule} from '@angular/forms';
 export class AppComponent{
   colors: string[] = ['Red', 'Green', 'Blue'];
   checkedColors: string[] = ['Green', 'Blue'];
+  exampleControl: FormControl = new FormControl('');
 }
 
 @NgModule({
-  imports: [OnsenModule, FormsModule],
+  imports: [OnsenModule, FormsModule, ReactiveFormsModule],
   declarations: [AppComponent],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]

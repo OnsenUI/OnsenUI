@@ -6,6 +6,7 @@ import {
   CUSTOM_ELEMENTS_SCHEMA
 } from '../src/ngx-onsenui';
 import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
+import { FormsModule, ReactiveFormsModule, FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app',
@@ -22,6 +23,10 @@ import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
         <span id="value">
           {{ value }}
         </span>
+
+        <p><strong>Reactive</strong></p>
+        <ons-range id="reactive-range" [formControl]="rangeForm"></ons-range><br />
+        <p id="reactive-value">{{ rangeForm.value }}</p>
       </div>
     </div>
   </ons-page>
@@ -29,11 +34,16 @@ import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
 })
 export class AppComponent {
   value: string = '10';
-  constructor() { }
+  rangeForm: FormControl;
+  reactiveStartValue: 89;
+
+  constructor() {
+    this.rangeForm = new FormControl('');
+  }
 }
 
 @NgModule({
-  imports: [OnsenModule],
+  imports: [OnsenModule, FormsModule, ReactiveFormsModule],
   declarations: [AppComponent],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
