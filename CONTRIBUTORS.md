@@ -31,5 +31,9 @@ List of code contributors (in no particular order):
 * [dzeims](https://github.com/dzeims)
 * [ataruohto0121](https://github.com/ataruohto0121)
 * [roboncode](https://github.com/roboncode)
+* [puku0x](https://github.com/puku0x)
+* [Naoki Matagawa](https://github.com/asial-matagawa)
+* [Gearóid Moroney](https://github.com/asialgearoid)
+* [Eric Corson](https://github.com/emccorson)
 
 Please add yourself if you're not on this list but feel that you should be.
