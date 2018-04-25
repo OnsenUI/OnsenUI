@@ -7,16 +7,25 @@ describe('switch.html', () => {
     expect($('ons-switch').isPresent()).toBeTruthy();
   });
 
-  it('should change the switch when the checkbox is clicked', () => {
-    expect($('ons-switch').getAttribute('checked')).not.toBe(null);
-    $('#checkbox').click();
-    expect($('ons-switch').getAttribute('checked')).toBe(null);
+  describe('templated-based form', () => {
+    it('should change the switch when the checkbox is clicked', () => {
+      expect($('ons-switch').getAttribute('checked')).not.toBe(null);
+      $('#checkbox').click();
+      expect($('ons-switch').getAttribute('checked')).toBe(null);
+    });
+
+    it('should change the checkbox when the switch is clicked', () => {
+      expect($('#checkbox').isSelected()).toBeTruthy();
+      $('ons-switch').click();
+      expect($('#checkbox').isSelected()).not.toBeTruthy();
+    });
   });
 
-  it('should change the checkbox when the switch is clicked', () => {
-    expect($('#checkbox').isSelected()).toBeTruthy();
-    $('ons-switch').click();
-    expect($('#checkbox').isSelected()).not.toBeTruthy();
+  describe('reactive form', () => {
+    it('should change the form value when the switch is switched', () => {
+      $('#reactive-switch').click();
+      expect($('#reactive-value').getText()).toBe('On');
+    });
   });
 
 });
