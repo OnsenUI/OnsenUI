@@ -1,4 +1,5 @@
-<p align="center"><a href="https://onsen.io/" target="_blank"><img width="220"src="https://onsenui.github.io/art/logos/onsenui-logo-1.png"></a></p>
+
+<p align="center"><a href="https://onsen.io/" target="_blank"><img width="140" src="https://onsenui.github.io/art/logos/onsenui-logo-1.png"></a></p>
 
 <p align="center">
   <a href="https://gitter.im/OnsenUI/OnsenUI"><img src="https://badges.gitter.im/Join%20Chat.svg" alt="Gitter Chat"></a>
@@ -11,15 +12,11 @@
   <a href="https://cdnjs.com/libraries/onsen"><img src="https://img.shields.io/cdnjs/v/onsen.svg" alt="CDNJS"></a>
 </p>
 
-# [Onsen UI](https://onsen.io/) - Cross-Platform HTML5 Hybrid App Framework
+# [Onsen UI](https://onsen.io/) - Cross-Platform Hybrid App and PWA Framework
 
-<p>Onsen UI is a library of UI components to help you create beautiful hybrid and mobile web apps for both Android and iOS using Javascript.</p>
+Onsen UI is an <strong>open source</strong> framework that makes it easy to create native-feeling Progressive Web Apps (PWAs) and hybrid apps.
 
-<p align="center"><img height="500" src="https://onsenui.github.io/art/showcase/showcase-onsenui.gif" alt="Onsen UI Todo App"></p>
-
-It is <strong>open source</strong> and designed to deliver native look and feel. Apps are made out of simple HTML tags, thus providing a gentle learning curve.
-
-The core library is written in <strong>pure Javascript</strong> (on top of <a href="http://webcomponents.org/">Web Components</a>) and is <strong>framework agnostic</strong>, which means you can use it with your favorite framework and its tools. Currently, we provide some extra binding packages in order to __tailor Onsen UI's API__ for specific frameworks:
+The core library is written in <strong>pure Javascript</strong> (on top of <a href="http://webcomponents.org/">Web Components</a>) and is <strong>framework agnostic</strong>, which means you can use it with your favorite framework and its tools. We provide some extra binding packages to make it easy to use Onsen UI's API with many popular frameworks:
 
 <table>
   <tbody><tr>
@@ -30,28 +27,60 @@ The core library is written in <strong>pure Javascript</strong> (on top of <a hr
   </tr></tbody>
 </table>
 
-Some other frameworks are supported by __community__ packages (i.e. not tested or implemented by the core team): [Aurelia](https://www.npmjs.com/package/aurelia-onsenui), [EmberJS](https://www.npmjs.com/package/ember-onsenui).
+Some other frameworks are supported by __community__ packages (not tested or implemented by the core team): [Aurelia](https://www.npmjs.com/package/aurelia-onsenui), [EmberJS](https://www.npmjs.com/package/ember-onsenui).
 
-Both <strong>iOS flat and Android's Material design</strong> are included. The components are optionally auto-styled based on the platform, which makes it possible to support both iOS and Android with the <strong>same source code</strong>.
+Both <strong>flat (iOS) and Material (Android) designs</strong> are included. The components are optionally auto-styled based on the platform, which makes it possible to support both iOS and Android with the <strong>same source code</strong>.
 
 
 ## Getting started
+We have several resources to help you get started creating hybrid apps and PWAs with Onsen UI:
 
-We have several resources to help you get started creating hybrid apps with Onsen UI:
-
-* __The official docs__: we provide guides and references for the [core library (vanilla JS or jQuery)](https://onsen.io/v2/docs/js.html) as well as the [Vue](https://onsen.io/v2/docs/guide/vue/index.html), [React](https://onsen.io/v2/docs/guide/react/index.html), [Angular2](https://onsen.io/v2/docs/guide/angular2/) and [AngularJS 1.x](https://onsen.io/v2/docs/guide/angular1/) components.
+* __The official docs__: We provide guides and references for all of the components and bindings, as well as how to publish your app. These are our _Getting Started_ guides:
+  * [Core guide (no framework)](https://onsen.io/v2/guide)
+  * [Vue guide](https://onsen.io/v2/guide/vue/)
+  * [React guide](https://onsen.io/v2/guide/react/)
+  * [Angular 2+ guide](https://onsen.io/v2/guide/angular2/)
+  * [AngularJS 1.x guide](https://onsen.io/v2/guide/angular1/)
+  * [jQuery guide](https://onsen.io/v2/guide/jquery/)
+  * [Creating an Onsen UI hybrid app using Cordova](https://onsen.io/v2/guide/hybrid/cordova.html)
+  * [Progressive Web Apps (PWAs) with Onsen UI](https://onsen.io/v2/guide/pwa/intro.html)
 * __Components overview__: a [list of included CSS components](https://onsen.io/v2/docs/css.html) in both flat and Material Design. Note that these components are just pure and performant CSS without JavaScript behavior. Some extra details (such as dragging or ripple effect) are added by Onsen UI custom elements.
-* __Playground__: an [interactive Onsen UI tutorial](https://onsen.io/playground/) is also available where you can learn how to use the library and play around with the components.
+* __Playground__: an [interactive Onsen UI tutorial](https://onsen.io/playground/) where you can learn how to use Onsen UI and play around with the components.
 * __Blog__: there are lots of great tutorials and guides published in our [official Onsen UI blog](https://onsen.io/blog/categories/tutorial.html) and we are adding new content regularly.
-* __Support__: if you are having trouble using some component the best place to get help is the [Onsen UI Forum](https://community.onsen.io/) or [Gitter chat](https://gitter.im/OnsenUI/OnsenUI). We are also available to answer short questions on Twitter at [@Onsen_UI](https://twitter.com/Onsen_UI). We are also on [Discord Chat](https://discord.gg/JWhBbnE) as well!
+* __Support__: if you are having trouble using some component the best place to get help is the [Onsen UI Forum](https://community.onsen.io/) or the community-run [Discord Chat](https://discord.gg/JWhBbnE). We are also available to answer short questions on Twitter at [@Onsen_UI](https://twitter.com/Onsen_UI).
+
+## Get Onsen UI
+
+### __Download the latest released version__
+We have a [distribution repository](https://github.com/OnsenUI/OnsenUI-dist/releases) with changelog. Onsen UI is also available in __npm__, __bower__ and __jspm__. Example:
+
+```bash
+npm install onsenui
+```
+
+This downloads Onsen UI main library and AngularJS bindings. For the other bindings, you can install `react-onsenui`, `vue-onsenui` or `ngx-onsenui`.
+
+### __Download or request from a CDN__
+You can also take the necessary files from a CDN. Some of the options are [unpkg](https://unpkg.com/onsenui/), [jsDelivr](https://www.jsdelivr.com/package/npm/onsenui) and [cdnjs](https://cdnjs.com/libraries/onsen).
+
+### __Get the latest development build__
+Optionally, you can download the [latest development build here](https://onsenui.github.io/latest-build). Be careful, usually everything there is already tested but it might be unstable sometimes.
+
+## Examples with source code
+There are lots of sample applications written using Onsen UI. __[Here are some examples](https://onsen.io/samples) with source code and tutorials__ to give you an idea of what kind of apps you can create.
+
+<p align="center">
+  <a href="https://argelius.github.io/angular2-onsenui-pokedex/" target="_blank"><img src="https://onsen.io/images/samples/pokedex-pikachu.png"></a>
+  <a href="http://argelius.github.io/react-onsenui-redux-weather/demo.html" target="_blank"><img src="https://onsen.io/images/samples/react-redux-weather.png"></a>
+  <a href="https://frandiox.github.io/OnsenUI-YouTube" target="_blank"><img src="https://onsen.io/images/samples/youtube.png"></a>
+</p>
 
 ## Onsen UI ecosystem
-
-Because sometimes a UI framework may not be enough to make hybrid app development easily, Onsen UI comes with a __complete ecosystem__ of well integrated tools. Meet [__Monaca__](https://monaca.io/).
+Because sometimes a UI framework may not be enough to make hybrid app development easy, Onsen UI comes with a __complete ecosystem__ of well integrated tools. Meet [__Monaca__](https://monaca.io/).
 
 <p align="center"><a href="https://monaca.io" target="_blank"><img width="300"src="https://onsenui.github.io/art/logos/monaca-logo-2.png"></a></p>
 
-Developed by the same team, __Monaca Platform__ is a toolkit that makes hybrid mobile app development with __PhoneGap / Cordova__ simple and easy: Onsen UI Cordova-like templates, debugging suite, push notifications, remote build, back-end solutions, encryption, version control, continuous integration and more. Furthermore, it provides multiple development environments with everything already configured and ready to go:
+Developed by the Onsen UI team, __Monaca__ is a toolkit that makes hybrid mobile app development with __PhoneGap / Cordova__ simple and easy: Onsen UI Cordova templates, debugging suite, push notifications, remote build, back-end solutions, encryption, version control, continuous integration and more. Furthermore, it provides multiple development environments with everything already configured and ready to go:
 
 <p align="center">
   <a href="https://monaca.io/cloud.html"><strong>Cloud IDE</strong></a> -
@@ -71,47 +100,13 @@ $ monaca remote-build # Production build on the cloud
 
 See the [Onsen UI Getting Started Page](http://onsen.io/v2/guide/) for more information.
 
-## Examples with source code
-
-There are lots of sample applications written using Onsen UI. __[Here are some examples](https://onsen.io/samples) with source code and tutorials__ to give you an idea of what kind of apps you can create.
-
-<p align="center">
-  <img src="https://onsen.io/images/samples/pokedex-pikachu.png">
-  <img src="https://onsen.io/images/samples/react-redux-weather.png">
-  <img src="https://onsen.io/images/samples/youtube.png">
-</p>
-
 ## Browser Support
+Onsen UI is tested to work with the following browsers and mobile OS.
 
-Onsen UI is tested with the following browsers and mobile OS.
-
- * Android 4.4.4+ (and Android 4.0+ with [Crosswalk engine](https://crosswalk-project.org/))
+ * Android 4.4.4+
  * iOS 8+
  * Chrome
  * Safari
 
-## Get Onsen UI
-
-* __Download the latest released version__
-
-We have a [distribution repository](https://github.com/OnsenUI/OnsenUI-dist/releases) with changelog. Onsen UI is also available in __npm__, __bower__ and __jspm__. Example:
-
-```bash
-npm install onsenui
-```
-
-This downloads Onsen UI main library and AngularJS bindings. For other bindings, install also `react-onsenui`, `vue-onsenui` or `ngx-onsenui`.
-
-* __Download or request from a CDN__
-
-You can also take the necessary files from a CDN. Some of the options are [unpkg](https://unpkg.com/onsenui/), [jsDelivr](https://www.jsdelivr.com/package/npm/onsenui) and [cdnjs](https://cdnjs.com/libraries/onsen).
-
-
-* __Get the latest development build__
-
-Optionally, you can download the [latest development build here](https://onsenui.github.io/latest-build). Be careful, usually everything there is already tested but it might be unstable sometimes.
-
-
 ## Contribution
-
 We welcome your contribution, no matter how big or small! Please have a look at the [contribution guide](https://github.com/OnsenUI/OnsenUI/blob/master/.github/CONTRIBUTING.md) for details about project structure, development environment, test suite, code style, etc. All the version updates are mentioned in the [changelog](https://github.com/OnsenUI/OnsenUI/blob/master/CHANGELOG.md).
