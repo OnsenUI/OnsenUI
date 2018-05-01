@@ -20,7 +20,7 @@ export class ItemContext {
  * @selector [ons-lazy-repeat]
  * @description
  *   [en]Angular directive for `<ons-lazy-repeat>` component.[/en]
- *   [en]`<ons-lazy-repeat>`要素と同じ機能を提供するAngularディレクティブです。[/en]
+ *   [ja]`<ons-lazy-repeat>`要素と同じ機能を提供するAngularディレクティブです。[/ja]
  * @example
  *   <ons-list>
  *     <ons-list-item *onsLazyRepeat="let item of items; let i = index">

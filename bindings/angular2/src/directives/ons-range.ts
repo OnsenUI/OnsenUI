@@ -20,7 +20,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
  * @selector ons-range
  * @description
  *   [en]Angular directive for `<ons-range>` component.[/en]
- *   [ja]`<ons-range>`要素のAngularディレクティブです。[/en]
+ *   [ja]`<ons-range>`要素のAngularディレクティブです。[/ja]
  * @example
  *   <ons-range [(value)]="foo"></ons-range>
  */
@@ -97,11 +97,11 @@ export class OnsRange implements OnChanges, OnDestroy, ControlValueAccessor {
   writeValue(obj: any) {
     this._element.value = obj;
   }
- 
+
   registerOnChange(fn: any) {
      this._propagateChange = fn;
   }
- 
+
   registerOnTouched(fn: any) {
     this. _propagateTouched = fn;
   }
