@@ -60,7 +60,7 @@ export class AppComponent{
 
   constructor() {
     this.exampleForm = new FormGroup({
-      vegetable: new FormControl('');
+      vegetable: new FormControl('')
     });
   }
 }
