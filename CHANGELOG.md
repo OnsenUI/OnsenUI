@@ -10,6 +10,7 @@ dev
  * ons.notification: Add `maskColor` configuration for `alert`, `confirm` and `prompt` ([#2358](https://github.com/OnsenUI/OnsenUI/issues/2358))
  * ons-list-item: Expandable list items
  * angular2: Add support for reactive forms (PR [#2401](https://github.com/OnsenUI/OnsenUI/pull/2401). Fixes [#2261](https://github.com/OnsenUI/OnsenUI/issues/2261).)
+ * ons-tabbar, react: Add `visible` prop to allow showing/hiding tabbar in React
 
  ### Bug Fixes
 
