@@ -5,7 +5,7 @@
 </template>
 
 <script>
-  /* This file is generated automatically */
+  /* This file was generated automatically by 'generate-components' task in bindings/vue/gulpfile.babel.js */
   import 'onsenui/esm/elements/ons-dialog';
   import { deriveEvents, hidable, hasOptions, dialogCancel, deriveDBB, portal, modifier } from '../mixins';
 

@@ -8,7 +8,7 @@ import SimpleWrapper from './SimpleWrapper.jsx';
  * @tutorial react/Reference/list
  * @description
  *   [en]
- *   Component that represents each item in the list. Must be put inside the `List` component. The list item is composed of three parts that are represented with the `left`, `center` and `right` classes. These classes can be used to ensure that the content of the list items is properly aligned.
+ *   Component that represents each item in the list. Must be put inside the `List` component. The list item is composed of four parts that are represented with the `left`, `center`, `right` and `expandable-content` classes. These classes can be used to ensure that the content of the list items is properly aligned.
  *   [/en]
  * [ja][/ja]
  * @example
@@ -16,6 +16,7 @@ import SimpleWrapper from './SimpleWrapper.jsx';
  *   <div className="left">Left</div>
  *   <div className="center">Center</div>
  *   <div className="right">Right</div>
+ *   <div className="expandable-content">Expandable content</div>
  * </ListItem>
  */
 class ListItem extends SimpleWrapper {
@@ -30,7 +31,11 @@ class ListItem extends SimpleWrapper {
 
   componentDidUpdate() {
     super.componentDidUpdate();
-    this.node._compile();
+
+    if (this.props.expanded !== this.node.expanded) {
+      const action = this.props.expanded ? 'show' : 'hide';
+      this.node[action + 'Expansion']();
+    }
   }
 }
 
@@ -74,7 +79,25 @@ ListItem.propTypes = {
    *  [en] Prevent vertical scrolling when the user drags horizontally. [/en]
    *  [ja][/ja]
    */
-  lockOnDrag: PropTypes.bool
+  lockOnDrag: PropTypes.bool,
+
+  /**
+   * @name expandable
+   * @type bool
+   * @description
+   *  [en]Specifies whether list item can be expanded to reveal hidden content. Expanded content must be defined in `div.expandable-content`.[/en]
+   *  [ja][/ja]
+   */
+  expandable: PropTypes.bool,
+
+  /**
+   * @name expanded
+   * @type bool
+   * @description
+   *  [en]For expandable list items, specifies whether item is expanded[/en]
+   *  [ja][/ja]
+   */
+  expanded: PropTypes.bool
 };
 
 export default ListItem;

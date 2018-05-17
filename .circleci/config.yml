@@ -17,7 +17,7 @@ jobs:
             echo "Yarn v$(yarn --version)"
             echo "$(google-chrome --version)"
       - run:
-          name: Instal coveralls and gulp globally
+          name: Install coveralls and gulp globally
           command: sudo yarn global add coveralls gulp
 
       # css-components

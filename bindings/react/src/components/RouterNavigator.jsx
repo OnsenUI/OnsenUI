@@ -8,7 +8,7 @@ import Util from './Util.js';
  * @category navigation
  * @tutorial react/Reference/navigator
  * @description
- * [en] This component is responsible for page transitioning and managing the pages of your OnsenUI application. In order to manage to display the pages, the  navigator needs to define the `renderPage` method, that takes an route and a navigator and  converts it to an page.[/en]
+ * [en] This component is a variant of the Navigator with a declarative API. In order to manage to display the pages, the  navigator needs to define the `renderPage` method, that takes an route and a navigator and  converts it to an page.[/en]
  * [ja][/ja]
  */
 class RouterNavigator extends BasicComponent {
@@ -260,36 +260,29 @@ RouterNavigator.propTypes = {
    * @required true
    * @defaultValue null
    * @description
-   *  [en] This function takes the current route object as a parameter and  creates returns a react componen.[/en]
+   *  [en] This function takes the current route object as a parameter and returns a react componen.[/en]
    *  [ja][/ja]
    */
   renderPage: PropTypes.func.isRequired,
   /**
-   * @name initialRouteStack
-   * @type array
-   * @required false
-   * @defaultValue null
-   * @description
-   *  [en] This array contains the initial routes from the navigator,
-   *  which will be used to render the initial pages in the renderPage method.
-   *  [/en]
-   *  [ja][/ja]
-   */
-  initialRouteStack: PropTypes.array,
-
-  /**
-   * @name initialRoute
+   * @name routeConfig
    * @type object
-   * @required false
+   * @required true
    * @defaultValue null
    * @description
-   *  [en] This array contains the initial route of the navigator,
-   *  which will be used to render the initial pages in the
-   *  renderPage method.
+   *  [en] This object must contain two properties:
+   *  `routeStack`: An array of route objects,
+   *  `processStack`: An array of process objects `{ type: push | pop | reset, route: userRoute }` that
+   *  describe the transition from the current state to the next state.
+   *  Make sure that the route stack is not emptied before the animations for the `processStack` have completed.
+   *  It is recommended to update the `routeStack` and empty the `processStack` in the 'onPostPop' callback.
    *  [/en]
    *  [ja][/ja]
    */
-  initialRoute: PropTypes.object,
+  routeConfig: PropTypes.shape({
+    routeStack: PropTypes.arrayOf(PropTypes.object),
+    processStack: PropTypes.arrayOf(PropTypes.object)
+  }),
 
   /**
    * @name onPrePush

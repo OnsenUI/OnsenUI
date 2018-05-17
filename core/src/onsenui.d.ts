@@ -1114,6 +1114,17 @@ declare namespace ons {
     visible: boolean;
   }
 
+  interface OnsListItemElement extends HTMLElement {
+    /**
+     * @description Show the expandable content if element is expandable
+     */
+    showExpansion(): void;
+    /**
+     * @description Hide the expandable content if element is expandable
+     */
+    hideExpansion(): void;
+  }
+
 }
 
 
@@ -1125,7 +1136,7 @@ interface AlertOptions {
   message?: string;
   messageHTML?: string;
   buttonLabel?: string;
-  buttonLabels?: [string];
+  buttonLabels?: string[];
   primaryButtonIndex?: number;
   cancelable?: boolean;
   animation?: string;

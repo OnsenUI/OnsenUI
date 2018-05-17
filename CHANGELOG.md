@@ -2,6 +2,25 @@
 CHANGELOG
 ====
 
+2.10.0
+---
+
+ ### New Features
+
+ * ons.notification: Add `maskColor` configuration for `alert`, `confirm` and `prompt` ([#2358](https://github.com/OnsenUI/OnsenUI/issues/2358))
+ * ons-list-item: Add expandable list items ([#2380](https://github.com/OnsenUI/OnsenUI/issues/2380))
+ * ons-toast: Toast messages can be more than one line long ([#2405](https://github.com/OnsenUI/OnsenUI/issues/2405))
+
+ ### Bug Fixes
+
+ * onsenui.d.ts: Fixed [#2354](https://github.com/OnsenUI/OnsenUI/issues/2354).
+ * ons-toolbar: `static` attribute works with iOS status bar.
+ * ons-pull-hook: Improve scroll behavior in UIWebView. Fixed [#2353](https://github.com/OnsenUI/OnsenUI/issues/2353) and [#2357](https://github.com/OnsenUI/OnsenUI/issues/2357).
+ * ons-navigator: Fixed [#2376](https://github.com/OnsenUI/OnsenUI/issues/2376).
+ * ons-select: Fixed [#2251](https://github.com/OnsenUI/OnsenUI/issues/2251) for all bindings.
+ * ons-splitter-side: Fixed regression of ([#2026](https://github.com/OnsenUI/OnsenUI/issues/2026)).
+ * ons-popover: Fixed incorrect placement of popover when page is not full width ([#2386](https://github.com/OnsenUI/OnsenUI/issues/2386)).
+
 2.9.2
 ---
 
@@ -17,9 +36,9 @@ CHANGELOG
  * ons-navigator: Fixed [#2333](https://github.com/OnsenUI/OnsenUI/issues/2333).
  * ons-select (fastclick): Fixed [#2352](https://github.com/OnsenUI/OnsenUI/issues/2352).
  * ons-switch: Fixed [#2341](https://github.com/OnsenUI/OnsenUI/issues/2341).
- 
+
  ### Misc
- 
+
  * core, react: Pointed reference pages to new tutorials.
 
 2.9.1

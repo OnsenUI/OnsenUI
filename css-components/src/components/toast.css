@@ -24,9 +24,9 @@
   background-color: var(--toast-background-color);
   display: flex;
   min-height: 48px;
-  line-height: 48px;
+  line-height: 1.5;
   box-sizing: border-box;
-  padding: 0 16px;
+  padding: 16px 16px;
 }
 
 .toast__message {
@@ -35,7 +35,7 @@
   flex-grow: 1;
   text-align: left;
   margin: 0 16px 0 0;
-  @apply(--ellipsis);
+  white-space: normal;
 }
 
 .toast__button {

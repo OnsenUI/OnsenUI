@@ -5,7 +5,7 @@
 </template>
 
 <script>
-  /* This file is generated automatically */
+  /* This file was generated automatically by 'generate-components' task in bindings/vue/gulpfile.babel.js */
   import 'onsenui/esm/elements/ons-alert-dialog-button';
   import { deriveEvents, modifier } from '../mixins';
 

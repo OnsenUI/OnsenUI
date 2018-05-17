@@ -5,12 +5,24 @@
 </template>
 
 <script>
-  /* This file is generated automatically */
+  /* This file was generated automatically by 'generate-components' task in bindings/vue/gulpfile.babel.js */
   import 'onsenui/esm/elements/ons-list-item';
   import { deriveEvents, modifier } from '../mixins';
 
   export default {
     name: 'v-ons-list-item',
-    mixins: [deriveEvents, modifier]
+    mixins: [deriveEvents, modifier],
+    props: {
+      expanded: {
+        type: Boolean
+      }
+    },
+
+    watch: {
+      expanded() {
+        const action = this.expanded ? 'show' : 'hide';
+        this.$el[action + 'Expansion']();
+      }
+    }
   };
 </script>

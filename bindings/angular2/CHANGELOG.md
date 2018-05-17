@@ -1,6 +1,18 @@
 CHANGELOG
 ====
 
+dev
+---
+
+### New Features
+
+ * Add support for reactive forms ([#2261](https://github.com/OnsenUI/OnsenUI/issues/2261))
+ * OnsListItem: Add support for expandable items
+
+### Bug Fixes
+
+ * OnsSelect: Fix for the previous `NgModel` fix ([#2251](https://github.com/OnsenUI/OnsenUI/issues/2251)).
+
 4.1.0
 ----
 

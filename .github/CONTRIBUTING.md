@@ -22,7 +22,7 @@ Onsen UI elements are made on top of Web Components. The source code is located 
 
 ### Bindings
 
-We wrap Onsen UI core with extra libraries to make it work better with some specific frameworks. The source code of these libraries is located in [bindings](https://github.com/OnsenUI/OnsenUI/tree/master/bindings), with the exception of [React Components](https://github.com/OnsenUI/react-onsenui).
+We wrap Onsen UI core with extra libraries to make it work better with some specific frameworks. The source code of these libraries is located in [bindings](https://github.com/OnsenUI/OnsenUI/tree/master/bindings).
 
 ### Style Sheets
 
@@ -136,6 +136,31 @@ In order to run both the unit tests and the end-to-end tests use the following c
 ```bash
 $ gulp test
 ```
+
+## Documentation
+
+Onsen UI's documentation is generated directly from each file's source code, using Onsen UI's own [wcdoc](https://github.com/OnsenUI/wcdoc) tool. The syntax will be familiar if you have used JSDoc before. Running this tool generates JSON files which are stored in `build/docs`. These JSON files are then used by the [onsen.io](https://github.com/OnsenUI/onsen.io) repository to generate the documentation you see on the website.
+
+### Setup
+
+Assuming you have already set up the Onsen UI repository, the other thing you need to do is set up the [onsen.io](https://github.com/OnsenUI/onsen.io) repository. Follow the instructions in that README to get it set up, but stop when you get to the comment `Checkout and build the latest revision of Onsen UI 2`. Instead of using the version of Onsen UI from GitHub, you want to use your local repository. The easiest way to do this is to create a symlink. Assuming your Onsen UI repository is at `~/dev/onsen/OnsenUI` and your onsen.io repository is at `~/dev/onsen/onsen.io`, the command would look like this (on MacOS and Linux):
+
+```
+ln -s ~/dev/onsen/OnsenUI ~/dev/onsen/onsen.io/dist/v2/OnsenUI
+```
+
+### Modifying Documentation
+
+Once this is all set up, follow these steps to modify the documentation.
+
+ 1. `Onsen UI`: Modify the documentation comments in the relevant JS file
+ 2. `Onsen UI`: Run `gulp build-docs`
+ 3. If you are changing the React docs, there are extra steps. Otherwise, skip to step 4.
+	- `Onsen UI`: Build the React Docs: `cd bindings/react && yarn install && yarn run gen-docs`
+	- `onsen.io`: Delete the React doc cache, if it exists: `rm -r .reactdoc`
+ 4. `onsen.io`: Run `gulp serve --lang en`
+
+The React documentation is built separately and cached because it takes a while to build. So, if you make changes to the documentation of React bindings, ensure you follow step 3 or you may not see your changes reflected.
 
 ## Release Procedure
 

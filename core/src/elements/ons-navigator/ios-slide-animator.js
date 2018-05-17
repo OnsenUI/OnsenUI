@@ -70,14 +70,16 @@ export default class IOSSlideNavigatorAnimator extends IOSSwipeNavigatorAnimator
   }
 
   _shouldAnimateToolbar(enterPage, leavePage) {
+    const toolbars = enterPage._canAnimateToolbar() && leavePage._canAnimateToolbar();
+
     const enterToolbar = enterPage._getToolbarElement();
     const leaveToolbar = leavePage._getToolbarElement();
 
-    const toolbars = enterPage._canAnimateToolbar() && leavePage._canAnimateToolbar();
-    const material = util.hasModifier(enterToolbar, 'material') || util.hasModifier(leaveToolbar, 'material');
-    const transparent = util.hasModifier(enterToolbar, 'transparent') || util.hasModifier(leaveToolbar, 'transparent');
+    const isStatic = enterToolbar.hasAttribute('static') || leaveToolbar.hasAttribute('static');
+    const isMaterial = util.hasModifier(enterToolbar, 'material') || util.hasModifier(leaveToolbar, 'material');
+    const isTransparent = util.hasModifier(enterToolbar, 'transparent') || util.hasModifier(leaveToolbar, 'transparent');
 
-    return toolbars && !material && !transparent;
+    return toolbars && !isStatic && !isMaterial && !isTransparent;
   }
 
   _calculateDelta(element, decomposition) {

@@ -250,21 +250,29 @@ export default class PopoverElement extends BaseDialogElement {
     const targetRect = target.getBoundingClientRect();
     const isMD = util.hasModifier(this, 'material');
     const cover = isMD && this.hasAttribute('cover-target');
+    const parent = util.findParent(this, 'ons-page') || document.body;
+    const parentDimensions = parent.getBoundingClientRect();
+    const maxPositions = {
+      top: Math.max(parentDimensions.top, safeAreaRect.top),
+      left: Math.max(parentDimensions.left, safeAreaRect.left),
+      bottom: Math.min(parentDimensions.bottom, safeAreaRect.bottom),
+      right: Math.min(parentDimensions.right, safeAreaRect.right),
+    };
 
     // Distance from each side of the safe area (with margin) to the target element
     const targetDistance = {
-      top: targetRect.top - (safeAreaRect.top + margin),
-      left: targetRect.left - (safeAreaRect.left + margin),
-      bottom: (safeAreaRect.bottom - margin) - targetRect.bottom,
-      right: (safeAreaRect.right - margin) - targetRect.right
+      top: targetRect.top - (maxPositions.top + margin),
+      left: targetRect.left - (maxPositions.left + margin),
+      bottom: (maxPositions.bottom - margin) - targetRect.bottom,
+      right: (maxPositions.right - margin) - targetRect.right
     };
 
     // Distance from each side of the safe area (with margin) to the geometric center of the target element
     const targetCenterDistanceFrom = {
-      top: targetRect.top + Math.round(targetRect.height / 2) - (safeAreaRect.top + margin),
-      left: targetRect.left + Math.round(targetRect.width / 2) - (safeAreaRect.left + margin),
-      bottom: (safeAreaRect.bottom - margin) - targetRect.bottom + Math.round(targetRect.height / 2),
-      right: (safeAreaRect.right - margin) - targetRect.right + Math.round(targetRect.width / 2)
+      top: targetRect.top + Math.round(targetRect.height / 2) - (maxPositions.top + margin),
+      left: targetRect.left + Math.round(targetRect.width / 2) - (maxPositions.left + margin),
+      bottom: (maxPositions.bottom - margin) - targetRect.bottom + Math.round(targetRect.height / 2),
+      right: (maxPositions.right - margin) - targetRect.right + Math.round(targetRect.width / 2)
     };
 
     const {vertical, primary: primaryDirection, secondary: secondaryDirection} = this._calculateDirections(targetDistance);

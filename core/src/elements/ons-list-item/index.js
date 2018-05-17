@@ -15,13 +15,16 @@ limitations under the License.
 
 */
 
-import onsElements from '../ons/elements';
-import util from '../ons/util';
-import styler from '../ons/styler';
-import autoStyle from '../ons/autostyle';
-import ModifierUtil from '../ons/internal/modifier-util';
-import BaseElement from './base/base-element';
-import contentReady from '../ons/content-ready';
+import onsElements from '../../ons/elements';
+import animit from '../../ons/animit';
+import util from '../../ons/util';
+import styler from '../../ons/styler';
+import autoStyle from '../../ons/autostyle';
+import ModifierUtil from '../../ons/internal/modifier-util';
+import AnimatorFactory from '../../ons/internal/animator-factory';
+import { ListItemAnimator, SlideListItemAnimator } from './animator';
+import BaseElement from '../base/base-element';
+import contentReady from '../../ons/content-ready';
 
 const defaultClassName = 'list-item';
 const scheme = {
@@ -34,6 +37,11 @@ const scheme = {
   '.list-item__subtitle': 'list-item--*__subtitle',
   '.list-item__thumbnail': 'list-item--*__thumbnail',
   '.list-item__icon': 'list-item--*__icon'
+};
+
+const _animatorDict = {
+  'default': SlideListItemAnimator,
+  'none': ListItemAnimator
 };
 
 /**
@@ -56,17 +64,18 @@ const scheme = {
  *   [ja][/ja]
  * @description
  *   [en]
- *     Component that represents each item in a list. The list item is composed of three parts that are represented with the `left`, `center` and `right` classes. These classes can be used to ensure that the content of the list items is properly aligned.
+ *     Component that represents each item in a list. The list item is composed of four parts that are represented with the `left`, `center`, `right` and `expandable-content` classes. These classes can be used to ensure that the content of the list items is properly aligned.
  *
  *     ```
  *     <ons-list-item>
  *       <div class="left">Left</div>
  *       <div class="center">Center</div>
  *       <div class="right">Right</div>
+ *       <div class="expandable-content">Expandable content</div>
  *     </ons-list-item>
  *     ```
  *
- *     There is also a number of classes (prefixed with `list-item__*`) that help when putting things like icons and thumbnails into the list items.
+ *     There are also a number of classes (prefixed with `list-item__*`) that help when putting things like icons and thumbnails into the list items.
  *   [/en]
  *   [ja][/ja]
  * @seealso ons-list
@@ -125,12 +134,36 @@ export default class ListItemElement extends BaseElement {
    *   [ja][/ja]
    */
 
+  /**
+   * @attribute expandable
+   * @type {Boolean}
+   * @description
+   *   [en]Makes the element able to be expanded to reveal extra content. For this to work, the expandable content must be defined in `div.expandable-content`.[/en]
+   *   [ja][/ja]
+   */
+
+  /**
+   * @attribute animation
+   * @type {String}
+   * @default default
+   * @description
+   *  [en]The animation used when showing and hiding the expandable content. Can be either `"default"` or `"none"`.[/en]
+   *  [ja][/ja]
+   */
+
   constructor() {
     super();
+
+    this._animatorFactory = this._updateAnimatorFactory();
+    this.toggleExpansion = this.toggleExpansion.bind(this);
 
     // Elements ignored when tapping
     const re = /^ons-(?!col$|row$|if$)/i;
     this._shouldIgnoreTap = e => e.hasAttribute('prevent-tap') || re.test(e.tagName);
+
+    // show and hide functions for Vue hidable mixin
+    this.show = this.showExpansion;
+    this.hide = this.hideExpansion;
 
     contentReady(this, () => {
       this._compile();
@@ -142,7 +175,11 @@ export default class ListItemElement extends BaseElement {
 
     this.classList.add(defaultClassName);
 
-    let left, center, right;
+    if(this.hasAttribute('expandable')) {
+      this.classList.add('list-item--expandable');
+    }
+
+    let left, center, right, expandableContent;
 
     for (let i = 0; i < this.children.length; i++) {
       const el = this.children[i];
@@ -158,37 +195,130 @@ export default class ListItemElement extends BaseElement {
         el.classList.add('list-item__right');
         right = el;
       }
+      else if (el.classList.contains('expandable-content')) {
+        el.classList.add('list-item__expandable-content');
+        expandableContent = el;
+      }
+    }
+
+    if (!right && this.hasAttribute('expandable')) {
+      right = document.createElement('div');
+      right.classList.add('list-item__right', 'right');
+
+      // We cannot use a pseudo-element for this chevron, as we cannot animate it using
+      // JS. So, we make a chevron span instead.
+      const chevron = document.createElement('span');
+      chevron.classList.add('list-item__expand-chevron');
+      right.appendChild(chevron);
     }
 
     if (!center) {
       center = document.createElement('div');
 
-      if (!left && !right) {
+      if (!left && !right && !expandableContent) {
         while (this.childNodes[0]) {
           center.appendChild(this.childNodes[0]);
         }
       } else {
         for (let i = this.childNodes.length - 1; i >= 0; i--) {
           const el = this.childNodes[i];
-          if (el !== left && el !== right) {
+          if (el !== left && el !== right && el !== expandableContent && el.tagName !== 'ONS-RIPPLE') {
             center.insertBefore(el, center.firstChild);
           }
         }
       }
 
-      this.insertBefore(center, right || null);
+      if(!expandableContent) {
+        this.insertBefore(center, right || null);
+      }
     }
 
-    center.classList.add('center');
-    center.classList.add('list-item__center');
+    center.classList.add('center', 'list-item__center');
+
+    if(expandableContent) {
+      // create 'top' div
+      // this holds everything except the expandable content
+      this._top = document.createElement('div');
+      this._top.classList.add('top', 'list-item__top');
+      this.appendChild(this._top);
+
+      this._top.appendChild(center);
+      if (left) {
+        this._top.appendChild(left);
+      }
+      if (right) {
+        this._top.appendChild(right);
+      }
+    }
 
     util.updateRipple(this);
 
     ModifierUtil.initModifier(this, scheme);
   }
 
+  /**
+   * @method showExpansion
+   * @signature showExpansion()
+   * @description
+   *   [en]Show the expandable content if the element is expandable.[/en]
+   *   [ja][/ja]
+   */
+  showExpansion() {
+    if (this.hasAttribute('expandable') && !this._expanding) {
+      this.expanded = true;
+      this._expanding = true;
+
+      const animator = this._animatorFactory.newAnimator();
+      animator.showExpansion(this, () => {
+        this.classList.add('expanded');
+        this._expanding = false;
+      });
+    }
+  }
+
+  /**
+   * @method hideExpansion
+   * @signature hideExpansion()
+   * @description
+   *   [en]Hide the expandable content if the element expandable.[/en]
+   *   [ja][/ja]
+   */
+  hideExpansion() {
+    if (this.hasAttribute('expandable') && !this._expanding) {
+      this.expanded = false;
+      this._expanding = true;
+
+      const animator = this._animatorFactory.newAnimator();
+      animator.hideExpansion(this, () => {
+        this.classList.remove('expanded');
+        this._expanding = false;
+      });
+    }
+  }
+
+  toggleExpansion() {
+    this.classList.contains('expanded') ? this.hideExpansion() : this.showExpansion();
+  }
+
+  _updateAnimatorFactory() {
+    return new AnimatorFactory({
+      animators: _animatorDict,
+      baseClass: ListItemAnimator,
+      baseClassName: 'ListItemAnimator',
+      defaultAnimation: this.getAttribute('animation') || 'default'
+    });
+  }
+
   static get observedAttributes() {
-    return ['modifier', 'class', 'ripple'];
+    return ['modifier', 'class', 'ripple', 'animation'];
+  }
+
+  get expandableContent() {
+    return this.querySelector('.list-item__expandable-content');
+  }
+
+  get expandChevron() {
+    return this.querySelector('.list-item__expand-chevron');
   }
 
   attributeChangedCallback(name, last, current) {
@@ -202,13 +332,18 @@ export default class ListItemElement extends BaseElement {
       case 'ripple':
         util.updateRipple(this);
         break;
+      case 'animation':
+        this._animatorFactory = this._updateAnimatorFactory();
+        break;
     }
   }
 
   connectedCallback() {
-    this._setupListeners(true);
-    this._originalBackgroundColor = this.style.backgroundColor;
-    this.tapped = false;
+    contentReady(this, () => {
+      this._setupListeners(true);
+      this._originalBackgroundColor = this.style.backgroundColor;
+      this.tapped = false;
+    });
   }
 
   disconnectedCallback() {
@@ -226,6 +361,10 @@ export default class ListItemElement extends BaseElement {
     this[action]('mousedown', this._onTouch);
     this[action]('mouseup', this._onRelease);
     this[action]('mouseout', this._onRelease);
+
+    if(this._top) {
+      this._top[action]('click', this.toggleExpansion);
+    }
   }
 
   _onDrag(event) {

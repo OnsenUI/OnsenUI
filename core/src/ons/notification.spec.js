@@ -12,7 +12,7 @@ describe('ons.notification', () => {
     const callback = chai.spy();
 
     beforeEach(() => {
-      resolvePromise = ons.notification.alert({message: 'hoge', modifier: 'fuga', cancelable: true, callback: callback});
+      resolvePromise = ons.notification.alert({message: 'hoge', modifier: 'fuga', maskColor: 'rgb(24, 134, 211)', cancelable: true, callback: callback});
       dialog = document.body.querySelector('ons-alert-dialog');
     });
 
@@ -72,6 +72,13 @@ describe('ons.notification', () => {
       expect(ons.notification.alert('test')).to.eventually.be.rejected;
       ons.elements.AlertDialog = alertDialog;
     });
+
+    it('sets the maskColor', () => {
+      const maskEl = dialog.querySelector('.alert-dialog-mask');
+      const color = window.getComputedStyle(maskEl)['background-color'];
+
+      expect(color).to.equal('rgb(24, 134, 211)');
+    });
   });
 
   describe('#confirm()', () => {
@@ -81,7 +88,7 @@ describe('ons.notification', () => {
     const callback = chai.spy();
 
     beforeEach(() => {
-      resolvePromise = ons.notification.confirm({message: 'hoge', modifier: 'fuga', cancelable: true, callback: callback});
+      resolvePromise = ons.notification.confirm({message: 'hoge', modifier: 'fuga', maskColor: 'rgb(24, 134, 211)', cancelable: true, callback: callback});
       dialog = document.body.querySelector('ons-alert-dialog');
     });
 
@@ -133,6 +140,13 @@ describe('ons.notification', () => {
 
       dialog.querySelector('ons-alert-dialog-button').click();
     });
+
+    it('sets the maskColor', () => {
+      const maskEl = dialog.querySelector('.alert-dialog-mask');
+      const color = window.getComputedStyle(maskEl)['background-color'];
+
+      expect(color).to.equal('rgb(24, 134, 211)');
+    });
   });
 
   describe('#prompt()', () => {
@@ -142,7 +156,7 @@ describe('ons.notification', () => {
     const callback = chai.spy();
 
     beforeEach(() => {
-      resolvePromise = ons.notification.prompt({message: 'hoge', modifier: 'fuga', submitOnEnter: true, cancelable: true, callback: callback});
+      resolvePromise = ons.notification.prompt({message: 'hoge', modifier: 'fuga', maskColor: 'rgb(24, 134, 211)', submitOnEnter: true, cancelable: true, callback: callback});
       dialog = document.body.querySelector('ons-alert-dialog');
     });
 
@@ -212,6 +226,13 @@ describe('ons.notification', () => {
 
       dialog.querySelector('input').value = 42;
       dialog.querySelector('ons-alert-dialog-button').click();
+    });
+
+    it('sets the maskColor', () => {
+      const maskEl = dialog.querySelector('.alert-dialog-mask');
+      const color = window.getComputedStyle(maskEl)['background-color'];
+
+      expect(color).to.equal('rgb(24, 134, 211)');
     });
   });
 

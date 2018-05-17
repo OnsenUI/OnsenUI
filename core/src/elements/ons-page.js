@@ -218,9 +218,8 @@ export default class PageElement extends BaseElement {
   }
 
   _canAnimateToolbar(content = this._contentElement) {
-    const toolbar = util.findChild(this, 'ons-toolbar');
-    if (toolbar) {
-      return !toolbar.hasAttribute('static');
+    if (util.findChild(this, 'ons-toolbar')) {
+      return true;
     }
 
     return !!util.findChild(content, el => {

@@ -260,12 +260,6 @@ export default class TabElement extends BaseElement {
 
     return new Promise(resolve => {
       this._pageLoader.load({ parent, page }, pageElement => {
-
-        if (!this.isActive()) { // Perf, fixes #2324 when active tab is 0
-          pageElement.style.visibility = 'hidden';
-          this._tabbar._loadInactive.promise.then(() => pageElement.style.visibility = '');
-        }
-
         parent.replaceChild(pageElement, parent.children[this.index]); // Ensure position
         this._loadedPage = pageElement;
         resolve(pageElement);
@@ -342,7 +336,9 @@ export default class TabElement extends BaseElement {
             const parentTarget = tabbar._targetElement;
             const dummyPage = util.create('div', { height: '100%', width: '100%', visibility: 'hidden' });
             parentTarget.insertBefore(dummyPage, parentTarget.children[index]); // Ensure position
-            return this._loadPageElement(parentTarget, pageTarget).then(deferred.resolve);
+
+            const load = () => this._loadPageElement(parentTarget, pageTarget).then(deferred.resolve);
+            return this.isActive() ? load() : tabbar._loadInactive.promise.then(load);
           }
 
           return deferred.resolve(this.pageElement);

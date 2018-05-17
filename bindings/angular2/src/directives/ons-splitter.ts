@@ -28,7 +28,7 @@ import {Params} from '../ons/params';
  *     selector: 'ons-page',
  *     template: `
  *       <ons-toolbar>
- *         <div class="center">Left Page</div> 
+ *         <div class="center">Left Page</div>
  *       </ons-toolbar>
  *       <div class="background"></div>
  *       <div class="content">
@@ -62,7 +62,7 @@ export class OnsSplitterSide {
    * @type {Type<any>}
    * @desc
    *   [en]Page content.[/en]
-   *   [ja]表示するページコンポーネントのクラスを指定します。[/en]
+   *   [ja]表示するページコンポーネントのクラスを指定します。[/ja]
    */
   @Input('page') set page(page: Type<any>) {
     this.element.page = page;
@@ -108,7 +108,7 @@ export class OnsSplitterSide {
       },
       (element: any) => {
         const componentRef = componentRefMap.get(element);
-        
+
         if (componentRef) {
           componentRef.destroy();
           componentRefMap.delete(element);
@@ -135,7 +135,7 @@ export class OnsSplitterContent {
    * @type {Type<any>}
    * @desc
    *   [en]Specify the page component.[/en]
-   *   [ja]表示するページコンポーネントのクラスを指定します。[/en]
+   *   [ja]表示するページコンポーネントのクラスを指定します。[/ja]
    */
   @Input('page') set page(page: Type<any>) {
     this.element.page = page;
@@ -178,7 +178,7 @@ export class OnsSplitterContent {
       },
       (element: any) => {
         const componentRef = componentRefMap.get(element);
-        
+
         if (componentRef) {
           componentRef.destroy();
           componentRefMap.delete(element);

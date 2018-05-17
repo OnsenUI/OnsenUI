@@ -6,6 +6,13 @@ dev
 
  ### New Features
 
+ * VOnsListItem: Add support for expandable items
+
+2.5.1
+----
+
+ ### New Features
+
  * VOnsNavigator: Navigator can now pass props to pages throw the `onsNavigatorProps` property in page components.
  * `modifier` prop now supports object and array syntax just like `class` prop.
 
