@@ -54,6 +54,9 @@ class Tabbar extends BasicComponent {
     node.addEventListener('postchange', this.onPostChange);
     node.addEventListener('reactive', this.onReactive);
     node.onSwipe = this.props.onSwipe || null;
+    if (this.props.visible !== undefined) {
+      node.setTabbarVisibility(this.props.visible);
+    }
   }
 
   componentWillUnmount() {
@@ -70,6 +73,9 @@ class Tabbar extends BasicComponent {
     }
     if (this.props.onSwipe !== nextProps.onSwipe) {
       node.onSwipe = nextProps.onSwipe;
+    }
+    if (this.props.visible !== nextProps.visible) {
+      node.setTabbarVisibility(nextProps.visible);
     }
   }
 
@@ -209,7 +215,16 @@ Tabbar.propTypes = {
    *  [en]Hook called whenever the user slides the tabbar. It gets a decimal index and an animationOptions object as arguments.[/en]
    *  [ja][/ja]
    */
-  onSwipe: PropTypes.func
+  onSwipe: PropTypes.func,
+
+  /**
+   * @name visible
+   * @type bool
+   * @description
+   *  [en]If true, the tabbar is shown on the screen. Otherwise, the tabbar is not shown.[/en]
+   *  [ja][/ja]
+   */
+  visible: PropTypes.bool
 };
 
 Tabbar.defaultProps = {
