@@ -1,6 +1,13 @@
 CHANGELOG
 ====
 
+dev
+----
+
+ ### New Features
+
+ * VOnsListItem: Add support for expandable items
+
 2.5.1
 ----
 
