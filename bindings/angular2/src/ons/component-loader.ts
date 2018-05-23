@@ -40,7 +40,7 @@ export class ComponentLoader {
       });
     }
 
-    const rootContainer = (<any>this.appRef)._rootComponents[0].location.nativeElement;
+    const rootContainer = (<any>this.appRef).components[0].location.nativeElement;
     rootContainer.appendChild(rootElement);
   }
 }
