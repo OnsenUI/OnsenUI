@@ -1,6 +1,13 @@
 CHANGELOG
 ====
 
+dev
+---
+
+### New Features
+
+ * Add support for Angular 6
+
 4.2.0
 ---
 
