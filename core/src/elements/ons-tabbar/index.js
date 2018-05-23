@@ -211,8 +211,8 @@ export default class TabbarElement extends BaseElement {
 
   constructor() {
     super();
-    contentReady(this, () => this._compile());
     this._loadInactive = util.defer(); // Improves #2324
+    contentReady(this, () => this._compile());
   }
 
   connectedCallback() {

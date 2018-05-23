@@ -1,8 +1,13 @@
 CHANGELOG
 ====
 
-dev
+4.2.0
 ---
+
+### New Features
+
+ * Add support for reactive forms ([#2261](https://github.com/OnsenUI/OnsenUI/issues/2261))
+ * OnsListItem: Add support for expandable items
 
 ### Bug Fixes
 
