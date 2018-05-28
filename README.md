@@ -104,7 +104,7 @@ See the [Onsen UI Getting Started Page](http://onsen.io/v2/guide/) for more info
 Onsen UI is tested to work with the following browsers and mobile OS.
 
  * Android 4.4.4+
- * iOS 8+
+ * iOS 9+
  * Chrome
  * Safari
 
