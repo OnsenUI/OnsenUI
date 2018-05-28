@@ -179,10 +179,12 @@ export default class ListItemElement extends BaseElement {
       this.classList.add('list-item--expandable');
     }
 
-    let left, center, right, expandableContent;
+    let left, center, right, top, expandableContent;
 
-    for (let i = 0; i < this.children.length; i++) {
-      const el = this.children[i];
+    const childEls = util.getAllChildNodes(this);
+
+    for (let i = 0; i < childEls.length; i++) {
+      const el = childEls[i];
 
       if (el.classList.contains('left')) {
         el.classList.add('list-item__left');
@@ -194,6 +196,10 @@ export default class ListItemElement extends BaseElement {
       else if (el.classList.contains('right')) {
         el.classList.add('list-item__right');
         right = el;
+      }
+      else if (el.classList.contains('top')) {
+        el.classList.add('list-item__top');
+        top = el;
       }
       else if (el.classList.contains('expandable-content')) {
         el.classList.add('list-item__expandable-content');
@@ -238,7 +244,7 @@ export default class ListItemElement extends BaseElement {
     if(expandableContent) {
       // create 'top' div
       // this holds everything except the expandable content
-      this._top = document.createElement('div');
+      this._top = top || document.createElement('div');
       this._top.classList.add('top', 'list-item__top');
       this.appendChild(this._top);
 

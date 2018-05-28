@@ -8,6 +8,7 @@ dev
  ### Bug Fixes
 
  * ons-tabbar: Fix race condition with some tabs ([#2430](https://github.com/OnsenUI/OnsenUI/issues/2430))
+ * ons-list-item: Fix expandable item breaking when compiled more than once (for example, with ng-repeat) ([#2434](https://github.com/OnsenUI/OnsenUI/issues/2434))
 
 2.10.0
 ---
