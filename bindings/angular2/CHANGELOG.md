@@ -1,6 +1,13 @@
 CHANGELOG
 ====
 
+4.2.2
+---
+
+### Misc
+ 
+ * Depend on OnsenUI ~v2.10.0
+
 4.2.1
 ---
 
