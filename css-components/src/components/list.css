@@ -125,6 +125,24 @@
   transition: background-color 0.2s linear;
 }
 
+/*~
+  name: Expandable List
+  category: List
+  elements: ons-list ons-list-item
+  markup: |
+    <ul class="list">
+      <li class="list-item list-item--expandable expanded">
+        <div class="list-item__top">
+          <div class="list-item__center">Item</div>
+          <div class="list-item__right">
+            <span class="list-item__expand-chevron"></span>
+          </div>
+        </div>
+        <div class="list-item__expandable-content">Expanded content</div>
+      </li>
+    </ul>
+*/
+
 .list-item__top {
   display: flex;
   flex-direction: row;
