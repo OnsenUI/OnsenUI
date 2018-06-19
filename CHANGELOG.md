@@ -2,6 +2,13 @@
 CHANGELOG
 ====
 
+dev
+---
+
+ ### Bug Fixes
+
+ * ons-lazy-repeat: Fix dynamic adding of items ([#2443](https://github.com/OnsenUI/OnsenUI/issues/2443))
+
 2.10.1
 ---
 

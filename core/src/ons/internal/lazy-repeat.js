@@ -275,12 +275,7 @@ export class LazyRepeatProvider {
 
   refresh() {
     const forceRender = { forceScrollDown: true };
-    const lastItemIndex = Math.min(this._lastItemRendered(), this._countItems() - 1);
     const firstItemIndex = this._firstItemRendered();
-
-    if (util.isInteger(lastItemIndex)) {
-      forceRender.forceLastIndex = lastItemIndex
-    }
 
     if (util.isInteger(firstItemIndex)) {
       this._wrapperElement.style.height = this._topPositions[firstItemIndex] + this._calculateRenderedHeight() + 'px';
