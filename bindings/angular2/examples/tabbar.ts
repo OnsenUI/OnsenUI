@@ -8,12 +8,8 @@ import {
 import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
 
 @Component({
-  selector: 'ons-page',
+  selector: 'ons-page[home]',
   template: `
-    <ons-toolbar>
-      <div class="center">Page</div>
-    </ons-toolbar>
-    <div class="background"></div>
     <div class="content" id="initial-page">
       <div style="text-align: center; margin: 10px">
         <p>Home</p>
@@ -35,13 +31,9 @@ export class HomeComponent {
 }
 
 @Component({
-  selector: 'ons-page',
+  selector: 'ons-page[page]',
   template: `
-    <ons-toolbar>
-      <div class="center">Page</div>
-    </ons-toolbar>
-    <div class="background"></div>
-    <div class="content" class="normal-page">
+    <div class="content normal-page">
       <div style="text-align: center; margin: 10px">
         <p>Page</p>
       </div>
@@ -54,21 +46,34 @@ export class PageComponent {
 @Component({
   selector: 'app',
   template: `
-  <ons-tabbar swipeable animation="none">
-    <div class="tabbar__content"></div>
-    <div class="tabbar">
-      <ons-tab label="Page1" icon="ion-home" [page]="home" active></ons-tab>
-      <ons-tab label="Page2" icon="ion-help" [page]="page"></ons-tab>
-      <ons-tab label="Page3" icon="ion-stop" [page]="page"></ons-tab>
-    </div>
-  </ons-tabbar>
+    <ons-page>
+      <ons-toolbar>
+        <div class="center">Tabbar</div>
+        <div class="right">
+          Index: <span id="index">{{index}}</span>
+        </div>
+      </ons-toolbar>
+      <ons-tabbar swipeable animation="none" position="auto" (swipe)="onSwipe($event)">
+        <div class="tabbar__content"></div>
+        <div class="tabbar">
+          <ons-tab label="Page1" icon="ion-home" [page]="home" active></ons-tab>
+          <ons-tab label="Page2" icon="ion-help" [page]="page"></ons-tab>
+          <ons-tab label="Page3" icon="ion-stop" [page]="page"></ons-tab>
+        </div>
+      </ons-tabbar>
+    </ons-page>
   `
 })
 export class AppComponent {
-  home = HomeComponent
-  page = PageComponent
+  home = HomeComponent;
+  page = PageComponent;
+  index = 0.0;
 
   constructor() { }
+
+  onSwipe(event: any) {
+    this.index = event.index;
+  }
 }
 
 @NgModule({
