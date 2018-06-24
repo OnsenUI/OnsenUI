@@ -71,11 +71,11 @@ export class OnsTabbar {
    *   [en]Triggers when the tabbar is swiped.[/en]
    *   [ja]`<ons-tabbar>`がスワイプされた時に発火します。[/ja]
    */
-  @Output('swipe') swipe = new EventEmitter();
+  @Output('swipe') _swipe = new EventEmitter();
 
   constructor(private _elementRef: ElementRef) {
     this._element = _elementRef.nativeElement;
-    this._element.onSwipe = (index: number, options: any) => this.swipe.emit({index, options});
+    this._element.onSwipe = (index: number, options: any) => this._swipe.emit({index, options});
   }
 }
 

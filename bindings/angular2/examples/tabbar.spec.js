@@ -23,4 +23,15 @@ describe('tabbar.html', () => {
     browser.wait(EC.visibilityOf(element.all(by.css('.normal-page')).get(0)), 5000);
     expect(element.all(by.css('.normal-page')).get(0).isDisplayed()).toBeTruthy();
   });
+
+  it ('should handle swipe event', () => {
+    expect($('#index').getText()).toBe('0.00');
+    browser.actions()
+      .mouseMove(element(by.css('.page__content')), {x: 16, y: 16})
+      .mouseDown()
+      .mouseMove({x: -50, y: 16})
+      .mouseMove({x: -100, y: 16})
+      .perform();
+    expect($('#index').getText()).not.toBe('0.00');
+  })
 });
