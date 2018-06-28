@@ -2079,7 +2079,7 @@ gulp-vue-compiler@^1.0.0-beta.0:
     babel-core "^6.26.0"
     gulp-util "^3.0.8"
     through2 "^2.0.3"
-    vue-component-compiler "git+ssh://git@github.com/frandiox/vue-component-compiler.git"
+    vue-component-compiler "git+https://git@github.com/frandiox/vue-component-compiler.git"
 
 gulp@^3.9.1:
   version "3.9.1"
@@ -4683,9 +4683,9 @@ void-elements@^2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/void-elements/-/void-elements-2.0.1.tgz#c066afb582bb1cb4128d60ea92392e94d5e9dbec"
 
-"vue-component-compiler@git+ssh://git@github.com/frandiox/vue-component-compiler.git":
+"vue-component-compiler@git+https://git@github.com/frandiox/vue-component-compiler.git":
   version "3.0.0"
-  resolved "git+ssh://git@github.com/frandiox/vue-component-compiler.git#0ba6e8bc74e97d53e137f557d7e632c3686edef1"
+  resolved "git+https://git@github.com/frandiox/vue-component-compiler.git#0ba6e8bc74e97d53e137f557d7e632c3686edef1"
   dependencies:
     hash-sum "^1.0.2"
     js-beautify "^1.7.3"
