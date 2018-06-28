@@ -29,18 +29,6 @@ describe('ons-bottom-toolbar', () => {
     expect(element.classList.contains('bottom-bar--fuga')).to.be.true;
   });
 
-  it('ensures its page\'s class', () => {
-    var element = new ons.elements.BottomToolbar(),
-      page = new ons.elements.Page();
-
-    document.body.appendChild(page);
-    page.appendChild(element);
-
-    expect(page.classList.contains('page-with-bottom-toolbar')).to.be.true;
-
-    document.body.removeChild(page);
-  });
-
   describe('#_compile()', () => {
     it('does not compile twice', () => {
       const div1 = document.createElement('div');
