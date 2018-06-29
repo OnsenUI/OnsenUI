@@ -193,6 +193,12 @@ export default class PageElement extends BaseElement {
       this.attributeChangedCallback('class');
     }
 
+    const bottomToolbar = util.findChild(this, 'ons-bottom-toolbar');
+    if (bottomToolbar) {
+      this._defaultClassName += ' page-with-bottom-toolbar';
+      this.attributeChangedCallback('class');
+    }
+
     ModifierUtil.initModifier(this, scheme);
   }
 
