@@ -268,7 +268,7 @@ util.parseJSONObjectSafely = (jsonString, failSafe = {}) => {
     if (typeof result === 'object' && result !== null) {
       return result;
     }
-  } catch(e) {
+  } catch (e) {
     return failSafe;
   }
   return failSafe;

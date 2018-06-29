@@ -410,7 +410,7 @@ export default class NavigatorElement extends BaseElement {
   }
 
   attributeChangedCallback(name, last, current) {
-    switch(name) {
+    switch (name) {
       case 'animation':
         this._updateAnimatorFactory();
         break;

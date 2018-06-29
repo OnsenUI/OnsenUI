@@ -99,7 +99,7 @@ const parseObject = (string) => {
   const object = {};
   let readingKey = true, key, previousToken, token;
 
-  while(string.length > 0) {
+  while (string.length > 0) {
     previousToken = token;
     token = nextToken(string);
     string = string.slice(token.length, string.length).trim();
@@ -135,7 +135,7 @@ const parseArray = (string) => {
   const array = [];
   let previousToken, token;
 
-  while(string.length > 0) {
+  while (string.length > 0) {
     previousToken = token;
     token = nextToken(string);
     string = string.slice(token.length, string.length).trim();

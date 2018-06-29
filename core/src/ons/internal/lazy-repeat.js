@@ -305,7 +305,7 @@ export class LazyRepeatProvider {
     const start = forceFirstIndex || Math.max(0, this._calculateStartIndex(offset) - 30); // Recalculate for 0 or undefined
     let i = start;
 
-    for(let top = this._topPositions[i]; i < count && top < limit; i++) {
+    for (let top = this._topPositions[i]; i < count && top < limit; i++) {
       if (i >= this._topPositions.length) { // perf optimization
         this._topPositions.length += 100;
       }

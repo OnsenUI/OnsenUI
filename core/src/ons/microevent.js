@@ -47,7 +47,7 @@ MicroEvent.prototype  = {
     if (event in this._events === false) {
       return;
     }
-    for(var i = 0; i < this._events[event].length; i++){
+    for (var i = 0; i < this._events[event].length; i++){
       this._events[event][i].apply(this, Array.prototype.slice.call(arguments, 1));
     }
   }
@@ -62,7 +62,7 @@ MicroEvent.prototype  = {
 */
 MicroEvent.mixin  = function(destObject){
   var props = ['on', 'once', 'off', 'emit'];
-  for(var i = 0; i < props.length; i ++){
+  for (var i = 0; i < props.length; i ++){
     if (typeof destObject === 'function') {
       destObject.prototype[props[i]]  = MicroEvent.prototype[props[i]];
     } else {

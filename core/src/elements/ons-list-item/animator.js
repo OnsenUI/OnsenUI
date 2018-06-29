@@ -71,7 +71,7 @@ export class SlideListItemAnimator extends ListItemAnimator {
         callback && callback();
       });
 
-    if(listItem.expandChevron) {
+    if (listItem.expandChevron) {
       animit(listItem.expandChevron, { duration: this.duration, property: 'transform' })
         .default(...(shouldOpen ? iconOpenTransition : iconOpenTransition.reverse()))
         .play();
