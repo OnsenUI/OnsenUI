@@ -167,7 +167,7 @@ class Platform {
   isIOS7above() {
     if (typeof device === 'object' && !/browser/i.test(device.platform)) {
       return (/iOS/i.test(device.platform) && (parseInt(device.version.split('.')[0]) >= 7));
-    } else if(/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+    } else if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
       const ver = (navigator.userAgent.match(/\b[0-9]+_[0-9]+(?:_[0-9]+)?\b/) || [''])[0].replace(/_/g, '.');
       return (parseInt(ver.split('.')[0]) >= 7);
     }
