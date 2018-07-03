@@ -2,7 +2,7 @@
 CHANGELOG
 ====
 
-dev
+2.10.2
 ---
 
  ### Bug Fixes
