@@ -24,7 +24,7 @@ import {
  *       </ons-toolbar>
  *       <div class="content">
  *         <ons-pull-hook height="64px" threshold-height="128px" 
- *           (changestate)="onChangeState($event)" (action)="onAction($event)">
+ *           (pull)="onPull($event)" (changestate)="onChangeState($event)" (action)="onAction($event)">
  *           {{message}}
  *         </ons-pull-hook>
  *       </div>
@@ -53,6 +53,11 @@ import {
  *           break;
  *       }
  *     }
+ * 
+ *     onPull($event) {
+ *       console.log($event.ratio);
+ *     }
+ * 
  *   }
  */
 @Directive({
@@ -66,22 +71,36 @@ export class OnsPullHook implements OnDestroy {
    * @param {Object} $event
    * @param {Function} $event.done
    * @desc
-   *   [en]Action to trigger.[/en]
+   *   [en]Triggers when the page is pulled down.[/en]
    *   [ja]`ons-pull-hook`要素のアクションが必要なときに呼び出されます。[/ja]
    */
-  @Output('action') action = new EventEmitter();
+  @Output() action = new EventEmitter();
 
   /**
    * @output changestate
    * @param {Object} $event
    * @param {String} $event.state
    * @desc
-   *   [en][/en]
+   *   [en]Triggers when the state is changed.[/en]
    *   [ja]`ons-pull-hook`要素の状態が変わった時に呼び出されます。[/ja]
    */
+
+
+  /**
+   * @output pull
+   * @param {Object} $event
+   * @param {Number} $event.ratio
+   * @param {Object} $event.options
+   * @desc
+   *   [en]Triggers whenever the element is pulled.[/en]
+   *   [ja]`ons-pull-hook`要素がプルされているときに呼び出されます。[/ja]
+   */
+  @Output() pull = new EventEmitter();
+
   constructor(private _elementRef: ElementRef) {
     this._element = _elementRef.nativeElement;
     this._element.onAction = (done: Function) => this.action.emit({done});
+    this._element.onPull = (ratio: number, options: any) => this.pull.emit({ratio, options});
   }
 
   ngOnDestroy() {

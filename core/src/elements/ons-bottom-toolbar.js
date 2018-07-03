@@ -58,12 +58,6 @@ export default class BottomToolbarElement extends BaseElement {
     ModifierUtil.initModifier(this, scheme);
   }
 
-  connectedCallback() {
-    if (util.match(this.parentNode, 'ons-page')) {
-      this.parentNode.classList.add('page-with-bottom-toolbar');
-    }
-  }
-
   static get observedAttributes() {
     return ['modifier', 'class'];
   }

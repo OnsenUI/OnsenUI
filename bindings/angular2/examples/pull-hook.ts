@@ -17,8 +17,11 @@ import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
     </ons-toolbar>
 
     <div class="content">
-      <ons-pull-hook #pullhook height="64px" threshold-height="128px" (changestate)="onChangeState($event)" (action)="onAction($event)">
-        {{message}}
+      <ons-pull-hook #pullhook height="64px" threshold-height="128px" (pull)="onPull($event)" (changestate)="onChangeState($event)" (action)="onAction($event)">
+        <div style="display: flex; justify-content: center; align-items: center;">
+          {{message}}
+          <span style="position: absolute; right: 8px;">Ratio: <span id="ratio">{{ratio | number: '.2'}}</span></span>
+        </div>
       </ons-pull-hook>
 
       <ons-list>
@@ -34,7 +37,10 @@ export class AppComponent implements AfterViewInit {
 
   items: number[] = [1, 2, 3, 4, 5];
 
-  @ViewChild('pullhook') pullhook:any;
+  ratio = 0;
+
+  @ViewChild('pullhook') pullhook: any;
+
   constructor() {
   }
 
@@ -62,6 +68,11 @@ export class AppComponent implements AfterViewInit {
         break;
     }
   }
+
+  onPull($event: any) {
+    this.ratio = $event.ratio;
+  }
+
 }
 
 @NgModule({

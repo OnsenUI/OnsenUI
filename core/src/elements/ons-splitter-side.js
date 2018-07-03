@@ -458,7 +458,7 @@ export default class SplitterSideElement extends BaseElement {
   }
 
   _updateAnimation(animation = this.getAttribute('animation')) {
-    if(this.parentNode) {
+    if (this.parentNode) {
       this._animator && this._animator.deactivate();
       this._animator = this._animatorFactory.newAnimator({animation});
       this._animator.activate(this);

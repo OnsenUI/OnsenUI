@@ -2,12 +2,10 @@
 <p align="center"><a href="https://onsen.io/" target="_blank"><img width="140" src="https://onsenui.github.io/art/logos/onsenui-logo-1.png"></a></p>
 
 <p align="center">
-  <a href="https://gitter.im/OnsenUI/OnsenUI"><img src="https://badges.gitter.im/Join%20Chat.svg" alt="Gitter Chat"></a>
   <a href="https://community.onsen.io/"><img src="https://img.shields.io/badge/forum-onsen--ui-FF412D.svg" alt="Forum"></a>
   <a href="https://github.com/OnsenUI/OnsenUI/blob/master/core/src/onsenui.d.ts"><img src="http://definitelytyped.org/badges/standard.svg" alt="TypeScript definitions"></a>
   <br>
   <a href="https://circleci.com/gh/OnsenUI/OnsenUI"><img src="https://circleci.com/gh/OnsenUI/OnsenUI.svg?style=shield" alt="Circle CI"></a>
-  <a href="https://coveralls.io/github/OnsenUI/OnsenUI?branch=master"><img src="https://coveralls.io/repos/OnsenUI/OnsenUI/badge.svg?branch=master&service=github" alt="Coverage Staus"></a>
   <a href="https://badge.fury.io/js/onsenui"><img src="https://badge.fury.io/js/onsenui.svg" alt="NPM version"></a>
   <a href="https://cdnjs.com/libraries/onsen"><img src="https://img.shields.io/cdnjs/v/onsen.svg" alt="CDNJS"></a>
 </p>
@@ -109,4 +107,4 @@ Onsen UI is tested to work with the following browsers and mobile OS.
  * Safari
 
 ## Contribution
-We welcome your contribution, no matter how big or small! Please have a look at the [contribution guide](https://github.com/OnsenUI/OnsenUI/blob/master/.github/CONTRIBUTING.md) for details about project structure, development environment, test suite, code style, etc. All the version updates are mentioned in the [changelog](https://github.com/OnsenUI/OnsenUI/blob/master/CHANGELOG.md).
+We welcome your contribution, no matter how big or small! Please have a look at the [contribution guide](https://github.com/OnsenUI/OnsenUI/blob/master/CONTRIBUTING.md) for details about project structure, development environment, test suite, code style, etc. All the version updates are mentioned in the [changelog](https://github.com/OnsenUI/OnsenUI/blob/master/CHANGELOG.md).

@@ -175,7 +175,7 @@ export default class ListItemElement extends BaseElement {
 
     this.classList.add(defaultClassName);
 
-    if(this.hasAttribute('expandable')) {
+    if (this.hasAttribute('expandable')) {
       this.classList.add('list-item--expandable');
     }
 
@@ -234,14 +234,14 @@ export default class ListItemElement extends BaseElement {
         }
       }
 
-      if(!expandableContent) {
+      if (!expandableContent) {
         this.insertBefore(center, right || null);
       }
     }
 
     center.classList.add('center', 'list-item__center');
 
-    if(expandableContent) {
+    if (expandableContent) {
       // create 'top' div
       // this holds everything except the expandable content
       this._top = top || document.createElement('div');
@@ -368,7 +368,7 @@ export default class ListItemElement extends BaseElement {
     this[action]('mouseup', this._onRelease);
     this[action]('mouseout', this._onRelease);
 
-    if(this._top) {
+    if (this._top) {
       this._top[action]('click', this.toggleExpansion);
     }
   }

@@ -8,10 +8,76 @@ import {
   ElementRef,
   Type,
   Input,
+  Output,
+  EventEmitter,
   OnDestroy,
   NgZone
 } from '@angular/core';
 import * as ons from 'onsenui';
+
+/**
+ * @element ons-tabbar
+ * @directive OnsTabbar
+ * @selector ons-tabbar
+ * @description
+ *   [en]Angular directive for `<ons-tabbar>` component.[/en]
+ *   [ja]`<ons-tabbar>`要素のためのディレクティブです。[/ja]
+ * @example
+ *   @Component({
+ *     selector: 'ons-page',
+ *     template: `
+ *       <ons-toolbar>
+ *         <div class="center">Page</div>
+ *       </ons-toolbar>
+ *       <div class="content">...</div>
+ *     `
+ *   })
+ *   class PageComponent {
+ *   }
+ *
+ *   @Component({
+ *     selector: 'app',
+ *     template: `
+ *     <ons-tabbar swipeable (swipe)="onSwipe($event)">
+ *       <div class="tabbar__content"></div>
+ *       <div class="tabbar">
+ *         <ons-tab label="Page1" icon="ion-home" [page]="page" active></ons-tab>
+ *         <ons-tab label="Page2" icon="ion-help" [page]="page"></ons-tab>
+ *         <ons-tab label="Page3" icon="ion-stop" [page]="page"></ons-tab>
+ *       </div>
+ *     </ons-tabbar>
+ *     `
+ *   })
+ *   export class AppComponent {
+ *     page = PageComponent
+ * 
+ *     onSwipe(event) {
+ *       console.log(event);
+ *     }
+ *   }
+ */
+@Directive({
+  selector: 'ons-tabbar'
+})
+export class OnsTabbar {
+  private _element: any;
+
+  /**
+   * @output swipe
+   * @param {Object} $event
+   * @param {number} $event.index
+   * @param {Object} $event.options
+   * @desc
+   *   [en]Triggers when the tabbar is swiped.[/en]
+   *   [ja]`<ons-tabbar>`がスワイプされた時に発火します。[/ja]
+   */
+  @Output('swipe') _swipe = new EventEmitter();
+
+  constructor(private _elementRef: ElementRef) {
+    this._element = _elementRef.nativeElement;
+    this._element.onSwipe = (index: number, options: any) => this._swipe.emit({index, options});
+  }
+}
 
 /**
  * @element ons-tab

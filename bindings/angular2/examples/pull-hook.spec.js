@@ -9,6 +9,17 @@ describe('pull-hook.html', () => {
     expect($('ons-pull-hook').isPresent()).toBeTruthy();
   });
 
+  it('should handle pull event', () => {
+    expect($('#ratio').getText()).toBe('0.00');
+    browser.actions()
+      .mouseMove(element(by.css('.page__content')), {x: 10, y: 60})
+      .mouseDown()
+      .mouseMove({x: 10, y: 70})
+      .perform();
+
+    expect($('#ratio').getText()).not.toBe('0.00');
+  });
+
   it('should load stuff when pulled down', () => {
     expect($('#item-5').isPresent()).toBeFalsy();
     browser.actions()
@@ -21,4 +32,5 @@ describe('pull-hook.html', () => {
     browser.wait(EC.presenceOf($('#item-5')), 5000);
     expect($('#item-5').isPresent()).toBeTruthy();
   });
+
 });

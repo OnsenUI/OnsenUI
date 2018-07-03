@@ -167,7 +167,7 @@ export default class TabElement extends BaseElement {
     }
 
     const button = util.create('button.tabbar__button');
-    while(this.childNodes[0]) {
+    while (this.childNodes[0]) {
       button.appendChild(this.childNodes[0]);
     }
 
