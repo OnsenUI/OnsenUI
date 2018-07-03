@@ -107,4 +107,4 @@ Onsen UI is tested to work with the following browsers and mobile OS.
  * Safari
 
 ## Contribution
-We welcome your contribution, no matter how big or small! Please have a look at the [contribution guide](https://github.com/OnsenUI/OnsenUI/blob/master/.github/CONTRIBUTING.md) for details about project structure, development environment, test suite, code style, etc. All the version updates are mentioned in the [changelog](https://github.com/OnsenUI/OnsenUI/blob/master/CHANGELOG.md).
+We welcome your contribution, no matter how big or small! Please have a look at the [contribution guide](https://github.com/OnsenUI/OnsenUI/blob/master/CONTRIBUTING.md) for details about project structure, development environment, test suite, code style, etc. All the version updates are mentioned in the [changelog](https://github.com/OnsenUI/OnsenUI/blob/master/CHANGELOG.md).
