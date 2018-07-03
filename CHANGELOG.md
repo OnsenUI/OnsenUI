@@ -8,6 +8,11 @@ dev
  ### Bug Fixes
 
  * ons-lazy-repeat: Fix dynamic adding of items ([#2443](https://github.com/OnsenUI/OnsenUI/issues/2443))
+ * ons-toast: Fix padding of Material toast ([#2436](https://github.com/OnsenUI/OnsenUI/issues/2436))
+ * ons-button: Remove dotted border on Firefox ([#2408](https://github.com/OnsenUI/OnsenUI/issues/2408))
+ * css: Fix CSS import paths ([#2336](https://github.com/OnsenUI/OnsenUI/issues/2336), [#2453](https://github.com/OnsenUI/OnsenUI/issues/2453))
+ * ons-input: Prevent zooming of inputs on iOS ([#2400](https://github.com/OnsenUI/OnsenUI/issues/2400)
+ * ons-page: Fix `page-with-bottom-toolbar` not being set in some cases ([#2459](https://github.com/OnsenUI/OnsenUI/issues/2459)
 
 2.10.1
 ---
