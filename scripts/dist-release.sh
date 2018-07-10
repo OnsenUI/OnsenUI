@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 distrepo='OnsenUI-dist'
 
 cd ..
@@ -31,10 +33,8 @@ else
 fi
 echo "** $(tput setaf 2)Finished$(tput setaf 7)!"
 
-echo "* $(tput setaf 3)Generating docs$(tput setaf 7)..."
-node_modules/.bin/gulp build-docs
-node_modules/.bin/rimraf docs/gendocs
-mv build/docs docs/gendocs
+echo "* $(tput setaf 3)Running tests$(tput setaf 7)..."
+node_modules/.bin/gulp test --skip-build
 echo "** $(tput setaf 2)Finished$(tput setaf 7)!"
 
 echo "* $(tput setaf 3)Preparing new release$(tput setaf 7)..."
