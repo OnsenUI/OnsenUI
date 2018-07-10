@@ -9,3 +9,4 @@ module-stats*.html
 .vscode
 /build
 /OnsenUI-dist
+docs/gendocs

@@ -241,13 +241,21 @@ class RouterNavigator extends BasicComponent {
     this.cancelUpdate = true;
   }
 
+  componentDidUpdate() {
+    /* When the component updates we now have the page we're pushing in our routeConfig, so we no longer need to render it specially */
+    this.page = null;
+  }
+
   render() {
     const attrs = Util.getAttrs(this);
 
+    /* Gather pages to render and the animating page in one array so React reuses components. */
+    const pagesToRender = this.props.routeConfig.routeStack.map(route => this.props.renderPage(route));
+    pagesToRender.push(this.page);
+
     return (
       <ons-navigator { ...attrs } ref={(navi) => { this._navi = navi; }}>
-        {this.props.routeConfig.routeStack.map(route => this.props.renderPage(route))}
-        {this.page}
+        {pagesToRender}
       </ons-navigator>
     );
   }

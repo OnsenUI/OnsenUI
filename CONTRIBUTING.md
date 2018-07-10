@@ -164,28 +164,50 @@ The React documentation is built separately and cached because it takes a while 
 
 ## Release Procedure
 
-Before releasing a new version, verify that the tests are passing and that there are no outstanding breaking issues. For major release with fundamental changes all components must be tested on all supported platforms.
+Follow these steps to release a new version of Onsen UI. You will need to have permission to publish to Onsen UI's npm to complete these steps.
 
-The first step is to add increase the version number in `package.json` and commit it. After that a new tag must be added:
+If you are publishing both the Onsen UI core and bindings at the same time, release the core first and then the bindings.
 
-```
-git tag -a 2.3.4
-```
+### Core Release
 
-This tag is important for building the documentation on the website.
+Before starting a release, check the following:
+ - Run the tests and confirm that they are passing (`npm test`, or check [CircleCI](https://circleci.com/gh/OnsenUI/OnsenUI))
+   - For a major release with fundamental changes, all components must be tested on all supported platforms
+ - If there are any new components, ensure they work in the Theme Roller
+ - Check the [Issues](https://github.com/OnsenUI/OnsenUI/issues) and ensure there are no outstanding breaking issues
+ - Check `CHANGELOG.md` and ensure that all the latest fixes and features are listed. Usually they are not because pull requests do not tend to modify the changelog. Compare it to the `git log` and add anything that is missing.
 
-The next step is to run the release script:
+Once you have done the pre-release checks above, follow the steps below to publish the core (which also includes the AngularJS bindings).
+ - Increase the version number
+   - `CHANGELOG.md`: Change `dev` to the new version number
+   - `package.json`: Change `version` to the new version number
+   - Commit and push these changes, with a commit message like: `chore(*): Bump 2.10.2`
+ - Merge `master` into `production`, and push
+   - `git checkout production && git merge master && git push`
+ - Tag production with the version number, and push
+   - e.g. `git tag 2.10.2 && git push --tags`
+ - Run the release script
+   - `cd scripts && ./dist-release.sh`
+   - This script builds Onsen UI to get it ready for release, which involves pulling the `OnsenUI-dist` repo. Once the script has finished, the built files, ready for release, will be located in the `OnsenUI-dist` folder. The `OnsenUI-dist` repository will also have been automatically tagged with the new version and pushed.
+ - Publish to npm. This will also cause the Bower package to be updated.
+   - `cd ../OnsenUI-dist && npm publish`
 
-```
-cd scripts
-sh dist-release.sh
-```
+Finally, on GitHub, create new releases for `OnsenUI` and `OnsenUI-dist`.
+ - On the New Release pages (linked below), _tag version_ and _Release title_ should both be the version number (e.g. `2.10.2`). Under _Describe this release_, copy the section for this release from `CHANGELOG.md`. Click _Publish Release_.
+ - OnsenUI: https://github.com/OnsenUI/OnsenUI/releases/new
+ - OnsenUI-dist: https://github.com/OnsenUI/OnsenUI-dist/releases/new
 
-This will build Onsen UI and put the files in the `OnsenUI-dist` directory.
+That's it! Your new Onsen UI version is released. :tada:
 
-The last step is to release the package on NPM. From the root of the repository do the following:
+### Releasing New Versions of Bindings
+Releasing new versions of bindings is relatively straightforward. These instructions are for the Vue, React and Angular 2+ bindings. Remember that the AngularJS bindings are bundled with the core.
 
-```
-cd OnsenUI-dist;
-npm publish
-```
+ - Ensure the tests are passing and there are no outstanding breaking issues
+ - Update the binding's `package.json`
+   - Change `version` to the new version of the binding
+   - If `onsenui` is listed in `dependencies` or `peerDependencies`, change its version to the latest available
+   - Commit and push these changes, with a commit message like: `chore(vue): Bump 2.6.0`
+ - Publish to npm. The bindings' `package.json` files contain `prepublish` commands, which will automatically build the bindings before publishing.
+   - Inside the binding's root directory, run `npm publish`
+
+That's it! Your new binding version is released. :tada:
