@@ -181,7 +181,7 @@ export default class BaseDialogElement extends BaseElement {
   }
 
   disconnectedCallback() {
-    if(this._backButtonHandler) {
+    if (this._backButtonHandler) {
       this._backButtonHandler.destroy();
       this._backButtonHandler = null;
     }
