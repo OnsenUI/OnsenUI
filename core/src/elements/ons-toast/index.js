@@ -83,7 +83,7 @@ export default class ToastElement extends BaseDialogElement {
   constructor() {
     super();
 
-    this._defaultDBB = e => e.callParentHandler();
+    this._defaultDBB = null;
     contentReady(this, () => this._compile());
   }
 
