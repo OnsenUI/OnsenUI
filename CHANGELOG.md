@@ -5,6 +5,10 @@ CHANGELOG
 dev
 ---
 
+ ### New Features
+
+ * ons.platform: Can choose to ignore selected platform when checking what platform is e.g. `ons.platform.isAndroid`. ([#2475](https://github.com/OnsenUI/OnsenUI/issues/2475)).
+
  ### Bug Fixes
 
  * ons-toast: Fix app closing when toast is shown and back button is pressed ([#2388](https://github.com/OnsenUI/OnsenUI/issues/2388))

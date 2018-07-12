@@ -138,14 +138,17 @@ class Platform {
   //----------------
   /**
    * @method isIOS
-   * @signature isIOS()
+   * @signature isIOS([ignoreSelectedPlatform])
+   * @param {Boolean} ignoreSelectedPlatform
+   *   [en]If true, selected platform is ignored and the actual platform is returned.[/en]
+   *   [ja][/ja]
    * @description
-   *   [en]Returns whether the OS is iOS.[/en]
+   *   [en]Returns whether the OS is iOS. By default does not ignore selected platform.[/en]
    *   [ja]iOS上で実行されているかどうかを返します。[/ja]
    * @return {Boolean}
    */
-  isIOS() {
-    if (this._getSelectedPlatform()) {
+  isIOS(ignoreSelectedPlatform = false) {
+    if (!ignoreSelectedPlatform && this._getSelectedPlatform()) {
       return this._getSelectedPlatform() === 'ios';
     }
 
@@ -249,14 +252,17 @@ class Platform {
   //----------------
   /**
    * @method isAndroid
-   * @signature isAndroid()
+   * @signature isAndroid([ignoreSelectedPlatform])
+   * @param {Boolean} ignoreSelectedPlatform
+   *   [en]If true, selected platform is ignored and the actual platform is returned.[/en]
+   *   [ja][/ja]
    * @description
-   *   [en]Returns whether the OS is Android.[/en]
+   *   [en]Returns whether the OS is Android. By default does not ignore selected platform.[/en]
    *   [ja]Android上で実行されているかどうかを返します。[/ja]
    * @return {Boolean}
    */
-  isAndroid() {
-    if (this._getSelectedPlatform()) {
+  isAndroid(ignoreSelectedPlatform = false) {
+    if (!ignoreSelectedPlatform && this._getSelectedPlatform()) {
       return this._getSelectedPlatform() === 'android';
     }
 
@@ -271,10 +277,18 @@ class Platform {
   // Other devices
   //----------------
   /**
+   * @method isWP
+   * @signature isWP([ignoreSelectedPlatform])
+   * @param {Boolean} ignoreSelectedPlatform
+   *   [en]If true, selected platform is ignored and the actual platform is returned.[/en]
+   *   [ja][/ja]
+   * @description
+   *   [en]Returns whether the OS is Windows phone. By default does not ignore selected platform.[/en]
+   *   [ja][/ja]
    * @return {Boolean}
    */
-  isWP() {
-    if (this._getSelectedPlatform()) {
+  isWP(ignoreSelectedPlatform = false) {
+    if (!ignoreSelectedPlatform && this._getSelectedPlatform()) {
       return this._getSelectedPlatform() === 'wp';
     }
 
@@ -287,14 +301,17 @@ class Platform {
 
   /**
    * @method isBlackBerry
-   * @signature isBlackBerry()
+   * @signature isBlackBerry([ignoreSelectedPlatform])
+   * @param {Boolean} ignoreSelectedPlatform
+   *   [en]If true, selected platform is ignored and the actual platform is returned.[/en]
+   *   [ja][/ja]
    * @description
-   *   [en]Returns whether the device is BlackBerry.[/en]
+   *   [en]Returns whether the device is BlackBerry. By default does not ignore selected platform.[/en]
    *   [ja]BlackBerry上で実行されているかどうかを返します。[/ja]
    * @return {Boolean}
    */
-  isBlackBerry() {
-    if (this._getSelectedPlatform()) {
+  isBlackBerry(ignoreSelectedPlatform = false) {
+    if (!ignoreSelectedPlatform && this._getSelectedPlatform()) {
       return this._getSelectedPlatform() === 'blackberry';
     }
 
@@ -310,14 +327,17 @@ class Platform {
   //----------------
   /**
    * @method isOpera
-   * @signature isOpera()
+   * @signature isOpera([ignoreSelectedPlatform])
+   * @param {Boolean} ignoreSelectedPlatform
+   *   [en]If true, selected platform is ignored and the actual platform is returned.[/en]
+   *   [ja][/ja]
    * @description
-   *   [en]Returns whether the browser is Opera.[/en]
+   *   [en]Returns whether the browser is Opera. By default does not ignore selected platform.[/en]
    *   [ja]Opera上で実行されているかどうかを返します。[/ja]
    * @return {Boolean}
    */
-  isOpera() {
-    if (this._getSelectedPlatform()) {
+  isOpera(ignoreSelectedPlatform = false) {
+    if (!ignoreSelectedPlatform && this._getSelectedPlatform()) {
       return this._getSelectedPlatform() === 'opera';
     }
 
@@ -326,14 +346,17 @@ class Platform {
 
   /**
    * @method isFirefox
-   * @signature isFirefox()
+   * @signature isFirefox([ignoreSelectedPlatform])
+   * @param {Boolean} ignoreSelectedPlatform
+   *   [en]If true, selected platform is ignored and the actual platform is returned.[/en]
+   *   [ja][/ja]
    * @description
-   *   [en]Returns whether the browser is Firefox.[/en]
+   *   [en]Returns whether the browser is Firefox. By default does not ignore selected platform.[/en]
    *   [ja]Firefox上で実行されているかどうかを返します。[/ja]
    * @return {Boolean}
    */
-  isFirefox() {
-    if (this._getSelectedPlatform()) {
+  isFirefox(ignoreSelectedPlatform = false) {
+    if (!ignoreSelectedPlatform && this._getSelectedPlatform()) {
       return this._getSelectedPlatform() === 'firefox';
     }
 
@@ -342,14 +365,17 @@ class Platform {
 
   /**
    * @method isSafari
-   * @signature isSafari()
+   * @signature isSafari([ignoreSelectedPlatform])
+   * @param {Boolean} ignoreSelectedPlatform
+   *   [en]If true, selected platform is ignored and the actual platform is returned.[/en]
+   *   [ja][/ja]
    * @description
-   *   [en]Returns whether the browser is Safari.[/en]
+   *   [en]Returns whether the browser is Safari. By default does not ignore selected platform.[/en]
    *   [ja]Safari上で実行されているかどうかを返します。[/ja]
    * @return {Boolean}
    */
-  isSafari() {
-    if (this._getSelectedPlatform()) {
+  isSafari(ignoreSelectedPlatform = false) {
+    if (!ignoreSelectedPlatform && this._getSelectedPlatform()) {
       return this._getSelectedPlatform() === 'safari';
     }
 
@@ -358,14 +384,17 @@ class Platform {
 
   /**
    * @method isChrome
-   * @signature isChrome()
+   * @signature isChrome([ignoreSelectedPlatform])
+   * @param {Boolean} ignoreSelectedPlatform
+   *   [en]If true, selected platform is ignored and the actual platform is returned.[/en]
+   *   [ja][/ja]
    * @description
-   *   [en]Returns whether the browser is Chrome.[/en]
+   *   [en]Returns whether the browser is Chrome. By default does not ignore selected platform.[/en]
    *   [ja]Chrome上で実行されているかどうかを返します。[/ja]
    * @return {Boolean}
    */
-  isChrome() {
-    if (this._getSelectedPlatform()) {
+  isChrome(ignoreSelectedPlatform = false) {
+    if (!ignoreSelectedPlatform && this._getSelectedPlatform()) {
       return this._getSelectedPlatform() === 'chrome';
     }
 
@@ -374,14 +403,17 @@ class Platform {
 
   /**
    * @method isIE
-   * @signature isIE()
+   * @signature isIE([ignoreSelectedPlatform])
+   * @param {Boolean} ignoreSelectedPlatform
+   *   [en]If true, selected platform is ignored and the actual platform is returned.[/en]
+   *   [ja][/ja]
    * @description
-   *   [en]Returns whether the browser is Internet Explorer.[/en]
+   *   [en]Returns whether the browser is Internet Explorer. By default does not ignore selected platform.[/en]
    *   [ja]Internet Explorer上で実行されているかどうかを返します。[/ja]
    * @return {Boolean}
    */
-  isIE() {
-    if (this._getSelectedPlatform()) {
+  isIE(ignoreSelectedPlatform = false) {
+    if (!ignoreSelectedPlatform && this._getSelectedPlatform()) {
       return this._getSelectedPlatform() === 'ie';
     }
 
@@ -390,14 +422,17 @@ class Platform {
 
   /**
    * @method isEdge
-   * @signature isEdge()
+   * @signature isEdge([ignoreSelectedPlatform])
+   * @param {Boolean} ignoreSelectedPlatform
+   *   [en]If true, selected platform is ignored and the actual platform is returned.[/en]
+   *   [ja][/ja]
    * @description
-   *   [en]Returns whether the browser is Edge.[/en]
+   *   [en]Returns whether the browser is Edge. By default does not ignore selected platform.[/en]
    *   [ja]Edge上で実行されているかどうかを返します。[/ja]
    * @return {Boolean}
    */
-  isEdge() {
-    if (this._getSelectedPlatform()) {
+  isEdge(ignoreSelectedPlatform = false) {
+    if (!ignoreSelectedPlatform && this._getSelectedPlatform()) {
       return this._getSelectedPlatform() === 'edge';
     }
 
