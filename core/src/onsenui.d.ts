@@ -327,6 +327,12 @@ declare namespace ons {
      *
      */
     function isEdge(): boolean;
+
+    /**
+     * @description Returns whether device is Windows phone
+     * @return {Boolean}
+     */
+    function isWP(): boolean;
   }
   /**
    * @description Utility methods for modifier attributes
