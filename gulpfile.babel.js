@@ -299,7 +299,7 @@ gulp.task('unit-test', argv['skip-build'] ? [] : (argv.watch ? ['watch-core'] : 
 
     (async () => {
       const specs = argv.specs || 'core/src/**/*.spec.js'; // you cannot use commas for --specs
-      let browsers = argv.browsers ? argv.browsers.split(',').map(s => s.trim()) : ['local_chrome_headless', 'remote_macos_elcapitan_safari_10'];
+      let browsers = argv.browsers ? argv.browsers.split(',').map(s => s.trim()) : ['local_chrome_headless', 'remote_macos_safari'];
 
       // If the Sauce credentials are not set, remove the remote builds from the queue.
       // This way, we can run the unit test more easily locally, as well as safely for
