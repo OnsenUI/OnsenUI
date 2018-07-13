@@ -429,6 +429,23 @@ declare namespace ons {
     visible: any;
   }
 
+  interface OnsToolbarElement extends HTMLElement {
+    /**
+     * @description Show or hide the toolbar element
+     */
+    setVisibility(visible: boolean): void;
+
+    /**
+     * @description Show the toolbar element
+     */
+    show(): void;
+
+    /**
+     * @description Hide the toolbar element
+     */
+    hide(): void;
+  }
+
   interface OnsToolbarButtonElement extends HTMLElement {
     disabled: any;
   }

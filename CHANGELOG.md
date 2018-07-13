@@ -8,6 +8,7 @@ dev
  ### New Features
 
  * ons.platform: Can choose to ignore selected platform when checking what platform is e.g. `ons.platform.isAndroid`. ([#2475](https://github.com/OnsenUI/OnsenUI/issues/2475)).
+ * ons-toolbar: Add methods to show and hide the toolbar ([#2478](https://github.com/OnsenUI/OnsenUI/issues/2478))
 
  ### Bug Fixes
 
