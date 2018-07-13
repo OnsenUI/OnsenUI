@@ -87,6 +87,10 @@
   @apply(--button);
 }
 
+.button::-moz-focus-inner {
+  outline: 0;
+}
+
 .button:hover {
   @apply(--button--hover);
 }
@@ -101,10 +105,6 @@
 
 .button:disabled, .button[disabled] {
   @apply(--button--disabled);
-}
-
-.button::-moz-focus-inner {
-  outline: 0;
 }
 
 /*~
