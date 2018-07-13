@@ -1,4 +1,5 @@
 import SimpleWrapper from './SimpleWrapper.jsx';
+import ReactDOM from 'react-dom';
 
 import PropTypes from 'prop-types';
 
@@ -33,6 +34,20 @@ class Toolbar extends SimpleWrapper {
   _getDomNodeName() {
     return 'ons-toolbar';
   }
+
+  componentDidMount() {
+    super.componentDidMount();
+
+    if (this.props.visible !== undefined) {
+      ReactDOM.findDOMNode(this).setVisibility(this.props.visible);
+    }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (this.props.visible !== nextProps.visible) {
+      ReactDOM.findDOMNode(this).setVisibility(nextProps.visible);
+    }
+  }
 }
 
 Toolbar.propTypes = {
@@ -45,7 +60,16 @@ Toolbar.propTypes = {
    *  [/en]
    *  [ja][/ja]
    */
-  modifier: PropTypes.string
+  modifier: PropTypes.string,
+
+  /**
+   * @name visible
+   * @type bool
+   * @description
+   *  [en]If true, the toolbar is shown on the screen. Otherwise, the toolbar is not shown.[/en]
+   *  [ja][/ja]
+   */
+  visible: PropTypes.bool
 };
 
 export default Toolbar;
