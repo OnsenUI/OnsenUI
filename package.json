@@ -4,7 +4,7 @@
   "description": "HTML5 Mobile Framework & UI Components",
   "private": false,
   "scripts": {
-    "build": "gulp build",
+    "build": "(cd bindings/angular1 && yarn install) && gulp build",
     "dev": "gulp serve --css --core",
     "test": "gulp test --disable-warnings",
     "test:skip-build": "gulp test --disable-warnings --skip-build"
@@ -72,7 +72,6 @@
     "node": ">= 4.0.0"
   },
   "devDependencies": {
-    "angular": "^1.6.6",
     "babel-core": "^6.26.0",
     "babel-eslint": "^8.0.2",
     "babel-plugin-angularjs-annotate": "^0.8.2",
@@ -91,20 +90,15 @@
     "gulp": "^3.9.1",
     "gulp-autoprefixer": "^4.0.0",
     "gulp-babel": "^7.0.0",
-    "gulp-chmod": "^2.0.0",
     "gulp-clean": "^0.3.1",
     "gulp-concat": "^2.6.1",
-    "gulp-connect": "^5.0.0",
     "gulp-cssmin": "^0.2.0",
-    "gulp-download": "^0.0.1",
     "gulp-hub": "^0.8.0",
     "gulp-if": "^2.0.2",
     "gulp-insert": "^0.5.0",
     "gulp-load-plugins": "^1.5.0",
-    "gulp-protractor": "^2.4.0",
     "gulp-rename": "^1.2.2",
     "gulp-replace": "^0.6.1",
-    "gulp-unzip": "^0.2.0",
     "gulp-util": "^3.0.8",
     "gulp-zip": "^4.0.0",
     "jsonschema": "^1.2.0",
@@ -121,7 +115,6 @@
     "karma-sauce-launcher": "^1.1.0",
     "mkpath": "^1.0.0",
     "mocha": "^4.0.1",
-    "protractor": "^4.0.10",
     "rollup": "^0.51.8",
     "rollup-plugin-babel": "^3.0.2",
     "rollup-plugin-commonjs": "^8.2.1",
@@ -142,6 +135,7 @@
   "dependencies": {
     "@onsenui/custom-elements": "1.0.0",
     "@onsenui/fastclick": "1.1.1",
-    "core-js": "^2.5.1"
+    "core-js": "^2.5.1",
+    "gulp-protractor": "^4.1.0"
   }
 }

@@ -19,7 +19,7 @@ limitations under the License.
 import 'babel-polyfill';
 
 import gulp from 'gulp';
-import path from'path';
+import path from 'path';
 import glob from 'glob';
 import pkg from './package.json';
 import {merge} from 'event-stream';
@@ -27,7 +27,7 @@ import runSequence from 'run-sequence';
 import dateformat from 'dateformat';
 import browserSync from 'browser-sync';
 import os from 'os';
-import {spawn} from 'child_process';
+import {spawn, spawnSync} from 'child_process';
 import fs from 'fs';
 import {argv} from 'yargs';
 import karma from 'karma';
@@ -36,9 +36,11 @@ import chalk from 'chalk';
 import { rollup, watch as rollupWatch } from 'rollup';
 import gulpLoadPlugins from 'gulp-load-plugins';
 import rawCoreRollupConfig from './rollup.config.js';
+import rawAngularRollupConfig from './bindings/angular1/rollup.config.js';
 
 // Configurations
-const rollupConfigs = rawCoreRollupConfig.reduce((r, c) => (r[c.output.name] = c) && r, {})
+const rawRollupConfigs = [].concat(rawCoreRollupConfig, rawAngularRollupConfig);
+const rollupConfigs = rawRollupConfigs.reduce((r, c) => (r[c.output.name] = c) && r, {});
 const babelrc = Object.assign({}, pkg.babel);
 babelrc.babelrc = babelrc.presets[0][1].modules = false;
 babelrc.plugins = [
@@ -86,7 +88,29 @@ const transpileCoreSrc = files => {
 };
 
 gulp.task('core', () => bundle(rollupConfigs.ons));
-gulp.task('angular-bindings', () => bundle(rollupConfigs.angularOns));
+
+// TODO: For 2.11.0, the bindings should no longer be copied. But it may still be
+// useful to keep this message for the foreseeable future. In 2.11.0, this warning
+// will be the only contents of the angular-onsenui.js file in the core.
+const angularCoreWarning = "console.warn('From Onsen UI 2.11.0, the AngularJS binding will no longer be part of the core package. \
+You will need to install the new angularjs-onsenui package. See https://onsen.io/v2/guide/angular1/#migrating-to-angularjs-onsenui-package for more details.');\n\n";
+const copyAngularBindings = () => {
+  const destDir = path.join('build', 'js');
+  if (!fs.existsSync(destDir)) { fs.mkdirSync(destDir) }
+
+  ['.js', '.min.js'].forEach(suffix => {
+    const src = path.join('bindings', 'angular1', 'dist', `angularjs-onsenui${suffix}`);
+    const dest = path.join(destDir, `angular-onsenui${suffix}`);
+
+    const fileContents = angularCoreWarning + fs.readFileSync(src);
+    fs.writeFileSync(dest, fileContents);
+  });
+}
+
+gulp.task('angular-bindings', () => {
+  spawnSync('gulp', ['--gulpfile', path.join('bindings', 'angular1', 'gulpfile.js', 'build')]);
+  copyAngularBindings();
+});
 
 ////////////////////////////////////////
 // watch
@@ -119,12 +143,40 @@ gulp.task('watch-core-esm', () => {
   gulp.watch(coreESMFiles).on('change', changedFile => transpileCoreSrc(changedFile.path));
   return watch(rollupConfigs.onsESM).then(() => transpileCoreSrc(coreESMFiles));
 });
+
 gulp.task('watch-core', ['core-css'], () => {
   gulp.watch(['core/css/*.css'], { debounceDelay: 300 }, ['core-css']);
   return watch(rollupConfigs.ons);
 });
-gulp.task('watch-angular-bindings', () => watch(rollupConfigs.angularOns));
+
+// gulp.task('watch-angular-bindings', () => watch(rollupConfigs.angularOns));
+
+// TODO: Remove this when AngularJS is no longer part of the core
+// The only difference between this task and the one-line `watch-angular-bindings` above
+// is that this copies the Angular files into core. From 2.11.0 we won't need this.
+gulp.task('watch-angular-bindings', () => {
+  rollupWatch(rollupConfigs.angularOns).on('event', event => {
+    switch (event.code) {
+      case 'BUNDLE_START':
+        $.util.log(`Bundling 'angularjs' ...`);
+        break;
+      case 'BUNDLE_END':
+        copyAngularBindings();
+        $.util.log(`Finished 'angularjs' bundle`);
+        break;
+      case 'ERROR':
+        throw new Error('Encountered an error while bundling\n\n', event.error);
+      case 'FATAL':
+        $.util.log($.util.colors.red('Encountered an unrecoverable error\n\n', event.error));
+        process.exit(1);
+        break;
+    }
+  });
+});
+
+
 gulp.task('watch-vue-bindings', () => watch(require('./bindings/vue/rollup.config.js').default.devConfig));
+
 gulp.task('watch-react-bindings', () => watch(require('./bindings/react/rollup.config.js').default.devConfig));
 
 ////////////////////////////////////////
@@ -625,188 +677,4 @@ gulp.task('build-docs', () => {
 ////////////////////////////////////////
 gulp.task('test', ['core-css'], function(done) {
   return runSequence('core-dts-test', 'unit-test', done);
-});
-
-////////////////////////////////////////
-// webdriver-update
-////////////////////////////////////////
-gulp.task('webdriver-update', $.protractor.webdriver_update);
-
-////////////////////////////////////////
-// webdriver-download
-////////////////////////////////////////
-gulp.task('webdriver-download', () => {
-  const platform = os.platform();
-  const destDir = path.join(__dirname, '.selenium');
-  const chromeDriverUrl = (() => {
-    const filePath = platform === 'win32' ?
-      '/2.25/chromedriver_win32.zip' :
-      `/2.25/chromedriver_${platform === 'darwin' ? 'mac' : 'linux'}64.zip`;
-    return `http://chromedriver.storage.googleapis.com${filePath}`;
-  })();
-
-  // Only download once.
-  if (fs.existsSync(destDir + '/chromedriver') || fs.existsSync(destDir + '/chromedriver.exe')) {
-    return gulp.src('');
-  }
-
-  const selenium = $.download('https://selenium-release.storage.googleapis.com/3.0/selenium-server-standalone-3.0.1.jar')
-    .pipe(gulp.dest(destDir));
-
-  const chromedriver = $.download(chromeDriverUrl)
-    .pipe($.unzip())
-    .pipe($.chmod(755))
-    .pipe(gulp.dest(destDir));
-
-  return merge(selenium, chromedriver);
-});
-
-////////////////////////////////////////
-// e2e-test
-////////////////////////////////////////
-gulp.task('e2e-test', function(done) {
-  // `runSequence` causes dependency tasks to be run many times.
-  // To prevent this issue, we have to use gulp 4.x and an appropriate gulpfile which follows 4.x format.
-  runSequence('e2e-test-protractor', 'e2e-test-webdriverio', done);
-});
-
-gulp.task('e2e-test-protractor', ['webdriver-download', 'core-css'], function(){
-  const port = 8081;
-
-  $.connect.server({
-    root: __dirname,
-    port: port
-  });
-
-  const conf = {
-    configFile: './core/test/e2e-protractor/protractor.conf.js',
-    args: [
-      '--baseUrl', 'http://127.0.0.1:' + port,
-      '--seleniumServerJar', path.join(__dirname, '.selenium/selenium-server-standalone-3.0.1.jar'),
-      '--chromeDriver', path.join(__dirname, '.selenium/chromedriver')
-    ]
-  };
-
-  const specs = argv.specs ? argv.specs.split(',').map(s => s.trim()) : ['core/test/e2e-protractor/**/*.js'];
-
-  return gulp.src(specs)
-    .pipe($.protractor.protractor(conf))
-    .on('error', function(e) {
-      console.error(e);
-      $.connect.serverClose();
-    })
-    .on('end', function() {
-      $.connect.serverClose();
-    });
-});
-
-gulp.task('e2e-test-webdriverio', ['webdriver-download', 'core-css'], function(done){
-  // Usage:
-  //     # run all WebdriverIO E2E tests
-  //     gulp e2e-test-webdriverio
-  //
-  //     # run only specified WebdriverIO E2E tests
-  //     gulp e2e-test-webdriverio --specs core/test/e2e-webdriverio/dummy/index.spec.js
-  //     gulp e2e-test-webdriverio --specs "core/test/**/index.spec.js"
-  //     gulp e2e-test-webdriverio --specs "core/test/**/*.spec.js"
-  //
-  //     # run WebdriverIO E2E tests in a particular browser (possible values are defined in standalone Selenium Server)
-  //     gulp e2e-test-webdriverio --browsers chrome # default
-  //     gulp e2e-test-webdriverio --browsers chrome,safari # you can use commas
-
-  // Structure of this E2E testing environment:
-  //     this gulpfile
-  //      ↓ <launch>
-  //     WebdriverIO
-  //      ↓ <access>
-  //     standalone Selenium Server (<- launched by this gulpfile)
-  //      ↓ <launch + access>
-  //     SafariDriver
-  //      ↓ <launch + access>
-  //     Safari
-  //      ↓ <access>
-  //     local HTTP server (<- launched by this gulpfile)
-
-  const port = 8081;
-
-  // launch local HTTP server for E2E testing
-  $.util.log($.util.colors.blue(`Launching local HTTP server for E2E testing...`));
-  $.connect.server({
-    root: __dirname,
-    port: port
-  });
-
-  // launch standalone Selenium Server
-  $.util.log($.util.colors.blue(`Launching standalone Selenium Server...`));
-  const standaloneSeleniumServer = spawn('java',
-    [
-      '-Dwebdriver.chrome.driver=.selenium/chromedriver',
-      '-jar',
-      '.selenium/selenium-server-standalone-3.0.1.jar'
-    ],
-    {stdio: 'inherit'} // redirect stdio/stdout/stderr to this process
-  );
-
-  (async () => {
-    const specs = argv.specs || 'core/test/e2e-webdriverio/**/*.js'; // you cannot use commas for --specs
-    const browsers = argv.browsers ? argv.browsers.split(',').map(s => s.trim()) : ['chrome'];
-
-    let testsPassed = true; // error flag
-
-    // Separately launch WebdriverIO for each browser
-    try {
-      for (let j = 0 ; j < browsers.length ; j++) {
-        $.util.log($.util.colors.blue(`Start E2E testing on ${browsers[j]}...`));
-
-        // Pass parameters to WebdriverIO config file via `global`
-        global.WDIO_BROWSER = browsers[j];
-        global.WDIO_SPEC_FILES = specs;
-
-        // Launch WebdriverIO and wait until it exits
-        await (async () => {
-          return new Promise((resolve, reject) => {
-            $.util.log($.util.colors.blue(`Launching WebdriverIO for ${browsers[j]}...`));
-            $.util.log($.util.colors.blue(specs));
-            const wdio = new WebdriverIOLauncher('core/test/e2e-webdriverio/wdio.conf.js');
-            wdio.run()
-            .then(
-              function (exitCode) {
-                const exitMessage = `WebdriverIO has exited with ${exitCode}`;
-
-                switch (exitCode) {
-                  case 0: // success
-                    $.util.log($.util.colors.green(exitMessage));
-                    $.util.log($.util.colors.green('Passed E2E tests successfully.'));
-                    break;
-                  default: // error
-                    $.util.log($.util.colors.red(exitMessage));
-                    $.util.log($.util.colors.red('Failed to pass some E2E tests. (Otherwise, the E2E testing itself is broken)'));
-                    testsPassed = false;
-                }
-                resolve();
-              },
-              function (error) {
-                $.util.log($.util.colors.red('Failed to launch WebdriverIO.'));
-                console.error(error.stacktrace);
-                resolve();
-              }
-            );
-          });
-        })();
-      }
-    } finally {
-      global.WDIO_BROWSER = undefined;
-
-      $.connect.serverClose(); // kill local HTTP servers
-      standaloneSeleniumServer.kill(); // kill standalone Selenium server
-    }
-
-    if (testsPassed) {
-      $.util.log($.util.colors.green('Passed E2E tests on all browsers!'));
-      done();
-    } else {
-      $.util.log($.util.colors.red('Failed to pass E2E tests on some browsers.'));
-      done('e2e-test-webdriverio has failed');
-    }
-  })();
 });
