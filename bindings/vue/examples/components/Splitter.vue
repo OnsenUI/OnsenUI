@@ -7,6 +7,7 @@
         :side="state.side"
         :collapse="state.collapse"
         :width="state.width"
+        :options="{ animation: 'reveal' }"
         @preopen="log('preopen')"
         @postopen="log('postopen')"
         @preclose="log('preclose')"
