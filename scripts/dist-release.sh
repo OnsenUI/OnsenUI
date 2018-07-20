@@ -29,6 +29,7 @@ then
 	node_modules/.bin/gulp dist-no-build
 else
 	yarn install
+	(cd bindings/angular1 && yarn install)
 	node_modules/.bin/gulp dist
 fi
 echo "** $(tput setaf 2)Finished$(tput setaf 7)!"
