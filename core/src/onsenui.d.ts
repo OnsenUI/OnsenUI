@@ -327,6 +327,12 @@ declare namespace ons {
      *
      */
     function isEdge(): boolean;
+
+    /**
+     * @description Returns whether device is Windows phone
+     * @return {Boolean}
+     */
+    function isWP(): boolean;
   }
   /**
    * @description Utility methods for modifier attributes
@@ -421,6 +427,23 @@ declare namespace ons {
     hide(...args: any[]): any;
     onDeviceBackButton: any;
     visible: any;
+  }
+
+  interface OnsToolbarElement extends HTMLElement {
+    /**
+     * @description Show or hide the toolbar element
+     */
+    setVisibility(visible: boolean): void;
+
+    /**
+     * @description Show the toolbar element
+     */
+    show(): void;
+
+    /**
+     * @description Hide the toolbar element
+     */
+    hide(): void;
   }
 
   interface OnsToolbarButtonElement extends HTMLElement {

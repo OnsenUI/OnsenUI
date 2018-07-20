@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="../../../../../build/css/onsen-css-components.css"/>
 
     <script src="../../../../../build/js/onsenui.js"></script>
-    <script src="../../../../../node_modules/angular/angular.js"></script>
+    <script src="../../../node_modules/angular/angular.js"></script>
     <script src="../../../../../build/js/angular-onsenui.js"></script>
     <script>
       ons.bootstrap();
@@ -16,14 +16,14 @@
           console.log('prepush:', event);
           if (!confirm('push?')) {
             event.cancel();
-          } 
+          }
         });
 
         navi.on('prepop', function(event) {
           console.log('prepop:', event);
           if (!confirm('pop?')) {
             event.cancel();
-          } 
+          }
         });
 
         navi.on('postpush', function(event) {
@@ -65,6 +65,6 @@
         <div class="center">Page</div>
       </ons-toolbar>
     </script>
-   
+
   </body>
 </html>

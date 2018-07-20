@@ -49,6 +49,16 @@ describe('ons.platform', () => {
       ons.platform.select('ios');
       expect(ons.platform.isIOS()).to.be.true;
     });
+
+    it('ignores selected platform if ignoreSelectedPlatform is true', () => {
+      ons.platform.select('ios');
+      expect(ons.platform.isIOS(true)).to.be.false;
+    });
+
+    it('does not ignore selected platform if ignoreSelectedPlatform is false', () => {
+      ons.platform.select('ios');
+      expect(ons.platform.isIOS(false)).to.be.true;
+    });
   });
 
   describe('#isAndroid()', () => {
@@ -59,6 +69,16 @@ describe('ons.platform', () => {
     it('supports forcing the platform', () => {
       ons.platform.select('android');
       expect(ons.platform.isAndroid()).to.be.true;
+    });
+
+    it('ignores selected platform if ignoreSelectedPlatform is true', () => {
+      ons.platform.select('android');
+      expect(ons.platform.isAndroid(true)).to.be.false;
+    });
+
+    it('does not ignore selected platform if ignoreSelectedPlatform is false', () => {
+      ons.platform.select('android');
+      expect(ons.platform.isAndroid(false)).to.be.true;
     });
   });
 
@@ -82,6 +102,16 @@ describe('ons.platform', () => {
     it('supports forcing the platform', () => {
       ons.platform.select('wp');
       expect(ons.platform.isWP()).to.be.true;
+    });
+
+    it('ignores selected platform if ignoreSelectedPlatform is true', () => {
+      ons.platform.select('wp');
+      expect(ons.platform.isWP(true)).to.be.false;
+    });
+
+    it('does not ignore selected platform if ignoreSelectedPlatform is false', () => {
+      ons.platform.select('wp');
+      expect(ons.platform.isWP(false)).to.be.true;
     });
   });
 
@@ -112,6 +142,16 @@ describe('ons.platform', () => {
       ons.platform.select('blackberry');
       expect(ons.platform.isBlackBerry()).to.be.true;
     });
+
+    it('ignores selected platform if ignoreSelectedPlatform is true', () => {
+      ons.platform.select('blackberry');
+      expect(ons.platform.isBlackBerry(true)).to.be.false;
+    });
+
+    it('does not ignore selected platform if ignoreSelectedPlatform is false', () => {
+      ons.platform.select('blackberry');
+      expect(ons.platform.isBlackBerry(false)).to.be.true;
+    });
   });
 
   describe('#isOpera()', () => {
@@ -122,6 +162,16 @@ describe('ons.platform', () => {
     it('supports forcing the platform', () => {
       ons.platform.select('opera');
       expect(ons.platform.isOpera()).to.be.true;
+    });
+
+    it('ignores selected platform if ignoreSelectedPlatform is true', () => {
+      ons.platform.select('opera');
+      expect(ons.platform.isOpera(true)).to.be.false;
+    });
+
+    it('does not ignore selected platform if ignoreSelectedPlatform is false', () => {
+      ons.platform.select('opera');
+      expect(ons.platform.isOpera(false)).to.be.true;
     });
   });
 
@@ -134,6 +184,16 @@ describe('ons.platform', () => {
       ons.platform.select('firefox');
       expect(ons.platform.isFirefox()).to.be.true;
     });
+
+    it('ignores selected platform if ignoreSelectedPlatform is true', () => {
+      ons.platform.select('firefox');
+      expect(ons.platform.isFirefox(true)).to.be.false;
+    });
+
+    it('does not ignore selected platform if ignoreSelectedPlatform is false', () => {
+      ons.platform.select('firefox');
+      expect(ons.platform.isFirefox(false)).to.be.true;
+    });
   });
 
   describe('#isSafari()', () => {
@@ -144,6 +204,16 @@ describe('ons.platform', () => {
     it('supports forcing the platform', () => {
       ons.platform.select('safari');
       expect(ons.platform.isSafari()).to.be.true;
+    });
+
+    it('ignores selected platform if ignoreSelectedPlatform is true', () => {
+      ons.platform.select('safari');
+      expect(ons.platform.isSafari(true)).to.be.false;
+    });
+
+    it('does not ignore selected platform if ignoreSelectedPlatform is false', () => {
+      ons.platform.select('safari');
+      expect(ons.platform.isSafari(false)).to.be.true;
     });
   });
 
@@ -157,6 +227,16 @@ describe('ons.platform', () => {
       ons.platform.select('chrome');
       expect(ons.platform.isChrome()).to.be.true;
     });
+
+    it('ignores selected platform if ignoreSelectedPlatform is true', () => {
+      ons.platform.select('chrome');
+      expect(ons.platform.isChrome(true)).to.be.false;
+    });
+
+    it('does not ignore selected platform if ignoreSelectedPlatform is false', () => {
+      ons.platform.select('chrome');
+      expect(ons.platform.isChrome(false)).to.be.true;
+    });
   });
 
   describe('#isIE()', () => {
@@ -167,6 +247,37 @@ describe('ons.platform', () => {
     it('supports forcing the platform', () => {
       ons.platform.select('ie');
       expect(ons.platform.isIE()).to.be.true;
+    });
+
+    it('ignores selected platform if ignoreSelectedPlatform is true', () => {
+      ons.platform.select('ie');
+      expect(ons.platform.isIE(true)).to.be.false;
+    });
+
+    it('does not ignore selected platform if ignoreSelectedPlatform is false', () => {
+      ons.platform.select('ie');
+      expect(ons.platform.isIE(false)).to.be.true;
+    });
+  });
+
+  describe('#isEdge()', () => {
+    it('returns false if platform is not Edge', () => {
+      expect(ons.platform.isEdge()).to.be.false;
+    });
+
+    it('supports forcing the platform', () => {
+      ons.platform.select('edge');
+      expect(ons.platform.isEdge()).to.be.true;
+    });
+
+    it('ignores selected platform if ignoreSelectedPlatform is true', () => {
+      ons.platform.select('edge');
+      expect(ons.platform.isEdge(true)).to.be.false;
+    });
+
+    it('does not ignore selected platform if ignoreSelectedPlatform is false', () => {
+      ons.platform.select('edge');
+      expect(ons.platform.isEdge(false)).to.be.true;
     });
   });
 

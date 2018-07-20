@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="../../../../../build/css/onsen-css-components.css"/>
 
     <script src="../../../../../build/js/onsenui.js"></script>
-    <script src="../../../../../node_modules/angular/angular.js"></script>
+    <script src="../../../node_modules/angular/angular.js"></script>
     <script src="../../../../../build/js/angular-onsenui.js"></script>
     <script>
       ons.bootstrap();
@@ -18,7 +18,7 @@
           message: msg,
           callback: function(idx) {
             if (idx === 0) {
-              alert("OK 2");  
+              alert("OK 2");
             } else {
               alert("NG 2");
             }
@@ -28,7 +28,7 @@
         var text = document.querySelector('.alert-dialog-content').innerHTML;
 
         if (text === msg) {
-          alert("OK 1");  
+          alert("OK 1");
         } else {
           alert("NG 1");
         }

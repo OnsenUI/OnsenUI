@@ -94,7 +94,7 @@ gulp.task('generate-components', () => {
   };
 
   const components = {
-    'toolbar': 'modifier',
+    'toolbar': 'hidable modifier',
     'bottom-toolbar': 'modifier',
     'toolbar-button': 'modifier',
     'alert-dialog-button': 'modifier',

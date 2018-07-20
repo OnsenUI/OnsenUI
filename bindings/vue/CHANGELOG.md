@@ -4,6 +4,10 @@ CHANGELOG
 2.6.1
 ----
 
+ ### Bug Fixes
+
+ * VOnsSplitterSide: `options.animation` can now be used to set the animation. Fixes [#2394](https://github.com/OnsenUI/OnsenUI/issues/2394).
+
  ### Misc
 
  * Depend on OnsenUI ~v2.10.0

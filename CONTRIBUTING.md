@@ -39,10 +39,9 @@ You will need a recent version of [Node.js](https://nodejs.org/) and [Yarn](http
 Clone this repository and run the following commands to build the project:
 
 ```bash
-$ cd css-components
+$ (cd css-components && yarn install)
 $ yarn install
-$ cd ..
-$ yarn install
+$ (cd bindings/angular1 && yarn install) # TODO: Remove after 2.11.0
 $ yarn build
 ```
 
@@ -177,7 +176,7 @@ Before starting a release, check the following:
  - Check the [Issues](https://github.com/OnsenUI/OnsenUI/issues) and ensure there are no outstanding breaking issues
  - Check `CHANGELOG.md` and ensure that all the latest fixes and features are listed. Usually they are not because pull requests do not tend to modify the changelog. Compare it to the `git log` and add anything that is missing.
 
-Once you have done the pre-release checks above, follow the steps below to publish the core (which also includes the AngularJS bindings).
+Once you have done the pre-release checks above, follow the steps below to publish the core.
  - Increase the version number
    - `CHANGELOG.md`: Change `dev` to the new version number
    - `package.json`: Change `version` to the new version number
@@ -200,7 +199,7 @@ Finally, on GitHub, create new releases for `OnsenUI` and `OnsenUI-dist`.
 That's it! Your new Onsen UI version is released. :tada:
 
 ### Releasing New Versions of Bindings
-Releasing new versions of bindings is relatively straightforward. These instructions are for the Vue, React and Angular 2+ bindings. Remember that the AngularJS bindings are bundled with the core.
+Releasing new versions of bindings is relatively straightforward.
 
  - Ensure the tests are passing and there are no outstanding breaking issues
  - Update the binding's `package.json`

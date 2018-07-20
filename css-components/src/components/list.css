@@ -112,7 +112,6 @@
 .list-item {
   position: relative;
   width: 100%;
-  position: relative;
   list-style: none;
   box-sizing: border-box;
   display: flex;
@@ -881,7 +880,7 @@
     </ul>
  */
 
-.list-item--chevron::before,
+.list-item--chevron:before,
 .list-item__expand-chevron {
   border-right: 2px solid var(--list-item-chevron-color);
   border-bottom: 2px solid var(--list-item-chevron-color);
@@ -891,7 +890,7 @@
   z-index: 5;
 }
 
-.list-item--chevron::before {
+.list-item--chevron:before {
   position: absolute;
   content: '';
   right: 16px;

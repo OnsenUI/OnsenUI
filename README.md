@@ -56,7 +56,7 @@ We have a [distribution repository](https://github.com/OnsenUI/OnsenUI-dist/rele
 npm install onsenui
 ```
 
-This downloads Onsen UI main library and AngularJS bindings. For the other bindings, you can install `react-onsenui`, `vue-onsenui` or `ngx-onsenui`.
+This downloads the core Onsen UI library. To install bindings, you can install `react-onsenui`, `vue-onsenui`, `ngx-onsenui` or `angularjs-onsenui`.
 
 ### __Download or request from a CDN__
 You can also take the necessary files from a CDN. Some of the options are [unpkg](https://unpkg.com/onsenui/), [jsDelivr](https://www.jsdelivr.com/package/npm/onsenui) and [cdnjs](https://cdnjs.com/libraries/onsen).

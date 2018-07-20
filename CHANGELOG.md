@@ -2,6 +2,19 @@
 CHANGELOG
 ====
 
+2.10.4
+---
+
+ ### New Features
+
+ * ons.platform: Can choose to ignore selected platform when checking what platform is e.g. `ons.platform.isAndroid`. ([#2475](https://github.com/OnsenUI/OnsenUI/issues/2475)).
+ * ons-toolbar: Add methods to show and hide the toolbar ([#2478](https://github.com/OnsenUI/OnsenUI/issues/2478))
+
+ ### Bug Fixes
+
+ * css: Fix button style for Firefox. ([#2469](https://github.com/OnsenUI/OnsenUI/issues/2469)).
+ * ons-toast: Fix app closing when toast is shown and back button is pressed ([#2388](https://github.com/OnsenUI/OnsenUI/issues/2388))
+
 2.10.3
 ---
 

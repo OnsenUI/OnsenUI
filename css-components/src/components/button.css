@@ -50,10 +50,6 @@
     outline: 0;
   }
 
-  --button::-moz-focus-inner {
-    border: 0;
-  }
-
   --button--active: {
     background-color: var(--button-background-color);
     transition: none;
@@ -89,6 +85,10 @@
 
 .button {
   @apply(--button);
+}
+
+.button::-moz-focus-inner {
+  outline: 0;
 }
 
 .button:hover {

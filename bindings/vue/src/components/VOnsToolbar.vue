@@ -7,10 +7,10 @@
 <script>
   /* This file was generated automatically by 'generate-components' task in bindings/vue/gulpfile.babel.js */
   import 'onsenui/esm/elements/ons-toolbar';
-  import { deriveEvents, modifier } from '../mixins';
+  import { deriveEvents, hidable, modifier } from '../mixins';
 
   export default {
     name: 'v-ons-toolbar',
-    mixins: [deriveEvents, modifier]
+    mixins: [deriveEvents, hidable, modifier]
   };
 </script>

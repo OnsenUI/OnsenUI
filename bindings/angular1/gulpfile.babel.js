@@ -1,11 +1,11 @@
-import '../../gulpfile.babel.js'; // inherit tasks from the parent gulpfile
-
 import gulp from 'gulp';
-import path from'path';
+import path from 'path';
 import {merge} from 'event-stream';
 import os from 'os';
 import fs from 'fs';
 import {argv} from 'yargs';
+import { rollup } from 'rollup';
+import rawBundleConfig from './rollup.config.js';
 
 ////////////////////////////////////////
 
@@ -77,3 +77,13 @@ gulp.task('e2e-test', ['webdriver-download'], function() {
       $.connect.serverClose();
     });
 });
+
+gulp.task('clean', () => gulp.src(['dist'], { read: false }).pipe($.clean()));
+
+gulp.task('angularjs-bindings', function() {
+  const config = rawBundleConfig.reduce((r, c) => (r[c.output.name] = c) && r, {});
+
+  return rollup(config.angularOns).then(bundle => bundle.write(config.angularOns.output));
+});
+
+gulp.task('build', ['clean', 'angularjs-bindings']);
