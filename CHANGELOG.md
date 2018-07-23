@@ -2,6 +2,13 @@
 CHANGELOG
 ====
 
+dev
+---
+
+ ### Bug Fixes
+
+ * ons-list-item: Fix expandable list item not working correctly for lists inside expandable content. ([#2485](https://github.com/OnsenUI/OnsenUI/issues/2485)).
+
 2.10.4
 ---
 
