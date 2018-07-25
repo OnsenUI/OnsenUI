@@ -170,95 +170,109 @@ export default class ListItemElement extends BaseElement {
     });
   }
 
+  /**
+   * Compiles the list item.
+   *
+   * Various elements are allowed in the body of a list item:
+   *
+   *  - div.left, div.right, and div.center are allowed as direct children
+   *  - if div.center is not defined, anything that isn't div.left, div.right or div.expandable-content will be put in a div.center
+   *  - if div.center is defined, anything that isn't div.left, div.right or div.expandable-content will be ignored
+   *  - if list item has expandable attribute:
+   *      - div.expandable-content is allowed as a direct child
+   *      - div.top is allowed as direct child
+   *      - if div.top is defined, anything that isn't div.expandable-content should be inside div.top - anything else will be ignored
+   *      - if div.right is not defined, a div.right will be created with a drop-down chevron
+   *
+   * See the tests for examples.
+   */
   _compile() {
     autoStyle.prepare(this);
-
     this.classList.add(defaultClassName);
+
+    let top, expandableContent;
+    let topContent = [];
+    Array.from(this.childNodes).forEach(node => {
+      if (node.nodeType !== Node.ELEMENT_NODE) {
+        topContent.push(node);
+      } else if (node.classList.contains('top')) {
+        top = node;
+      } else if (node.classList.contains('expandable-content')) {
+        expandableContent = node;
+      } else {
+        topContent.push(node);
+      }
+
+      if (node.nodeName !== 'ONS-RIPPLE') {
+        node.remove();
+      }
+    });
+    topContent = top ? Array.from(top.childNodes) : topContent;
+
+    let left, right, center;
+    const centerContent = [];
+    topContent.forEach(node => {
+      if (node.nodeType !== Node.ELEMENT_NODE) {
+        centerContent.push(node);
+      } else if (node.classList.contains('left')) {
+        left = node;
+      } else if (node.classList.contains('right')) {
+        right = node;
+      } else if (node.classList.contains('center')) {
+        center = node;
+      } else {
+        centerContent.push(node);
+      }
+    });
 
     if (this.hasAttribute('expandable')) {
       this.classList.add('list-item--expandable');
-    }
 
-    let left, center, right, top, expandableContent;
-
-    const childEls = util.getAllChildNodes(this);
-
-    for (let i = 0; i < childEls.length; i++) {
-      const el = childEls[i];
-
-      if (el.classList.contains('left')) {
-        el.classList.add('list-item__left');
-        left = el;
+      if (!top) {
+        top = document.createElement('div');
+        top.classList.add('top');
       }
-      else if (el.classList.contains('center')) {
-        center = el;
-      }
-      else if (el.classList.contains('right')) {
-        el.classList.add('list-item__right');
-        right = el;
-      }
-      else if (el.classList.contains('top')) {
-        el.classList.add('list-item__top');
-        top = el;
-      }
-      else if (el.classList.contains('expandable-content')) {
-        el.classList.add('list-item__expandable-content');
-        expandableContent = el;
-      }
-    }
+      top.classList.add('list-item__top');
+      this.appendChild(top);
+      this._top = top;
 
-    if (!right && this.hasAttribute('expandable')) {
-      right = document.createElement('div');
-      right.classList.add('list-item__right', 'right');
+      if (expandableContent) {
+        expandableContent.classList.add('list-item__expandable-content');
+        this.appendChild(expandableContent);
+      }
 
-      // We cannot use a pseudo-element for this chevron, as we cannot animate it using
-      // JS. So, we make a chevron span instead.
-      const chevron = document.createElement('span');
-      chevron.classList.add('list-item__expand-chevron');
-      right.appendChild(chevron);
+      if (!right) {
+        right = document.createElement('div');
+        right.classList.add('list-item__right', 'right');
+
+        // We cannot use a pseudo-element for this chevron, as we cannot animate it using
+        // JS. So, we make a chevron span instead.
+        const chevron = document.createElement('span');
+        chevron.classList.add('list-item__expand-chevron');
+        right.appendChild(chevron);
+      }
+    } else {
+      top = this;
     }
 
     if (!center) {
       center = document.createElement('div');
-
-      if (!left && !right && !expandableContent) {
-        while (this.childNodes[0]) {
-          center.appendChild(this.childNodes[0]);
-        }
-      } else {
-        for (let i = this.childNodes.length - 1; i >= 0; i--) {
-          const el = this.childNodes[i];
-          if (el !== left && el !== right && el !== expandableContent && el.tagName !== 'ONS-RIPPLE') {
-            center.insertBefore(el, center.firstChild);
-          }
-        }
-      }
-
-      if (!expandableContent) {
-        this.insertBefore(center, right || null);
-      }
+      center.classList.add('center');
+      centerContent.forEach(node => center.appendChild(node));
     }
+    center.classList.add('list-item__center');
+    top.appendChild(center);
 
-    center.classList.add('center', 'list-item__center');
-
-    if (expandableContent) {
-      // create 'top' div
-      // this holds everything except the expandable content
-      this._top = top || document.createElement('div');
-      this._top.classList.add('top', 'list-item__top');
-      this.appendChild(this._top);
-
-      this._top.appendChild(center);
-      if (left) {
-        this._top.appendChild(left);
-      }
-      if (right) {
-        this._top.appendChild(right);
-      }
+    if (left) {
+      left.classList.add('list-item__left');
+      top.appendChild(left);
+    }
+    if (right) {
+      right.classList.add('list-item__right');
+      top.appendChild(right);
     }
 
     util.updateRipple(this);
-
     ModifierUtil.initModifier(this, scheme);
   }
 

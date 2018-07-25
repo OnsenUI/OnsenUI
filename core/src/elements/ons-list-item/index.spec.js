@@ -36,6 +36,36 @@ describe('OnsListItemElement', () => {
     expect(listItem.classList.contains('list-item--fuga')).to.be.true;
   });
 
+  it('compiles div.left defined as a direct child', () => {
+    const listItem = ons._util.createElement('<ons-list-item><div class="left"></div></ons-list-item>');
+    const left = listItem.querySelector('.left');
+    expect(left.classList.contains('list-item__left')).to.be.true;
+  });
+
+  it('compiles div.right defined as a direct child', () => {
+    const listItem = ons._util.createElement('<ons-list-item><div class="right"></div></ons-list-item>');
+    const right = listItem.querySelector('.right');
+    expect(right.classList.contains('list-item__right')).to.be.true;
+  });
+
+  it('compiles div.center defined as a direct child', () => {
+    const listItem = ons._util.createElement('<ons-list-item><div class="center"></div></ons-list-item>');
+    const center = listItem.querySelector('.center');
+    expect(center.classList.contains('list-item__center')).to.be.true;
+  });
+
+  it('puts center content in a new div.center if div.center is not already defined', () => {
+    const listItem = ons._util.createElement('<ons-list-item><div id="content"></div></ons-list-item');
+    const centerContent = listItem.querySelector('.center #content');
+    expect(centerContent).to.not.be.null;
+  });
+
+  it('ignores center content defined outside div.center if div.center is defined', () => {
+    const listItem = ons._util.createElement('<ons-list-item><div id="ignored"></div><div class="center"></div></ons-list-item');
+    const ignored = listItem.querySelector('#ignored');
+    expect(ignored).to.be.null;
+  });
+
   describe('attribute expandable', () => {
     beforeEach(done => {
       listItem = ons._util.createElement('<ons-list-item expandable>content<div class="expandable-content">expanded</div></ons-list-item>');
@@ -49,6 +79,17 @@ describe('OnsListItemElement', () => {
 
     it('has top div', () => {
       expect(listItem.querySelector('.top')).to.not.be.null;
+    });
+
+    it('compiles div.top defined as a direct child', () => {
+      listItem = ons._util.createElement('<ons-list-item expandable><div class="top"></div></ons-list-item>');
+      const top = listItem.querySelector('.top');
+      expect(top.classList.contains('list-item__top')).to.be.true;
+    });
+
+    it('compiles div.expandable-content defined as a direct child', () => {
+      const expandableContent = listItem.querySelector('.expandable-content');
+      expect(expandableContent.classList.contains('list-item__expandable-content')).to.be.true;
     });
 
     it('has left div inside top div if left div is defined', () => {
@@ -75,6 +116,12 @@ describe('OnsListItemElement', () => {
       listItem = ons._util.createElement('<ons-list-item expandable>content<div class="expandable-content">expanded</div><div class="right">right</div></ons-list-item>');
       const right = listItem.querySelector('.right');
       expect(right.innerHTML === 'right').to.be.true;
+    });
+
+    it('ignores top-level content defined outside top div if top div is defined', () => {
+      listItem = ons._util.createElement('<ons-list-item expandable><div id="ignored"></div><div class="expandable-content">expanded</div><div class="top">top</div></ons-list-item>');
+      const ignored = listItem.querySelector('#ignored');
+      expect(ignored).to.be.null;
     });
   });
 
