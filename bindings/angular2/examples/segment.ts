@@ -23,7 +23,7 @@ export class Page3Component {
 
   logIndexes() {
     console.log('active button index', this.inj.get(AppComponent)._segment.nativeElement.getActiveButtonIndex());
-    console.log('active button index', this.inj.get(AppComponent)._tabbar.nativeElement.getActiveTabIndex());
+    console.log('active tab index', this.inj.get(AppComponent)._tabbar.nativeElement.getActiveTabIndex());
   }
 }
 
@@ -42,7 +42,7 @@ export class Page2Component {
 
   logIndexes() {
     console.log('active button index', this.inj.get(AppComponent)._segment.nativeElement.getActiveButtonIndex());
-    console.log('active button index', this.inj.get(AppComponent)._tabbar.nativeElement.getActiveTabIndex());
+    console.log('active tab index', this.inj.get(AppComponent)._tabbar.nativeElement.getActiveTabIndex());
   }
 }
 
@@ -71,7 +71,7 @@ export class Page1Component {
 
   logIndexes() {
     console.log('active button index', this.inj.get(AppComponent)._segment.nativeElement.getActiveButtonIndex());
-    console.log('active button index', this.inj.get(AppComponent)._tabbar.nativeElement.getActiveTabIndex());
+    console.log('active tab index', this.inj.get(AppComponent)._tabbar.nativeElement.getActiveTabIndex());
   }
 }
 
@@ -81,7 +81,7 @@ export class Page1Component {
     <ons-page>
       <ons-toolbar>
         <div class="center">
-          <ons-segment #segment id="segment" tabbar-id="tabbar" style="width: 280px; margin-top: 8px;">
+          <ons-segment #segment style="width: 280px; margin-top: 8px;" [tabbar]="tabbar" (postchange)="onPostChange($event)">
             <button>Page 1</button>
             <button>Page 2</button>
             <button>Page 3</button>
@@ -89,14 +89,7 @@ export class Page1Component {
         </div>
       </ons-toolbar>
 
-      <!-- Comment <ons-tabbar> out to test this one -->
-      <ons-segment active-index="1" style="width: 280px; margin: 10px 20px;">
-        <button>Label 1</button>
-        <button>Label 2</button>
-        <button>Label 3</button>
-      </ons-segment>
-
-      <ons-tabbar #tabbar id="tabbar">
+      <ons-tabbar #tabbar>
         <ons-tab [page]="page1" active></ons-tab>
         <ons-tab [page]="page2"></ons-tab>
         <ons-tab [page]="page3"></ons-tab>
@@ -111,10 +104,10 @@ export class AppComponent {
   page2 = Page2Component;
   page3 = Page3Component;
 
-  constructor() {
-    document.addEventListener('postchange', function (event) {
-      console.log('postchange event', event);
-    });
+  constructor() {}
+
+  onPostChange(event: any) {
+    console.log('postchange event', event);
   }
 }
 
