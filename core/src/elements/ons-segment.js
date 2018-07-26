@@ -156,8 +156,8 @@ export default class SegmentElement extends BaseElement {
   }
 
   connectedCallback() {
-    if (this.hasAttribute('tabbar-id')) {
-      contentReady(this, () => {
+    contentReady(this, () => {
+      if (this.hasAttribute('tabbar-id')) {
         const page = util.findParent(this, 'ons-page');
         this._tabbar = page && page.querySelector('#' + this.getAttribute('tabbar-id'));
         if (!this._tabbar || this._tabbar.tagName !== 'ONS-TABBAR') {
@@ -168,8 +168,8 @@ export default class SegmentElement extends BaseElement {
         setImmediate(() => this._setChecked(this._tabbar.getActiveTabIndex()));
 
         this._tabbar.addEventListener('prechange', this._onTabbarPreChange);
-      });
-    }
+      }
+    });
 
     this.addEventListener('change', this._onChange);
   }
