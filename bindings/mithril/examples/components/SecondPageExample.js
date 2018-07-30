@@ -1,9 +1,17 @@
 import m from 'mithril';
 import {Navigator, Page} from 'mithril-onsenui'
+import MyNavigatorController from './MyNavigatorController';
 
 class SecondPageExample {
 	oninit(vnode) {
 		this.vnode = vnode;
+		this.PageExample = vnode.attrs.PageExample;
+	}
+	resetPageExample (){
+		MyNavigatorController.resetPage([this.vnode.attrs.PageExample, {}, '']);
+	}
+	resetPagePopExample (){
+		MyNavigatorController.resetPage([this.vnode.attrs.PageExample, {}, ''], {pop: true});
 	}
 	view(vnode) {
 		return m(Page, [
@@ -17,7 +25,10 @@ class SecondPageExample {
 				)
 			]),
 			m('p', {style: 'text-align: center'},
-				m('div', 'WHOOPEE')
+				m('ons-button', {onclick: this.resetPageExample.bind(this)}, 'Reset page!')
+			),
+			m('p', {style: 'text-align: center'},
+				m('ons-button', {onclick: this.resetPagePopExample.bind(this)}, 'Reset page pop!')
 			)
 		]);
 	}

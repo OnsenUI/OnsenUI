@@ -32,6 +32,7 @@ class Examples {
 		]);
 	}
 }
+
 var pageStack = [
 	[Examples, {navigator: MyNavigatorController}, 'Page 1']
 ];

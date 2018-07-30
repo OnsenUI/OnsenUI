@@ -1,5 +1,6 @@
 import m from 'mithril';
 import {Navigator, Page} from 'mithril-onsenui'
+import MyNavigatorController from './MyNavigatorController';
 import SecondPageExample from './SecondPageExample'
 
 class PageExample {
@@ -8,15 +9,8 @@ class PageExample {
 		this.pushPageExample = this.pushPageExample.bind(this);
 	}
 	pushPageExample (){
-		this.vnode.attrs.navigator.pushPage([SecondPageExample]);
-	}
-	resetPageExample (){
-		console.log('RESET');
-		this.vnode.attrs.navigator.resetPage([SecondPageExample, {}, '']);
-	}
-	replacePageExample (){
-		console.log('RESET');
-		this.vnode.attrs.navigator.resetPage([SecondPageExample, {}, '']);
+		console.log(MyNavigatorController);
+		MyNavigatorController.pushPage([SecondPageExample, {PageExample}]);
 	}
 	view(vnode) {
 		return m(Page, [
@@ -30,12 +24,6 @@ class PageExample {
 			]),
 			m('p', {style: 'text-align: center'},
 				m('ons-button', {onclick: this.pushPageExample.bind(this)}, 'Push page!')
-			),
-			m('p', {style: 'text-align: center'},
-				m('ons-button', {onclick: this.resetPageExample.bind(this)}, 'Reset page!')
-			),
-			m('p', {style: 'text-align: center'},
-				m('ons-button', {onclick: this.replacePageExample.bind(this)}, 'Replace page!')
 			)
 		]);
 	}

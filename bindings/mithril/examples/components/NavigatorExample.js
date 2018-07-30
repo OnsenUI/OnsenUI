@@ -1,12 +1,12 @@
 import m from 'mithril';
-import {Navigator, Page, NavigatorController} from 'mithril-onsenui'
+import {Navigator, Page} from 'mithril-onsenui'
+import MyNavigatorController from './MyNavigatorController';
 // import SplitterExample from './SplitterExample';
 import PageExample from './PageExample';
 // import SecondPageExample from './SecondPageExample';
 
-var navigatorController = new NavigatorController();
 var pageStack = [
-	[PageExample, {navigator: navigatorController}, 'Page 1']
+	[PageExample, 'Page 1']
 ];
 
 class NavigatorExample {
@@ -17,7 +17,8 @@ class NavigatorExample {
 		console.log(vnode);
 	}
 	view(vnode) {
-		return m(Navigator, {swipeable: true, pageStack: pageStack, controller: navigatorController});
+		console.log(MyNavigatorController);
+		return m(Navigator, {swipeable: true, pageStack: pageStack, controller: MyNavigatorController});
 	}
 }
 

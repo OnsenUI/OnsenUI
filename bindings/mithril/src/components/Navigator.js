@@ -27,10 +27,11 @@ class Navigator extends BasicComponent {
 
 		// console.log('oniniit');
 		this.pageStack = vnode.attrs.pageStack;
+		this.normalizeStack();
 		this.onDeviceBackButton = vnode.attrs.onDeviceBackButton || this._onDeviceBackButton.bind(this);
 	}
 
-	update(vnode) {
+	onupdate(vnode) {
 		if(vnode.attrs.onDeviceBackButton !== undefined) {
 			vnode.dom.onDeviceBackButton = vnode.attrs.onDeviceBackButton;
 		}
@@ -57,10 +58,49 @@ class Navigator extends BasicComponent {
 		vnode.dom.removeEventListener('postpop', this.vnode.attrs.onPostPop || NOOP);
 	}
 
+	update(pageStack) {
+		this.pageStack = pageStack;
+		this.normalizeStack();
+
+		return new Promise((resolve) => {
+			m.redraw();
+			resolve();
+		})
+	}
+
 	view(vnode) {
 		return m('ons-navigator', Object.assign({}, vnode.attrs, {_onDeviceBackButton: this.onDeviceBackButton}), this.pageStack.map((page) => {
 			return m(...page)
 		}));
+	}
+
+	normalizeStack(){
+		for(let i=0; i<this.pageStack.length; ++i) {
+			this.pageStack[i] = this.normalizePage(this.pageStack[i]);
+		}
+	}
+
+	normalizePage(item) {
+		let attrs = item[1], start = 2, children;
+		if(attrs === null) {
+			attrs = {};
+		} else if(typeof attrs !== 'object' || attrs.tag != null ||Array.isArray(attrs)) {
+			attrs = {};
+			start = 1;
+		}
+
+		if(item.length === start + 1) {
+			children = item[start];
+			if(!Array.isArray(children)) {
+				children = [children]
+			}
+		} else {
+			children = []
+			while(start < arguments.length) {
+				children.push(arguments[start++])
+			}
+		}
+		return [item[0], attrs, children];
 	}
 
 	resetPage(page, options = {}) {
@@ -74,8 +114,8 @@ class Navigator extends BasicComponent {
 
 		const hidePages = () => {
 			for(let i = this.pageStack.length-2; i>=0; --i) {
-				this.pageStack[1].style = this.pageStack[1].style || {};
-				this.pageStack[1].style.display = 'none';
+				this.pageStack[i][1].style = this.pageStack[i][1].style || {};
+				this.pageStack[i][1].style.display = 'none';
 			}
 		};
 
@@ -96,6 +136,7 @@ class Navigator extends BasicComponent {
 
 		const update = () => {
 			this.pageStack = stack;
+			this.normalizeStack()
 			return new Promise((resolve) => {
 				m.redraw();
 				resolve();
@@ -182,6 +223,7 @@ class Navigator extends BasicComponent {
 	}
 
 	replacePage(page, options = {}) {
+		page = this.normalizePage(page);
 		if (this.vnode.dom._isRunning) {
 			return Promise.reject('Navigator is already running animation.');
 		}
@@ -213,6 +255,7 @@ class Navigator extends BasicComponent {
 
 
 	pushPage(page, options = {}) {
+		page = this.normalizePage(page);
 		if (this.vnode.dom._isRunning) {
 			return Promise.reject('Navigator is already running animation.');
 		}
