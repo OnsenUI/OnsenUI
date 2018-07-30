@@ -1,6 +1,13 @@
 CHANGELOG
 ====
 
+dev
+----
+
+ ### Bug Fixes
+
+ * VOnsSelect: selected value is updated properly when options change. Fixes [#2486](https://github.com/OnsenUI/OnsenUI/issues/2486).
+
 2.6.1
 ----
 
