@@ -9,7 +9,7 @@ import Util from './Util.js';
  * @tutorial react/Reference/list
  * @description
  *   [en]
- *     Component for representing a list. It takes an array called datasource and calls renderRow(row, index) for every row.  Furthermore, the header and the footer can be specified with `renderRow` and `renderHeader` respectivly. [/en]
+ *     Component for representing a list. It takes an array called datasource and calls renderRow(row, index) for every row.  Furthermore, the header and the footer can be specified with `renderRow` and `renderHeader` respectively. [/en]
  * [ja][/ja]
  * @example
   <List
