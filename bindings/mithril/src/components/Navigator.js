@@ -181,6 +181,17 @@ class Navigator extends BasicComponent {
 		}
 	}
 
+	replacePage(page, options = {}) {
+		if (this.vnode.dom._isRunning) {
+			return Promise.reject('Navigator is already running animation.');
+		}
+
+		return this.pushPage(page, options).then(() => {
+			this.pageStack.splice(this.pageStack.length - 2, 1);
+			this.vnode.dom.topPage.updateBackButton(this.pageStack.length > 1);
+			m.redraw();
+		});
+	}
 
 	popPage(options = {}) {
 		if (this.vnode.dom._isRunning) {

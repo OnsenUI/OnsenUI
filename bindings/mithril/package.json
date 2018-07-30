@@ -1,6 +1,6 @@
 {
   "name": "mithril-onsenui",
-  "version": "2.2.2",
+  "version": "2.10.4",
   "description": "Mithril bindings for Onsen UI",
   "author": "Onsen UI Team <team@monaca.io>",
   "scripts": {
@@ -15,7 +15,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/OnsenUI/OnsenUI"
+    "url": "https://github.com/FREEZX/OnsenUI"
   },
   "licenses": [
     {
@@ -24,7 +24,7 @@
     }
   ],
   "bugs": {
-    "url": "https://github.com/OnsenUI/OnsenUI/issues"
+    "url": "https://github.com/FREEZX/OnsenUI/issues"
   },
   "keywords": [
     "phonegap",
@@ -44,14 +44,14 @@
     "mithril": "~1.1.0"
   },
   "devDependencies": {
-    "babel-core": "^6.13.2",
+    "babel-core": "^6.26.3",
     "babel-loader": "^6.2.5",
     "babel-plugin-transform-runtime": "^6.23.0",
-    "babel-preset-env": "^1.4.0",
+    "babel-preset-env": "^1.7.0",
     "babel-preset-stage-3": "^6.22.0",
     "babel-runtime": "^6.0.0",
     "cross-env": "^1.0.8",
-    "css-loader": "^0.28.7",
+    "css-loader": "^0.28.11",
     "file-loader": "^0.8.5",
     "fs-extra": "^3.0.1",
     "glob": "^7.1.2",
@@ -60,27 +60,28 @@
     "gulp-unzip": "^0.2.0",
     "gulp-util": "^3.0.7",
     "json-loader": "^0.5.4",
-    "mithril": "~1.1.0",
+    "mithril": "^1.1.6",
     "rollup-plugin-alias": "^1.4.0",
-    "rollup-plugin-babel": "^3.0.3",
-    "rollup-plugin-commonjs": "^8.2.6",
+    "rollup-plugin-babel": "^3.0.7",
+    "rollup-plugin-commonjs": "^8.4.1",
     "rollup-plugin-eslint": "^4.0.0",
     "rollup-plugin-filesize": "^1.5.0",
-    "rollup-plugin-node-globals": "^1.1.0",
-    "rollup-plugin-node-resolve": "^3.0.0",
+    "rollup-plugin-node-globals": "^1.2.1",
+    "rollup-plugin-node-resolve": "^3.3.0",
     "rollup-plugin-progress": "^0.4.0",
     "rollup-plugin-replace": "^2.0.0",
     "rollup-plugin-uglify": "^2.0.1",
     "rollup-plugin-visualizer": "^0.3.1",
     "run-sequence": "^1.2.2",
-    "static-server": "^2.0.3",
-    "style-loader": "^0.19.0",
+    "static-server": "^2.2.1",
+    "style-loader": "^0.19.1",
     "url-loader": "^0.6.2",
-    "vuex": "^3.0.0",
+    "vuex": "^3.0.1",
     "wdio-jasmine-framework": "^0.2.17",
     "wdio-spec-reporter": "0.0.5",
-    "webdriverio": "^4.5.0",
+    "webdriverio": "^4.13.1",
     "webpack": "^1.13.2",
-    "webpack-dev-server": "^1.12.0"
-  }
+    "webpack-dev-server": "^3.1.4"
+  },
+  "dependencies": {}
 }

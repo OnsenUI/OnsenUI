@@ -14,6 +14,10 @@ class PageExample {
 		console.log('RESET');
 		this.vnode.attrs.navigator.resetPage([SecondPageExample, {}, '']);
 	}
+	replacePageExample (){
+		console.log('RESET');
+		this.vnode.attrs.navigator.resetPage([SecondPageExample, {}, '']);
+	}
 	view(vnode) {
 		return m(Page, [
 			m('ons-toolbar', [
@@ -29,6 +33,9 @@ class PageExample {
 			),
 			m('p', {style: 'text-align: center'},
 				m('ons-button', {onclick: this.resetPageExample.bind(this)}, 'Reset page!')
+			),
+			m('p', {style: 'text-align: center'},
+				m('ons-button', {onclick: this.replacePageExample.bind(this)}, 'Replace page!')
 			)
 		]);
 	}

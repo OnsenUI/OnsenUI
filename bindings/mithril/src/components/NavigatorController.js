@@ -8,6 +8,9 @@ class NavigatorController {
 	resetPage(page, options={}) {
 		this.nav.resetPage(page, options);
 	}
+	replacePage(page, options={}) {
+		this.nav.replacePage(page, options);
+	}
 	resetPageStack(pageStack, options={}) {
 		this.nav.resetPageStack(pageStack, options);
 	}
