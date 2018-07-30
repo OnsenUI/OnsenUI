@@ -458,13 +458,15 @@ export default class SplitterSideElement extends BaseElement {
   }
 
   _updateAnimation(animation = this.getAttribute('animation')) {
-    this._animator && this._animator.deactivate();
-    this._animator = this._animatorFactory.newAnimator({animation});
-    this._animator.activate(this);
-    this._animationOpt = {
-      timing: this._animator.duration,
-      duration: this._animator.duration
-    };
+    if (this.parentNode) {
+      this._animator && this._animator.deactivate();
+      this._animator = this._animatorFactory.newAnimator({animation});
+      this._animator.activate(this);
+      this._animationOpt = {
+        timing: this._animator.duration,
+        duration: this._animator.duration
+      };
+    }
   }
 
   _updateAnimationOptions(value = this.getAttribute('animation-options')) {
@@ -605,8 +607,8 @@ export default class SplitterSideElement extends BaseElement {
    */
   toggle(options = {}, force) {
     const shouldOpen = typeof force === 'boolean' ? force : !this.isOpen;
-    const action = shouldOpen ? 'open' : 'close',
-      FINAL_STATE = shouldOpen ? OPEN_STATE : CLOSED_STATE;
+    const action = shouldOpen ? 'open' : 'close';
+    const FINAL_STATE = shouldOpen ? OPEN_STATE : CLOSED_STATE;
 
     if (this._mode === SPLIT_MODE) {
       return Promise.resolve(false);
@@ -626,6 +628,10 @@ export default class SplitterSideElement extends BaseElement {
 
     const unlock = this._lock.lock();
     this._state = CHANGING_STATE;
+
+    if (options.animation) {
+      this._updateAnimation(options.animation);
+    }
 
     return new Promise(resolve => {
       this._animator[action](() => {

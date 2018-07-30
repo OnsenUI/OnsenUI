@@ -138,7 +138,10 @@ notification._createAlertDialog = (...params) => new Promise(resolve => {
 
   el.dialog = document.createElement('ons-alert-dialog');
   el.dialog.innerHTML = `
-    <div class="alert-dialog-mask"></div>
+    <div class="alert-dialog-mask"
+      style="
+        ${options.maskColor ? 'background-color: ' + options.maskColor : ''}
+      "></div>
     <div class="alert-dialog">
       <div class="alert-dialog-container">
         <div class="alert-dialog-title">
@@ -274,6 +277,9 @@ notification._createAlertDialog = (...params) => new Promise(resolve => {
  * @param {String} [options.modifier]
  *   [en]Modifier for the dialog.[/en]
  *   [ja]アラートダイアログのmodifier属性の値を指定します。[/ja]
+ * @param {String} [options.maskColor]
+ *   [en]Color of the background mask. Default is "rgba(0, 0, 0, 0.2)" ("rgba(0, 0, 0, 0.3)" for Material).[/en]
+ *   [ja]背景のマスクの色を指定します。"rgba(0, 0, 0, 0.2)"がデフォルト値です。[/ja]
  * @param {Function} [options.callback]
  *   [en]Function that executes after dialog has been closed.[/en]
  *   [ja]アラートダイアログが閉じられた時に呼び出される関数オブジェクトを指定します。[/ja]

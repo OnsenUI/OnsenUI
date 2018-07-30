@@ -136,6 +136,18 @@ util.hasAnyComponentAsParent = (element) => {
 };
 
 /**
+ * @param {Object} element
+ * @return {Array}
+ */
+util.getAllChildNodes = (element) => {
+  return [element].concat(
+    ...Array.from(element.children).map(childEl => {
+      return util.getAllChildNodes(childEl);
+    })
+  );
+}
+
+/**
  * @param {Element} element
  * @return {boolean}
  */
@@ -256,7 +268,7 @@ util.parseJSONObjectSafely = (jsonString, failSafe = {}) => {
     if (typeof result === 'object' && result !== null) {
       return result;
     }
-  } catch(e) {
+  } catch (e) {
     return failSafe;
   }
   return failSafe;

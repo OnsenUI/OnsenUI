@@ -1,11 +1,11 @@
-import '../../gulpfile.babel.js'; // inherit tasks from the parent gulpfile
-
 import gulp from 'gulp';
-import path from'path';
+import path from 'path';
 import {merge} from 'event-stream';
 import os from 'os';
 import fs from 'fs';
 import {argv} from 'yargs';
+import { rollup } from 'rollup';
+import rawBundleConfig from './rollup.config.js';
 
 ////////////////////////////////////////
 
@@ -24,8 +24,8 @@ gulp.task('webdriver-download', () => {
   const destDir = path.join(__dirname, '.selenium');
   const chromeDriverUrl = (() => {
     const filePath = platform === 'win32' ?
-      '/2.25/chromedriver_win32.zip' :
-      `/2.25/chromedriver_${platform === 'darwin' ? 'mac' : 'linux'}64.zip`;
+      '/2.38/chromedriver_win32.zip' :
+      `/2.38/chromedriver_${platform === 'darwin' ? 'mac' : 'linux'}64.zip`;
     return `http://chromedriver.storage.googleapis.com${filePath}`;
   })();
 
@@ -34,7 +34,7 @@ gulp.task('webdriver-download', () => {
     return gulp.src('');
   }
 
-  const selenium = $.download('https://selenium-release.storage.googleapis.com/3.0/selenium-server-standalone-3.0.1.jar')
+  const selenium = $.download('https://selenium-release.storage.googleapis.com/3.12/selenium-server-standalone-3.12.0.jar')
     .pipe(gulp.dest(destDir));
 
   const chromedriver = $.download(chromeDriverUrl)
@@ -60,7 +60,7 @@ gulp.task('e2e-test', ['webdriver-download'], function() {
     configFile: './test/e2e/protractor.conf.js',
     args: [
       '--baseUrl', 'http://127.0.0.1:' + port,
-      '--seleniumServerJar', path.join(__dirname, '.selenium/selenium-server-standalone-3.0.1.jar'),
+      '--seleniumServerJar', path.join(__dirname, '.selenium/selenium-server-standalone-3.12.0.jar'),
       '--chromeDriver', path.join(__dirname, '.selenium/chromedriver')
     ]
   };
@@ -77,3 +77,13 @@ gulp.task('e2e-test', ['webdriver-download'], function() {
       $.connect.serverClose();
     });
 });
+
+gulp.task('clean', () => gulp.src(['dist'], { read: false }).pipe($.clean()));
+
+gulp.task('angularjs-bindings', function() {
+  const config = rawBundleConfig.reduce((r, c) => (r[c.output.name] = c) && r, {});
+
+  return rollup(config.angularOns).then(bundle => bundle.write(config.angularOns.output));
+});
+
+gulp.task('build', ['clean', 'angularjs-bindings']);

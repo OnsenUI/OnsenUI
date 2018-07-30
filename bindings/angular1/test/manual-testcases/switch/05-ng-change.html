@@ -6,9 +6,9 @@
     <link rel="stylesheet" href="../../../../../build/css/onsen-css-components.css"/>
 
     <script src="../../../../../build/js/onsenui.js"></script>
-    <script src="../../../../../node_modules/angular/angular.js"></script>
+    <script src="../../../node_modules/angular/angular.js"></script>
     <script src="../../../../../build/js/angular-onsenui.js"></script>
-    <script src="../vendor/jquery.js"></script>    
+    <script src="../vendor/jquery.js"></script>
     <script>
       var app = angular.module('myApp', ['onsen']);
 
@@ -18,7 +18,7 @@
         $scope.inc = function() {
           $scope.counter++;
         };
-        
+
         $timeout(function() {
           if ($scope.counter !== 4) {
             alert("NG");

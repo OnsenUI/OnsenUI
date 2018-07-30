@@ -136,6 +136,35 @@ describe('LazyRepeatProvider', () => {
     });
   });
 
+  describe('#refresh()', () => {
+    it('calls _render with forceScrollDown set to true', () => {
+      // _render takes an object as an argument, but chai-spies only compares directly,
+      // so the usual expect to.have.been.called.with can't be used. Instead, the _render
+      // function is mocked and the arguments are checked in there.
+      chai.spy.on(provider, '_render', forceRender => {
+        expect(forceRender.forceScrollDown).to.be.true;
+      });
+
+      provider.refresh();
+    });
+
+    it('calls _render with forceFirstIndex set to correct index', () => {
+      chai.spy.on(provider, '_firstItemRendered', () => 47);
+      chai.spy.on(provider, '_render', forceRender => {
+        expect(forceRender.forceFirstIndex).to.equal(47);
+      });
+
+      provider.refresh();
+    });
+
+    it('should remove all elements', () => {
+      chai.spy.on(provider, '_removeAllElements');
+
+      provider.refresh();
+      expect(provider._removeAllElements).to.have.been.called;
+    });
+  });
+
   describe('#_render()', () => {
     it('removes items that are not in view', () => {
       expect(provider._renderedItems.hasOwnProperty(0)).to.be.true;

@@ -15,7 +15,7 @@
     "camelcase": "error",
     "no-console": ["warn",
       {
-        allow: ["warn", "error"]
+        "allow": ["warn", "error"]
       }
     ],
     "curly": [
@@ -55,6 +55,7 @@
       "beforeColon": false,
       "afterColon": true
     }],
+    "keyword-spacing": "error",
     "no-use-before-define": [
       "error",
       "nofunc"

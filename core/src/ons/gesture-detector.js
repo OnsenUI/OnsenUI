@@ -180,7 +180,7 @@ GestureDetector.gestures = GestureDetector.gestures || {};
  * @private
  */
 function setup(opts) {
-  if(GestureDetector.READY) {
+  if (GestureDetector.READY) {
     return;
   }
 
@@ -257,19 +257,19 @@ Utils = GestureDetector.utils = {
     var i, len;
 
     // native forEach on arrays
-    if('forEach' in obj) {
+    if ('forEach' in obj) {
       obj.forEach(iterator, context);
       // arrays
-    } else if(obj.length !== undefined) {
-      for(i = 0, len = obj.length; i < len; i++) {
-        if(iterator.call(context, obj[i], i, obj) === false) {
+    } else if (obj.length !== undefined) {
+      for (i = 0, len = obj.length; i < len; i++) {
+        if (iterator.call(context, obj[i], i, obj) === false) {
           return;
         }
       }
       // objects
     } else {
-      for(i in obj) {
-        if(obj.hasOwnProperty(i) &&
+      for (i in obj) {
+        if (obj.hasOwnProperty(i) &&
           iterator.call(context, obj[i], i, obj) === false) {
           return;
         }
@@ -295,7 +295,7 @@ Utils = GestureDetector.utils = {
    */
   inArray: function inArray(src, find, deep) {
     if (deep) {
-      for(var i = 0, len = src.length; i < len; i++) { // Array.findIndex
+      for (var i = 0, len = src.length; i < len; i++) { // Array.findIndex
         if (Object.keys(find).every(function(key) { return src[i][key] === find[key]; })) {
           return i;
         }
@@ -303,11 +303,11 @@ Utils = GestureDetector.utils = {
       return -1;
     }
 
-    if(src.indexOf) {
+    if (src.indexOf) {
       return src.indexOf(find);
     } else {
-      for(var i = 0, len = src.length; i < len; i++) {
-        if(src[i] === find) {
+      for (var i = 0, len = src.length; i < len; i++) {
+        if (src[i] === find) {
           return i;
         }
       }
@@ -331,8 +331,8 @@ Utils = GestureDetector.utils = {
    * @return {Boolean} found
    */
   hasParent: function hasParent(node, parent) {
-    while(node) {
-      if(node == parent) {
+    while (node) {
+      if (node == parent) {
         return true;
       }
       node = node.parentNode;
@@ -354,7 +354,7 @@ Utils = GestureDetector.utils = {
         max = Math.max;
 
     // no need to loop when only one touch
-    if(touches.length === 1) {
+    if (touches.length === 1) {
       return {
         pageX: touches[0].pageX,
         pageY: touches[0].pageY,
@@ -415,7 +415,7 @@ Utils = GestureDetector.utils = {
     var x = Math.abs(touch1.clientX - touch2.clientX),
         y = Math.abs(touch1.clientY - touch2.clientY);
 
-    if(x >= y) {
+    if (x >= y) {
       return touch1.clientX - touch2.clientX > 0 ? DIRECTION_LEFT : DIRECTION_RIGHT;
     }
     return touch1.clientY - touch2.clientY > 0 ? DIRECTION_UP : DIRECTION_DOWN;
@@ -443,7 +443,7 @@ Utils = GestureDetector.utils = {
    */
   getScale: function getScale(start, end) {
     // need two fingers...
-    if(start.length >= 2 && end.length >= 2) {
+    if (start.length >= 2 && end.length >= 2) {
       return this.getDistance(end[0], end[1]) / this.getDistance(start[0], start[1]);
     }
     return 1;
@@ -457,7 +457,7 @@ Utils = GestureDetector.utils = {
    */
   getRotation: function getRotation(start, end) {
     // need two fingers
-    if(start.length >= 2 && end.length >= 2) {
+    if (start.length >= 2 && end.length >= 2) {
       return this.getAngle(end[1], end[0]) - this.getAngle(start[1], start[0]);
     }
     return 0;
@@ -484,15 +484,15 @@ Utils = GestureDetector.utils = {
     var prefixes = ['', 'Webkit', 'Moz', 'O', 'ms'];
     prop = Utils.toCamelCase(prop);
 
-    for(var i = 0; i < prefixes.length; i++) {
+    for (var i = 0; i < prefixes.length; i++) {
       var p = prop;
       // prefixes
-      if(prefixes[i]) {
+      if (prefixes[i]) {
         p = prefixes[i] + p.slice(0, 1).toUpperCase() + p.slice(1);
       }
 
       // test the style
-      if(p in element.style) {
+      if (p in element.style) {
         element.style[p] = (toggle === null || toggle) && value || '';
         break;
       }
@@ -509,7 +509,7 @@ Utils = GestureDetector.utils = {
    * @param {Boolean} [toggle=true]
    */
   toggleBehavior: function toggleBehavior(element, props, toggle) {
-    if(!props || !element || !element.style) {
+    if (!props || !element || !element.style) {
       return;
     }
 
@@ -523,11 +523,11 @@ Utils = GestureDetector.utils = {
     };
 
     // also the disable onselectstart
-    if(props.userSelect == 'none') {
+    if (props.userSelect == 'none') {
       element.onselectstart = falseFn;
     }
     // and disable ondragstart
-    if(props.userDrag == 'none') {
+    if (props.userDrag == 'none') {
       element.ondragstart = falseFn;
     }
   },
@@ -632,41 +632,41 @@ Event = GestureDetector.event = {
 
       // if we are in a mouseevent, but there has been a touchevent triggered in this session
       // we want to do nothing. simply break out of the event.
-      if(isMouse && self.preventMouseEvents) {
+      if (isMouse && self.preventMouseEvents) {
         return;
 
         // mousebutton must be down
-      } else if(isMouse && eventType == EVENT_START && ev.button === 0) {
+      } else if (isMouse && eventType == EVENT_START && ev.button === 0) {
         self.preventMouseEvents = false;
         self.shouldDetect = true;
-      } else if(isPointer && eventType == EVENT_START) {
+      } else if (isPointer && eventType == EVENT_START) {
         self.shouldDetect = (ev.buttons === 1 || PointerEvent.matchType(POINTER_TOUCH, ev));
         // just a valid start event, but no mouse
-      } else if(!isMouse && eventType == EVENT_START) {
+      } else if (!isMouse && eventType == EVENT_START) {
         self.preventMouseEvents = true;
         self.shouldDetect = true;
       }
 
       // update the pointer event before entering the detection
-      if(isPointer && eventType != EVENT_END) {
+      if (isPointer && eventType != EVENT_END) {
         PointerEvent.updatePointer(eventType, ev);
       }
 
       // we are in a touch/down state, so allowed detection of gestures
-      if(self.shouldDetect) {
+      if (self.shouldDetect) {
         triggerType = self.doDetect.call(self, ev, eventType, element, handler);
       }
 
       // ...and we are done with the detection
       // so reset everything to start each detection totally fresh
-      if(triggerType == EVENT_END) {
+      if (triggerType == EVENT_END) {
         self.preventMouseEvents = false;
         self.shouldDetect = false;
         PointerEvent.reset();
         // update the pointerevent object after the detection
       }
 
-      if(isPointer && eventType == EVENT_END) {
+      if (isPointer && eventType == EVENT_END) {
         PointerEvent.updatePointer(eventType, ev);
       }
     };
@@ -692,10 +692,10 @@ Event = GestureDetector.event = {
     var changedLength = touchListLength;
 
     // at each touchstart-like event we want also want to trigger a TOUCH event...
-    if(eventType == EVENT_START) {
+    if (eventType == EVENT_START) {
       triggerChange = EVENT_TOUCH;
       // ...the same for a touchend-like event
-    } else if(eventType == EVENT_END) {
+    } else if (eventType == EVENT_END) {
       triggerChange = EVENT_RELEASE;
 
       // keep track of how many touches have been removed
@@ -705,7 +705,7 @@ Event = GestureDetector.event = {
     // after there are still touches on the screen,
     // we just want to trigger a MOVE event. so change the START or END to a MOVE
     // but only after detection has been started, the first time we actually want a START
-    if(changedLength > 0 && this.started) {
+    if (changedLength > 0 && this.started) {
       triggerType = EVENT_MOVE;
     }
 
@@ -717,12 +717,12 @@ Event = GestureDetector.event = {
 
     // trigger the triggerType event before the change (TOUCH, RELEASE) events
     // but the END event should be at last
-    if(eventType != EVENT_END) {
+    if (eventType != EVENT_END) {
       handler.call(Detection, evData);
     }
 
     // trigger a change (TOUCH, RELEASE) event, this means the length of the touches changed
-    if(triggerChange) {
+    if (triggerChange) {
       evData.changedLength = changedLength;
       evData.eventType = triggerChange;
 
@@ -733,7 +733,7 @@ Event = GestureDetector.event = {
     }
 
     // trigger the END event
-    if(triggerType == EVENT_END) {
+    if (triggerType == EVENT_END) {
       handler.call(Detection, evData);
 
       // ...and we are done with the detection
@@ -752,8 +752,8 @@ Event = GestureDetector.event = {
    */
   determineEventTypes: function determineEventTypes() {
     var types;
-    if(GestureDetector.HAS_POINTEREVENTS) {
-      if(window.PointerEvent) {
+    if (GestureDetector.HAS_POINTEREVENTS) {
+      if (window.PointerEvent) {
         types = [
           'pointerdown',
           'pointermove',
@@ -766,7 +766,7 @@ Event = GestureDetector.event = {
           'MSPointerUp MSPointerCancel MSLostPointerCapture'
         ];
       }
-    } else if(GestureDetector.NO_MOUSEEVENTS) {
+    } else if (GestureDetector.NO_MOUSEEVENTS) {
       types = [
         'touchstart',
         'touchmove',
@@ -794,13 +794,13 @@ Event = GestureDetector.event = {
    */
   getTouchList: function getTouchList(ev, eventType) {
     // get the fake pointerEvent touchlist
-    if(GestureDetector.HAS_POINTEREVENTS) {
+    if (GestureDetector.HAS_POINTEREVENTS) {
       return PointerEvent.getTouchList();
     }
 
     // get the touchlist
-    if(ev.touches) {
-      if(eventType == EVENT_MOVE) {
+    if (ev.touches) {
+      if (eventType == EVENT_MOVE) {
         return ev.touches;
       }
 
@@ -809,7 +809,7 @@ Event = GestureDetector.event = {
       var touchList = [];
 
       Utils.each(concat, function(touch) {
-        if(Utils.inArray(identifiers, touch.identifier) === -1) {
+        if (Utils.inArray(identifiers, touch.identifier) === -1) {
           touchList.push(touch);
         }
         identifiers.push(touch.identifier);
@@ -834,9 +834,9 @@ Event = GestureDetector.event = {
   collectEventData: function collectEventData(element, eventType, touches, ev) {
     // find out pointerType
     var pointerType = POINTER_TOUCH;
-    if(Utils.inStr(ev.type, 'mouse') || PointerEvent.matchType(POINTER_MOUSE, ev)) {
+    if (Utils.inStr(ev.type, 'mouse') || PointerEvent.matchType(POINTER_MOUSE, ev)) {
       pointerType = POINTER_MOUSE;
-    } else if(PointerEvent.matchType(POINTER_PEN, ev)) {
+    } else if (PointerEvent.matchType(POINTER_PEN, ev)) {
       pointerType = POINTER_PEN;
     }
 
@@ -912,7 +912,7 @@ PointerEvent = GestureDetector.PointerEvent = {
    * @param {Object} pointerEvent
    */
   updatePointer: function updatePointer(eventType, pointerEvent) {
-    if(eventType == EVENT_END || (eventType != EVENT_END && pointerEvent.buttons !== 1)) {
+    if (eventType == EVENT_END || (eventType != EVENT_END && pointerEvent.buttons !== 1)) {
       delete this.pointers[pointerEvent.pointerId];
     } else {
       pointerEvent.identifier = pointerEvent.pointerId;
@@ -926,7 +926,7 @@ PointerEvent = GestureDetector.PointerEvent = {
    * @param {PointerEvent} ev
    */
   matchType: function matchType(pointerType, ev) {
-    if(!ev.pointerType) {
+    if (!ev.pointerType) {
       return false;
     }
 
@@ -975,7 +975,7 @@ Detection = GestureDetector.detection = {
    */
   startDetect: function startDetect(inst, eventData) {
     // already busy with a GestureDetector.gesture detection on an element
-    if(this.current) {
+    if (this.current) {
       return;
     }
 
@@ -1001,7 +1001,7 @@ Detection = GestureDetector.detection = {
    * @return {any}
    */
   detect: function detect(eventData) {
-    if(!this.current || this.stopped) {
+    if (!this.current || this.stopped) {
       return;
     }
 
@@ -1015,17 +1015,17 @@ Detection = GestureDetector.detection = {
     // call GestureDetector.gesture handlers
     Utils.each(this.gestures, function triggerGesture(gesture) {
       // only when the instance options have enabled this gesture
-      if(!this.stopped && inst.enabled && instOptions[gesture.name]) {
+      if (!this.stopped && inst.enabled && instOptions[gesture.name]) {
         gesture.handler.call(gesture, eventData, inst);
       }
     }, this);
 
     // store as previous event event
-    if(this.current) {
+    if (this.current) {
       this.current.lastEvent = eventData;
     }
 
-    if(eventData.eventType == EVENT_END) {
+    if (eventData.eventType == EVENT_END) {
       this.stopDetect();
     }
 
@@ -1061,7 +1061,7 @@ Detection = GestureDetector.detection = {
         calcEv = cur.lastCalcEvent,
         calcData = cur.lastCalcData;
 
-    if(calcEv && ev.timeStamp - calcEv.timeStamp > GestureDetector.CALCULATE_INTERVAL) {
+    if (calcEv && ev.timeStamp - calcEv.timeStamp > GestureDetector.CALCULATE_INTERVAL) {
       center = calcEv.center;
       deltaTime = ev.timeStamp - calcEv.timeStamp;
       deltaX = ev.center.clientX - calcEv.center.clientX;
@@ -1069,11 +1069,11 @@ Detection = GestureDetector.detection = {
       recalc = true;
     }
 
-    if(ev.eventType == EVENT_TOUCH || ev.eventType == EVENT_RELEASE) {
+    if (ev.eventType == EVENT_TOUCH || ev.eventType == EVENT_RELEASE) {
       cur.futureCalcEvent = ev;
     }
 
-    if(!cur.lastCalcEvent || recalc) {
+    if (!cur.lastCalcEvent || recalc) {
       calcData.velocity = Utils.getVelocity(deltaTime, deltaX, deltaY);
       calcData.angle = Utils.getAngle(center, ev.center);
       calcData.direction = Utils.getDirection(center, ev.center);
@@ -1099,7 +1099,7 @@ Detection = GestureDetector.detection = {
         lastEv = cur.lastEvent || startEv;
 
     // update the start touchlist to calculate the scale/rotation
-    if(ev.eventType == EVENT_TOUCH || ev.eventType == EVENT_RELEASE) {
+    if (ev.eventType == EVENT_TOUCH || ev.eventType == EVENT_RELEASE) {
       startEv.touches = [];
       Utils.each(ev.touches, function(touch) {
         startEv.touches.push({
@@ -1140,7 +1140,7 @@ Detection = GestureDetector.detection = {
   register: function register(gesture) {
     // add an enable gesture options if there is no given
     var options = gesture.defaults || {};
-    if(options[gesture.name] === undefined) {
+    if (options[gesture.name] === undefined) {
       options[gesture.name] = true;
     }
 
@@ -1155,10 +1155,10 @@ Detection = GestureDetector.detection = {
 
     // sort the list by index
     this.gestures.sort(function(a, b) {
-      if(a.index < b.index) {
+      if (a.index < b.index) {
         return -1;
       }
-      if(a.index > b.index) {
+      if (a.index > b.index) {
         return 1;
       }
       return 0;
@@ -1219,7 +1219,7 @@ GestureDetector.Instance = function(element, options) {
   this.options.listenerOptions = listenerOptions;
 
   // add some css to the element to prevent the browser from doing its native behavior
-  if(this.options.behavior) {
+  if (this.options.behavior) {
     Utils.toggleBehavior(this.element, this.options.behavior, true);
   }
 
@@ -1229,9 +1229,9 @@ GestureDetector.Instance = function(element, options) {
    * @type {Object}
    */
   this.eventStartHandler = Event.onTouch(element, EVENT_START, function(ev) {
-    if(self.enabled && ev.eventType == EVENT_START) {
+    if (self.enabled && ev.eventType == EVENT_START) {
       Detection.startDetect(self, ev);
-    } else if(ev.eventType == EVENT_TOUCH) {
+    } else if (ev.eventType == EVENT_TOUCH) {
       Detection.detect(ev);
     }
   }, listenerOptions);
@@ -1285,7 +1285,7 @@ GestureDetector.Instance.prototype = {
 
     Event.off(self.element, gestures, handler, util.extend({}, self.options.listenerOptions, opt), function(type) {
       var index = Utils.inArray(self.eventHandlers, { gesture: type, handler: handler }, true);
-      if(index >= 0) {
+      if (index >= 0) {
         self.eventHandlers.splice(index, 1);
       }
     });
@@ -1301,7 +1301,7 @@ GestureDetector.Instance.prototype = {
    */
   trigger: function triggerEvent(gesture, eventData) {
     // optional
-    if(!eventData) {
+    if (!eventData) {
       eventData = {};
     }
 
@@ -1313,7 +1313,7 @@ GestureDetector.Instance.prototype = {
     // trigger on the target if it is in the instance element,
     // this is for event delegation tricks
     var element = this.element;
-    if(Utils.hasParent(eventData.target, element)) {
+    if (Utils.hasParent(eventData.target, element)) {
       element = eventData.target;
     }
 
@@ -1350,7 +1350,7 @@ GestureDetector.Instance.prototype = {
     Utils.toggleBehavior(this.element, this.options.behavior, false);
 
     // unbind all custom event handlers
-    for(i = -1; (eh = this.eventHandlers[++i]);) { // eslint-disable-line no-cond-assign
+    for (i = -1; (eh = this.eventHandlers[++i]);) { // eslint-disable-line no-cond-assign
       Utils.off(this.element, eh.gesture, eh.handler);
     }
 
@@ -1419,12 +1419,12 @@ GestureDetector.Instance.prototype = {
     var cur = Detection.current;
 
     // max touches
-    if(inst.options.dragMaxTouches > 0 &&
+    if (inst.options.dragMaxTouches > 0 &&
       ev.touches.length > inst.options.dragMaxTouches) {
       return;
     }
 
-    switch(ev.eventType) {
+    switch (ev.eventType) {
     case EVENT_START:
       triggered = false;
       break;
@@ -1432,7 +1432,7 @@ GestureDetector.Instance.prototype = {
     case EVENT_MOVE:
       // when the distance we moved is too small we skip this gesture
       // or we can be already in dragging
-      if(ev.distance < inst.options.dragMinDistance &&
+      if (ev.distance < inst.options.dragMinDistance &&
         cur.name != name) {
         return;
       }
@@ -1440,9 +1440,9 @@ GestureDetector.Instance.prototype = {
       var startCenter = cur.startEvent.center;
 
       // we are dragging!
-      if(cur.name != name) {
+      if (cur.name != name) {
         cur.name = name;
-        if(inst.options.dragDistanceCorrection && ev.distance > 0) {
+        if (inst.options.dragDistanceCorrection && ev.distance > 0) {
           // When a drag is triggered, set the event center to dragMinDistance pixels from the original event center.
           // Without this correction, the dragged distance would jumpstart at dragMinDistance pixels instead of at 0.
           // It might be useful to save the original start point somewhere
@@ -1458,7 +1458,7 @@ GestureDetector.Instance.prototype = {
       }
 
       // lock drag to axis?
-      if(cur.lastEvent.dragLockToAxis ||
+      if (cur.lastEvent.dragLockToAxis ||
         ( inst.options.dragLockToAxis &&
           inst.options.dragLockMinDistance <= ev.distance
         )) {
@@ -1467,8 +1467,8 @@ GestureDetector.Instance.prototype = {
 
         // keep direction on the axis that the drag gesture started on
         var lastDirection = cur.lastEvent.direction;
-        if(ev.dragLockToAxis && lastDirection !== ev.direction) {
-          if(Utils.isVertical(lastDirection)) {
+        if (ev.dragLockToAxis && lastDirection !== ev.direction) {
+          if (Utils.isVertical(lastDirection)) {
             ev.direction = (ev.deltaY < 0) ? DIRECTION_UP : DIRECTION_DOWN;
           } else {
             ev.direction = (ev.deltaX < 0) ? DIRECTION_LEFT : DIRECTION_RIGHT;
@@ -1476,7 +1476,7 @@ GestureDetector.Instance.prototype = {
         }
 
         // first time, trigger dragstart event
-        if(!triggered) {
+        if (!triggered) {
           inst.trigger(name + 'start', ev);
           triggered = true;
         }
@@ -1488,14 +1488,14 @@ GestureDetector.Instance.prototype = {
         var isVertical = Utils.isVertical(ev.direction);
 
         // block the browser events
-        if((inst.options.dragBlockVertical && isVertical) ||
+        if ((inst.options.dragBlockVertical && isVertical) ||
           (inst.options.dragBlockHorizontal && !isVertical)) {
           ev.preventDefault();
         }
         break;
 
       case EVENT_RELEASE:
-        if(triggered && ev.changedLength <= inst.options.dragMaxTouches) {
+        if (triggered && ev.changedLength <= inst.options.dragMaxTouches) {
           inst.trigger(name + 'end', ev);
           triggered = false;
         }
@@ -1624,7 +1624,7 @@ GestureDetector.Instance.prototype = {
       var options = inst.options,
           current = Detection.current;
 
-      switch(ev.eventType) {
+      switch (ev.eventType) {
       case EVENT_START:
         clearTimeout(timer);
 
@@ -1634,14 +1634,14 @@ GestureDetector.Instance.prototype = {
         // set timer and if after the timeout it still is hold,
         // we trigger the hold event
         timer = setTimeout(function() {
-          if(current && current.name == name) {
+          if (current && current.name == name) {
             inst.trigger(name, ev);
           }
         }, options.holdTimeout);
         break;
 
       case EVENT_MOVE:
-        if(ev.distance > options.holdThreshold) {
+        if (ev.distance > options.holdThreshold) {
           clearTimeout(timer);
         }
         break;
@@ -1692,7 +1692,7 @@ GestureDetector.Instance.prototype = {
     name: 'release',
     index: Infinity,
     handler: function releaseGesture(ev, inst) {
-      if(ev.eventType == EVENT_RELEASE) {
+      if (ev.eventType == EVENT_RELEASE) {
         inst.trigger(this.name, ev);
       }
     }
@@ -1770,19 +1770,19 @@ GestureDetector.Instance.prototype = {
     },
 
     handler: function swipeGesture(ev, inst) {
-      if(ev.eventType == EVENT_RELEASE) {
+      if (ev.eventType == EVENT_RELEASE) {
         var touches = ev.touches.length,
             options = inst.options;
 
         // max touches
-        if(touches < options.swipeMinTouches ||
+        if (touches < options.swipeMinTouches ||
           touches > options.swipeMaxTouches) {
           return;
         }
 
         // when the distance we moved is too small we skip this gesture
         // or we can be already in dragging
-        if(ev.velocityX > options.swipeVelocityX ||
+        if (ev.velocityX > options.swipeVelocityX ||
           ev.velocityY > options.swipeVelocityY) {
           // trigger swipe events
           inst.trigger(this.name, ev);
@@ -1823,7 +1823,7 @@ GestureDetector.Instance.prototype = {
           sincePrev,
           didDoubleTap;
 
-      switch(ev.eventType) {
+      switch (ev.eventType) {
       case EVENT_START:
         hasMoved = false;
         break;
@@ -1833,13 +1833,13 @@ GestureDetector.Instance.prototype = {
         break;
 
       case EVENT_END:
-        if(!Utils.inStr(ev.srcEvent.type, 'cancel') && ev.deltaTime < options.tapMaxTime && !hasMoved) {
+        if (!Utils.inStr(ev.srcEvent.type, 'cancel') && ev.deltaTime < options.tapMaxTime && !hasMoved) {
           // previous gesture, for the double tap since these are two different gesture detections
           sincePrev = prev && prev.lastEvent && ev.timeStamp - prev.lastEvent.timeStamp;
           didDoubleTap = false;
 
           // check if double tap
-          if(prev && prev.name == name &&
+          if (prev && prev.name == name &&
             (sincePrev && sincePrev < options.doubleTapInterval) &&
             ev.distance < options.doubleTapDistance) {
             inst.trigger('doubletap', ev);
@@ -1847,7 +1847,7 @@ GestureDetector.Instance.prototype = {
           }
 
           // do a single tap
-          if(!didDoubleTap || options.tapAlways) {
+          if (!didDoubleTap || options.tapAlways) {
             current.name = name;
             inst.trigger(current.name, ev);
           }
@@ -1940,16 +1940,16 @@ GestureDetector.Instance.prototype = {
       preventMouse: false
     },
     handler: function touchGesture(ev, inst) {
-      if(inst.options.preventMouse && ev.pointerType == POINTER_MOUSE) {
+      if (inst.options.preventMouse && ev.pointerType == POINTER_MOUSE) {
         ev.stopDetect();
         return;
       }
 
-      if(inst.options.preventDefault) {
+      if (inst.options.preventDefault) {
         ev.preventDefault();
       }
 
-      if(ev.eventType == EVENT_TOUCH) {
+      if (ev.eventType == EVENT_TOUCH) {
         inst.trigger('touch', ev);
       }
     }
@@ -1998,14 +1998,14 @@ GestureDetector.Instance.prototype = {
     var triggered = false;
 
     function transformGesture(ev, inst) {
-      switch(ev.eventType) {
+      switch (ev.eventType) {
       case EVENT_START:
         triggered = false;
         break;
 
       case EVENT_MOVE:
         // at least multitouch
-        if(ev.touches.length < 2) {
+        if (ev.touches.length < 2) {
           return;
         }
 
@@ -2014,7 +2014,7 @@ GestureDetector.Instance.prototype = {
 
         // when the distance we moved is too small we skip this gesture
         // or we can be already in dragging
-        if(scaleThreshold < inst.options.transformMinScale &&
+        if (scaleThreshold < inst.options.transformMinScale &&
           rotationThreshold < inst.options.transformMinRotation) {
           return;
         }
@@ -2023,7 +2023,7 @@ GestureDetector.Instance.prototype = {
         Detection.current.name = name;
 
         // first time, trigger dragstart event
-        if(!triggered) {
+        if (!triggered) {
           inst.trigger(name + 'start', ev);
           triggered = true;
         }
@@ -2031,19 +2031,19 @@ GestureDetector.Instance.prototype = {
         inst.trigger(name, ev); // basic transform event
 
         // trigger rotate event
-        if(rotationThreshold > inst.options.transformMinRotation) {
+        if (rotationThreshold > inst.options.transformMinRotation) {
           inst.trigger('rotate', ev);
         }
 
         // trigger pinch event
-        if(scaleThreshold > inst.options.transformMinScale) {
+        if (scaleThreshold > inst.options.transformMinScale) {
           inst.trigger('pinch', ev);
           inst.trigger('pinch' + (ev.scale < 1 ? 'in' : 'out'), ev);
         }
         break;
 
       case EVENT_RELEASE:
-        if(triggered && ev.changedLength < 2) {
+        if (triggered && ev.changedLength < 2) {
           inst.trigger(name + 'end', ev);
           triggered = false;
         }

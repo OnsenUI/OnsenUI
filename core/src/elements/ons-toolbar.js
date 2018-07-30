@@ -51,9 +51,9 @@ const scheme = {
  *   [en]
  *     Toolbar component that can be used with navigation.
  *
- *     Left, center and right container can be specified by class names.
+ *     Left, center and right containers can be specified by class names.
  *
- *     This component will automatically displays as a Material Design toolbar when running on Android devices.
+ *     This component will automatically display as a Material Design toolbar when running on Android devices.
  *   [/en]
  *   [ja]ナビゲーションで使用するツールバー用コンポーネントです。クラス名により、左、中央、右のコンテナを指定できます。[/ja]
  * @codepen aHmGL
@@ -133,6 +133,56 @@ export default class ToolbarElement extends BaseElement {
         ModifierUtil.onModifierChanged(last, current, this, scheme);
         break;
     }
+  }
+
+  /**
+   * @method setVisibility
+   * @signature setVisibility(visible)
+   * @param {Boolean} visible
+   *   [en]Set to true to show the toolbar, false to hide it[/en]
+   *   [ja][/ja]
+   * @description
+   *   [en]Shows the toolbar if visible is true, otherwise hides it.[/en]
+   *   [ja][/ja]
+   */
+  setVisibility(visible) {
+    contentReady(this, () => {
+      this.style.display = visible ? '' : 'none';
+
+      if (this.parentNode) {
+        const siblingBackground = util.findChild(this.parentNode, '.page__background');
+        if (siblingBackground) {
+          siblingBackground.style.top = visible ? null : 0;
+        }
+
+        const siblingContent = util.findChild(this.parentNode, '.page__content');
+        if (siblingContent) {
+          siblingContent.style.top = visible ? null : 0;
+        }
+      }
+    });
+  }
+
+  /**
+   * @method show
+   * @signature show()
+   * @description
+   *   [en]Show the toolbar.[/en]
+   *   [ja][/ja]
+   */
+  show() {
+    this.setVisibility(true);
+  }
+
+  /**
+   * @method hide
+   * @signature hide()
+   * @description
+   *   [en]Hide the toolbar.[/en]
+   *   [ja][/ja]
+   */
+  hide() {
+    this.setVisibility(false);
   }
 
   /**

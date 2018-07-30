@@ -2,6 +2,27 @@
 CHANGELOG
 ====
 
+1.11.1
+----
+
+### Misc
+
+  * Depend on OnsenUI ~v2.10.0
+
+1.11.0
+----
+
+### New Features
+
+  * Tabbar: Add `visible` prop to allow showing / hiding
+  * ListItem: Add support for expandable items
+  * Inputs: Add defaultValue props, to enable use as [uncontrolled components](https://reactjs.org/docs/uncontrolled-components.html) (PR [#2309](https://github.com/OnsenUI/OnsenUI/pull/2309))
+
+### Bug Fixes
+
+  * Input: Fix readOnly prop ([#2323](https://github.com/OnsenUI/OnsenUI/issues/2323))
+  * Input: Update class correctly when className is changed ([#2158](https://github.com/OnsenUI/OnsenUI/issues/2158))
+
 1.10.0
 ----
 

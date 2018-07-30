@@ -81,7 +81,7 @@ gulp.task('generate-components', () => {
 </template>
 
 <script>
-  /* This file is generated automatically */
+  /* This file was generated automatically by 'generate-components' task in bindings/vue/gulpfile.babel.js */
   import 'onsenui/esm/elements/${domElement}';
   import { ${mixins} } from '../mixins';
 
@@ -94,7 +94,7 @@ gulp.task('generate-components', () => {
   };
 
   const components = {
-    'toolbar': 'modifier',
+    'toolbar': 'hidable modifier',
     'bottom-toolbar': 'modifier',
     'toolbar-button': 'modifier',
     'alert-dialog-button': 'modifier',
@@ -102,7 +102,6 @@ gulp.task('generate-components', () => {
     'icon': 'modifier',
     'card': 'modifier',
     'list': 'modifier',
-    'list-item': 'modifier',
     'list-title': 'modifier',
     'list-header': 'modifier',
     'ripple': '',
@@ -290,4 +289,3 @@ gulp.task('test', (done) => {
   // WIP
   done();
 });
-

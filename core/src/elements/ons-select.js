@@ -233,7 +233,7 @@ export default class SelectElement extends BaseElement {
           enumerable: true,
           get: () => this._select[key],
           set: ['form', 'type'].indexOf(key) === -1
-            ? value => (this._select[key] = value)
+            ? value => contentReady(this, () => this._select[key] = value)
             : undefined
         });
       });

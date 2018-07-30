@@ -56,6 +56,15 @@ describe('OnsPageElement', () => {
     expect(page.querySelector('#inner').className).not.to.contain('page--wrapper');
   });
 
+  it('should add an extra class if there is a bottom toolbar', () => {
+    const page = ons._util.createElement(`<ons-page>
+      <div class="page__content">...</div>
+      <ons-bottom-toolbar></ons-bottom-toolbar>
+    </ons-page>`);
+
+    expect(page.className).to.contain('page-with-bottom-toolbar');
+  });
+
   describe('#attachedCallback()', () => {
     it('calls \'onInit\' hook', () => {
       const p = new Promise((resolve) => element.onInit = resolve);
@@ -200,6 +209,7 @@ describe('OnsPageElement', () => {
       var spy = chai.spy.on(ons._internal.ModifierUtil, 'onModifierChanged');
       element.attributeChangedCallback('modifier', 'fuga', 'piyo');
       expect(spy).to.have.been.called.once;
+      chai.spy.restore(ons._internal.ModifierUtil, 'onModifierChanged');
     });
 
     it('sets _onInfiniteScroll', () => {

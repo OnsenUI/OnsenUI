@@ -144,22 +144,14 @@ describe('OnsToastElement', () => {
 
 
   describe('#onDeviceBackButton', () => {
-    it('gets the callback', () => {
-      expect(element.onDeviceBackButton).to.be.ok;
-    });
-
-    it('calls parent handler by default', () => {
-      const event = {};
-      const spy = chai.spy.on(event, 'callParentHandler');
-
-      element.onDeviceBackButton._callback(event);
-      expect(spy).to.have.been.called.once;
+    it('does nothing by default', () => {
+      expect(element.onDeviceBackButton).to.be.undefined;
+      expect(element._backButtonHandler).to.be.undefined;
     });
 
     it('overwrites the callback', () => {
-      const spy = chai.spy.on(element._backButtonHandler, 'destroy');
+      expect(element._backButtonHandler).to.be.undefined;
       element.onDeviceBackButton = () => { return; };
-      expect(spy).to.have.been.called.once;
       expect(element._backButtonHandler).to.be.ok;
     });
   });

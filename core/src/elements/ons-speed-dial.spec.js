@@ -114,6 +114,7 @@ describe('OnsSpeedDialElement', () => {
         `);
 
       expect(spy).to.have.been.called.with('up');
+      chai.spy.restore(window.ons.elements.SpeedDial.prototype, '_updateDirection');
     });
 
     it('is called with the value of the direction attribute', () => {
@@ -123,6 +124,7 @@ describe('OnsSpeedDialElement', () => {
         `);
 
       expect(spy).to.have.been.called.with('down');
+      chai.spy.restore(window.ons.elements.SpeedDial.prototype, '_updateDirection');
     });
 
     it('is called when direction changes', () => {

@@ -243,6 +243,7 @@ describe('OnsTabElement', () => {
 
         tabbar.remove();
         template1.remove();
+        chai.spy.restore(tab._pageLoader, 'load');
         done();
       });
 
@@ -271,6 +272,7 @@ describe('OnsTabElement', () => {
         expect(tab.pageElement.id).to.equal('test-page');
 
         tabbar.remove();
+        chai.spy.restore(tab._pageLoader, 'load');
         done();
       });
 

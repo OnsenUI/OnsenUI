@@ -87,6 +87,10 @@
   @apply(--button);
 }
 
+.button::-moz-focus-inner {
+  outline: 0;
+}
+
 .button:hover {
   @apply(--button--hover);
 }

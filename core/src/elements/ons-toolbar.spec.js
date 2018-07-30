@@ -119,4 +119,16 @@ describe('OnsToolbarElement', () => {
       ons.platform.select('');
     });
   });
+
+  describe('setVisibility', () => {
+    it('should hide the toolbar', () => {
+      element.setVisibility(false);
+      expect(element.style.display).to.equal('none');
+    });
+
+    it('should show the toolbar', () => {
+      element.setVisibility(true);
+      expect(element.style.display).not.to.equal('none');
+    });
+  });
 });

@@ -6,7 +6,7 @@ import {
   CUSTOM_ELEMENTS_SCHEMA
 } from '../src/ngx-onsenui';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule, FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app',
@@ -25,6 +25,13 @@ import { FormsModule } from '@angular/forms';
           </option>
         </ons-select>
         <p>Modifier <strong>{{ selectedModifier }}</strong> looks great.</p>
+
+        <ons-select id="animal-select" [formControl]="animalForm">
+          <option *ngFor="let animal of animals; let i = index" [id]="'animal-' + i" [value]="animal">
+            {{ animal }}
+          </option>
+        </ons-select>
+        <p><strong><span id="selected-animal">{{ animalForm.value }}</span></strong> is selected.</p>
       </div>
     </div>
   </ons-page>
@@ -37,12 +44,16 @@ export class AppComponent {
     {value: 'material', label: 'Material'},
     {value: 'underbar', label: 'Underbar'}
   ];
+  animals: string[] = ['Lion', 'Leopard', 'Rhinoceros', 'Elephant', 'Cape buffalo'];
+  animalForm: FormControl;
 
-  constructor() { }
+  constructor() {
+    this.animalForm = new FormControl('Lion');
+  }
 }
 
 @NgModule({
-  imports: [OnsenModule, FormsModule],
+  imports: [OnsenModule, FormsModule, ReactiveFormsModule],
   declarations: [AppComponent],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]

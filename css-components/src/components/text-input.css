@@ -1,6 +1,6 @@
 
 :root {
-  --text-input-font-size: 15px;
+  --text-input-font-size: 16px;
   --text-input-height: 31px;
   --text-input-border-color: var(--input-border-color);
   --material-text-input-font-size: 16px;
@@ -187,4 +187,3 @@
     background-size: 100% 2px, 100% 2px;
   }
 }
-

@@ -60,7 +60,7 @@ describe('OnsRippleElement', () => {
 
   describe('#_compile()', () => {
     it('is called when an element is created', done => {
-      const spy = spyOn('_compile'),
+      const spy = chai.spy.on(ons.elements.Ripple.prototype, '_compile'),
         _ = new ons.elements.Ripple();
 
       contentReady(_, () => {
@@ -90,7 +90,7 @@ describe('OnsRippleElement', () => {
     const attributes = ['color', 'center', 'start-radius', 'background', 'modifier'];
 
     it('is called when an element is created', () => {
-      const spy = spyOn('attributeChangedCallback'),
+      const spy = chai.spy.on(ons.elements.Ripple.prototype, 'attributeChangedCallback'),
         _ = new ons.elements.Ripple();
 
       expect(spy).to.have.been.called.exactly(attributes.length);
@@ -164,23 +164,6 @@ describe('OnsRippleElement', () => {
     });
   });
 
-  const itCalls = calling => {
-    return {
-      whenUsing: (whenUsing, ...rest) => {
-        it(`calls ${calling}`, done => {
-          const spy = spyOn(calling),
-            ripple = new ons.elements.Ripple();
-
-          contentReady(ripple, () => {
-            ripple[whenUsing].apply(ripple, rest);
-            expect(spy).to.have.been.called.once;
-            done();
-          });
-        });
-      }
-    };
-  };
-
   const newEvent = () => ({
     gesture: {
       direction: 'left',
@@ -206,7 +189,17 @@ describe('OnsRippleElement', () => {
   });
 
   describe('#_onTap()', () => {
-    itCalls('_rippleAnimation').whenUsing('_onTap', newEvent());
+    it(`calls _rippleAnimation`, done => {
+      const ripple = new ons.elements.Ripple();
+      const spy = chai.spy.on(ripple, '_rippleAnimation');
+
+      contentReady(ripple, () => {
+        ripple._onTap(newEvent());
+        expect(spy).to.have.been.called.once;
+        chai.spy.restore(ripple, '_rippleAnimation');
+        done();
+      });
+    });
   });
 
   describe('#_onHold()', () => {
@@ -218,7 +211,17 @@ describe('OnsRippleElement', () => {
   });
 
   describe('#_onDragStart()', () => {
-    itCalls('_rippleAnimation').whenUsing('_onDragStart', newEvent());
+    it(`calls _rippleAnimation`, done => {
+      const ripple = new ons.elements.Ripple();
+      const spy = chai.spy.on(ripple, '_rippleAnimation');
+
+      contentReady(ripple, () => {
+        ripple._onDragStart(newEvent());
+        expect(spy).to.have.been.called.once;
+        chai.spy.restore(ripple, '_rippleAnimation');
+        done();
+      });
+    });
 
     it('releases', () => {
       ripple._onHold(newEvent());

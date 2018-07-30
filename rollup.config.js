@@ -76,37 +76,5 @@ export default [
         sourcemap: false, // Unminified to show core-js size
       }),
     ],
-  },
-
-  // Angular Bindings
-  {
-    input: 'bindings/angular1/index.js',
-    output: {
-      file: 'build/js/angular-onsenui.js',
-      format: 'umd',
-      name: 'angularOns',
-      sourcemap: 'inline',
-      banner: banner('angular-' + pkg.name),
-    },
-    plugins: [
-      eslint({
-        include: [
-          'bindings/angular1/js/**/*.js',
-          'bindings/angular1/directives/**/*.js',
-          'bindings/angular1/services/**/*.js',
-          'bindings/angular1/views/**/*.js',
-        ],
-      }),
-      resolve(),
-      commonjs(cjsOpt),
-      babel(Object.assign({}, babelrc, { plugins: [ ['angularjs-annotate', { explicitOnly: false }] ] })),
-      progress(),
-      filesize(),
-      visualizer({
-        filename: 'bindings/angular1/module-stats.html',
-        sourcemap: true, // Shows minified sizes
-      }),
-      execute(`node_modules/.bin/uglifyjs build/js/angular-${pkg.name}.js -c -m --comments '/angular-${pkg.name} v/' --output build/js/angular-${pkg.name}.min.js`),
-    ],
-  },
+  }
 ];

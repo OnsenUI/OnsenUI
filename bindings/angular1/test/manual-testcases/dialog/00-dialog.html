@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="../../../../../build/css/onsen-css-components.css"/>
 
     <script src="../../../../../build/js/onsenui.js"></script>
-    <script src="../../../../../node_modules/angular/angular.js"></script>
+    <script src="../../../node_modules/angular/angular.js"></script>
     <script src="../../../../../build/js/angular-onsenui.js"></script>
     <script>
       ons.bootstrap();
@@ -19,7 +19,7 @@
             mask = document.querySelector('.dialog-mask');;
 
           if (!el) {
-            alert('NG 1');  
+            alert('NG 1');
           } else {
             alert('OK 1');
           }
@@ -32,13 +32,13 @@
 
           dialog.destroy();
           if (document.querySelector('.dialog')) {
-            alert('NG 3');  
+            alert('NG 3');
           } else {
             alert('OK 3');
           }
 
         });
-      }); 
+      });
     </script>
 
     <style>

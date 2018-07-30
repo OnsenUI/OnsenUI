@@ -9,7 +9,7 @@ For more information of what's included in Onsen UI please see:
 * [Main repo](https://github.com/OnsenUI/OnsenUI)
 * [Official website](https://onsen.io/)
 * [Docs](https://onsen.io/v2/guide/vue/)
-* [Playground](http://tutorial.onsen.io/?framework=vue&category=reference&module=page)
+* [Playground](https://onsen.io/playground/?framework=vue&category=reference&module=page)
 
 ## Installation
 
@@ -63,7 +63,7 @@ yarn run dev
 
 This will open a development server with a kitchen sink app in `localhost:8080`.
 
-Otherwise, have a look at the [playground](https://tutorial.onsen.io/) for online examples.
+Otherwise, have a look at the [playground](https://onsen.io/playground/) for online examples.
 
 ## Support
 

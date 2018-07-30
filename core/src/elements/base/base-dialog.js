@@ -168,7 +168,9 @@ export default class BaseDialogElement extends BaseElement {
   }
 
   connectedCallback() {
-    this.onDeviceBackButton = this._defaultDBB.bind(this);
+    if (typeof this._defaultDBB === 'function') {
+      this.onDeviceBackButton = this._defaultDBB.bind(this);
+    }
 
     contentReady(this, () => {
       if (this._mask) {
@@ -179,8 +181,10 @@ export default class BaseDialogElement extends BaseElement {
   }
 
   disconnectedCallback() {
-    this._backButtonHandler.destroy();
-    this._backButtonHandler = null;
+    if (this._backButtonHandler) {
+      this._backButtonHandler.destroy();
+      this._backButtonHandler = null;
+    }
 
     if (this._mask) {
       this._mask.removeEventListener('click', this._cancel, false);

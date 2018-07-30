@@ -1,6 +1,32 @@
 CHANGELOG
 ====
 
+4.2.2
+---
+
+### Misc
+ 
+ * Depend on OnsenUI ~v2.10.0
+
+4.2.1
+---
+
+### New Features
+
+ * Add support for Angular 6
+
+4.2.0
+---
+
+### New Features
+
+ * Add support for reactive forms ([#2261](https://github.com/OnsenUI/OnsenUI/issues/2261))
+ * OnsListItem: Add support for expandable items
+
+### Bug Fixes
+
+ * OnsSelect: Fix for the previous `NgModel` fix ([#2251](https://github.com/OnsenUI/OnsenUI/issues/2251)).
+
 4.1.0
 ----
 
