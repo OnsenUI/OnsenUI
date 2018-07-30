@@ -57,7 +57,7 @@ Button.propTypes = {
    * @name onClick
    * @type function
    * @description
-   *  [en] This function will be called ones the button is clicked. [/en]
+   *  [en] This function will be called when the button is clicked. [/en]
    *  [ja][/ja]
    */
   onClick: PropTypes.func
