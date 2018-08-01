@@ -114,3 +114,11 @@ limitations under the License.
 .ons-icon--5x {
   font-size: 5em;
 }
+
+/**
+ * ons-icon with Font Awesome backward compatibility
+ */
+.ons-icon.fa {
+  font-family: 'Font Awesome 5 Brands', 'Font Awesome 5 Free';
+  font-weight: 900;
+}
