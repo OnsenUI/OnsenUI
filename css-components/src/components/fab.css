@@ -91,7 +91,7 @@
     <button class="fab"><i class="zmdi zmdi-car"></i></button>
     <button class="fab" disabled><i class="zmdi zmdi-car"></i></button>
 */
-ons-fab, button {
+ons-fab, ons-speed-dial-item, button {
   &.fab {
     @apply(--fab);
     &:active {
@@ -129,7 +129,7 @@ ons-fab, button {
     <button class="fab fab--material" disabled><i class="zmdi zmdi-car"></i></button>
 */
 
-ons-fab, button {
+ons-fab, ons-speed-dial-item, button {
   &.fab--material {
     @apply(--material-fab);
   }
@@ -178,7 +178,7 @@ ons-fab, button {
     <button class="fab fab--material fab--mini" disabled><i class="zmdi zmdi-plus"></i></button>
 */
 
-ons-fab, button {
+ons-fab, ons-speed-dial-item, button {
   &.fab--mini {
     width: var(--fab-mini-width);
     height: var(--fab-mini-height);
@@ -195,7 +195,7 @@ ons-fab, button {
   }
 }
 
-ons-fab, button {
+ons-fab, button, .speed-dial {
   &.fab--top__right {
     top: 20px;
     bottom: auto;
