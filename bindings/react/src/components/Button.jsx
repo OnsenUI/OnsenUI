@@ -1,4 +1,4 @@
-import SimpleWrapper from './SimpleWrapper.jsx';
+import wrapOnsElement from './Wrappers';
 import PropTypes from 'prop-types';
 
 /**
@@ -14,11 +14,7 @@ import PropTypes from 'prop-types';
  *   Tap Me
  * </Button>
  */
-class Button extends SimpleWrapper {
-  _getDomNodeName() {
-    return 'ons-button';
-  }
-}
+const Button = wrapOnsElement('ons-button');
 
 Button.propTypes = {
   /**

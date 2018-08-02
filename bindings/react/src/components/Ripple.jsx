@@ -1,6 +1,5 @@
-import SimpleWrapper from './SimpleWrapper.jsx';
-
 import PropTypes from 'prop-types';
+import wrapOnsElement from './Wrappers';
 
 /**
  * @original ons-ripple
@@ -16,11 +15,7 @@ import PropTypes from 'prop-types';
      <Ripple color='red' />
    </div>
  */
-class Ripple extends SimpleWrapper {
-  _getDomNodeName() {
-    return 'ons-ripple';
-  }
-}
+const Ripple = wrapOnsElement('ons-ripple');
 
 Ripple.propTypes = {
   /**

@@ -1,6 +1,5 @@
-import SimpleWrapper from './SimpleWrapper.jsx';
-
 import PropTypes from 'prop-types';
+import wrapOnsElement from './Wrappers';
 
 /**
  * @original ons-carousel-item
@@ -20,11 +19,7 @@ import PropTypes from 'prop-types';
      </CarouselItem>
    </Carousel>
  */
-class CarouselItem extends SimpleWrapper {
-  _getDomNodeName() {
-    return 'ons-carousel-item';
-  }
-}
+const CarouselItem = wrapOnsElement('ons-carousel-item');
 
 CarouselItem.propTypes = {
   /**

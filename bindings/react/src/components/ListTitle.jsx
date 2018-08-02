@@ -1,6 +1,5 @@
-import SimpleWrapper from './SimpleWrapper.jsx';
-
 import PropTypes from 'prop-types';
+import wrapOnsElement from './Wrappers';
 
 /**
  * @original ons-list-title
@@ -21,11 +20,7 @@ import PropTypes from 'prop-types';
     )}
   />
  */
-class ListTitle extends SimpleWrapper {
-  _getDomNodeName() {
-    return 'ons-list-title';
-  }
-}
+const ListTitle = wrapOnsElement('ons-list-title');
 
 ListTitle.propTypes = {
   /**

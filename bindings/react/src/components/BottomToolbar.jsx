@@ -1,5 +1,5 @@
-import SimpleWrapper from './SimpleWrapper.jsx';
 import PropTypes from 'prop-types';
+import wrapOnsElement from './Wrappers';
 
 /**
  * @original ons-bottom-toolbar
@@ -10,11 +10,7 @@ import PropTypes from 'prop-types';
  * @example
  * <BottomToolbar modifier="material"> Content </BottomToolbar>
  */
-class BottomToolbar extends SimpleWrapper {
-  _getDomNodeName() {
-    return 'ons-bottom-toolbar';
-  }
-}
+const BottomToolbar = wrapOnsElement('ons-bottom-toolbar');
 
 BottomToolbar.propTypes = {
   /**
