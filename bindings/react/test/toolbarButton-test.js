@@ -1,15 +1,35 @@
  /* global describe it assert */
 
 import React from 'react';
-import ReactDOM from 'react-dom';
-import {ToolbarButton} from '../dist/react-onsenui.js';
-import TestUtils from 'react-dom/test-utils';
+import { ToolbarButton } from '../dist/react-onsenui.js';
+import { mount } from 'enzyme';
 
-import rendersToComponent from './testUtil.js';
+describe('ToolbarButton', function() {
+  let wrapper;
 
-describe('ToolbarButon', function() {
-  rendersToComponent(
-    <ToolbarButton />,
-    'ons-toolbar-button'
-  );
+  beforeEach((done) => {
+    wrapper = mount(<ToolbarButton />);
+    setImmediate(done);
+  })
+
+  it('renders to ons-toolbar-button', () => {
+    expect(wrapper.find('ons-toolbar-button')).to.have.length(1);
+  });
+
+  describe('className', function () {
+
+    beforeEach((done) => {
+      wrapper = mount(<ToolbarButton className='some-class' />);
+      setImmediate(done);
+    });
+
+    it('binds className prop to class', () => {
+      expect(wrapper.find('ons-toolbar-button').prop('class')).to.equal('some-class');
+    });
+
+    it('updates class when className changes', () => {
+      wrapper.setProps({ className: 'new-class' });
+      expect(wrapper.find('ons-toolbar-button').prop('class')).to.equal('new-class');
+    });
+  });
 });

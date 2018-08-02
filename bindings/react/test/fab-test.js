@@ -1,14 +1,35 @@
  /* global describe it assert */
 
 import React from 'react';
-import ReactDOM from 'react-dom';
-import {Fab} from '../dist/react-onsenui.js';
-import TestUtils from 'react-dom/test-utils';
-import rendersToComponent from './testUtil.js';
+import { Fab } from '../dist/react-onsenui.js';
+import { mount } from 'enzyme';
 
 describe('Fab', function() {
-  rendersToComponent(
-    <Fab />,
-    'ons-fab'
-  );
+  let wrapper;
+
+  beforeEach((done) => {
+    wrapper = mount(<Fab />);
+    setImmediate(done);
+  })
+
+  it('renders to ons-fab', () => {
+    expect(wrapper.find('ons-fab')).to.have.length(1);
+  });
+
+  describe('className', function () {
+
+    beforeEach((done) => {
+      wrapper = mount(<Fab className='some-class' />);
+      setImmediate(done);
+    });
+
+    it('binds className prop to class', () => {
+      expect(wrapper.find('ons-fab').prop('class')).to.equal('some-class');
+    });
+
+    it('updates class when className changes', () => {
+      wrapper.setProps({ className: 'new-class' });
+      expect(wrapper.find('ons-fab').prop('class')).to.equal('new-class');
+    });
+  });
 });
