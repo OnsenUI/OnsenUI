@@ -1,5 +1,5 @@
 <template>
-  <ons-list-item v-on="unrecognizedListeners" :modifier="normalizedModifier">
+  <ons-list-item v-on="unrecognizedListeners" :modifier="normalizedModifier" v-on:expansion="onExpansion">
     <slot></slot>
   </ons-list-item>
 </template>
@@ -17,7 +17,13 @@
         type: Boolean
       }
     },
-
+    methods: {
+      onExpansion() {
+        if (this.expanded !== this.$el.expanded) {
+          this.$emit('update:expanded', this.$el.expanded);
+        }
+      }
+    },
     watch: {
       expanded() {
         const action = this.expanded ? 'show' : 'hide';

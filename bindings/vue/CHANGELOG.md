@@ -7,6 +7,7 @@ dev
  ### Bug Fixes
 
  * VOnsSelect: selected value is updated properly when options change. Fixes [#2486](https://github.com/OnsenUI/OnsenUI/issues/2486).
+ * VOnsListItem: expanded prop is updated when list item is expanded. Fixes [#2493](https://github.com/OnsenUI/OnsenUI/issues/2493).
 
 2.6.1
 ----

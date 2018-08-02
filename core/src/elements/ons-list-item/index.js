@@ -318,6 +318,7 @@ export default class ListItemElement extends BaseElement {
 
   toggleExpansion() {
     this.classList.contains('expanded') ? this.hideExpansion() : this.showExpansion();
+    this.dispatchEvent(new Event('expansion'));
   }
 
   _updateAnimatorFactory() {
