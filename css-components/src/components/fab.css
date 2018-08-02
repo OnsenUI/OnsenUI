@@ -91,6 +91,7 @@
     <button class="fab"><i class="zmdi zmdi-car"></i></button>
     <button class="fab" disabled><i class="zmdi zmdi-car"></i></button>
 */
+/* stylelint-disable */
 ons-fab, ons-speed-dial-item, button {
   &.fab {
     @apply(--fab);
@@ -119,6 +120,7 @@ ons-fab, ons-speed-dial-item, button {
     line-height: var(--material-fab-height);
   }
 }
+/* stylelint-enable */
 
 /*~
   name: Material Fab
@@ -129,6 +131,7 @@ ons-fab, ons-speed-dial-item, button {
     <button class="fab fab--material" disabled><i class="zmdi zmdi-car"></i></button>
 */
 
+/* stylelint-disable */
 ons-fab, ons-speed-dial-item, button {
   &.fab--material {
     @apply(--material-fab);
@@ -159,6 +162,7 @@ ons-fab, ons-speed-dial-item, button {
     @apply(--material-fab--disabled);
   }
 }
+/* stylelint-enable */
 
 /*~
   name: Fab Mini
@@ -178,6 +182,7 @@ ons-fab, ons-speed-dial-item, button {
     <button class="fab fab--material fab--mini" disabled><i class="zmdi zmdi-plus"></i></button>
 */
 
+/* stylelint-disable */
 ons-fab, ons-speed-dial-item, button {
   &.fab--mini {
     width: var(--fab-mini-width);
@@ -194,7 +199,9 @@ ons-fab, ons-speed-dial-item, button {
     transform: scale(0);
   }
 }
+/* stylelint-enable */
 
+/* stylelint-disable */
 ons-fab, button, .speed-dial {
   &.fab--top__right {
     top: 20px;
@@ -246,3 +253,4 @@ ons-fab, button, .speed-dial {
     position: var(--fab-position);
   }
 }
+/* stylelint-enable */
