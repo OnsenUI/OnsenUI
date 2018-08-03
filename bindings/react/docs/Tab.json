@@ -1,1 +1,0 @@
-{"description":"@original ons-tab\n@category tabbar\n@tutorial react/Reference/tabbar\n@description\n[en] Represents a tab inside tab bar.\n [/en]\n[ja][/ja]\n@example\n<Tap>\n  Home\n</Tap>","methods":[{"name":"_getDomNodeName","docblock":null,"modifiers":[],"params":[],"returns":null}]}
