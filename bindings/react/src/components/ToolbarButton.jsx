@@ -1,6 +1,5 @@
-import SimpleWrapper from './SimpleWrapper.jsx';
-
 import PropTypes from 'prop-types';
+import wrapOnsElement from './Wrappers';
 
 /**
  * @original ons-toolbar-button
@@ -27,11 +26,7 @@ import PropTypes from 'prop-types';
       Page Content
     </Page>
  */
-class ToolbarButton extends SimpleWrapper {
-  _getDomNodeName() {
-    return 'ons-toolbar-button';
-  }
-}
+const ToolbarButton = wrapOnsElement('ons-toolbar-button');
 
 ToolbarButton.propTypes = {
   /**
