@@ -43,15 +43,19 @@ class Tabbar extends BasicComponent {
       }
     };
     this.onPreChange = callback.bind(this, 'onPreChange');
-    this.onPostChange = callback.bind(this, 'onPostChange');
-    this.onReactive = callback.bind(this, 'onReactive');
+    this.onReactive  = callback.bind(this, 'onReactive');
+    this.updateIndex = this.updateIndex.bind(this);
+    this.state = {
+        index:this.props.index ? this.props.index : 0
+    }
+
   }
 
   componentDidMount() {
     super.componentDidMount();
     const node = this._tabbar;
     node.addEventListener('prechange', this.onPreChange);
-    node.addEventListener('postchange', this.onPostChange);
+    node.addEventListener('postchange', this.updateIndex);
     node.addEventListener('reactive', this.onReactive);
     node.onSwipe = this.props.onSwipe || null;
     if (this.props.visible !== undefined) {
@@ -62,31 +66,42 @@ class Tabbar extends BasicComponent {
   componentWillUnmount() {
     const node = this._tabbar;
     node.removeEventListener('prechange', this.onPreChange);
-    node.removeEventListener('postchange', this.onPostChange);
+    node.removeEventListener('postchange', this.updateIndex);
     node.removeEventListener('reactive', this.onReactive);
   }
 
   componentWillReceiveProps(nextProps) {
     const node = this._tabbar;
+
     if (nextProps.index !== this.props.index && nextProps.index !== node.getActiveTabIndex()) {
       node.setActiveTab(nextProps.index, { reject: false });
     }
+
     if (this.props.onSwipe !== nextProps.onSwipe) {
       node.onSwipe = nextProps.onSwipe;
     }
     if (this.props.visible !== nextProps.visible) {
       node.setTabbarVisibility(nextProps.visible);
     }
+    if(nextProps.index !== this.props.index && nextProps.index !== this.state.index) {
+      this.setState({
+        index: nextProps.index
+      });
+    }
   }
 
   render() {
-    const attrs = Util.getAttrs(this, this.props, { index: 'activeIndex' });
-    const tabs = this.props.renderTabs(this.props.index, this);
+    const useProps = Object.assign({},this.props,{
+      index:this.state.index
+    });
+
+    const attrs = Util.getAttrs(this, useProps, { index: 'activeIndex' });
+    const tabs = this.props.renderTabs(this.state.index, this);
 
     if (!this.tabPages) {
       this.tabPages = tabs.map((tab) => tab.content);
     } else {
-      this.tabPages[this.props.index] = tabs[this.props.index].content;
+      this.tabPages[this.state.index] = tabs[this.state.index].content;
     }
 
     return (
@@ -103,6 +118,18 @@ class Tabbar extends BasicComponent {
         </div>
       </ons-tabbar>
     );
+  }
+
+  updateIndex(e){
+    this.setState((s,p)=>{
+      return Object.assign({},s,{
+        index:e.index
+      });
+    });
+    if(this.props.onPostChange)
+    {
+      this.props.onPostChange(e);
+    }
   }
 }
 
