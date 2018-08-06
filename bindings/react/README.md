@@ -71,7 +71,7 @@ The main [Onsen UI repo](https://github.com/OnsenUI/OnsenUI) contains the CSS an
 
 We always welcome contributions by either opening an issue or doing a pull request.
 
-To test this repo in the current state of master, one needs to first clone this repo recursivly (it binds onsenui in a specific version) and run `npm install` in both the main folder and OnsenUI folder and finally build OnsenUI.
+To test this repo in the current state of master, one needs to first clone this repo recursively (it binds onsenui in a specific version) and run `npm install` in both the main folder and OnsenUI folder and finally build OnsenUI.
 
 ```bash
 $ git clone --recursive git@github.com:OnsenUI/react-onsenui.git
