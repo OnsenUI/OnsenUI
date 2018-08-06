@@ -2,7 +2,7 @@
 
 ![Onsen UI Vue](https://cloud.githubusercontent.com/assets/6549462/18077336/e982c922-6ebf-11e6-895d-232357ff8f8c.png)
 
-With Onsen UI you can create beautiful and performant hybrid apps that run on both Android and iOS. This package contains [Vue.js](https://vuejs.org) v2 bindings and components that makes it easy to integrate the Onsen UI components in Vue apps.
+With Onsen UI you can create beautiful and performant hybrid apps that run on both Android and iOS. This package contains [Vue.js](https://vuejs.org) v2 bindings and components that make it easy to integrate the Onsen UI components in Vue apps.
 
 For more information of what's included in Onsen UI please see:
 
@@ -54,7 +54,7 @@ Vue.use(VueOnsen);
 
 The examples are located under `/bindings/vue/examples` directory in the main repo.
 
-You can serve these examples by running the development server. First you need to [build the main repo](https://github.com/OnsenUI/OnsenUI#how-to-manually-build-this-project). When that is done you can run the following commands from `/bindings/vue/` directory:
+You can serve these examples by running the development server. First you need to [build the main repo](https://github.com/OnsenUI/OnsenUI/blob/master/CONTRIBUTING.md#development-setup). When that is done you can run the following commands from `/bindings/vue/` directory:
 
 ```
 yarn install
@@ -67,6 +67,6 @@ Otherwise, have a look at the [playground](https://onsen.io/playground/) for onl
 
 ## Support
 
-If you need help using these bindings we recommend you to use [our forum](https://community.onsen.io/) to ask questions. We also have a [Gitter channel](https://gitter.im/OnsenUI/OnsenUI).
+If you need help using these bindings we recommend you to use [our forum](https://community.onsen.io/) to ask questions. We also have a [Discord chat](https://discord.gg/JWhBbnE).
 
-If you find any bug or want to request features/ API changes, please [open an issue](https://github.com/OnsenUI/OnsenUI/issues). Make sure to include all information necessary to reproduce it if you file a bug report.
+If you find any bug or want to request features/API changes, please [open an issue](https://github.com/OnsenUI/OnsenUI/issues). Make sure to include all information necessary to reproduce it if you file a bug report.
