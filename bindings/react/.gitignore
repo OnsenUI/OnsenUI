@@ -34,3 +34,6 @@ node_modules
 
 # Examples bundle
 examples/build.js
+
+# Auto-generated docs directory
+docs
