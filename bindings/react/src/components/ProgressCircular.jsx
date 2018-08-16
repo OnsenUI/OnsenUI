@@ -1,5 +1,5 @@
-import SimpleWrapper from './SimpleWrapper.jsx';
 import PropTypes from 'prop-types';
+import wrapOnsElement from './Wrappers';
 
 /**
  * @original ons-progress-circular
@@ -13,11 +13,7 @@ import PropTypes from 'prop-types';
  *<ProgressCircular value={55} secondaryValue={87} />
  *<ProgressCircular indeterminate />
  */
-class ProgressCircular extends SimpleWrapper {
-  _getDomNodeName() {
-    return 'ons-progress-circular';
-  }
-}
+const ProgressCircular = wrapOnsElement('ons-progress-circular');
 
 ProgressCircular.propTypes = {
   /**
