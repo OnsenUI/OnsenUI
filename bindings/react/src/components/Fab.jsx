@@ -1,5 +1,6 @@
+import SimpleWrapper from './SimpleWrapper.jsx';
+
 import PropTypes from 'prop-types';
-import wrapOnsElement from './Wrappers';
 
 /**
  * @original ons-fab
@@ -21,7 +22,11 @@ import wrapOnsElement from './Wrappers';
      <SpeedDialItem onClick={() => console.log('speed D')}> D </SpeedDialItem>
    </SpeedDial>
   */
-const Fab = wrapOnsElement('ons-fab');
+class Fab extends SimpleWrapper {
+  _getDomNodeName() {
+    return 'ons-fab';
+  }
+}
 
 Fab.propTypes = {
   /**

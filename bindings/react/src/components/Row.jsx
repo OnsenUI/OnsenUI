@@ -1,5 +1,5 @@
+import SimpleWrapper from './SimpleWrapper.jsx';
 import PropTypes from 'prop-types';
-import wrapOnsElement from './Wrappers';
 
 /**
  * @original ons-row
@@ -16,7 +16,11 @@ import wrapOnsElement from './Wrappers';
  *   <Col>Text</Col>
  * </Row>
  */
-const Row = wrapOnsElement('ons-row');
+class Row extends SimpleWrapper {
+  _getDomNodeName() {
+    return 'ons-row';
+  }
+}
 
 Row.propTypes = {
 

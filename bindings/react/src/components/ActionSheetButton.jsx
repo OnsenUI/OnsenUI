@@ -1,5 +1,5 @@
+import SimpleWrapper from './SimpleWrapper.jsx';
 import PropTypes from 'prop-types';
-import wrapOnsElement from './Wrappers';
 
 /**
  * @original ons-action-sheet-button
@@ -9,7 +9,11 @@ import wrapOnsElement from './Wrappers';
  * [en]Component that represent each button of the action sheet.[/en]
  * [ja][/ja]
  */
-const ActionSheetButton = wrapOnsElement('ons-action-sheet-button');
+class ActionSheetButton extends SimpleWrapper {
+  _getDomNodeName() {
+    return 'ons-action-sheet-button';
+  }
+}
 
 ActionSheetButton.propTypes = {
   /**

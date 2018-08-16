@@ -1,5 +1,5 @@
+import SimpleWrapper from './SimpleWrapper.jsx';
 import PropTypes from 'prop-types';
-import wrapOnsElement from './Wrappers';
 
 /**
  * @original ons-card
@@ -14,7 +14,11 @@ import wrapOnsElement from './Wrappers';
   <p>Some content</p>
 </Card>
  */
-const Card = wrapOnsElement('ons-card');
+class Card extends SimpleWrapper {
+  _getDomNodeName() {
+    return 'ons-card';
+  }
+}
 
 Card.propTypes = {
   /**

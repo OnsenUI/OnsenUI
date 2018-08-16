@@ -1,5 +1,5 @@
+import SimpleWrapper from './SimpleWrapper.jsx';
 import PropTypes from 'prop-types';
-import wrapOnsElement from './Wrappers';
 
 /**
  * @original ons-progress-bar
@@ -12,7 +12,11 @@ import wrapOnsElement from './Wrappers';
  *<ProgressBar value={55} secondaryValue={87} />
  *<ProgressBar indeterminate />
  */
-const ProgressBar = wrapOnsElement('ons-progress-bar');
+class ProgressBar extends SimpleWrapper {
+  _getDomNodeName() {
+    return 'ons-progress-bar';
+  }
+}
 
 ProgressBar.propTypes = {
   /**

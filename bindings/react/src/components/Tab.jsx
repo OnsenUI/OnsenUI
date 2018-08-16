@@ -1,4 +1,4 @@
-import wrapOnsElement from './Wrappers';
+import SimpleWrapper from './SimpleWrapper.jsx';
 
 /**
  * @original ons-tab
@@ -13,6 +13,10 @@ import wrapOnsElement from './Wrappers';
  *   Home
  * </Tap>
  */
-const Tab = wrapOnsElement('ons-tab');
+class Tab extends SimpleWrapper {
+  _getDomNodeName() {
+    return 'ons-tab';
+  }
+}
 
 export default Tab;

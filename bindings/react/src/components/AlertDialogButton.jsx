@@ -1,5 +1,5 @@
+import SimpleWrapper from './SimpleWrapper.jsx';
 import PropTypes from 'prop-types';
-import wrapOnsElement from './Wrappers';
 
 /**
  * @original ons-alert-dialog-button
@@ -9,7 +9,11 @@ import wrapOnsElement from './Wrappers';
  * [en]Component that represent each button of the alert dialog.[/en]
  * [ja][/ja]
  */
-const AlertDialogButton = wrapOnsElement('ons-alert-dialog-button');
+class AlertDialogButton extends SimpleWrapper {
+  _getDomNodeName() {
+    return 'ons-alert-dialog-button';
+  }
+}
 
 AlertDialogButton.propTypes = {
   /**

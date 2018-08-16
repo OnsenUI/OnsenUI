@@ -1,5 +1,4 @@
-import wrapOnsElement from './Wrappers';
-
+import SimpleWrapper from './SimpleWrapper.jsx';
 /**
  * @original ons-splitter-content
  * @category menu
@@ -32,6 +31,10 @@ import wrapOnsElement from './Wrappers';
     </SplitterSide>
   </Splitter>
  */
-const SplitterContent = wrapOnsElement('ons-splitter-content');
+class SplitterContent extends SimpleWrapper {
+  _getDomNodeName() {
+    return 'ons-splitter-content';
+  }
+}
 
 export default SplitterContent;
