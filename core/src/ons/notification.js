@@ -174,6 +174,7 @@ notification._createAlertDialog = (...params) => new Promise(resolve => {
           .then(() => {
             if (el) {
               const resolveValue = el.input.value;
+              el.dialog.remove();
               _destroyDialog();
               options.callback(resolveValue);
               resolve(resolveValue);
