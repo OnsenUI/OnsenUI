@@ -102,19 +102,20 @@ class Platform {
    * @method isIPhoneX
    * @signature isIPhoneX()
    * @description
-   *   [en]Returns whether the device is iPhone X.[/en]
-   *   [ja]iPhone X上で実行されているかどうかを返します。[/ja]
+   *   [en]Returns whether the device is iPhone X, XS, XS Max, or XR.[/en]
+   *   [ja]iPhone X や XS、XS Max、または XR 上で実行されているかどうかを返します。[/ja]
    * @return {Boolean}
    */
   isIPhoneX() {
-    // iPhone 8 and iPhone X have a same user agent. We cannot avoid using window.screen.
+    // iOS WebViews on the same iOS version have the same user agent.
+    // We cannot avoid using window.screen.
+    // We also cannot use cordova-plugin-device since its behavior is different between simulators and real devices.
     // This works well both in iOS Safari and (UI|WK)WebView of iPhone X.
-    //Added extra sizes for IPhone XR
     return this.isIPhone() &&
-      (window.screen.width === 375 && window.screen.height === 812 ||
-       window.screen.width === 414 && window.screen.height === 896 ||
-       window.screen.width === 896 && window.screen.height === 414 ||
-       window.screen.width === 812 && window.screen.height === 375);
+      (window.screen.width === 375 && window.screen.height === 812 || // X, XS portrait
+       window.screen.width === 812 && window.screen.height === 375 || // X, XS landscape
+       window.screen.width === 414 && window.screen.height === 896 || // XS Max, XR portrait
+       window.screen.width === 896 && window.screen.height === 414); // XS Max, XR landscape
   }
 
   /**
