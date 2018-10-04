@@ -112,10 +112,10 @@ class Platform {
     // We also cannot use cordova-plugin-device since its behavior is different between simulators and real devices.
     // This works well both in iOS Safari and (UI|WK)WebView of iPhone X.
     return this.isIPhone() &&
-      (window.screen.width === 375 && window.screen.height === 812 ||
-       window.screen.width === 414 && window.screen.height === 896 ||
-       window.screen.width === 896 && window.screen.height === 414 ||
-       window.screen.width === 812 && window.screen.height === 375);
+      (window.screen.width === 375 && window.screen.height === 812 || // X, XS portrait
+       window.screen.width === 812 && window.screen.height === 375 || // X, XS landscape
+       window.screen.width === 414 && window.screen.height === 896 || // XS Max, XR portrait
+       window.screen.width === 896 && window.screen.height === 414); // XS Max, XR landscape
   }
 
   /**
