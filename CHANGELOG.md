@@ -2,13 +2,17 @@
 CHANGELOG
 ====
 
-dev
+2.10.5
 ---
 
  ### Bug Fixes
 
  * ons-list-item: Fix expandable list item not working correctly for lists inside expandable content. ([#2485](https://github.com/OnsenUI/OnsenUI/issues/2485)).
  * ons.platform.isIPhoneX: Support iPhone XS, XS Max, and XR. ([#2540](https://github.com/OnsenUI/OnsenUI/issues/2540)).
+
+ ### Misc
+
+ * Updated FontAwesome to 5.2.0 ([#2502](https://github.com/OnsenUI/OnsenUI/issues/2502)).
 
 2.10.4
 ---
