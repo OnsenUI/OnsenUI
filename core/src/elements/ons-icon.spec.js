@@ -1,13 +1,20 @@
-'use strict';
+import contentReady from '../ons/content-ready';
 
 describe('OnsIconElement', () => {
+  let element;
+  
+  beforeEach(done => {
+    element = new ons.elements.Icon();
+    document.body.appendChild(element);
+    contentReady(element, done);
+  });
+  
   it('should exist', () => {
     expect(window.ons.elements.Icon).to.be.ok;
   });
 
   describe('icon attribute', () => {
     it('provides \'icon\' attribute', () => {
-      var element = new ons.elements.Icon();
       element.setAttribute('icon', 'ion-navicon');
       expect(element.classList.contains('ion-navicon')).to.be.true;
 
@@ -29,7 +36,6 @@ describe('OnsIconElement', () => {
     });
 
     it('toggles autoPrefix', () => {
-      var element = new ons.elements.Icon();
       element.setAttribute('icon', 'my-custom-icon');
       expect(element.classList.contains('my')).not.to.be.true;
       expect(element.classList.contains('my-custom-icon')).not.to.be.true;
@@ -70,23 +76,21 @@ describe('OnsIconElement', () => {
     });
 
     it('supports a second icon depending on modifiers', () => {
-      var element = new ons.elements.Icon();
       element.setAttribute('icon', 'ion-navicon, material:md-face');
       expect(element.classList.contains('ion-navicon')).to.be.true;
       expect(element.classList.contains('zmdi-face')).not.to.be.true;
-
-      ons.platform.select('android');
-      element = new ons.elements.Icon();
+    });
+    
+    it('supports a second icon depending on modifiers (material)', () => {
+      element.setAttribute('modifier', 'material');
       element.setAttribute('icon', 'ion-navicon, material:md-face');
       expect(element.classList.contains('ion-navicon')).not.to.be.true;
       expect(element.classList.contains('zmdi-face')).to.be.true;
-      ons.platform.select('');
     });
   });
 
   describe('size attribute', () => {
     it('provides \'size\' attribute', () => {
-      var element = new ons.elements.Icon();
       element.setAttribute('size', '10px');
       expect(element.style.fontSize).to.equal('10px');
 
@@ -109,15 +113,14 @@ describe('OnsIconElement', () => {
     });
 
     it('supports a second size depending on modifiers', () => {
-      var element = new ons.elements.Icon();
       element.setAttribute('size', '20px, material:30px');
       expect(element.style.fontSize).to.equal('20px');
-
-      ons.platform.select('android');
-      element = new ons.elements.Icon();
+    });
+    
+    it('supports a second size depending on modifiers (material)', () => {
+      element.setAttribute('modifier', 'material');
       element.setAttribute('size', '20px, material:30px');
       expect(element.style.fontSize).to.equal('30px');
-      ons.platform.select('');
     });
   });
 
@@ -128,6 +131,19 @@ describe('OnsIconElement', () => {
       div1.innerHTML = '<ons-icon icon="fa-twitter" size="10px"></ons-icon>';
       div2.innerHTML = div1.innerHTML;
       expect(div1.isEqualNode(div2)).to.be.true;
+    });
+  });
+  
+  describe('autoStyling', () => {
+    it('adds \'material\' modifier on Android', done => {
+      ons.platform.select('android');
+      const icon = document.createElement('ons-icon');
+
+      contentReady(icon, () => {
+        expect(icon.getAttribute('modifier')).to.equal('material');
+        ons.platform.select('');
+        done();
+      });
     });
   });
 });
