@@ -19,6 +19,7 @@ import onsElements from '../ons/elements';
 import util from '../ons/util';
 import autoStyle from '../ons/autostyle';
 import BaseElement from './base/base-element';
+import contentReady from '../ons/content-ready';
 
 let autoPrefix = 'fa'; // FIXME: To be removed in v3
 
@@ -119,8 +120,10 @@ export default class IconElement extends BaseElement {
 
   constructor() {
     super();
-
-    this._compile();
+     
+    contentReady(this, () => {
+      this._compile();
+    });
   }
 
   static get observedAttributes() {
