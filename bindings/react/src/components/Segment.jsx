@@ -97,10 +97,10 @@ Segment.propTypes = {
   modifier: PropTypes.string,
 
   /**
-   * @name onChange
+   * @name onPostChange
    * @type function
    * @description
-   *  [en] Called when the active button changes.[/en]
+   *  [en] Called after the active button changes.[/en]
    *  [ja][/ja]
    */
   onPostChange: PropTypes.func
