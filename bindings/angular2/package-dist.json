@@ -42,7 +42,7 @@
   ],
   "homepage": "https://onsen.io/angular2/",
   "peerDependencies": {
-    "@angular/core": "^6.0.0",
+    "@angular/core": "^7.0.0",
     "onsenui": "~2.10.0"
   }
 }
