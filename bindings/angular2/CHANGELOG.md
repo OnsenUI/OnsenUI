@@ -4,13 +4,16 @@ CHANGELOG
 dev
 ---
 
-### Misc
- 
- * Remove `ReflectiveInjector` in favor of `StaticInjector`.
 ### New Features
 
- * Supported Angular 7.0.0+.
- * Added `OnsSegment` directive ([#2390](https://github.com/OnsenUI/OnsenUI/issues/2390))
+ * Supported Angular 7+.
+ * Added `OnsSegment` directive ([#2390](https://github.com/OnsenUI/OnsenUI/issues/2390)).
+ * Added `OnsTabbar` directive ([#2452](https://github.com/OnsenUI/OnsenUI/issues/2452)).
+ * Changed `OnsPullHook` directive to emit `pull` output ([#2457](https://github.com/OnsenUI/OnsenUI/issues/2457)).
+
+### Misc
+ 
+ * Removed `ReflectiveInjector`s in favor of `StaticInjector`s.
 
 4.2.2
 ---
