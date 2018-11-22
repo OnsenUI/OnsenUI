@@ -1,6 +1,13 @@
 CHANGELOG
 ====
 
+dev
+---
+
+### Misc
+ 
+ * Remove `ReflectiveInjector` in favor of `StaticInjector`.
+
 4.2.2
 ---
 
