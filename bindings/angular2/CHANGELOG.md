@@ -7,6 +7,10 @@ dev
 ### Misc
  
  * Remove `ReflectiveInjector` in favor of `StaticInjector`.
+### New Features
+
+ * Supported Angular 7.0.0+.
+ * Added `OnsSegment` directive ([#2390](https://github.com/OnsenUI/OnsenUI/issues/2390))
 
 4.2.2
 ---
