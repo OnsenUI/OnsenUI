@@ -1,7 +1,7 @@
 CHANGELOG
 ====
 
-dev
+7.0.0
 ---
 
 ### New Features

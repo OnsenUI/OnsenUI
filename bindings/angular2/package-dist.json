@@ -1,6 +1,6 @@
 {
   "name": "ngx-onsenui",
-  "version": "4.2.2",
+  "version": "7.0.0",
   "private": false,
   "author": "Mitsunori Kubota <mitsunori@asial.co.jp>",
   "main": "bundles/ngx-onsenui.umd.js",
