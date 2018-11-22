@@ -6,7 +6,6 @@ import {
   ElementRef,
   Input,
   OnDestroy,
-  ReflectiveInjector,
   OnInit,
   ViewContainerRef,
   ComponentFactoryResolver,
@@ -91,10 +90,13 @@ export class OnsSplitterSide {
     return new ons.PageLoader(
       ({page, parent, params}: any, done: Function) => {
         this._zone.run(() => {
-          const injector = ReflectiveInjector.resolveAndCreate([
-            {provide: Params, useValue: new Params(params || {})},
-            {provide: OnsSplitterSide, useValue: this}
-          ], this._injector);
+          const injector = Injector.create({
+            providers: [
+              {provide: Params, useValue: new Params(params || {})},
+              {provide: OnsSplitterSide, useValue: this}
+            ],
+            parent: this._injector
+          });
 
           const factory = this._resolver.resolveComponentFactory(page);
           const pageComponentRef = this._viewContainer.createComponent(factory, 0, injector);
@@ -162,10 +164,13 @@ export class OnsSplitterContent {
 
     return new ons.PageLoader(
       ({page, parent, params}: any, done: Function) => {
-        const injector = ReflectiveInjector.resolveAndCreate([
-          {provide: Params, useValue: new Params(params || {})},
-          {provide: OnsSplitterContent, useValue: this}
-        ], this._injector);
+        const injector = Injector.create({
+          providers: [
+            {provide: Params, useValue: new Params(params || {})},
+            {provide: OnsSplitterContent, useValue: this}
+          ],
+          parent: this._injector
+        });
 
         const factory = this._resolver.resolveComponentFactory(page);
         const pageComponentRef = this._viewContainer.createComponent(factory, 0, injector);

@@ -1,7 +1,6 @@
 import {
   Component,
   Injector,
-  ReflectiveInjector,
   Directive,
   ElementRef,
   ComponentRef,
@@ -97,10 +96,13 @@ export class OnsNavigator implements OnDestroy {
       ({page, parent, params}: any, done: Function) => {
         this._zone.run(() => {
           const pageParams = new Params(params || {});
-          const injector = ReflectiveInjector.resolveAndCreate([
-            {provide: Params, useValue: pageParams},
-            {provide: OnsNavigator, useValue: this}
-          ], this._injector);
+          const injector = Injector.create({
+            providers: [
+              {provide: Params, useValue: pageParams},
+              {provide: OnsNavigator, useValue: this}
+            ],
+            parent: this._injector
+          });
 
           const factory = this._resolver.resolveComponentFactory(page);
           const selector = 'ons-navigator';

@@ -4,7 +4,6 @@ import {
   Injectable,
   ApplicationRef,
   ComponentRef,
-  ReflectiveInjector,
   Type,
   NgZone
 } from '@angular/core';
@@ -38,9 +37,12 @@ export class AlertDialogFactory {
       setImmediate(() => {
         this._zone.run(() => {
           const factory = this._resolver.resolveComponentFactory(componentType);
-          const injector = ReflectiveInjector.resolveAndCreate([
-            {provide: Params, useValue: new Params(params)}
-          ], this._injector);
+          const injector = Injector.create({
+            providers: [
+              {provide: Params, useValue: new Params(params)}
+            ],
+            parent: this._injector
+          });
           const componentRef = factory.create(injector);
           const rootElement = componentRef.location.nativeElement;
 
