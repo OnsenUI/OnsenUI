@@ -2,6 +2,25 @@
 # yarn lockfile v1
 
 
+"@angular-devkit/core@7.0.6":
+  version "7.0.6"
+  resolved "https://registry.yarnpkg.com/@angular-devkit/core/-/core-7.0.6.tgz#26c4cd4d271e8cd03f6e50b4ec30cbc606f3346e"
+  integrity sha512-RPSXUtLrpYDTqAEL0rCyDKxES76EomsPBvUUZTD6UkE2pihoh9ZIxkzhzlE+HU/xdqm28+smQYFhvvEAXFWwSQ==
+  dependencies:
+    ajv "6.5.3"
+    chokidar "2.0.4"
+    fast-json-stable-stringify "2.0.0"
+    rxjs "6.3.3"
+    source-map "0.7.3"
+
+"@angular-devkit/schematics@7.0.6":
+  version "7.0.6"
+  resolved "https://registry.yarnpkg.com/@angular-devkit/schematics/-/schematics-7.0.6.tgz#97fca028bd937e2319d9d34c12b82e8d1d99de23"
+  integrity sha512-S/3CrBDoh/BD4mBq8RNGQ8sgNFDsveCuFHDkOyct8+NDg2wcRkEGigyq8eZwVN/iVKCwjxc0I/bC336edoNMIQ==
+  dependencies:
+    "@angular-devkit/core" "7.0.6"
+    rxjs "6.3.3"
+
 "@angular/common@^7.0.0":
   version "7.1.0"
   resolved "https://registry.yarnpkg.com/@angular/common/-/common-7.1.0.tgz#89b0a34fd8f2a323704369551be4ac7491dda0b7"
@@ -54,9 +73,23 @@
   dependencies:
     tslib "^1.9.0"
 
+"@schematics/angular@^7.0.0":
+  version "7.0.6"
+  resolved "https://registry.yarnpkg.com/@schematics/angular/-/angular-7.0.6.tgz#1173c201d118cf38d1afdb382e9a916e4b540a17"
+  integrity sha512-jOHL+vSu1cqAo3kRNDmgkq/GR2EDkJx5/h0VXGlbtdEpq892LipKHtyPgXa269AABgPKb3TSNBwZls6g2L9FCw==
+  dependencies:
+    "@angular-devkit/core" "7.0.6"
+    "@angular-devkit/schematics" "7.0.6"
+    typescript "3.1.6"
+
 "@types/core-js@^0.9.46":
   version "0.9.46"
   resolved "https://registry.yarnpkg.com/@types/core-js/-/core-js-0.9.46.tgz#ea701ee34cbb6dfe6d100f1530319547c93c8d79"
+
+"@types/jasmine@^2.6.0":
+  version "2.8.12"
+  resolved "https://registry.yarnpkg.com/@types/jasmine/-/jasmine-2.8.12.tgz#dfe606b07686c977f54d17cb8ebe6cae2e26f8ff"
+  integrity sha512-eE+xeiGBPgQsNcyg61JBqQS6NtxC+s2yfOikMCnc0Z4NqKujzmSahmtjLCKVQU/AyrTEQ76TOwQBnr8wGP2bmA==
 
 abbrev@1:
   version "1.1.1"
@@ -105,6 +138,16 @@ agent-base@2:
 ajv-keywords@^1.1.1:
   version "1.5.1"
   resolved "https://registry.yarnpkg.com/ajv-keywords/-/ajv-keywords-1.5.1.tgz#314dd0a4b3368fad3dfcdc54ede6171b886daf3c"
+
+ajv@6.5.3:
+  version "6.5.3"
+  resolved "https://registry.yarnpkg.com/ajv/-/ajv-6.5.3.tgz#71a569d189ecf4f4f321224fecb166f071dd90f9"
+  integrity sha512-LqZ9wY+fx3UMiiPd741yB2pj3hhil+hQc8taf4o2QGRFpWgZ2V5C8HA165DY9sS3fJwsk7uT7ZlFEyC3Ig3lLg==
+  dependencies:
+    fast-deep-equal "^2.0.1"
+    fast-json-stable-stringify "^2.0.0"
+    json-schema-traverse "^0.4.1"
+    uri-js "^4.2.2"
 
 ajv@^4.7.0:
   version "4.11.8"
@@ -1100,22 +1143,7 @@ chalk@^2.3.1:
     escape-string-regexp "^1.0.5"
     supports-color "^5.3.0"
 
-chokidar@^1.4.2:
-  version "1.7.0"
-  resolved "https://registry.yarnpkg.com/chokidar/-/chokidar-1.7.0.tgz#798e689778151c8076b4b360e5edd28cda2bb468"
-  dependencies:
-    anymatch "^1.3.0"
-    async-each "^1.0.0"
-    glob-parent "^2.0.0"
-    inherits "^2.0.1"
-    is-binary-path "^1.0.0"
-    is-glob "^2.0.0"
-    path-is-absolute "^1.0.0"
-    readdirp "^2.0.0"
-  optionalDependencies:
-    fsevents "^1.0.0"
-
-chokidar@^2.0.0, chokidar@^2.0.2:
+chokidar@2.0.4, chokidar@^2.0.0, chokidar@^2.0.2:
   version "2.0.4"
   resolved "https://registry.yarnpkg.com/chokidar/-/chokidar-2.0.4.tgz#356ff4e2b0e8e43e322d18a372460bbcf3accd26"
   dependencies:
@@ -1133,6 +1161,21 @@ chokidar@^2.0.0, chokidar@^2.0.2:
     upath "^1.0.5"
   optionalDependencies:
     fsevents "^1.2.2"
+
+chokidar@^1.4.2:
+  version "1.7.0"
+  resolved "https://registry.yarnpkg.com/chokidar/-/chokidar-1.7.0.tgz#798e689778151c8076b4b360e5edd28cda2bb468"
+  dependencies:
+    anymatch "^1.3.0"
+    async-each "^1.0.0"
+    glob-parent "^2.0.0"
+    inherits "^2.0.1"
+    is-binary-path "^1.0.0"
+    is-glob "^2.0.0"
+    path-is-absolute "^1.0.0"
+    readdirp "^2.0.0"
+  optionalDependencies:
+    fsevents "^1.0.0"
 
 chownr@^1.1.1:
   version "1.1.1"
@@ -1818,7 +1861,7 @@ fast-deep-equal@^2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/fast-deep-equal/-/fast-deep-equal-2.0.1.tgz#7b05218ddf9667bf7f370bf7fdb2cb15fdd0aa49"
 
-fast-json-stable-stringify@^2.0.0:
+fast-json-stable-stringify@2.0.0, fast-json-stable-stringify@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/fast-json-stable-stringify/-/fast-json-stable-stringify-2.0.0.tgz#d5142c0caee6b1189f87d3a76111064f86c8bbf2"
 
@@ -4168,7 +4211,7 @@ ripemd160@^2.0.0, ripemd160@^2.0.1:
     hash-base "^3.0.0"
     inherits "^2.0.1"
 
-rxjs@^6.3.0:
+rxjs@6.3.3, rxjs@^6.3.0:
   version "6.3.3"
   resolved "https://registry.yarnpkg.com/rxjs/-/rxjs-6.3.3.tgz#3c6a7fa420e844a81390fb1158a9ec614f4bad55"
   dependencies:
@@ -4428,6 +4471,11 @@ source-map-support@^0.5.3:
 source-map-url@^0.4.0:
   version "0.4.0"
   resolved "https://registry.yarnpkg.com/source-map-url/-/source-map-url-0.4.0.tgz#3e935d7ddd73631b97659956d55128e87b5084a3"
+
+source-map@0.7.3:
+  version "0.7.3"
+  resolved "https://registry.yarnpkg.com/source-map/-/source-map-0.7.3.tgz#5302f8169031735226544092e64981f751750383"
+  integrity sha512-CkCj6giN3S+n9qrYiBTX5gystlENnRW5jZeNLHpe6aue+SrHcG5VYwujhW9s4dY31mEGsxBDrHR6oI69fTXsaQ==
 
 source-map@^0.5.3, source-map@^0.5.6, source-map@^0.5.7, source-map@~0.5.1:
   version "0.5.7"
@@ -4770,7 +4818,7 @@ typedarray@^0.0.6:
   version "0.0.6"
   resolved "https://registry.yarnpkg.com/typedarray/-/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
 
-typescript@~3.1.1:
+typescript@3.1.6, typescript@~3.1.1:
   version "3.1.6"
   resolved "https://registry.yarnpkg.com/typescript/-/typescript-3.1.6.tgz#b6543a83cfc8c2befb3f4c8fba6896f5b0c9be68"
 

@@ -17,6 +17,9 @@
     "directives/**/*.js",
     "directives/**/*.js.map",
     "directives/**/*.metadata.json",
+    "schematics/**/*.d.ts",
+    "schematics/**/*.js",
+    "schematics/**/*.js.map",
     "ons/**/*.d.ts",
     "ons/**/*.js",
     "ons/**/*.js.map",
@@ -44,5 +47,6 @@
   "peerDependencies": {
     "@angular/core": "^7.0.0",
     "onsenui": "~2.10.0"
-  }
+  },
+  "schematics": "./schematics/collection.json"
 }

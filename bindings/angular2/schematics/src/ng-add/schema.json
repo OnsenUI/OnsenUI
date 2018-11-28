@@ -1,0 +1,16 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "id": "ngx-onsenui-ng-add",
+  "title": "ngx-onsenui ng-add schematic",
+  "type": "object",
+  "properties": {
+    "project": {
+      "type": "string",
+      "description": "The name of the project.",
+      "$default": {
+        "$source": "projectName"
+      }
+    }
+  },
+  "required": []
+}
