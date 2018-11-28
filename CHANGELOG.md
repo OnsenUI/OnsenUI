@@ -13,6 +13,7 @@ CHANGELOG
  ### Misc
 
  * Updated FontAwesome to 5.2.0 ([#2502](https://github.com/OnsenUI/OnsenUI/issues/2502)).
+ * Avoid event-stream@3.3.6 vulnerability (https://github.com/dominictarr/event-stream/issues/116).
 
 2.10.4
 ---
