@@ -81,7 +81,7 @@
     "chalk": "^2.3.0",
     "dateformat": "^3.0.2",
     "eslint": "^4.10.0",
-    "event-stream": "^3.3.4",
+    "event-stream": "3.3.4",
     "gulp": "^3.9.1",
     "gulp-autoprefixer": "^4.0.0",
     "gulp-babel": "^7.0.0",
@@ -131,6 +131,6 @@
     "@onsenui/custom-elements": "1.0.0",
     "@onsenui/fastclick": "1.1.1",
     "core-js": "^2.5.1",
-    "gulp-protractor": "^4.1.0"
+    "gulp-protractor": "^4.1.1"
   }
 }
