@@ -2,7 +2,7 @@
 CHANGELOG
 ====
 
-dev
+1.0.1
 ---
 
  ### Misc

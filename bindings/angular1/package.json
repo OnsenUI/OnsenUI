@@ -1,6 +1,6 @@
 {
   "name": "angularjs-onsenui",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "AngularJS bindings for Onsen UI",
   "author": "Onsen UI Team <team@monaca.io>",
   "main": "dist/angularjs-onsenui.js",
