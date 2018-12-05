@@ -2,6 +2,13 @@
 CHANGELOG
 ====
 
+dev
+---
+
+ ### Bug Fixes
+
+ * ons-icon: Fix bug where Font Awesome v5 styles (far, fal, fab) were being ignored.
+
 2.10.6
 ---
 
