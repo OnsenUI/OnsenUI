@@ -182,7 +182,10 @@ export default class IconElement extends BaseElement {
       classList.push('ons-icon--ion');
     } else if (iconName.indexOf('fa-') === 0) {
       classList.push(iconName);
-      classList.push('fa');
+      // default icon style to Font Awesome Solid if icon style is not specified already
+      if (!(this.classList.contains('far') || this.classList.contains('fab') || this.classList.contains('fal'))) {
+        classList.push('fa');
+      }
     } else if (iconName.indexOf('md-') === 0)  {
       classList.push('zmdi');
       classList.push('zmdi-' + iconName.split(/-(.+)?/)[1]);
