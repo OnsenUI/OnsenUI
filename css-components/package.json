@@ -24,8 +24,8 @@
     "gulp-util": "^2.2.14",
     "immutable-css": "^1.1.2",
     "postcss-base64": "^0.6.1",
-    "postcss-cssnext": "^3.0.2",
     "postcss-import": "^9.1.0",
+    "postcss-preset-env": "^6.5.0",
     "postcss-reporter": "^3.0.0",
     "rimraf": "^2.6.1",
     "run-sequence": "^0.3.6"

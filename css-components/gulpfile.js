@@ -8,7 +8,7 @@ const $ = require('gulp-load-plugins')();
 const eco = require('eco');
 const fs = require('fs');
 const ancss = require('@onsenui/ancss');
-const cssnext = require('postcss-cssnext');
+const postcssPresetEnv = require('postcss-preset-env');
 const reporter = require('postcss-reporter');
 const historyApiFallback = require('connect-history-api-fallback');
 const {rollup} = require('rollup');
@@ -77,7 +77,7 @@ gulp.task('cssnext', ['stylelint'], () => {
       extensions: ['.svg'],
       root: __dirname + '/src/components/'
     }),
-    cssnext({
+    postcssPresetEnv({
       browsers: babelrc.presets[0][1].targets.browsers,
     }),
     reporter({
