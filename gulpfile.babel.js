@@ -22,10 +22,9 @@ import gulp from 'gulp';
 import path from 'path';
 import glob from 'glob';
 import pkg from './package.json';
-import {merge} from 'event-stream';
-import runSequence from 'run-sequence';
+import mergeStream from 'merge-stream';
 import dateformat from 'dateformat';
-import browserSync from 'browser-sync';
+import browserSyncPlugin from 'browser-sync';
 import os from 'os';
 import {spawn, spawnSync} from 'child_process';
 import fs from 'fs';
@@ -54,9 +53,10 @@ const coreESMFiles = [
   '!core/src/**/*.spec.js',
 ];
 
-
 const $ = gulpLoadPlugins();
-$.hub(['./css-components/gulpfile.js']); // adds 'build-css', 'css-clean' and 'cssnext' tasks
+
+const hub = new $.hub(['./css-components/gulpfile.js']); // adds 'build-css', 'css-clean' and 'cssnext' tasks
+gulp.registry(hub);
 
 ////////////////////////////////////////
 // bundles
@@ -87,7 +87,10 @@ const transpileCoreSrc = files => {
   );
 };
 
-gulp.task('core', () => bundle(rollupConfigs.ons));
+function core(done) {
+  bundle(rollupConfigs.ons);
+  done();
+}
 
 // TODO: For 2.11.0, the bindings should no longer be copied. But it may still be
 // useful to keep this message for the foreseeable future. In 2.11.0, this warning
@@ -107,10 +110,11 @@ const copyAngularBindings = () => {
   });
 }
 
-gulp.task('angular-bindings', () => {
+function angularBindings(done) {
   spawnSync('gulp', ['--gulpfile', path.join('bindings', 'angular1', 'gulpfile.js', 'build')]);
   copyAngularBindings();
-});
+  done();
+}
 
 ////////////////////////////////////////
 // watch
@@ -139,22 +143,23 @@ const watch = config => new Promise((resolve, reject) => {
   });
 });
 
-gulp.task('watch-core-esm', () => {
+function watchCoreEsm() {
   gulp.watch(coreESMFiles).on('change', changedFile => transpileCoreSrc(changedFile.path));
   return watch(rollupConfigs.onsESM).then(() => transpileCoreSrc(coreESMFiles));
-});
+}
 
-gulp.task('watch-core', ['core-css'], () => {
-  gulp.watch(['core/css/*.css'], { debounceDelay: 300 }, ['core-css']);
+function watchCore() {
+  coreCss();
+  gulp.watch(['core/css/*.css'], { debounceDelay: 300 }, coreCss);
   return watch(rollupConfigs.ons);
-});
+}
 
 // gulp.task('watch-angular-bindings', () => watch(rollupConfigs.angularOns));
 
 // TODO: Remove this when AngularJS is no longer part of the core
 // The only difference between this task and the one-line `watch-angular-bindings` above
 // is that this copies the Angular files into core. From 2.11.0 we won't need this.
-gulp.task('watch-angular-bindings', () => {
+function watchAngularBindings(done) {
   rollupWatch(rollupConfigs.angularOns).on('event', event => {
     switch (event.code) {
       case 'BUNDLE_START':
@@ -172,17 +177,23 @@ gulp.task('watch-angular-bindings', () => {
         break;
     }
   });
-});
+  done();
+}
 
+function watchVueBindings(done) {
+  watch(require('./bindings/vue/rollup.config.js').default.devConfig);
+  done();
+}
 
-gulp.task('watch-vue-bindings', () => watch(require('./bindings/vue/rollup.config.js').default.devConfig));
-
-gulp.task('watch-react-bindings', () => watch(require('./bindings/react/rollup.config.js').default.devConfig));
+function watchReactBindings(done) {
+  watch(require('./bindings/react/rollup.config.js').default.devConfig);
+  done();
+}
 
 ////////////////////////////////////////
 // core-dts-test
 ////////////////////////////////////////
-gulp.task('core-dts-test', (argv['skip-build'] ? [] : ['core']), (done) => {
+function coreDtsTest(done) {
   // Usage:
   //     # validate the d.ts file for the core
   //     gulp core-dts-test
@@ -313,158 +324,170 @@ gulp.task('core-dts-test', (argv['skip-build'] ? [] : ['core']), (done) => {
     console.log(reason.stack);
     throw reason;
   });
-});
+}
+
+exports['core-dts-test'] = argv['skip-build'] ? coreDtsTest : gulp.series(core, coreDtsTest);
 
 ////////////////////////////////////////
 // unit-test
 ////////////////////////////////////////
-gulp.task('unit-test', argv['skip-build'] ? [] : (argv.watch ? ['watch-core'] : ['core-css', 'core']),
-  (done) => {
-    // Usage:
-    //     # run all unit tests in just one Karma server
-    //     gulp unit-test
-    //
-    //     # run only specified unit tests in just one Karma server
-    //     gulp unit-test --specs core/src/elements/ons-navigator/index.spec.js
-    //     gulp unit-test --specs "core/src/**/index.spec.js"
-    //     gulp unit-test --specs "core/src/**/*.spec.js"
-    //
-    //     # run all unit tests separately
-    //     gulp unit-test --separately
-    //
-    //     # run only specified unit tests separately
-    //     gulp unit-test --separately --specs core/src/elements/ons-navigator/index.spec.js
-    //     gulp unit-test --separately --specs "core/src/**/index.spec.js"
-    //     gulp unit-test --separately --specs "core/src/**/*.spec.js"
-    //
-    //     # run unit tests in a particular browser
-    //     gulp unit-test --browsers local_chrome_headless
-    //     gulp unit-test --browsers local_chrome_headless,local_safari # you can use commas
-    //     gulp unit-test --browsers remote_iphone_5_simulator_ios_10_0_safari # to use this, see karma.conf.js
-    //     gulp unit-test --browsers local_chrome_headless,remote_macos_elcapitan_safari_10 # default
-    //
-    //     # run unit tests without Onsen UI warnings
-    //     gulp unit-test --disable-warnings
-    //
-    //     # watch unit tests
-    //     gulp unit-test --watch
+// Usage:
+//     # run all unit tests in just one Karma server
+//     gulp unit-test
+//
+//     # run only specified unit tests in just one Karma server
+//     gulp unit-test --specs core/src/elements/ons-navigator/index.spec.js
+//     gulp unit-test --specs "core/src/**/index.spec.js"
+//     gulp unit-test --specs "core/src/**/*.spec.js"
+//
+//     # run all unit tests separately
+//     gulp unit-test --separately
+//
+//     # run only specified unit tests separately
+//     gulp unit-test --separately --specs core/src/elements/ons-navigator/index.spec.js
+//     gulp unit-test --separately --specs "core/src/**/index.spec.js"
+//     gulp unit-test --separately --specs "core/src/**/*.spec.js"
+//
+//     # run unit tests in a particular browser
+//     gulp unit-test --browsers local_chrome_headless
+//     gulp unit-test --browsers local_chrome_headless,local_safari # you can use commas
+//     gulp unit-test --browsers remote_iphone_5_simulator_ios_10_0_safari # to use this, see karma.conf.js
+//     gulp unit-test --browsers local_chrome_headless,remote_macos_elcapitan_safari_10 # default
+//
+//     # run unit tests without Onsen UI warnings
+//     gulp unit-test --disable-warnings
+//
+//     # watch unit tests
+//     gulp unit-test --watch
 
-    (async () => {
-      const specs = argv.specs || 'core/src/**/*.spec.js'; // you cannot use commas for --specs
-      let browsers = argv.browsers ? argv.browsers.split(',').map(s => s.trim()) : ['local_chrome_headless', 'remote_macos_safari'];
+const unitTestTasks = [];
+if (!argv['skip-build']) {
+  if (argv.watch) {
+    unitTestTasks.push(watchCore);
+  } else {
+    unitTestTasks.push(coreCss, core);
+  }
+}
+unitTestTasks.push(unitTest);
+exports['unit-test'] = gulp.series(...unitTestTasks);
 
-      // If the Sauce credentials are not set, remove the remote builds from the queue.
-      // This way, we can run the unit test more easily locally, as well as safely for
-      // pull requests. These values are not passed to PR builds because in theory the
-      // PR could log out these values and expose them.
-      if (!process.env.SAUCE_USERNAME || !process.env.SAUCE_ACCESS_KEY) {
-        browsers = browsers.filter(browser => {
-          const isRemote = browser.indexOf('remote') === 0;
+function unitTest(done) {
 
-          if (isRemote) {
-            console.warn(`Not testing on ${browser} due to missing credentials`);
-            return false;
-          } else {
-            return true;
-          }
-        });
-      }
+  (async () => {
+    const specs = argv.specs || 'core/src/**/*.spec.js'; // you cannot use commas for --specs
+    let browsers = argv.browsers ? argv.browsers.split(',').map(s => s.trim()) : ['local_chrome_headless', 'remote_macos_safari'];
 
-      let listOfSpecFiles;
-      if (argv.separately) { // resolve glob pattern
-        listOfSpecFiles = glob.sync( path.join(__dirname, specs) );
-      } else { // do not resolve glob pattern
-        listOfSpecFiles = new Array( path.join(__dirname, specs) );
-      }
+    // If the Sauce credentials are not set, remove the remote builds from the queue.
+    // This way, we can run the unit test more easily locally, as well as safely for
+    // pull requests. These values are not passed to PR builds because in theory the
+    // PR could log out these values and expose them.
+    if (!process.env.SAUCE_USERNAME || !process.env.SAUCE_ACCESS_KEY) {
+      browsers = browsers.filter(browser => {
+        const isRemote = browser.indexOf('remote') === 0;
 
-      // if --disable-warnings is specified, suppress warnings from Onsen UI
-      if (argv['disable-warnings']) {
-        global.KARMA_DISABLE_WARNINGS = true;
-      }
+        if (isRemote) {
+          console.warn(`Not testing on ${browser} due to missing credentials`);
+          return false;
+        } else {
+          return true;
+        }
+      });
+    }
 
-      let testsPassed = true; // error flag
+    let listOfSpecFiles;
+    if (argv.separately) { // resolve glob pattern
+      listOfSpecFiles = glob.sync( path.join(__dirname, specs) );
+    } else { // do not resolve glob pattern
+      listOfSpecFiles = new Array( path.join(__dirname, specs) );
+    }
 
-      // Separately launch Karma server for each browser and each set of spec files
-      try {
-        for (let j = 0 ; j < browsers.length ; j++) {
-          $.util.log($.util.colors.blue(`Start unit testing on ${browsers[j]}...`));
+    // if --disable-warnings is specified, suppress warnings from Onsen UI
+    if (argv['disable-warnings']) {
+      global.KARMA_DISABLE_WARNINGS = true;
+    }
+
+    let testsPassed = true; // error flag
+
+    // Separately launch Karma server for each browser and each set of spec files
+    try {
+      for (let j = 0 ; j < browsers.length ; j++) {
+        $.util.log($.util.colors.blue(`Start unit testing on ${browsers[j]}...`));
+
+        // Pass parameters to Karma config file via `global`
+        global.KARMA_BROWSER = browsers[j];
+
+        for (let i = 0 ; i < listOfSpecFiles.length ; i++) {
+          $.util.log($.util.colors.blue(path.relative(__dirname, listOfSpecFiles[i])));
 
           // Pass parameters to Karma config file via `global`
-          global.KARMA_BROWSER = browsers[j];
+          global.KARMA_SPEC_FILES = listOfSpecFiles[i];
 
-          for (let i = 0 ; i < listOfSpecFiles.length ; i++) {
-            $.util.log($.util.colors.blue(path.relative(__dirname, listOfSpecFiles[i])));
+          // Launch Karma server and wait until it exits
+          await (async () => {
+            return new Promise((resolve, reject) => {
+              new karma.Server(
+                {
+                  configFile: path.join(__dirname, 'core/test/unit/karma.conf.js'),
+                  singleRun: argv.watch ? false : true, // overrides the corresponding option in config file
+                  autoWatch: argv.watch ? true : false // same as above
+                },
+                (exitCode) => {
+                  const exitMessage = `Karma server has exited with ${exitCode}`;
 
-            // Pass parameters to Karma config file via `global`
-            global.KARMA_SPEC_FILES = listOfSpecFiles[i];
-
-            // Launch Karma server and wait until it exits
-            await (async () => {
-              return new Promise((resolve, reject) => {
-                new karma.Server(
-                  {
-                    configFile: path.join(__dirname, 'core/test/unit/karma.conf.js'),
-                    singleRun: argv.watch ? false : true, // overrides the corresponding option in config file
-                    autoWatch: argv.watch ? true : false // same as above
-                  },
-                  (exitCode) => {
-                    const exitMessage = `Karma server has exited with ${exitCode}`;
-
-                    switch (exitCode) {
-                      case 0: // success
-                        $.util.log($.util.colors.green(exitMessage));
-                        $.util.log($.util.colors.green('Passed unit tests successfully.'));
-                        break;
-                      default: // error
-                        $.util.log($.util.colors.red(exitMessage));
-                        $.util.log($.util.colors.red('Failed to pass some unit tests. (Otherwise, the unit testing itself is broken)'));
-                        testsPassed = false;
-                    }
-                    resolve();
+                  switch (exitCode) {
+                    case 0: // success
+                      $.util.log($.util.colors.green(exitMessage));
+                      $.util.log($.util.colors.green('Passed unit tests successfully.'));
+                      break;
+                    default: // error
+                      $.util.log($.util.colors.red(exitMessage));
+                      $.util.log($.util.colors.red('Failed to pass some unit tests. (Otherwise, the unit testing itself is broken)'));
+                      testsPassed = false;
                   }
-                ).start();
-              });
-            })();
+                  resolve();
+                }
+              ).start();
+            });
+          })();
 
-            // Wait for 500 ms before next iteration to avoid crashes
-            await (async () => {
-              return new Promise((resolve, reject) => {
-                setTimeout(() => { resolve(); }, 500 );
-              });
-            })();
-          }
+          // Wait for 500 ms before next iteration to avoid crashes
+          await (async () => {
+            return new Promise((resolve, reject) => {
+              setTimeout(() => { resolve(); }, 500 );
+            });
+          })();
         }
-      } finally {
-        global.KARMA_BROWSER = undefined;
-        global.KARMA_SPEC_FILES = undefined;
       }
+    } finally {
+      global.KARMA_BROWSER = undefined;
+      global.KARMA_SPEC_FILES = undefined;
+    }
 
-      if (testsPassed) {
-        $.util.log($.util.colors.green('Passed unit tests on all browsers!'));
-        done();
-      } else {
-        $.util.log($.util.colors.red('Failed to pass unit tests on some browsers.'));
-        done('unit-test has failed');
-      }
-    })();
-  }
-);
+    if (testsPassed) {
+      $.util.log($.util.colors.green('Passed unit tests on all browsers!'));
+      done();
+    } else {
+      $.util.log($.util.colors.red('Failed to pass unit tests on some browsers.'));
+      done('unit-test has failed');
+    }
+  })();
+}
 
 ////////////////////////////////////////
 // clean
 ////////////////////////////////////////
-gulp.task('clean', () => {
+function clean() {
   return gulp.src([
     '.tmp',
     'build',
     '.selenium/'
-  ], {read: false}).pipe($.clean());
-});
+  ], {read: false, allowEmpty: true}).pipe($.clean());
+}
 
 ////////////////////////////////////////
 // core-css
 ////////////////////////////////////////
-gulp.task('core-css', () =>  {
+function coreCss() {
   const buildPath = 'build/css/';
   const core = (name, fonts) => gulp.src([
       (fonts ? '' : '!') + 'core/css/fonts.css',
@@ -486,7 +509,7 @@ gulp.task('core-css', () =>  {
     .pipe(gulp.dest(buildPath))
   ;
 
-  return merge(
+  return mergeStream(
     core('onsenui', true),
     core('onsenui-core', false),
 
@@ -506,21 +529,21 @@ gulp.task('core-css', () =>  {
     gulp.src('core/css/material-design-iconic-font/**/*')
     .pipe(gulp.dest('build/css/material-design-iconic-font/'))
   );
-});
+}
 
 ////////////////////////////////////////
 // core-esm
 ////////////////////////////////////////
-gulp.task('core-esm', () =>  {
+function coreEsm() {
   // ES Modules (transpiled ES source codes)
   return bundle(rollupConfigs.onsESM).then(() => transpileCoreSrc(coreESMFiles))
-});
+}
 
 ////////////////////////////////////////
 // copy-files
 ////////////////////////////////////////
-gulp.task('copy-files', () =>  {
-  return merge(
+function copyFiles() {
+  return mergeStream(
     // CSS source
     gulp.src([
       'css-components/**/*',
@@ -547,12 +570,12 @@ gulp.task('copy-files', () =>  {
     gulp.src('core/src/onsenui.d.ts')
       .pipe(gulp.dest('build/js/')),
   );
-});
+}
 
 ////////////////////////////////////////
 // compress-distribution-package
 ////////////////////////////////////////
-gulp.task('compress-distribution-package', () => {
+function compressDistributionPackage() {
   const src = [
     path.join(__dirname, 'build/**'),
     path.join(__dirname, 'LICENSE'),
@@ -566,22 +589,22 @@ gulp.task('compress-distribution-package', () => {
   return gulp.src(src)
     .pipe($.zip('onsenui.zip'))
     .pipe(gulp.dest(path.join(__dirname, 'build')));
-});
+}
 
 ////////////////////////////////////////
 // build
 ////////////////////////////////////////
 const buildTasks = [
-  'clean',
-  'core',
-  'core-esm',
-  'angular-bindings',
-  'core-css',
+  clean,
+  core,
+  coreEsm,
+  angularBindings,
+  coreCss,
   'build-css',
-  'copy-files',
+  copyFiles,
 ];
 
-gulp.task('build', done => runSequence.apply(null, buildTasks.concat(['build-docs', 'compress-distribution-package', done])));
+exports.build = gulp.series(...buildTasks.concat([buildDocs, compressDistributionPackage]));
 
 ////////////////////////////////////////
 // dist
@@ -604,14 +627,26 @@ const distFiles = done => {
   .on('end', done);
 };
 
-gulp.task('dist', done => runSequence.apply(null, buildTasks.concat([() => distFiles(done)])));
-gulp.task('dist-no-build', distFiles);
+exports.dist = gulp.series(...buildTasks.concat(distFiles));
+
+exports['dist-no-build'] = distFiles
 
 ////////////////////////////////////////
 // serve
 ////////////////////////////////////////
 
-gulp.task('serve', done => {
+const serveTasks = [liveReload];
+argv.css && serveTasks.push('css-clean', 'cssnext');
+argv.core && serveTasks.push(watchCore);
+argv.coreEsm && serveTasks.push(watchCoreEsm);
+(argv.angular || argv.angular1) && serveTasks.push(watchAngularBindings);
+argv.react && serveTasks.push(watchReactBindings);
+argv.vue && serveTasks.push(watchVueBindings);
+serveTasks.push(browserSync);
+
+exports.serve = gulp.series(...serveTasks);
+
+function liveReload(done) {
   // Livereload
   gulp.watch([
     'build/js/*onsenui.js',
@@ -623,23 +658,13 @@ gulp.task('serve', done => {
     'bindings/vue/examples/build.js',
     'bindings/react/examples/build.js',
   ]).on('change', changedFile => {
-    gulp.src(changedFile.path)
-      .pipe(browserSync.reload({stream: true, once: true}));
+    gulp.src(changedFile)
+      .pipe(browserSyncPlugin.reload({stream: true, once: true}));
   });
+  done();
+}
 
-  const tasks = [];
-  argv.css && tasks.push('css-clean', 'cssnext');
-  argv.core && tasks.push('watch-core');
-  argv.coreEsm && tasks.push('watch-core-esm');
-  (argv.angular || argv.angular1) && tasks.push('watch-angular-bindings');
-  argv.react && tasks.push('watch-react-bindings');
-  argv.vue && tasks.push('watch-vue-bindings');
-  tasks.push('browser-sync', done);
-
-  return runSequence(...tasks);
-});
-
-gulp.task('browser-sync', (done) => {
+function browserSync(done) {
   const startPath =
     argv.vue && '/bindings/vue/examples/index.html'
     || argv.react && '/bindings/react/examples/index.html'
@@ -647,7 +672,7 @@ gulp.task('browser-sync', (done) => {
     // || (argv.ngx || argv.angular2) && '/bindings/angular2/.../'
     || '/examples/';
 
-  browserSync({
+  browserSyncPlugin({
     server: {
       baseDir: __dirname,
       index: 'index.html',
@@ -661,20 +686,20 @@ gulp.task('browser-sync', (done) => {
     ghostMode: false,
     notify: false
   }, done);
-});
+}
 
 ////////////////////////////////////////
 // build-docs
 ////////////////////////////////////////
-gulp.task('build-docs', () => {
+function buildDocs() {
   const docsBuilder = require('./docs/wcdoc');
 
   return docsBuilder.build(path.join(__dirname, '/build/docs'));
-});
+}
+
+exports['build-docs'] = buildDocs;
 
 ////////////////////////////////////////
 // test
 ////////////////////////////////////////
-gulp.task('test', ['core-css'], function(done) {
-  return runSequence('core-dts-test', 'unit-test', done);
-});
+exports.test = gulp.series(coreDtsTest, unitTest);

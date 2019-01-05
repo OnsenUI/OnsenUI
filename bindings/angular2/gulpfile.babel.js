@@ -8,14 +8,15 @@ import StaticServer from 'static-server';
 
 const FLAGS = `--inline --colors --progress --display-error-details --display-cached`;
 
-gulp.task('serve', done => {
+function serve(done) {
   createDevServer().listen('3030', '0.0.0.0', () => {
     open('http://0.0.0.0:3030/bindings/angular2/examples/button.html');
     done();
   });
-});
+}
+exports.serve = serve;
 
-gulp.task('serve-umd-template', () => {
+function serveUmdTemplate() {
   const server = new StaticServer({
     rootPath: '.',
     port: 8967
@@ -23,11 +24,11 @@ gulp.task('serve-umd-template', () => {
   server.start(() => {
     open(`http://0.0.0.0:${server.port}/umd-template/index.html`);
   });
-});
+}
   
-gulp.task('test', ['e2e-test']);
+exports.test = e2eTest;
 
-gulp.task('e2e-test', done => {
+function e2eTest(done) {
   const server = createDevServer({quiet: true});
 
   server.listen(9090, '0.0.0.0', () => {
@@ -40,7 +41,8 @@ gulp.task('e2e-test', done => {
       done();
     });
   });
-});
+}
+exports['e2e-test'] = e2eTest;
 
 function createDevServer(options = {}) {
   const config = require('./webpack.dev.config.js');
