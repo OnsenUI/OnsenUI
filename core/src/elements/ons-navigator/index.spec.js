@@ -341,6 +341,15 @@ describe('OnsNavigatorElement', () => {
         });
       });
     });
+
+    it('works when initial page is defined as child element', () => {
+      nav = ons._util.createElement(`
+        <ons-navigator page='hoge'><ons-page></ons-page></ons-navigator>
+      `);
+      document.body.appendChild(nav);
+
+      expect(() => nav.bringPageTop('hoge')).to.not.throw(Error);
+    });
   });
 
   describe('#insertPage()', () => {
