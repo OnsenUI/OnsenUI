@@ -89,7 +89,6 @@ describe('OnsIconElement', () => {
     });
 
     it('defaults to Font Awesome Solid if icon style is not specified', () => {
-      const element = new ons.elements.Icon();
       element.setAttribute('icon', 'fa-circle');
       expect(element.classList.contains('fa')).to.be.true;
       expect(element.classList.contains('far')).to.not.be.true;
@@ -98,7 +97,6 @@ describe('OnsIconElement', () => {
     });
 
     it('supports Font Awesome Regular icon style', () => {
-      const element = new ons.elements.Icon();
       element.classList.add('far');
       element.setAttribute('icon', 'fa-circle');
       expect(element.classList.contains('far')).to.be.true;
@@ -106,7 +104,6 @@ describe('OnsIconElement', () => {
     });
 
     it('supports Font Awesome Brands icon style', () => {
-      const element = new ons.elements.Icon();
       element.classList.add('fab');
       element.setAttribute('icon', 'fa-circle');
       expect(element.classList.contains('fab')).to.be.true;
@@ -114,7 +111,6 @@ describe('OnsIconElement', () => {
     });
 
     it('supports Font Awesome Light icon style', () => {
-      const element = new ons.elements.Icon();
       element.classList.add('fal');
       element.setAttribute('icon', 'fa-circle');
       expect(element.classList.contains('fal')).to.be.true;
