@@ -8,6 +8,7 @@ dev
  ### Bug Fixes
 
  * ons-icon: Fix bug where Font Awesome v5 styles (far, fal, fab) were being ignored.
+ * ons-navigator: Fix bringPageTop not working if a page is defined inside ons-navigator tags.
 
 2.10.6
 ---
