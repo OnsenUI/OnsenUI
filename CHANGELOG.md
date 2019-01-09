@@ -9,6 +9,7 @@ dev
 
  * ons-icon: Fix bug where Font Awesome v5 styles (far, fal, fab) were being ignored.
  * ons-navigator: Fix bringPageTop not working if a page is defined inside ons-navigator tags.
+ * ons-tab: Stop recreating tabs when page with tabbar is brought to top of navigator stack. ([#2604](https://github.com/OnsenUI/OnsenUI/issues/2604)).
 
 2.10.6
 ---
