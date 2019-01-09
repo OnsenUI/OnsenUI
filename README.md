@@ -93,7 +93,7 @@ $ [sudo] npm -g install monaca
 $ monaca create helloworld # And choose the starter template
 $ monaca preview # Preview on the browser
 $ monaca debug # Preview on a real device
-$ monaca remote-build # Production build on the cloud
+$ monaca remote build --browser # Production build on the cloud
 ```
 
 See the [Onsen UI Getting Started Page](http://onsen.io/v2/guide/) for more information.
