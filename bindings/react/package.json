@@ -86,8 +86,7 @@
     "rollup-plugin-visualizer": "^0.3.1",
     "style-loader": "^0.13.1",
     "url-loader": "^0.5.7",
-    "webpack": "^2.6.1",
-    "webpack-dev-server": "^1.16.2"
+    "webpack": "^2.6.1"
   },
   "peerDependencies": {
     "onsenui": "~2.10.6",
