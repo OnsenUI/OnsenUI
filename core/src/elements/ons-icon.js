@@ -120,7 +120,7 @@ export default class IconElement extends BaseElement {
 
   constructor() {
     super();
-     
+
     contentReady(this, () => {
       this._compile();
     });
