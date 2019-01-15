@@ -15,17 +15,17 @@ describe('toast.html', () => {
   });
 
   // TODO: This test is broken on CircleCI. Fix it.
-  //it('should hide static ons-toast when the button is clicked', () => {
-  //  const staticToast = element.all(by.tagName('ons-toast')).get(0);
+  it('should hide static ons-toast when the button is clicked', () => {
+    const staticToast = element.all(by.tagName('ons-toast')).get(0);
 
-  //  expect(staticToast.isDisplayed()).toBeFalsy();
-  //  element.all(by.tagName('ons-button')).get(0).click();
-  //  browser.wait(EC.visibilityOf(staticToast), 5000);
+    expect(staticToast.isDisplayed()).toBeFalsy();
+    element.all(by.tagName('ons-button')).get(0).click();
+    browser.wait(EC.visibilityOf(staticToast), undefined, "timed out waiting for toast to be shown");
 
-  //  element.all(by.css('.toast__button')).get(0).click();
-  //  browser.wait(EC.invisibilityOf(staticToast), 5000);
-  //  expect(staticToast.isDisplayed()).toBeFalsy();
-  //});
+    element.all(by.css('.toast__button')).get(0).click();
+    browser.wait(EC.invisibilityOf(staticToast), undefined, "timed out waiting for toast to disappear");
+    expect(staticToast.isDisplayed()).toBeFalsy();
+  });
 
   it('should have dynamic ons-toast elements', () => {
     let dynamicToast;
@@ -38,20 +38,20 @@ describe('toast.html', () => {
   });
 
   // TODO: This test is broken on CircleCI. Fix it.
-  //it('should hide and destroy dynamic ons-toast when the button is clicked', () => {
-  //  let dynamicToast;
+  it('should hide and destroy dynamic ons-toast when the button is clicked', () => {
+    let dynamicToast;
 
-  //  expect(element.all(by.tagName('ons-toast')).count()).toBe(1);
-  //  element.all(by.tagName('ons-button')).get(1).click();
-  //  dynamicToast = element.all(by.tagName('ons-toast')).get(1);
-  //  browser.wait(EC.visibilityOf(dynamicToast), 5000);
+    expect(element.all(by.tagName('ons-toast')).count()).toBe(1);
+    element.all(by.tagName('ons-button')).get(1).click();
+    dynamicToast = element.all(by.tagName('ons-toast')).get(1);
+    browser.wait(EC.visibilityOf(dynamicToast), undefined, "timed out waiting for toast to be show");
 
-  //  element.all(by.css('.toast__button')).get(1).click();
-  //  browser.wait(() => {
-  //    return element.all(by.tagName('ons-toast')).count().then((count) => {
-  //      return count <= 1;
-  //    });
-  //  }, 5000);
-  //  expect(element.all(by.tagName('ons-toast')).count()).toBe(1);
-  //});
+    element.all(by.css('.toast__button')).get(1).click();
+    browser.wait(() => {
+      return element.all(by.tagName('ons-toast')).count().then((count) => {
+        return count <= 1;
+      });
+    }, undefined, "timed out waiting for toast to be destroyed");
+    expect(element.all(by.tagName('ons-toast')).count()).toBe(1);
+  });
 });
