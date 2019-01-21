@@ -10,6 +10,7 @@
     "test:skip-build": "gulp test --disable-warnings --skip-build"
   },
   "main": "js/onsenui.js",
+  "module": "esm/index.js",
   "typings": "js/onsenui.d.ts",
   "files": [
     "bower.json",
