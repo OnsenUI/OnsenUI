@@ -15,7 +15,7 @@ import Util from './Util.js';
  * @example
  * <Select modifier="material"
  *   value={this.state.value}
- *   onChange={(event) => this.setState({value: event.target.value})}
+ *   onChange={(event) => this.setState({value: event.target.value})}>
  *   <option value="1">1</option>
  *   <option value="2">2nd</option>
  *   <option value="3">3rd option</option>
