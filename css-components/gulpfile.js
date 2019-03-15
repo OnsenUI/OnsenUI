@@ -96,7 +96,7 @@ function cssnext() {
     .pipe(gulp.dest(prefix))
     .pipe(browserSync.stream());
 }
-exports.cssnext = gulp.series(stylelint, cssnext);
+gulp.task('cssnext', gulp.series(stylelint, cssnext));
 
 function cssClean(done) {
   rimraf.sync(__dirname + '/build/{*-,}onsen-css-components.css');
@@ -105,7 +105,7 @@ function cssClean(done) {
   rimraf.sync(prefix + '/{*-,}onsen-css-components.min.css');
   done();
 }
-exports['css-clean'] = cssClean;
+gulp.task('css-clean', cssClean);
 
 ////////////////////////////////////////
 // generate-preview
