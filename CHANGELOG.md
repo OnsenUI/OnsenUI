@@ -2,15 +2,20 @@
 CHANGELOG
 ====
 
-dev
+2.10.7
 ---
 
  ### Bug Fixes
 
+ * ons-icon: Compile when content is ready. ([#2547](https://github.com/OnsenUI/OnsenUI/issues/2547)).
  * ons-icon: Fix bug where Font Awesome v5 styles (far, fal, fab) were being ignored.
  * ons-navigator: Fix bringPageTop not working if a page is defined inside ons-navigator tags.
  * ons-tab: Stop recreating tabs when page with tabbar is brought to top of navigator stack. ([#2604](https://github.com/OnsenUI/OnsenUI/issues/2604)).
  * ons-fab: Fix toggled/hidden fab reappears when you leave and return to its page bug. ([#2558](https://github.com/OnsenUI/OnsenUI/issues/2558)).
+
+ ### Misc
+
+ * Upgrade to Gulp 4.
 
 2.10.6
 ---
