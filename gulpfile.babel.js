@@ -87,9 +87,8 @@ const transpileCoreSrc = files => {
   );
 };
 
-function core(done) {
-  bundle(rollupConfigs.ons);
-  done();
+function core() {
+  return bundle(rollupConfigs.ons);
 }
 
 // TODO: For 2.11.0, the bindings should no longer be copied. But it may still be

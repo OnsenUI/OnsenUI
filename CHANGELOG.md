@@ -2,6 +2,13 @@
 CHANGELOG
 ====
 
+2.10.8
+---
+
+ ### Misc
+
+ * Fix bug in gulpfile where `core` was signalling completion too early.
+
 2.10.7
 ---
 
