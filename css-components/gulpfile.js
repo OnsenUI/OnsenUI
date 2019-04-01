@@ -65,7 +65,7 @@ function cssmin() {
   return gulp.src(prefix + '{*-,}onsen-css-components.css')
     .pipe($.cssmin())
     .pipe($.rename({suffix: '.min'}))
-    .pipe(gulp.dest('./build/'))
+    //.pipe(gulp.dest('./build/'))
     .pipe(gulp.dest(prefix));
 }
 
@@ -92,7 +92,7 @@ function cssnext() {
   return gulp.src('src/{*-,}onsen-css-components.css', cwdOption)
     //.pipe(plumber()) // this was causing the task to never complete with gulp 4, but why...?
     .pipe(postcss(plugins))
-    .pipe(gulp.dest('./build/'))
+    //.pipe(gulp.dest('./build/'))
     .pipe(gulp.dest(prefix))
     .pipe(browserSync.stream());
 }

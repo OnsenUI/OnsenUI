@@ -8,6 +8,7 @@ CHANGELOG
  ### Misc
 
  * Fix bug in gulpfile where `core` was signalling completion too early.
+ * Fix bug in gulpfile where distribution CSS files were output to the wrong directory.
 
 2.10.7
 ---
