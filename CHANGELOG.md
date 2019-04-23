@@ -2,6 +2,13 @@
 CHANGELOG
 ====
 
+2.10.9
+---
+
+ ### Misc
+
+ * Upgrade Font Awesome to v5.8.1
+
 2.10.8
 ---
 
