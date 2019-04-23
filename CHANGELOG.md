@@ -8,6 +8,7 @@ CHANGELOG
  ### Misc
 
  * Upgrade Font Awesome to v5.8.1
+ * Upgrade Ionicons to v4.5.5
 
 2.10.8
 ---
