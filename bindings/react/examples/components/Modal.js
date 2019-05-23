@@ -39,7 +39,7 @@ export default class extends React.Component {
           <ToolbarButton onClick={() => this.setState({ showModal: false })}>
             <Icon
               size={{default: 24, material: 40}}
-              icon={{default: 'ion-close', material: 'md-close'}}
+              icon={{default: 'ion-ios-close', material: 'md-close'}}
             />
           </ToolbarButton>
         )}

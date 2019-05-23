@@ -44,7 +44,7 @@ export default class extends React.Component {
           <ons-icon
             modifier={this.state.modifier}
             fixed-width='false'
-            icon='ion-edit, material:md-edit' size='20px, material:20px' />
+            icon='ion-ios-brush, material:md-edit' size='20px, material:20px' />
           <p> Button standard2</p>
           {[0, 90, 180, 270].map((val) =>
 

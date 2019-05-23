@@ -28,8 +28,8 @@ export default class extends React.Component {
             </div>
             <div className="content">
               <div>
-                <Button><Icon icon="ion-thumbsup"></Icon></Button>
-                <Button><Icon icon="ion-share"></Icon></Button>
+                <Button><Icon icon="ion-ios-thumbs-up"></Icon></Button>
+                <Button><Icon icon="ion-ios-share"></Icon></Button>
               </div>
               <List>
                 <ListHeader>Bindings</ListHeader>

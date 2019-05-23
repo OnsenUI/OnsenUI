@@ -2,6 +2,15 @@
 CHANGELOG
 ====
 
+2.10.9
+---
+
+ ### Misc
+
+ * Upgrade Font Awesome to v5.8.1
+ * Upgrade Ionicons to v4.5.5
+ * Upgrade Material Design icons to v2.2.0
+
 2.10.8
 ---
 
