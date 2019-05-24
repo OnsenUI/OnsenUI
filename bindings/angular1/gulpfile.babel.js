@@ -77,7 +77,7 @@ function e2eTest() {
       $.connect.serverClose();
     });
 }
-exports['e2e-test'] = gulp.series(webdriverDownload, e2eTest);
+gulp.task('e2e-test', gulp.series(webdriverDownload, e2eTest));
 
 function clean() {
   return gulp.src(['dist'], { read: false, allowEmpty: true })
@@ -90,4 +90,4 @@ function angularjsBindings() {
   return rollup(config.angularOns).then(bundle => bundle.write(config.angularOns.output));
 }
 
-exports.build = gulp.series(clean, angularjsBindings);
+gulp.task('build', gulp.series(clean, angularjsBindings));

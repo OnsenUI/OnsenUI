@@ -70,7 +70,7 @@ jobs:
       # Core build
       - run:
           name: Building Onsen UI core
-          command: gulp build
+          command: npx gulp build
 
       # bindings/angular2
       - restore_cache:
