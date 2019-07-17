@@ -56,8 +56,8 @@ export class PageComponent {
       <ons-tabbar swipeable animation="none" position="auto" (swipe)="onSwipe($event)">
         <div class="tabbar__content"></div>
         <div class="tabbar">
-          <ons-tab label="Page1" icon="ion-ios-home" [page]="home" active></ons-tab>
-          <ons-tab label="Page2" icon="ion-ios-help" [page]="page"></ons-tab>
+          <ons-tab label="Page1" icon="ion-ios-home" [page]="home" active active-icon="ion-ios-square"></ons-tab>
+          <ons-tab label="Page2" icon="ion-ios-help" [page]="page" active-icon="ion-ios-square"></ons-tab>
           <ons-tab label="Page3" icon="ion-ios-square" [page]="page"></ons-tab>
         </div>
       </ons-tabbar>

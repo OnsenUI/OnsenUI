@@ -2,8 +2,12 @@
 CHANGELOG
 ====
 
-2.10.9
+dev
 ---
+
+ ### Bug Fixes
+
+ * ons-tab: Show active-icon for initially active tab in Angular 2+. ([#2656](https://github.com/OnsenUI/OnsenUI/issues/2656)).
 
  ### Misc
 

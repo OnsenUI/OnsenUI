@@ -194,7 +194,7 @@ export default class TabElement extends BaseElement {
       iconWrapper = iconWrapper || util.createElement('<div class="tabbar__icon"><ons-icon></ons-icon></div>');
       const icon = iconWrapper.children[0];
       const fix = (last => () => icon.attributeChangedCallback('icon', last, this.getAttribute('icon')))(icon.getAttribute('icon'));
-      icon.setAttribute('icon', this.getAttribute('icon'));
+      icon.setAttribute('icon', this.getAttribute(this.isActive() ? 'active-icon' : 'icon'));
       iconWrapper.parentElement !== button && button.insertBefore(iconWrapper, button.firstChild);
 
       // dirty fix for https://github.com/OnsenUI/OnsenUI/issues/1654
