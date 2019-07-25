@@ -39,6 +39,7 @@ import rawAngularRollupConfig from './bindings/angular1/rollup.config.js';
 
 // Configurations
 const rawRollupConfigs = [].concat(rawCoreRollupConfig, rawAngularRollupConfig);
+// make an object of rollup configs where each entry in object is: config name -> config
 const rollupConfigs = rawRollupConfigs.reduce((r, c) => (r[c.output.name] = c) && r, {});
 const babelrc = Object.assign({}, pkg.babel);
 babelrc.babelrc = babelrc.presets[0][1].modules = false;
@@ -489,9 +490,9 @@ function clean() {
 function coreCss() {
   const buildPath = 'build/css/';
   const core = (name, fonts) => gulp.src([
-      (fonts ? '' : '!') + 'core/css/fonts.css',
       'core/css/common.css',
       'core/css/*.css',
+      (fonts ? '' : '!') + 'core/css/fonts.css',
     ])
     .pipe($.concat(`${name}.css`))
     .pipe($.insert.prepend(`/*! ${pkg.name} - v${pkg.version} - ${dateformat(new Date(), 'yyyy-mm-dd')} */\n`))
