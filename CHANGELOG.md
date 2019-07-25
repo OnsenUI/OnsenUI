@@ -5,6 +5,10 @@ CHANGELOG
 dev
 ---
 
+ ### Bug Fixes
+
+ * ons-tab: Show active-icon for initially active tab in Angular 2+. ([#2656](https://github.com/OnsenUI/OnsenUI/issues/2656)).
+
  ### Misc
 
  * Upgrade Font Awesome to v5.8.1
