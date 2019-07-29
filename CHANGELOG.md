@@ -2,6 +2,13 @@
 CHANGELOG
 ====
 
+2.10.10
+---
+
+ ### Misc
+
+ * Make sure CSS imports go at the top of onsenui.css. ([#2674](https://github.com/OnsenUI/OnsenUI/issues/2674)).
+
 2.10.9
 ---
 
