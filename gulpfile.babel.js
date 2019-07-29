@@ -489,11 +489,20 @@ function clean() {
 ////////////////////////////////////////
 function coreCss() {
   const buildPath = 'build/css/';
-  const core = (name, fonts) => gulp.src([
+  const core = (name, fonts) => {
+    const cssFiles = [
       'core/css/common.css',
       'core/css/*.css',
-      (fonts ? '' : '!') + 'core/css/fonts.css',
-    ])
+    ];
+    if (fonts) {
+      cssFiles.unshift('core/css/fonts.css');
+    } else {
+      cssFiles.push('!core/css/fonts.css');
+    }
+
+    return gulp.src(
+      cssFiles
+    )
     .pipe($.concat(`${name}.css`))
     .pipe($.insert.prepend(`/*! ${pkg.name} - v${pkg.version} - ${dateformat(new Date(), 'yyyy-mm-dd')} */\n`))
     // Transpile
@@ -506,8 +515,8 @@ function coreCss() {
     // Minify
     .pipe($.cssmin({ processImport: false }))
     .pipe($.rename({ suffix: '.min' }))
-    .pipe(gulp.dest(buildPath))
-  ;
+    .pipe(gulp.dest(buildPath));
+  }
 
   return mergeStream(
     core('onsenui', true),
