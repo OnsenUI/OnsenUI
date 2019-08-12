@@ -35,7 +35,7 @@ import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
 export class AppComponent {
   public items: any[];
 
-  @ViewChild(OnsLazyRepeat) lazyRepeat: OnsLazyRepeat;
+  @ViewChild(OnsLazyRepeat, {static: false}) lazyRepeat: OnsLazyRepeat;
 
   constructor() {
     this.items = [];

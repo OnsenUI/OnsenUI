@@ -39,7 +39,7 @@ export class AppComponent implements AfterViewInit {
 
   ratio = 0;
 
-  @ViewChild('pullhook') pullhook: any;
+  @ViewChild('pullhook', {static: true}) pullhook: any;
 
   constructor() {
   }
