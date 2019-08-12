@@ -1,6 +1,13 @@
 CHANGELOG
 ====
 
+dev
+---
+
+### New Features
+
+ * Supported Angular 8+.
+
 7.0.0
 ---
 
