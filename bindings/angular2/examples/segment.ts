@@ -98,8 +98,8 @@ export class Page1Component {
   `
 })
 export class AppComponent {
-  @ViewChild('segment') _segment: any;
-  @ViewChild('tabbar') _tabbar: any;
+  @ViewChild('segment', {static: true}) _segment: any;
+  @ViewChild('tabbar', {static: true}) _tabbar: any;
   page1 = Page1Component;
   page2 = Page2Component;
   page3 = Page3Component;

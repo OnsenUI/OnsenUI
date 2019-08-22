@@ -1,9 +1,9 @@
 {
   "compilerOptions": {
-    "module": "es2015",
+    "module": "esnext",
     "target": "es5",
     "moduleResolution": "node",
-    "lib": ["es2017", "dom"],
+    "lib": ["es2018", "dom"],
     "sourceMap": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,

@@ -5,6 +5,7 @@ const webpack = require('webpack')
 const pkg = JSON.parse(fs.readFileSync('package-dist.json', 'utf-8' ));
 
 module.exports = {
+  mode: 'production',
   entry: './dist/ngx-onsenui.js', // string | object | array
   // Here the application starts executing
   // and webpack starts bundling
