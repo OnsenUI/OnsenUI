@@ -1,6 +1,5 @@
 {
   "$schema": "../node_modules/@angular-devkit/schematics/collection-schema.json",
-  "extends": ["@schematics/angular"],
   "schematics": {
     "ng-add": {
       "description": "Install ngx-onsenui",
@@ -12,11 +11,6 @@
       "private": true,
       "factory": "./ng-add/setup-project",
       "schema": "./ng-add/schema.json"
-    },
-    "page": {
-      "description": "Create a page component",
-      "factory": "./page/index",
-      "schema": "./page/schema.json"
     }
   }
 }
