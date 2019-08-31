@@ -6,7 +6,7 @@
  * found in the LICENSE file at https://angular.io/license
  */
 
-import {WorkspaceProject} from '@angular-devkit/core/src/workspace';
+import {WorkspaceProject} from '@angular-devkit/core/src/experimental/workspace';
 import {SchematicsException, Tree} from '@angular-devkit/schematics';
 import {addImportToModule} from '@schematics/angular/utility/ast-utils';
 import {InsertChange} from '@schematics/angular/utility/change';

@@ -6,7 +6,7 @@
  * found in the LICENSE file at https://angular.io/license
  */
 
-import {WorkspaceSchema, WorkspaceProject} from '@angular-devkit/core/src/workspace';
+import {WorkspaceSchema, WorkspaceProject} from '@angular-devkit/core/src/experimental/workspace';
 
 /**
  * Finds the specified project configuration in the workspace. Throws an error if the project

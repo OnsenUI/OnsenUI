@@ -8,7 +8,7 @@ import {
   getSourceFile,
   hasNgModuleImport,
 } from '../utils';
-import { WorkspaceProject, WorkspaceSchema } from '@angular-devkit/core/src/workspace';
+import { WorkspaceProject, WorkspaceSchema } from '@angular-devkit/core/src/experimental/workspace';
 import { getWorkspace } from '@schematics/angular/utility/config';
 import { addSymbolToNgModuleMetadata } from '@schematics/angular/utility/ast-utils';
 import { getAppModulePath } from '@schematics/angular/utility/ng-ast-utils';
@@ -45,7 +45,6 @@ export default function(options: Schema): Rule {
     addCustomElementsSchema(options),
     addOnsenModule(options),
     addOnsenStyles(options),
-    addDefaultStyleExt(options),
     updateTsLint(),
     showCompleteMessage()
   ]);
@@ -166,29 +165,6 @@ function addOnsenStyles(options: Schema) {
   };
 }
 
-/**
- * Adds default style extention to the schematics of the specified project.
- */
-function addDefaultStyleExt(options: Schema) {
-  return (host: Tree) => {
-    const workspace = getWorkspace(host);
-    const project = getProjectFromWorkspace(workspace, options.project);
-
-    const schematics = project.schematics;
-    if (schematics) {
-      const angularComponentSchematic = schematics['@schematics/angular:component'];
-      if (angularComponentSchematic) {
-        schematics['ngx-onsenui:page'] = {
-          'styleext': angularComponentSchematic.styleext
-        };
-        host.overwrite('angular.json', JSON.stringify(workspace, null, 2));
-      }
-    } 
-
-    return host;
-  };
-}
-
 /** Adds a theming style entry to the given project target options. */
 function addThemeStyleToTarget(project: WorkspaceProject, targetName: string, host: Tree,
   assetPath: string, workspace: WorkspaceSchema) {
@@ -219,13 +195,6 @@ function addThemeStyleToTarget(project: WorkspaceProject, targetName: string, ho
 function showCompleteMessage() {
   return (host: Tree, context: SchematicContext) => {
     context.logger.log('info', `🎉 Hooray! ngx-onsenui is successfully installed.`);
-    context.logger.log('info', ``);
-    context.logger.log('info', `You can generate a page by`);
-    context.logger.log('info', `$ ng generate ngx-onsenui:page sample`);
-    context.logger.log('info', `or`);
-    context.logger.log('info', `$ ng config cli.defaultCollection ngx-onsenui`);
-    context.logger.log('info', `$ ng generate page sample`);
-    context.logger.log('info', ``);
     context.logger.log('info', `♨️ For more information, see https://onsen.io/v2/api/angular2/`);
     return host;
   };
