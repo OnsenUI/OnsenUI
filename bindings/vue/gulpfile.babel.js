@@ -4,8 +4,7 @@ import corePkg from '../../package.json';
 import gulp from 'gulp';
 import * as glob from 'glob';
 import path from'path';
-import {merge} from 'event-stream';
-import runSequence from 'run-sequence';
+import mergeStream from 'merge-stream';
 import fs from 'fs';
 import fse from 'fs-extra';
 import yargs, {argv} from 'yargs';
@@ -25,9 +24,15 @@ const FLAGS = `--inline --colors --progress --display-error-details --display-ca
 ////////////////////////////////////////
 const bundle = config => rollup(config).then(bundle => bundle.write(config.output));
 
-gulp.task('vue-bindings', () => bundle(rollupConfig.VueOnsen));
-gulp.task('vue-bindings-esm-bundle', () => bundle(rollupConfig.VueOnsenESM));
-gulp.task('vue-bindings-esm', ['vue-bindings-esm-bundle'], () =>  {
+function vueBindings() {
+  return bundle(rollupConfig.VueOnsen);
+}
+
+function vueBindingsEsmBundle() {
+  return bundle(rollupConfig.VueOnsenESM);
+}
+
+function vueBindingsEsm() {
   const babelrc = Object.assign({}, corePkg.babel);
   babelrc.babelrc = babelrc.presets[0][1].modules = false;
   babelrc.plugins = [
@@ -36,7 +41,7 @@ gulp.task('vue-bindings-esm', ['vue-bindings-esm-bundle'], () =>  {
   ];
 
   // ES Modules (transpiled ES source codes)
-  return merge(
+  return mergeStream(
     gulp.src([
       'src/**/*.js',
       '!src/*.js',
@@ -55,18 +60,19 @@ gulp.task('vue-bindings-esm', ['vue-bindings-esm-bundle'], () =>  {
     .pipe(gulp.dest('esm/'))
 
   );
-});
+}
 
-gulp.task('clean', () => gulp.src([ 'dist', 'esm', ], { read: false }).pipe($.clean()));
+function clean() {
+  return gulp.src([ 'dist', 'esm', ], { read: false, allowEmpty: true })
+    .pipe($.clean());
+}
 
-gulp.task('build', done => {
-  return runSequence('clean', 'vue-bindings', 'vue-bindings-esm', done);
-});
+exports.build = gulp.series(clean, vueBindings, vueBindingsEsmBundle, vueBindingsEsm);
 
 ////////////////////////////////////////
 // generate-components
 ////////////////////////////////////////
-gulp.task('generate-components', () => {
+gulp.task('generate-components', (done) => {
   const camelize = string => string.toLowerCase().replace(/-([a-z])/g, (m, l) => l.toUpperCase());
   const generate = (baseName, baseMixins = '') => {
     const domElement = 'ons-' + baseName;
@@ -139,6 +145,8 @@ gulp.task('generate-components', () => {
       }
     });
   });
+
+  done();
 });
 
 // Build tags and attribute data files required for `vue-onsenui-helper-json`.

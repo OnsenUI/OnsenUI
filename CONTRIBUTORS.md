@@ -35,5 +35,8 @@ List of code contributors (in no particular order):
 * [Naoki Matagawa](https://github.com/asial-matagawa)
 * [Gearóid Moroney](https://github.com/asialgearoid)
 * [Eric Corson](https://github.com/emccorson)
+* [Yong Sopheaktra](https://github.com/yong-asial)
+* [aguingand](https://github.com/aguingand)
+* [Priya Pandya](https://github.com/MetalDent)
 
 Please add yourself if you're not on this list but feel that you should be.

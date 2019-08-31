@@ -257,6 +257,55 @@ describe('OnsPageElement', () => {
       document.body.appendChild(element);
       return expect(p).to.eventually.be.fulfilled;
     });
+
+    describe('ons-fab', () => {
+      let fab;
+
+      beforeEach(() => {
+        element = ons._util.createElement('<ons-page><ons-fab></ons-fab></ons-page>');
+        fab = element.querySelector('ons-fab');
+      });
+
+      afterEach(() => {
+        fab = null;
+      });
+
+      it('doesn\'t show a manually hidden ons-fab', () => {
+        fab.hide();
+        expect(fab.visible).to.be.false;
+
+        document.body.appendChild(element);
+        element._show();
+        expect(fab.visible).to.be.false;
+      });
+
+      it('does show an ons-fab that wasn\'t manually hidden', () => {
+        document.body.appendChild(element);
+        element._show();
+        expect(fab.visible).to.be.true;
+      });
+
+      it('does show an ons-fab that was automatically hidden', () => {
+        fab._toggle(false);
+        expect(fab.visible).to.be.false;
+
+        document.body.appendChild(element);
+        element._show();
+        expect(fab.visible).to.be.true;
+      });
+
+      it('does show an ons-fab that was manually hidden then manually shown', () => {
+        fab.hide();
+        expect(fab.visible).to.be.false;
+        fab.show();
+        expect(fab.visible).to.be.true;
+
+        document.body.appendChild(element);
+        element._show();
+        expect(fab.visible).to.be.true;
+      });
+    });
+
   });
 
   describe('#_hide()', () => {

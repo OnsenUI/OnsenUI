@@ -42,3 +42,11 @@
  *   [en]New value for `index` prop.[/en]
  *   [ja][/ja]
  */
+
+/**
+ * @attribute visible
+ * @type {Boolean}
+ * @description
+ *   [en]Specify the visibility of the component.[/en]
+ *   [ja][/ja]
+ */

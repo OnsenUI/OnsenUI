@@ -1,6 +1,6 @@
 import gulp from 'gulp';
 import path from 'path';
-import {merge} from 'event-stream';
+import mergeStream from 'merge-stream';
 import os from 'os';
 import fs from 'fs';
 import {argv} from 'yargs';
@@ -19,7 +19,7 @@ gulp.task('webdriver-update', $.protractor.webdriver_update);
 ////////////////////////////////////////
 // webdriver-download (overrides parent definition)
 ////////////////////////////////////////
-gulp.task('webdriver-download', () => {
+function webdriverDownload(done) {
   const platform = os.platform();
   const destDir = path.join(__dirname, '.selenium');
   const chromeDriverUrl = (() => {
@@ -31,24 +31,24 @@ gulp.task('webdriver-download', () => {
 
   // Only download once.
   if (fs.existsSync(destDir + '/chromedriver') || fs.existsSync(destDir + '/chromedriver.exe')) {
-    return gulp.src('');
+    done();
+  } else {
+    const selenium = $.download('https://selenium-release.storage.googleapis.com/3.12/selenium-server-standalone-3.12.0.jar')
+      .pipe(gulp.dest(destDir));
+  
+    const chromedriver = $.download(chromeDriverUrl)
+      .pipe($.unzip())
+      .pipe($.chmod(755))
+      .pipe(gulp.dest(destDir));
+  
+    return mergeStream(selenium, chromedriver);
   }
-
-  const selenium = $.download('https://selenium-release.storage.googleapis.com/3.12/selenium-server-standalone-3.12.0.jar')
-    .pipe(gulp.dest(destDir));
-
-  const chromedriver = $.download(chromeDriverUrl)
-    .pipe($.unzip())
-    .pipe($.chmod(755))
-    .pipe(gulp.dest(destDir));
-
-  return merge(selenium, chromedriver);
-});
+}
 
 ////////////////////////////////////////
 // e2e-test (overrides parent definition)
 ////////////////////////////////////////
-gulp.task('e2e-test', ['webdriver-download'], function() {
+function e2eTest() {
   const port = 8081;
 
   $.connect.server({
@@ -76,14 +76,18 @@ gulp.task('e2e-test', ['webdriver-download'], function() {
     .on('end', function() {
       $.connect.serverClose();
     });
-});
+}
+gulp.task('e2e-test', gulp.series(webdriverDownload, e2eTest));
 
-gulp.task('clean', () => gulp.src(['dist'], { read: false }).pipe($.clean()));
+function clean() {
+  return gulp.src(['dist'], { read: false, allowEmpty: true })
+    .pipe($.clean());
+}
 
-gulp.task('angularjs-bindings', function() {
+function angularjsBindings() {
   const config = rawBundleConfig.reduce((r, c) => (r[c.output.name] = c) && r, {});
 
   return rollup(config.angularOns).then(bundle => bundle.write(config.angularOns.output));
-});
+}
 
-gulp.task('build', ['clean', 'angularjs-bindings']);
+gulp.task('build', gulp.series(clean, angularjsBindings));

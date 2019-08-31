@@ -82,7 +82,7 @@ export default class FabElement extends BaseElement {
 
     // The following statements can be executed before contentReady
     // since these do not access the children
-    this.hide();
+    this._hide();
     this.classList.add(defaultClassName);
 
     contentReady(this, () => {
@@ -113,7 +113,7 @@ export default class FabElement extends BaseElement {
   }
 
   connectedCallback() {
-    setImmediate(() => this.show());
+    setImmediate(() => this._show());
   }
 
   static get observedAttributes() {
@@ -138,11 +138,13 @@ export default class FabElement extends BaseElement {
   }
 
   _show() {
-    this.show();
+    if (!this._manuallyHidden) { // if user has not called ons-fab.hide()
+      this._toggle(true);
+    }
   }
 
   _hide() {
-    setImmediate(() => this.hide());
+    setImmediate(() => this._toggle(false));
   }
 
   _updateRipple() {
@@ -218,6 +220,11 @@ export default class FabElement extends BaseElement {
    *   [ja][/ja]
    */
   toggle(action = !this.visible) {
+    this._manuallyHidden = !action;
+    this._toggle(action);
+  }
+
+  _toggle(action = !this.visible) {
     const isBottom = (this.getAttribute('position') || '').indexOf('bottom') >= 0;
     const translate = isBottom ? `translate3d(0px, -${util.globals.fabOffset || 0}px, 0px)` : '';
 

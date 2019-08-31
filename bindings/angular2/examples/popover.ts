@@ -23,7 +23,7 @@ import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
 })
 class MyPopoverComponent implements OnInit {
 
-  @ViewChild('popover') _popover: any;
+  @ViewChild('popover', {static: true}) _popover: any;
 
   message = '';
 

@@ -1,0 +1,11 @@
+/**
+ * @element ons-action-sheet
+ */
+
+/**
+ * @attribute visible
+ * @type {Boolean}
+ * @description
+ *   [en]Specify the visibility of the component.[/en]
+ *   [ja][/ja]
+ */

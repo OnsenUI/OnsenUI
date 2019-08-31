@@ -39,7 +39,7 @@ export default class extends React.Component {
       <div className='toolbar'>
         <div className='toolbar__left'>
           <span ref='navigation' onClick={() => this.showClick(this.refs.navigation)} className='toolbar-button--outline toolbar__line-height'>
-            <i className='ion-navicon' style={{fontSize: 32, verticalAlign: -6}}></i>
+            <i className='ion-ios-menu' style={{fontSize: 32, verticalAlign: -6}}></i>
           </span>
         </div>
 
@@ -62,21 +62,21 @@ export default class extends React.Component {
         <label onClick={() => this.showClick(this.refs.stop)} className='tabbar__item'>
           <input type='radio' name='tabbar-b' defaultChecked='checked' />
           <button ref='stop' className='tabbar__button'>
-            <i className='tabbar__icon ion-stop'></i>
+            <i className='tabbar__icon ion-ios-square'></i>
           </button>
         </label>
 
         <label onClick={() => this.showClick(this.refs.record)} className='tabbar__item'>
           <input type='radio' name='tabbar-b' />
           <button ref='record' className='tabbar__button'>
-            <i className='tabbar__icon ion-record'></i>
+            <i className='tabbar__icon ion-ios-microphone'></i>
           </button>
         </label>
 
         <label onClick={() => this.showClick(this.refs.star)} className='tabbar__item'>
           <input type='radio' name='tabbar-b' />
           <button ref='star' className='tabbar__button'>
-            <i className='tabbar__icon ion-star'></i>
+            <i className='tabbar__icon ion-ios-star'></i>
           </button>
         </label>
 

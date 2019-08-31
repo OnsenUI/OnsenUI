@@ -37,13 +37,13 @@ class MyPullHook extends React.Component {
         <Icon
           size={35}
           spin={false}
-          icon='ion-arrow-down-a' />
+          icon='ion-ios-round-down' />
         Pull down to refresh
         </span>;
     } else if (this.state.pullHookState === 'preaction') {
-      child = <span><Icon size={35} spin={false} icon='ion-arrow-up-a'></Icon> Release to refresh</span>;
+      child = <span><Icon size={35} spin={false} icon='ion-ios-round-up'></Icon> Release to refresh</span>;
     } else {
-      child = <span><Icon size={35} spin={true} icon='ion-load-d'></Icon> Loading data...</span>;
+      child = <span><Icon size={35} spin={true} icon='ion-ios-flower'></Icon> Loading data...</span>;
     }
 
     return (

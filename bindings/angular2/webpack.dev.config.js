@@ -3,6 +3,7 @@ const glob = require('glob');
 const webpack = require('webpack')
 
 module.exports = {
+  mode: 'development',
   entry: (function() {
     var result = {};
 

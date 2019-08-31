@@ -2,6 +2,23 @@
 CHANGELOG
 ====
 
+1.11.2
+----
+
+### New Features
+
+  * Toolbar: Add visible prop to show and hide toolbar
+
+### Bug Fixes
+
+  * RouterNavigator: Fix double mount ([#2423](https://github.com/OnsenUI/OnsenUI/issues/2423))
+  * Checkbox: Fix checkbox behaviour on multi-mount ([#2418](https://github.com/OnsenUI/OnsenUI/issues/2418))
+
+### Misc
+
+  * Depend on React 16
+  * Remove auto-generated docs
+
 1.11.1
 ----
 

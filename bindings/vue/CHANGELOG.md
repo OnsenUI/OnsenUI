@@ -1,20 +1,21 @@
 CHANGELOG
 ====
 
-dev
+2.6.2
 ----
+
+ ### New Features
+
+ * VOnsToolbar: Add visible prop to show/hide toolbar. Closes [#2478](https://github.com/OnsenUI/OnsenUI/issues/2478).
 
  ### Bug Fixes
 
  * VOnsSelect: selected value is updated properly when options change. Fixes [#2486](https://github.com/OnsenUI/OnsenUI/issues/2486).
  * VOnsListItem: expanded prop is updated when list item is expanded. Fixes [#2493](https://github.com/OnsenUI/OnsenUI/issues/2493).
+ * VOnsSplitterSide: `options.animation` can now be used to set the animation. Fixes [#2394](https://github.com/OnsenUI/OnsenUI/issues/2394).
 
 2.6.1
 ----
-
- ### Bug Fixes
-
- * VOnsSplitterSide: `options.animation` can now be used to set the animation. Fixes [#2394](https://github.com/OnsenUI/OnsenUI/issues/2394).
 
  ### Misc
 

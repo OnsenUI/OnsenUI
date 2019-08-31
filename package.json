@@ -1,6 +1,6 @@
 {
   "name": "onsenui",
-  "version": "2.10.5",
+  "version": "2.10.10",
   "description": "HTML5 Mobile Framework & UI Components",
   "private": false,
   "scripts": {
@@ -81,14 +81,14 @@
     "chalk": "^2.3.0",
     "dateformat": "^3.0.2",
     "eslint": "^4.10.0",
-    "event-stream": "^3.3.4",
-    "gulp": "^3.9.1",
+    "event-stream": "3.3.4",
+    "gulp": "^4.0.0",
     "gulp-autoprefixer": "^4.0.0",
     "gulp-babel": "^7.0.0",
     "gulp-clean": "^0.3.1",
     "gulp-concat": "^2.6.1",
     "gulp-cssmin": "^0.2.0",
-    "gulp-hub": "^0.8.0",
+    "gulp-hub": "^4.2.0",
     "gulp-if": "^2.0.2",
     "gulp-insert": "^0.5.0",
     "gulp-load-plugins": "^1.5.0",
@@ -108,6 +108,7 @@
     "karma-rollup-preprocessor": "^5.0.1",
     "karma-safari-launcher": "^1.0.0",
     "karma-sauce-launcher": "^1.1.0",
+    "merge-stream": "^1.0.1",
     "mkpath": "^1.0.0",
     "mocha": "^4.0.1",
     "rollup": "^0.51.8",
@@ -120,17 +121,16 @@
     "rollup-plugin-progress": "^0.4.0",
     "rollup-plugin-string": "^2.0.2",
     "rollup-plugin-visualizer": "^0.3.1",
-    "run-sequence": "^2.2.0",
     "typescript": "^2.3.3",
     "uglify-js": "^3.1.8",
     "wcdoc": "0.1.19",
-    "wdio-jasmine-framework": "^0.2.16",
+    "wdio-jasmine-framework": "^0.3.8",
     "webdriverio": "^4.4.0"
   },
   "dependencies": {
     "@onsenui/custom-elements": "1.0.0",
     "@onsenui/fastclick": "1.1.1",
     "core-js": "^2.5.1",
-    "gulp-protractor": "^4.1.0"
+    "gulp-protractor": "^4.1.1"
   }
 }

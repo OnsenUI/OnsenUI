@@ -40,7 +40,7 @@ import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
   `
 })
 export class AppComponent {
-  @ViewChild('myCarousel') _carousel: any;
+  @ViewChild('myCarousel', {static: true}) _carousel: any;
   constructor() { }
 
   doSomething() {

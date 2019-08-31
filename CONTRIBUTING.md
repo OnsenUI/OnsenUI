@@ -191,10 +191,19 @@ Once you have done the pre-release checks above, follow the steps below to publi
  - Publish to npm. This will also cause the Bower package to be updated.
    - `cd ../OnsenUI-dist && npm publish`
 
-Finally, on GitHub, create new releases for `OnsenUI` and `OnsenUI-dist`.
+Then, on GitHub, create new releases for `OnsenUI` and `OnsenUI-dist`.
  - On the New Release pages (linked below), _tag version_ and _Release title_ should both be the version number (e.g. `2.10.2`). Under _Describe this release_, copy the section for this release from `CHANGELOG.md`. Click _Publish Release_.
  - OnsenUI: https://github.com/OnsenUI/OnsenUI/releases/new
  - OnsenUI-dist: https://github.com/OnsenUI/OnsenUI-dist/releases/new
+
+Finally, update monaca/monaca-component-onsenui:
+1. `git clone` the repo
+2. `npm install onsenui -g --prefix .` to get the latest onsenui
+3. Copy relevant files in latest onsenui dir to monaca-component-onsenui dir (same way as past commits)
+4. Update package.json (and some other files) manually
+5. Commit changes
+6. Tag the new version (i.e. 2.10.6) to the new commit
+7. Push to GitHub
 
 That's it! Your new Onsen UI version is released. :tada:
 

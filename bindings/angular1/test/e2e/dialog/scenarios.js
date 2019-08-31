@@ -26,21 +26,21 @@
       expect(element(by.id('name')).getText()).toBe('Hello there, Anatoo!');
     });
 
-    it('should emit events', function() {
-      var button = element(by.id('open-dialog'));
-      expect(button.isDisplayed()).toBeTruthy();
+    //it('should emit events', function() {
+    //  var button = element(by.id('open-dialog'));
+    //  expect(button.isDisplayed()).toBeTruthy();
 
-      button.click();
-      browser.wait(EC.invisibilityOf(button));
-      expect(button.isDisplayed()).not.toBeTruthy();
+    //  button.click();
+    //  browser.wait(EC.invisibilityOf(button));
+    //  expect(button.isDisplayed()).not.toBeTruthy();
 
-      var closeDialog = element(by.id('close-dialog'))
-      browser.wait(EC.visibilityOf(closeDialog));
-      closeDialog.click();
+    //  var closeDialog = element(by.id('close-dialog'))
+    //  browser.wait(EC.visibilityOf(closeDialog));
+    //  closeDialog.click();
 
-      browser.wait(EC.visibilityOf(button));
-      expect(button.isDisplayed()).toBeTruthy();
-    });
+    //  browser.wait(EC.visibilityOf(button));
+    //  expect(button.isDisplayed()).toBeTruthy();
+    //});
 
     it('should emit DOM events', function() {
       element(by.id('open-dialog')).click();

@@ -2,6 +2,57 @@
 CHANGELOG
 ====
 
+2.10.10
+---
+
+ ### Misc
+
+ * Make sure CSS imports go at the top of onsenui.css. ([#2674](https://github.com/OnsenUI/OnsenUI/issues/2674)).
+
+2.10.9
+---
+
+ ### Bug Fixes
+
+ * ons-tab: Show active-icon for initially active tab in Angular 2+. ([#2656](https://github.com/OnsenUI/OnsenUI/issues/2656)).
+
+ ### Misc
+
+ * Upgrade Font Awesome to v5.8.1
+ * Upgrade Ionicons to v4.5.5
+ * Upgrade Material Design icons to v2.2.0
+ * Stop fonts being included in onsenui-core.css
+
+2.10.8
+---
+
+ ### Misc
+
+ * Fix bug in gulpfile where `core` was signalling completion too early.
+ * Fix bug in gulpfile where distribution CSS files were output to the wrong directory.
+
+2.10.7
+---
+
+ ### Bug Fixes
+
+ * ons-icon: Compile when content is ready. ([#2547](https://github.com/OnsenUI/OnsenUI/issues/2547)).
+ * ons-icon: Fix bug where Font Awesome v5 styles (far, fal, fab) were being ignored.
+ * ons-navigator: Fix bringPageTop not working if a page is defined inside ons-navigator tags.
+ * ons-tab: Stop recreating tabs when page with tabbar is brought to top of navigator stack. ([#2604](https://github.com/OnsenUI/OnsenUI/issues/2604)).
+ * ons-fab: Fix toggled/hidden fab reappears when you leave and return to its page bug. ([#2558](https://github.com/OnsenUI/OnsenUI/issues/2558)).
+
+ ### Misc
+
+ * Upgrade to Gulp 4.
+
+2.10.6
+---
+
+ ### Misc
+
+ * Avoid event-stream@3.3.6 vulnerability (https://github.com/dominictarr/event-stream/issues/116).
+
 2.10.5
 ---
 

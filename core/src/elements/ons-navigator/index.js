@@ -884,10 +884,6 @@ export default class NavigatorElement extends BaseElement {
   _lastIndexOfPage(pageName) {
     let index;
     for (index = this.pages.length - 1; index >= 0; index--) {
-      if (!this._pageMap.has(this.pages[index])) {
-        util.throw('Incorrect state of pageMap');
-      }
-
       if (pageName === this._pageMap.get(this.pages[index])) {
         break;
       }
