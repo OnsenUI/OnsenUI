@@ -20,6 +20,8 @@
     }
   ],
   "devDependencies": {
+    "@angular-devkit/core": "^8.0.0",
+    "@angular-devkit/schematics": "^8.0.0",
     "@angular/common": "^8.0.0",
     "@angular/compiler": "^8.0.0",
     "@angular/compiler-cli": "^8.0.0",
@@ -27,6 +29,8 @@
     "@angular/forms": "^8.0.0",
     "@angular/platform-browser": "^8.0.0",
     "@angular/platform-browser-dynamic": "^8.0.0",
+    "@schematics/angular": "^8.0.0",
+    "@types/jasmine": "^3.4.0",
     "awesome-typescript-loader": "^3.1.3",
     "babel-core": "^6.24.1",
     "babel-loader": "^7",
