@@ -259,8 +259,8 @@
 @media (orientation: landscape) {
   /* Only patching lists just under .page__content */
   html[onsflag-iphonex-landscape] .page__content > .list:not(.list--inset) {
-    margin-left: calc(- var(--iphonex-safe-area-inset-left-landscape));
-    margin-right: calc(- var(--iphonex-safe-area-inset-right-landscape));
+    margin-left: calc(-1 * var(--iphonex-safe-area-inset-left-landscape));
+    margin-right: calc(-1 * var(--iphonex-safe-area-inset-right-landscape));
   }
 
   /* For left safe area */
