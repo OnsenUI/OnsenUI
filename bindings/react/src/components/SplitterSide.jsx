@@ -56,7 +56,7 @@ class SplitterSide extends BasicComponent {
   componentDidMount() {
     super.componentDidMount();
     this.node = ReactDOM.findDOMNode(this);
-    this.componentWillReceiveProps(this.props);
+    this.UNSAFE_componentWillReceiveProps(this.props);
 
     this.node.addEventListener('postopen', this.onOpen);
     this.node.addEventListener('postclose', this.onClose);
@@ -73,7 +73,7 @@ class SplitterSide extends BasicComponent {
     this.node.removeEventListener('modechange', this.onModeChange);
   }
 
-  componentWillReceiveProps(newProps) {
+  UNSAFE_componentWillReceiveProps(newProps) {
     if (newProps.isOpen) {
       this.node.open();
     } else {

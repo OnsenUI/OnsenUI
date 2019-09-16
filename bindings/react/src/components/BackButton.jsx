@@ -38,7 +38,7 @@ class BackButton extends SimpleWrapper {
     this._updateOnClick(this.props);
   }
 
-  componentWillReceiveProps(props) {
+  UNSAFE_componentWillReceiveProps(props) {
     this._updateOnClick(props);
   }
 }

@@ -74,7 +74,7 @@ class LazyList extends BasicComponent {
     };
   }
 
-  componentWillReceiveProps(newProps) {
+  UNSAFE_componentWillReceiveProps(newProps) {
     var helpProps = {
       ...this.props,
       ...newProps
