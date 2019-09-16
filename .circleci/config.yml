@@ -19,6 +19,9 @@ jobs:
       - run:
           name: Install coveralls and gulp globally
           command: sudo yarn global add coveralls gulp
+      - run:
+          name: Install rsync
+          command: sudo apt install -y rsync
 
       # css-components
       - restore_cache:

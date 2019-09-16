@@ -1,3 +1,6 @@
 npm_modules
 dist
 npm-debug.log
+schematics/src/**/*.js
+schematics/src/**/*.js.map
+schematics/src/**/*.d.ts
