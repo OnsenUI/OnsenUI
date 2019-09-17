@@ -43,7 +43,7 @@ class Toolbar extends SimpleWrapper {
     }
   }
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     if (this.props.visible !== nextProps.visible) {
       ReactDOM.findDOMNode(this).setVisibility(nextProps.visible);
     }

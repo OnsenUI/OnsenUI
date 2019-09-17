@@ -191,7 +191,7 @@ class RouterNavigator extends BasicComponent {
     this.update();
   }
 
-  componentWillReceiveProps(newProps) {
+  UNSAFE_componentWillReceiveProps(newProps) {
     const processStack = [...newProps.routeConfig.processStack];
 
     if (newProps.onDeviceBackButton !== undefined) {

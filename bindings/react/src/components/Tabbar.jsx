@@ -66,7 +66,7 @@ class Tabbar extends BasicComponent {
     node.removeEventListener('reactive', this.onReactive);
   }
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     const node = this._tabbar;
     if (nextProps.index !== this.props.index && nextProps.index !== node.getActiveTabIndex()) {
       node.setActiveTab(nextProps.index, { reject: false });

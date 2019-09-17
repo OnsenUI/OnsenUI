@@ -52,7 +52,7 @@ class Segment extends BasicComponent {
     return false;
   }
 
-  componentWillReceiveProps(props) {
+  UNSAFE_componentWillReceiveProps(props) {
     const node = findDOMNode(this);
 
     if (this.props.index !== props.index && props.index !== node.getActiveButtonIndex()) {
