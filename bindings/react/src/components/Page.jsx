@@ -54,7 +54,7 @@ class Page extends BasicComponent {
     }
   }
 
-  componentWillReceiveProps(newProps) {
+  UNSAFE_componentWillReceiveProps(newProps) {
     if (newProps.onDeviceBackButton !== undefined) {
       ReactDOM.findDOMNode(this).onDeviceBackButton = newProps.onDeviceBackButton;
     }

@@ -53,7 +53,7 @@ class BaseDialog extends React.Component {
     this.renderPortal(this.props, false, this.props.onDeviceBackButton);
   }
 
-  componentWillReceiveProps(newProps) {
+  UNSAFE_componentWillReceiveProps(newProps) {
     this.renderPortal(newProps, this.props.isOpen);
     if (newProps.onDeviceBackButton !== undefined) {
       this.node.firstChild.onDeviceBackButton = newProps.onDeviceBackButton;
