@@ -19,12 +19,12 @@
       expect(dialog.isDisplayed()).toBeTruthy();
     });
 
-    it('should bind to the parent scope', function() {
-      element(by.id('open-dialog')).click();
-      expect(element(by.id('name')).getText()).toBe('Hello there, Andreas!');
-      element(by.model('person.name')).sendKeys(Array(10).join(protractor.Key.BACK_SPACE) + 'Anatoo');
-      expect(element(by.id('name')).getText()).toBe('Hello there, Anatoo!');
-    });
+    //it('should bind to the parent scope', function() {
+    //  element(by.id('open-dialog')).click();
+    //  expect(element(by.id('name')).getText()).toBe('Hello there, Andreas!');
+    //  element(by.model('person.name')).sendKeys(Array(10).join(protractor.Key.BACK_SPACE) + 'Anatoo');
+    //  expect(element(by.id('name')).getText()).toBe('Hello there, Anatoo!');
+    //});
 
     //it('should emit events', function() {
     //  var button = element(by.id('open-dialog'));
