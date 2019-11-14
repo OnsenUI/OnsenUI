@@ -141,9 +141,9 @@
   markup: |
     <div class="action-sheet-mask action-sheet-mask--material"></div>
     <div class="action-sheet action-sheet--material">
-      <button class="action-sheet-button action-sheet-button--material"><i class="ion-android-checkbox-blank action-sheet-icon--material"></i>Label</button>
-      <button class="action-sheet-button action-sheet-button--material"><i class="ion-android-checkbox-blank action-sheet-icon--material"></i>Label</button>
-      <button class="action-sheet-button action-sheet-button--material"><i class="ion-android-close action-sheet-icon--material"></i>Cancel</button>
+      <button class="action-sheet-button action-sheet-button--material"><i class="ion-ios-square action-sheet-icon--material"></i>Label</button>
+      <button class="action-sheet-button action-sheet-button--material"><i class="ion-ios-square action-sheet-icon--material"></i>Label</button>
+      <button class="action-sheet-button action-sheet-button--material"><i class="ion-ios-close action-sheet-icon--material"></i>Cancel</button>
     </div>
 */
 
@@ -154,8 +154,8 @@
     <div class="action-sheet-mask action-sheet-mask--material"></div>
     <div class="action-sheet action-sheet--material">
       <div class="action-sheet-title action-sheet-title--material">Title</div>
-      <button class="action-sheet-button action-sheet-button--material"><i class="ion-android-checkbox-blank action-sheet-icon--material"></i>Label</button>
-      <button class="action-sheet-button action-sheet-button--material"><i class="ion-android-close action-sheet-icon--material"></i>Cancel</button>
+      <button class="action-sheet-button action-sheet-button--material"><i class="ion-ios-square action-sheet-icon--material"></i>Label</button>
+      <button class="action-sheet-button action-sheet-button--material"><i class="ion-ios-close action-sheet-icon--material"></i>Cancel</button>
     </div>
 */
 
