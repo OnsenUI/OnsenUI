@@ -79,10 +79,13 @@ function cssnext() {
       extensions: ['.svg'],
       root: __dirname + '/src/components/'
     }),
-    require('postcss-apply'),
     cssnextPlugin({
       browsers: babelrc.presets[0][1].targets.browsers,
+      preserve: false,
+      stage: 0
     }),
+    require('postcss-apply'),
+    require('postcss-calc'),
     reporter({
       clearAllMessages: true,
       clearReportedMessages: true,
