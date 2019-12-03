@@ -26,6 +26,7 @@
     "postcss-apply": "^0.12.0",
     "postcss-base64": "^0.6.1",
     "postcss-calc": "^7.0.1",
+    "postcss-color-function": "^4.1.0",
     "postcss-import": "^9.1.0",
     "postcss-preset-env": "^6.7.0",
     "postcss-reporter": "^3.0.0",

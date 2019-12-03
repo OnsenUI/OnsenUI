@@ -86,6 +86,7 @@ function cssnext() {
     }),
     require('postcss-apply'),
     require('postcss-calc'),
+    require('postcss-color-function'),
     reporter({
       clearAllMessages: true,
       clearReportedMessages: true,
