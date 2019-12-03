@@ -7,7 +7,7 @@ const $ = require('gulp-load-plugins')();
 const eco = require('eco');
 const fs = require('fs');
 const ancss = require('@onsenui/ancss');
-const cssnextPlugin = require('postcss-cssnext');
+const cssnextPlugin = require('postcss-preset-env');
 const reporter = require('postcss-reporter');
 const historyApiFallback = require('connect-history-api-fallback');
 const {rollup} = require('rollup');
@@ -79,6 +79,7 @@ function cssnext() {
       extensions: ['.svg'],
       root: __dirname + '/src/components/'
     }),
+    require('postcss-apply'),
     cssnextPlugin({
       browsers: babelrc.presets[0][1].targets.browsers,
     }),
