@@ -2,6 +2,13 @@
 CHANGELOG
 ====
 
+dev
+---
+
+ ### Bug Fixes
+
+ * ons-input: Add spellcheck to list of attributes passed to inner input. ([#2706](https://github.com/OnsenUI/OnsenUI/issues/2706)).
+
 2.10.10
 ---
 

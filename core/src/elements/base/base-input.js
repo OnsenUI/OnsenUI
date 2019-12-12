@@ -34,6 +34,7 @@ const INPUT_ATTRIBUTES = [
   'readonly',
   'required',
   'size',
+  'spellcheck',
   'step',
   'validator',
   'value'
