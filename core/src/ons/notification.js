@@ -102,6 +102,7 @@ notification._createAlertDialog = (...params) => new Promise(resolve => {
         placeholder="${options.placeholder || ''}"
         value="${options.defaultValue || ''}"
         style="width: 100%; margin-top: 10px;"
+        spellcheck="false"
       />
     `;
   }
@@ -174,6 +175,7 @@ notification._createAlertDialog = (...params) => new Promise(resolve => {
           .then(() => {
             if (el) {
               const resolveValue = el.input.value;
+              el.dialog.remove();
               _destroyDialog();
               options.callback(resolveValue);
               resolve(resolveValue);
