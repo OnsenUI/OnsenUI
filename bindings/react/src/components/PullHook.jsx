@@ -132,6 +132,15 @@ PullHook.propTypes = {
   thresholdHeight: PropTypes.number,
 
   /**
+   * @name maxHeight
+   * @type number
+   * @description
+   *  [en] The max height of the pull hook in pixels when threshold is a negative value. The default value is 96.[/en]
+   *  [ja][/ja]
+   */
+  maxHeight: PropTypes.number,
+
+  /**
    * @name fixedContent
    * @type number
    * @description
