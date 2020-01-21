@@ -561,7 +561,7 @@ declare namespace ons {
      * @param {Number} maxHeight Desired max height when thresholdHeight is negative
      * @description The maxHeight of the pull hook in pixels when thresholdHeight is negative. The default value is `96px`.
      */
-    thresholdHeight: string;
+    maxHeight: string;
     /**
     * @description The current number of pixels the pull hook has moved.
     */
