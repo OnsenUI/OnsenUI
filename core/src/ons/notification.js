@@ -166,21 +166,24 @@ notification._createAlertDialog = (...params) => new Promise(resolve => {
   _setAttributes(el.dialog, options);
 
   // Prompt events
-  if (options.isPrompt && options.submitOnEnter) {
+  if (options.isPrompt) {
     el.input = el.dialog.querySelector('.text-input');
-    el.input.onkeypress = event => {
-      if (event.keyCode === 13) {
-        el.dialog.hide()
-          .then(() => {
-            if (el) {
-              const resolveValue = el.input.value;
-              _destroyDialog();
-              options.callback(resolveValue);
-              resolve(resolveValue);
-            }
-          });
-      }
-    };
+
+    if (options.submitOnEnter) {
+      el.input.onkeypress = event => {
+        if (event.keyCode === 13) {
+          el.dialog.hide()
+            .then(() => {
+              if (el) {
+                const resolveValue = el.input.value;
+                _destroyDialog();
+                options.callback(resolveValue);
+                resolve(resolveValue);
+              }
+            });
+        }
+      };
+    }
   }
 
   // Button events
