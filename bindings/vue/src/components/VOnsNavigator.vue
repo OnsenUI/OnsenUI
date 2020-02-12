@@ -93,6 +93,9 @@
               if (isReattached) {
                 this._redetachPage(lastTopPage);
               }
+            }, () => { // push failed or was canceled
+              this._canceled = true;
+              this.pageStack.pop();
             });
         }
 
@@ -120,6 +123,12 @@
     watch: {
       pageStack(after, before) {
         if (this.$el.hasAttribute('swipeable') && this.$children.length !== this.$el.children.length) {
+          return;
+        }
+
+        // watcher triggered by undoing a canceled push or pop
+        if (this._canceled) {
+          this._canceled = null;
           return;
         }
 
