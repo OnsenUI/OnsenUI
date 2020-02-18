@@ -1,6 +1,13 @@
 CHANGELOG
 ====
 
+dev
+---
+
+ ### Bug Fixes
+
+ * VOnsNavigator: Don't add page to page stack when push is canceled. Fixes [#2724](https://github.com/OnsenUI/OnsenUI/issues/2724).
+
 2.6.2
 ----
 
