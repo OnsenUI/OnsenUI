@@ -26,4 +26,4 @@ export { default as BackButton } from './BackButton';
 export { default as BottomToolbar } from './BottomToolbar';
 export { default as RouterNavigator } from './RouterNavigator';
 export { default as ReduxNavigator } from './ReduxNavigator';
-
+export { default as GestureDetector } from './GestureDetector';
