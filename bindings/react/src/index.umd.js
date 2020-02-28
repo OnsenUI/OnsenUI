@@ -12,6 +12,7 @@ import Checkbox from './components/Checkbox.jsx';
 import Col from './components/Col.jsx';
 import Dialog from './components/Dialog.jsx';
 import Fab from './components/Fab.jsx';
+import GestureDetector from './components/GestureDetector.jsx';
 import Icon from './components/Icon.jsx';
 import Input from './components/Input.jsx';
 import LazyList from './components/LazyList.jsx';
@@ -63,6 +64,7 @@ export {
   Col,
   Dialog,
   Fab,
+  GestureDetector,
   Icon,
   Input,
   LazyList,

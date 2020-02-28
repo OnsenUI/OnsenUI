@@ -2,6 +2,13 @@
 CHANGELOG
 ====
 
+dev
+----
+
+### New Features
+
+  * GestureDetector: Added new component to wrap ons-gesture-detector.
+
 1.11.2
 ----
 
