@@ -39,5 +39,6 @@ List of code contributors (in no particular order):
 * [aguingand](https://github.com/aguingand)
 * [Priya Pandya](https://github.com/MetalDent)
 * [gittysam](https://github.com/gittysam)
+* [Stayman Hou](https://github.com/StaymanHou)
 
 Please add yourself if you're not on this list but feel that you should be.
