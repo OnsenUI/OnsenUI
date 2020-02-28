@@ -27,6 +27,7 @@ class ListItem extends SimpleWrapper {
   componentDidMount() {
     super.componentDidMount();
     this.node = ReactDOM.findDOMNode(this);
+    this.node.expanded = this.props.expanded === true
   }
 
   componentDidUpdate() {
