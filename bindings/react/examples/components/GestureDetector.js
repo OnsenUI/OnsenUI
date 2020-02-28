@@ -16,18 +16,31 @@ export default class extends React.Component {
 
   render() {
     const gestures = [
-      'drag', 'dragleft', 'dragright', 'dragup', 'dragdown',
-      'hold', 'release',
-      'swipe', 'swipeleft', 'swiperight', 'swipeup', 'swipedown',
-      'tap', 'doubletap',
-      'pinch', 'pinchin', 'pinchout',
-      'touch', 'transform', 'rotate'
+      'Drag',
+      'DragLeft',
+      'DragRight',
+      'DragUp',
+      'DragDown',
+      'Hold',
+      'Release',
+      'Swipe',
+      'SwipeLeft',
+      'SwipeRight',
+      'SwipeUp',
+      'SwipeDown',
+      'Tap',
+      'DoubleTap',
+      'Pinch',
+      'PinchIn',
+      'PinchOut',
+      'Touch',
+      'Transform',
+      'Rotate'
     ];
 
     const funcs = {};
     gestures.forEach(g => {
-      const propName = 'on' + g.charAt(0).toUpperCase() + g.slice(1);
-      funcs[propName] = () => this.setState({ gesture: g });
+      funcs['on' + g] = () => this.setState({ gesture: g.toLowerCase() });
     });
 
     return (

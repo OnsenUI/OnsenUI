@@ -27,12 +27,26 @@ class GestureDetector extends SimpleWrapper {
     super(props);
 
     this.gestures = [
-      'drag', 'dragleft', 'dragright', 'dragup', 'dragdown',
-      'hold', 'release',
-      'swipe', 'swipeleft', 'swiperight', 'swipeup', 'swipedown',
-      'tap', 'doubletap',
-      'pinch', 'pinchin', 'pinchout',
-      'touch', 'transform', 'rotate'
+      'Drag',
+      'DragLeft',
+      'DragRight',
+      'DragUp',
+      'DragDown',
+      'Hold',
+      'Release',
+      'Swipe',
+      'SwipeLeft',
+      'SwipeRight',
+      'SwipeUp',
+      'SwipeDown',
+      'Tap',
+      'DoubleTap',
+      'Pinch',
+      'PinchIn',
+      'PinchOut',
+      'Touch',
+      'Transform',
+      'Rotate'
     ];
   }
 
@@ -40,20 +54,16 @@ class GestureDetector extends SimpleWrapper {
     return 'ons-gesture-detector';
   }
 
-  propFromEvent(event) {
-    return 'on' + event.charAt(0).toUpperCase() + event.slice(1);
-  }
-
   componentDidMount() {
     const node = findDOMNode(this);
     this.gestures.forEach(gesture =>
-      node.addEventListener(gesture, this.props[this.propFromEvent(gesture)]));
+      node.addEventListener(gesture.toLowerCase(), this.props['on' + gesture]));
   }
 
   componentWillUnmount() {
     const node = findDOMNode(this);
     this.gestures.forEach(gesture =>
-      node.removeEventListener(gesture, this.props[this.propFromEvent(gesture)]));
+      node.removeEventListener(gesture.toLowerCase(), this.props['on' + gesture]));
   }
 }
 
@@ -77,7 +87,7 @@ GestureDetector.propTypes = {
    *  [en]Called when the user drags left.[/en]
    *  [ja][/ja]
    */
-  onDragleft: PropTypes.func,
+  onDragLeft: PropTypes.func,
 
   /**
    * @name onDragright
@@ -86,7 +96,7 @@ GestureDetector.propTypes = {
    *  [en]Called when the user drags right.[/en]
    *  [ja][/ja]
    */
-  onDragright: PropTypes.func,
+  onDragRight: PropTypes.func,
 
   /**
    * @name onDragup
@@ -95,7 +105,7 @@ GestureDetector.propTypes = {
    *  [en]Called when the user drags up.[/en]
    *  [ja][/ja]
    */
-  onDragup: PropTypes.func,
+  onDragUp: PropTypes.func,
 
   /**
    * @name onDragdown
@@ -104,7 +114,7 @@ GestureDetector.propTypes = {
    *  [en]Called when the user drags down.[/en]
    *  [ja][/ja]
    */
-  onDragdown: PropTypes.func,
+  onDragDown: PropTypes.func,
 
   /**
    * @name onHold
@@ -140,7 +150,7 @@ GestureDetector.propTypes = {
    *  [en]Called when the user swipes left.[/en]
    *  [ja][/ja]
    */
-  onSwipeleft: PropTypes.func,
+  onSwipeLeft: PropTypes.func,
 
   /**
    * @name onSwiperight
@@ -149,7 +159,7 @@ GestureDetector.propTypes = {
    *  [en]Called when the user swipes right.[/en]
    *  [ja][/ja]
    */
-  onSwiperight: PropTypes.func,
+  onSwipeRight: PropTypes.func,
 
   /**
    * @name onSwipeup
@@ -158,7 +168,7 @@ GestureDetector.propTypes = {
    *  [en]Called when the user swipes up.[/en]
    *  [ja][/ja]
    */
-  onSwipeup: PropTypes.func,
+  onSwipeUp: PropTypes.func,
 
   /**
    * @name onSwipedown
@@ -167,7 +177,7 @@ GestureDetector.propTypes = {
    *  [en]Called when the user swipes down.[/en]
    *  [ja][/ja]
    */
-  onSwipedown: PropTypes.func,
+  onSwipeDown: PropTypes.func,
 
   /**
    * @name onTap
@@ -185,7 +195,7 @@ GestureDetector.propTypes = {
    *  [en]Called when the user double taps.[/en]
    *  [ja][/ja]
    */
-  onDoubletap: PropTypes.func,
+  onDoubleTap: PropTypes.func,
 
   /**
    * @name onPinch
@@ -203,7 +213,7 @@ GestureDetector.propTypes = {
    *  [en]Called when the user pinches in.[/en]
    *  [ja][/ja]
    */
-  onPinchin: PropTypes.func,
+  onPinchIn: PropTypes.func,
 
   /**
    * @name onPinchout
@@ -212,7 +222,7 @@ GestureDetector.propTypes = {
    *  [en]Called when the user pinches out.[/en]
    *  [ja][/ja]
    */
-  onPinchout: PropTypes.func,
+  onPinchOut: PropTypes.func,
 
   /**
    * @name onTouch
