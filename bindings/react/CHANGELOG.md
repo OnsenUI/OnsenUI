@@ -9,6 +9,10 @@ dev
 
   * GestureDetector: Added new component to wrap ons-gesture-detector.
 
+### Bug Fixes
+
+  * ListItem: Set expanded on inner list item at startup. ([#2499](https://github.com/OnsenUI/OnsenUI/issues/2499))
+
 1.11.2
 ----
 
