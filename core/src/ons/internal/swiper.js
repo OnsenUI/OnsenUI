@@ -190,7 +190,7 @@ export default class Swiper {
       size = this.itemNumSize;
 
     if (this.itemNumSize === 0 || !util.isInteger(scroll)) {
-      return this._lastActiveIndex;
+      return parseInt(this._lastActiveIndex, 10);
     }
 
     if (scroll <= 0) {
