@@ -8,6 +8,7 @@ dev
 
  * Support Angular 8+.
  * Support ng add schematic for Angular CLI ([#2566](https://github.com/OnsenUI/OnsenUI/issues/2566)).
+ * Fix 'setImmediate is not defined' bug ([#2735](https://github.com/OnsenUI/OnsenUI/pull/2735)).
 
 7.0.0
 ---
