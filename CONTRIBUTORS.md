@@ -40,5 +40,6 @@ List of code contributors (in no particular order):
 * [Priya Pandya](https://github.com/MetalDent)
 * [gittysam](https://github.com/gittysam)
 * [Stayman Hou](https://github.com/StaymanHou)
+* [Jan Vincent Liwanag](https://github.com/jvliwanag)
 
 Please add yourself if you're not on this list but feel that you should be.
