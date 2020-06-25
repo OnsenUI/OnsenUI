@@ -86,7 +86,7 @@ Input.propTypes = {
   ]),
 
   /**
-   * @name placehoder
+   * @name placeholder
    * @type string
    * @description
    *  [en] Placeholder text. In Material Design this placeholder will be a floating label. [/en]
