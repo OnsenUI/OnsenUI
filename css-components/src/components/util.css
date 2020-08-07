@@ -1,3 +1,4 @@
+@custom-media --retina-query (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi), (min-resolution: 2dppx);
 
 :root {
   --reset-font: {
@@ -94,8 +95,6 @@
     border: none;
     background-color: transparent;
   }
-
-  @custom-media --retina-query (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi), (min-resolution: 2dppx);
 
   --material-font: {
     font-family: 'Roboto', 'Noto', sans-serif;
