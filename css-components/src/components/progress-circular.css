@@ -33,9 +33,11 @@
 .progress-circular__background,
 .progress-circular__primary,
 .progress-circular__secondary {
+  /* clean-css ignore:start */
   cx: 50%;
   cy: 50%;
   r: 40%;
+  /* clean-css ignore:end */
   animation: none;
   fill: none;
   stroke-width: 5%;
