@@ -3,13 +3,13 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "build": "gulp build",
     "serve": "gulp serve",
-    "build-css": "npm run clean && npm run stylelint && npm run postcss && npm run minify",
+    "build": "npm run build:stylelint && npm run build:postcss && npm run build:minify",
     "clean": "rimraf ./build",
-    "stylelint": "stylelint 'src/**/*.css'",
-    "postcss": "postcss src/{*-,}onsen-css-components.css --base src --dir build",
-    "minify": "cd build && cleancss -o onsen-css-components.min.css onsen-css-components.css && cleancss -o old-onsen-css-components.min.css old-onsen-css-components.css && cleancss -o dark-onsen-css-components.min.css dark-onsen-css-components.css"
+    "build:stylelint": "stylelint 'src/**/*.css'",
+    "build:postcss": "postcss src/{*-,}onsen-css-components.css --base src --dir build",
+    "build:minify": "cd build && cleancss -o onsen-css-components.min.css onsen-css-components.css && cleancss -o old-onsen-css-components.min.css old-onsen-css-components.css && cleancss -o dark-onsen-css-components.min.css dark-onsen-css-components.css",
+    "prebuild": "npm run clean"
   },
   "dependencies": {
     "browser-sync": "^2.18.6",
