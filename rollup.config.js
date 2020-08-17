@@ -7,10 +7,7 @@ import eslint from 'rollup-plugin-eslint';
 import resolve from 'rollup-plugin-node-resolve';
 import commonjs from 'rollup-plugin-commonjs';
 import string from 'rollup-plugin-string';
-import filesize from 'rollup-plugin-filesize';
 import progress from 'rollup-plugin-progress';
-import visualizer from 'rollup-plugin-visualizer';
-import execute from 'rollup-plugin-execute';
 
 const banner = name => `/* ${name} v${pkg.version} - ${dateformat(new Date(), 'yyyy-mm-dd')} */\n`;
 const stringOpt = { include: '**/*.svg', }; // SVG images
@@ -45,13 +42,10 @@ export default [
       commonjs(cjsOpt),
       babel(babelrc),
       progress(),
-      filesize(),
-      visualizer({
-        filename: 'module-stats.umd.html',
-        sourcemap: true, // Shows minified sizes
-      }),
-      execute(`node_modules/.bin/uglifyjs build/js/${pkg.name}.js -c -m --comments '/${pkg.name} v/' --output build/js/${pkg.name}.min.js`),
     ],
+    watch: {
+      clearScreen: false
+    }
   },
 
   // Core ES Modules
@@ -70,11 +64,7 @@ export default [
       commonjs(cjsOpt),
       babel(babelrc),
       progress(),
-      filesize(),
-      visualizer({
-        filename: 'module-stats.esm.html',
-        sourcemap: false, // Unminified to show core-js size
-      }),
     ],
-  }
+    watch: false
+  },
 ];
