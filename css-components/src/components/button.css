@@ -123,7 +123,7 @@
 }
 
 .button--outline:active {
-  background-color: color(var(--button-background-color) tint(var(--alpha-lighten)));
+  background-color: color-mod(var(--button-background-color) tint(var(--alpha-lighten)));
   border: 1px solid var(--button-background-color);
   color: var(--button-background-color);
   opacity: 1;
@@ -145,14 +145,14 @@
 
 .button--light {
   background-color: transparent;
-  color: color(var(--button-light-color) a(40%));
-  border: 1px solid color(var(--button-light-color) a(20%));
+  color: color-mod(var(--button-light-color) a(40%));
+  border: 1px solid color-mod(var(--button-light-color) a(20%));
 }
 
 .button--light:active {
-  background-color: color(var(--button-light-color) a(5%));
-  color: color(var(--button-light-color) a(40%));
-  border: 1px solid color(var(--button-light-color) a(20%));
+  background-color: color-mod(var(--button-light-color) a(5%));
+  color: color-mod(var(--button-light-color) a(40%));
+  border: 1px solid color-mod(var(--button-light-color) a(20%));
   opacity: 1;
 }
 
