@@ -23,6 +23,7 @@
     "clean": "rimraf ./build && mkdir build && mkdir build/css && mkdir build/js",
     "dist": "cpx '{bower.json,package.json,README.md,CHANGELOG.md,LICENSE}' OnsenUI-dist && cpx 'build/{!(onsenui.zip|package.json),!(docs)/**/*}' OnsenUI-dist",
     "prebuild": "npm run clean",
+    "preinstall": "cd css-components && npm install",
     "serve": "npm run serve:watch-core & npm run serve:watch-css & npm run serve:browser-sync",
     "serve:browser-sync": "browser-sync start --config bs-config.js",
     "serve:watch-core": "npm run build:js:rollup -- --watch",
