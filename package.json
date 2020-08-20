@@ -114,20 +114,6 @@
     "event-stream": "3.3.4",
     "fancy-log": "^1.3.3",
     "glob": "^7.1.6",
-    "gulp": "^4.0.0",
-    "gulp-autoprefixer": "^4.0.0",
-    "gulp-babel": "^7.0.0",
-    "gulp-clean": "^0.3.1",
-    "gulp-concat": "^2.6.1",
-    "gulp-cssmin": "^0.2.0",
-    "gulp-hub": "^4.2.0",
-    "gulp-if": "^2.0.2",
-    "gulp-insert": "^0.5.0",
-    "gulp-load-plugins": "^1.5.0",
-    "gulp-rename": "^1.2.2",
-    "gulp-replace": "^0.6.1",
-    "gulp-util": "^3.0.8",
-    "gulp-zip": "^4.0.0",
     "jsonschema": "^1.2.0",
     "karma": "^1.7.1",
     "karma-chai": "^0.1.0",
@@ -168,7 +154,6 @@
   "dependencies": {
     "@onsenui/custom-elements": "1.0.0",
     "@onsenui/fastclick": "1.1.1",
-    "core-js": "^2.6.11",
-    "gulp-protractor": "^4.1.1"
+    "core-js": "^2.6.11"
   }
 }
