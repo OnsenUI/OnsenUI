@@ -5,7 +5,7 @@
   "private": false,
   "scripts": {
     "build": "npm run build:js && npm run build:css && npm run build:css-components && npm run build:copy && npm run build:docs && npm run build:zip",
-    "build:docs": "",
+    "build:docs": "node scripts/build-docs.js",
     "build:js": "npm run build:js:rollup && npm run build:js:minify && npm run build:js:babel-esm-elements && npm run build:js:babel-esm-ons",
     "build:js:babel-esm-elements": "babel core/src/elements --out-dir build/esm/elements --ignore 'src/**/*.spec.js'",
     "build:js:babel-esm-ons": "babel core/src/ons --out-dir build/esm/ons --ignore 'src/**/*.spec.js'",
