@@ -25,7 +25,7 @@
     "prebuild": "npm run clean",
     "serve": "npm run serve:watch-core & npm run serve:watch-css & npm run serve:browser-sync",
     "serve:browser-sync": "browser-sync start --config bs-config.js",
-    "serve:watch-core": "npm run rollup -- --watch",
+    "serve:watch-core": "npm run build:js:rollup -- --watch",
     "serve:watch-css": "watch 'npm run build:css:onsenui-css' core/css --ignoreDotFiles",
     "test": "npm run test:core-dts && npm run test:unit",
     "test:unit": "node scripts/unit-test.js",
