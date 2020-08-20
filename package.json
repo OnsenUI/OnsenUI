@@ -4,8 +4,6 @@
   "description": "HTML5 Mobile Framework & UI Components",
   "private": false,
   "scripts": {
-    "test": "gulp test --disable-warnings",
-    "test:skip-build": "gulp test --disable-warnings --skip-build",
     "build": "npm run build:js && npm run build:css && npm run build:css-components && npm run build:copy && npm run build:docs && npm run build:zip",
     "build:docs": "",
     "build:js": "npm run build:js:rollup && npm run build:js:minify && npm run build:js:babel-esm-elements && npm run build:js:babel-esm-ons",
@@ -28,7 +26,10 @@
     "serve": "npm run serve:watch-core & npm run serve:watch-css & npm run serve:browser-sync",
     "serve:browser-sync": "browser-sync start --config bs-config.js",
     "serve:watch-core": "npm run rollup -- --watch",
-    "serve:watch-css": "watch 'npm run build:css:onsenui-css' core/css --ignoreDotFiles"
+    "serve:watch-css": "watch 'npm run build:css:onsenui-css' core/css --ignoreDotFiles",
+    "test": "npm run test:core-dts && npm run test:unit",
+    "test:unit": "node scripts/unit-test.js",
+    "test:core-dts": "node scripts/core-dts-test.js"
   },
   "main": "js/onsenui.js",
   "typings": "js/onsenui.d.ts",
@@ -89,6 +90,7 @@
   },
   "devDependencies": {
     "@types/node": "^14.6.0",
+    "ansi-colors": "^4.1.1",
     "autoprefixer": "^9.8.6",
     "babel-core": "^6.26.0",
     "babel-eslint": "^8.0.2",
@@ -110,6 +112,7 @@
     "dateformat": "^3.0.2",
     "eslint": "^4.10.0",
     "event-stream": "3.3.4",
+    "fancy-log": "^1.3.3",
     "glob": "^7.1.6",
     "gulp": "^4.0.0",
     "gulp-autoprefixer": "^4.0.0",
