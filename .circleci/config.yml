@@ -42,14 +42,14 @@ jobs:
       # Core dependencies
       - restore_cache:
           keys:
-            - v1-onsenui-cache-{{ .Branch }}-{{ checksum "yarn.lock" }}
+            - v1-onsenui-cache-{{ .Branch }}-{{ checksum "package-lock.json" }}
             - v1-onsenui-cache-{{ .Branch }}-
             - v1-onsenui-cache-
       - run:
           name: Install dependencies
-          command: yarn install --pure-lockfile
+          command: npm ci
       - save_cache:
-          key: v1-onsenui-cache-{{ .Branch }}-{{ checksum "yarn.lock" }}
+          key: v1-onsenui-cache-{{ .Branch }}-{{ checksum "package-lock.json" }}
           paths:
             - ./node_modules
 
