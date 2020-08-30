@@ -10,6 +10,7 @@ dev
  * ons-input: Add spellcheck to list of attributes passed to inner input. ([#2706](https://github.com/OnsenUI/OnsenUI/issues/2706)).
  * ons.notification: Fix prompt callback not running when submitOnEnter is false. ([#2618](https://github.com/OnsenUI/OnsenUI/issues/2618)).
  * ons-tab: Fall back to icon if active-icon not set when updating button content. ([#2720](https://github.com/OnsenUI/OnsenUI/pull/2720))
+ * ons-fab: Stop fab scrolling with viewport when wrapped in another element. ([#2778](https://github.com/OnsenUI/OnsenUI/issues/2778))
 
 2.10.10
 ---
