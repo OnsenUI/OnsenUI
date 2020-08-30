@@ -15,11 +15,11 @@
   --toolbar-border-color: #b2b2b2;
   --button-bar-color: var(--highlight-color);
   --button-bar-active-text-color: #fff;
-  --button-bar-active-background-color: color(var(--button-bar-color) tint(70%));
+  --button-bar-active-background-color: color-mod(var(--button-bar-color) tint(70%));
   --button-light-color: black;
   --segment-color: var(--highlight-color);
   --segment-active-text-color: #fff;
-  --segment-active-background-color: color(var(--segment-color) tint(70%));
+  --segment-active-background-color: color-mod(var(--segment-color) tint(70%));
   --list-background-color: #fff;
   --list-header-background-color: #eee;
   --list-tap-active-background-color: #d9d9d9;
@@ -62,7 +62,7 @@
   --search-input-background-color: rgba(3, 3, 3, 0.09);
   --fab-text-color: #ffffff;
   --fab-background-color: var(--highlight-color);
-  --fab-active-background-color: color(var(--fab-background-color) a(70%));
+  --fab-active-background-color: color-mod(var(--fab-background-color) a(70%));
   --card-background-color: white;
   --card-text-color: #030303;
   --toast-background-color: rgba(0, 0, 0, 0.8);
@@ -77,7 +77,7 @@
   --material-notification-background-color: #e91e63;
   --material-notification-color: white;
   --material-switch-active-thumb-color: #37474f;
-  --material-switch-active-background-color: color(#37474f a(50%));
+  --material-switch-active-background-color: color-mod(#37474f a(50%));
   --material-switch-inactive-thumb-color: #f1f1f1;
   --material-switch-inactive-background-color: #b0afaf;
   --material-range-track-color: #bdbdbd;
@@ -90,13 +90,13 @@
   --material-toolbar-button-color: #1e88e5;
   --material-segment-background-color: #fafafa;
   --material-segment-active-background-color: #c8c8c8;
-  --material-segment-text-color: color(black a(38%));
+  --material-segment-text-color: color-mod(black a(38%));
   --material-segment-active-text-color: #353535;
   --material-button-background-color: #2979ff;
   --material-button-text-color: #ffffff;
-  --material-button-disabled-background-color: color(#4f4f4f a(26%));
-  --material-button-disabled-color: color(black a(26%));
-  --material-flat-button-active-background-color: color(#999 a(20%));
+  --material-button-disabled-background-color: color-mod(#4f4f4f a(26%));
+  --material-button-disabled-color: color-mod(black a(26%));
+  --material-flat-button-active-background-color: color-mod(#999 a(20%));
   --material-list-background-color: #fff;
   --material-list-item-separator-color: #eee;
   --material-list-header-text-color: #757575;
@@ -137,7 +137,7 @@
   --material-select-input-color: var(--material-text-color);
   --material-select-input-active-color: rgba(0, 0, 0, 0.15);
   --material-select-input-inactive-color: rgba(0, 0, 0, 0.81);
-  --material-select-border-color: color(black a(12%));
+  --material-select-border-color: color-mod(black a(12%));
   --material-popover-background-color: #fafafa;
   --material-popover-text-color: var(--material-text-color);
   --material-action-sheet-text-color: #686868;

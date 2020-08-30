@@ -44,6 +44,7 @@
   },
   "devDependencies": {
     "angular": "^1.7.2",
+    "gulp": "^4.0.2",
     "gulp-chmod": "^2.0.0",
     "gulp-clean": "^0.4.0",
     "gulp-connect": "^5.5.0",
@@ -59,7 +60,7 @@
     "rollup-plugin-execute": "^1.0.0",
     "rollup-plugin-filesize": "^2.0.0",
     "rollup-plugin-node-resolve": "^3.3.0",
-    "rollup-plugin-progress": "^0.4.0",
+    "rollup-plugin-progress": "^1.1.2",
     "uglify-js": "^3.4.4"
   },
   "babel": {

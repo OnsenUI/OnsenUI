@@ -243,4 +243,3 @@
 :disabled + .radio-button--material__checkmark:before {
   border-color: var(--material-radio-button-disabled-color);
 }
-

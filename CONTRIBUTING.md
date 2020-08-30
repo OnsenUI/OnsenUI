@@ -43,10 +43,8 @@ You will need a recent version of [Node.js](https://nodejs.org/) and [Yarn](http
 
 Clone this repository and run the following commands to build the project:
 
-    (cd css-components && yarn install)
-    yarn install
-    (cd bindings/angular1 && yarn install) # TODO: Remove after 2.11.0
-    yarn build
+    npm install
+    npm run build
 
 The files will be built and copied into **OnsenUI/build** folder.
 
@@ -107,9 +105,9 @@ Running Tests
 
 Onsen UI has unit tests for the Web Components as well as end-to-end testing of the binding libraries using Protractor.
 
-Use the following commands to run the unit tests:
+Use the following commands to run the tests:
 
-    gulp unit-test
+    npm test
 
 or these commands for end-to-end testing of the binding libraries:
 
@@ -126,10 +124,6 @@ To run a single test or a group of tests use the `--specs` parameter and provide
 
     cd bindings/angular1
     gulp e2e-test --specs test/e2e/lazyRepeat/scenarios.js
-
-In order to run both the unit tests and the end-to-end tests use the following command:
-
-    gulp test
 
 
 Documentation

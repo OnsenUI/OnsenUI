@@ -1,4 +1,9 @@
 module.exports = {
+  ignoreFiles: [
+    './src/components/combination.css',
+    './src/iphonex-support/**/*.css'
+  ],
+
   defaultSeverity: 'warning',
 
   rules: {
@@ -26,7 +31,6 @@ module.exports = {
     'function-name-case': 'lower',
     'function-parentheses-newline-inside': null,
     'function-parentheses-space-inside': 'never',
-    'function-url-data-uris': null,
     'function-url-no-scheme-relative': null,
     'function-url-quotes': 'always',
     'function-url-scheme-whitelist': null,
@@ -133,12 +137,7 @@ module.exports = {
     'selector-max-compound-selectors': 3,
     'selector-max-specificity': '0,3,1',
     'selector-nested-pattern': null,
-    'selector-no-attribute': null,
-    'selector-no-combinator': null,
-    'selector-no-id': true,
     'selector-no-qualifying-type': true,
-    'selector-no-type': null,
-    'selector-no-universal': true,
     'selector-no-vendor-prefix': true,
     'selector-pseudo-class-blacklist': null,
     'selector-pseudo-class-case': 'lower',

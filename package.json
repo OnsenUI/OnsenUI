@@ -4,10 +4,33 @@
   "description": "HTML5 Mobile Framework & UI Components",
   "private": false,
   "scripts": {
-    "build": "(cd bindings/angular1 && yarn install) && gulp build",
-    "dev": "gulp serve --css --core",
-    "test": "gulp test --disable-warnings",
-    "test:skip-build": "gulp test --disable-warnings --skip-build"
+    "build": "npm run build:js && npm run build:css && npm run build:css-components && npm run build:copy && npm run build:docs && npm run build:zip",
+    "build:docs": "node scripts/build-docs.js",
+    "build:js": "npm run build:js:rollup && npm run build:js:minify && npm run build:js:babel-esm-elements && npm run build:js:babel-esm-ons",
+    "build:js:babel-esm-elements": "babel core/src/elements --out-dir build/esm/elements --ignore 'src/**/*.spec.js'",
+    "build:js:babel-esm-ons": "babel core/src/ons --out-dir build/esm/ons --ignore 'src/**/*.spec.js'",
+    "build:js:minify": "uglifyjs build/js/onsenui.js -c -m --comments '/onsenui v/' --output build/js/onsenui.min.js",
+    "build:js:rollup": "rollup --config",
+    "build:copy": "npm run build:copy:css-components-src && npm run build:copy:more-files",
+    "build:copy:more-files": "cpx package.json build && cpx core/src/onsenui.d.ts build/js",
+    "build:copy:css-components-src": "cpx 'css-components/{!(npm-debug.log|onsen-visual-design-spec.sketch),!(node_modules|build)/**/*}' build/css-components-src",
+    "build:css": "npm run build:css:onsenui-css && npm run build:css:minify-css && npm run build:css:copy-icons",
+    "build:css:copy-icons": "ncp core/css/font_awesome build/css/font_awesome && ncp core/css/ionicons build/css/ionicons && ncp core/css/material-design-iconic-font build/css/material-design-iconic-font",
+    "build:css:minify-css": "cleancss --inline none -o build/css/onsenui.min.css build/css/onsenui.css && cleancss --inline none -o build/css/onsenui-core.min.css build/css/onsenui-core.css",
+    "build:css:onsenui-css": "node scripts/make-onsenui-css.js",
+    "build:css-components": "(cd css-components && npm run build) && ncp css-components/build build/css",
+    "build:zip": "node scripts/zip.js",
+    "clean": "rimraf ./build && mkdir build && mkdir build/css && mkdir build/js",
+    "dist": "cpx '{bower.json,package.json,README.md,CHANGELOG.md,LICENSE}' OnsenUI-dist && cpx 'build/{!(onsenui.zip|package.json),!(docs)/**/*}' OnsenUI-dist",
+    "prebuild": "npm run clean",
+    "preinstall": "cd css-components && npm install",
+    "serve": "npm run serve:watch-core & npm run serve:watch-css & npm run serve:browser-sync",
+    "serve:browser-sync": "browser-sync start --config bs-config.js",
+    "serve:watch-core": "npm run build:js:rollup -- --watch",
+    "serve:watch-css": "watch 'npm run build:css:onsenui-css' core/css --ignoreDotFiles",
+    "test": "npm run test:core-dts && npm run test:unit",
+    "test:unit": "node scripts/unit-test.js",
+    "test:core-dts": "node scripts/core-dts-test.js"
   },
   "main": "js/onsenui.js",
   "typings": "js/onsenui.d.ts",
@@ -42,60 +65,56 @@
     "onsenui"
   ],
   "homepage": "https://onsen.io/",
+  "browserslist": [
+    "> 1%",
+    "iOS >= 8.0",
+    "Android >= 4.4",
+    "Chrome >= 30",
+    "Safari >= 9",
+    "Firefox ESR",
+    "Opera 12.1"
+  ],
   "babel": {
     "presets": [
       [
         "env",
-        {
-          "targets": {
-            "browsers": [
-              "> 1%",
-              "iOS >= 8.0",
-              "Android >= 4.4",
-              "Chrome >= 30",
-              "Safari >= 9",
-              "Firefox ESR",
-              "Opera 12.1"
-            ]
-          }
-        }
+        {}
       ],
       "stage-3"
+    ],
+    "plugins": [
+      "inline-svg"
     ]
   },
   "engines": {
     "node": ">= 4.0.0"
   },
   "devDependencies": {
+    "@types/node": "^14.6.0",
+    "ansi-colors": "^4.1.1",
+    "autoprefixer": "^9.8.6",
     "babel-core": "^6.26.0",
     "babel-eslint": "^8.0.2",
     "babel-plugin-angularjs-annotate": "^0.8.2",
     "babel-plugin-external-helpers": "^6.22.0",
+    "babel-plugin-inline-svg": "^1.0.1",
     "babel-plugin-transform-runtime": "^6.23.0",
     "babel-preset-env": "^1.6.1",
     "babel-preset-stage-3": "^6.24.1",
-    "browser-sync": "^2.18.13",
+    "bestzip": "^2.1.6",
+    "browser-sync": "^2.26.12",
     "chai": "^3.4.1",
     "chai-as-promised": "^5.2.0",
     "chai-spies": "^1.0.0",
     "chalk": "^2.3.0",
+    "clean-css-cli": "^4.3.0",
+    "concat": "^1.0.3",
+    "cpx": "^1.5.0",
     "dateformat": "^3.0.2",
     "eslint": "^4.10.0",
     "event-stream": "3.3.4",
-    "gulp": "^4.0.0",
-    "gulp-autoprefixer": "^4.0.0",
-    "gulp-babel": "^7.0.0",
-    "gulp-clean": "^0.3.1",
-    "gulp-concat": "^2.6.1",
-    "gulp-cssmin": "^0.2.0",
-    "gulp-hub": "^4.2.0",
-    "gulp-if": "^2.0.2",
-    "gulp-insert": "^0.5.0",
-    "gulp-load-plugins": "^1.5.0",
-    "gulp-rename": "^1.2.2",
-    "gulp-replace": "^0.6.1",
-    "gulp-util": "^3.0.8",
-    "gulp-zip": "^4.0.0",
+    "fancy-log": "^1.3.3",
+    "glob": "^7.1.6",
     "jsonschema": "^1.2.0",
     "karma": "^1.7.1",
     "karma-chai": "^0.1.0",
@@ -111,18 +130,24 @@
     "merge-stream": "^1.0.1",
     "mkpath": "^1.0.0",
     "mocha": "^4.0.1",
+    "ncp": "^2.0.0",
+    "postcss": "^7.0.32",
+    "postcss-cli": "^7.1.1",
+    "rimraf": "^3.0.2",
     "rollup": "^0.51.8",
     "rollup-plugin-babel": "^3.0.2",
     "rollup-plugin-commonjs": "^8.2.1",
     "rollup-plugin-eslint": "^4.0.0",
-    "rollup-plugin-execute": "^1.0.0",
-    "rollup-plugin-filesize": "^1.4.2",
+    "rollup-plugin-execute": "^1.1.1",
+    "rollup-plugin-filesize": "^1.5.0",
     "rollup-plugin-node-resolve": "^3.0.0",
-    "rollup-plugin-progress": "^0.4.0",
+    "rollup-plugin-progress": "^1.1.2",
     "rollup-plugin-string": "^2.0.2",
     "rollup-plugin-visualizer": "^0.3.1",
-    "typescript": "^2.3.3",
+    "stylelint": "^13.6.1",
+    "typescript": "^3.9.7",
     "uglify-js": "^3.1.8",
+    "watch": "^1.0.2",
     "wcdoc": "0.1.19",
     "wdio-jasmine-framework": "^0.3.8",
     "webdriverio": "^4.4.0"
@@ -130,7 +155,6 @@
   "dependencies": {
     "@onsenui/custom-elements": "1.0.0",
     "@onsenui/fastclick": "1.1.1",
-    "core-js": "^2.5.1",
-    "gulp-protractor": "^4.1.1"
+    "core-js": "^2.6.11"
   }
 }
