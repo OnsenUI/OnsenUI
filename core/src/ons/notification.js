@@ -486,10 +486,11 @@ notification.toast = (message, options) => {
 
     _setAttributes(toast, options);
 
+    const originalHide = toast.hide.bind(toast);
+
     const finish = value => {
       if (toast) {
-        toast
-        .hide()
+        originalHide()
         .then(() => {
           if (toast) {
             toast.remove();
@@ -504,6 +505,9 @@ notification.toast = (message, options) => {
     if (options.buttonLabels) {
       util.findChild(toast._toast, 'button').onclick = () => finish(0);
     }
+
+    // overwrite so that ons.notification.hide resolves when toast.hide is called
+    toast.hide = () => finish(-1);
 
     document.body.appendChild(toast);
     options.compile(toast);
