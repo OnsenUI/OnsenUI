@@ -38,6 +38,7 @@
     "chromedriver": "2.38.0",
     "core-js": "^2.5.7",
     "cp": "^0.2.0",
+    "gulp": "^4.0.2",
     "gulp-shell": "^0.5.2",
     "open": "0.0.5",
     "protractor": "^3.3.0",
