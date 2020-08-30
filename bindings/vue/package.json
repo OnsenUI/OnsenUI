@@ -60,6 +60,7 @@
     "gulp": "^4.0.0",
     "gulp-babel": "^7.0.0",
     "gulp-clean": "^0.3.2",
+    "gulp-load-plugins": "^2.0.4",
     "gulp-rename": "^1.2.2",
     "gulp-util": "^3.0.7",
     "gulp-vue-compiler": "^1.0.0-beta.0",
