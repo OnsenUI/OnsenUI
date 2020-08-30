@@ -126,7 +126,7 @@ jobs:
       # Tests
       - run:
           name: Run OnsenUI Tests
-          command: npm run test:skip-build
+          command: npm run test
 
       - run: cd bindings/angular1; npm test
       - run: cd bindings/angular2; npm test
