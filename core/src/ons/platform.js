@@ -127,7 +127,7 @@ class Platform {
    * @return {Boolean}
    */
   isIPad() {
-    return /iPad/i.test(navigator.userAgent);
+    return /iPad/i.test(navigator.userAgent) || this.isIPadOS();
   }
 
   /**
