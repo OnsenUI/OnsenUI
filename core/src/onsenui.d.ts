@@ -323,6 +323,13 @@ declare namespace ons {
      * @return {Boolean}
      */
     function isIOS7above(): boolean;
+
+    /**
+     * @description Returns whether the OS is iPadOS
+     * @return {Boolean}
+     */
+    function isIPadOS(): boolean;
+
     /**
      *
      */

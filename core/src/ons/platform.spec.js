@@ -286,4 +286,10 @@ describe('ons.platform', () => {
       expect(ons.platform.isIOS7above()).to.be.false;
     });
   });
+
+  describe('#isIPadOS()', () => {
+    it('returns false if platform is not iPadOS', () => {
+      expect(ons.platform.isIPadOS()).to.be.false;
+    });
+  });
 });
