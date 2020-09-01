@@ -12,6 +12,7 @@ dev
  * ons-tab: Fall back to icon if active-icon not set when updating button content. ([#2720](https://github.com/OnsenUI/OnsenUI/pull/2720))
  * ons-fab: Stop fab scrolling with viewport when wrapped in another element. ([#2778](https://github.com/OnsenUI/OnsenUI/issues/2778))
  * ons.notification: Resolve toast when hide is called before timeout. ([#2755](https://github.com/OnsenUI/OnsenUI/issues/2755))
+ * core: Fix status-bar-fill not being automatically set on iPadOS. ([#2745](https://github.com/OnsenUI/OnsenUI/issues/2745))
 
 2.10.10
 ---

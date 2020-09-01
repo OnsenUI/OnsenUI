@@ -181,6 +181,21 @@ class Platform {
     return false;
   }
 
+  /**
+   * @method isIPadOS
+   * @signature isIPadOS()
+   * @description
+   *   [en]Returns whether the OS is iPadOS.[/en]
+   *   [ja][/ja]
+   * @return {Boolean}
+   */
+  isIPadOS() {
+    // The iPadOS User Agent string is the same as MacOS so as a
+    // workaround we test the max touch points, which is 5 for
+    // iPads and 0 for desktop browsers.
+    return !!(/Macintosh/i.test(navigator.userAgent) && navigator.maxTouchPoints && navigator.maxTouchPoints === 5);
+  }
+
   //----------------
   // iOS browsers
   //----------------
