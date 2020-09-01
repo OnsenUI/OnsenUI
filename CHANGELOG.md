@@ -14,6 +14,7 @@ dev
  * ons.notification: Resolve toast when hide is called before timeout. ([#2755](https://github.com/OnsenUI/OnsenUI/issues/2755))
  * ons-navigator: Fix navigator still running when non-existent page is pushed. ([#2740](https://github.com/OnsenUI/OnsenUI/issues/2740))
  * core: Fix status-bar-fill not being automatically set on iPadOS. ([#2745](https://github.com/OnsenUI/OnsenUI/issues/2745))
+ * core: Fix isIPad returning false on iPadOS. ([#2621](https://github.com/OnsenUI/OnsenUI/issues/2621))
 
 2.10.10
 ---
