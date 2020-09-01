@@ -581,6 +581,9 @@ export default class NavigatorElement extends BaseElement {
       this._pageLoader.load({page, parent: this, params: options.data}, pageElement => {
         prepare(pageElement);
         resolve();
+      }, error => {
+        this._isRunning = false;
+        throw error;
       });
     }));
   }

@@ -18,13 +18,13 @@ import util from './util';
 import internal from './internal';
 
 // Default implementation for global PageLoader.
-function loadPage({page, parent, params = {}}, done) {
+function loadPage({page, parent, params = {}}, done, error) {
   internal.getPageHTMLAsync(page).then(html => {
     const pageElement = util.createElement(html);
     parent.appendChild(pageElement);
 
     done(pageElement);
-  });
+  }).catch(e => error(e));
 }
 
 function unloadPage(element) {
@@ -63,15 +63,16 @@ export class PageLoader {
    * @param {Element} options.parent A location to load page.
    * @param {Object} [options.params] Extra parameters for ons-page.
    * @param {Function} done Take an object that has "element" property and "unload" function.
+   * @param {Function} error Function called when there is an error.
    */
-  load({page, parent, params = {}}, done) {
+  load({page, parent, params = {}}, done, error) {
     this._loader({page, parent, params}, pageElement => {
       if (!(pageElement instanceof Element)) {
         throw Error('pageElement must be an instance of Element.');
       }
 
       done(pageElement);
-    });
+    }, error);
   }
 
   unload(pageElement) {
