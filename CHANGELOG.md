@@ -15,6 +15,7 @@ dev
  * ons-navigator: Fix navigator still running when non-existent page is pushed. ([#2740](https://github.com/OnsenUI/OnsenUI/issues/2740))
  * core: Fix status-bar-fill not being automatically set on iPadOS. ([#2745](https://github.com/OnsenUI/OnsenUI/issues/2745))
  * core: Fix isIPad returning false on iPadOS. ([#2621](https://github.com/OnsenUI/OnsenUI/issues/2621))
+ * ons-carousel: Fix wrong active index being set on resize for carousels with items narrower that the screen width. ([#2738](https://github.com/OnsenUI/OnsenUI/issues/2738))
 
 2.10.10
 ---

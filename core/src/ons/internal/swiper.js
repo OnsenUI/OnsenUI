@@ -102,7 +102,7 @@ export default class Swiper {
   }
 
   onResize() {
-    const i = this._scroll / this.targetSize;
+    const i = this._scroll / this.itemNumSize;
     this._reset();
     this.setActiveIndex(i);
     this.refresh();
