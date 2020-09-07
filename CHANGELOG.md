@@ -18,6 +18,7 @@ dev
  * ons-carousel: Fix wrong active index being set on resize for carousels with items narrower that the screen width. ([#2738](https://github.com/OnsenUI/OnsenUI/issues/2738))
  * ons-navigator: Fix bug where entry page data contains leave page data in postpop. ([#2575](https://github.com/OnsenUI/OnsenUI/issues/2575))
  * ons-navigator: Fix pushPage's callback being called by popPage. ([#2761](https://github.com/OnsenUI/OnsenUI/issues/2761))
+ * ons-carousel: Fix carousel not swiping when inside modal on iOS. ([#2572](https://github.com/OnsenUI/OnsenUI/issues/2572))
 
  ### BREAKING CHANGES
 
