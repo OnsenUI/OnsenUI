@@ -271,7 +271,7 @@ describe('ons.notification', () => {
       const event = new CustomEvent('click');
       const spy = chai.spy.on(dialog, 'hide');
       button.dispatchEvent(event);
-      expect(spy).to.have.been.called.once;
+      expect(dialog.style.display).to.equal('none');
     });
 
     it('resolves to the pressed button index', (done) => {
