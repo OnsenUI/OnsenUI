@@ -17,6 +17,11 @@ dev
  * core: Fix isIPad returning false on iPadOS. ([#2621](https://github.com/OnsenUI/OnsenUI/issues/2621))
  * ons-carousel: Fix wrong active index being set on resize for carousels with items narrower that the screen width. ([#2738](https://github.com/OnsenUI/OnsenUI/issues/2738))
  * ons-navigator: Fix bug where entry page data contains leave page data in postpop. ([#2575](https://github.com/OnsenUI/OnsenUI/issues/2575))
+ * ons-navigator: Fix pushPage's callback being called by popPage. ([#2761](https://github.com/OnsenUI/OnsenUI/issues/2761))
+
+ ### BREAKING CHANGES
+
+ * ons-navigator: If options are not set for popPage, it no longer defaults to the options set when the page was pushed.
 
 2.10.10
 ---
