@@ -490,11 +490,14 @@ export default class NavigatorElement extends BaseElement {
       const leavePage = this.pages[length - 1];
       const enterPage = this.pages[length - 2];
 
-      options = util.extend({}, this.options || {}, leavePage.pushedOptions || {}, options);
+      options = util.extend({}, this.options || {}, options);
 
       if (options.data) {
         enterPage.data = util.extend({}, enterPage.data || {}, options.data || {});
       }
+
+      // add in leave page options once options.data has been set
+      options = util.extend({}, leavePage.pushedOptions || {}, options);
 
       const done = () => {
         update().then(() => {
