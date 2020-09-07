@@ -147,41 +147,12 @@ export default class Swiper {
   }
 
   setActiveIndex(index, options = {}) {
+    console.log('set active index');
     this._setSwiping(true);
     index = Math.max(0, Math.min(index, this.itemCount - 1));
     const scroll = Math.max(0, Math.min(this.maxScroll, this._offset + this.itemNumSize * index));
 
-    if (platform.isUIWebView()) {
-      /* Dirty fix for #2231(https://github.com/OnsenUI/OnsenUI/issues/2231). begin */
-      const concat = arrayOfArray => Array.prototype.concat.apply([], arrayOfArray);
-      const contents = concat(
-        util.arrayFrom(this.target.children).map(page => {
-          return util.arrayFrom(page.children)
-            .filter(child => child.classList.contains('page__content'));
-        })
-      );
-
-      const map = new Map();
-      return (
-        new Promise(resolve => {
-          contents.forEach(content => {
-            map.set(content, content.getAttribute('class'));
-            content.classList.add('page__content--suppress-layer-creation')
-          });
-          requestAnimationFrame(resolve);
-        })
-        .then(() => this._changeTo(scroll, options))
-        .then(() => new Promise(resolve => {
-          contents.forEach(content => {
-            content.setAttribute('class', map.get(content));
-          });
-          requestAnimationFrame(resolve);
-        }))
-      );
-      /* end */
-    } else {
-      return this._changeTo(scroll, options);
-    }
+    return this._changeTo(scroll, options);
   }
 
   getActiveIndex(scroll = this._scroll) {
