@@ -22,7 +22,7 @@ dev
 
  ### BREAKING CHANGES
 
- * UIWebView is no longer supported.
+ * UIWebView is no longer supported. FastClick is also removed.
  * ons-navigator: If options are not set for popPage, it no longer defaults to the options set when the page was pushed.
 
 2.10.10
