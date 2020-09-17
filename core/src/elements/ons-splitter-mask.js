@@ -51,12 +51,10 @@ export default class SplitterMaskElement extends BaseElement {
 
   connectedCallback() {
     this.addEventListener('click', this._boundOnClick);
-    util.iosMaskScrollFix(this, true);
   }
 
   disconnectedCallback() {
     this.removeEventListener('click', this._boundOnClick);
-    util.iosMaskScrollFix(this, false);
   }
 }
 

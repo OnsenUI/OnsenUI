@@ -175,7 +175,6 @@ export default class BaseDialogElement extends BaseElement {
     contentReady(this, () => {
       if (this._mask) {
         this._mask.addEventListener('click', this._cancel, false);
-        util.iosMaskScrollFix(this._mask, true);
       }
     });
   }
@@ -188,7 +187,6 @@ export default class BaseDialogElement extends BaseElement {
 
     if (this._mask) {
       this._mask.removeEventListener('click', this._cancel, false);
-      util.iosMaskScrollFix(this._mask, false);
     }
   }
 

@@ -105,8 +105,6 @@ export default class PullHookElement extends BaseElement {
   constructor() {
     super();
 
-    this._shouldFixScroll = util.globals.isUIWebView;
-
     this._onDrag = this._onDrag.bind(this);
     this._onDragStart = this._onDragStart.bind(this);
     this._onDragEnd = this._onDragEnd.bind(this);
@@ -142,7 +140,7 @@ export default class PullHookElement extends BaseElement {
     const tapY = event.gesture.center.clientY + this._pageElement.scrollTop;
     const maxY = window.innerHeight;
     // Only use drags that start near the pullHook to reduce flickerings
-    const draggableAreaRatio = this._shouldFixScroll ? .8 : 1;
+    const draggableAreaRatio = 1;
 
     this._ignoreDrag = event.consumed || (tapY > maxY * draggableAreaRatio);
 
@@ -180,17 +178,6 @@ export default class PullHookElement extends BaseElement {
 
     const tapY = event.gesture.center.clientY + this._pageElement.scrollTop;
     const maxY = window.innerHeight;
-
-    // Hack to make it work on Android 4.4 WebView and iOS UIWebView. Scrolls manually
-    // near the top of the page so there will be no inertial scroll when scrolling down.
-    // Allowing default scrolling will kill all 'touchmove' events.
-    if (this._shouldFixScroll) {
-      this._pageElement.scrollTop = this._startScroll - event.gesture.deltaY;
-      // Allow inertia when scrolling down below 50% of the view to reduce flickerings
-      if (event.gesture.interimDirection !== 'up' || (tapY <= maxY * .5)) {
-        event.gesture.preventDefault();
-      }
-    }
 
     const scroll = Math.max(event.gesture.deltaY - this._startScroll, 0);
     if (scroll !== this._currentTranslation) {
@@ -432,7 +419,7 @@ export default class PullHookElement extends BaseElement {
         dragMinDistance: 1,
         dragDistanceCorrection: false,
         dragLockToAxis: !this._dragLockDisabled,
-        passive: !this._shouldFixScroll
+        passive: true
       });
 
       gdToggle('on');
