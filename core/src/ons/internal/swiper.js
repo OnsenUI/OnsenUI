@@ -147,7 +147,6 @@ export default class Swiper {
   }
 
   setActiveIndex(index, options = {}) {
-    console.log('set active index');
     this._setSwiping(true);
     index = Math.max(0, Math.min(index, this.itemCount - 1));
     const scroll = Math.max(0, Math.min(this.maxScroll, this._offset + this.itemNumSize * index));
