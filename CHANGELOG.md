@@ -2,6 +2,13 @@
 CHANGELOG
 ====
 
+2.11.1
+---
+
+ ### Misc
+
+ * Remove preinstall script that was causing npm install to fail.
+
 2.11.0
 ---
 
