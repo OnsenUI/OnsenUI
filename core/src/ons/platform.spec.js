@@ -34,12 +34,6 @@ describe('ons.platform', () => {
     });
   });
 
-  describe('#isUIWebView()', () => {
-    it('return false if platform is not a UIWebView', () => {
-      expect(ons.platform.isUIWebView()).to.be.false;
-    });
-  });
-
   describe('#isIOS()', () => {
     it('returns false if platform is not IOS', () => {
       expect(ons.platform.isIOS()).to.be.false;

@@ -34,7 +34,6 @@ util.globals = {
 
 platform._runOnActualPlatform(() => {
   util.globals.actualMobileOS = platform.getMobileOS();
-  util.globals.isUIWebView = platform.isUIWebView();
   util.globals.isWKWebView = platform.isWKWebView();
 });
 
@@ -546,15 +545,7 @@ util.iosPreventScroll = gd => {
 util.iosPageScrollFix = (add) => { // Full fix - May cause issues with UIWebView's momentum scroll
   if (util.globals.actualMobileOS === 'ios') {
     document.body.classList.toggle('ons-ios-scroll', add); // Allows custom and localized fixes (#2274)
-    if (!util.globals.isUIWebView || internal.config.forceUIWebViewScrollFix) {
-      document.body.classList.toggle('ons-ios-scroll-fix', add);
-    }
-  }
-};
-util.iosMaskScrollFix = (el, add) => { // Half fix - only prevents scroll on masks
-  if (util.globals.isUIWebView) {
-    const action = (add ? 'add' : 'remove') + 'EventListener';
-    el[action]('touchmove', prevent, false);
+    document.body.classList.toggle('ons-ios-scroll-fix', add);
   }
 };
 

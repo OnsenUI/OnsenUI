@@ -227,18 +227,6 @@ class Platform {
     return !!(this.isIOS() && window.webkit && window.webkit.messageHandlers && window.indexedDB && !lte9);
   }
 
-  /**
-   * @method isUIWebView
-   * @signature isUIWebView()
-   * @description
-   *   [en]Returns whether app is running in UIWebView.[/en]
-   *   [ja]UIWebViewで実行されているかどうかを返します。[/ja]
-   * @return {Boolean}
-   */
-  isUIWebView() {
-    return !!(this.isIOS() && !this.isIOSSafari() && !this.isWKWebView());
-  }
-
   //----------------
   // Android devices
   //----------------

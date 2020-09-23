@@ -80,11 +80,6 @@ declare namespace ons {
    */
   function disableIconAutoPrefix(): void;
   /**
-   * @param {Boolean} force Enable or disable the fix.
-   * @description Applies a fix for iOS UIWebView which prevents scroll events jumping to pages under the top layer. This may visually affect normal scrolling of UIWebView if you open a dialog/menu before the scroll momentum finished. Disabled by default.
-   */
-  function forceUIWebViewScrollFix(force: boolean): void;
-  /**
    * @description Refresh styling for the given platform. Only useful for demos. Use `ons.platform.select(...)` for development and production.
    */
   function forcePlatformStyling(platform: string): void;
@@ -245,12 +240,6 @@ declare namespace ons {
     function isAndroidPhone(): boolean;
 
     function isAndroidTablet(): boolean;
-
-    /**
-     * @description Returns whether app is running in UIWebView.
-     * @return {Boolean}
-     */
-    function isUIWebView(): boolean;
 
     /**
      * @description Returns whether app is running in iOS Safari.

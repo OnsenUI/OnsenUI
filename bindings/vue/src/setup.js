@@ -9,7 +9,6 @@ export default function(ons) {
       /^set/,
       /animit/,
       /elements/,
-      /fastClick/,
       /GestureDetector/,
       /notification/,
       /orientation/,
