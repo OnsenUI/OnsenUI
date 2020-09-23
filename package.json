@@ -149,7 +149,6 @@
     "uglify-js": "^3.1.8",
     "watch": "^1.0.2",
     "wcdoc": "0.1.19",
-    "wdio-jasmine-framework": "^0.3.8",
     "webdriverio": "^4.4.0"
   },
   "dependencies": {
