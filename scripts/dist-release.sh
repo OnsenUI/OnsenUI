@@ -19,23 +19,19 @@ fi
 
 (cd $distrepo && git rm -r * --cached --ignore-unmatch 1>/dev/null && rm -rf *)
 
-echo "* $(tput setaf 3)Installing dependencies of css-components$(tput setaf 7)..."
-(cd css-components && yarn install)
-echo "** $(tput setaf 2)Finished$(tput setaf 7)!"
-
 echo "* $(tput setaf 3)Preparing OnsenUI$(tput setaf 7)..."
 if [ "$1" == "no-build" ]
 then
-	node_modules/.bin/gulp dist-no-build
+	npm run dist
 else
-	yarn install
-	(cd bindings/angular1 && yarn install)
-	node_modules/.bin/gulp dist
+	npm install
+	npm run build
+	npm run dist
 fi
 echo "** $(tput setaf 2)Finished$(tput setaf 7)!"
 
 echo "* $(tput setaf 3)Running tests$(tput setaf 7)..."
-node_modules/.bin/gulp test --skip-build
+npm run test
 echo "** $(tput setaf 2)Finished$(tput setaf 7)!"
 
 echo "* $(tput setaf 3)Preparing new release$(tput setaf 7)..."
