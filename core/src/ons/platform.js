@@ -159,7 +159,7 @@ class Platform {
     if (typeof device === 'object' && !/browser/i.test(device.platform)) {
       return /iOS/i.test(device.platform);
     } else {
-      return /iPhone|iPad|iPod/i.test(navigator.userAgent);
+      return /iPhone|iPad|iPod/i.test(navigator.userAgent) || this.isIPadOS();
     }
   }
 
