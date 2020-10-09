@@ -2,6 +2,13 @@
 CHANGELOG
 ====
 
+dev
+---
+
+ ### Bug Fixes
+
+ * ons.platform: isIOS now returns true for iPadOS. ([#2804](https://github.com/OnsenUI/OnsenUI/pull/2804)).
+
 2.11.1
 ---
 
