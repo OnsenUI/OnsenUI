@@ -232,7 +232,10 @@ notification._createAlertDialog = (...params) => new Promise(resolve => {
         if (el.input && options.isPrompt && options.autofocus) {
           const strLength = el.input.value.length;
           el.input.focus();
-          el.input.setSelectionRange(strLength, strLength);
+          if (el.input.type &&
+            ['text', 'search', 'url', 'tel', 'password'].includes(el.input.type)) {
+            el.input.setSelectionRange(strLength, strLength);
+          }
         }
       });
   });
