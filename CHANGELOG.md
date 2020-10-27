@@ -8,6 +8,7 @@ dev
  ### Bug Fixes
 
  * ons.platform: isIOS now returns true for iPadOS. ([#2804](https://github.com/OnsenUI/OnsenUI/pull/2804)).
+ * ons.platform: Only prompt input cursor for supported input types. ([#2803](https://github.com/OnsenUI/OnsenUI/issues/2803)).
 
 2.11.1
 ---
