@@ -44,7 +44,7 @@ You will need a recent version of [Node.js](https://nodejs.org/) and [Yarn](http
 Clone this repository and run the following commands to build the project:
 
     npm install
-    (cdd css-components && npm install)
+    (cd css-components && npm install)
     npm run build
 
 The files will be built and copied into **OnsenUI/build** folder.
