@@ -22,7 +22,6 @@ import {findDOMNode} from 'react-dom';
  *
  */
 class GestureDetector extends SimpleWrapper {
-
   constructor(props) {
     super(props);
 
@@ -67,9 +66,7 @@ class GestureDetector extends SimpleWrapper {
   }
 }
 
-
 GestureDetector.propTypes = {
-
 
   /**
    * @name onDrag
