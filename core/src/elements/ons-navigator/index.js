@@ -35,10 +35,10 @@ import deviceBackButtonDispatcher from '../../ons/internal/device-back-button-di
 import {PageLoader, defaultPageLoader, instantPageLoader} from '../../ons/page-loader';
 
 const _animatorDict = {
-  'default': () => platform.isAndroid() ? MDFadeNavigatorAnimator : IOSSlideNavigatorAnimator,
-  'slide': () => platform.isAndroid() ? MDSlideNavigatorAnimator : IOSSlideNavigatorAnimator,
-  'lift': () => platform.isAndroid() ? MDLiftNavigatorAnimator : IOSLiftNavigatorAnimator,
-  'fade': () => platform.isAndroid() ? MDFadeNavigatorAnimator : IOSFadeNavigatorAnimator,
+  'default': function () { return platform.isAndroid() ? MDFadeNavigatorAnimator : IOSSlideNavigatorAnimator },
+  'slide': function () { return platform.isAndroid() ? MDSlideNavigatorAnimator : IOSSlideNavigatorAnimator },
+  'lift': function () { return platform.isAndroid() ? MDLiftNavigatorAnimator : IOSLiftNavigatorAnimator },
+  'fade': function () { return platform.isAndroid() ? MDFadeNavigatorAnimator : IOSFadeNavigatorAnimator },
   'slide-ios': IOSSlideNavigatorAnimator,
   'slide-md': MDSlideNavigatorAnimator,
   'lift-ios': IOSLiftNavigatorAnimator,

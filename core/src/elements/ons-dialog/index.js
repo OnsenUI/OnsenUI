@@ -32,7 +32,7 @@ const scheme = {
 };
 
 const _animatorDict = {
-  'default': () => platform.isAndroid() ? AndroidDialogAnimator : IOSDialogAnimator,
+  'default': function () { return  platform.isAndroid() ? AndroidDialogAnimator : IOSDialogAnimator },
   'slide': SlideDialogAnimator,
   'none': DialogAnimator
 };

@@ -42,8 +42,8 @@ const scheme = {
 
 const _animatorDict = {
   'none': AlertDialogAnimator,
-  'default': () => platform.isAndroid() ? AndroidAlertDialogAnimator : IOSAlertDialogAnimator,
-  'fade': () => platform.isAndroid() ? AndroidAlertDialogAnimator : IOSAlertDialogAnimator
+  'default': function () { return platform.isAndroid() ? AndroidAlertDialogAnimator : IOSAlertDialogAnimator },
+  'fade': function () { return platform.isAndroid() ? AndroidAlertDialogAnimator : IOSAlertDialogAnimator }
 };
 
 /**
