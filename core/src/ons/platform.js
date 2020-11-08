@@ -102,8 +102,8 @@ class Platform {
    * @method isIPhoneX
    * @signature isIPhoneX()
    * @description
-   *   [en]Returns whether the device is iPhone X, XS, XS Max, or XR.[/en]
-   *   [ja]iPhone X や XS、XS Max、または XR 上で実行されているかどうかを返します。[/ja]
+   *   [en]Returns whether the device is iPhone X, XS, XS Max, XR, 11, 12 Mini, 12, 12 Pro or 12 Pro Max.[/en]
+   *   [ja]iPhone X や XS、XS Max、XR、11、12 Mini、12、12 Pro、または12 ProMaxのいずれであるかを返します。[/ja]
    * @return {Boolean}
    */
   isIPhoneX() {
@@ -115,7 +115,13 @@ class Platform {
       (window.screen.width === 375 && window.screen.height === 812 || // X, XS portrait
        window.screen.width === 812 && window.screen.height === 375 || // X, XS landscape
        window.screen.width === 414 && window.screen.height === 896 || // XS Max, XR portrait
-       window.screen.width === 896 && window.screen.height === 414); // XS Max, XR landscape
+       window.screen.width === 896 && window.screen.height === 414 || // XS Max, XR landscape
+       window.screen.width === 360 && window.screen.height === 780 || // 12 Mini portrait
+       window.screen.width === 780 && window.screen.height === 360 || // 12 Mini landscape
+       window.screen.width === 390 && window.screen.height === 844 || // 12, 12 Pro portrait
+       window.screen.width === 844 && window.screen.height === 390 || // 12, 12 Pro landscape
+       window.screen.width === 428 && window.screen.height === 926 || // 12 Pro Max portrait
+       window.screen.width === 926 && window.screen.height === 428 ); // 12 Pro Max landscape
   }
 
   /**
