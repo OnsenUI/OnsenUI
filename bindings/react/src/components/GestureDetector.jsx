@@ -81,7 +81,7 @@ GestureDetector.propTypes = {
   onDrag: PropTypes.func,
 
   /**
-   * @name onDragleft
+   * @name onDragLeft
    * @type function
    * @description
    *  [en]Called when the user drags left.[/en]
@@ -90,7 +90,7 @@ GestureDetector.propTypes = {
   onDragLeft: PropTypes.func,
 
   /**
-   * @name onDragright
+   * @name onDragRight
    * @type function
    * @description
    *  [en]Called when the user drags right.[/en]
@@ -99,7 +99,7 @@ GestureDetector.propTypes = {
   onDragRight: PropTypes.func,
 
   /**
-   * @name onDragup
+   * @name onDragUp
    * @type function
    * @description
    *  [en]Called when the user drags up.[/en]
@@ -108,7 +108,7 @@ GestureDetector.propTypes = {
   onDragUp: PropTypes.func,
 
   /**
-   * @name onDragdown
+   * @name onDragDown
    * @type function
    * @description
    *  [en]Called when the user drags down.[/en]
@@ -144,7 +144,7 @@ GestureDetector.propTypes = {
   onSwipe: PropTypes.func,
 
   /**
-   * @name onSwipeleft
+   * @name onSwipeLeft
    * @type function
    * @description
    *  [en]Called when the user swipes left.[/en]
@@ -153,7 +153,7 @@ GestureDetector.propTypes = {
   onSwipeLeft: PropTypes.func,
 
   /**
-   * @name onSwiperight
+   * @name onSwipeRight
    * @type function
    * @description
    *  [en]Called when the user swipes right.[/en]
@@ -162,7 +162,7 @@ GestureDetector.propTypes = {
   onSwipeRight: PropTypes.func,
 
   /**
-   * @name onSwipeup
+   * @name onSwipeUp
    * @type function
    * @description
    *  [en]Called when the user swipes up.[/en]
@@ -171,7 +171,7 @@ GestureDetector.propTypes = {
   onSwipeUp: PropTypes.func,
 
   /**
-   * @name onSwipedown
+   * @name onSwipeDown
    * @type function
    * @description
    *  [en]Called when the user swipes down.[/en]
@@ -189,7 +189,7 @@ GestureDetector.propTypes = {
   onTap: PropTypes.func,
 
   /**
-   * @name onDoubletap
+   * @name onDoubleTap
    * @type function
    * @description
    *  [en]Called when the user double taps.[/en]
@@ -207,7 +207,7 @@ GestureDetector.propTypes = {
   onPinch: PropTypes.func,
 
   /**
-   * @name onPinchin
+   * @name onPinchIn
    * @type function
    * @description
    *  [en]Called when the user pinches in.[/en]
@@ -216,7 +216,7 @@ GestureDetector.propTypes = {
   onPinchIn: PropTypes.func,
 
   /**
-   * @name onPinchout
+   * @name onPinchOut
    * @type function
    * @description
    *  [en]Called when the user pinches out.[/en]
