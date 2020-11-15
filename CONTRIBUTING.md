@@ -7,7 +7,7 @@ The basic workflow when making contributions is the following:
 
 * [Fork](https://github.com/OnsenUI/OnsenUI/fork) the repository
 * Commit your changes
-* Make a [pull request](https://help.github.com/articles/using-pull-requests) to **master** branch.
+* Make a [pull request](https://help.github.com/articles/using-pull-requests) to the **onsen.io** branch for documentation fixes in the current release of Onsen UI, or **master** for anything else.
 
 After you've made a pull request we will review it. If everything is fine and we like the change the contribution will be pulled into the main Onsen UI repository. In the case where there are some issues with the code or we disagree with how it's been implemented we will describe the issues in the comments so they can be corrected.
 
@@ -167,6 +167,7 @@ Before starting a release, check the following:
  - If there are any new components, ensure they work in the Theme Roller
  - Check the [Issues](https://github.com/OnsenUI/OnsenUI/issues) and ensure there are no outstanding breaking issues
  - Check `CHANGELOG.md` and ensure that all the latest fixes and features are listed. Usually they are not because pull requests do not tend to modify the changelog. Compare it to the `git log` and add anything that is missing.
+ - Merge **onsen.io** into **master**. **onsen.io** contains documentation changes for the current release of Onsen UI that were made after the release.
 
 Once you have done the pre-release checks above, follow the steps below to publish the core.
  - Increase the version number
@@ -187,6 +188,10 @@ Then, on GitHub, create new releases for `OnsenUI` and `OnsenUI-dist`.
  - On the New Release pages (linked below), _tag version_ and _Release title_ should both be the version number (e.g. `2.10.2`). Under _Describe this release_, copy the section for this release from `CHANGELOG.md`. Click _Publish Release_.
  - OnsenUI: https://github.com/OnsenUI/OnsenUI/releases/new
  - OnsenUI-dist: https://github.com/OnsenUI/OnsenUI-dist/releases/new
+ 
+Then update the Onsen UI website:
+ - Merge **master** into the **onsen.io** branch. These should now be identical.
+ - Run a build of the onsen.io repository on Circle CI.
 
 Finally, update monaca/monaca-component-onsenui:
 1. `git clone` the repo
