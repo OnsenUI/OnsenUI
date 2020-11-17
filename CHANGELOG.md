@@ -10,6 +10,7 @@ dev
  * ons.platform: isIOS now returns true for iPadOS. ([#2804](https://github.com/OnsenUI/OnsenUI/pull/2804)).
  * ons.platform: Only prompt input cursor for supported input types. ([#2803](https://github.com/OnsenUI/OnsenUI/issues/2803)).
  * core: Fix animations not working for platform-specific animations.
+ * ons-fab: Fix fab not being positioned relative to tab page. ([#2810](https://github.com/OnsenUI/OnsenUI/issues/2810)).
 
 2.11.1
 ---
