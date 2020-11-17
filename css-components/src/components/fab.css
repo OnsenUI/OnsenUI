@@ -2,13 +2,13 @@
 :root {
   --fab-width: 56px;
   --fab-height: 56px;
-  --fab-position: fixed;
+  --fab-position: absolute;
   --fab-mini-width: 40px;
   --fab-mini-height: 40px;
 
   --material-fab-width: 56px;
   --material-fab-height: 56px;
-  --material-fab-position: fixed;
+  --material-fab-position: absolute;
   --material-fab-mini-width: 40px;
   --material-fab-mini-height: 40px;
 
