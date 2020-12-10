@@ -2,8 +2,23 @@ import './ons/platform'; // This file must be loaded before Custom Elements poly
 import './polyfills/index.js';
 import './vendor/index.js';
 import './ons/microevent.js';
+import internal from './ons/internal';
 
 export default function setup(ons) {
+  internal.waitDOMContentLoaded(function() {
+    register('script[type="text/ons-template"]');
+    register('script[type="text/template"]');
+    register('script[type="text/ng-template"]');
+    register('template');
+
+    function register(query) {
+      const templates = window.document.querySelectorAll(query);
+      for (let i = 0; i < templates.length; i++) {
+        internal.templateStore.set(templates[i].getAttribute('id'), templates[i].textContent || templates[i].content);
+      }
+    }
+  });
+
   if (window._onsLoaded) {
     ons._util.warn('Onsen UI is loaded more than once.');
   }
