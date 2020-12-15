@@ -131,4 +131,21 @@ describe('OnsCheckboxElement', () => {
       });
     });
   });
+
+  describe('#focus()', () => {
+    it('focuses the inner input', () => {
+      expect(document.activeElement).to.not.equal(element._input);
+      element.focus();
+      expect(document.activeElement).to.equal(element._input);
+    });
+  });
+
+  describe('#blur()', () => {
+    it('blurs the input', () => {
+      element.focus();
+      expect(document.activeElement).to.equal(element._input);
+      element.blur();
+      expect(document.activeElement).to.not.equal(element._input);
+    });
+  });
 });
