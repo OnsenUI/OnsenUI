@@ -13,6 +13,10 @@ dev
  * ons-fab: Fix fab not being positioned relative to tab page. ([#2810](https://github.com/OnsenUI/OnsenUI/issues/2810)).
  * core: Fix setImmediate not defined for ESM bug.
 
+ ### New Features
+
+ * core: Add blur and focus methods for input elements. ([#2809](https://github.com/OnsenUI/OnsenUI/pull/2809)).
+
 2.11.1
 ---
 
