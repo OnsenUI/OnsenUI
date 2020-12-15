@@ -308,6 +308,21 @@ export default class SwitchElement extends BaseCheckboxElement {
    *   [ja]コンポーネント内部のcheckbox要素になります。[/ja]
    */
 
+  /**
+   * @method focus
+   * @signature focus()
+   * @description
+   *   [en]Focuses the switch.[/en]
+   *   [ja][/ja]
+   */
+
+  /**
+   * @method blur
+   * @signature blur()
+   * @description
+   *   [en]Removes focus from the switch.[/en]
+   *   [ja][/ja]
+   */
 }
 
 onsElements.Switch = SwitchElement;

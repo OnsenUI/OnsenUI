@@ -104,6 +104,22 @@ export default class CheckboxElement extends BaseCheckboxElement {
    *   [en]Whether the checkbox is disabled or not.[/en]
    *   [ja]無効化されている場合に`true`。[/ja]
    */
+
+  /**
+   * @method focus
+   * @signature focus()
+   * @description
+   *   [en]Focuses the checkbox.[/en]
+   *   [ja][/ja]
+   */
+
+  /**
+   * @method blur
+   * @signature blur()
+   * @description
+   *   [en]Removes focus from the checkbox.[/en]
+   *   [ja][/ja]
+   */
 }
 
 onsElements.Checkbox = CheckboxElement;

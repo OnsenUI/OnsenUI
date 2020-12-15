@@ -205,6 +205,22 @@ export default class InputElement extends BaseInputElement {
    *   [en]Whether the input is disabled or not.[/en]
    *   [ja]無効化されている場合に`true`。[/ja]
    */
+
+  /**
+   * @method focus
+   * @signature focus()
+   * @description
+   *   [en]Focuses the input.[/en]
+   *   [ja][/ja]
+   */
+
+  /**
+   * @method blur
+   * @signature blur()
+   * @description
+   *   [en]Removes focus from the input.[/en]
+   *   [ja][/ja]
+   */
 }
 
 onsElements.Input = InputElement;

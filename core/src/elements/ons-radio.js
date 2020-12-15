@@ -101,6 +101,22 @@ export default class RadioElement extends BaseCheckboxElement {
    *   [en]Whether the radio button is disabled or not.[/en]
    *   [ja]無効化されている場合に`true`。[/ja]
    */
+
+  /**
+   * @method focus
+   * @signature focus()
+   * @description
+   *   [en]Focuses the radio button.[/en]
+   *   [ja][/ja]
+   */
+
+  /**
+   * @method blur
+   * @signature blur()
+   * @description
+   *   [en]Removes focus from the radio button.[/en]
+   *   [ja][/ja]
+   */
 }
 
 onsElements.Radio = RadioElement;

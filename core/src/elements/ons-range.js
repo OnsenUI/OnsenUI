@@ -214,6 +214,22 @@ export default class RangeElement extends BaseInputElement {
    *   [en]Current value.[/en]
    *   [ja][/ja]
    */
+
+  /**
+   * @method focus
+   * @signature focus()
+   * @description
+   *   [en]Focuses the range.[/en]
+   *   [ja][/ja]
+   */
+
+  /**
+   * @method blur
+   * @signature blur()
+   * @description
+   *   [en]Removes focus from the range.[/en]
+   *   [ja][/ja]
+   */
 }
 
 onsElements.Range = RangeElement;
