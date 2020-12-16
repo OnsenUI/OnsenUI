@@ -116,8 +116,6 @@ class Platform {
        window.screen.width === 812 && window.screen.height === 375 || // X, XS landscape
        window.screen.width === 414 && window.screen.height === 896 || // XS Max, XR portrait
        window.screen.width === 896 && window.screen.height === 414 || // XS Max, XR landscape
-       window.screen.width === 360 && window.screen.height === 780 || // 12 Mini portrait
-       window.screen.width === 780 && window.screen.height === 360 || // 12 Mini landscape
        window.screen.width === 390 && window.screen.height === 844 || // 12, 12 Pro portrait
        window.screen.width === 844 && window.screen.height === 390 || // 12, 12 Pro landscape
        window.screen.width === 428 && window.screen.height === 926 || // 12 Pro Max portrait
