@@ -102,8 +102,8 @@ class Platform {
    * @method isIPhoneX
    * @signature isIPhoneX()
    * @description
-   *   [en]Returns whether the device is iPhone X, XS, XS Max, or XR.[/en]
-   *   [ja]iPhone X や XS、XS Max、または XR 上で実行されているかどうかを返します。[/ja]
+   *   [en]Returns whether the device is iPhone X, XS, XS Max, XR, 11, 11 Pro, 11 Pro Max, 12 Mini, 12, 12 Pro or 12 Pro Max.[/en]
+   *   [ja]iPhone X や XS、XS Max、XR、11、11 Pro、11 Pro Max、12 Mini、12、12 Pro、または12 Pro Max上で実行されているかどうかを返します。[/ja]
    * @return {Boolean}
    */
   isIPhoneX() {
@@ -112,10 +112,23 @@ class Platform {
     // We also cannot use cordova-plugin-device since its behavior is different between simulators and real devices.
     // This works well both in iOS Safari and (UI|WK)WebView of iPhone X.
     return this.isIPhone() &&
-      (window.screen.width === 375 && window.screen.height === 812 || // X, XS portrait
-       window.screen.width === 812 && window.screen.height === 375 || // X, XS landscape
-       window.screen.width === 414 && window.screen.height === 896 || // XS Max, XR portrait
-       window.screen.width === 896 && window.screen.height === 414); // XS Max, XR landscape
+      (
+        // X, XS, 11 Pro, 12 Mini
+        window.screen.width === 375 && window.screen.height === 812 || // portrait
+        window.screen.width === 812 && window.screen.height === 375 || // landscape
+
+        // XS Max, XR, 11, 11 Pro Max
+        window.screen.width === 414 && window.screen.height === 896 || // portrait
+        window.screen.width === 896 && window.screen.height === 414 || // landscape
+
+        // 12, 12 Pro
+        window.screen.width === 390 && window.screen.height === 844 || // portrait
+        window.screen.width === 844 && window.screen.height === 390 || // landscape
+
+        // 12 Pro Max
+        window.screen.width === 428 && window.screen.height === 926 || // portrait
+        window.screen.width === 926 && window.screen.height === 428  // landscape
+      );
   }
 
   /**
