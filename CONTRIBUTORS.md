@@ -41,6 +41,7 @@ List of code contributors (in no particular order):
 * [gittysam](https://github.com/gittysam)
 * [Stayman Hou](https://github.com/StaymanHou)
 * [Jan Vincent Liwanag](https://github.com/jvliwanag)
-* [kenji7157](https://github.com/kenji7157)
+* [Kenji Kawanobe](https://github.com/kenji7157)
+* [Stan Janssen](https://github.com/stonjohnsson)
 
 Please add yourself if you're not on this list but feel that you should be.
