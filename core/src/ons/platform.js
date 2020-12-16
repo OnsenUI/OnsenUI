@@ -15,6 +15,8 @@ limitations under the License.
 
 */
 
+import util from '../ons/util';
+
 // Save HTMLElement object before Custom Elements polyfill patch global HTMLElement.
 const NativeHTMLElement = window.HTMLElement;
 
@@ -99,14 +101,14 @@ class Platform {
   }
 
   /**
-   * @method isIPhoneX
-   * @signature isIPhoneX()
+   * @method isIPhoneNotched
+   * @signature isIPhoneNotched()
    * @description
    *   [en]Returns whether the device is iPhone X, XS, XS Max, XR, 11, 11 Pro, 11 Pro Max, 12 Mini, 12, 12 Pro or 12 Pro Max.[/en]
    *   [ja]iPhone X や XS、XS Max、XR、11、11 Pro、11 Pro Max、12 Mini、12、12 Pro、または12 Pro Max上で実行されているかどうかを返します。[/ja]
    * @return {Boolean}
    */
-  isIPhoneX() {
+  isIPhoneNotched() {
     // iOS WebViews on the same iOS version have the same user agent.
     // We cannot avoid using window.screen.
     // We also cannot use cordova-plugin-device since its behavior is different between simulators and real devices.
@@ -129,6 +131,19 @@ class Platform {
         window.screen.width === 428 && window.screen.height === 926 || // portrait
         window.screen.width === 926 && window.screen.height === 428  // landscape
       );
+  }
+
+  /**
+   * @method isIPhoneX
+   * @signature isIPhoneX()
+   * @description
+   *   [en]Deprecated: Use `isIPhoneNotched` instead. Returns whether the device is iPhone X, XS, XS Max, XR, 11, 11 Pro, 11 Pro Max, 12 Mini, 12, 12 Pro or 12 Pro Max.[/en]
+   *   [ja]Deprecated: Use `isIPhoneNotched` instead. iPhone X や XS、XS Max、XR、11、11 Pro、11 Pro Max、12 Mini、12、12 Pro、または12 Pro Max上で実行されているかどうかを返します。[/ja]
+   * @return {Boolean}
+   */
+  isIPhoneX() {
+    util.warn('ons.platform.isIPhoneX is deprecated. Use ons.platform.isIPhoneNotched instead.');
+    return isIPhoneNotched();
   }
 
   /**
