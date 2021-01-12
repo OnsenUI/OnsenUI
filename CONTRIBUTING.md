@@ -167,7 +167,7 @@ Before starting a release, check the following:
  - If there are any new components, ensure they work in the Theme Roller
  - Check the [Issues](https://github.com/OnsenUI/OnsenUI/issues) and ensure there are no outstanding breaking issues
  - Check `CHANGELOG.md` and ensure that all the latest fixes and features are listed. Usually they are not because pull requests do not tend to modify the changelog. Compare it to the `git log` and add anything that is missing.
- - Merge **onsen.io** into **master**. **onsen.io** contains documentation changes for the current release of Onsen UI that were made after the release.
+ - Merge **master** into **onsen.io**. **onsen.io** contains documentation changes for the current release of Onsen UI that were made after the release.
 
 Once you have done the pre-release checks above, follow the steps below to publish the core.
  - Increase the version number
