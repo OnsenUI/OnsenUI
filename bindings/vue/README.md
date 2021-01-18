@@ -13,10 +13,10 @@ For more information of what's included in Onsen UI please see:
 
 ## Installation
 
-#### Package Manager (yarn, npm)
+#### Package Manager (npm, yarn)
 
 ```
-yarn add onsenui vue-onsenui --save
+npm install --save onsenui vue-onsenui
 ```
 
 #### Direct download
@@ -57,8 +57,8 @@ The examples are located under `/bindings/vue/examples` directory in the main re
 You can serve these examples by running the development server. First you need to [build the main repo](https://github.com/OnsenUI/OnsenUI/blob/master/CONTRIBUTING.md#development-setup). When that is done you can run the following commands from `/bindings/vue/` directory:
 
 ```
-yarn install
-yarn run dev
+npm install
+npm run dev
 ```
 
 This will open a development server with a kitchen sink app in `localhost:8080`.
