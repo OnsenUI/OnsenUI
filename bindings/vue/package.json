@@ -65,7 +65,7 @@
     "gulp-util": "^3.0.7",
     "gulp-vue-compiler": "^1.0.0-beta.0",
     "merge-stream": "^1.0.1",
-    "rollup": "^0.51.8",
+    "rollup": "^2.36.2",
     "rollup-plugin-alias": "^1.4.0",
     "rollup-plugin-babel": "^3.0.2",
     "rollup-plugin-commonjs": "^8.2.6",
@@ -79,7 +79,7 @@
     "rollup-plugin-vue": "^2.5.2",
     "uglify-js": "^3.1.7",
     "vue": "^2.5.2",
-    "vue-template-compiler": "^2.5.2",
+    "vue-template-compiler": "~2.5.2",
     "vuex": "^3.0.0"
   },
   "dependencies": {
