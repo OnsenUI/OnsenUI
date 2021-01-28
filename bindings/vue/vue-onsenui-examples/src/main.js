@@ -31,7 +31,7 @@ const mainList = {
   props: ['examples', 'changeExample']
 };
 
-const vm = new Vue({
+new Vue({
   el: '#app',
   components: { ...examples },
   template: `
