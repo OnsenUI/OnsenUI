@@ -43,7 +43,7 @@
   "homepage": "https://onsen.io/",
   "peerDependencies": {
     "onsenui": "~2.10.0",
-    "vue": "~2.5.0"
+    "vue": "^2.6.11"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
@@ -78,8 +78,8 @@
     "rollup-plugin-visualizer": "^0.3.1",
     "rollup-plugin-vue": "^2.5.2",
     "uglify-js": "^3.1.7",
-    "vue": "^2.5.2",
-    "vue-template-compiler": "~2.5.2",
+    "vue": "^2.6.11",
+    "vue-template-compiler": "^2.6.11",
     "vuex": "^3.0.0"
   },
   "dependencies": {
