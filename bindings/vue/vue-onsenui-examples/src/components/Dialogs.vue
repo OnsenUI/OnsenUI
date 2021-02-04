@@ -122,7 +122,7 @@
     </v-ons-list>
 
     <v-ons-dialog cancelable
-      :visible.sync="dialogVisible"
+      v-model:visible="dialogVisible"
       @deviceBackButton="log('dialogDBB'); $event.callParentHandler()"
       @preshow="log('preshow')"
       @postshow="log('postshow')"
@@ -137,7 +137,7 @@
 
     <v-ons-alert-dialog cancelable
       modifier="rowfooter"
-      :visible.sync="alertDialog1Visible"
+      v-model:visible="alertDialog1Visible"
       @deviceBackButton="log('alertDialogDBB'); $event.callParentHandler()"
     >
       <span slot="title">Title slots</span>
@@ -153,14 +153,14 @@
       modifier="rowfooter"
       :title="'Title props'"
       :footer="{Ok: () => alertDialog2Visible = false, Cancel: () => alertDialog2Visible = false}"
-      :visible.sync="alertDialog2Visible"
+      v-model:visible="alertDialog2Visible"
     >
       Lorem ipsum
       <button @click="alertDialog2Visible= !alertDialog2Visible">toggle</button>
     </v-ons-alert-dialog>
 
     <v-ons-modal
-      :visible.sync="modalVisible"
+      v-model:visible="modalVisible"
       @deviceBackButton="log('modalDBB'); $event.callParentHandler()"
     >
       <p>This is a modal</p>
@@ -169,7 +169,7 @@
 
     <v-ons-popover cancelable
       :target="$refs.myToolbarButton"
-      :visible.sync="popoverVisible"
+      v-model:visible="popoverVisible"
       @deviceBackButton="log('popoverDBB'); $event.callParentHandler()"
       @preshow="log('preshow')"
       @postshow="log('postshow')"
@@ -181,7 +181,7 @@
     </v-ons-popover>
 
     <v-ons-action-sheet
-      :visible.sync="actionSheetVisible"
+      v-model:visible="actionSheetVisible"
       cancelable
       title="Description"
     >

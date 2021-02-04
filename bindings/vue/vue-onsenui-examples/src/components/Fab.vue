@@ -15,7 +15,7 @@
 
     <v-ons-speed-dial
       :visible="speedDialVisible"
-      :open.sync="speedDialOpen"
+      v-model:open="speedDialOpen"
       position="bottom left"
       direction="up"
       @open="log('open')"
