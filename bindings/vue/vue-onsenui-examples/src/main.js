@@ -1,7 +1,8 @@
-import Vue from 'vue';
+import { createApp } from 'vue';
 import * as examples from './components';
 
 import VueOnsen from 'vue-onsenui'; // umd
+import Vuex from 'vuex';
 
 import 'onsenui/css/onsenui.css';
 import 'onsenui/css/onsen-css-components.css';
@@ -13,8 +14,6 @@ import 'onsenui/css/onsen-css-components.css';
 // import VOnsToolbar from '../src/components/VOnsToolbar';
 // Vue.component(VOnsPage.name, VOnsPage);
 // Vue.component(VOnsToolbar.name, VOnsToolbar);
-
-Vue.use(VueOnsen);
 
 const mainList = {
   template: `
@@ -31,7 +30,7 @@ const mainList = {
   props: ['examples', 'changeExample']
 };
 
-new Vue({
+const app = createApp({
   el: '#app',
   components: { ...examples },
   template: `
@@ -49,11 +48,13 @@ new Vue({
     </v-ons-page>
   `,
 
-  data: {
-    mainList,
-    examples,
-    title: 'Main List',
-    currentView: mainList
+  data() {
+    return {
+      mainList,
+      examples,
+      title: 'Main List',
+      currentView: mainList
+    }
   },
 
   methods: {
@@ -67,3 +68,6 @@ new Vue({
     }
   }
 });
+
+app.use(VueOnsen);
+app.use(Vuex);

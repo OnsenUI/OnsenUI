@@ -34,14 +34,14 @@
 </template>
 
 <script>
-  import Vue from 'vue';
+  import { createApp } from 'vue';
 
 	export default {
     data() {
       return {
         normalListCount: 20,
         renderItem: i => {
-          return new Vue({
+          return createApp({
             template: `<v-ons-list-item :index="index" :key="index">#{{ index }}</v-ons-list-item>`,
             data() {
               return {
