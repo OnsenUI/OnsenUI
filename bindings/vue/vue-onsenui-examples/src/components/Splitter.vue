@@ -2,7 +2,7 @@
   <v-ons-page>
     <v-ons-splitter>
       <v-ons-splitter-side
-        :open.sync="splitterOpen"
+        v-model:open="splitterOpen"
         :swipeable="state.swipeable"
         :side="state.side"
         :collapse="state.collapse"
