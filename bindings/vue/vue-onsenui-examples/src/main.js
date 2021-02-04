@@ -3,6 +3,9 @@ import * as examples from './components';
 
 import VueOnsen from 'vue-onsenui'; // umd
 
+import 'onsenui/css/onsenui.css';
+import 'onsenui/css/onsen-css-components.css';
+
 // import VueOnsen from 'vue-onsenui/esm'; // esm
 // // import * as VOns from 'vue-onsenui/esm/components';
 // // Object.values(VOns).forEach(component => Vue.component(component.name, component));
@@ -28,7 +31,7 @@ const mainList = {
   props: ['examples', 'changeExample']
 };
 
-const vm = new Vue({
+new Vue({
   el: '#app',
   components: { ...examples },
   template: `
