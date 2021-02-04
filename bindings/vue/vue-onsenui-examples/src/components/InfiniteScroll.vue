@@ -60,6 +60,8 @@
           done();
         }, 500);
       }
-    }
+    },
+
+    emits: [ 'refresh' ]
 	};
 </script>
