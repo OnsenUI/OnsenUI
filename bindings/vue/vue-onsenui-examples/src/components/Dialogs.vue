@@ -140,10 +140,10 @@
       v-model:visible="alertDialog1Visible"
       @deviceBackButton="log('alertDialogDBB'); $event.callParentHandler()"
     >
-      <span slot="title">Title slots</span>
+      <template v-slot:title>Title slots</template>
       Lorem ipsum
       <button @click="alertDialog1Visible= !alertDialog1Visible">toggle</button>
-      <template slot="footer">
+      <template v-slot:footer>
         <v-ons-alert-dialog-button @click="alertDialog1Visible = false">Ok</v-ons-alert-dialog-button>
         <v-ons-alert-dialog-button @click="alertDialog1Visible = false">Cancel</v-ons-alert-dialog-button>
       </template>

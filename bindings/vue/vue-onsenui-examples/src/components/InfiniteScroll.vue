@@ -1,7 +1,7 @@
 <template>
   <v-ons-page>
     <v-ons-tabbar :index="0">
-      <template slot="pages">
+      <template v-slot:pages>
         <v-ons-page>
           <v-ons-toolbar>
             <div class="right"><v-ons-toolbar-button @click="$emit('refresh')">Refresh</v-ons-toolbar-button></div>

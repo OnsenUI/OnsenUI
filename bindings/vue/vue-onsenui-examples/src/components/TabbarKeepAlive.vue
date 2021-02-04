@@ -5,7 +5,7 @@
     </v-ons-toolbar>
 
     <v-ons-tabbar :visible="tabbarVisibility" @init.native="log('init')">
-      <template slot="pages">
+      <template v-slot:pages>
         <keep-alive>
           <div :is="currentPage"></div>
         </keep-alive>
