@@ -12,7 +12,6 @@ import filesize from 'rollup-plugin-filesize';
 import progress from 'rollup-plugin-progress';
 import visualizer from 'rollup-plugin-visualizer';
 import vue from 'rollup-plugin-vue';
-import execute from 'rollup-plugin-execute';
 
 const local = (...args) => path.resolve(__dirname, ...args);
 
@@ -56,7 +55,6 @@ export default {
     visualizer({
       filename: 'module-stats.umd.html',
       sourcemap: true,
-    }),
-    execute(`node_modules/.bin/uglifyjs dist/${pkg.name}.js -c -m --comments '/${pkg.name}/' --output dist/${pkg.name}.min.js`),
+    })
   ]
 }
