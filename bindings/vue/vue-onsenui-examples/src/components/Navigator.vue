@@ -51,6 +51,7 @@
       animation: 'fade'
     },
     components: { myToolbar },
+    emits: [ 'replace', 'reset' ]
   };
 
   const page2 = {
@@ -85,7 +86,8 @@
     },
     components: { myToolbar },
     mounted() {
-    }
+    },
+    emits: [ 'push' ]
   };
 
   const page1 = {
@@ -110,7 +112,8 @@
     },
     components: { myToolbar },
     mounted() {
-    }
+    },
+    emits: [ 'push' ]
   };
 
 	export default {
@@ -121,11 +124,6 @@
     },
     methods: {
       log
-    },
-    components: {
-      page1,
-      page2,
-      page3
     }
 	};
 </script>

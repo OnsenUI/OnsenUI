@@ -4,10 +4,10 @@
       <div class="center">Tabbar Visible: <input type="checkbox" v-model="tabbarVisibility" /></div>
     </v-ons-toolbar>
 
-    <v-ons-tabbar :visible="tabbarVisibility" @init.native="log('init')">
-      <template slot="pages">
+    <v-ons-tabbar :visible="tabbarVisibility" @init="log('init')">
+      <template v-slot:pages>
         <keep-alive>
-          <div :is="currentPage"></div>
+          <component :is="currentPage"></component>
         </keep-alive>
       </template>
 

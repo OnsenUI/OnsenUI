@@ -1,7 +1,7 @@
 <template>
   <v-ons-page>
     <v-ons-tabbar :index="0">
-      <template slot="pages">
+      <template v-slot:pages>
         <v-ons-page>
           <v-ons-toolbar>
             <div class="right"><v-ons-toolbar-button @click="$emit('refresh')">Refresh</v-ons-toolbar-button></div>
@@ -34,14 +34,14 @@
 </template>
 
 <script>
-  import Vue from 'vue';
+  import { createApp } from 'vue';
 
 	export default {
     data() {
       return {
         normalListCount: 20,
         renderItem: i => {
-          return new Vue({
+          return createApp({
             template: `<v-ons-list-item :index="index" :key="index">#{{ index }}</v-ons-list-item>`,
             data() {
               return {
@@ -60,6 +60,8 @@
           done();
         }, 500);
       }
-    }
+    },
+
+    emits: [ 'refresh' ]
 	};
 </script>

@@ -16,7 +16,7 @@
 
     <v-ons-list-header>Expandable</v-ons-list-header>
     <v-ons-list>
-      <v-ons-list-item expandable :expanded.sync="itemExpanded">
+      <v-ons-list-item expandable v-model:expanded="itemExpanded">
         Tap to expand
         <div class="expandable-content">
           I have been expanded!
