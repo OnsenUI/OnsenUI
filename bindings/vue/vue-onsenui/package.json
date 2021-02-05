@@ -70,7 +70,7 @@
     "rollup-plugin-alias": "^1.4.0",
     "rollup-plugin-babel": "^3.0.2",
     "rollup-plugin-commonjs": "^8.2.6",
-    "rollup-plugin-eslint": "^4.0.0",
+    "rollup-plugin-eslint": "^7.0.0",
     "rollup-plugin-execute": "^1.0.0",
     "rollup-plugin-filesize": "^1.4.2",
     "rollup-plugin-node-resolve": "^3.0.0",
