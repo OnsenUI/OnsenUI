@@ -1,11 +1,11 @@
 import path from 'path';
 import pkg from './package.json';
-import corePkg from '../../package.json';
+import corePkg from '../../../package.json';
 import dateformat from 'dateformat';
 
 // Rollup plugins
 import babel from 'rollup-plugin-babel';
-import eslint from 'rollup-plugin-eslint';
+import { eslint } from 'rollup-plugin-eslint';
 import resolve from 'rollup-plugin-node-resolve';
 import commonjs from 'rollup-plugin-commonjs';
 import replace from 'rollup-plugin-replace';

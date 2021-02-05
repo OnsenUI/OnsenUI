@@ -8,7 +8,8 @@
     "build": "cross-env NODE_ENV=production gulp build && npm run build:helper-json",
     "build:helper-json": "(cd ../../ && npm run build:docs) && gulp build:helper-json",
     "prepublish": "npm run build",
-    "test": "gulp test"
+    "test": "gulp test",
+    "lint": "eslint \"src/**/*.js\" \"src/**/*.vue\""
   },
   "main": "dist/vue-onsenui.js",
   "files": [
@@ -47,14 +48,14 @@
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
-    "babel-eslint": "^8.0.1",
+    "babel-eslint": "^10.1.0",
     "babel-plugin-external-helpers": "^6.22.0",
     "babel-plugin-transform-runtime": "^6.23.0",
     "babel-preset-env": "^1.4.0",
     "babel-preset-stage-3": "^6.22.0",
     "cross-env": "^1.0.8",
-    "eslint": "^4.10.0",
-    "eslint-plugin-vue": "^3.13.1",
+    "eslint": "^6.7.2",
+    "eslint-plugin-vue": "^7.0.0-0",
     "fs-extra": "^3.0.1",
     "glob": "^7.1.2",
     "gulp": "^4.0.0",
@@ -69,7 +70,7 @@
     "rollup-plugin-alias": "^1.4.0",
     "rollup-plugin-babel": "^3.0.2",
     "rollup-plugin-commonjs": "^8.2.6",
-    "rollup-plugin-eslint": "^4.0.0",
+    "rollup-plugin-eslint": "^7.0.0",
     "rollup-plugin-execute": "^1.0.0",
     "rollup-plugin-filesize": "^1.4.2",
     "rollup-plugin-node-resolve": "^3.0.0",
