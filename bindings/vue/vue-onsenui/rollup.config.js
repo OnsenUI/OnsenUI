@@ -1,6 +1,6 @@
 import path from 'path';
 import pkg from './package.json';
-import corePkg from '../../package.json';
+import corePkg from '../../../package.json';
 import dateformat from 'dateformat';
 
 // Rollup plugins
