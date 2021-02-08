@@ -37,10 +37,10 @@ export default {
   },
   plugins: [
     eslint({
-      include: [
-        'src/**/*.js',
-        'src/**/*.vue',
-      ],
+      exclude: [
+        /vue&type=/,
+        /node_modules/
+      ]
     }),
     resolve({ extensions: ['.js', '.vue'] }),
     replace({
