@@ -4,7 +4,7 @@ import * as components from './components';
 
 const $ons = setup(ons);
 
-$ons.install = (Vue, params = {}) => {
+$ons.install = Vue => {
   /**
    * Register components of vue-onsenui.
    */

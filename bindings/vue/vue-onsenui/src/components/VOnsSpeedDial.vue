@@ -1,5 +1,5 @@
 <template>
-  <ons-speed-dial :on-click.prop="action">
+  <ons-speed-dial :on-click.prop="action" v-on="handlers">
     <slot></slot>
   </ons-speed-dial>
 </template>
@@ -19,6 +19,16 @@
       }
     },
 
+    data() {
+      return {
+        handlers: {
+          ...this.unrecognizedListeners,
+          open: this.userInteraction,
+          close: this.userInteraction
+        }
+      }
+    },
+
     methods: {
       action() {
         let runDefault = true;
@@ -33,6 +43,9 @@
       },
       _updateToggle() {
         this._shouldUpdate() && this.$el[this.open ? 'showItems' : 'hideItems'].call(this.$el);
+      },
+      userInteraction() {
+        this._shouldUpdate() && this.$emit('update:open', this.$el.isOpen());
       }
     },
 
@@ -43,8 +56,6 @@
     },
 
     mounted() {
-      this.$on(['open', 'close'], () => this._shouldUpdate() && this.$emit('update:open', this.$el.isOpen()));
-
       this._updateToggle();
     }
   };

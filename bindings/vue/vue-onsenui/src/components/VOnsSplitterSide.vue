@@ -1,5 +1,5 @@
 <template>
-  <ons-splitter-side v-on="unrecognizedListeners">
+  <ons-splitter-side v-on="handlers">
     <slot></slot>
   </ons-splitter-side>
 </template>
@@ -19,12 +19,26 @@
       }
     },
 
+    data() {
+      return {
+        handlers: {
+          ...this.unrecognizedListeners,
+          postopen: this.userInteraction,
+          postclose: this.userInteraction,
+          modechange: this.userInteraction
+        }
+      }
+    },
+
     methods: {
       action() {
         this._shouldUpdate() && this.$el[this.open ? 'open' : 'close'].call(this.$el, this.options).catch(() => {});
       },
       _shouldUpdate() {
         return this.open !== undefined && this.open !== this.$el.isOpen;
+      },
+      userInteraction() {
+        this._shouldUpdate() && this.$emit('update:open', this.$el.isOpen);
       }
     },
 
@@ -35,8 +49,6 @@
     },
 
     mounted() {
-      this.$on(['postopen', 'postclose', 'modechange'], () => this._shouldUpdate() && this.$emit('update:open', this.$el.isOpen));
-
       this.action();
     }
   };
