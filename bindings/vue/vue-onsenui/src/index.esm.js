@@ -3,7 +3,7 @@ import setup from './setup';
 
 const $ons = setup(ons);
 
-$ons.install = (Vue, params = {}) => {
+$ons.install = Vue => {
   /**
    * Expose ons object.
    */

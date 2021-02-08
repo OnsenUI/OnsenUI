@@ -73,7 +73,7 @@ export default {
     this.$vnode.context.$on('refresh', this.refresh);
   },
 
-  beforeDestroy() {
+  beforeUnmount() {
     this.$vnode.context.$off('refresh', this.refresh);
 
     // This will destroy the provider once the rendered element

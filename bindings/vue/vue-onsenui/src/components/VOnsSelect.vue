@@ -1,5 +1,5 @@
 <template>
-  <ons-select v-on="$listeners" :modifier="normalizedModifier">
+  <ons-select v-bind="$attrs" :modifier="normalizedModifier">
     <select v-model="selectedValue">
       <slot></slot>
     </select>

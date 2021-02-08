@@ -27,15 +27,15 @@
       },
       popPage: {
         type: Function,
-        default() {
-          this.pageStack.pop();
+        default(props) {
+          props.pageStack.pop();
         }
       }
     },
 
     methods: {
       isReady() {
-        if (this.hasOwnProperty('_ready') && this._ready instanceof Promise) {
+        if (Object.prototype.hasOwnProperty.call(this, '_ready') && this._ready instanceof Promise) {
           return this._ready;
         }
         return Promise.resolve();
