@@ -24,7 +24,7 @@ babelrc.plugins = ['external-helpers'];
 babelrc.exclude = [local('node_modules/**'), local('../../build/**')];
 
 const globals = { 'onsenui': 'ons', 'onsenui/esm': 'ons' },
-  external = id => /onsenui/.test(id),
+  external = id => /^onsenui/.test(id),
   banner = `/* ${pkg.name} v${pkg.version} - ${dateformat(new Date(), 'yyyy-mm-dd')} */\n`;
 
 const builds = [
