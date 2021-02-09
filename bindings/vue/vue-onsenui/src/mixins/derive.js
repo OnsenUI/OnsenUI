@@ -69,7 +69,7 @@ const deriveEvents = {
     });
   },
 
-  beforeDestroy() {
+  beforeUnmount() {
     Object.keys(this._handlers).forEach(key => {
       this.$el.removeEventListener(key, this._handlers[key]);
     });

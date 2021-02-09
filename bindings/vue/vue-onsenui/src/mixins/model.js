@@ -38,7 +38,7 @@ const modelInput = {
     this._updateValue();
     this.$el.addEventListener(this[model.event], this._onModelEvent);
   },
-  beforeDestroy() {
+  beforeUnmount() {
     this.$el.removeEventListener(this[model.event], this._onModelEvent);
   }
 };

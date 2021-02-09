@@ -84,7 +84,7 @@ const portal = {
   deactivated() {
     _unmount.call(this);
   },
-  beforeDestroy() {
+  beforeUnmount() {
     _unmount.call(this);
   }
 };
