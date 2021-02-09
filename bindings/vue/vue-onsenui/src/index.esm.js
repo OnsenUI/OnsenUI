@@ -3,11 +3,11 @@ import setup from './setup';
 
 const $ons = setup(ons);
 
-$ons.install = Vue => {
+$ons.install = app => {
   /**
    * Expose ons object.
    */
-  Vue.prototype.$ons = $ons;
+  app.config.globalProperties.$ons = $ons;
 };
 
 export default $ons;
