@@ -37,7 +37,7 @@ const deriveDBB = {
     this._isDBBSetup === true && (this._isDBBSetup = false);
   },
 
-  destroyed() {
+  unmounted() {
     this.$el.onDeviceBackButton && this.$el.onDeviceBackButton.destroy();
   }
 };
