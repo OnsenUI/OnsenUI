@@ -45,7 +45,7 @@ const deriveDBB = {
 const deriveEvents = {
   computed: {
     unrecognizedListeners() {
-      const name = camelize('-' + this.$options._componentTag.slice(6));
+      const name = camelize('-' + this.$options.name.slice(6));
       return Object.keys(this.$listeners || {})
         .filter(k => (this.$ons.elements[name].events || []).indexOf(k) === -1)
         .reduce((r, k) => {
