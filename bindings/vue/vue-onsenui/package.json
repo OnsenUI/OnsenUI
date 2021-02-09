@@ -7,6 +7,7 @@
     "dev": "cd ../../ && gulp serve --vue",
     "build": "cross-env NODE_ENV=production gulp build && npm run build:helper-json",
     "build:umd": "rollup -c rollup.config.umd.js",
+    "build:esm": "rollup -c rollup.config.esm.js",
     "build:minify": "uglifyjs dist/vue-onsenui.js -c -m --comments '/vue-onsenui/' --output dist/vue-onsenui.min.js",
     "build:helper-json": "(cd ../../ && npm run build:docs) && gulp build:helper-json",
     "prepublish": "npm run build",
