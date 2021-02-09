@@ -37,7 +37,7 @@ const deriveDBB = {
     this._isDBBSetup === true && (this._isDBBSetup = false);
   },
 
-  destroyed() {
+  unmounted() {
     this.$el.onDeviceBackButton && this.$el.onDeviceBackButton.destroy();
   }
 };
@@ -45,7 +45,7 @@ const deriveDBB = {
 const deriveEvents = {
   computed: {
     unrecognizedListeners() {
-      const name = camelize('-' + this.$options._componentTag.slice(6));
+      const name = camelize('-' + this.$options.name.slice(6));
       return Object.keys(this.$listeners || {})
         .filter(k => (this.$ons.elements[name].events || []).indexOf(k) === -1)
         .reduce((r, k) => {
@@ -69,7 +69,7 @@ const deriveEvents = {
     });
   },
 
-  beforeDestroy() {
+  beforeUnmount() {
     Object.keys(this._handlers).forEach(key => {
       this.$el.removeEventListener(key, this._handlers[key]);
     });
