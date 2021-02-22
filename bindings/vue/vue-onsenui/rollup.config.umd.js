@@ -48,7 +48,11 @@ export default {
       include: './src/components/*.vue',
       'import \'onsenui/esm/elements/': '// \'',
     }),
-    vue(),
+    vue({
+      compilerOptions: {
+        isCustomElement: tag => tag.startsWith('ons-')
+      }
+    }),
     babel(babelrc),
     progress(),
     filesize(),
