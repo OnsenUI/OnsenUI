@@ -1,5 +1,5 @@
 <template>
-  <ons-alert-dialog v-on="unrecognizedListeners" :modifier="normalizedModifier">
+  <ons-alert-dialog :modifier="normalizedModifier">
     <div class="alert-dialog-title">
       <slot name="title">{{title}}</slot>
     </div>

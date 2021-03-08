@@ -1,5 +1,5 @@
 <template>
-  <ons-toast v-on="unrecognizedListeners" :modifier="normalizedModifier">
+  <ons-toast :modifier="normalizedModifier">
     <slot></slot>
   </ons-toast>
 </template>

@@ -2,7 +2,6 @@
   <ons-page
     :on-infinite-scroll.prop="infiniteScroll"
     :modifier="normalizedModifier"
-    v-on="unrecognizedListeners"
   >
     <slot></slot>
   </ons-page>

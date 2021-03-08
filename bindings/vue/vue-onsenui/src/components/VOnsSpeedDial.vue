@@ -22,7 +22,6 @@
     data() {
       return {
         handlers: {
-          ...this.unrecognizedListeners,
           open: this.userInteraction,
           close: this.userInteraction
         }

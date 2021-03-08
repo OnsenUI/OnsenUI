@@ -1,5 +1,5 @@
 <template>
-  <ons-checkbox v-on="unrecognizedListeners" :modifier="normalizedModifier">
+  <ons-checkbox :modifier="normalizedModifier">
     <slot></slot>
   </ons-checkbox>
 </template>

@@ -22,7 +22,6 @@
     data() {
       return {
         handlers: {
-          ...this.unrecognizedListeners,
           postopen: this.userInteraction,
           postclose: this.userInteraction,
           modechange: this.userInteraction

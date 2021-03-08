@@ -1,5 +1,5 @@
 <template>
-  <ons-search-input v-on="unrecognizedListeners" :modifier="normalizedModifier">
+  <ons-search-input :modifier="normalizedModifier">
     <slot></slot>
   </ons-search-input>
 </template>

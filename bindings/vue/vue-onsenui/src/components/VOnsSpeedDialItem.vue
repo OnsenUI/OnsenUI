@@ -1,5 +1,5 @@
 <template>
-  <ons-speed-dial-item v-on="unrecognizedListeners" :modifier="normalizedModifier">
+  <ons-speed-dial-item :modifier="normalizedModifier">
     <slot></slot>
   </ons-speed-dial-item>
 </template>

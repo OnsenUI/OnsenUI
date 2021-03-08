@@ -1,5 +1,5 @@
 <template>
-  <ons-radio v-on="unrecognizedListeners" :modifier="normalizedModifier">
+  <ons-radio :modifier="normalizedModifier">
     <slot></slot>
   </ons-radio>
 </template>

@@ -2,7 +2,6 @@
   <ons-pull-hook
     :on-action.prop="action"
     :on-pull.prop="onPull"
-    v-on="unrecognizedListeners"
   >
     <slot></slot>
   </ons-pull-hook>

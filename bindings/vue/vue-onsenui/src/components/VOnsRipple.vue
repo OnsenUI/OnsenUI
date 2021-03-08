@@ -1,5 +1,5 @@
 <template>
-  <ons-ripple v-on="unrecognizedListeners">
+  <ons-ripple>
     <slot></slot>
   </ons-ripple>
 </template>

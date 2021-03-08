@@ -1,5 +1,5 @@
 <template>
-  <ons-carousel-item v-on="unrecognizedListeners">
+  <ons-carousel-item>
     <slot></slot>
   </ons-carousel-item>
 </template>

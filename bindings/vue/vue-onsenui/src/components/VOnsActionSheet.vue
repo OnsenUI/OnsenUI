@@ -1,5 +1,5 @@
 <template>
-  <ons-action-sheet v-on="unrecognizedListeners" :modifier="normalizedModifier">
+  <ons-action-sheet :modifier="normalizedModifier">
     <slot></slot>
   </ons-action-sheet>
 </template>

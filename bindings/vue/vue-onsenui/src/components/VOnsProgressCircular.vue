@@ -1,5 +1,5 @@
 <template>
-  <ons-progress-circular v-on="unrecognizedListeners" :modifier="normalizedModifier">
+  <ons-progress-circular :modifier="normalizedModifier">
     <slot></slot>
   </ons-progress-circular>
 </template>

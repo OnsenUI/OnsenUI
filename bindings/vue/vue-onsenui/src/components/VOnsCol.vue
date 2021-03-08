@@ -1,5 +1,5 @@
 <template>
-  <ons-col v-on="unrecognizedListeners">
+  <ons-col>
     <slot></slot>
   </ons-col>
 </template>

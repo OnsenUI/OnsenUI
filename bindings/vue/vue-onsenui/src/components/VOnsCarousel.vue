@@ -3,7 +3,6 @@
     :on-swipe.prop="onSwipe"
     :initial-index="index"
     @postchange.self="$emit('update:index', $event.activeIndex)"
-    v-on="unrecognizedListeners"
   >
     <div>
       <slot></slot>

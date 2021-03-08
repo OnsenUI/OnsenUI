@@ -1,5 +1,5 @@
 <template>
-  <ons-progress-bar v-on="unrecognizedListeners" :modifier="normalizedModifier">
+  <ons-progress-bar :modifier="normalizedModifier">
     <slot></slot>
   </ons-progress-bar>
 </template>

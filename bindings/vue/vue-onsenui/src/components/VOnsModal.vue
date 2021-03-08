@@ -1,5 +1,5 @@
 <template>
-  <ons-modal v-on="unrecognizedListeners" :modifier="normalizedModifier">
+  <ons-modal :modifier="normalizedModifier">
     <slot></slot>
   </ons-modal>
 </template>
