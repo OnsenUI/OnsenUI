@@ -9,8 +9,10 @@
   import 'onsenui/esm/elements/ons-col';
   import { deriveEvents } from '../mixins';
 
+  const name = 'v-ons-col';
+
   export default {
-    name: 'v-ons-col',
-    mixins: [deriveEvents]
+    name,
+    mixins: [deriveEvents(name)]
   };
 </script>

@@ -9,8 +9,10 @@
   import 'onsenui/esm/elements/ons-toolbar-button';
   import { deriveEvents, modifier } from '../mixins';
 
+  const name = 'v-ons-toolbar-button';
+
   export default {
-    name: 'v-ons-toolbar-button',
-    mixins: [deriveEvents, modifier]
+    name,
+    mixins: [deriveEvents(name), modifier]
   };
 </script>

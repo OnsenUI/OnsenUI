@@ -9,8 +9,10 @@
   import 'onsenui/esm/elements/ons-icon';
   import { deriveEvents, modifier } from '../mixins';
 
+  const name = 'v-ons-icon';
+
   export default {
-    name: 'v-ons-icon',
-    mixins: [deriveEvents, modifier]
+    name,
+    mixins: [deriveEvents(name), modifier]
   };
 </script>

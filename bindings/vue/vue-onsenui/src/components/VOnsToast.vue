@@ -9,8 +9,10 @@
   import 'onsenui/esm/elements/ons-toast';
   import { deriveEvents, hidable, hasOptions, deriveDBB, portal, modifier } from '../mixins';
 
+  const name = 'v-ons-toast';
+
   export default {
-    name: 'v-ons-toast',
-    mixins: [deriveEvents, hidable, hasOptions, deriveDBB, portal, modifier]
+    name,
+    mixins: [deriveEvents(name), hidable, hasOptions, deriveDBB, portal, modifier]
   };
 </script>

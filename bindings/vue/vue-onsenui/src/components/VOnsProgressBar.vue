@@ -9,8 +9,10 @@
   import 'onsenui/esm/elements/ons-progress-bar';
   import { deriveEvents, modifier } from '../mixins';
 
+  const name = 'v-ons-progress-bar';
+
   export default {
-    name: 'v-ons-progress-bar',
-    mixins: [deriveEvents, modifier]
+    name,
+    mixins: [deriveEvents(name), modifier]
   };
 </script>

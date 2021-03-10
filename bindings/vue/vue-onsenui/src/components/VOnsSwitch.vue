@@ -9,8 +9,10 @@
   import 'onsenui/esm/elements/ons-switch';
   import { deriveEvents, modelCheckbox, modifier } from '../mixins';
 
+  const name = 'v-ons-switch';
+
   export default {
-    name: 'v-ons-switch',
-    mixins: [deriveEvents, modelCheckbox, modifier]
+    name,
+    mixins: [deriveEvents(name), modelCheckbox, modifier]
   };
 </script>

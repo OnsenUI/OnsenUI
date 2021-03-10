@@ -9,8 +9,10 @@
   import 'onsenui/esm/elements/ons-splitter-content';
   import { deriveEvents } from '../mixins';
 
+  const name = 'v-ons-splitter-content';
+
   export default {
-    name: 'v-ons-splitter-content',
-    mixins: [deriveEvents]
+    name,
+    mixins: [deriveEvents(name)]
   };
 </script>

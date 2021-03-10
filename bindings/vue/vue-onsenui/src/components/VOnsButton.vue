@@ -9,8 +9,10 @@
   import 'onsenui/esm/elements/ons-button';
   import { deriveEvents, modifier } from '../mixins';
 
+  const name = 'v-ons-button';
+
   export default {
-    name: 'v-ons-button',
-    mixins: [deriveEvents, modifier]
+    name,
+    mixins: [deriveEvents(name), modifier]
   };
 </script>

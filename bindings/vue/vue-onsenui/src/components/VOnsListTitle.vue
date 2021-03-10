@@ -9,8 +9,10 @@
   import 'onsenui/esm/elements/ons-list-title';
   import { deriveEvents, modifier } from '../mixins';
 
+  const name = 'v-ons-list-title';
+
   export default {
-    name: 'v-ons-list-title',
-    mixins: [deriveEvents, modifier]
+    name,
+    mixins: [deriveEvents(name), modifier]
   };
 </script>

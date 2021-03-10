@@ -9,8 +9,10 @@
   import 'onsenui/esm/elements/ons-action-sheet';
   import { deriveEvents, hidable, hasOptions, dialogCancel, deriveDBB, portal, modifier } from '../mixins';
 
+  const name = 'v-ons-action-sheet';
+
   export default {
-    name: 'v-ons-action-sheet',
-    mixins: [deriveEvents, hidable, hasOptions, dialogCancel, deriveDBB, portal, modifier]
+    name,
+    mixins: [deriveEvents(name), hidable, hasOptions, dialogCancel, deriveDBB, portal, modifier]
   };
 </script>

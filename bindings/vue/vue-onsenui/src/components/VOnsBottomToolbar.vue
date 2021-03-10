@@ -9,8 +9,10 @@
   import 'onsenui/esm/elements/ons-bottom-toolbar';
   import { deriveEvents, modifier } from '../mixins';
 
+  const name = 'v-ons-bottom-toolbar';
+
   export default {
-    name: 'v-ons-bottom-toolbar',
-    mixins: [deriveEvents, modifier]
+    name,
+    mixins: [deriveEvents(name), modifier]
   };
 </script>
