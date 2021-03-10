@@ -2,7 +2,6 @@
   <ons-pull-hook
     :on-action.prop="action"
     :on-pull.prop="onPull"
-    v-on="unrecognizedListeners"
   >
     <slot></slot>
   </ons-pull-hook>
@@ -12,9 +11,11 @@
   import 'onsenui/esm/elements/ons-pull-hook';
   import { deriveEvents } from '../mixins';
 
+  const name = 'v-ons-pull-hook';
+
   export default {
-    name: 'v-ons-pull-hook',
-    mixins: [deriveEvents],
+    name,
+    mixins: [deriveEvents(name)],
 
     props: {
       action: {

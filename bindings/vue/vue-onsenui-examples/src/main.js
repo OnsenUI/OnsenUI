@@ -1,8 +1,9 @@
 import { createApp } from 'vue';
-import * as examples from './components';
 
 import VueOnsen from 'vue-onsenui'; // umd
 import Vuex from 'vuex';
+
+import App from './App.vue';
 
 import 'onsenui/css/onsenui.css';
 import 'onsenui/css/onsen-css-components.css';
@@ -15,59 +16,9 @@ import 'onsenui/css/onsen-css-components.css';
 // Vue.component(VOnsPage.name, VOnsPage);
 // Vue.component(VOnsToolbar.name, VOnsToolbar);
 
-const mainList = {
-  template: `
-  <div>
-    <v-ons-page>
-      <v-ons-list>
-        <v-ons-list-item v-for="(example, key) in examples" :key="key" @click="changeExample(key)" modifier="chevron">
-          <div class="center">{{ key }}</div>
-        </v-ons-list-item>
-      </v-ons-list>
-    </v-ons-page>
-  </div>
-  `,
-  props: ['examples', 'changeExample']
-};
-
-const app = createApp({
-  el: '#app',
-  components: { ...examples },
-  template: `
-    <v-ons-page>
-      <v-ons-toolbar>
-        <div class="left"><v-ons-toolbar-button @click.prevent="backToList" v-show="currentView !== mainList">Main list</v-ons-toolbar-button></div>
-        <div class="center">{{ title }}</div>
-      </v-ons-toolbar>
-
-      <div class="content">
-        <keep-alive>
-          <div :is="currentView" :examples="examples" :changeExample="changeExample"></div>
-        </keep-alive>
-      </div>
-    </v-ons-page>
-  `,
-
-  data() {
-    return {
-      mainList,
-      examples,
-      title: 'Main List',
-      currentView: mainList
-    }
-  },
-
-  methods: {
-    changeExample(key) {
-      this.title = key;
-      this.currentView = this.examples[key];
-    },
-    backToList() {
-      this.title = 'Main List';
-      this.currentView = mainList;
-    }
-  }
-});
+const app = createApp(App);
 
 app.use(VueOnsen);
 app.use(Vuex);
+
+app.mount('#app');

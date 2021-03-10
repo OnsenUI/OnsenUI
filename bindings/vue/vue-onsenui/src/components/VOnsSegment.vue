@@ -8,10 +8,13 @@
   import 'onsenui/esm/elements/ons-segment';
   import { deriveEvents } from '../mixins';
 
-  export default {
-    name: 'v-ons-segment',
-    mixins: [deriveEvents],
+  const name = 'v-ons-segment';
 
+  export default {
+    name,
+    mixins: [deriveEvents(name)],
+
+    emits: ['update:index'],
     props: {
       index: {
         type: Number

@@ -20,8 +20,8 @@ babelrc.babelrc = babelrc.presets[0][1].modules = false;
 babelrc.plugins = ['external-helpers'];
 babelrc.exclude = [local('node_modules/**'), local('../../build/**')];
 
-const globals = { 'onsenui': 'ons', 'onsenui/esm': 'ons' },
-  external = id => /^onsenui/.test(id),
+const globals = { 'vue': 'Vue', 'onsenui': 'ons' },
+  external = [ 'vue', 'onsenui' ],
   banner = `/* ${pkg.name} v${pkg.version} - ${dateformat(new Date(), 'yyyy-mm-dd')} */\n`;
 
 export default {
@@ -48,7 +48,11 @@ export default {
       include: './src/components/*.vue',
       'import \'onsenui/esm/elements/': '// \'',
     }),
-    vue(),
+    vue({
+      compilerOptions: {
+        isCustomElement: tag => tag.startsWith('ons-')
+      }
+    }),
     babel(babelrc),
     progress(),
     filesize(),

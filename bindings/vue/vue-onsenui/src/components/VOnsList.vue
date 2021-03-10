@@ -1,5 +1,5 @@
 <template>
-  <ons-list v-on="unrecognizedListeners" :modifier="normalizedModifier">
+  <ons-list :modifier="normalizedModifier">
     <slot></slot>
   </ons-list>
 </template>
@@ -9,8 +9,10 @@
   import 'onsenui/esm/elements/ons-list';
   import { deriveEvents, modifier } from '../mixins';
 
+  const name = 'v-ons-list';
+
   export default {
-    name: 'v-ons-list',
-    mixins: [deriveEvents, modifier]
+    name,
+    mixins: [deriveEvents(name), modifier]
   };
 </script>

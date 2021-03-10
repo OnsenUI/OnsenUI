@@ -16,6 +16,7 @@ const modelInput = {
       default: 'input'
     }
   },
+  emits: [model.event],
 
   methods: {
     _updateValue() {

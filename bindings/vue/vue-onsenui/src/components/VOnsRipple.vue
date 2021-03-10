@@ -1,5 +1,5 @@
 <template>
-  <ons-ripple v-on="unrecognizedListeners">
+  <ons-ripple>
     <slot></slot>
   </ons-ripple>
 </template>
@@ -9,8 +9,10 @@
   import 'onsenui/esm/elements/ons-ripple';
   import { deriveEvents } from '../mixins';
 
+  const name = 'v-ons-ripple';
+
   export default {
-    name: 'v-ons-ripple',
-    mixins: [deriveEvents]
+    name,
+    mixins: [deriveEvents(name)]
   };
 </script>

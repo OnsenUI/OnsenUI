@@ -1,6 +1,6 @@
 import 'babel-polyfill';
 
-import corePkg from '../../package.json';
+import corePkg from '../../../package.json';
 import gulp from 'gulp';
 import * as glob from 'glob';
 import path from'path';
@@ -76,12 +76,14 @@ gulp.task('generate-components', (done) => {
   const camelize = string => string.toLowerCase().replace(/-([a-z])/g, (m, l) => l.toUpperCase());
   const generate = (baseName, baseMixins = '') => {
     const domElement = 'ons-' + baseName;
-    const mixins = 'deriveEvents' + (baseMixins ? `, ${baseMixins.trim().split(/\s+/).join(', ')}` : '');
-    const modifier = mixins.indexOf('modifier') !== -1;
+    const commaSeparatedBaseMixins = baseMixins ? `, ${baseMixins.trim().split(/\s+/).join(', ')}` : '';
+    const mixinsImport = 'deriveEvents' + commaSeparatedBaseMixins;
+    const mixinsKey = 'deriveEvents(name)' + commaSeparatedBaseMixins;
+    const modifier = mixinsImport.indexOf('modifier') !== -1;
 
     return `
 <template>
-  <${domElement} v-on="unrecognizedListeners"${modifier ? ' :modifier="normalizedModifier"' : ''}>
+  <${domElement}${modifier ? ' :modifier="normalizedModifier"' : ''}>
     <slot></slot>
   </${domElement}>
 </template>
@@ -89,11 +91,13 @@ gulp.task('generate-components', (done) => {
 <script>
   /* This file was generated automatically by 'generate-components' task in bindings/vue/gulpfile.babel.js */
   import 'onsenui/esm/elements/${domElement}';
-  import { ${mixins} } from '../mixins';
+  import { ${mixinsImport} } from '../mixins';
+
+  const name = 'v-${domElement}';
 
   export default {
-    name: 'v-${domElement}',
-    mixins: [${mixins}]
+    name,
+    mixins: [${mixinsKey}]
   };
 </script>
     `.trim();

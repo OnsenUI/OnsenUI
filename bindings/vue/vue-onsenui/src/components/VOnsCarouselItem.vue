@@ -1,5 +1,5 @@
 <template>
-  <ons-carousel-item v-on="unrecognizedListeners">
+  <ons-carousel-item>
     <slot></slot>
   </ons-carousel-item>
 </template>
@@ -9,8 +9,10 @@
   import 'onsenui/esm/elements/ons-carousel-item';
   import { deriveEvents } from '../mixins';
 
+  const name = 'v-ons-carousel-item';
+
   export default {
-    name: 'v-ons-carousel-item',
-    mixins: [deriveEvents]
+    name,
+    mixins: [deriveEvents(name)]
   };
 </script>

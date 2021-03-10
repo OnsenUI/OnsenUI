@@ -65,6 +65,8 @@ const selfProvider = {
 
 // Common event for Dialogs
 const dialogCancel = {
+  emits: [ 'update:visible' ],
+
   mounted() {
     this.$on('dialog-cancel', () => this.$emit('update:visible', false));
   }

@@ -1,5 +1,5 @@
 <template>
-  <ons-speed-dial-item v-on="unrecognizedListeners" :modifier="normalizedModifier">
+  <ons-speed-dial-item :modifier="normalizedModifier">
     <slot></slot>
   </ons-speed-dial-item>
 </template>
@@ -9,8 +9,10 @@
   import 'onsenui/esm/elements/ons-speed-dial-item';
   import { deriveEvents, modifier } from '../mixins';
 
+  const name = 'v-ons-speed-dial-item';
+
   export default {
-    name: 'v-ons-speed-dial-item',
-    mixins: [deriveEvents, modifier]
+    name,
+    mixins: [deriveEvents(name), modifier]
   };
 </script>

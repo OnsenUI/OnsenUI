@@ -1,5 +1,5 @@
 <template>
-  <ons-toolbar v-on="unrecognizedListeners" :modifier="normalizedModifier">
+  <ons-toolbar :modifier="normalizedModifier">
     <slot></slot>
   </ons-toolbar>
 </template>
@@ -9,8 +9,10 @@
   import 'onsenui/esm/elements/ons-toolbar';
   import { deriveEvents, hidable, modifier } from '../mixins';
 
+  const name = 'v-ons-toolbar';
+
   export default {
-    name: 'v-ons-toolbar',
-    mixins: [deriveEvents, hidable, modifier]
+    name,
+    mixins: [deriveEvents(name), hidable, modifier]
   };
 </script>

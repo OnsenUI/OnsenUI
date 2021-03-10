@@ -1,5 +1,5 @@
 <template>
-  <ons-modal v-on="unrecognizedListeners" :modifier="normalizedModifier">
+  <ons-modal :modifier="normalizedModifier">
     <slot></slot>
   </ons-modal>
 </template>
@@ -9,8 +9,10 @@
   import 'onsenui/esm/elements/ons-modal';
   import { deriveEvents, hidable, hasOptions, deriveDBB, portal, modifier } from '../mixins';
 
+  const name = 'v-ons-modal';
+
   export default {
-    name: 'v-ons-modal',
-    mixins: [deriveEvents, hidable, hasOptions, deriveDBB, portal, modifier]
+    name,
+    mixins: [deriveEvents(name), hidable, hasOptions, deriveDBB, portal, modifier]
   };
 </script>

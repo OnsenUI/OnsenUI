@@ -8,9 +8,13 @@
   import 'onsenui/esm/elements/ons-speed-dial';
   import { hidable, deriveEvents } from '../mixins';
 
+  const name = 'v-ons-speed-dial';
+
   export default {
-    name: 'v-ons-speed-dial',
-    mixins: [deriveEvents, hidable],
+    name,
+    mixins: [deriveEvents(name), hidable],
+
+    emits: ['update:open', 'click'],
 
     props: {
       open: {
@@ -22,7 +26,6 @@
     data() {
       return {
         handlers: {
-          ...this.unrecognizedListeners,
           open: this.userInteraction,
           close: this.userInteraction
         }

@@ -1,5 +1,5 @@
 <template>
-  <ons-list-item v-on="unrecognizedListeners" :modifier="normalizedModifier" v-on:expansion="onExpansion">
+  <ons-list-item :modifier="normalizedModifier" v-on:expansion="onExpansion">
     <slot></slot>
   </ons-list-item>
 </template>
@@ -8,14 +8,17 @@
   import 'onsenui/esm/elements/ons-list-item';
   import { deriveEvents, modifier } from '../mixins';
 
+  const name = 'v-ons-list-item';
+
   export default {
-    name: 'v-ons-list-item',
-    mixins: [deriveEvents, modifier],
+    name,
+    mixins: [deriveEvents(name), modifier],
     props: {
       expanded: {
         type: Boolean
       }
     },
+    emits: ['update:expanded'],
     methods: {
       onExpansion() {
         if (this.expanded !== this.$el.expanded) {

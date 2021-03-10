@@ -8,10 +8,13 @@
   import 'onsenui/esm/elements/ons-splitter-side';
   import { hasOptions, deriveEvents } from '../mixins';
 
-  export default {
-    name: 'v-ons-splitter-side',
-    mixins: [hasOptions, deriveEvents],
+  const name = 'v-ons-splitter-side';
 
+  export default {
+    name,
+    mixins: [hasOptions, deriveEvents(name)],
+
+    emits: ['update:open'],
     props: {
       open: {
         type: Boolean,
@@ -22,7 +25,6 @@
     data() {
       return {
         handlers: {
-          ...this.unrecognizedListeners,
           postopen: this.userInteraction,
           postclose: this.userInteraction,
           modechange: this.userInteraction

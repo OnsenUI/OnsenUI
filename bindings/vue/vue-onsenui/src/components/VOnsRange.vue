@@ -1,5 +1,5 @@
 <template>
-  <ons-range v-on="unrecognizedListeners" :modifier="normalizedModifier">
+  <ons-range :modifier="normalizedModifier">
     <slot></slot>
   </ons-range>
 </template>
@@ -9,8 +9,10 @@
   import 'onsenui/esm/elements/ons-range';
   import { deriveEvents, modelInput, modifier } from '../mixins';
 
+  const name = 'v-ons-range';
+
   export default {
-    name: 'v-ons-range',
-    mixins: [deriveEvents, modelInput, modifier]
+    name,
+    mixins: [deriveEvents(name), modelInput, modifier]
   };
 </script>

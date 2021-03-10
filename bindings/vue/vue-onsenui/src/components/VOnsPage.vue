@@ -2,7 +2,6 @@
   <ons-page
     :on-infinite-scroll.prop="infiniteScroll"
     :modifier="normalizedModifier"
-    v-on="unrecognizedListeners"
   >
     <slot></slot>
   </ons-page>
@@ -12,9 +11,11 @@
   import 'onsenui/esm/elements/ons-page';
   import { deriveEvents, deriveDBB, modifier } from '../mixins';
 
+  const name = 'v-ons-page';
+
   export default {
-    name: 'v-ons-page',
-    mixins: [deriveEvents, deriveDBB, modifier],
+    name,
+    mixins: [deriveEvents(name), deriveDBB, modifier],
 
     props: {
       infiniteScroll: {

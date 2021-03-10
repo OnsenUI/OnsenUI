@@ -1,5 +1,5 @@
 <template>
-  <ons-search-input v-on="unrecognizedListeners" :modifier="normalizedModifier">
+  <ons-search-input :modifier="normalizedModifier">
     <slot></slot>
   </ons-search-input>
 </template>
@@ -9,8 +9,10 @@
   import 'onsenui/esm/elements/ons-search-input';
   import { deriveEvents, modelInput, modifier } from '../mixins';
 
+  const name = 'v-ons-search-input';
+
   export default {
-    name: 'v-ons-search-input',
-    mixins: [deriveEvents, modelInput, modifier]
+    name,
+    mixins: [deriveEvents(name), modelInput, modifier]
   };
 </script>

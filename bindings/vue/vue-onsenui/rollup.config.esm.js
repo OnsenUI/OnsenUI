@@ -39,7 +39,11 @@ export default {
     banner,
   },
   plugins: [
-    vue(),
+    vue({
+      compilerOptions: {
+        isCustomElement: tag => tag.startsWith('ons-')
+      }
+    }),
     resolve(),
     eslint({
       exclude: [

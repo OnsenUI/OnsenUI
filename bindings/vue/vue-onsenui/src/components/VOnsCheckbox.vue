@@ -1,5 +1,5 @@
 <template>
-  <ons-checkbox v-on="unrecognizedListeners" :modifier="normalizedModifier">
+  <ons-checkbox :modifier="normalizedModifier">
     <slot></slot>
   </ons-checkbox>
 </template>
@@ -9,8 +9,10 @@
   import 'onsenui/esm/elements/ons-checkbox';
   import { deriveEvents, modelCheckbox, modifier } from '../mixins';
 
+  const name = 'v-ons-checkbox';
+
   export default {
-    name: 'v-ons-checkbox',
-    mixins: [deriveEvents, modelCheckbox, modifier]
+    name,
+    mixins: [deriveEvents(name), modelCheckbox, modifier]
   };
 </script>
