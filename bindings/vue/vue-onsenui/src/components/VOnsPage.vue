@@ -11,9 +11,11 @@
   import 'onsenui/esm/elements/ons-page';
   import { deriveEvents, deriveDBB, modifier } from '../mixins';
 
+  const name = 'v-ons-page';
+
   export default {
-    name: 'v-ons-page',
-    mixins: [deriveEvents, deriveDBB, modifier],
+    name,
+    mixins: [deriveEvents(name), deriveDBB, modifier],
 
     props: {
       infiniteScroll: {

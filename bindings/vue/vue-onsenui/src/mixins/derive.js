@@ -1,4 +1,6 @@
-import { camelize, eventToHandler, handlerToProp } from '../internal/util';
+import ons from 'onsenui';
+
+import { camelize, eventToHandler, handlerToProp, capitalize } from '../internal/util';
 
 /* Private */
 const _setupDBB = component => {
@@ -42,7 +44,9 @@ const deriveDBB = {
   }
 };
 
-const deriveEvents = {
+const deriveEvents = elementName => ({
+  emits: ons.elements[capitalize(camelize(elementName.slice(6)))].events,
+
   computed: {
     unrecognizedListeners() {
       const name = camelize('-' + this.$options.name.slice(6));
@@ -75,6 +79,6 @@ const deriveEvents = {
     });
     this._handlers = null;
   }
-};
+});
 
 export { deriveDBB, deriveEvents };

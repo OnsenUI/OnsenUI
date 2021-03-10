@@ -16,9 +16,11 @@
   import 'onsenui/esm/elements/ons-navigator';
   import { hasOptions, selfProvider, deriveEvents, deriveDBB } from '../mixins';
 
+  const name = 'v-ons-navigator';
+
   export default {
-    name: 'v-ons-navigator',
-    mixins: [hasOptions, selfProvider, deriveEvents, deriveDBB],
+    name,
+    mixins: [hasOptions, selfProvider, deriveEvents(name), deriveDBB],
 
     props: {
       pageStack: {

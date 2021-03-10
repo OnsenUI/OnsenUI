@@ -17,6 +17,7 @@
         type: Boolean
       }
     },
+    emits: ['click'],
 
     methods: {
       action() {

@@ -12,6 +12,7 @@
     name: 'v-ons-back-button',
     inject: ['navigator'],
     mixins: [modifier],
+    emits: ['click'],
 
     methods: {
       action() {

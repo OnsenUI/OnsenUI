@@ -15,9 +15,11 @@
   import 'onsenui/esm/elements/ons-carousel';
   import { hasOptions, deriveEvents } from '../mixins';
 
+  const name = 'v-ons-carousel';
+
   export default {
-    name: 'v-ons-carousel',
-    mixins: [hasOptions, deriveEvents],
+    name,
+    mixins: [hasOptions, deriveEvents(name)],
 
     props: {
       index: {
@@ -27,6 +29,7 @@
         type: Function
       }
     },
+    emits: ['update:index'],
 
     watch: {
       index() {

@@ -24,6 +24,7 @@
         default: 'input'
       }
     },
+    emits: ['modelEvent'],
     computed: {
       selectedValue: {
         get() {
