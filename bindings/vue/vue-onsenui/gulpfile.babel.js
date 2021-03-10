@@ -81,7 +81,7 @@ gulp.task('generate-components', (done) => {
 
     return `
 <template>
-  <${domElement} v-on="unrecognizedListeners"${modifier ? ' :modifier="normalizedModifier"' : ''}>
+  <${domElement}${modifier ? ' :modifier="normalizedModifier"' : ''}>
     <slot></slot>
   </${domElement}>
 </template>
