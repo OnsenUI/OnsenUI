@@ -50,10 +50,12 @@ const deriveEvents = elementName => ({
   computed: {
     unrecognizedListeners() {
       const name = camelize('-' + this.$options.name.slice(6));
-      return Object.keys(this.$listeners || {})
+      const listeners = Object.fromEntries(Object.entries(this.$attrs)
+        .filter(([attribute, handler]) => /^on[^a-z]/.test(attribute)));
+      return Object.keys(listeners || {})
         .filter(k => (this.$ons.elements[name].events || []).indexOf(k) === -1)
         .reduce((r, k) => {
-          r[k] = this.$listeners[k];
+          r[k] = listeners[k];
           return r;
         }, {});
     }

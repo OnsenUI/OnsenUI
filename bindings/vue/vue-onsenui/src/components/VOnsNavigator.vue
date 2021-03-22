@@ -5,8 +5,7 @@
         v-for="page in pageStack"
         :is="page"
         :key="page.key || page.name"
-        v-on="unrecognizedListeners"
-        v-bind="page.onsNavigatorProps"
+        v-bind="{ ...unrecognizedListeners, ...page.onsNavigatorProps }"
       ></component>
     </slot>
   </ons-navigator>
