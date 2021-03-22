@@ -53,7 +53,7 @@
       },
       _eachPage(start, end, cb) {
         for (let i = start; i < end; i++) {
-          cb(this.$children[i].$el);
+          cb(this.pageStack[i].$el);
         }
       },
       _reattachPage(pageElement, position = null, restoreScroll) {
@@ -112,7 +112,7 @@
       },
       _checkSwipe(event) {
         if (this.$el.hasAttribute('swipeable') &&
-          event.leavePage !== this.$el.lastChild && event.leavePage === this.$children[this.$children.length - 1].$el
+          event.leavePage !== this.$el.lastChild && event.leavePage === this.pageStack[this.pageStack.length - 1].$el
         ) {
           this.popPage();
         }
@@ -121,7 +121,7 @@
 
     watch: {
       pageStack(after, before) {
-        if (this.$el.hasAttribute('swipeable') && this.$children.length !== this.$el.children.length) {
+        if (this.$el.hasAttribute('swipeable') && this.pageStack.length !== this.$el.children.length) {
           return;
         }
 
@@ -132,13 +132,13 @@
         }
 
         const propWasMutated = after === before; // Can be mutated or replaced
-        const lastTopPage = this.$children[this.$children.length - 1].$el;
+        const lastTopPage = this.pageStack[this.pageStack.length - 1].$el;
         const scrollElement = this._findScrollPage(lastTopPage);
         const scrollValue = scrollElement.scrollTop || 0;
 
         this._pageStackUpdate = {
           lastTopPage,
-          lastLength: propWasMutated ? this.$children.length : before.length,
+          lastLength: propWasMutated ? this.pageStack.length : before.length,
           currentLength: !propWasMutated && after.length,
           restoreScroll: () => scrollElement.scrollTop = scrollValue
         };
@@ -149,10 +149,10 @@
 
     updated() {
       if (this._pageStackUpdate) {
-        let currentTopPage = this.$children[this.$children.length - 1].$el;
+        let currentTopPage = this.pageStack[this.pageStack.length - 1].$el;
         let { lastTopPage, currentLength } = this._pageStackUpdate;
         const { lastLength, restoreScroll } = this._pageStackUpdate;
-        currentLength = currentLength === false ? this.$children.length : currentLength;
+        currentLength = currentLength === false ? this.pageStack.length : currentLength;
 
         if (currentTopPage !== lastTopPage) {
           this._ready = this._animate({ lastLength, currentLength, lastTopPage, currentTopPage, restoreScroll });
