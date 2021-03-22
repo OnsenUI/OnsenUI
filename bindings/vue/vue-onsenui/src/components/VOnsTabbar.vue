@@ -3,13 +3,12 @@
     :on-swipe.prop="onSwipe"
     :activeIndex="index"
     :modifier="normalizedModifier"
-    v-on="unrecognizedListeners"
     @prechange.self="$nextTick(() => !$event.detail.canceled && $emit('update:index', $event.index))"
   >
     <div class="tabbar__content">
       <div>
         <slot name="pages">
-          <component v-for="tab in tabs" v-bind="tab.props" :is="tab.page" :key="(tab.page.key || tab.page.name || _tabKey(tab))" v-on="unrecognizedListeners"></component>
+          <component v-for="tab in tabs" v-bind="{ ...unrecognizedListeners, ...tab.props }" :is="tab.page" :key="(tab.page.key || tab.page.name || _tabKey(tab))" />
         </slot>
       </div>
       <div></div>
