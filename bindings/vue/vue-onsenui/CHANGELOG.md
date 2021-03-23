@@ -4,6 +4,10 @@ CHANGELOG
 dev
 ---
 
+ ### BREAKING CHANGES
+
+ * VOnsNavigator: Deprecate setting the initial page by <v-ons-navigator>'s slot; instead use the pageStack prop.
+
  ### Bug Fixes
 
  * VOnsNavigator: Don't add page to page stack when push is canceled. Fixes [#2724](https://github.com/OnsenUI/OnsenUI/issues/2724).
