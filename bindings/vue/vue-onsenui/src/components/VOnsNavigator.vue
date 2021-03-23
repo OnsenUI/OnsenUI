@@ -27,8 +27,8 @@
       },
       popPage: {
         type: Function,
-        default(props) {
-          props.pageStack.pop();
+        default() {
+          this.pageStack.pop();
         }
       }
     },
