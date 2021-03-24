@@ -16,6 +16,8 @@
 </template>
 
 <script>
+  import { markRaw } from 'vue';
+
   const log = (...args) => console.log(...args);
 
   const myToolbar = {
@@ -66,9 +68,9 @@
     methods: {
       log,
       push() {
-        this.$emit('push', page3);
-        this.$emit('push', page3);
-        this.$emit('push', page3);
+        this.$emit('push', markRaw(page3));
+        this.$emit('push', markRaw(page3));
+        this.$emit('push', markRaw(page3));
       }
     },
     props: {
@@ -102,12 +104,12 @@
     methods: {
       log,
       push() {
-        this.$emit('push', {
+        this.$emit('push', markRaw({
           extends: page2,
           onsNavigatorProps: {
             myProp: 'This is a navigator prop'
           }
-        });
+        }));
       }
     },
     components: { myToolbar },
@@ -119,7 +121,7 @@
 	export default {
     data() {
       return {
-        pageStack: [page1]
+        pageStack: [markRaw(page1)]
       };
     },
     methods: {

@@ -5,6 +5,7 @@
       :is="page"
       :key="page.key || page.name"
       v-bind="{ ...unrecognizedListeners, ...page.onsNavigatorProps }"
+      :ref="setPageRef"
     ></component>
   </ons-navigator>
 </template>
@@ -26,13 +27,24 @@
       },
       popPage: {
         type: Function,
-        default(props) {
-          props.pageStack.pop();
+        default() {
+          this.pageStack.pop();
         }
       }
     },
 
+    data() {
+      return {
+        pageRefs: []
+      }
+    },
+
     methods: {
+      setPageRef(el) {
+        if (el) {
+          this.pageRefs.push(el);
+        }
+      },
       isReady() {
         if (Object.prototype.hasOwnProperty.call(this, '_ready') && this._ready instanceof Promise) {
           return this._ready;
@@ -53,7 +65,7 @@
       },
       _eachPage(start, end, cb) {
         for (let i = start; i < end; i++) {
-          cb(this.pageStack[i].$el);
+          cb(this.pageRefs[i].$el);
         }
       },
       _reattachPage(pageElement, position = null, restoreScroll) {
@@ -66,8 +78,12 @@
         return Promise.resolve();
       },
       _animate({ lastLength, currentLength, lastTopPage, currentTopPage, restoreScroll }) {
-        const pushedOptions = this.pageStack[this.pageStack.length - 1].onsNavigatorOptions
-          || currentTopPage.__vue__.onsNavigatorOptions
+        const pushedOptions =
+          // onsNavigatorOptions defined inside component's data property
+          this.pageRefs[this.pageRefs.length - 1].onsNavigatorOptions
+          // onsNavigatorOptions defined at same level as data and methods
+          || this.pageStack[this.pageStack.length - 1].onsNavigatorOptions
+          // onsNavigatorOptions is not defined
           || {};
 
         // Push
@@ -112,7 +128,7 @@
       },
       _checkSwipe(event) {
         if (this.$el.hasAttribute('swipeable') &&
-          event.leavePage !== this.$el.lastChild && event.leavePage === this.pageStack[this.pageStack.length - 1].$el
+          event.leavePage !== this.$el.lastChild && event.leavePage === this.pageRefs[this.pageRefs.length - 1].$el
         ) {
           this.popPage();
         }
@@ -121,7 +137,7 @@
 
     watch: {
       pageStack(after, before) {
-        if (this.$el.hasAttribute('swipeable') && this.pageStack.length !== this.$el.children.length) {
+        if (this.$el.hasAttribute('swipeable') && this.pageRefs.length !== this.$el.children.length) {
           return;
         }
 
@@ -132,13 +148,13 @@
         }
 
         const propWasMutated = after === before; // Can be mutated or replaced
-        const lastTopPage = this.pageStack[this.pageStack.length - 1].$el;
+        const lastTopPage = this.pageRefs[this.pageRefs.length - 1].$el;
         const scrollElement = this._findScrollPage(lastTopPage);
         const scrollValue = scrollElement.scrollTop || 0;
 
         this._pageStackUpdate = {
           lastTopPage,
-          lastLength: propWasMutated ? this.pageStack.length : before.length,
+          lastLength: propWasMutated ? this.pageRefs.length : before.length,
           currentLength: !propWasMutated && after.length,
           restoreScroll: () => scrollElement.scrollTop = scrollValue
         };
@@ -147,12 +163,16 @@
       }
     },
 
+    beforeUpdate() {
+      this.pageRefs = [];
+    },
+
     updated() {
       if (this._pageStackUpdate) {
-        let currentTopPage = this.pageStack[this.pageStack.length - 1].$el;
+        let currentTopPage = this.pageRefs[this.pageRefs.length - 1].$el;
         let { lastTopPage, currentLength } = this._pageStackUpdate;
         const { lastLength, restoreScroll } = this._pageStackUpdate;
-        currentLength = currentLength === false ? this.pageStack.length : currentLength;
+        currentLength = currentLength === false ? this.pageRefs.length : currentLength;
 
         if (currentTopPage !== lastTopPage) {
           this._ready = this._animate({ lastLength, currentLength, lastTopPage, currentTopPage, restoreScroll });
