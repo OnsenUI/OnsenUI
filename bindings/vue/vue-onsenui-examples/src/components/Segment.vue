@@ -22,6 +22,8 @@
 </template>
 
 <script>
+  import { markRaw } from 'vue';
+
   const homePage = {
     template: `
       <v-ons-page>
@@ -73,7 +75,7 @@
               logIndexes: this.logIndexes
             }
           }
-        ]
+        ].map(markRaw)
       };
     },
     methods: {

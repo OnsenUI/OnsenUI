@@ -12,6 +12,8 @@
 </template>
 
 <script>
+  import { markRaw } from 'vue';
+
   const home = {
     template: `
       <v-ons-page>
@@ -63,7 +65,7 @@
             icon: 'fa-cogs',
             page: settings
           }
-        ]
+        ].map(markRaw)
       };
     },
 
