@@ -5,7 +5,7 @@
       <div class="left">
         <v-ons-toolbar-button
           @click.prevent="backToList"
-          v-show="currentView !== mainList"
+          v-show="currentView !== initialView"
         >
           Main list
         </v-ons-toolbar-button>
@@ -28,6 +28,8 @@
 
 <script>
 
+import { markRaw } from 'vue';
+
 import * as examples from './components';
 import MainList from './MainList.vue';
 
@@ -35,22 +37,24 @@ export default {
   name: 'App',
 
   data() {
+    const initialView = markRaw(MainList);
+
     return {
-      MainList,
+      initialView,
       examples,
       title: 'Main List',
-      currentView: MainList
+      currentView: initialView
     }
   },
 
   methods: {
     changeExample(key) {
       this.title = key;
-      this.currentView = this.examples[key];
+      this.currentView = markRaw(this.examples[key]);
     },
     backToList() {
       this.title = 'Main List';
-      this.currentView = MainList;
+      this.currentView = this.initialView;
     }
   }
 }
