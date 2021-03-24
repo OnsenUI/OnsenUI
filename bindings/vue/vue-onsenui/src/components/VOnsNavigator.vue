@@ -78,7 +78,7 @@
         return Promise.resolve();
       },
       _animate({ lastLength, currentLength, lastTopPage, currentTopPage, restoreScroll }) {
-        const pushedOptions = this.pageStack[this.pageStack.length - 1].onsNavigatorOptions
+        const pushedOptions = this.pageRefs[this.pageRefs.length - 1].onsNavigatorOptions
           || currentTopPage.__vue__.onsNavigatorOptions
           || {};
 
