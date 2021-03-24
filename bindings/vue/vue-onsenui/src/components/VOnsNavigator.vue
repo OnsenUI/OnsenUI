@@ -78,8 +78,12 @@
         return Promise.resolve();
       },
       _animate({ lastLength, currentLength, lastTopPage, currentTopPage, restoreScroll }) {
-        const pushedOptions = this.pageRefs[this.pageRefs.length - 1].onsNavigatorOptions
-          || currentTopPage.__vue__.onsNavigatorOptions
+        const pushedOptions =
+          // onsNavigatorOptions defined inside component's data property
+          this.pageRefs[this.pageRefs.length - 1].onsNavigatorOptions
+          // onsNavigatorOptions defined at same level as data and methods
+          || this.pageStack[this.pageStack.length - 1].onsNavigatorOptions
+          // onsNavigatorOptions is not defined
           || {};
 
         // Push
