@@ -136,30 +136,42 @@
     },
 
     watch: {
-      pageStack(after, before) {
-        if (this.$el.hasAttribute('swipeable') && this.pageRefs.length !== this.$el.children.length) {
-          return;
-        }
+      pageStack: {
+        handler(after, before) {
+          // Set inheritAttrs to false to stop custom event listeners being
+          // applied to the native ons-page element. They are already applied to
+          // the native ons-navigator element (which will fire native ons-page
+          // events due to bubbling) so without this listeners for events fired
+          // by ons-page (e.g. 'show') would be called twice.
+          this.pageStack.forEach(page => page.inheritAttrs = false);
 
-        // watcher triggered by undoing a canceled push or pop
-        if (this._canceled) {
-          this._canceled = null;
-          return;
-        }
+          if (this.$el) { // if mounted
+            if (this.$el.hasAttribute('swipeable') && this.pageRefs.length !== this.$el.children.length) {
+              return;
+            }
 
-        const propWasMutated = after === before; // Can be mutated or replaced
-        const lastTopPage = this.pageRefs[this.pageRefs.length - 1].$el;
-        const scrollElement = this._findScrollPage(lastTopPage);
-        const scrollValue = scrollElement.scrollTop || 0;
+            // watcher triggered by undoing a canceled push or pop
+            if (this._canceled) {
+              this._canceled = null;
+              return;
+            }
 
-        this._pageStackUpdate = {
-          lastTopPage,
-          lastLength: propWasMutated ? this.pageRefs.length : before.length,
-          currentLength: !propWasMutated && after.length,
-          restoreScroll: () => scrollElement.scrollTop = scrollValue
-        };
+            const propWasMutated = after === before; // Can be mutated or replaced
+            const lastTopPage = this.pageRefs[this.pageRefs.length - 1].$el;
+            const scrollElement = this._findScrollPage(lastTopPage);
+            const scrollValue = scrollElement.scrollTop || 0;
 
-        // this.$nextTick(() => { }); // Waits too long, updated() hook is faster and prevents flickerings
+            this._pageStackUpdate = {
+              lastTopPage,
+              lastLength: propWasMutated ? this.pageRefs.length : before.length,
+              currentLength: !propWasMutated && after.length,
+              restoreScroll: () => scrollElement.scrollTop = scrollValue
+            };
+
+            // this.$nextTick(() => { }); // Waits too long, updated() hook is faster and prevents flickerings
+          }
+        },
+        immediate: true
       }
     },
 
