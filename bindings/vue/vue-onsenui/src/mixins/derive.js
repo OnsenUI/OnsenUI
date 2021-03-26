@@ -50,7 +50,6 @@ const deriveEvents = elementName => ({
   computed: {
     // Returns all listeners that aren't listed in the component's `emits` key.
     unrecognizedListeners() {
-      const name = camelize('-' + this.$options.name.slice(6));
       // Listeners are prefixed with 'on' e.g. 'onShow' so we test for that
       const isListener = ([attribute]) => /^on[^a-z]/.test(attribute);
 
