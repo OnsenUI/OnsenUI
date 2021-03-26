@@ -48,16 +48,13 @@ const deriveEvents = elementName => ({
   emits: ons.elements[capitalize(camelize(elementName.slice(6)))].events,
 
   computed: {
+    // Returns all listeners that aren't listed in the component's `emits` key.
     unrecognizedListeners() {
       const name = camelize('-' + this.$options.name.slice(6));
-      const listeners = Object.fromEntries(Object.entries(this.$attrs)
-        .filter(([attribute, handler]) => /^on[^a-z]/.test(attribute)));
-      return Object.keys(listeners || {})
-        .filter(k => (this.$ons.elements[name].events || []).indexOf(k) === -1)
-        .reduce((r, k) => {
-          r[k] = listeners[k];
-          return r;
-        }, {});
+      // Listeners are prefixed with 'on' e.g. 'onShow' so we test for that
+      const isListener = ([attribute]) => /^on[^a-z]/.test(attribute);
+
+      return Object.fromEntries(Object.entries(this.$attrs).filter(isListener));
     }
   },
 
