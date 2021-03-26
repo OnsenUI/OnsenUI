@@ -62,6 +62,17 @@
         if (this.index !== this.$el.getActiveTabIndex()) {
           this.$el.setActiveTab(this.index, { reject: false, ...this.options });
         }
+      },
+      tabs: {
+        handler() {
+          // Set inheritAttrs to false to stop custom event listeners being
+          // applied to the native ons-page element. They are already applied to
+          // the native ons-tabbar element (which will fire native ons-page
+          // events due to bubbling) so without this listeners for events fired
+          // by ons-page (e.g. 'show') would be called twice.
+          this.tabs.forEach(tab => tab.page.inheritAttrs = false);
+        },
+        immediate: true
       }
     }
   };
