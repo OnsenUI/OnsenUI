@@ -1,9 +1,13 @@
 <template>
   <v-ons-page>
     <v-ons-toolbar>
-      <div class="left"><v-ons-toolbar-button @click="tabbarIndex--">Index--</v-ons-toolbar-button></div>
+      <div class="left">
+        <v-ons-toolbar-button @click="tabbarIndex--" :disabled="tabbarIndex <= 0">Index--</v-ons-toolbar-button>
+      </div>
       <div class="center">Index: {{tabbarIndex}} -- Show: <input type="checkbox" v-model="tabbarVisibility" /> - <button @click="tabs[0].props.test = 'Modified!'; tabs[1].badge = 2">Props</button></div>
-      <div class="right"><v-ons-toolbar-button @click="tabbarIndex++">Index++</v-ons-toolbar-button></div>
+      <div class="right">
+        <v-ons-toolbar-button @click="tabbarIndex++" :disabled="tabbarIndex >= tabs.length - 1">Index++</v-ons-toolbar-button>
+      </div>
     </v-ons-toolbar>
 
     <v-ons-tabbar
