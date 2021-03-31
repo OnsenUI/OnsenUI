@@ -13,7 +13,7 @@
     <v-ons-tabbar
       swipeable
       v-model:tabs="tabs"
-      :index="tabbarIndex"
+      v-model:index="tabbarIndex"
       :visible="tabbarVisibility"
       position="auto"
       @reactive="log('reactive')"
