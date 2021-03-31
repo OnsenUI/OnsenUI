@@ -48,7 +48,9 @@
       },
       tabbarStyle: {
         type: Object,
-        default: {}
+        default() {
+          return {};
+        }
       }
     },
 
