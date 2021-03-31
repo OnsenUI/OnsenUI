@@ -82,7 +82,7 @@
             icon: 'fa-cogs',
             page: settings
           }
-        ].map(markRaw)
+        ].map(tab => ({ ...tab, page: markRaw(tab.page) }))
       };
     },
 
