@@ -65,7 +65,7 @@
         tabs: [
           {
             label: 'Home',
-            icon: 'ion-ios-home-outline',
+            icon: 'ion-ios-home',
             page: home,
             props: {
               test: 'This is a page prop.'
@@ -73,7 +73,7 @@
           },
           {
             label: 'News',
-            icon: 'ion-ios-bell',
+            icon: 'ion-ios-notifications',
             badge: 7,
             page: news
           },
