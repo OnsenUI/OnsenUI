@@ -47,7 +47,8 @@
         type: Function
       },
       tabbarStyle: {
-        type: null
+        type: Object,
+        default: {}
       }
     },
 

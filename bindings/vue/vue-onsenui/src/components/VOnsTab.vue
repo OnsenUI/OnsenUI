@@ -1,5 +1,5 @@
 <template>
-  <ons-tab :active="active" :on-click.prop="action">
+  <ons-tab :active="coercedActive" :on-click.prop="action">
   </ons-tab>
 </template>
 
@@ -27,6 +27,15 @@
         if (runDefault) {
           this.tabbar.$el.setActiveTab(this.$el.index, { reject: false, ...this.tabbar.options });
         }
+      }
+    },
+
+    computed: {
+      coercedActive() {
+        // Returns null if active prop is false so the native ons-tab's active
+        // attribute will not be set. Without this, ons-tab's active attribute
+        // would be active="false" (i.e. set).
+        return this.active || null;
       }
     },
 
