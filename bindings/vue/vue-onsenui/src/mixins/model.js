@@ -1,14 +1,13 @@
 /* Private */
 const model = {
-  prop: 'modelProp',
-  event: 'modelEvent'
+  prop: 'modelValue',
+  event: 'update:modelValue'
 };
 
 /* Public */
 
 // Generic input
 const modelInput = {
-  model,
   props: {
     [model.prop]: [Number, String],
     [model.event]: {

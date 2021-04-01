@@ -1,9 +1,13 @@
 <template>
   <v-ons-page>
     <v-ons-toolbar>
-      <div class="left"><v-ons-toolbar-button @click="carouselIndex--">Prev: Index--</v-ons-toolbar-button></div>
+      <div class="left">
+        <v-ons-toolbar-button @click="carouselIndex--" :disabled="carouselIndex <= 0">Prev: Index--</v-ons-toolbar-button>
+      </div>
       <div class="center">Index: {{carouselIndex}}</div>
-      <div class="right"><v-ons-toolbar-button @click="carouselIndex++">Next: Index++</v-ons-toolbar-button></div>
+      <div class="right">
+        <v-ons-toolbar-button @click="carouselIndex++" :disabled="carouselIndex >= Object.keys(items).length - 1">Next: Index++</v-ons-toolbar-button>
+      </div>
     </v-ons-toolbar>
 
     <v-ons-carousel fullscreen v-model:index="carouselIndex" swipeable auto-scroll overscrollable @postchange="log('postchange')" @refresh="log('refresh')" @overscroll="log('overscroll')">

@@ -3,8 +3,8 @@ import ons from 'onsenui';
 import { camelize, eventToHandler, handlerToProp, capitalize } from '../internal/util';
 
 /* Private */
+const dbb = 'onDeviceBackButton';
 const _setupDBB = component => {
-  const dbb = 'onDeviceBackButton';
   // Call original handler or parent handler by default
   const handler = component[dbb] || (component.$el[dbb] && component.$el[dbb]._callback) || (e => e.callParentHandler());
 
@@ -25,6 +25,7 @@ const _setupDBB = component => {
 /* Public */
 // Device Back Button Handler
 const deriveDBB = {
+  emits: [handlerToProp(dbb)],
   mounted() {
     _setupDBB(this);
   },
