@@ -2,6 +2,14 @@
 CHANGELOG
 ====
 
+1.11.4
+----
+
+### Misc
+
+ * Depend on OnsenUI ~v2.11.0.
+ * UIWebView is no longer supported.
+
 1.11.3
 ----
 
