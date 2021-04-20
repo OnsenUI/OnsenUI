@@ -1,12 +1,17 @@
 CHANGELOG
 ====
 
-dev
+2.6.3
 ---
 
  ### Bug Fixes
 
  * VOnsNavigator: Don't add page to page stack when push is canceled. Fixes [#2724](https://github.com/OnsenUI/OnsenUI/issues/2724).
+
+ ### Misc
+
+ * Depend on OnsenUI ~v2.11.0.
+ * UIWebView is no longer supported. FastClick is also removed.
 
 2.6.2
 ----
