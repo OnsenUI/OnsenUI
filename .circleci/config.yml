@@ -110,16 +110,16 @@ jobs:
       # bindings/vue
       - restore_cache:
           keys:
-            - v1-vue-cache-{{ .Branch }}-{{ checksum "bindings/vue/package-lock.json" }}
+            - v1-vue-cache-{{ .Branch }}-{{ checksum "bindings/vue/yarn.lock" }}
             - v1-vue-cache-{{ .Branch }}-
             - v1-vue-cache-
       - run:
           name: Install Vue dependencies
           command: |
             cd bindings/vue
-            npm ci
+            yarn install --pure-lockfile
       - save_cache:
-          key: v1-vue-cache-{{ .Branch }}-{{ checksum "bindings/vue/package-lock.json" }}
+          key: v1-vue-cache-{{ .Branch }}-{{ checksum "bindings/vue/yarn.lock" }}
           paths:
             - ./bindings/vue/node_modules
 

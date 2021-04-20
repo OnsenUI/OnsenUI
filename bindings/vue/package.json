@@ -1,17 +1,88 @@
 {
-  "name": "vue-monorepo",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "name": "vue-onsenui",
+  "version": "2.6.2",
+  "description": "Vue.js bindings for Onsen UI",
+  "author": "Onsen UI Team <team@monaca.io>",
   "scripts": {
-    "build": "npm run --prefix vue-onsenui build",
-    "serve": "npm run --prefix vue-onsenui-examples serve"
+    "dev": "cd ../../ && gulp serve --vue",
+    "build": "cross-env NODE_ENV=production gulp build && npm run build:helper-json",
+    "build:helper-json": "(cd ../../ && npm run build:docs) && gulp build:helper-json",
+    "prepublish": "npm run build",
+    "test": "gulp test"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "workspaces": [
-    "./vue-onsenui",
-    "./vue-onsenui-examples"
-  ]
+  "main": "dist/vue-onsenui.js",
+  "files": [
+    "dist",
+    "esm"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/OnsenUI/OnsenUI"
+  },
+  "licenses": [
+    {
+      "type": "Apache-2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0"
+    }
+  ],
+  "bugs": {
+    "url": "https://github.com/OnsenUI/OnsenUI/issues"
+  },
+  "keywords": [
+    "phonegap",
+    "cordova",
+    "vue.js",
+    "components",
+    "hybrid",
+    "app",
+    "ui",
+    "mobile",
+    "onsen",
+    "onsenui"
+  ],
+  "homepage": "https://onsen.io/",
+  "peerDependencies": {
+    "onsenui": "~2.10.0",
+    "vue": "~2.5.0"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-eslint": "^8.0.1",
+    "babel-plugin-external-helpers": "^6.22.0",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-preset-env": "^1.4.0",
+    "babel-preset-stage-3": "^6.22.0",
+    "cross-env": "^1.0.8",
+    "eslint": "^4.10.0",
+    "eslint-plugin-vue": "^3.13.1",
+    "fs-extra": "^3.0.1",
+    "glob": "^7.1.2",
+    "gulp": "^4.0.0",
+    "gulp-babel": "^7.0.0",
+    "gulp-clean": "^0.3.2",
+    "gulp-load-plugins": "^2.0.4",
+    "gulp-rename": "^1.2.2",
+    "gulp-util": "^3.0.7",
+    "gulp-vue-compiler": "^1.0.0-beta.0",
+    "merge-stream": "^1.0.1",
+    "rollup": "^0.51.8",
+    "rollup-plugin-alias": "^1.4.0",
+    "rollup-plugin-babel": "^3.0.2",
+    "rollup-plugin-commonjs": "^8.2.6",
+    "rollup-plugin-eslint": "^4.0.0",
+    "rollup-plugin-execute": "^1.0.0",
+    "rollup-plugin-filesize": "^1.4.2",
+    "rollup-plugin-node-resolve": "^3.0.0",
+    "rollup-plugin-progress": "^1.1.2",
+    "rollup-plugin-replace": "^2.0.0",
+    "rollup-plugin-visualizer": "^0.3.1",
+    "rollup-plugin-vue": "^2.5.2",
+    "uglify-js": "^3.1.7",
+    "vue": "^2.5.2",
+    "vue-template-compiler": "^2.5.2",
+    "vuex": "^3.0.0"
+  },
+  "dependencies": {
+    "babel-runtime": "^6.26.0"
+  }
 }
