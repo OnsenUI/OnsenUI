@@ -1,9 +1,14 @@
 {
+  root: true,
+  env: {
+    node: true
+  },
   extends: [
-    '../../.eslintrc',
-    'plugin:vue/recommended',
+    plugin:vue/vue3-essential,
+    eslint:recommended
   ],
-  rules: {
-    // override if necessary
-  }
+  parserOptions: {
+    parser: 'babel-eslint'
+  },
+  rules: {}
 }
