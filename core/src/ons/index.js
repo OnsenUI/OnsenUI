@@ -512,11 +512,11 @@ function waitDeviceReady() {
   const unlockDeviceReady = ons._readyLock.lock();
   window.addEventListener('DOMContentLoaded', () => {
     if (ons.isWebView()) {
-      window.document.addEventListener('deviceready', unlockDeviceReady, false);
+      window.document.addEventListener('deviceready', unlockDeviceReady, {once: true});
     } else {
       unlockDeviceReady();
     }
-  }, false);
+  }, {once: true});
 }
 
 /**
