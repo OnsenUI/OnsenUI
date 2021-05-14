@@ -45,9 +45,23 @@ const deriveDBB = {
   }
 };
 
-const deriveEvents = (elementName, eventsToRemove = []) => {
+/**
+ * Returns a mixin that handles listeners for the underlying native JS element's
+ * events. By default, all the native element's events are applied to the Vue
+ * component. Native elements events can be removed from the Vue component by
+ * setting `eventsToRemove`.
+ *
+ * IMPORTANT!: If `eventsToRemove` is set, `inheritAttrs: false` and
+ * `v-bind="unrecognizedListners` should be manually set on the Vue component
+ * (the mixin can't handle this).
+ *
+ * @param {String} name - The name of the component e.g. v-ons-dialog @param
+ * {Array} eventsToRemove - Array of native element event names to filter from
+ * the Vue component e.g. ['dialog-cancel', 'modechange']
+ */
+const deriveEvents = (name, eventsToRemove = []) => {
 
-  const nativeEvents = ons.elements[capitalize(camelize(elementName.slice(6)))].events || [];
+  const nativeEvents = ons.elements[capitalize(camelize(name.slice(6)))].events || [];
   const filteredNativeEvents = nativeEvents.filter(event => eventsToRemove.indexOf(event) === -1);
 
   return {
