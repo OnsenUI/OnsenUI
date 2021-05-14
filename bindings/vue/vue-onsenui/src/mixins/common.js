@@ -68,7 +68,12 @@ const dialogCancel = {
   emits: [ 'update:visible' ],
 
   mounted() {
-    this.$on('dialog-cancel', () => this.$emit('update:visible', false));
+    this._onDialogCancel = () => this.$emit('update:visible', false);
+    this.$el.addEventListener('dialog-cancel', this._onDialogCancel);
+  },
+
+  beforeUnmount() {
+    this.$el.removeEventListener('dialog-cancel', this._onDialogCancel);
   }
 };
 
