@@ -1,5 +1,5 @@
 <template>
-  <ons-popover>
+  <ons-popover v-bind="unrecognizedAttributes">
     <slot></slot>
   </ons-popover>
 </template>
@@ -12,7 +12,8 @@
 
   export default {
     name,
-    mixins: [hidable, hasOptions, dialogCancel, deriveEvents(name), deriveDBB, portal],
+    inheritAttrs: false,
+    mixins: [hidable, hasOptions, dialogCancel, deriveEvents(name, ['dialog-cancel']), deriveDBB, portal],
 
     props: {
       target: {

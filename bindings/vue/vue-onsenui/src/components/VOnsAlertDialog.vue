@@ -1,5 +1,5 @@
 <template>
-  <ons-alert-dialog :modifier="normalizedModifier">
+  <ons-alert-dialog v-bind="unrecognizedAttributes" :modifier="normalizedModifier">
     <div class="alert-dialog-title">
       <slot name="title">{{title}}</slot>
     </div>
@@ -22,7 +22,8 @@
 
   export default {
     name,
-    mixins: [hidable, hasOptions, dialogCancel, deriveEvents(name), deriveDBB, portal, modifier],
+    inheritAttrs: false,
+    mixins: [hidable, hasOptions, dialogCancel, deriveEvents(name, ['dialog-cancel']), deriveDBB, portal, modifier],
 
     props: {
       title: {
