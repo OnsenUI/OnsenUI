@@ -384,6 +384,14 @@ export default class SplitterSideElement extends BaseElement {
     return this.getAttribute('side') === 'right' ? 'right' : 'left';
   }
 
+  set side(value) {
+    if (value) {
+      this.setAttribute('side', value);
+    } else {
+      tihs.removeAttribute('side');
+    }
+  }
+
   disconnectedCallback() {
     this._swipe && this._swipe.dispose();
     this._animator = this._animationOpt = this._swipe = null;
