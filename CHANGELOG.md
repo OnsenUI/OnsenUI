@@ -2,6 +2,13 @@
 CHANGELOG
 ====
 
+dev
+---
+
+ ### New Features
+
+ * ons-splitter-side: Added `swipeable` property.
+
 2.11.2
 ---
 

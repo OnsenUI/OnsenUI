@@ -42,6 +42,12 @@ describe('OnsSplitterSideElement', () => {
     expect(left.pageLoader instanceof ons.PageLoader).to.be.ok;
   });
 
+  it('provides swipeable property', () => {
+    expect(left.hasAttribute('swipeable')).to.be.false;
+    left.swipeable = true;
+    expect(left.hasAttribute('swipeable')).to.be.true;
+  });
+
   describe('#load()', () => {
     let template;
 

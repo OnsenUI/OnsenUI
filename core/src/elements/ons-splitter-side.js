@@ -302,8 +302,18 @@ export default class SplitterSideElement extends BaseElement {
    *   [ja]collapseモード時にスワイプ操作を有効にする場合に指定します。[/ja]
    */
 
+  /**
+   * @property swipeable
+   * @type {Boolean}
+   * @description
+   *   [en]Whether to enable swipe interaction on collapse mode.[/en]
+   *   [ja]collapseモード時にスワイプ操作を有効にする場合に指定します。[/ja]
+   */
+
   constructor() {
     super();
+
+    util.defineBooleanProperty(this, 'swipeable');
 
     this._page = null;
     this._state = CLOSED_STATE;
