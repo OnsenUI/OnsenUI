@@ -48,6 +48,13 @@ describe('OnsSplitterSideElement', () => {
     expect(left.hasAttribute('swipeable')).to.be.true;
   });
 
+  it('doesn\'t create a new SwipeReveal if one already exists', () => {
+    const swipeBefore = left._swipe;
+    left.connectedCallback();
+    const swipeAfter = left._swipe;
+    expect(swipeBefore).to.equal(swipeAfter);
+  });
+
   describe('#load()', () => {
     let template;
 
