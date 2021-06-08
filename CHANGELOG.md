@@ -2,6 +2,17 @@
 CHANGELOG
 ====
 
+dev
+---
+
+ ### Bug Fixes
+
+ * ons-splitter-side: Stop creating new swipe reveals when connected if one already exists.
+
+ ### New Features
+
+ * ons-splitter-side: Added `swipeable` property.
+
 2.11.2
 ---
 

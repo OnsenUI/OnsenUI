@@ -42,6 +42,19 @@ describe('OnsSplitterSideElement', () => {
     expect(left.pageLoader instanceof ons.PageLoader).to.be.ok;
   });
 
+  it('provides swipeable property', () => {
+    expect(left.hasAttribute('swipeable')).to.be.false;
+    left.swipeable = true;
+    expect(left.hasAttribute('swipeable')).to.be.true;
+  });
+
+  it('doesn\'t create a new SwipeReveal if one already exists', () => {
+    const swipeBefore = left._swipe;
+    left.connectedCallback();
+    const swipeAfter = left._swipe;
+    expect(swipeBefore).to.equal(swipeAfter);
+  });
+
   describe('#load()', () => {
     let template;
 

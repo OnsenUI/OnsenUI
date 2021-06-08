@@ -894,6 +894,10 @@ declare namespace ons {
      * @description Hook called whenever the user slides the splitter.
      **/
     onSwipe?: Function;
+    /**
+     * @description true if the splitter side element is swipeable.
+     **/
+    swipeable: boolean;
   }
 
   interface OnsLazyRepeatElement extends HTMLElement {
