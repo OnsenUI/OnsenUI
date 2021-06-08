@@ -1,5 +1,5 @@
 <template>
-  <ons-splitter-side>
+  <ons-splitter-side :animation="options.animation">
     <slot></slot>
   </ons-splitter-side>
 </template>
