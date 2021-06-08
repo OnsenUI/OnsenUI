@@ -130,7 +130,7 @@
   elements: ons-list ons-list-item
   markup: |
     <ul class="list">
-      <li class="list-item list-item--expandable expanded">
+      <li class="list-item list-item--expandable list-item--expanded">
         <div class="list-item__top">
           <div class="list-item__center">Item</div>
           <div class="list-item__right">
@@ -167,7 +167,7 @@
   overflow: hidden;
 }
 
-.list-item.expanded > .list-item__expandable-content {
+.list-item--expandable.list-item--expanded > .list-item__expandable-content {
   display: block;
   height: auto;
 }
@@ -903,7 +903,7 @@
   margin: 1px; /* this improves alignment with normal chevrons */
 }
 
-.list-item--expandable.expanded .list-item__expand-chevron {
+.list-item--expandable.list-item--expanded .list-item__expand-chevron {
   transform: rotate(225deg);
 }
 

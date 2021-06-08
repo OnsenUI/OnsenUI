@@ -1146,6 +1146,10 @@ declare namespace ons {
      * @description Hide the expandable content if element is expandable
      */
     hideExpansion(): void;
+    /**
+     * @description For expandable list items, specifies whether the expandable content is expanded or not.
+     **/
+    expanded: boolean;
   }
 
 }
