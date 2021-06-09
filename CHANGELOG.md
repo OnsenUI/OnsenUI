@@ -2,6 +2,22 @@
 CHANGELOG
 ====
 
+dev
+---
+
+ ### Bug Fixes
+
+ * ons-splitter-side: Stop creating new swipe reveals when connected if one already exists.
+
+ ### New Features
+
+ * ons-splitter-side: Added `swipeable` property.
+ * ons-list-item: Added `expandable` attribute and property. ([#2896](https://github.com/OnsenUI/OnsenUI/issues/2896)).
+
+ ### BREAKING CHANGES
+
+ * ons-list-item: `expanded` class has been renamed to `list-item--expanded`.
+
 2.11.2
 ---
 

@@ -1,6 +1,13 @@
 CHANGELOG
 ====
 
+dev
+---
+
+ ### Bug Fixes
+
+ * VOnsSplitterSide: animation option is respected when swiping splitter at startup.
+
 2.6.3
 ---
 

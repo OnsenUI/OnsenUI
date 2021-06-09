@@ -7,7 +7,7 @@
         :side="state.side"
         :collapse="state.collapse"
         :width="state.width"
-        :options="{ animation: 'reveal' }"
+        :options="{ animation: state.animation }"
         @preopen="log('preopen')"
         @postopen="log('postopen')"
         @preclose="log('preclose')"
@@ -73,12 +73,23 @@
         </v-ons-list-item>
         <v-ons-list-item>
           <div class="center">
+            Animation
+          </div>
+          <div class="right">
+            <select v-model="sideState.animation">
+              <option>overlay</option>
+              <option>push</option>
+              <option>reveal</option>
+            </select>
+          </div>
+        </v-ons-list-item>
+        <v-ons-list-item>
+          <div class="center">
             Swipeable
           </div>
           <div class="right">
             <v-ons-switch
-              :checked="sideState.swipeable"
-              @change="sideState.swipeable = $event.target.checked"
+              v-model="sideState.swipeable"
             >
             </v-ons-switch>
           </div>
@@ -135,7 +146,8 @@
           side: 'left',
           width: '200px',
           collapse: '',
-          swipeable: true
+          swipeable: true,
+          animation: null
         }
       }
     ),

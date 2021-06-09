@@ -1,5 +1,5 @@
 <template>
-  <ons-splitter-side v-on="handlers">
+  <ons-splitter-side :animation="options.animation">
     <slot></slot>
   </ons-splitter-side>
 </template>
@@ -38,9 +38,6 @@
       },
       _shouldUpdate() {
         return this.open !== undefined && this.open !== this.$el.isOpen;
-      },
-      userInteraction() {
-        this._shouldUpdate() && this.$emit('update:open', this.$el.isOpen);
       }
     },
 
@@ -51,7 +48,15 @@
     },
 
     mounted() {
+      this._userInteraction = e =>
+        this._shouldUpdate() && this.$emit('update:open', this.$el.isOpen);
+      ['postopen', 'postclose', 'modechange'].forEach(e => this.$el.addEventListener(e, this._userInteraction));
+
       this.action();
+    },
+
+    beforeUnmount() {
+      ['postopen', 'postclose', 'modechange'].forEach(e => this.$el.removeEventListener(e, this._userInteraction));
     }
   };
 </script>
