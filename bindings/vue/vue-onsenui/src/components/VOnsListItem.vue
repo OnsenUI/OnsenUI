@@ -1,5 +1,5 @@
 <template>
-  <ons-list-item :modifier="normalizedModifier" v-on:expansion="onExpansion">
+  <ons-list-item :modifier="normalizedModifier" :expanded="expanded" v-on:expansion="onExpansion">
     <slot></slot>
   </ons-list-item>
 </template>
@@ -24,12 +24,6 @@
         if (this.expanded !== this.$el.expanded) {
           this.$emit('update:expanded', this.$el.expanded);
         }
-      }
-    },
-    watch: {
-      expanded() {
-        const action = this.expanded ? 'show' : 'hide';
-        this.$el[action + 'Expansion']();
       }
     }
   };
