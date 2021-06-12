@@ -324,7 +324,6 @@ export default class ListItemElement extends BaseElement {
 
   toggleExpansion() {
     this.expanded = !this.expanded;
-    this.dispatchEvent(new Event('expansion'));
   }
 
   _animateExpansion() {
@@ -336,6 +335,8 @@ export default class ListItemElement extends BaseElement {
     }
 
     this._expanding = true;
+
+    this.dispatchEvent(new Event('expansion'));
 
     const animator = this._animatorFactory.newAnimator();
     animator._animateExpansion(this, this.expanded, () => {
