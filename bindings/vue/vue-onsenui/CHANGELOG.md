@@ -7,6 +7,7 @@ dev
  ### Bug Fixes
 
  * VOnsSplitterSide: animation option is respected when swiping splitter at startup.
+ * VOnsPage: Page content is updated when adding content dynamically with `v-for`. [#2512](https://github.com/OnsenUI/OnsenUI/issues/2512)).
 
 2.6.3
 ---
