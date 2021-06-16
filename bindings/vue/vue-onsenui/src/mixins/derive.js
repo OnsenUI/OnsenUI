@@ -52,11 +52,11 @@ const deriveDBB = {
  * setting `eventsToRemove`.
  *
  * IMPORTANT!: If `eventsToRemove` is set, `inheritAttrs: false` and
- * `v-bind="unrecognizedListners` should be manually set on the Vue component
+ * `v-bind="unrecognizedListeners` should be manually set on the Vue component
  * (the mixin can't handle this).
  *
- * @param {String} name - The name of the component e.g. v-ons-dialog @param
- * {Array} eventsToRemove - Array of native element event names to filter from
+ * @param {String} name - The name of the component e.g. v-ons-dialog
+ * @param {Array} eventsToRemove - Array of native element event names to filter from
  * the Vue component e.g. ['dialog-cancel', 'modechange']
  */
 const deriveEvents = (name, eventsToRemove = []) => {
