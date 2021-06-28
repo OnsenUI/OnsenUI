@@ -3,12 +3,21 @@ jobs:
   build:
     working_directory: ~/working_directory
     docker:
-      - image: circleci/node:10.16-browsers
+      - image: circleci/node:14.17.1-browsers
         env:
           - DISPLAY=:99
           - CHROME_BIN=/usr/bin/google-chrome
     steps:
       - checkout
+      - run:
+          name: Install coveralls and gulp globally
+          command: sudo yarn global add coveralls gulp
+      - run:
+          name: Install rsync
+          command: sudo apt install -y rsync
+      - run:
+          name: Install latest npm
+          command: sudo npm i -g npm
       - run:
           name: Print system information
           command: |
@@ -16,12 +25,6 @@ jobs:
             echo "npm v$(npm --version)"
             echo "Yarn v$(yarn --version)"
             echo "$(google-chrome --version)"
-      - run:
-          name: Install coveralls and gulp globally
-          command: sudo yarn global add coveralls gulp
-      - run:
-          name: Install rsync
-          command: sudo apt install -y rsync
 
       # css-components
       - restore_cache:
@@ -47,7 +50,7 @@ jobs:
             - v1-onsenui-cache-
       - run:
           name: Install dependencies
-          command: npm ci
+          command: npm i --no-save
       - save_cache:
           key: v1-onsenui-cache-{{ .Branch }}-{{ checksum "package-lock.json" }}
           paths:
@@ -110,18 +113,23 @@ jobs:
       # bindings/vue
       - restore_cache:
           keys:
-            - v1-vue-cache-{{ .Branch }}-{{ checksum "bindings/vue/yarn.lock" }}
+            - v1-vue-cache-{{ .Branch }}-{{ checksum "bindings/vue/package-lock.json" }}
             - v1-vue-cache-{{ .Branch }}-
             - v1-vue-cache-
       - run:
           name: Install Vue dependencies
           command: |
             cd bindings/vue
-            yarn install --pure-lockfile
+            npm i --no-save
       - save_cache:
-          key: v1-vue-cache-{{ .Branch }}-{{ checksum "bindings/vue/yarn.lock" }}
+          key: v1-vue-cache-{{ .Branch }}-{{ checksum "bindings/vue/package-lock.json" }}
           paths:
             - ./bindings/vue/node_modules
+      - run:
+          name: Building vue-onsenui
+          command: |
+            cd bindings/vue
+            npm run build
 
       # Tests
       - run:

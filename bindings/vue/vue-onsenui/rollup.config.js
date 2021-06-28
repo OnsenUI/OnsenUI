@@ -1,6 +1,6 @@
 import path from 'path';
 import pkg from './package.json';
-import corePkg from '../../package.json';
+import corePkg from '../../../package.json';
 import dateformat from 'dateformat';
 
 // Rollup plugins
@@ -14,7 +14,6 @@ import progress from 'rollup-plugin-progress';
 import visualizer from 'rollup-plugin-visualizer';
 import alias from 'rollup-plugin-alias';
 import vue from 'rollup-plugin-vue';
-import execute from 'rollup-plugin-execute';
 
 const local = (...args) => path.resolve(__dirname, ...args);
 
@@ -24,7 +23,7 @@ babelrc.plugins = ['external-helpers'];
 babelrc.exclude = [local('node_modules/**'), local('../../build/**')];
 
 const globals = { 'onsenui': 'ons', 'onsenui/esm': 'ons' },
-  external = id => /onsenui/.test(id),
+  external = id => /^onsenui/.test(id),
   banner = `/* ${pkg.name} v${pkg.version} - ${dateformat(new Date(), 'yyyy-mm-dd')} */\n`;
 
 const builds = [
@@ -60,8 +59,7 @@ const builds = [
       visualizer({
         filename: 'module-stats.umd.html',
         sourcemap: true,
-      }),
-      execute(`node_modules/.bin/uglifyjs dist/${pkg.name}.js -c -m --comments '/${pkg.name}/' --output dist/${pkg.name}.min.js`),
+      })
     ],
   },
 

@@ -1,6 +1,6 @@
 import 'babel-polyfill';
 
-import corePkg from '../../package.json';
+import corePkg from '../../../package.json';
 import gulp from 'gulp';
 import * as glob from 'glob';
 import path from'path';
