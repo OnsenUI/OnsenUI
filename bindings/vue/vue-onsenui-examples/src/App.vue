@@ -1,28 +1,59 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+  <v-ons-page>
+    <v-ons-toolbar>
+
+      <div class="left">
+        <v-ons-toolbar-button
+          @click.prevent="backToList"
+          v-show="currentView !== initialView"
+        >
+          Main list
+        </v-ons-toolbar-button>
+      </div>
+
+      <div class="center">{{ title }}</div>
+    </v-ons-toolbar>
+
+    <div class="content">
+      <keep-alive>
+        <component
+          :is="currentView"
+          :examples="examples"
+          :changeExample="changeExample"
+        ></component>
+      </keep-alive>
+    </div>
+  </v-ons-page>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+
+import * as examples from './components';
+import MainList from './MainList.vue';
 
 export default {
   name: 'App',
-  components: {
-    HelloWorld
+
+  data() {
+    const initialView = MainList;
+
+    return {
+      initialView,
+      examples,
+      title: 'Main List',
+      currentView: initialView
+    }
+  },
+
+  methods: {
+    changeExample(key) {
+      this.title = key;
+      this.currentView = this.examples[key];
+    },
+    backToList() {
+      this.title = 'Main List';
+      this.currentView = this.initialView;
+    }
   }
 }
 </script>
-
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
