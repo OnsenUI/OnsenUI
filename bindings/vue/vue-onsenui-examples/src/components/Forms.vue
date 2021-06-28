@@ -139,7 +139,7 @@
     <br><br>
     <v-ons-list-title>v-for: {{ vForItems }}</v-ons-list-title>
     <v-ons-list>
-      <v-ons-list-item v-for="item in vForItems" :key="'test'">
+      <v-ons-list-item v-for="(item, index) in vForItems" :key="index">
         <div class="left"><v-ons-checkbox v-model="item.checked"></v-ons-checkbox></div>
         <div class="center">{{ item.checked }}</div>
       </v-ons-list-item>
