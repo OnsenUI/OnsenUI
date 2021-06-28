@@ -50,7 +50,7 @@ jobs:
             - v1-onsenui-cache-
       - run:
           name: Install dependencies
-          command: npm ci
+          command: npm i --no-save
       - save_cache:
           key: v1-onsenui-cache-{{ .Branch }}-{{ checksum "package-lock.json" }}
           paths:
@@ -120,7 +120,7 @@ jobs:
           name: Install Vue dependencies
           command: |
             cd bindings/vue
-            npm ci
+            npm i --no-save
       - save_cache:
           key: v1-vue-cache-{{ .Branch }}-{{ checksum "bindings/vue/package-lock.json" }}
           paths:
