@@ -5,7 +5,8 @@
   "description": "",
   "scripts": {
     "build": "npm run --prefix vue-onsenui build",
-    "serve": "npm run --prefix vue-onsenui-examples serve"
+    "serve": "npm run --prefix vue-onsenui-examples serve",
+    "test": "npm run --prefix vue-onsenui test"
   },
   "keywords": [],
   "author": "",
