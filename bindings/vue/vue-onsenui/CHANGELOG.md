@@ -1,6 +1,13 @@
 CHANGELOG
 ====
 
+2.6.4
+---
+
+ ### Misc
+
+ * Depend on vue ~2.6.0.
+
 2.6.3
 ---
 
