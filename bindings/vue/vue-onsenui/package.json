@@ -4,7 +4,6 @@
   "description": "Vue.js bindings for Onsen UI",
   "author": "Onsen UI Team <team@monaca.io>",
   "scripts": {
-    "dev": "cd ../../ && gulp serve --vue",
     "build": "cross-env NODE_ENV=production gulp build && npm run build:minify && npm run build:helper-json",
     "build:helper-json": "(cd ../../ && npm run build:docs) && gulp build:helper-json",
     "build:minify": "uglifyjs dist/vue-onsenui.js -c -m --comments '/vue-onsenui/' --output dist/vue-onsenui.min.js",
