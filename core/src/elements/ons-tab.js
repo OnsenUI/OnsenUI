@@ -353,8 +353,18 @@ export default class TabElement extends BaseElement {
     });
   }
 
+  get active() {
+    return this._tabbar.activeIndex === this.index;
+  }
+
+  set active(active) {
+    if (active) {
+      this._tabbar.activeIndex = this.index;
+    }
+  }
+
   static get observedAttributes() {
-    return ['modifier', 'ripple', 'icon', 'label', 'page', 'badge', 'class'];
+    return ['modifier', 'ripple', 'icon', 'label', 'page', 'badge', 'class', 'active'];
   }
 
   attributeChangedCallback(name, last, current) {
@@ -375,6 +385,12 @@ export default class TabElement extends BaseElement {
         break;
       case 'page':
         this.page = current || '';
+        break;
+      case 'active':
+        const hasActiveAttribute = current != null
+        if (this.active !== hasActiveAttribute) {
+          this.active = hasActiveAttribute;
+        }
         break;
     }
   }

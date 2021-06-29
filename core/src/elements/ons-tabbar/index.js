@@ -366,10 +366,8 @@ export default class TabbarElement extends BaseElement {
       }
     }
 
-    const activeIndex = Number(this.getAttribute('activeIndex')); // 0 by default
-    if (tabbar.children.length > activeIndex && !util.findChild(tabbar, '[active]')) {
-      tabbar.children[activeIndex].setAttribute('active', '');
-    }
+    // sets active-index to default of 0 when neither active nor active-index has been set
+    this.setAttribute('active-index', this.activeIndex);
 
     this._tabbarBorder = util.findChild(tabbar, '.tabbar__border') || util.create('.tabbar__border');
     tabbar.appendChild(this._tabbarBorder);
@@ -593,8 +591,16 @@ export default class TabbarElement extends BaseElement {
     this.remove();
   }
 
+  get activeIndex() {
+    return Number(this.getAttribute('active-index'));
+  }
+
+  set activeIndex(value) {
+    this.setAttribute('active-index', value);
+  }
+
   static get observedAttributes() {
-    return ['modifier', 'position', 'swipeable', 'tab-border', 'hide-tabs'];
+    return ['modifier', 'position', 'swipeable', 'tab-border', 'hide-tabs', 'active-index'];
   }
 
   attributeChangedCallback(name, last, current) {
@@ -608,6 +614,11 @@ export default class TabbarElement extends BaseElement {
       this._swiper && this._swiper.updateSwipeable(this.hasAttribute('swipeable'));
     } else if (name === 'hide-tabs') {
       this.setTabbarVisibility(!this.hasAttribute('hide-tabs') || current === 'false');
+    } else if (name === 'active-index') {
+      if (last) {
+        this.tabs[last].removeAttribute('active');
+      }
+      this.tabs[current].setAttribute('active', '');
     }
   }
 
