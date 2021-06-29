@@ -318,15 +318,15 @@ describe('OnsTabElement', () => {
       setImmediate(() => {
         const tab1 = tabbar.querySelector('#tab1');
         const tab2 = tabbar.querySelector('#tab2');
-        expect(tabbar.getActiveTabIndex()).to.equal(0);
+        expect(tabbar.activeIndex).to.equal(0);
 
         tab2.setActive(true);
         tab1.classList.remove('active');
-        expect(tabbar.getActiveTabIndex()).to.equal(1);
+        expect(tabbar.activeIndex).to.equal(1);
 
         tab1.setActive(true);
         tab2.setActive(false);
-        expect(tabbar.getActiveTabIndex()).to.equal(0);
+        expect(tabbar.activeIndex).to.equal(0);
 
         document.body.removeChild(tabbar);
         document.body.removeChild(template1);

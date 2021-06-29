@@ -123,7 +123,7 @@ export default class SegmentElement extends BaseElement {
 
     contentReady(this, () => {
       this._compile()
-      setImmediate(() => this._lastActiveIndex = this._tabbar ? this._tabbar.getActiveTabIndex() : this.getActiveButtonIndex());
+      setImmediate(() => this._lastActiveIndex = this._tabbar ? this._tabbar.activeIndex : this.getActiveButtonIndex());
     });
   }
 
@@ -165,7 +165,7 @@ export default class SegmentElement extends BaseElement {
         }
 
         this._tabbar.setAttribute('hide-tabs', '');
-        setImmediate(() => this._setChecked(this._tabbar.getActiveTabIndex()));
+        setImmediate(() => this._setChecked(this._tabbar.activeIndex));
 
         this._tabbar.addEventListener('prechange', this._onTabbarPreChange);
       }

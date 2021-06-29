@@ -326,7 +326,7 @@ export default class TabbarElement extends BaseElement {
     this._tabsRect = this.tabs.map(tab => tab.getBoundingClientRect());
     if (this._tabbarBorder) {
       this._tabbarBorder.style.display = this.hasAttribute('tab-border') || util.hasModifier(this, 'material') ? 'block' : 'none';
-      const index = this.getActiveTabIndex();
+      const index = this.activeIndex;
       if (this._tabsRect.length > 0 && index >= 0) {
         this._tabbarBorder.style.width = this._tabsRect[index].width + 'px';
       }
@@ -418,7 +418,7 @@ export default class TabbarElement extends BaseElement {
 
   get topPage() {
     const tabs = this.tabs,
-      index = this.getActiveTabIndex();
+      index = this.activeIndex;
     return tabs[index]
       ? tabs[index].pageElement || this.pages[0] || null
       : null;
@@ -458,7 +458,7 @@ export default class TabbarElement extends BaseElement {
    *   [ja][/ja]
    */
   setActiveTab(nextIndex, options = {}) {
-    const prevIndex = this.getActiveTabIndex();
+    const prevIndex = this.activeIndex;
     const prevTab = this.tabs[prevIndex],
       nextTab = this.tabs[nextIndex];
 
@@ -572,7 +572,7 @@ export default class TabbarElement extends BaseElement {
 
     setImmediate(() => {
       const tabs = this.tabs;
-      const activeIndex = this.getActiveTabIndex(tabs);
+      const activeIndex = this.activeIndex;
       this._loadInactive.resolve();
       if (tabs.length > 0 && activeIndex >= 0) {
         tabs[activeIndex].loaded.then(el => el && setImmediate(() => el._show()));
