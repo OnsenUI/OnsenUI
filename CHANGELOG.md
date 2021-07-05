@@ -18,6 +18,10 @@ dev
 
  * ons-list-item: `expanded` class has been renamed to `list-item--expanded`.
 
+ ### New Features
+
+ * ons-tabbar: `swipe` event is now emitted when the tabbar swipes.
+
 2.11.2
 ---
 
