@@ -13,6 +13,7 @@ dev
  ### New Features
 
  * ons-tabbar: `swipe` event is now emitted when the tabbar swipes.
+ * ons-carousel: `swipe` event is now emitted when the carousel swipes.
 
 2.11.2
 ---
