@@ -10,6 +10,10 @@ dev
  * core: DOMContentReady and deviceready event listeners are removed after being invoked once. ([#2886](https://github.com/OnsenUI/OnsenUI/pull/2886)).
  * ons-button: Allow form submission on submit key keypress. ([#2857](https://github.com/OnsenUI/OnsenUI/issues/2857)).
 
+ ### New Features
+
+ * ons-tabbar: `swipe` event is now emitted when the tabbar swipes.
+
 2.11.2
 ---
 
