@@ -103,6 +103,22 @@ export default class CarouselElement extends BaseElement {
    */
 
   /**
+   * @event swipe
+   * @description
+   *   [en]Fires when the carousel swipes.[/en]
+   *   [ja][/ja]
+   * @param {Object} event
+   *   [en]Event object.[/en]
+   *   [ja]イベントオブジェクト。[/ja]
+   * @param {Number} event.index
+   *   [en]Current index.[/en]
+   *   [ja]現在アクティブになっているons-carouselのインデックスを返します。[/ja]
+   * @param {Object} event.options
+   *   [en]Animation options object.[/en]
+   *   [ja][/ja]
+   */
+
+  /**
    * @attribute direction
    * @type {String}
    * @description
@@ -245,7 +261,7 @@ export default class CarouselElement extends BaseElement {
         preChangeHook: this._onChange.bind(this, 'prechange'),
         postChangeHook: this._onChange.bind(this, 'postchange'),
         refreshHook: this._onRefresh.bind(this),
-        scrollHook: (...args) => this._onSwipe && this._onSwipe(...args)
+        scrollHook: (index, options) => util.triggerElementEvent(this, 'swipe', { index, options })
       });
 
       contentReady(this, () => this._swiper.init({
@@ -259,6 +275,10 @@ export default class CarouselElement extends BaseElement {
     if (this._swiper && this._swiper.initialized) {
       this._swiper.dispose();
       this._swiper = null;
+    }
+
+    if (this._onSwipe) {
+      this.removeEventListener('swipe', this._onSwipe);
     }
   }
 
@@ -532,6 +552,12 @@ export default class CarouselElement extends BaseElement {
     if (value && !(value instanceof Function)) {
       util.throw(`"onSwipe" must be a function`)
     }
+
+    if (this._onSwipe) {
+      document.removeEventListener('swipe', this._onSwipe);
+    }
+    document.addEventListener('swipe', value);
+
     this._onSwipe = value;
   }
 
