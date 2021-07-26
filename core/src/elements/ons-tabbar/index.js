@@ -145,6 +145,22 @@ export default class TabbarElement extends BaseElement {
    */
 
   /**
+   * @event swipe
+   * @description
+   *   [en]Fires when the tabbar swipes.[/en]
+   *   [ja][/ja]
+   * @param {Object} event
+   *   [en]Event object.[/en]
+   *   [ja]イベントオブジェクト。[/ja]
+   * @param {Number} event.index
+   *   [en]Current index.[/en]
+   *   [ja]現在アクティブになっているons-tabのインデックスを返します。[/ja]
+   * @param {Object} event.options
+   *   [en]Animation options object.[/en]
+   *   [ja][/ja]
+   */
+
+  /**
    * @attribute animation
    * @type {String}
    * @default none
@@ -213,6 +229,8 @@ export default class TabbarElement extends BaseElement {
     super();
     this._loadInactive = util.defer(); // Improves #2324
     contentReady(this, () => this._compile());
+
+    util.defineListenerProperty(this, 'swipe');
   }
 
   connectedCallback() {
@@ -251,6 +269,8 @@ export default class TabbarElement extends BaseElement {
       this._tabbarBorder = null;
       this._tabsRect = null;
     }
+
+    util.disconnectListenerProperty(this, 'swipe');
   }
 
   _normalizeEvent(event) {
@@ -298,7 +318,7 @@ export default class TabbarElement extends BaseElement {
       }
     }
 
-    this._onSwipe && this._onSwipe(index, options);
+    util.triggerElementEvent(this, 'swipe', { index, options });
   }
 
   _onRefresh() {
@@ -529,16 +549,6 @@ export default class TabbarElement extends BaseElement {
    *   [en]Hook called whenever the user slides the tabbar. It gets a decimal index and an animationOptions object as arguments.[/en]
    *   [ja][/ja]
    */
-  get onSwipe() {
-    return this._onSwipe;
-  }
-
-  set onSwipe(value) {
-    if (value && !(value instanceof Function)) {
-      util.throw(`"onSwipe" must be a function`)
-    }
-    this._onSwipe = value;
-  }
 
   /**
    * @method getActiveTabIndex

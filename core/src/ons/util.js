@@ -564,4 +564,41 @@ util.checkMissingImport = (...elementNames) => {
   });
 }
 
+/**
+ * Makes a property for a listener e.g. onClick
+ */
+util.defineListenerProperty = (object, eventName) => {
+  const camelized = util.camelize(eventName);
+  const propertyName = 'on' + camelized.charAt(0).toUpperCase() + camelized.slice(1);
+
+  let handler;
+  Object.defineProperty(object, propertyName, {
+    get() {
+      return handler;
+    },
+    set(newHandler) {
+      if (handler) {
+        object.removeEventListener(eventName, handler);
+      }
+      object.addEventListener(eventName, newHandler);
+
+      handler = newHandler;
+    }
+  });
+}
+
+/**
+ * Removes the listener for a listener property e.g. onClick
+ * Useful for removing listeners during disconnectedCallback.
+ */
+util.disconnectListenerProperty = (object, eventName) => {
+  const camelized = util.camelize(eventName);
+  const propertyName = 'on' + camelized.charAt(0).toUpperCase() + camelized.slice(1);
+
+  if (object[propertyName]) {
+    object.removeEventListener(eventName, object[propertyName]);
+    object[propertyName] = null;
+  }
+}
+
 export default util;

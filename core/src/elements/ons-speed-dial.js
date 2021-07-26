@@ -125,6 +125,8 @@ export default class SpeedDialElement extends BaseElement {
 
     this._itemShown = false;
     this._boundOnClick = this._onClick.bind(this);
+
+    util.defineListenerProperty(this, 'click');
   }
 
   _compile() {
@@ -172,6 +174,7 @@ export default class SpeedDialElement extends BaseElement {
 
   disconnectedCallback() {
     this.removeEventListener('click', this._boundOnClick, false);
+    util.disconnectListenerProperty(this, 'click');
   }
 
   get items() {
@@ -182,13 +185,12 @@ export default class SpeedDialElement extends BaseElement {
     return util.findChild(this, 'ons-fab');
   }
 
-  _onClick(e) {
-    if (this.onClick) {
-      this.onClick.apply(this);
-      return Promise.resolve();
-    } else if (!this.disabled && this.visible) {
-      return this.toggleItems();
-    }
+  _onClick(event) {
+    setTimeout(() => {
+      if (!event.defaultPrevented && !this.disabled && this.visible) {
+        return this.toggleItems();
+      }
+    });
   }
 
   _show() {
