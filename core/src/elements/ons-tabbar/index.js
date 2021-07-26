@@ -229,6 +229,8 @@ export default class TabbarElement extends BaseElement {
     super();
     this._loadInactive = util.defer(); // Improves #2324
     contentReady(this, () => this._compile());
+
+    util.defineListenerProperty(this, 'swipe');
   }
 
   connectedCallback() {
@@ -268,9 +270,7 @@ export default class TabbarElement extends BaseElement {
       this._tabsRect = null;
     }
 
-    if (this._onSwipe) {
-      this.removeEventListener('swipe', this._onSwipe);
-    }
+    util.disconnectListenerProperty(this, 'swipe');
   }
 
   _normalizeEvent(event) {
@@ -549,22 +549,6 @@ export default class TabbarElement extends BaseElement {
    *   [en]Hook called whenever the user slides the tabbar. It gets a decimal index and an animationOptions object as arguments.[/en]
    *   [ja][/ja]
    */
-  get onSwipe() {
-    return this._onSwipe;
-  }
-
-  set onSwipe(value) {
-    if (value && !(value instanceof Function)) {
-      util.throw(`"onSwipe" must be a function`)
-    }
-
-    if (this._onSwipe) {
-      document.removeEventListener('swipe', this._onSwipe);
-    }
-    document.addEventListener('swipe', value);
-
-    this._onSwipe = value;
-  }
 
   /**
    * @method getActiveTabIndex

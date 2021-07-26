@@ -228,6 +228,8 @@ export default class CarouselElement extends BaseElement {
   constructor() {
     super();
 
+    util.defineListenerProperty(this, 'swipe');
+
     contentReady(this, () => this._compile());
   }
 
@@ -277,9 +279,7 @@ export default class CarouselElement extends BaseElement {
       this._swiper = null;
     }
 
-    if (this._onSwipe) {
-      this.removeEventListener('swipe', this._onSwipe);
-    }
+    util.disconnectListenerProperty(this, 'swipe');
   }
 
   static get observedAttributes() {
@@ -544,22 +544,6 @@ export default class CarouselElement extends BaseElement {
    *   [en]Hook called whenever the user slides the carousel. It gets a decimal index and an animationOptions object as arguments.[/en]
    *   [ja][/ja]
    */
-  get onSwipe() {
-    return this._onSwipe;
-  }
-
-  set onSwipe(value) {
-    if (value && !(value instanceof Function)) {
-      util.throw(`"onSwipe" must be a function`)
-    }
-
-    if (this._onSwipe) {
-      document.removeEventListener('swipe', this._onSwipe);
-    }
-    document.addEventListener('swipe', value);
-
-    this._onSwipe = value;
-  }
 
   /**
    * @property autoScroll
