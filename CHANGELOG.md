@@ -5,6 +5,10 @@ CHANGELOG
 dev
 ---
 
+ ### BREAKING CHANGES
+
+ * ons-tab: Setting onClick no longers prevents default behaviour. `event.preventDefault` should be called in the onClick callback.
+
  ### Bug Fixes
 
  * core: DOMContentReady and deviceready event listeners are removed after being invoked once. ([#2886](https://github.com/OnsenUI/OnsenUI/pull/2886)).
@@ -14,6 +18,7 @@ dev
 
  * ons-tabbar: `swipe` event is now emitted when the tabbar swipes.
  * ons-carousel: `swipe` event is now emitted when the carousel swipes.
+ * ons-tab: Calling event.preventDefault for click events can be used to prevent switching tab.
 
 2.11.2
 ---
