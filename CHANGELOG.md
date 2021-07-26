@@ -9,6 +9,7 @@ dev
 
  * ons-tab: Setting onClick no longers prevents default behaviour. `event.preventDefault` should be called in the onClick callback.
  * ons-back-button: Setting onClick no longers prevents default behaviour. `event.preventDefault` should be called in the onClick callback.
+ * ons-speed-dial: Setting onClick no longers prevents default behaviour. `event.preventDefault` should be called in the onClick callback.
 
  ### Bug Fixes
 
@@ -21,6 +22,7 @@ dev
  * ons-carousel: `swipe` event is now emitted when the carousel swipes.
  * ons-tab: Calling event.preventDefault for click events can be used to prevent switching tab.
  * ons-back-button: Calling event.preventDefault for click events can be used to prevent navigator going back a page.
+ * ons-speed-dial: Calling event.preventDefault for click events can be used to prevent speed dial opening/closing.
 
 2.11.2
 ---
