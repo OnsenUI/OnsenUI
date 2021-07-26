@@ -39,7 +39,7 @@ const scheme = {
  *   [en]
  *     Back button component for `<ons-toolbar>`. Put it in the left part of the `<ons-toolbar>`.
  *
- *     It will find the parent `<ons-navigator>` element and pop a page when clicked. This behavior can be overriden by specifying the `onClick` property.
+ *     It will find the parent `<ons-navigator>` element and pop a page when clicked. This behavior can be overriden by specifying the `onClick` property and calling event.preventDefault in its callback.
  *   [/en]
  *   [ja][/ja]
  * @codepen aHmGL
@@ -82,6 +82,8 @@ export default class BackButtonElement extends BaseElement {
 
     this._options = {};
     this._boundOnClick = this._onClick.bind(this);
+
+    util.defineListenerProperty(this, 'click');
   }
 
   _updateIcon(icon = util.findChild(this, '.back-button__icon')) {
@@ -164,16 +166,16 @@ export default class BackButtonElement extends BaseElement {
    *   [en]Used to override the default back button behavior.[/en]
    *   [ja][/ja]
    */
-  _onClick() {
-    if (this.onClick) {
-      this.onClick.apply(this);
-    }
-    else {
-      const navigator = util.findParent(this, 'ons-navigator');
-      if (navigator) {
-        navigator.popPage(this.options);
+
+  _onClick(event) {
+    setTimeout(() => {
+      if (!event.defaultPrevented) {
+        const navigator = util.findParent(this, 'ons-navigator');
+        if (navigator) {
+          navigator.popPage(this.options);
+        }
       }
-    }
+    });
   }
 
   connectedCallback() {
@@ -199,6 +201,7 @@ export default class BackButtonElement extends BaseElement {
 
   disconnectedCallback() {
     this.removeEventListener('click', this._boundOnClick, false);
+    util.disconnectListenerProperty(this, 'click');
   }
 
   show() {
