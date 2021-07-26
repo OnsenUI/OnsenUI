@@ -238,7 +238,7 @@ export default class PullHookElement extends BaseElement {
    * @property onAction
    * @type {Function}
    * @description
-   *   [en]This will be called in the `action` state if it exists. The function will be given a `done` callback as it's first argument.[/en]
+   *   [en]This will be called in the `action` state if it exists. The function will be given a `done` callback as its first argument.[/en]
    *   [ja][/ja]
    */
   get onAction() {
