@@ -73,6 +73,22 @@ export default class PullHookElement extends BaseElement {
    */
 
   /**
+   * @event pull
+   * @description
+   *   [en]Fired when the pull hook is pulled.[/en]
+   *   [ja][/ja]
+   * @param {Object} event
+   *   [en]Event object.[/en]
+   *   [ja]イベントオブジェクト。[/ja]
+   * @param {Object} event.ratio
+   *   [en]The pulled distance ratio (scroll / height).[/en]
+   *   [ja][/ja]
+   * @param {String} event.animationOptions
+   *   [en]The animation options object.[/en]
+   *   [ja][/ja]
+   */
+
+  /**
    * @attribute disabled
    * @description
    *   [en]If this attribute is set the "pull-to-refresh" functionality is disabled.[/en]
@@ -112,6 +128,8 @@ export default class PullHookElement extends BaseElement {
 
     this._setState(STATE_INITIAL, true);
     this._hide(); // Fix for transparent toolbar transitions
+
+    util.defineListenerProperty(this, 'pull');
   }
 
   _setStyle() {
@@ -241,16 +259,6 @@ export default class PullHookElement extends BaseElement {
    *   [en]Hook called whenever the user pulls the element. It gets the pulled distance ratio (scroll / height) and an animationOptions object as arguments.[/en]
    *   [ja][/ja]
    */
-  get onPull() {
-    return this._onPull;
-  }
-
-  set onPull(value) {
-    if (value && !(value instanceof Function)) {
-      throwType('onPull', 'function or null');
-    }
-    this._onPull = value;
-  }
 
   _finish() {
     this._setState(STATE_ACTION);
@@ -382,7 +390,7 @@ export default class PullHookElement extends BaseElement {
 
     this._currentTranslation = scroll;
     const opt = options.animate ? { duration: .3, timing: 'cubic-bezier(.1, .7, .1, 1)' } : {};
-    this._onPull && this._onPull((scroll / this.height).toFixed(2), opt);
+    util.triggerElementEvent(this, 'pull', { ratio: (scroll / this.height).toFixed(2), animationOptions: opt });
     const scrollElement =  this.hasAttribute('fixed-content') ? this : this._pageElement;
 
     animit(scrollElement)
@@ -438,6 +446,7 @@ export default class PullHookElement extends BaseElement {
   disconnectedCallback() {
     this._hide();
     this._setupListeners(false);
+    util.disconnectListenerProperty(this, 'pull');
   }
 
   static get observedAttributes() {
