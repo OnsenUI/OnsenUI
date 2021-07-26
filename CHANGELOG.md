@@ -20,6 +20,7 @@ dev
 
  * ons-tabbar: `swipe` event is now emitted when the tabbar swipes.
  * ons-carousel: `swipe` event is now emitted when the carousel swipes.
+ * ons-pull-hook: `pull` event is now emitted when the pull hook is pulled.
  * ons-tab: Calling event.preventDefault for click events can be used to prevent switching tab.
  * ons-back-button: Calling event.preventDefault for click events can be used to prevent navigator going back a page.
  * ons-speed-dial: Calling event.preventDefault for click events can be used to prevent speed dial opening/closing.
