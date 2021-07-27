@@ -1,6 +1,6 @@
 <template>
   <ons-page
-    :on-infinite-scroll.prop="infiniteScroll"
+    :on-infinite-scroll="infiniteScroll"
     :modifier="normalizedModifier"
   >
     <slot></slot>

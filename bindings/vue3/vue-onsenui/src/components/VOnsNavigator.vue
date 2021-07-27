@@ -1,5 +1,5 @@
 <template>
-  <ons-navigator @postpop.self="_checkSwipe" :options.prop="options">
+  <ons-navigator @postpop.self="_checkSwipe" :options="options">
     <component
       v-for="page in pageStack"
       :is="page"

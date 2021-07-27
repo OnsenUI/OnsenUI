@@ -1,7 +1,7 @@
 <template>
   <ons-pull-hook
-    :on-action.prop="action"
-    :on-pull.prop="onPull"
+    :on-action="action"
+    :on-pull="onPull"
   >
     <slot></slot>
   </ons-pull-hook>

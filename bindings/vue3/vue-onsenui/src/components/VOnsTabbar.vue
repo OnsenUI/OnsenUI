@@ -1,6 +1,6 @@
 <template>
   <ons-tabbar
-    :on-swipe.prop="onSwipe"
+    :on-swipe="onSwipe"
     :activeIndex="index"
     :modifier="normalizedModifier"
     @prechange.self="$nextTick(() => !$event.detail.canceled && $emit('update:index', $event.index))"

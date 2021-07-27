@@ -1,6 +1,6 @@
 <template>
   <ons-carousel
-    :on-swipe.prop="onSwipe"
+    :on-swipe="onSwipe"
     :initial-index="index"
     @postchange.self="$emit('update:index', $event.activeIndex)"
   >

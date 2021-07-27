@@ -1,5 +1,5 @@
 <template>
-  <ons-speed-dial :on-click.prop="action" v-on="handlers">
+  <ons-speed-dial :on-click="action" v-on="handlers">
     <slot></slot>
   </ons-speed-dial>
 </template>

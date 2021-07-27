@@ -1,5 +1,5 @@
 <template>
-  <ons-tab :active="coercedActive" :on-click.prop="action">
+  <ons-tab :active="coercedActive" :on-click="action">
   </ons-tab>
 </template>
 
