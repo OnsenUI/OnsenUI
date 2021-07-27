@@ -5,26 +5,16 @@ CHANGELOG
 dev
 ---
 
- ### Bug Fixes
-
- * ons-splitter-side: Stop creating new swipe reveals when connected if one already exists.
-
- ### New Features
-
- * ons-splitter-side: Added `swipeable` property.
- * ons-list-item: Added `expandable` attribute and property. ([#2896](https://github.com/OnsenUI/OnsenUI/issues/2896)).
-
  ### BREAKING CHANGES
 
  * ons-list-item: `expanded` class has been renamed to `list-item--expanded`.
- ### BREAKING CHANGES
-
  * ons-tab: Setting onClick no longers prevents default behaviour. `event.preventDefault` should be called in the onClick callback.
  * ons-back-button: Setting onClick no longers prevents default behaviour. `event.preventDefault` should be called in the onClick callback.
  * ons-speed-dial: Setting onClick no longers prevents default behaviour. `event.preventDefault` should be called in the onClick callback.
 
  ### Bug Fixes
 
+ * ons-splitter-side: Stop creating new swipe reveals when connected if one already exists.
  * core: DOMContentReady and deviceready event listeners are removed after being invoked once. ([#2886](https://github.com/OnsenUI/OnsenUI/pull/2886)).
  * ons-button: Allow form submission on submit key keypress. ([#2857](https://github.com/OnsenUI/OnsenUI/issues/2857)).
 
@@ -36,6 +26,8 @@ dev
  * ons-tab: Calling event.preventDefault for click events can be used to prevent switching tab.
  * ons-back-button: Calling event.preventDefault for click events can be used to prevent navigator going back a page.
  * ons-speed-dial: Calling event.preventDefault for click events can be used to prevent speed dial opening/closing.
+ * ons-splitter-side: Added `swipeable` property.
+ * ons-list-item: Added `expandable` attribute and property. ([#2896](https://github.com/OnsenUI/OnsenUI/issues/2896)).
 
 2.11.2
 ---
