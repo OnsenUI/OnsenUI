@@ -145,6 +145,8 @@ export default class TabElement extends BaseElement {
 
     this._pageLoader = defaultPageLoader;
     this._onClick = this._onClick.bind(this);
+
+    util.defineListenerProperty(this, 'click');
   }
 
   set pageLoader(loader) {
@@ -241,12 +243,12 @@ export default class TabElement extends BaseElement {
     return Array.prototype.indexOf.call(this.parentElement.children, this);
   }
 
-  _onClick() {
-    if (this.onClick instanceof Function) {
-      this.onClick();
-    } else {
-      this._tabbar.setActiveTab(this.index, { reject: false });
-    }
+  _onClick(event) {
+    setTimeout(() => {
+      if (!event.defaultPrevented) {
+        this._tabbar.setActiveTab(this.index, { reject: false });
+      }
+    });
   }
 
   setActive(active = true) {
@@ -298,6 +300,8 @@ export default class TabElement extends BaseElement {
       this._hasLoaded = false;
       this.loaded = null;
     }
+
+    util.disconnectListenerProperty(this, 'click');
   }
 
   connectedCallback() {

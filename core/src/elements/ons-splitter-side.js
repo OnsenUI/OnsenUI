@@ -240,9 +240,11 @@ export default class SplitterSideElement extends BaseElement {
    * @description
    *   [en]
    *     Specify the collapse behavior. Valid values are `"portrait"`, `"landscape"` or a media query.
-   *     The strings `"portrait"` and `"landscape"` means the view will collapse when device is in landscape or portrait orientation.
+   *     The string `"portrait"` means the view will collapse when the device is in portrait orientation.
+   *     The string `"landscape"` means the view will collapse when the device is in landscape orientation.
    *     If the value is a media query, the view will collapse when the media query resolves to `true`.
-   *     If the value is not defined, the view always be in `"collapse"` mode.
+   *     If the attribute is set, including as an empty string, the view will always be in `"collapse"` mode.
+   *     If the attribute is not set, the view will be in `"split"` mode.
    *   [/en]
    *   [ja]
    *     左側のページを非表示にする条件を指定します。portrait, landscape、width #pxもしくはメディアクエリの指定が可能です。

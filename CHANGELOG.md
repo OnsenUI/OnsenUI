@@ -17,6 +17,25 @@ dev
  ### BREAKING CHANGES
 
  * ons-list-item: `expanded` class has been renamed to `list-item--expanded`.
+ ### BREAKING CHANGES
+
+ * ons-tab: Setting onClick no longers prevents default behaviour. `event.preventDefault` should be called in the onClick callback.
+ * ons-back-button: Setting onClick no longers prevents default behaviour. `event.preventDefault` should be called in the onClick callback.
+ * ons-speed-dial: Setting onClick no longers prevents default behaviour. `event.preventDefault` should be called in the onClick callback.
+
+ ### Bug Fixes
+
+ * core: DOMContentReady and deviceready event listeners are removed after being invoked once. ([#2886](https://github.com/OnsenUI/OnsenUI/pull/2886)).
+ * ons-button: Allow form submission on submit key keypress. ([#2857](https://github.com/OnsenUI/OnsenUI/issues/2857)).
+
+ ### New Features
+
+ * ons-tabbar: `swipe` event is now emitted when the tabbar swipes.
+ * ons-carousel: `swipe` event is now emitted when the carousel swipes.
+ * ons-pull-hook: `pull` event is now emitted when the pull hook is pulled.
+ * ons-tab: Calling event.preventDefault for click events can be used to prevent switching tab.
+ * ons-back-button: Calling event.preventDefault for click events can be used to prevent navigator going back a page.
+ * ons-speed-dial: Calling event.preventDefault for click events can be used to prevent speed dial opening/closing.
 
 2.11.2
 ---

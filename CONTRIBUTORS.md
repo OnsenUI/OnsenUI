@@ -43,5 +43,6 @@ List of code contributors (in no particular order):
 * [Jan Vincent Liwanag](https://github.com/jvliwanag)
 * [Kenji Kawanobe](https://github.com/kenji7157)
 * [Stan Janssen](https://github.com/stonjohnsson)
+* [Alexander S.](https://github.com/Sysix)
 
 Please add yourself if you're not on this list but feel that you should be.

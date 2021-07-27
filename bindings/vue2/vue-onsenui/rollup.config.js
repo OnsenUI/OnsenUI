@@ -5,7 +5,7 @@ import dateformat from 'dateformat';
 
 // Rollup plugins
 import babel from 'rollup-plugin-babel';
-import eslint from 'rollup-plugin-eslint';
+import { eslint } from 'rollup-plugin-eslint';
 import resolve from 'rollup-plugin-node-resolve';
 import commonjs from 'rollup-plugin-commonjs';
 import replace from 'rollup-plugin-replace';
@@ -41,10 +41,10 @@ const builds = [
     },
     plugins: [
       eslint({
-        include: [
-          'src/**/*.js',
-          'src/**/*.vue',
-        ],
+        exclude: [
+          /vue&type=/,
+          /node_modules/
+        ]
       }),
       resolve({ extensions: ['.js', '.vue'] }),
       replace({

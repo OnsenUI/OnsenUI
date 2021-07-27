@@ -58,6 +58,10 @@ export default class BaseButtonElement extends BaseElement {
     return util.findChild(this, 'ons-icon');
   }
 
+  get _hiddenButton() {
+    return util.findChild(this, 'button');
+  }
+
   _compile() {
     autoStyle.prepare(this);
 
@@ -68,6 +72,12 @@ export default class BaseButtonElement extends BaseElement {
       const icon = util.createElement(`<ons-icon icon="${this.getAttribute('icon')}"></ons-icon>`);
       icon.classList.add(this._defaultClassName.replace('button', 'icon'));
       this.insertBefore(icon, this.firstChild);
+    }
+
+    // Add hidden button to allow form submission
+    if (!this._hiddenButton) {
+      const button = util.createElement('<button hidden></button>');
+      this.appendChild(button);
     }
 
     this._updateRipple();
