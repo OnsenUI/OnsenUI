@@ -76,20 +76,20 @@ jobs:
           command: npm run build
 
       # bindings/angular2
-      - restore_cache:
-          keys:
-            - v1-angular2-cache-{{ .Branch }}-{{ checksum "bindings/angular2/yarn.lock" }}
-            - v1-angular2-cache-{{ .Branch }}-
-            - v1-angular2-cache-
-      - run:
-          name: Install Angular 2 dependencies
-          command: |
-            cd bindings/angular2
-            yarn install --pure-lockfile
-      - save_cache:
-          key: v1-angular2-cache-{{ .Branch }}-{{ checksum "bindings/angular2/yarn.lock" }}
-          paths:
-            - ./bindings/angular2/node_modules
+      # - restore_cache:
+      #     keys:
+      #       - v1-angular2-cache-{{ .Branch }}-{{ checksum "bindings/angular2/yarn.lock" }}
+      #       - v1-angular2-cache-{{ .Branch }}-
+      #       - v1-angular2-cache-
+      # - run:
+      #     name: Install Angular 2 dependencies
+      #     command: |
+      #       cd bindings/angular2
+      #       yarn install --pure-lockfile
+      # - save_cache:
+      #     key: v1-angular2-cache-{{ .Branch }}-{{ checksum "bindings/angular2/yarn.lock" }}
+      #     paths:
+      #       - ./bindings/angular2/node_modules
 
       # bindings/react
       - restore_cache:
@@ -145,9 +145,9 @@ jobs:
           command: npm run test
 
       # - run: cd bindings/angular1; npm test    # TODO: make tests work again
-      - run: cd bindings/angular2; npm test
-      - run: cd bindings/react; npm test
+      #- run: cd bindings/angular2; npm test
       - run: cd bindings/vue; npm test
+      #- run: cd bindings/react; npm test
       - run:
           name: Save test results
           command: |
