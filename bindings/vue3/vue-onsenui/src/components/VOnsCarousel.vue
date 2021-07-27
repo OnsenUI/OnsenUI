@@ -1,6 +1,5 @@
 <template>
   <ons-carousel
-    :on-swipe.prop="onSwipe"
     :initial-index="index"
     @postchange.self="$emit('update:index', $event.activeIndex)"
   >
@@ -24,9 +23,6 @@
     props: {
       index: {
         type: Number
-      },
-      onSwipe: {
-        type: Function
       }
     },
     emits: ['update:index'],

@@ -1,5 +1,5 @@
 <template>
-  <ons-speed-dial :on-click.prop="action" v-on="handlers">
+  <ons-speed-dial v-on="handlers">
     <slot></slot>
   </ons-speed-dial>
 </template>
@@ -14,7 +14,7 @@
     name,
     mixins: [deriveEvents(name), hidable],
 
-    emits: ['update:open', 'click'],
+    emits: ['update:open'],
 
     props: {
       open: {
@@ -33,14 +33,6 @@
     },
 
     methods: {
-      action() {
-        let runDefault = true;
-        this.$emit('click', { preventDefault: () => runDefault = false });
-
-        if (runDefault) {
-          this.$el.toggleItems();
-        }
-      },
       _shouldUpdate() {
         return this.open !== undefined && this.open !== this.$el.isOpen();
       },

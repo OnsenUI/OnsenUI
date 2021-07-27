@@ -1,5 +1,5 @@
 <template>
-  <ons-back-button :on-click.prop="action">
+  <ons-back-button @click.prevent="action">
     <slot></slot>
   </ons-back-button>
 </template>

@@ -1,6 +1,5 @@
 <template>
   <ons-tabbar
-    :on-swipe.prop="onSwipe"
     :activeIndex="index"
     :modifier="normalizedModifier"
     @prechange.self="$nextTick(() => !$event.detail.canceled && $emit('update:index', $event.index))"
@@ -42,9 +41,6 @@
         validator(value) {
           return value.every(tab => ['icon', 'label', 'page'].some(prop => !!Object.getOwnPropertyDescriptor(tab, prop)));
         }
-      },
-      onSwipe: {
-        type: Function
       },
       tabbarStyle: {
         type: Object,

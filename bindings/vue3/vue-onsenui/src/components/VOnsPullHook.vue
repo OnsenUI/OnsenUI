@@ -1,8 +1,5 @@
 <template>
-  <ons-pull-hook
-    :on-action.prop="action"
-    :on-pull.prop="onPull"
-  >
+  <ons-pull-hook>
     <slot></slot>
   </ons-pull-hook>
 </template>
@@ -20,9 +17,18 @@
     props: {
       action: {
         type: Function
-      },
-      onPull: {
-        type: Function
+      }
+    },
+
+    mounted() {
+      this.$el.onAction = this.action;
+    },
+
+    watch: {
+      action() {
+        if (this.action !== this.$el.onAction) {
+          this.$el.onAction = this.action;
+        }
       }
     }
   };
