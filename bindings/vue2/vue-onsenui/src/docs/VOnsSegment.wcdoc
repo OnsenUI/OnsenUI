@@ -1,0 +1,21 @@
+/**
+ * @element ons-segment
+ */
+
+/**
+ * @attribute index
+ * @type {Number}
+ * @description
+ *   [en]If exists, specifies the current active button's index. It is also used as the initially active button index. Must be modified on `update:index` event.[/en]
+ *   [ja][/ja]
+ */
+
+/**
+ * @event update:index
+ * @description
+ *   [en]Fired right after the active button changes. Useful to update `index` prop.[/en]
+ *   [ja][/ja]
+ * @param {Number} event
+ *   [en]New value for `index` prop.[/en]
+ *   [ja][/ja]
+ */
