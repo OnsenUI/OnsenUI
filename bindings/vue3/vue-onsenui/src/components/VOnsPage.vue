@@ -1,6 +1,5 @@
 <template>
   <ons-page
-    :on-infinite-scroll="infiniteScroll"
     :modifier="normalizedModifier"
   >
     <slot></slot>
@@ -20,6 +19,18 @@
     props: {
       infiniteScroll: {
         type: Function
+      }
+    },
+
+    mounted() {
+      this.$el.onInfiniteScroll = this.infiniteScroll;
+    },
+
+    watch: {
+      infiniteScroll() {
+        if (this.$el.onInfiniteScroll !== this.infiniteScroll) {
+          this.$el.onInfiniteScroll = this.infiniteScroll;
+        }
       }
     }
   };
