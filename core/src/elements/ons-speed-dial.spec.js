@@ -70,8 +70,8 @@ describe('OnsSpeedDialElement', () => {
   describe('#_onClick()', () => {
     it('should call #toggleItems()', () => {
       const spy = chai.spy.on(speedDial, 'toggleItems');
-      return speedDial._onClick()
-      .then(() => expect(spy).to.have.been.called.once);
+      speedDial._onClick();
+      setTimeout(() => expect(spy).to.have.been.called.once);
     });
   });
 
