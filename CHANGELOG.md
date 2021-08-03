@@ -29,6 +29,10 @@ dev
  * ons-splitter-side: Added `swipeable` property.
  * ons-list-item: Added `expandable` attribute and property. ([#2896](https://github.com/OnsenUI/OnsenUI/issues/2896)).
 
+ ### Misc
+
+ * Support for bower has been dropped. ([#2924](https://github.com/OnsenUI/OnsenUI/issues/2924)).
+
 2.11.2
 ---
 
