@@ -626,7 +626,6 @@ const distFiles = done => {
     '!build/docs/',
     '!build/onsenui.zip',
     '!build/package.json',
-    'bower.json',
     'package.json',
     'README.md',
     'CHANGELOG.md',

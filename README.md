@@ -50,7 +50,7 @@ We have several resources to help you get started creating hybrid apps and PWAs 
 ## Get Onsen UI
 
 ### __Download the latest released version__
-We have a [distribution repository](https://github.com/OnsenUI/OnsenUI-dist/releases) with changelog. Onsen UI is also available in __npm__, __bower__ and __jspm__. Example:
+We have a [distribution repository](https://github.com/OnsenUI/OnsenUI-dist/releases) with changelog. Onsen UI is also available in __npm__ and __jspm__. Example:
 
 ```bash
 npm install onsenui
