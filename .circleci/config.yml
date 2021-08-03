@@ -10,6 +10,9 @@ jobs:
     steps:
       - checkout
       - run:
+          name: Install npm
+          command: sudo npm install -g  npm@latest
+      - run:
           name: Print system information
           command: |
             echo "node $(node -v)"
