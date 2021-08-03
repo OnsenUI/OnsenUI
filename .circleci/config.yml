@@ -144,9 +144,9 @@ jobs:
           name: Run OnsenUI Tests
           command: npm run test
 
-      # - run: cd bindings/angular1; npm test    # TODO: make tests work again
+      #- run: cd bindings/angular1; npm test    # TODO: make tests work again
       #- run: cd bindings/angular2; npm test
-      - run: cd bindings/vue; npm test
+      #- run: cd bindings/vue; npm test
       #- run: cd bindings/react; npm test
       - run:
           name: Save test results
