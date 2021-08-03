@@ -9,12 +9,11 @@ If you are a user of this binding, please refer to [the official guide of this b
 How to manually build this project
 ----------------------------------
 
-All the following commands must be executed in `bindings/angular2` directory.  
+All the following commands must be executed in `bindings/angular2` directory.
 Also, **you need to build the core before building this binding.**
 
-    yarn install
-
-This command requires you to [install yarn](https://yarnpkg.com/en/docs/install) if you haven't already.
+    npm install
+    npm run build
 
 
 Running Examples
@@ -36,6 +35,6 @@ To run a single test or a group of tests use the `--specs` parameter and provide
 
 ## How to build transpiled files to publish
 
-    yarn run build-dist
+    npm run build-dist
 
 Then transpiled files are generated in `dist` directory.
