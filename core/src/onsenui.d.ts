@@ -894,6 +894,10 @@ declare namespace ons {
      * @description Hook called whenever the user slides the splitter.
      **/
     onSwipe?: Function;
+    /**
+     * @description true if the splitter side element is swipeable.
+     **/
+    swipeable: boolean;
   }
 
   interface OnsLazyRepeatElement extends HTMLElement {
@@ -1142,6 +1146,10 @@ declare namespace ons {
      * @description Hide the expandable content if element is expandable
      */
     hideExpansion(): void;
+    /**
+     * @description For expandable list items, specifies whether the expandable content is expanded or not.
+     **/
+    expanded: boolean;
   }
 
 }

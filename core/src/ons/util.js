@@ -565,6 +565,24 @@ util.checkMissingImport = (...elementNames) => {
 }
 
 /**
+ * On a given object, defines a boolean property that reflects an attribute of the same name.
+ */
+util.defineBooleanProperty = (object, propertyName) => {
+  Object.defineProperty(object, propertyName, {
+    get() {
+      return this.hasAttribute(propertyName);
+    },
+    set(value) {
+      if (value) {
+        this.setAttribute(propertyName, '');
+      } else {
+        this.removeAttribute(propertyName);
+      }
+    }
+  });
+}
+
+/**
  * Makes a property for a listener e.g. onClick
  */
 util.defineListenerProperty = (object, eventName) => {

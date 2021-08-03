@@ -304,8 +304,18 @@ export default class SplitterSideElement extends BaseElement {
    *   [ja]collapseモード時にスワイプ操作を有効にする場合に指定します。[/ja]
    */
 
+  /**
+   * @property swipeable
+   * @type {Boolean}
+   * @description
+   *   [en]Whether to enable swipe interaction on collapse mode.[/en]
+   *   [ja]collapseモード時にスワイプ操作を有効にする場合に指定します。[/ja]
+   */
+
   constructor() {
     super();
+
+    util.defineBooleanProperty(this, 'swipeable');
 
     this._page = null;
     this._state = CLOSED_STATE;
@@ -339,43 +349,45 @@ export default class SplitterSideElement extends BaseElement {
       util.throw('Parent must be an ons-splitter element');
     }
 
-    this._swipe = new SwipeReveal({
-      element: this,
-      elementHandler: this.parentElement,
-      swipeMax: () => {
-        this._onSwipe && this._onSwipe(1, this._animationOpt);
-        this.open();
-      },
-      swipeMid: (distance, width) => {
-        this._onSwipe && this._onSwipe(distance/width);
-        this._animator.translate(distance);
-      },
-      swipeMin: () => {
-        this._onSwipe && this._onSwipe(0, this._animationOpt);
-        this.close();
-      },
-      getThreshold: () => Math.max(0, Math.min(1, parseFloat(this.getAttribute('open-threshold')) || 0.3)),
-      getSide: () => this.side,
-      isInitialState: () => {
-        const closed = this._state === CLOSED_STATE;
-        this._state = CHANGING_STATE;
-        return closed;
-      },
-      ignoreSwipe: (event, distance) => {
-        const isOpen = this.isOpen;
-        const validDrag = d => this.side === 'left'
-          ? ((d === 'left' && isOpen) || (d === 'right' && !isOpen))
-          : ((d === 'left' && !isOpen) || (d === 'right' && isOpen));
+    if (!this._swipe) {
+      this._swipe = new SwipeReveal({
+        element: this,
+        elementHandler: this.parentElement,
+        swipeMax: () => {
+          this._onSwipe && this._onSwipe(1, this._animationOpt);
+          this.open();
+        },
+        swipeMid: (distance, width) => {
+          this._onSwipe && this._onSwipe(distance/width);
+          this._animator.translate(distance);
+        },
+        swipeMin: () => {
+          this._onSwipe && this._onSwipe(0, this._animationOpt);
+          this.close();
+        },
+        getThreshold: () => Math.max(0, Math.min(1, parseFloat(this.getAttribute('open-threshold')) || 0.3)),
+        getSide: () => this.side,
+        isInitialState: () => {
+          const closed = this._state === CLOSED_STATE;
+          this._state = CHANGING_STATE;
+          return closed;
+        },
+        ignoreSwipe: (event, distance) => {
+          const isOpen = this.isOpen;
+          const validDrag = d => this.side === 'left'
+            ? ((d === 'left' && isOpen) || (d === 'right' && !isOpen))
+            : ((d === 'left' && !isOpen) || (d === 'right' && isOpen));
 
-        const area = Math.max(0, parseInt(this.getAttribute('swipe-target-width'), 10) || 0);
+          const area = Math.max(0, parseInt(this.getAttribute('swipe-target-width'), 10) || 0);
 
-        return this._mode === SPLIT_MODE || this._lock.isLocked() || this._isOtherSideOpen()
-          || !validDrag(event.gesture.direction)
-          || (!isOpen && area !== 0 && distance > area);
-      }
-    });
+          return this._mode === SPLIT_MODE || this._lock.isLocked() || this._isOtherSideOpen()
+            || !validDrag(event.gesture.direction)
+            || (!isOpen && area !== 0 && distance > area);
+        }
+      });
 
-    this.attributeChangedCallback('swipeable');
+      this.attributeChangedCallback('swipeable');
+    }
 
     contentReady(this, () => {
       this.constructor.observedAttributes.forEach(attr => this.attributeChangedCallback(attr, null, this.getAttribute(attr)));
@@ -384,6 +396,14 @@ export default class SplitterSideElement extends BaseElement {
 
   get side() {
     return this.getAttribute('side') === 'right' ? 'right' : 'left';
+  }
+
+  set side(value) {
+    if (value) {
+      this.setAttribute('side', value);
+    } else {
+      tihs.removeAttribute('side');
+    }
   }
 
   disconnectedCallback() {

@@ -220,17 +220,16 @@ describe('OnsListItemElement', () => {
   });
 
   describe('toggleExpansion', () => {
-    it('calls hideExpansion when already expanded', () => {
-      const spy = chai.spy.on(listItem, 'hideExpansion');
-      listItem.classList.add('expanded');
+    it('sets expanded to false when already expanded', () => {
+      listItem.expanded = true;
       listItem.toggleExpansion();
-      expect(spy).to.have.been.called.once;
+      expect(listItem.expanded).to.be.false;
     });
 
-    it('calls showExpansion when not expanded', () => {
-      const spy = chai.spy.on(listItem, 'showExpansion');
+    it('sets expanded to true when not expanded', () => {
+      listItem.expanded = false;
       listItem.toggleExpansion();
-      expect(spy).to.have.been.called.once;
+      expect(listItem.expanded).to.be.true;
     });
   });
 
@@ -238,19 +237,19 @@ describe('OnsListItemElement', () => {
     let animatorMock;
 
     beforeEach(() => {
-      animatorMock = chai.spy.interface('animatorMock', ['showExpansion']);
+      animatorMock = chai.spy.interface('animatorMock', ['_animateExpansion']);
       chai.spy.on(listItem._animatorFactory, 'newAnimator', () => animatorMock);
     });
 
-    it('calls animator.showExpansion when expandable is set', () => {
+    it('calls animator._animateExpansion when expandable is set', () => {
       listItem.setAttribute('expandable');
       listItem.showExpansion();
-      expect(animatorMock.showExpansion).to.have.been.called.once;
+      expect(animatorMock._animateExpansion).to.have.been.called.once;
     });
 
-    it('does not call animator.showExpansion when expandable is not set', () => {
+    it('does not call animator._animateExpansion when expandable is not set', () => {
       listItem.showExpansion();
-      expect(animatorMock.showExpansion).to.not.have.been.called;
+      expect(animatorMock._animateExpansion).to.not.have.been.called;
     });
   });
 
@@ -258,19 +257,41 @@ describe('OnsListItemElement', () => {
     let animatorMock;
 
     beforeEach(() => {
-      animatorMock = chai.spy.interface('animatorMock', ['hideExpansion']);
+      listItem = ons._util.createElement('<ons-list-item expanded>content<div class="expandable-content">expanded</div></ons-list-item>');
+
+      animatorMock = chai.spy.interface('animatorMock', ['_animateExpansion']);
       chai.spy.on(listItem._animatorFactory, 'newAnimator', () => animatorMock);
     });
 
-    it('calls animator.hideExpansion when expandable is set', () => {
+    it('calls animator._animateExpansion when expandable is set', () => {
       listItem.setAttribute('expandable');
       listItem.hideExpansion();
-      expect(animatorMock.hideExpansion).to.have.been.called.once;
+      expect(animatorMock._animateExpansion).to.have.been.called.once;
     });
 
-    it('does not call animator.hideExpansion when expandable is not set', () => {
+    it('does not call animator._animateExpansion when expandable is not set', () => {
       listItem.hideExpansion();
-      expect(animatorMock.hideExpansion).to.not.have.been.called;
+      expect(animatorMock._animateExpansion).to.not.have.been.called;
+    });
+  });
+
+  describe('attribute expanded', () => {
+    let animatorMock;
+
+    beforeEach(() => {
+      animatorMock = chai.spy.interface('animatorMock', ['_animateExpansion']);
+      chai.spy.on(listItem._animatorFactory, 'newAnimator', () => animatorMock);
+    });
+
+    it('does not call animator._animateExpansion when expanded is set at startup', () => {
+      listItem = ons._util.createElement('<ons-list-item expandable expanded>content<div class="expandable-content">expanded</div></ons-list-item>');
+      expect(animatorMock._animateExpansion).to.not.have.been.called;
+    });
+
+    it('calls animator_animateExpansion when expanded is set after startup', () => {
+      listItem = ons._util.createElement('<ons-list-item expandable>content<div class="expandable-content">expanded</div></ons-list-item>');
+      listItem.setAttribute('expanded', '');
+      expect(animatorMock._animateExpansion).to.have.been.called;
     });
   });
 });

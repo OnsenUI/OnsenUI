@@ -143,6 +143,22 @@ export default class ListItemElement extends BaseElement {
    */
 
   /**
+   * @attribute expanded
+   * @type {Boolean}
+   * @description
+   *   [en]For expandable list items, specifies whether the expandable content is expanded or not.[/en]
+   *   [ja][/ja]
+   */
+
+  /**
+   * @property expanded
+   * @type {Boolean}
+   * @description
+   *   [en]For expandable list items, specifies whether the expandable content is expanded or not.[/en]
+   *   [ja][/ja]
+   */
+
+  /**
    * @attribute animation
    * @type {String}
    * @default default
@@ -153,6 +169,8 @@ export default class ListItemElement extends BaseElement {
 
   constructor() {
     super();
+
+    util.defineBooleanProperty(this, 'expanded');
 
     this._animatorFactory = this._updateAnimatorFactory();
     this.toggleExpansion = this.toggleExpansion.bind(this);
@@ -251,6 +269,12 @@ export default class ListItemElement extends BaseElement {
         chevron.classList.add('list-item__expand-chevron');
         right.appendChild(chevron);
       }
+
+      // The case where the list item should already start expanded.
+      // Adding the class early stops the animation from running at startup.
+      if (this.expanded) {
+        this.classList.add('list-item--expanded');
+      }
     } else {
       top = this;
     }
@@ -284,16 +308,7 @@ export default class ListItemElement extends BaseElement {
    *   [ja][/ja]
    */
   showExpansion() {
-    if (this.hasAttribute('expandable') && !this._expanding) {
-      this.expanded = true;
-      this._expanding = true;
-
-      const animator = this._animatorFactory.newAnimator();
-      animator.showExpansion(this, () => {
-        this.classList.add('expanded');
-        this._expanding = false;
-      });
-    }
+    this.expanded = true;
   }
 
   /**
@@ -304,21 +319,35 @@ export default class ListItemElement extends BaseElement {
    *   [ja][/ja]
    */
   hideExpansion() {
-    if (this.hasAttribute('expandable') && !this._expanding) {
-      this.expanded = false;
-      this._expanding = true;
-
-      const animator = this._animatorFactory.newAnimator();
-      animator.hideExpansion(this, () => {
-        this.classList.remove('expanded');
-        this._expanding = false;
-      });
-    }
+    this.expanded = false;
   }
 
   toggleExpansion() {
-    this.classList.contains('expanded') ? this.hideExpansion() : this.showExpansion();
+    this.expanded = !this.expanded;
+  }
+
+  _animateExpansion() {
+    // Stops the animation from running in the case where the list item should start already expanded
+    const expandedAtStartup = this.expanded && this.classList.contains('list-item--expanded');
+
+    if (!this.hasAttribute('expandable') || this._expanding || expandedAtStartup) {
+      return;
+    }
+
+    this._expanding = true;
+
     this.dispatchEvent(new Event('expansion'));
+
+    const animator = this._animatorFactory.newAnimator();
+    animator._animateExpansion(this, this.expanded, () => {
+      this._expanding = false;
+
+      if (this.expanded) {
+        this.classList.add('list-item--expanded');
+      } else {
+        this.classList.remove('list-item--expanded');
+      }
+    });
   }
 
   _updateAnimatorFactory() {
@@ -331,7 +360,7 @@ export default class ListItemElement extends BaseElement {
   }
 
   static get observedAttributes() {
-    return ['modifier', 'class', 'ripple', 'animation'];
+    return ['modifier', 'class', 'ripple', 'animation', 'expanded'];
   }
 
   get expandableContent() {
@@ -355,6 +384,9 @@ export default class ListItemElement extends BaseElement {
         break;
       case 'animation':
         this._animatorFactory = this._updateAnimatorFactory();
+        break;
+      case 'expanded':
+        this._animateExpansion();
         break;
     }
   }

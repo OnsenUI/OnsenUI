@@ -1,0 +1,11 @@
+/**
+ * @element ons-list-item
+ */
+
+/**
+ * @attribute expanded
+ * @type {Boolean}
+ * @description
+ *   [en]For expandable list items, specifies whether the expandable content is expanded or not.[/en]
+ *   [ja][/ja]
+ */
