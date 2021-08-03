@@ -80,7 +80,8 @@ describe('OnsBackButtonElement', () => {
 
         nav.pushPage('page2').then(function(page) {
           const element = nav.querySelector('ons-back-button');
-          nav.querySelector('ons-back-button')._onClick();
+          const event = new Event('click');
+          nav.querySelector('ons-back-button')._onClick(event);
         });
       });
 
@@ -89,11 +90,11 @@ describe('OnsBackButtonElement', () => {
   });
 
   describe('#onClick', () => {
-    it ('overrides the default click handler', () => {
+    it('prevents the default click handler when event.preventDefault is called', () => {
       const backButton = ons._util.createElement('<ons-back-button></ons-back-button>');
-      backButton.onClick = function () {};
+      backButton.onClick = function (event) { event.preventDefault() };
       const spy = chai.spy.on(backButton, 'onClick');
-      backButton._onClick();
+      backButton.dispatchEvent(new Event('click'));
       expect(spy).to.have.been.called.once;
     });
   });
