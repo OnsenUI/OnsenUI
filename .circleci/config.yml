@@ -112,22 +112,22 @@ jobs:
           paths:
             - ./bindings/react/node_modules
 
-      # bindings/vue2
-      - restore_cache:
-          keys:
-            - v1-vue2-cache-{{ .Branch }}-{{ checksum "bindings/vue2/package-lock.json" }}
-            - v1-vue2-cache-{{ .Branch }}-
-            - v1-vue2-cache-
-      - run:
-          name: Install Vue 2 dependencies and build vue-onsenui for Vue 2
-          command: |
-            cd bindings/vue2
-            npm ci
-            npm run build
-      - save_cache:
-          key: v1-vue2-cache-{{ .Branch }}-{{ checksum "bindings/vue2/package-lock.json" }}
-          paths:
-            - ./bindings/vue2/node_modules
+      ## bindings/vue2
+      #- restore_cache:
+      #    keys:
+      #      - v1-vue2-cache-{{ .Branch }}-{{ checksum "bindings/vue2/package-lock.json" }}
+      #      - v1-vue2-cache-{{ .Branch }}-
+      #      - v1-vue2-cache-
+      #- run:
+      #    name: Install Vue 2 dependencies and build vue-onsenui for Vue 2
+      #    command: |
+      #      cd bindings/vue2
+      #      npm ci
+      #      npm run build
+      #- save_cache:
+      #    key: v1-vue2-cache-{{ .Branch }}-{{ checksum "bindings/vue2/package-lock.json" }}
+      #    paths:
+      #      - ./bindings/vue2/node_modules
 
       # bindings/vue3
       - restore_cache:
