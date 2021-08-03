@@ -80,7 +80,7 @@ function cssnext() {
       root: __dirname + '/src/components/'
     }),
     cssnextPlugin({
-      browsers: babelrc.presets[0][1].targets.browsers,
+      browsers: corePkg.browserslist,
     }),
     reporter({
       clearAllMessages: true,

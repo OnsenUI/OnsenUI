@@ -5,7 +5,7 @@
   "author": "Onsen UI Team <team@monaca.io>",
   "main": "dist/angularjs-onsenui.js",
   "scripts": {
-    "dev": "cd ../../ && gulp serve --angular",
+    "serve": "cd ../../ && gulp serve --angular",
     "build": "gulp build",
     "prepare": "npm run build",
     "test": "gulp e2e-test"

@@ -39,7 +39,7 @@ There is also a stylesheet that is specific to the custom elements called `onsen
 Development Setup
 -----------------
 
-You will need a recent version of [Node.js](https://nodejs.org/) and [Yarn](https://yarnpkg.com/) before continuing.
+You will need a recent version of [Node.js](https://nodejs.org/) before continuing.
 
 Clone this repository and run the following commands to build the project:
 
@@ -51,13 +51,13 @@ The files will be built and copied into **OnsenUI/build** folder.
 
 If you want to work with some bindings, like `vue`, you need to run the following commands:
 
-    cd bindings/vue
-    yarn install
+    cd bindings/vue3
+    npm install
+    npm run build
 
 It is also possible to serve the files for development and running examples:
 
-    yarn dev
-    gulp serve --css --core --angular1 --vue # Or any combination
+    npm run serve
 
 * Then navigate your browser to [http://0.0.0.0:3000/examples/index.html](http://0.0.0.0:3000/examples/index.html)
 
@@ -145,7 +145,7 @@ Once this is all set up, follow these steps to modify the documentation.
  1. `Onsen UI`: Modify the documentation comments in the relevant JS file
  2. `Onsen UI`: Run `gulp build-docs`
  3. If you are changing the React docs, there are extra steps. Otherwise, skip to step 4.
-	- `Onsen UI`: Build the React Docs: `cd bindings/react && yarn install && yarn run gen-docs`
+	- `Onsen UI`: Build the React Docs: `cd bindings/react && npm install && npm run gen-docs`
 	- `onsen.io`: Delete the React doc cache, if it exists: `rm -r .reactdoc`
  4. `onsen.io`: Run `gulp serve --lang en`
 
@@ -188,7 +188,7 @@ Then, on GitHub, create new releases for `OnsenUI` and `OnsenUI-dist`.
  - On the New Release pages (linked below), _tag version_ and _Release title_ should both be the version number (e.g. `2.10.2`). Under _Describe this release_, copy the section for this release from `CHANGELOG.md`. Click _Publish Release_.
  - OnsenUI: https://github.com/OnsenUI/OnsenUI/releases/new
  - OnsenUI-dist: https://github.com/OnsenUI/OnsenUI-dist/releases/new
- 
+
 Then update the Onsen UI website:
  - Merge **master** into the **onsen.io** branch. These should now be identical.
  - Run a build of the onsen.io repository on Circle CI.
