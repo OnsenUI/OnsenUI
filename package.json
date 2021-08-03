@@ -131,7 +131,6 @@
     "ncp": "^2.0.0",
     "postcss": "^7.0.35",
     "postcss-cli": "^7.1.2",
-    "puppeteer": "^10.1.0",
     "rimraf": "^3.0.2",
     "rollup": "^0.51.8",
     "rollup-plugin-babel": "^3.0.7",

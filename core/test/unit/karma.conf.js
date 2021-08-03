@@ -1,8 +1,6 @@
 // Karma configuration
 // Generated on Thu Apr 09 2015 15:16:41 GMT+0900 (JST)
 
-process.env.CHROME_BIN = require('puppeteer').executablePath()
-
 var babelrc = require('../../../package.json').babel;
 babelrc.babelrc = babelrc.presets[0][1].modules = false;
 babelrc.plugins = ['external-helpers'];
