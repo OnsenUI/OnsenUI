@@ -14,11 +14,10 @@ jobs:
           command: |
             echo "node $(node -v)"
             echo "npm v$(npm --version)"
-            echo "Yarn v$(yarn --version)"
             echo "$(google-chrome --version)"
       - run:
           name: Install coveralls and gulp globally
-          command: sudo yarn global add coveralls gulp
+          command: sudo npm install -g  add coveralls gulp
       - run:
           name: Install rsync
           command: sudo apt install -y rsync
@@ -26,16 +25,16 @@ jobs:
       # css-components
       - restore_cache:
           keys:
-            - v1-css-components-cache-{{ .Branch }}-{{ checksum "css-components/yarn.lock" }}
+            - v1-css-components-cache-{{ .Branch }}-{{ checksum "css-components/package-lock.json" }}
             - v1-css-components-cache-{{ .Branch }}
             - v1-css-components-cache-
       - run:
           name: Install css-components dependencies
           command: |
             cd css-components
-            yarn install --pure-lockfile
+            npm ci
       - save_cache:
-          key: v1-css-components-cache-{{ .Branch }}-{{ checksum "css-components/yarn.lock" }}
+          key: v1-css-components-cache-{{ .Branch }}-{{ checksum "css-components/package-lock.json" }}
           paths:
             - ./css-components/node_modules
 
@@ -57,16 +56,17 @@ jobs:
       # TODO: For now, needs to be before the core build. After 2.11.0, this should be moved below it.
       - restore_cache:
           keys:
-            - v1-angular1-cache-{{ .Branch }}-{{ checksum "bindings/angular1/yarn.lock" }}
+            - v1-angular1-cache-{{ .Branch }}-{{ checksum "bindings/angular1/package-lock.json" }}
             - v1-angular1-cache-{{ .Branch }}-
             - v1-angular1-cache-
       - run:
-          name: Install AngularJS dependencies
+          name: Install AngularJS dependencies and build anglarjs-onsenui
           command: |
             cd bindings/angular1
-            yarn install --pure-lockfile
+            npm ci
+            npm run build
       - save_cache:
-          key: v1-angular1-cache-{{ .Branch }}-{{ checksum "bindings/angular1/yarn.lock" }}
+          key: v1-angular1-cache-{{ .Branch }}-{{ checksum "bindings/angular1/package-lock.json" }}
           paths:
             - ./bindings/angular1/node_modules
 
@@ -78,32 +78,34 @@ jobs:
       # bindings/angular2
       - restore_cache:
           keys:
-            - v1-angular2-cache-{{ .Branch }}-{{ checksum "bindings/angular2/yarn.lock" }}
+            - v1-angular2-cache-{{ .Branch }}-{{ checksum "bindings/angular2/package-lock.json" }}
             - v1-angular2-cache-{{ .Branch }}-
             - v1-angular2-cache-
       - run:
-          name: Install Angular 2 dependencies
+          name: Install Angular 2 dependencies and build ngx-onsenui
           command: |
             cd bindings/angular2
-            yarn install --pure-lockfile
+            npm ci
+            npm run build-dist
       - save_cache:
-          key: v1-angular2-cache-{{ .Branch }}-{{ checksum "bindings/angular2/yarn.lock" }}
+          key: v1-angular2-cache-{{ .Branch }}-{{ checksum "bindings/angular2/package-lock.json" }}
           paths:
             - ./bindings/angular2/node_modules
 
       # bindings/react
       - restore_cache:
           keys:
-            - v1-react-cache-{{ .Branch }}-{{ checksum "bindings/react/yarn.lock" }}
+            - v1-react-cache-{{ .Branch }}-{{ checksum "bindings/react/package-lock.json" }}
             - v1-react-cache-{{ .Branch }}-
             - v1-react-cache-
       - run:
-          name: Install React dependencies
+          name: Install React dependencies and build react-onsenui
           command: |
             cd bindings/react
-            yarn install --pure-lockfile
+            npm ci
+            npm run build
       - save_cache:
-          key: v1-react-cache-{{ .Branch }}-{{ checksum "bindings/react/yarn.lock" }}
+          key: v1-react-cache-{{ .Branch }}-{{ checksum "bindings/react/package-lock.json" }}
           paths:
             - ./bindings/react/node_modules
 
@@ -114,10 +116,11 @@ jobs:
             - v1-vue2-cache-{{ .Branch }}-
             - v1-vue2-cache-
       - run:
-          name: Install Vue 2 dependencies
+          name: Install Vue 2 dependencies and build vue-onsenui for Vue 2
           command: |
             cd bindings/vue2
             npm ci
+            npm run build
       - save_cache:
           key: v1-vue2-cache-{{ .Branch }}-{{ checksum "bindings/vue2/package-lock.json" }}
           paths:
@@ -130,10 +133,11 @@ jobs:
             - v1-vue3-cache-{{ .Branch }}-
             - v1-vue3-cache-
       - run:
-          name: Install Vue 3 dependencies
+          name: Install Vue 3 dependencies and build vue-onsenui for Vue 3
           command: |
             cd bindings/vue3
             npm ci
+            npm run build
       - save_cache:
           key: v1-vue3-cache-{{ .Branch }}-{{ checksum "bindings/vue3/package-lock.json" }}
           paths:
