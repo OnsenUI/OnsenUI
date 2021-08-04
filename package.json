@@ -79,9 +79,6 @@
         {}
       ],
       "stage-3"
-    ],
-    "plugins": [
-      "inline-svg"
     ]
   },
   "engines": {
@@ -96,7 +93,6 @@
     "babel-eslint": "^8.2.6",
     "babel-plugin-angularjs-annotate": "^0.8.2",
     "babel-plugin-external-helpers": "^6.22.0",
-    "babel-plugin-inline-svg": "^1.2.0",
     "babel-plugin-transform-runtime": "^6.23.0",
     "babel-preset-env": "^1.7.0",
     "babel-preset-stage-3": "^6.24.1",

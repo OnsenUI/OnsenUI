@@ -21,8 +21,6 @@ import autoStyle from '../ons/autostyle';
 import ModifierUtil from '../ons/internal/modifier-util';
 import BaseElement from './base/base-element';
 import contentReady from '../ons/content-ready';
-import iosBackButtonIcon from '../../images/ios-back-button-icon.svg';
-import mdBackButtonIcon from '../../images/md-back-button-icon.svg';
 
 const defaultClassName = 'back-button';
 
@@ -31,6 +29,36 @@ const scheme = {
   '.back-button__icon': 'back-button--*__icon',
   '.back-button__label': 'back-button--*__label'
 };
+
+// original image file at ../../images/ios-back-button-icon.svg
+const iosBackButtonIcon = `
+  <?xml version="1.0" encoding="UTF-8"?>
+  <svg width="13px" height="21px" viewBox="0 0 13 21" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+      <title>ios-back-button-icon</title>
+      <desc>Created with Sketch.</desc>
+      <defs></defs>
+      <g id="toolbar-back-button" stroke="none" stroke-width="1" fill-rule="evenodd">
+          <g id="ios" transform="translate(-34.000000, -30.000000)">
+              <polygon id="ios-back-button-icon" points="34 40.5 44.5 30 46.5 32 38 40.5 46.5 49 44.5 51"></polygon>
+          </g>
+      </g>
+  </svg>
+`;
+
+// original image file at ../../images/md-back-button-icon.svg
+const mdBackButtonIcon = `
+  <?xml version="1.0" encoding="UTF-8"?>
+  <svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+      <title>md-back-button-icon</title>
+      <desc>Created with Sketch.</desc>
+      <defs></defs>
+      <g id="toolbar-back-button" stroke="none" stroke-width="1" fill-rule="evenodd">
+          <g id="android" transform="translate(-32.000000, -32.000000)" fill-rule="nonzero">
+              <polygon id="md-back-button-icon" points="48 39 35.83 39 41.42 33.41 40 32 32 40 40 48 41.41 46.59 35.83 41 48 41"></polygon>
+          </g>
+      </g>
+  </svg>
+`;
 
 /**
  * @element ons-back-button
