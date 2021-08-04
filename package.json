@@ -145,7 +145,6 @@
     "webdriverio": "^6.10.5"
   },
   "dependencies": {
-    "@onsenui/custom-elements": "1.0.0",
-    "core-js": "^2.6.12"
+    "@onsenui/custom-elements": "1.0.0"
   }
 }
