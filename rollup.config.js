@@ -50,7 +50,7 @@ export default [
 
   // Core ES Modules
   {
-    input: 'core/src/index.esm.js',
+    input: 'core/src/index.js',
     external: id => /\/ons\//.test(id), // Do not bundle 'ons', only polyfills/vendor
     output: {
       file: 'build/esm/index.js',
