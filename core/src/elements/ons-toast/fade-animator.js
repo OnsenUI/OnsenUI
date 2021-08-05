@@ -16,8 +16,8 @@ limitations under the License.
 
 */
 
-import animit from '../../ons/animit';
-import ToastAnimator from './animator';
+import animit from '../../ons/animit.js';
+import ToastAnimator from './animator.js';
 
 /**
  * iOS style animator for dialog.

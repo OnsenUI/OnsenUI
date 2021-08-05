@@ -15,9 +15,9 @@ limitations under the License.
 
 */
 
-import onsElements from '../ons/elements';
-import styler from '../ons/styler';
-import BaseElement from './base/base-element';
+import onsElements from '../ons/elements.js';
+import styler from '../ons/styler.js';
+import BaseElement from './base/base-element.js';
 
 /**
  * @element ons-col

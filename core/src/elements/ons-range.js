@@ -11,9 +11,9 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import onsElements from '../ons/elements';
-import util from '../ons/util';
-import BaseInputElement from './base/base-input';
+import onsElements from '../ons/elements.js';
+import util from '../ons/util.js';
+import BaseInputElement from './base/base-input.js';
 
 const scheme = {
   '': 'range--*',

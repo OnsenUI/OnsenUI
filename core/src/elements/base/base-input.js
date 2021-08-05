@@ -11,11 +11,11 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import util from '../../ons/util';
-import BaseElement from './base-element';
-import autoStyle from '../../ons/autostyle';
-import ModifierUtil from '../../ons/internal/modifier-util';
-import contentReady from '../../ons/content-ready';
+import util from '../../ons/util.js';
+import BaseElement from './base-element.js';
+import autoStyle from '../../ons/autostyle.js';
+import ModifierUtil from '../../ons/internal/modifier-util.js';
+import contentReady from '../../ons/content-ready.js';
 
 const INPUT_ATTRIBUTES = [
   'autocapitalize',

@@ -1,4 +1,4 @@
-import ToastQueue from './toast-queue';
+import ToastQueue from './toast-queue.js';
 
 describe('ToastQueue',() => {
   beforeEach(() => {

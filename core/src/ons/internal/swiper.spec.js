@@ -1,4 +1,4 @@
-import Swiper from './swiper';
+import Swiper from './swiper.js';
 
 describe('Swiper', () => {
   let element, swiper;

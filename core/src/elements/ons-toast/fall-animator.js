@@ -16,10 +16,10 @@ limitations under the License.
 
 */
 
-import util from '../../ons/util';
-import animit from '../../ons/animit';
-import iPhoneXPatch from '../../ons/iphonex-patch';
-import ToastAnimator from './animator';
+import util from '../../ons/util.js';
+import animit from '../../ons/animit.js';
+import iPhoneXPatch from '../../ons/iphonex-patch.js';
+import ToastAnimator from './animator.js';
 
 /**
  * Fall-fade Toast Animator

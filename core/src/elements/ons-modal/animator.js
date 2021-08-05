@@ -15,7 +15,7 @@ limitations under the License.
 
 */
 
-import BaseAnimator from '../../ons/base-animator';
+import BaseAnimator from '../../ons/base-animator.js';
 
 export default class ModalAnimator extends BaseAnimator {
 

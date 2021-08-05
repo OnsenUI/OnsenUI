@@ -15,10 +15,10 @@ limitations under the License.
 
 */
 
-import IOSSwipeNavigatorAnimator from './ios-swipe-animator';
-import util from '../../ons/util';
-import animit from '../../ons/animit';
-import contentReady from '../../ons/content-ready';
+import IOSSwipeNavigatorAnimator from './ios-swipe-animator.js';
+import util from '../../ons/util.js';
+import animit from '../../ons/animit.js';
+import contentReady from '../../ons/content-ready.js';
 
 const translate3d = (x = 0, y = 0, z = 0) => `translate3d(${x}, ${y}, ${z})`;
 

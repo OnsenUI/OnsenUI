@@ -15,9 +15,9 @@ limitations under the License.
 
 */
 
-import NavigatorAnimator from './animator';
-import util from '../../ons/util';
-import animit from '../../ons/animit';
+import NavigatorAnimator from './animator.js';
+import util from '../../ons/util.js';
+import animit from '../../ons/animit.js';
 
 const transform = 'translate3d(0, 0, 0)';
 

@@ -11,8 +11,8 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import onsElements from '../ons/elements';
-import BaseInputElement from './base/base-input';
+import onsElements from '../ons/elements.js';
+import BaseInputElement from './base/base-input.js';
 
 const scheme = {
   '.search-input': 'search-input--*'

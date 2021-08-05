@@ -15,10 +15,10 @@ limitations under the License.
 
 */
 
-import util from '../../ons/util';
-import styler from '../../ons/styler';
-import contentReady from '../../ons/content-ready';
-import BaseAnimator from '../../ons/base-animator';
+import util from '../../ons/util.js';
+import styler from '../../ons/styler.js';
+import contentReady from '../../ons/content-ready.js';
+import BaseAnimator from '../../ons/base-animator.js';
 
 export default class SplitterAnimator extends BaseAnimator {
 

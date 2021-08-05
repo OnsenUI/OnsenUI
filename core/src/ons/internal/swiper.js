@@ -1,7 +1,7 @@
-import util from '../util';
-import platform from '../platform';
-import animit from '../animit';
-import GestureDetector from '../gesture-detector';
+import util from '../util.js';
+import platform from '../platform.js';
+import animit from '../animit.js';
+import GestureDetector from '../gesture-detector.js';
 
 const directionMap = {
   vertical: {

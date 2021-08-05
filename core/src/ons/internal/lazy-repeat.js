@@ -15,8 +15,8 @@ limitations under the License.
 
 */
 
-import util from '../util';
-import platform from '../platform';
+import util from '../util.js';
+import platform from '../platform.js';
 
 export class LazyRepeatDelegate {
 

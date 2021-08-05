@@ -15,9 +15,9 @@ limitations under the License.
 
 */
 
-import util from './util';
-import contentReady from './content-ready';
-import ToastQueue from './internal/toast-queue';
+import util from './util.js';
+import contentReady from './content-ready.js';
+import ToastQueue from './internal/toast-queue.js';
 
 const _setAttributes = (element, options) => {
   ['id', 'class', 'animation']

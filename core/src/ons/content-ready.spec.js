@@ -1,4 +1,4 @@
-import contentReady from './content-ready';
+import contentReady from './content-ready.js';
 
 describe('content-ready', () => {
   it('should work normally on an element have single text node', () => {

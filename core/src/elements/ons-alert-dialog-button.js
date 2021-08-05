@@ -15,8 +15,8 @@ limitations under the License.
 
 */
 
-import onsElements from '../ons/elements';
-import BaseButtonElement from './base/base-button';
+import onsElements from '../ons/elements.js';
+import BaseButtonElement from './base/base-button.js';
 
 /**
  * @element ons-alert-dialog-button

@@ -15,8 +15,8 @@ limitations under the License.
 
 */
 
-import onsElements from '../ons/elements';
-import BaseElement from './base/base-element';
+import onsElements from '../ons/elements.js';
+import BaseElement from './base/base-element.js';
 
 /**
  * @element ons-row

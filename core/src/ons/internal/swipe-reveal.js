@@ -15,8 +15,8 @@ limitations under the License.
 
 */
 
-import util from '../../ons/util';
-import GestureDetector from '../../ons/gesture-detector';
+import util from '../../ons/util.js';
+import GestureDetector from '../../ons/gesture-detector.js';
 
 const widthToPx = (width) => {
   const [value, px] = [parseInt(width, 10), /px/.test(width)];

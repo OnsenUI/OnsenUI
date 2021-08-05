@@ -8,6 +8,9 @@
     "browser": false,
     "builtin": true
   },
+  "plugins": [
+    "import"
+  ],
   "rules": {
     "strict": "off",
     "prefer-const": "warn",
@@ -73,6 +76,7 @@
       "error",
       "inside"
     ],
-    "semi": "error"
+    "semi": "error",
+    "import/extensions": ["warn", "always"]
   }
 }

@@ -15,13 +15,13 @@ limitations under the License.
 
 */
 
-import onsElements from './elements';
-import styler from './styler';
-import internal from './internal';
-import autoStyle from './autostyle';
-import ModifierUtil from './internal/modifier-util';
-import animationOptionsParse from './animation-options-parser';
-import platform from './platform';
+import onsElements from './elements.js';
+import styler from './styler.js';
+import internal from './internal/index.js';
+import autoStyle from './autostyle.js';
+import ModifierUtil from './internal/modifier-util.js';
+import animationOptionsParse from './animation-options-parser.js';
+import platform from './platform.js';
 
 const util = {};
 const errorPrefix = '[Onsen UI]';

@@ -15,7 +15,7 @@ limitations under the License.
 
 */
 
-import util from './util';
+import util from './util.js';
 
 export default class BaseAnimator {
 

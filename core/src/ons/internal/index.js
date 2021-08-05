@@ -14,10 +14,10 @@ See the License for the specific language governing permissions and
 limitations under the License.
 
 */
-import internal from './internal';
-import AnimatorFactory from './animator-factory';
-import ModifierUtil from './modifier-util';
-import deviceBackButtonDispatcher from './device-back-button-dispatcher';
+import internal from './internal.js';
+import AnimatorFactory from './animator-factory.js';
+import ModifierUtil from './modifier-util.js';
+import deviceBackButtonDispatcher from './device-back-button-dispatcher.js';
 
 internal.AnimatorFactory = AnimatorFactory;
 internal.ModifierUtil = ModifierUtil;

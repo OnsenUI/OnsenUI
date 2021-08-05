@@ -14,8 +14,8 @@ See the License for the specific language governing permissions and
 limitations under the License.
 
 */
-import util from './util';
-import internal from './internal';
+import util from './util.js';
+import internal from './internal/index.js';
 
 // Default implementation for global PageLoader.
 function loadPage({page, parent, params = {}}, done, error) {

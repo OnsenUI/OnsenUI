@@ -15,11 +15,11 @@ limitations under the License.
 
 */
 
-import onsElements from '../ons/elements';
-import BaseElement from './base/base-element';
-import autoStyle from '../ons/autostyle';
-import ModifierUtil from '../ons/internal/modifier-util';
-import util from '../ons/util';
+import onsElements from '../ons/elements.js';
+import BaseElement from './base/base-element.js';
+import autoStyle from '../ons/autostyle.js';
+import ModifierUtil from '../ons/internal/modifier-util.js';
+import util from '../ons/util.js';
 
 const defaultClassName = 'list-title';
 const scheme = {'': 'list-title--*'};

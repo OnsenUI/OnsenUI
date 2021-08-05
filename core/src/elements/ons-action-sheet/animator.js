@@ -15,9 +15,9 @@ limitations under the License.
 
 */
 
-import animit from '../../ons/animit';
-import BaseAnimator from '../../ons/base-animator';
-import iPhoneXPatch from '../../ons/iphonex-patch';
+import animit from '../../ons/animit.js';
+import BaseAnimator from '../../ons/base-animator.js';
+import iPhoneXPatch from '../../ons/iphonex-patch.js';
 
 export class ActionSheetAnimator extends BaseAnimator {
 

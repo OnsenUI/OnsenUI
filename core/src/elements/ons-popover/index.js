@@ -15,16 +15,16 @@ limitations under the License.
 
 */
 
-import onsElements from '../../ons/elements';
-import util from '../../ons/util';
-import autoStyle from '../../ons/autostyle';
-import ModifierUtil from '../../ons/internal/modifier-util';
-import AnimatorFactory from '../../ons/internal/animator-factory';
-import { PopoverAnimator, IOSFadePopoverAnimator, MDFadePopoverAnimator } from './animator';
-import platform from '../../ons/platform';
-import iPhoneXPatch from '../../ons/iphonex-patch';
-import BaseDialogElement from '../base/base-dialog';
-import contentReady from '../../ons/content-ready';
+import onsElements from '../../ons/elements.js';
+import util from '../../ons/util.js';
+import autoStyle from '../../ons/autostyle.js';
+import ModifierUtil from '../../ons/internal/modifier-util.js';
+import AnimatorFactory from '../../ons/internal/animator-factory.js';
+import { PopoverAnimator, IOSFadePopoverAnimator, MDFadePopoverAnimator } from './animator.js';
+import platform from '../../ons/platform.js';
+import iPhoneXPatch from '../../ons/iphonex-patch.js';
+import BaseDialogElement from '../base/base-dialog.js';
+import contentReady from '../../ons/content-ready.js';
 
 const scheme = {
   '.popover': 'popover--*',

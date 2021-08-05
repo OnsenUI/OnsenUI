@@ -16,8 +16,8 @@ limitations under the License.
 
 */
 
-import animit from '../../ons/animit';
-import ModalAnimator from './animator';
+import animit from '../../ons/animit.js';
+import ModalAnimator from './animator.js';
 
 /**
  * iOS style animator for dialog.

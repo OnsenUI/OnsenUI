@@ -1,4 +1,4 @@
-import contentReady from '../ons/content-ready';
+import contentReady from '../ons/content-ready.js';
 
 describe('OnsIconElement', () => {
   let element;

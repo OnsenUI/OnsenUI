@@ -1,4 +1,4 @@
-import BaseAnimator from './base-animator';
+import BaseAnimator from './base-animator.js';
 
 describe('BaseAnimator', () => {
   class TestGenericAnimator extends BaseAnimator { }

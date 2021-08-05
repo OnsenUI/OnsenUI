@@ -15,13 +15,13 @@ limitations under the License.
 
 */
 
-import onsElements from '../ons/elements';
-import util from '../ons/util';
-import styler from '../ons/styler';
-import platform from '../ons/platform';
-import BaseElement from './base/base-element';
-import GestureDetector from '../ons/gesture-detector';
-import animit from '../ons/animit';
+import onsElements from '../ons/elements.js';
+import util from '../ons/util.js';
+import styler from '../ons/styler.js';
+import platform from '../ons/platform.js';
+import BaseElement from './base/base-element.js';
+import GestureDetector from '../ons/gesture-detector.js';
+import animit from '../ons/animit.js';
 
 const STATE_INITIAL = 'initial';
 const STATE_PREACTION = 'preaction';

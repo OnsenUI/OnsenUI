@@ -15,8 +15,8 @@ limitations under the License.
 
 */
 
-import platform from './platform';
-import util from './util';
+import platform from './platform.js';
+import util from './util.js';
 
 const error = message => util.throw(`In PageAttributeExpression: ${message}`);
 

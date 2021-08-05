@@ -15,16 +15,16 @@ limitations under the License.
 
 */
 
-import onsElements from '../../ons/elements';
-import util from '../../ons/util';
-import ModifierUtil from '../../ons/internal/modifier-util';
-import AnimatorFactory from '../../ons/internal/animator-factory';
-import OverlaySplitterAnimator from './overlay-animator';
-import PushSplitterAnimator from './push-animator';
-import RevealSplitterAnimator from './reveal-animator';
-import BaseElement from '../base/base-element';
-import deviceBackButtonDispatcher from '../../ons/internal/device-back-button-dispatcher';
-import contentReady from '../../ons/content-ready';
+import onsElements from '../../ons/elements.js';
+import util from '../../ons/util.js';
+import ModifierUtil from '../../ons/internal/modifier-util.js';
+import AnimatorFactory from '../../ons/internal/animator-factory.js';
+import OverlaySplitterAnimator from './overlay-animator.js';
+import PushSplitterAnimator from './push-animator.js';
+import RevealSplitterAnimator from './reveal-animator.js';
+import BaseElement from '../base/base-element.js';
+import deviceBackButtonDispatcher from '../../ons/internal/device-back-button-dispatcher.js';
+import contentReady from '../../ons/content-ready.js';
 
 const _animatorDict = {
   default: OverlaySplitterAnimator,

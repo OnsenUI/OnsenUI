@@ -15,12 +15,12 @@ limitations under the License.
 
 */
 
-import onsElements from '../../ons/elements';
-import util from '../../ons/util';
-import autoStyle from '../../ons/autostyle';
-import contentReady from '../../ons/content-ready';
-import ModifierUtil from '../../ons/internal/modifier-util';
-import BaseElement from './base-element';
+import onsElements from '../../ons/elements.js';
+import util from '../../ons/util.js';
+import autoStyle from '../../ons/autostyle.js';
+import contentReady from '../../ons/content-ready.js';
+import ModifierUtil from '../../ons/internal/modifier-util.js';
+import BaseElement from './base-element.js';
 
 export default class BaseButtonElement extends BaseElement {
 

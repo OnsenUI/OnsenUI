@@ -15,13 +15,13 @@ limitations under the License.
 
 */
 
-import onsElements from '../../ons/elements';
-import util from '../../ons/util';
-import internal from '../../ons/internal';
-import BaseElement from '../base/base-element';
-import Animator from './animator-css';
-import contentReady from '../../ons/content-ready';
-import ModifierUtil from '../../ons/internal/modifier-util';
+import onsElements from '../../ons/elements.js';
+import util from '../../ons/util.js';
+import internal from '../../ons/internal/index.js';
+import BaseElement from '../base/base-element.js';
+import Animator from './animator-css.js';
+import contentReady from '../../ons/content-ready.js';
+import ModifierUtil from '../../ons/internal/modifier-util.js';
 
 const defaultClassName = 'ripple';
 const scheme = {

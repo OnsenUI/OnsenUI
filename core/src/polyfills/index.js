@@ -4,7 +4,7 @@
 // If you replace this import statement with codes,
 // the codes will be executed after the following polyfills are imported
 // because import statements are hoisted during compilation.
-import './polyfill-switches';
+import './polyfill-switches.js';
 
 // Polyfill Custom Elements v1 with global namespace pollution
 import '@onsenui/custom-elements/src/custom-elements';

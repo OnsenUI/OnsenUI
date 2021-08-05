@@ -16,11 +16,11 @@ limitations under the License.
 
 */
 
-import util from '../../ons/util';
-import animit from '../../ons/animit';
-import platform from '../../ons/platform';
-import iPhoneXPatch from '../../ons/iphonex-patch';
-import ToastAnimator from './animator';
+import util from '../../ons/util.js';
+import animit from '../../ons/animit.js';
+import platform from '../../ons/platform.js';
+import iPhoneXPatch from '../../ons/iphonex-patch.js';
+import ToastAnimator from './animator.js';
 
 /**
  * Ascend Toast Animator.
