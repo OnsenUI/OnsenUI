@@ -644,7 +644,7 @@ describe('OnsNavigatorElement', () => {
     it('overwrites specified properties', () => {
       const deferred = {};
       deferred.promise = new Promise((resolve) => {
-        deferred.resolve = resolve
+        deferred.resolve = resolve;
       });
 
       const CustomAnimatorClass = window.ons.elements.Navigator.animators['fade-ios'].extend({
@@ -668,7 +668,7 @@ describe('OnsNavigatorElement', () => {
         .then(() => {
           return expect(deferred.promise).to.eventually.be.fulfilled;
         });
-    })
+    });
   });
 
   describe('#_compile()', () => {
@@ -683,7 +683,7 @@ describe('OnsNavigatorElement', () => {
 
   describe('#backButton', () => {
     beforeEach((done) => {
-      const tpl1 = ons._util.createElement(`<template id="backPage"><ons-page><ons-back-button>Back</ons-back-button>hoge</ons-page></template>`)
+      const tpl1 = ons._util.createElement(`<template id="backPage"><ons-page><ons-back-button>Back</ons-back-button>hoge</ons-page></template>`);
       const tpl2 = ons._util.createElement(`<template id="backPage2"><ons-page><ons-back-button>Back</ons-back-button>hoge2</ons-page></template>`);
 
       document.body.appendChild(tpl1);

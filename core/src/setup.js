@@ -41,7 +41,7 @@ export default function setup(ons) {
         if (event.keyCode === 27) {
           ons.fireDeviceBackButtonEvent();
         }
-      })
+      });
     }
 
     // setup loading placeholder

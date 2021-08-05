@@ -38,7 +38,7 @@ const _normalizeArguments = (message, options = {}, defaults = {}) => {
   if (options.hasOwnProperty('buttonLabels') || options.hasOwnProperty('buttonLabel')) {
     options.buttonLabels = options.buttonLabels || options.buttonLabel;
     if (!Array.isArray(options.buttonLabels)) {
-      options.buttonLabels = [options.buttonLabels || '']
+      options.buttonLabels = [options.buttonLabels || ''];
     }
   }
 
@@ -518,12 +518,12 @@ notification.toast = (message, options) => {
     const show = () => {
       toast.parentElement && toast.show(options).then(() => {
         if (options.timeout) {
-          setTimeout(() => finish(-1), options.timeout)
+          setTimeout(() => finish(-1), options.timeout);
         }
       });
     };
 
-    setImmediate(() => options.force ? show() : ToastQueue.add(show, promise))
+    setImmediate(() => options.force ? show() : ToastQueue.add(show, promise));
   });
 
   return promise;

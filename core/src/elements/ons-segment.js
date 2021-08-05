@@ -122,7 +122,7 @@ export default class SegmentElement extends BaseElement {
     this._onTabbarPreChange = this._onTabbarPreChange.bind(this);
 
     contentReady(this, () => {
-      this._compile()
+      this._compile();
       setImmediate(() => this._lastActiveIndex = this._tabbar ? this._tabbar.getActiveTabIndex() : this.getActiveButtonIndex());
     });
   }

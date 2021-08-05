@@ -67,7 +67,7 @@ describe('OnsSearchInputElement', () => {
       const element = ons._util.createElement('<ons-search-input input-id="myInput"></ons-search-input>');
 
       setImmediate(() => {
-        expect(element.querySelector('input').id).to.equal('myInput')
+        expect(element.querySelector('input').id).to.equal('myInput');
         done();
       });
     });

@@ -16,7 +16,7 @@ limitations under the License.
 */
 
 import util from '../../ons/util';
-import BaseAnimator from '../../ons/base-animator'
+import BaseAnimator from '../../ons/base-animator';
 
 export default class NavigatorAnimator extends BaseAnimator {
 

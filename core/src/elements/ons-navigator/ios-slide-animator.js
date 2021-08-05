@@ -97,7 +97,7 @@ export default class IOSSlideNavigatorAnimator extends IOSSwipeNavigatorAnimator
       label = decomposition.backButtonIcon.getBoundingClientRect().right - 2;
     }
 
-    return {title, label}
+    return {title, label};
   }
 
   /**

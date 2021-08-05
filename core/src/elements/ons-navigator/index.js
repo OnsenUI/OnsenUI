@@ -35,10 +35,10 @@ import deviceBackButtonDispatcher from '../../ons/internal/device-back-button-di
 import {PageLoader, defaultPageLoader, instantPageLoader} from '../../ons/page-loader';
 
 const _animatorDict = {
-  'default': function () { return platform.isAndroid() ? MDFadeNavigatorAnimator : IOSSlideNavigatorAnimator },
-  'slide': function () { return platform.isAndroid() ? MDSlideNavigatorAnimator : IOSSlideNavigatorAnimator },
-  'lift': function () { return platform.isAndroid() ? MDLiftNavigatorAnimator : IOSLiftNavigatorAnimator },
-  'fade': function () { return platform.isAndroid() ? MDFadeNavigatorAnimator : IOSFadeNavigatorAnimator },
+  'default': function () { return platform.isAndroid() ? MDFadeNavigatorAnimator : IOSSlideNavigatorAnimator; },
+  'slide': function () { return platform.isAndroid() ? MDSlideNavigatorAnimator : IOSSlideNavigatorAnimator; },
+  'lift': function () { return platform.isAndroid() ? MDLiftNavigatorAnimator : IOSLiftNavigatorAnimator; },
+  'fade': function () { return platform.isAndroid() ? MDFadeNavigatorAnimator : IOSFadeNavigatorAnimator; },
   'slide-ios': IOSSlideNavigatorAnimator,
   'slide-md': MDSlideNavigatorAnimator,
   'lift-ios': IOSLiftNavigatorAnimator,
@@ -780,7 +780,7 @@ export default class NavigatorElement extends BaseElement {
     }
 
     if (options.pop) {
-      this._removePages()
+      this._removePages();
       return this.insertPage(0, page, { data: options.data })
         .then(() => this.popPage(options));
     }
@@ -788,7 +788,7 @@ export default class NavigatorElement extends BaseElement {
     // Tip: callback runs before resolved promise
     const callback = options.callback;
     options.callback = newPage => {
-      this._removePages()
+      this._removePages();
       newPage.updateBackButton(false);
       callback && callback(newPage);
     };
@@ -1039,11 +1039,11 @@ export default class NavigatorElement extends BaseElement {
   }
 
   _show() {
-    this.loaded.then(() => this.topPage && this.topPage._show())
+    this.loaded.then(() => this.topPage && this.topPage._show());
   }
 
   _hide() {
-    this.topPage && this.topPage._hide()
+    this.topPage && this.topPage._hide();
   }
 
   _destroy() {

@@ -379,7 +379,7 @@ export default class Swiper {
   }
 
   _normalizeScroll(scroll) {
-    return Math.max( Math.min(scroll, this.maxScroll), 0)
+    return Math.max( Math.min(scroll, this.maxScroll), 0);
   }
 
   refresh() {

@@ -559,7 +559,7 @@ export default class SplitterSideElement extends BaseElement {
 
   set onSwipe(value) {
     if (value && !(value instanceof Function)) {
-      util.throw('"onSwipe" must be a function')
+      util.throw('"onSwipe" must be a function');
     }
     this._onSwipe = value;
   }

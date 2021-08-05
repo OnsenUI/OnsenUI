@@ -258,7 +258,7 @@ export class LazyRepeatProvider {
   }
 
   _calculateRenderedHeight() {
-    return Object.keys(this._renderedItems).reduce((a, b) => a + this._getItemHeight(+(b)), 0)
+    return Object.keys(this._renderedItems).reduce((a, b) => a + this._getItemHeight(+(b)), 0);
   }
 
   _onChange() {
@@ -349,7 +349,7 @@ export class LazyRepeatProvider {
 
     this._delegate.loadItemElement(index, item => {
       if (isScrollUp) {
-        this._wrapperElement.insertBefore(item.element, this._wrapperElement.children[this._insertIndex])
+        this._wrapperElement.insertBefore(item.element, this._wrapperElement.children[this._insertIndex]);
         this.padding = this._topPositions[index];
         item.height = this._topPositions[index + 1] - this._topPositions[index];
       } else {

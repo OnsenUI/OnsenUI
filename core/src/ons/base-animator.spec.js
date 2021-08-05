@@ -30,5 +30,5 @@ describe('BaseAnimator', () => {
     expect(customAnimatorInstance.duration).to.not.equal(originalAnimatorInstance.duration);
 
     customAnimatorInstance.method2();
-  })
+  });
 });

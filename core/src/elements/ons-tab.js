@@ -254,7 +254,7 @@ export default class TabElement extends BaseElement {
   setActive(active = true) {
     this._input.checked = active;
     this.classList.toggle('active', active);
-    util.toggleAttribute(this, 'active', active)
+    util.toggleAttribute(this, 'active', active);
 
     if (this.hasAttribute('icon') && this.hasAttribute('active-icon')) {
       this._icon.children[0].setAttribute('icon', this.getAttribute(active ? 'active-icon' : 'icon'));

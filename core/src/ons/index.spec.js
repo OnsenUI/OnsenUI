@@ -128,7 +128,7 @@ describe('ons', () => {
         return ons.createElement('page.html', { append: element1 }).then(element2 => {
           expect(element2.parentElement).to.equal(element1);
           element1.remove();
-        })
+        });
       });
     });
 

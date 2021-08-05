@@ -92,7 +92,7 @@ describe('OnsBackButtonElement', () => {
   describe('#onClick', () => {
     it('prevents the default click handler when event.preventDefault is called', () => {
       const backButton = ons._util.createElement('<ons-back-button></ons-back-button>');
-      backButton.onClick = function (event) { event.preventDefault() };
+      backButton.onClick = function (event) { event.preventDefault(); };
       const spy = chai.spy.on(backButton, 'onClick');
       backButton.dispatchEvent(new Event('click'));
       expect(spy).to.have.been.called.once;

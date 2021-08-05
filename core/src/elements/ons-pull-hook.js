@@ -460,7 +460,7 @@ export default class PullHookElement extends BaseElement {
   }
 
   static get events() {
-    return ['changestate']
+    return ['changestate'];
   }
 }
 

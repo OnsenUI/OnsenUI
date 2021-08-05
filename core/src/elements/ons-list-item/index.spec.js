@@ -178,7 +178,7 @@ describe('OnsListItemElement', () => {
       const origColor = 'rgb(250, 250, 250)';
       const newColor = 'rgb(255, 255, 255)';
 
-      var elt = ons._util.createElement('<div>content</div>')
+      var elt = ons._util.createElement('<div>content</div>');
 
       listItem.appendChild(elt);
 

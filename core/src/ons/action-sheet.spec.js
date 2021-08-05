@@ -10,7 +10,7 @@ describe('ons.openActionSheet', () => {
     ons.elements.ActionSheet = undefined;
     expect(ons.openActionSheet()).to.eventually.be.rejected;
     ons.elements.ActionSheet = actionSheet;
-  })
+  });
 
   describe('#actionSheet()', () => {
     let dialog,

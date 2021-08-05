@@ -243,7 +243,7 @@ describe('OnsSpeedDialElement', () => {
         for (let i = 0; i < speedDial.items; i++) {
           expect(speedDial.items[i].style.transform).to.equal('scale(1)');
         }
-      })
+      });
     });
   });
 

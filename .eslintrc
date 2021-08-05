@@ -72,6 +72,7 @@
     "wrap-iife": [
       "error",
       "inside"
-    ]
+    ],
+    "semi": "error"
   }
 }

@@ -13,7 +13,7 @@ describe('ons-action-sheet-button', () => {
       expect(element.classList.contains('action-sheet-button')).to.be.true;
       expect(element.classList.contains('foo')).to.be.true;
       done();
-    })
+    });
   });
 
   it('provides modifier attribute', () => {
@@ -55,7 +55,7 @@ describe('ons-action-sheet-button', () => {
         expect(e.getAttribute('modifier')).to.equal('material');
         ons.platform.select('');
         done();
-      })
+      });
     });
   });
 });

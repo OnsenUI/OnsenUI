@@ -302,7 +302,7 @@ export default class TabbarElement extends BaseElement {
       }
     }
 
-    return event.canceled
+    return event.canceled;
   }
 
   _onScroll(index, options = {}) {
@@ -402,7 +402,7 @@ export default class TabbarElement extends BaseElement {
         }
 
         const content = page._getContentElement();
-        const cs = window.getComputedStyle(page._getContentElement(), null)
+        const cs = window.getComputedStyle(page._getContentElement(), null);
 
         this.style.top = top ? parseInt(cs.getPropertyValue('padding-top'), 10) - p + 'px' : '';
 

@@ -54,7 +54,7 @@ export default class CarouselItemElement extends BaseElement {
   }
 
   static get observedAttributes() {
-    return ['modifier']
+    return ['modifier'];
   }
 
   attributeChangedCallback(name, last, current) {

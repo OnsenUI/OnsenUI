@@ -148,7 +148,7 @@ export default class IconElement extends BaseElement {
   }
 
   _parseAttr(attrName, modifier = this.getAttribute('modifier') || '') {
-    const attr = this.getAttribute(attrName) || attrName || ''
+    const attr = this.getAttribute(attrName) || attrName || '';
     const parts = attr.split(/\s*,\s*/);
     const def = parts[0];
     let md = parts[1];

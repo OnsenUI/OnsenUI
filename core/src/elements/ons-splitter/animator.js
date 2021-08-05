@@ -58,7 +58,7 @@ export default class SplitterAnimator extends BaseAnimator {
 
   clearTransition() {
     'side mask content'.split(/\s+/)
-      .forEach(e => this['_' + e] && styler.clear(this['_' + e], 'transform transition'))
+      .forEach(e => this['_' + e] && styler.clear(this['_' + e], 'transform transition'));
   }
 
   clearMask() {

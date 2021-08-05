@@ -207,7 +207,7 @@ export default class SpeedDialElement extends BaseElement {
       } else {
         resolve();
       }
-    })
+    });
   }
 
   _updateRipple() {
