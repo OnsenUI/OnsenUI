@@ -31,6 +31,7 @@
     "test:core-dts": "node scripts/core-dts-test.js"
   },
   "main": "js/onsenui.js",
+  "module": "esm/index.js",
   "typings": "js/onsenui.d.ts",
   "files": [
     "css",
