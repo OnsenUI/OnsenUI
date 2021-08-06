@@ -144,8 +144,5 @@
     "watch": "^1.0.2",
     "wcdoc": "0.1.19",
     "webdriverio": "^6.10.5"
-  },
-  "dependencies": {
-    "@onsenui/custom-elements": "1.0.0"
   }
 }
