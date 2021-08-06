@@ -11,6 +11,8 @@ dev
  * ons-tab: Setting onClick no longers prevents default behaviour. `event.preventDefault` should be called in the onClick callback.
  * ons-back-button: Setting onClick no longers prevents default behaviour. `event.preventDefault` should be called in the onClick callback.
  * ons-speed-dial: Setting onClick no longers prevents default behaviour. `event.preventDefault` should be called in the onClick callback.
+ * core: The ES modules are now distributed in ES6 instead of transpiled ES5. If you need to support ES5, you should transpile the contents of the `esm` directory.
+ * core: Bundlers will now use the ES modules version of Onsen UI by default instead of the UMD version.
 
  ### Bug Fixes
 
@@ -32,6 +34,8 @@ dev
  ### Misc
 
  * Support for bower has been dropped. ([#2924](https://github.com/OnsenUI/OnsenUI/issues/2924)).
+ * The ES modules are now distributed as unbundled ES6 instead of bundled ES5. ([#2731](https://github.com/OnsenUI/OnsenUI/issues/2731)).
+ * `module` key has been added to package.json. Bundlers will now use the ES modules version of Onsen UI by default instead of the UMD version.
 
 2.11.2
 ---
