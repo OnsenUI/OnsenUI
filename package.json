@@ -7,7 +7,7 @@
     "build": "npm run build:js && npm run build:css && npm run build:css-components && npm run build:copy && npm run build:docs && npm run build:zip",
     "build:docs": "node scripts/build-docs.js",
     "build:js": "npm run build:js:rollup && npm run build:js:minify && npm run build:js:esm",
-    "build:js:esm": "cpx 'core/src/{elements,ons}/**/!(*.spec.js)' build/esm",
+    "build:js:esm": "cpx 'core/src/**/!(*.spec.js|index.umd.js|onsenui.d.ts)' build/esm",
     "build:js:minify": "uglifyjs build/js/onsenui.js -c -m --comments '/onsenui v/' --output build/js/onsenui.min.js",
     "build:js:rollup": "rollup --config",
     "build:copy": "npm run build:copy:css-components-src && npm run build:copy:more-files",

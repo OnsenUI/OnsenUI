@@ -43,23 +43,5 @@ export default [
     watch: {
       clearScreen: false
     }
-  },
-
-  // Core ES Modules
-  {
-    input: 'core/src/index.js',
-    external: id => /\/ons\//.test(id), // Do not bundle 'ons', only polyfills/vendor
-    output: {
-      file: 'build/esm/index.js',
-      format: 'es',
-      name: 'onsESM',
-      sourcemap: 'inline',
-      banner: banner(pkg.name),
-    },
-    plugins: [
-      resolve(),
-      progress(),
-    ],
-    watch: false
-  },
+  }
 ];
