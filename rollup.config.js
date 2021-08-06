@@ -58,7 +58,6 @@ export default [
     },
     plugins: [
       resolve(),
-      babel(babelrc),
       progress(),
     ],
     watch: false

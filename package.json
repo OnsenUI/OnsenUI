@@ -6,9 +6,8 @@
   "scripts": {
     "build": "npm run build:js && npm run build:css && npm run build:css-components && npm run build:copy && npm run build:docs && npm run build:zip",
     "build:docs": "node scripts/build-docs.js",
-    "build:js": "npm run build:js:rollup && npm run build:js:minify && npm run build:js:babel-esm-elements && npm run build:js:babel-esm-ons",
-    "build:js:babel-esm-elements": "babel core/src/elements --out-dir build/esm/elements --ignore 'src/**/*.spec.js'",
-    "build:js:babel-esm-ons": "babel core/src/ons --out-dir build/esm/ons --ignore 'src/**/*.spec.js'",
+    "build:js": "npm run build:js:rollup && npm run build:js:minify && npm run build:js:esm",
+    "build:js:esm": "cpx 'core/src/{elements,ons}/**/!(*.spec.js)' build/esm",
     "build:js:minify": "uglifyjs build/js/onsenui.js -c -m --comments '/onsenui v/' --output build/js/onsenui.min.js",
     "build:js:rollup": "rollup --config",
     "build:copy": "npm run build:copy:css-components-src && npm run build:copy:more-files",
