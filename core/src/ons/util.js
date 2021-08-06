@@ -15,13 +15,13 @@ limitations under the License.
 
 */
 
-import onsElements from './elements';
-import styler from './styler';
-import internal from './internal';
-import autoStyle from './autostyle';
-import ModifierUtil from './internal/modifier-util';
-import animationOptionsParse from './animation-options-parser';
-import platform from './platform';
+import onsElements from './elements.js';
+import styler from './styler.js';
+import internal from './internal/index.js';
+import autoStyle from './autostyle.js';
+import ModifierUtil from './internal/modifier-util.js';
+import animationOptionsParse from './animation-options-parser.js';
+import platform from './platform.js';
 
 const util = {};
 const errorPrefix = '[Onsen UI]';
@@ -144,7 +144,7 @@ util.getAllChildNodes = (element) => {
       return util.getAllChildNodes(childEl);
     })
   );
-}
+};
 
 /**
  * @param {Element} element
@@ -211,7 +211,7 @@ util.createElement = (html) => {
   }
 
   if (wrapper.children.length > 1) {
-    util.throw('HTML template must contain a single root element')
+    util.throw('HTML template must contain a single root element');
   }
 
   const element = wrapper.children[0];
@@ -405,7 +405,7 @@ util.toggleModifier = (...args) => {
   const force = typeof options === 'boolean' ? options : options.force;
 
   const toggle = typeof force === 'boolean' ? force : !util.hasModifier(...args);
-  toggle ? util.addModifier(...args) : util.removeModifier(...args)
+  toggle ? util.addModifier(...args) : util.removeModifier(...args);
 };
 
 /**
@@ -416,7 +416,7 @@ util.toggleModifier = (...args) => {
 util.restoreClass = (el, defaultClass, scheme) => {
   defaultClass.split(/\s+/).forEach(c => c !== '' && !el.classList.contains(c) && el.classList.add(c));
   el.hasAttribute('modifier') && ModifierUtil.refresh(el, scheme);
-}
+};
 
 // TODO: FIX
 util.updateParentPosition = (el) => {
@@ -562,7 +562,7 @@ util.checkMissingImport = (...elementNames) => {
       util.throw(`Ons${name} is required but was not imported (Custom Elements)`);
     }
   });
-}
+};
 
 /**
  * On a given object, defines a boolean property that reflects an attribute of the same name.
@@ -580,7 +580,7 @@ util.defineBooleanProperty = (object, propertyName) => {
       }
     }
   });
-}
+};
 
 /**
  * Makes a property for a listener e.g. onClick
@@ -603,7 +603,7 @@ util.defineListenerProperty = (object, eventName) => {
       handler = newHandler;
     }
   });
-}
+};
 
 /**
  * Removes the listener for a listener property e.g. onClick
@@ -617,6 +617,6 @@ util.disconnectListenerProperty = (object, eventName) => {
     object.removeEventListener(eventName, object[propertyName]);
     object[propertyName] = null;
   }
-}
+};
 
 export default util;

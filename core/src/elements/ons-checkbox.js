@@ -11,8 +11,8 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import onsElements from '../ons/elements';
-import BaseCheckboxElement from './base/base-checkbox';
+import onsElements from '../ons/elements.js';
+import BaseCheckboxElement from './base/base-checkbox.js';
 
 const scheme = {
   '.checkbox': 'checkbox--*',

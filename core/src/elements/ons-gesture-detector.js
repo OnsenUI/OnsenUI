@@ -15,9 +15,9 @@ limitations under the License.
 
 */
 
-import onsElements from '../ons/elements';
-import BaseElement from './base/base-element';
-import GestureDetector from '../ons/gesture-detector';
+import onsElements from '../ons/elements.js';
+import BaseElement from './base/base-element.js';
+import GestureDetector from '../ons/gesture-detector.js';
 
 /**
  * @element ons-gesture-detector

@@ -93,7 +93,7 @@ describe('OnsRadioElement', () => {
       const element = ons._util.createElement('<ons-radio input-id="myRadio"></ons-radio>');
 
       setImmediate(() => {
-        expect(element.querySelector('input').id).to.equal('myRadio')
+        expect(element.querySelector('input').id).to.equal('myRadio');
         done();
       });
     });

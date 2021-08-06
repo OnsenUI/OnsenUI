@@ -14,9 +14,9 @@ See the License for the specific language governing permissions and
 limitations under the License.
 
 */
-import util from '../../ons/util';
-import animit from '../../ons/animit';
-import BaseAnimator from '../../ons/base-animator';
+import util from '../../ons/util.js';
+import animit from '../../ons/animit.js';
+import BaseAnimator from '../../ons/base-animator.js';
 
 export class PopoverAnimator extends BaseAnimator {
 

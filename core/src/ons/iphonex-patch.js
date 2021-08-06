@@ -20,12 +20,12 @@ const iPhoneXPatch = {};
 
 iPhoneXPatch.isIPhoneXPortraitPatchActive = () => {
   return document.documentElement.getAttribute('onsflag-iphonex-portrait') != null && window.innerWidth < window.innerHeight;
-}
+};
 
 iPhoneXPatch.isIPhoneXLandscapePatchActive = () => {
   // If width === height, treat it as landscape
   return document.documentElement.getAttribute('onsflag-iphonex-landscape') != null && window.innerWidth >= window.innerHeight;
-}
+};
 
 /**
  * Returns the safe area lengths based on the current state of the safe areas.
@@ -56,7 +56,7 @@ iPhoneXPatch.getSafeAreaLengths = () => {
   }
 
   return safeAreaLengths;
-}
+};
 
 /**
  * Returns the safe area rect based on the current state of the safe areas.
@@ -93,6 +93,6 @@ iPhoneXPatch.getSafeAreaDOMRect = () => {
     right: safeAreaRect.x + safeAreaRect.width,
     bottom: safeAreaRect.y + safeAreaRect.height
   };
-}
+};
 
 export default iPhoneXPatch;

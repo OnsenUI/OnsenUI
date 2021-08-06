@@ -1,4 +1,4 @@
-import { LazyRepeatProvider, LazyRepeatDelegate } from './lazy-repeat';
+import { LazyRepeatProvider, LazyRepeatDelegate } from './lazy-repeat.js';
 
 describe('LazyRepeatDelegate', () => {
   let userDelegate, delegate;

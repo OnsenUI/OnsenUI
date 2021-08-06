@@ -15,7 +15,7 @@ limitations under the License.
 
 */
 
-import NavigatorAnimator from './animator';
+import NavigatorAnimator from './animator.js';
 
 export default class NoneNavigatorAnimator extends NavigatorAnimator {
   constructor(options) {

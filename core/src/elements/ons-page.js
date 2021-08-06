@@ -15,16 +15,16 @@ limitations under the License.
 
 */
 
-import onsElements from '../ons/elements';
-import util from '../ons/util';
-import internal from '../ons/internal';
-import autoStyle from '../ons/autostyle';
-import ModifierUtil from '../ons/internal/modifier-util';
-import BaseElement from './base/base-element';
-import deviceBackButtonDispatcher from '../ons/internal/device-back-button-dispatcher';
-import contentReady from '../ons/content-ready';
+import onsElements from '../ons/elements.js';
+import util from '../ons/util.js';
+import internal from '../ons/internal/index.js';
+import autoStyle from '../ons/autostyle.js';
+import ModifierUtil from '../ons/internal/modifier-util.js';
+import BaseElement from './base/base-element.js';
+import deviceBackButtonDispatcher from '../ons/internal/device-back-button-dispatcher.js';
+import contentReady from '../ons/content-ready.js';
 
-import './ons-toolbar'; // ensures that 'ons-toolbar' element is registered
+import './ons-toolbar.js'; // ensures that 'ons-toolbar' element is registered
 
 const defaultClassName = 'page';
 const scheme = {

@@ -93,7 +93,7 @@ describe('OnsCheckboxElement', () => {
       const element = ons._util.createElement('<ons-checkbox input-id="myCheckbox"></ons-checkbox>');
 
       setImmediate(() => {
-        expect(element.querySelector('input').id).to.equal('myCheckbox')
+        expect(element.querySelector('input').id).to.equal('myCheckbox');
         done();
       });
     });

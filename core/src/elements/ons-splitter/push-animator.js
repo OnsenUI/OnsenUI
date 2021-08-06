@@ -15,7 +15,7 @@ limitations under the License.
 
 */
 
-import animit from '../../ons/animit';
+import animit from '../../ons/animit.js';
 import SplitterAnimator from './animator.js';
 
 export default class PushSplitterAnimator extends SplitterAnimator {

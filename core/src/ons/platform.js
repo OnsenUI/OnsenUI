@@ -399,7 +399,7 @@ class Platform {
       return this._getSelectedPlatform() === 'safari';
     }
 
-    return (Object.prototype.toString.call(window.HTMLElement).indexOf('Constructor') > 0) || (function (p) { return p.toString() === '[object SafariRemoteNotification]' })(!window['safari'] || safari.pushNotification);
+    return (Object.prototype.toString.call(window.HTMLElement).indexOf('Constructor') > 0) || (function (p) { return p.toString() === '[object SafariRemoteNotification]'; })(!window['safari'] || safari.pushNotification);
   }
 
   /**

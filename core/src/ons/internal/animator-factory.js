@@ -15,8 +15,8 @@ limitations under the License.
 
 */
 
-import util from '../util';
-import internal from '../internal';
+import util from '../util.js';
+import internal from '../internal/index.js';
 
 export default class AnimatorFactory {
 

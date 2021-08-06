@@ -15,9 +15,9 @@ limitations under the License.
 
 */
 
-import NavigatorAnimator from './animator';
-import util from '../../ons/util';
-import animit from '../../ons/animit';
+import NavigatorAnimator from './animator.js';
+import util from '../../ons/util.js';
+import animit from '../../ons/animit.js';
 
 /**
  * Abstract swipe animator for iOS navigator transition.
@@ -403,8 +403,8 @@ export default class IOSSwipeNavigatorAnimator extends NavigatorAnimator {
 
   _restoreStyle(...args) {
     const restore = el => {
-      this._savedStyle.get(el) === null ? el.removeAttribute('style') : el.setAttribute('style', this._savedStyle.get(el))
-      this._savedStyle.delete(el)
+      this._savedStyle.get(el) === null ? el.removeAttribute('style') : el.setAttribute('style', this._savedStyle.get(el));
+      this._savedStyle.delete(el);
     };
     args.forEach(restore);
 

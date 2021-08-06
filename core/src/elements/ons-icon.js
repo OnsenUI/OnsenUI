@@ -15,11 +15,11 @@ limitations under the License.
 
 */
 
-import onsElements from '../ons/elements';
-import util from '../ons/util';
-import autoStyle from '../ons/autostyle';
-import BaseElement from './base/base-element';
-import contentReady from '../ons/content-ready';
+import onsElements from '../ons/elements.js';
+import util from '../ons/util.js';
+import autoStyle from '../ons/autostyle.js';
+import BaseElement from './base/base-element.js';
+import contentReady from '../ons/content-ready.js';
 
 let autoPrefix = 'fa'; // FIXME: To be removed in v3
 
@@ -148,7 +148,7 @@ export default class IconElement extends BaseElement {
   }
 
   _parseAttr(attrName, modifier = this.getAttribute('modifier') || '') {
-    const attr = this.getAttribute(attrName) || attrName || ''
+    const attr = this.getAttribute(attrName) || attrName || '';
     const parts = attr.split(/\s*,\s*/);
     const def = parts[0];
     let md = parts[1];

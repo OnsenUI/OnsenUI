@@ -11,13 +11,13 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import onsElements from '../ons/elements';
-import util from '../ons/util';
-import styler from '../ons/styler';
-import autoStyle from '../ons/autostyle';
-import ModifierUtil from '../ons/internal/modifier-util';
-import BaseElement from './base/base-element';
-import contentReady from '../ons/content-ready';
+import onsElements from '../ons/elements.js';
+import util from '../ons/util.js';
+import styler from '../ons/styler.js';
+import autoStyle from '../ons/autostyle.js';
+import ModifierUtil from '../ons/internal/modifier-util.js';
+import BaseElement from './base/base-element.js';
+import contentReady from '../ons/content-ready.js';
 
 const defaultClassName = 'fab';
 

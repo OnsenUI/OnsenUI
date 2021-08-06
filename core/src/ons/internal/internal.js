@@ -15,9 +15,9 @@ limitations under the License.
 
 */
 
-import util from '../util';
-import platform from '../platform';
-import pageAttributeExpression from '../page-attribute-expression';
+import util from '../util.js';
+import platform from '../platform.js';
+import pageAttributeExpression from '../page-attribute-expression.js';
 
 const internal = {};
 

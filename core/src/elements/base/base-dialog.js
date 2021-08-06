@@ -15,13 +15,13 @@ limitations under the License.
 
 */
 
-import util from '../../ons/util';
-import BaseElement from './base-element';
-import ModifierUtil from '../../ons/internal/modifier-util';
-import AnimatorFactory from '../../ons/internal/animator-factory';
-import DoorLock from '../../ons/doorlock';
-import deviceBackButtonDispatcher from '../../ons/internal/device-back-button-dispatcher';
-import contentReady from '../../ons/content-ready';
+import util from '../../ons/util.js';
+import BaseElement from './base-element.js';
+import ModifierUtil from '../../ons/internal/modifier-util.js';
+import AnimatorFactory from '../../ons/internal/animator-factory.js';
+import DoorLock from '../../ons/doorlock.js';
+import deviceBackButtonDispatcher from '../../ons/internal/device-back-button-dispatcher.js';
+import contentReady from '../../ons/content-ready.js';
 
 export default class BaseDialogElement extends BaseElement {
 

@@ -15,9 +15,9 @@ limitations under the License.
 
 */
 
-import util from './util';
-import contentReady from './content-ready';
-import ToastQueue from './internal/toast-queue';
+import util from './util.js';
+import contentReady from './content-ready.js';
+import ToastQueue from './internal/toast-queue.js';
 
 const _setAttributes = (element, options) => {
   ['id', 'class', 'animation']
@@ -38,7 +38,7 @@ const _normalizeArguments = (message, options = {}, defaults = {}) => {
   if (options.hasOwnProperty('buttonLabels') || options.hasOwnProperty('buttonLabel')) {
     options.buttonLabels = options.buttonLabels || options.buttonLabel;
     if (!Array.isArray(options.buttonLabels)) {
-      options.buttonLabels = [options.buttonLabels || '']
+      options.buttonLabels = [options.buttonLabels || ''];
     }
   }
 
@@ -518,12 +518,12 @@ notification.toast = (message, options) => {
     const show = () => {
       toast.parentElement && toast.show(options).then(() => {
         if (options.timeout) {
-          setTimeout(() => finish(-1), options.timeout)
+          setTimeout(() => finish(-1), options.timeout);
         }
       });
     };
 
-    setImmediate(() => options.force ? show() : ToastQueue.add(show, promise))
+    setImmediate(() => options.force ? show() : ToastQueue.add(show, promise));
   });
 
   return promise;

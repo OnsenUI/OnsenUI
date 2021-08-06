@@ -11,10 +11,10 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import onsElements from '../ons/elements';
-import BaseInputElement from './base/base-input';
-import contentReady from '../ons/content-ready';
-import util from '../ons/util';
+import onsElements from '../ons/elements.js';
+import BaseInputElement from './base/base-input.js';
+import contentReady from '../ons/content-ready.js';
+import util from '../ons/util.js';
 
 const scheme = {
   '.text-input': 'text-input--*',
@@ -128,7 +128,7 @@ export default class InputElement extends BaseInputElement {
 
     const type = this.getAttribute('type');
     if (['checkbox', 'radio'].indexOf(type) >= 0) {
-      util.warn(`Warn: <ons-input type="${type}"> is deprecated since v2.4.0. Use <ons-${type}> instead.`)
+      util.warn(`Warn: <ons-input type="${type}"> is deprecated since v2.4.0. Use <ons-${type}> instead.`);
     }
   }
 

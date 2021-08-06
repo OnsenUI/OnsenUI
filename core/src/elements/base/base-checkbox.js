@@ -11,8 +11,8 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import BaseInputElement from './base-input';
-import contentReady from '../../ons/content-ready';
+import BaseInputElement from './base-input.js';
+import contentReady from '../../ons/content-ready.js';
 
 export default class BaseCheckboxElement extends BaseInputElement {
 

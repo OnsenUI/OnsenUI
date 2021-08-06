@@ -15,7 +15,7 @@ limitations under the License.
 
 */
 
-import platform from '../platform';
+import platform from '../platform.js';
 
 const util = {
   _ready: false,

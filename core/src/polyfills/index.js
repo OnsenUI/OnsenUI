@@ -4,17 +4,7 @@
 // If you replace this import statement with codes,
 // the codes will be executed after the following polyfills are imported
 // because import statements are hoisted during compilation.
-import './polyfill-switches';
-
-// Polyfill ECMAScript standard features with global namespace pollution
-import 'core-js/fn/object/set-prototype-of';
-import 'core-js/fn/set';
-import 'core-js/fn/map';
-import 'core-js/fn/weak-map';
-import 'core-js/fn/array/from';
-
-// Polyfill Custom Elements v1 with global namespace pollution
-import '@onsenui/custom-elements/src/custom-elements';
+import './polyfill-switches.js';
 
 // Polyfill MutationObserver with global namespace pollution
 import './MutationObserver@0.7.22/MutationObserver.js';

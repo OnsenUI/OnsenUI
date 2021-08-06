@@ -15,11 +15,11 @@ limitations under the License.
 
 */
 
-import onsElements from '../ons/elements';
-import orientation from '../ons/orientation';
-import platform from '../ons/platform';
-import BaseElement from './base/base-element';
-import contentReady from '../ons/content-ready';
+import onsElements from '../ons/elements.js';
+import orientation from '../ons/orientation.js';
+import platform from '../ons/platform.js';
+import BaseElement from './base/base-element.js';
+import contentReady from '../ons/content-ready.js';
 
 /**
  * @element ons-if

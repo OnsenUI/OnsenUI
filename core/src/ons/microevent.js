@@ -69,7 +69,7 @@ MicroEvent.mixin  = function(destObject){
       destObject[props[i]] = MicroEvent.prototype[props[i]];
     }
   }
-}
+};
 
 window.MicroEvent = MicroEvent;
 export default MicroEvent;

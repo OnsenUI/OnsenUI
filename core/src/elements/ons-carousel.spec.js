@@ -123,7 +123,7 @@ describe('OnsCarouselElement', () => {
 
     it('should fire change events', () => {
       const p = name => new Promise(resolve => carousel.addEventListener(name, resolve));
-      const promises = Promise.all([p('prechange'), p('postchange')])
+      const promises = Promise.all([p('prechange'), p('postchange')]);
       carousel.setActiveIndex(1);
       return expect(promises).to.eventually.be.fulfilled;
     });

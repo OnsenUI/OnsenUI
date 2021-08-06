@@ -15,19 +15,19 @@ limitations under the License.
 
 */
 
-import onsElements from '../ons/elements';
-import util from '../ons/util';
-import AnimatorFactory from '../ons/internal/animator-factory';
-import orientation from '../ons/orientation';
-import internal from '../ons/internal';
-import ModifierUtil from '../ons/internal/modifier-util';
-import BaseElement from './base/base-element';
-import SplitterAnimator from './ons-splitter/animator';
-import SwipeReveal from '../ons/internal/swipe-reveal';
-import DoorLock from '../ons/doorlock';
-import contentReady from '../ons/content-ready';
-import { PageLoader, defaultPageLoader} from '../ons/page-loader';
-import SplitterElement from './ons-splitter';
+import onsElements from '../ons/elements.js';
+import util from '../ons/util.js';
+import AnimatorFactory from '../ons/internal/animator-factory.js';
+import orientation from '../ons/orientation.js';
+import internal from '../ons/internal/index.js';
+import ModifierUtil from '../ons/internal/modifier-util.js';
+import BaseElement from './base/base-element.js';
+import SplitterAnimator from './ons-splitter/animator.js';
+import SwipeReveal from '../ons/internal/swipe-reveal.js';
+import DoorLock from '../ons/doorlock.js';
+import contentReady from '../ons/content-ready.js';
+import { PageLoader, defaultPageLoader} from '../ons/page-loader.js';
+import SplitterElement from './ons-splitter/index.js';
 
 const SPLIT_MODE = 'split';
 const COLLAPSE_MODE = 'collapse';
@@ -559,7 +559,7 @@ export default class SplitterSideElement extends BaseElement {
 
   set onSwipe(value) {
     if (value && !(value instanceof Function)) {
-      util.throw('"onSwipe" must be a function')
+      util.throw('"onSwipe" must be a function');
     }
     this._onSwipe = value;
   }

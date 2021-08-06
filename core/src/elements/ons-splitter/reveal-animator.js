@@ -15,9 +15,9 @@ limitations under the License.
 
 */
 
-import contentReady from '../../ons/content-ready';
-import styler from '../../ons/styler';
-import animit from '../../ons/animit';
+import contentReady from '../../ons/content-ready.js';
+import styler from '../../ons/styler.js';
+import animit from '../../ons/animit.js';
 import SplitterAnimator from './animator.js';
 
 export default class RevealSplitterAnimator extends SplitterAnimator {

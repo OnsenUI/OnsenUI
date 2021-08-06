@@ -15,30 +15,30 @@ limitations under the License.
 
 */
 
-import onsElements from '../../ons/elements';
-import util from '../../ons/util';
-import internal from '../../ons/internal';
-import SwipeReveal from '../../ons/internal/swipe-reveal';
-import AnimatorFactory from '../../ons/internal/animator-factory';
-import NavigatorAnimator from './animator';
-import IOSSlideNavigatorAnimator from './ios-slide-animator';
-import IOSLiftNavigatorAnimator from './ios-lift-animator';
-import IOSFadeNavigatorAnimator from './ios-fade-animator';
-import MDSlideNavigatorAnimator from './md-slide-animator';
-import MDLiftNavigatorAnimator from './md-lift-animator';
-import MDFadeNavigatorAnimator from './md-fade-animator';
-import NoneNavigatorAnimator from './none-animator';
-import platform from '../../ons/platform';
-import contentReady from '../../ons/content-ready';
-import BaseElement from '../base/base-element';
-import deviceBackButtonDispatcher from '../../ons/internal/device-back-button-dispatcher';
-import {PageLoader, defaultPageLoader, instantPageLoader} from '../../ons/page-loader';
+import onsElements from '../../ons/elements.js';
+import util from '../../ons/util.js';
+import internal from '../../ons/internal/index.js';
+import SwipeReveal from '../../ons/internal/swipe-reveal.js';
+import AnimatorFactory from '../../ons/internal/animator-factory.js';
+import NavigatorAnimator from './animator.js';
+import IOSSlideNavigatorAnimator from './ios-slide-animator.js';
+import IOSLiftNavigatorAnimator from './ios-lift-animator.js';
+import IOSFadeNavigatorAnimator from './ios-fade-animator.js';
+import MDSlideNavigatorAnimator from './md-slide-animator.js';
+import MDLiftNavigatorAnimator from './md-lift-animator.js';
+import MDFadeNavigatorAnimator from './md-fade-animator.js';
+import NoneNavigatorAnimator from './none-animator.js';
+import platform from '../../ons/platform.js';
+import contentReady from '../../ons/content-ready.js';
+import BaseElement from '../base/base-element.js';
+import deviceBackButtonDispatcher from '../../ons/internal/device-back-button-dispatcher.js';
+import {PageLoader, defaultPageLoader, instantPageLoader} from '../../ons/page-loader.js';
 
 const _animatorDict = {
-  'default': function () { return platform.isAndroid() ? MDFadeNavigatorAnimator : IOSSlideNavigatorAnimator },
-  'slide': function () { return platform.isAndroid() ? MDSlideNavigatorAnimator : IOSSlideNavigatorAnimator },
-  'lift': function () { return platform.isAndroid() ? MDLiftNavigatorAnimator : IOSLiftNavigatorAnimator },
-  'fade': function () { return platform.isAndroid() ? MDFadeNavigatorAnimator : IOSFadeNavigatorAnimator },
+  'default': function () { return platform.isAndroid() ? MDFadeNavigatorAnimator : IOSSlideNavigatorAnimator; },
+  'slide': function () { return platform.isAndroid() ? MDSlideNavigatorAnimator : IOSSlideNavigatorAnimator; },
+  'lift': function () { return platform.isAndroid() ? MDLiftNavigatorAnimator : IOSLiftNavigatorAnimator; },
+  'fade': function () { return platform.isAndroid() ? MDFadeNavigatorAnimator : IOSFadeNavigatorAnimator; },
   'slide-ios': IOSSlideNavigatorAnimator,
   'slide-md': MDSlideNavigatorAnimator,
   'lift-ios': IOSLiftNavigatorAnimator,
@@ -780,7 +780,7 @@ export default class NavigatorElement extends BaseElement {
     }
 
     if (options.pop) {
-      this._removePages()
+      this._removePages();
       return this.insertPage(0, page, { data: options.data })
         .then(() => this.popPage(options));
     }
@@ -788,7 +788,7 @@ export default class NavigatorElement extends BaseElement {
     // Tip: callback runs before resolved promise
     const callback = options.callback;
     options.callback = newPage => {
-      this._removePages()
+      this._removePages();
       newPage.updateBackButton(false);
       callback && callback(newPage);
     };
@@ -1039,11 +1039,11 @@ export default class NavigatorElement extends BaseElement {
   }
 
   _show() {
-    this.loaded.then(() => this.topPage && this.topPage._show())
+    this.loaded.then(() => this.topPage && this.topPage._show());
   }
 
   _hide() {
-    this.topPage && this.topPage._hide()
+    this.topPage && this.topPage._hide();
   }
 
   _destroy() {

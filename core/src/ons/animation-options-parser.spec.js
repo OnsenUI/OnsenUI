@@ -1,4 +1,4 @@
-import animationOptionsParse from './animation-options-parser';
+import animationOptionsParse from './animation-options-parser.js';
 
 describe('animationOptionsParser', () => {
   it('exists', () => {

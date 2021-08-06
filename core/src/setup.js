@@ -1,8 +1,8 @@
-import './ons/platform'; // This file must be loaded before Custom Elements polyfills.
+import './ons/platform.js'; // This file must be loaded before Custom Elements polyfills.
 import './polyfills/index.js';
 import './vendor/index.js';
 import './ons/microevent.js';
-import internal from './ons/internal';
+import internal from './ons/internal/index.js';
 
 export default function setup(ons) {
   internal.waitDOMContentLoaded(function() {
@@ -41,7 +41,7 @@ export default function setup(ons) {
         if (event.keyCode === 27) {
           ons.fireDeviceBackButtonEvent();
         }
-      })
+      });
     }
 
     // setup loading placeholder

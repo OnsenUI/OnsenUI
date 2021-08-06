@@ -15,10 +15,10 @@ limitations under the License.
 
 */
 
-import onsElements from '../ons/elements';
-import BaseElement from './base/base-element';
-import util from '../ons/util';
-import contentReady from '../ons/content-ready';
+import onsElements from '../ons/elements.js';
+import BaseElement from './base/base-element.js';
+import util from '../ons/util.js';
+import contentReady from '../ons/content-ready.js';
 
 export default class SplitterMaskElement extends BaseElement {
 

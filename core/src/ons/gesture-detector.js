@@ -4,7 +4,7 @@
 
 'use strict';
 
-import util from './util';
+import util from './util.js';
 
 var Event, Utils, Detection, PointerEvent;
 

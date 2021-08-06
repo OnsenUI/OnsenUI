@@ -11,11 +11,11 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import onsElements from '../ons/elements';
-import util from '../ons/util';
-import internal from '../ons/internal';
-import BaseElement from './base/base-element';
-import { LazyRepeatDelegate, LazyRepeatProvider } from '../ons/internal/lazy-repeat';
+import onsElements from '../ons/elements.js';
+import util from '../ons/util.js';
+import internal from '../ons/internal/index.js';
+import BaseElement from './base/base-element.js';
+import { LazyRepeatDelegate, LazyRepeatProvider } from '../ons/internal/lazy-repeat.js';
 
 /**
  * @element ons-lazy-repeat

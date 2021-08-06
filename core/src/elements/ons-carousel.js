@@ -15,11 +15,11 @@ limitations under the License.
 
 */
 
-import onsElements from '../ons/elements';
-import util from '../ons/util';
-import BaseElement from './base/base-element';
-import contentReady from '../ons/content-ready';
-import Swiper from '../ons/internal/swiper';
+import onsElements from '../ons/elements.js';
+import util from '../ons/util.js';
+import BaseElement from './base/base-element.js';
+import contentReady from '../ons/content-ready.js';
+import Swiper from '../ons/internal/swiper.js';
 
 /**
  * @element ons-carousel

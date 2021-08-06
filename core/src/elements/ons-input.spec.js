@@ -106,7 +106,7 @@ describe('OnsInputElement', () => {
       const element = ons._util.createElement('<ons-input input-id="myInput"></ons-input>');
 
       setImmediate(() => {
-        expect(element.querySelector('input').id).to.equal('myInput')
+        expect(element.querySelector('input').id).to.equal('myInput');
         done();
       });
     });
@@ -118,7 +118,7 @@ describe('OnsInputElement', () => {
       expect(element._input.type).to.equal('text');
       element.setAttribute('type', 'radio');
       expect(element._input.type).to.equal('text');
-    })
+    });
 
     it('sets the type to the inner input', () => {
       element.setAttribute('type', 'password');

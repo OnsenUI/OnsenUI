@@ -15,10 +15,10 @@ limitations under the License.
 
 */
 
-import onsElements from '../ons/elements';
-import util from '../ons/util';
-import BaseElement from './base/base-element';
-import ModifierUtil from '../ons/internal/modifier-util';
+import onsElements from '../ons/elements.js';
+import util from '../ons/util.js';
+import BaseElement from './base/base-element.js';
+import ModifierUtil from '../ons/internal/modifier-util.js';
 const scheme = {'': 'carousel-item--*'};
 
 /**
@@ -54,7 +54,7 @@ export default class CarouselItemElement extends BaseElement {
   }
 
   static get observedAttributes() {
-    return ['modifier']
+    return ['modifier'];
   }
 
   attributeChangedCallback(name, last, current) {

@@ -1,4 +1,4 @@
-import BaseAnimator from './base-animator';
+import BaseAnimator from './base-animator.js';
 
 describe('BaseAnimator', () => {
   class TestGenericAnimator extends BaseAnimator { }
@@ -30,5 +30,5 @@ describe('BaseAnimator', () => {
     expect(customAnimatorInstance.duration).to.not.equal(originalAnimatorInstance.duration);
 
     customAnimatorInstance.method2();
-  })
+  });
 });

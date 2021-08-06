@@ -15,21 +15,21 @@ limitations under the License.
 
 */
 
-import util from './util';
-import elements from './elements'
-import animit from './animit'
-import GestureDetector from './gesture-detector';
-import platform from './platform';
-import notification from './notification';
-import actionSheet from './action-sheet';
-import internal from './internal';
-import orientation from './orientation';
-import modifier from './modifier';
-import softwareKeyboard from './software-keyboard';
-import pageAttributeExpression from './page-attribute-expression';
-import autoStyle from './autostyle';
-import DoorLock from './doorlock';
-import { defaultPageLoader, PageLoader } from './page-loader';
+import util from './util.js';
+import elements from './elements.js';
+import animit from './animit.js';
+import GestureDetector from './gesture-detector.js';
+import platform from './platform.js';
+import notification from './notification.js';
+import actionSheet from './action-sheet.js';
+import internal from './internal/index.js';
+import orientation from './orientation.js';
+import modifier from './modifier.js';
+import softwareKeyboard from './software-keyboard.js';
+import pageAttributeExpression from './page-attribute-expression.js';
+import autoStyle from './autostyle.js';
+import DoorLock from './doorlock.js';
+import { defaultPageLoader, PageLoader } from './page-loader.js';
 
 /**
  * @object ons

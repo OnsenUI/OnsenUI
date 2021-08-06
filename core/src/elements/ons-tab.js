@@ -15,14 +15,14 @@ limitations under the License.
 
 */
 
-import onsElements from '../ons/elements';
-import util from '../ons/util';
-import autoStyle from '../ons/autostyle';
-import ModifierUtil from '../ons/internal/modifier-util';
-import BaseElement from './base/base-element';
-import TabbarElement from './ons-tabbar';
-import contentReady from '../ons/content-ready';
-import { PageLoader, defaultPageLoader } from '../ons/page-loader';
+import onsElements from '../ons/elements.js';
+import util from '../ons/util.js';
+import autoStyle from '../ons/autostyle.js';
+import ModifierUtil from '../ons/internal/modifier-util.js';
+import BaseElement from './base/base-element.js';
+import TabbarElement from './ons-tabbar/index.js';
+import contentReady from '../ons/content-ready.js';
+import { PageLoader, defaultPageLoader } from '../ons/page-loader.js';
 
 const defaultClassName = 'tabbar__item';
 
@@ -254,7 +254,7 @@ export default class TabElement extends BaseElement {
   setActive(active = true) {
     this._input.checked = active;
     this.classList.toggle('active', active);
-    util.toggleAttribute(this, 'active', active)
+    util.toggleAttribute(this, 'active', active);
 
     if (this.hasAttribute('icon') && this.hasAttribute('active-icon')) {
       this._icon.children[0].setAttribute('icon', this.getAttribute(active ? 'active-icon' : 'icon'));

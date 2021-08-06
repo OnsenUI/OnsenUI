@@ -15,13 +15,13 @@ limitations under the License.
 
 */
 
-import onsElements from '../ons/elements';
-import util from '../ons/util';
-import autoStyle from '../ons/autostyle';
-import ModifierUtil from '../ons/internal/modifier-util';
-import BaseCheckboxElement from './base/base-checkbox';
-import contentReady from '../ons/content-ready';
-import GestureDetector from '../ons/gesture-detector';
+import onsElements from '../ons/elements.js';
+import util from '../ons/util.js';
+import autoStyle from '../ons/autostyle.js';
+import ModifierUtil from '../ons/internal/modifier-util.js';
+import BaseCheckboxElement from './base/base-checkbox.js';
+import contentReady from '../ons/content-ready.js';
+import GestureDetector from '../ons/gesture-detector.js';
 
 const scheme = {
   '': 'switch--*',

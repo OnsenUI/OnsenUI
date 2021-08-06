@@ -15,8 +15,8 @@ limitations under the License.
 
 */
 
-import onsPlatform from './platform';
-import util from './util';
+import onsPlatform from './platform.js';
+import util from './util.js';
 
 let autoStyleEnabled = true;
 
