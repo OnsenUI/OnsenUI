@@ -4,12 +4,9 @@
   "description": "HTML5 Mobile Framework & UI Components",
   "private": false,
   "scripts": {
-    "build": "npm run build:js && npm run build:css && npm run build:css-components && npm run build:copy && npm run build:docs && npm run build:zip",
+    "build": "npm run build:umd && npm run build:css && npm run build:css-components && npm run build:copy && npm run build:docs && npm run build:zip",
     "build:docs": "node scripts/build-docs.js",
-    "build:js": "npm run build:js:rollup && npm run build:js:minify && npm run build:js:esm",
-    "build:js:esm": "cpx 'core/src/**/!(*.spec.js|index.umd.js|onsenui.d.ts)' build/esm",
-    "build:js:minify": "uglifyjs build/js/onsenui.js -c -m --comments '/onsenui v/' --output build/js/onsenui.min.js",
-    "build:js:rollup": "rollup --config",
+    "build:umd": "rollup --config && uglifyjs js/onsenui.js -c -m --comments '/onsenui v/' --output js/onsenui.min.js",
     "build:copy": "npm run build:copy:css-components-src && npm run build:copy:more-files",
     "build:copy:more-files": "cpx package.json build && cpx core/src/onsenui.d.ts build/js",
     "build:copy:css-components-src": "cpx 'css-components/{!(npm-debug.log|onsen-visual-design-spec.sketch),!(node_modules|build)/**/*}' build/css-components-src",
@@ -19,7 +16,7 @@
     "build:css:onsenui-css": "node scripts/make-onsenui-css.js",
     "build:css-components": "(cd css-components && npm run build) && ncp css-components/build build/css",
     "build:zip": "node scripts/zip.js",
-    "clean": "rimraf ./build && mkdir build && mkdir build/css && mkdir build/js",
+    "clean": "rimraf ./js && rimraf ./build",
     "dist": "cpx '{package.json,README.md,CHANGELOG.md,LICENSE}' OnsenUI-dist && cpx 'build/{!(onsenui.zip|package.json),!(docs)/**/*}' OnsenUI-dist",
     "prebuild": "npm run clean",
     "serve": "npm run serve:watch-core & npm run serve:watch-css & npm run serve:browser-sync",
@@ -32,12 +29,13 @@
   },
   "main": "js/onsenui.js",
   "module": "esm/index.js",
-  "typings": "js/onsenui.d.ts",
+  "typings": "esm/onsenui.d.ts",
   "files": [
+    "esm",
+    "!esm/{index.umd.js,**/*.spec.js}",
     "css",
     "css-components-src",
-    "js",
-    "esm"
+    "js"
   ],
   "repository": {
     "type": "git",

@@ -14,12 +14,15 @@ const babelrc = Object.assign({}, pkg.babel);
 babelrc.babelrc = babelrc.presets[0][1].modules = false;
 babelrc.plugins = ['external-helpers'];
 
+const srcDir = 'esm';
+const buildDir = 'js';
+
 export default [
   // Core UMD
   {
-    input: 'core/src/index.umd.js',
+    input: `${srcDir}/index.umd.js`,
     output: {
-      file: 'build/js/onsenui.js',
+      file: `${buildDir}/onsenui.js`,
       format: 'umd',
       name: 'ons',
       sourcemap: 'inline',
@@ -28,11 +31,11 @@ export default [
     plugins: [
       eslint({
         include: [
-          'core/src/**/*.js',
+          `${srcDir}/**/*.js`,
         ],
         exclude: [
-          'core/src/polyfills/**/*.js',
-          'core/src/vendor/**/*.js'
+          `${srcDir}/polyfills/**/*.js`,
+          `${srcDir}/vendor/**/*.js`
         ]
       }),
       string(stringOpt),

@@ -8,5 +8,6 @@ module-stats*.html
 .selenium
 .vscode
 /build
+/js
 /OnsenUI-dist
 docs/gendocs
