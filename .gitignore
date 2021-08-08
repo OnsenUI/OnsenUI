@@ -9,5 +9,9 @@ module-stats*.html
 .vscode
 /build
 /js
+/css/onsenui-core.css
+/css/onsenui-core.min.css
+/css/onsenui.css
+/css/onsenui.min.css
 /OnsenUI-dist
 docs/gendocs
