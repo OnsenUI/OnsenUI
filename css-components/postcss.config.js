@@ -7,23 +7,15 @@ module.exports = {
       extensions: ['.svg'],
       root: 'src/components/'
     }),
-    require('postcss-preset-env')({
-      browsers: browsers,
-    }),
-    require('postcss-apply')({
-      preserve: false
-    }),
-    require('postcss-custom-properties')({
-      preserve: false
-    }),
+    require('postcss-mixins'),
     require('postcss-custom-media')({
       preserve: false
     }),
     require('postcss-nested'),
-    require('postcss-calc')({
-      preserve: false
-    }),
     require('postcss-color-mod-function'),
+    require('postcss-preset-env')({
+      browsers: browsers
+    }),
     require('postcss-reporter')({
       clearAllMessages: true,
       clearReportedMessages: true,
