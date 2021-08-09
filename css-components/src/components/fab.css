@@ -12,13 +12,13 @@
   --material-fab-mini-width: 40px;
   --material-fab-mini-height: 40px;
 
-  --fab: {
+  @define-mixin fab {
     position: relative;
     display: inline-block;
-    @apply(--reset-box-model);
-    @apply(--reset-base);
-    @apply(--reset-font);
-    @apply(--reset-cursor);
+    @mixin reset-box-model;
+    @mixin reset-base;
+    @mixin reset-font;
+    @mixin reset-cursor;
     width: var(--fab-width);
     height: var(--fab-height);
     text-decoration: none;
@@ -36,9 +36,9 @@
     transition: all 0.1s linear;
   }
 
-  --material-fab: {
-    @apply(--fab);
-    @apply(--material-font);
+  @define-mixin material-fab {
+    @mixin fab;
+    @mixin material-font;
     width: var(--material-fab-width);
     height: var(--material-fab-height);
     text-decoration: none;
@@ -46,40 +46,40 @@
     line-height: var(--material-fab-height);
     color: var(--material-fab-text-color);
     background-color: var(--material-fab-background-color);
-    @apply(--material-shadow-2);
+    @mixin material-shadow-2;
     transition: all 0.2s ease-in-out;
   }
 
-  --fab--focus: {
+  @define-mixin fab--focus {
     outline: 0;
   }
 
-  --material-fab--focus: {
+  @define-mixin material-fab--focus {
     outline: 0;
   }
 
-  --fab--active: {
+  @define-mixin fab--active {
     box-shadow: 0 3px 6 rgba(0, 0, 0, 0.12);
     background-color: var(--fab-active-background-color);
     transition: all 0.2s ease;
   }
 
-  --material-fab--active: {
-    @apply(--material-shadow-4);
+  @define-mixin material-fab--active {
+    @mixin material-shadow-4;
     background-color: var(--material-fab-active-background-color);
     transition: all 0.2s ease;
   }
 
-  --fab--disabled: {
+  @define-mixin fab--disabled {
     background-color: color-mod(black alpha(50%));
-    @apply(--material-shadow-0);
-    @apply(--disabled);
+    @mixin material-shadow-0;
+    @mixin disabled;
   }
 
-  --material-fab--disabled: {
+  @define-mixin material-fab--disabled {
     background-color: color-mod(black alpha(50%));
-    @apply(--material-shadow-0);
-    @apply(--disabled);
+    @mixin material-shadow-0;
+    @mixin disabled;
   }
 }
 
@@ -94,17 +94,17 @@
 /* stylelint-disable */
 ons-fab, ons-speed-dial-item, button {
   &.fab {
-    @apply(--fab);
+    @mixin fab;
     &:active {
-      @apply(--fab--active);
+      @mixin fab--active;
       box-shadow: 0 0 6 rgba(0, 0, 0, 0.12);
     }
     &:focus {
-      @apply(--fab--focus);
+      @mixin fab--focus;
     }
     &:disabled,
     &[disabled] {
-      @apply(--material-fab--disabled);
+      @mixin material-fab--disabled;
     }
   }
 
@@ -134,15 +134,15 @@ ons-fab, ons-speed-dial-item, button {
 /* stylelint-disable */
 ons-fab, ons-speed-dial-item, button {
   &.fab--material {
-    @apply(--material-fab);
+    @mixin material-fab;
   }
 
   &.fab--material:active {
-    @apply(--material-fab--active);
+    @mixin material-fab--active;
   }
 
   &.fab--material:focus {
-    @apply(--material-fab--focus);
+    @mixin material-fab--focus;
   }
 
   &.fab--material__icon {
@@ -159,7 +159,7 @@ ons-fab, ons-speed-dial-item, button {
 
   &.fab--material:disabled,
   &.fab--material[disabled] {
-    @apply(--material-fab--disabled);
+    @mixin material-fab--disabled;
   }
 }
 /* stylelint-enable */

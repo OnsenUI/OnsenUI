@@ -1,6 +1,6 @@
 
 :root {
-  --retina-alert-dialog-button-border: {
+  @define-mixin retina-alert-dialog-button-border {
     @media (--retina-query) {
       border-top: none;
       background-size: 100% 1px;
@@ -33,10 +33,10 @@
 */
 
 .alert-dialog {
-  @apply(--reset-box-model);
-  @apply(--reset-base);
-  @apply(--reset-cursor);
-  @apply(--reset-font);
+  @mixin reset-box-model;
+  @mixin reset-base;
+  @mixin reset-cursor;
+  @mixin reset-font;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -57,7 +57,7 @@
 }
 
 .alert-dialog-title {
-  @apply(--reset-font);
+  @mixin reset-font;
   font-size: var(--font-size);
   font-weight: var(--font-weight--large);
   padding: 0 8px;
@@ -66,7 +66,7 @@
 }
 
 .alert-dialog-content {
-  @apply(--reset-box-model);
+  @mixin reset-box-model;
   padding: 4px 12px 8px;
   font-size: var(--font-size--mini);
   min-height: 36px;
@@ -79,11 +79,11 @@
 }
 
 .alert-dialog-button {
-  @apply(--reset-box-model);
-  @apply(--reset-base);
-  @apply(--reset-font);
-  @apply(--reset-cursor);
-  @apply(--ellipsis);
+  @mixin reset-box-model;
+  @mixin reset-base;
+  @mixin reset-font;
+  @mixin reset-cursor;
+  @mixin ellipsis;
   text-decoration: none;
   letter-spacing: 0;
   vertical-align: middle;
@@ -100,7 +100,7 @@
   line-height: 44px;
   outline: none;
   color: var(--alert-dialog-button-color);
-  @apply(--retina-alert-dialog-button-border);
+  @mixin retina-alert-dialog-button-border;
 }
 
 .alert-dialog-button:active {
@@ -146,8 +146,8 @@
 }
 
 .alert-dialog-mask {
-  @apply(--reset-base);
-  @apply(--reset-cursor);
+  @mixin reset-base;
+  @mixin reset-cursor;
   position: absolute;
   top: 0;
   right: 0;
@@ -247,11 +247,11 @@
 
 .alert-dialog-container--material {
   padding: 22px 0 0 0;
-  @apply(--material-shadow-5);
+  @mixin material-shadow-5;
 }
 
 .alert-dialog-title--material {
-  @apply(--material-font);
+  @mixin material-font;
   text-align: left;
   font-size: 20px;
   font-weight: 500;
@@ -260,7 +260,7 @@
 }
 
 .alert-dialog-content--material {
-  @apply(--material-font);
+  @mixin material-font;
   text-align: left;
   font-size: 16px;
   font-weight: 400;
@@ -281,7 +281,7 @@
 }
 
 .alert-dialog-button--material {
-  @apply(--material-font);
+  @mixin material-font;
   text-transform: uppercase;
   display: inline-block;
   width: auto;

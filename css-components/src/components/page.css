@@ -5,7 +5,7 @@
 }
 
 .page {
-  @apply(--reset-font);
+  @mixin reset-font;
   background-color: var(--page-background-color);
   position: absolute;
   top: 0;
@@ -44,12 +44,12 @@
 }
 
 .page--material {
-  @apply(--material-font);
+  @mixin material-font;
   background-color: var(--page-material-background-color);
 }
 
 .page--material__content {
-  @apply(--material-font);
+  @mixin material-font;
   font-weight: var(--font-weight);
 }
 
@@ -58,7 +58,7 @@
 .page__content h3,
 .page__content h4,
 .page__content h5 {
-  @apply(--material-font);
+  @mixin material-font;
   font-weight: var(--font-weight--large);
   margin: 0.6em 0;
   padding: 0;
@@ -81,7 +81,7 @@
 .page--material__content h3,
 .page--material__content h4,
 .page--material__content h5 {
-  @apply(--material-font);
+  @mixin material-font;
   font-weight: var(--font-weight--large);
   margin: 0.6em 0;
   padding: 0;

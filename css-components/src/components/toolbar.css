@@ -10,7 +10,7 @@
   --toolbar-material-height: 56px;
   --material-toolbar-color: var(--material-toolbar-text-color);
 
-  --retina-toolbar-top-border: {
+  @define-mixin retina-toolbar-top-border {
     border-top: none;
     background-size: 100% 1px;
     background-repeat: no-repeat;
@@ -22,7 +22,7 @@
     }
   }
 
-  --retina-toolbar-bottom-border: {
+  @define-mixin retina-toolbar-bottom-border {
     border-bottom: none;
     background-size: 100% 1px;
     background-repeat: no-repeat;
@@ -34,21 +34,21 @@
     }
   }
 
-  --toolbar: {
-    @apply(--reset-font);
-    @apply(--reset-container);
-    @apply(--reset-base);
-    @apply(--reset-cursor);
+  @define-mixin toolbar {
+    @mixin reset-font;
+    @mixin reset-container;
+    @mixin reset-base;
+    @mixin reset-cursor;
     z-index: 2;
   }
 
-  --toolbar__item: {
-    @apply(--reset-box-model);
-    @apply(--reset-base);
+  @define-mixin toolbar__item {
+    @mixin reset-box-model;
+    @mixin reset-base;
   }
 
-  --toolbar--material-font: {
-    @apply(--material-font);
+  @define-mixin toolbar--material-font {
+    @mixin material-font;
     font-size: 20px;
     font-weight: 500;
     color: var(--material-toolbar-color);
@@ -66,7 +66,7 @@
 */
 
 .toolbar {
-  @apply(--toolbar);
+  @mixin toolbar;
   display: flex;
   align-items: stretch;
   flex-wrap: nowrap;
@@ -79,7 +79,7 @@
   font-weight: var(--font-weight);
   width: 100%;
   white-space: nowrap;
-  @apply(--retina-toolbar-bottom-border);
+  @mixin retina-toolbar-bottom-border;
 }
 
 .toolbar__bg {
@@ -87,7 +87,7 @@
 }
 
 .toolbar__item {
-  @apply(--toolbar__item);
+  @mixin toolbar__item;
   height: var(--toolbar-height);
   overflow: visible;
   display: block;
@@ -95,7 +95,7 @@
 }
 
 .toolbar__left {
-  @apply(--toolbar__item);
+  @mixin toolbar__item;
   max-width: 50%;
   width: 27%;
   text-align: left;
@@ -103,7 +103,7 @@
 }
 
 .toolbar__right {
-  @apply(--toolbar__item);
+  @mixin toolbar__item;
   max-width: 50%;
   width: 27%;
   text-align: right;
@@ -111,7 +111,7 @@
 }
 
 .toolbar__center {
-  @apply(--toolbar__item);
+  @mixin toolbar__item;
   width: 46%;
   text-align: center;
   line-height: var(--toolbar-height);
@@ -190,7 +190,7 @@
 */
 
 .bottom-bar {
-  @apply(--toolbar);
+  @mixin toolbar;
   display: block;
   height: var(--toolbar-height);
   padding-left: var(--toolbar-padding);
@@ -205,7 +205,7 @@
   bottom: 0;
   right: 0;
   left: 0;
-  @apply(--retina-toolbar-top-border);
+  @mixin retina-toolbar-top-border;
 }
 
 .bottom-bar__line-height {
@@ -299,7 +299,7 @@
 }
 
 .toolbar--material__left, .toolbar--material__right {
-  @apply(--toolbar--material-font);
+  @mixin toolbar--material-font;
   height: var(--toolbar-material-height);
   min-width: 72px;
   width: auto;
@@ -307,7 +307,7 @@
 }
 
 .toolbar--material__center {
-  @apply(--toolbar--material-font);
+  @mixin toolbar--material-font;
   height: var(--toolbar-material-height);
   width: auto;
   flex-grow: 1;

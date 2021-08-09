@@ -45,7 +45,7 @@ module.exports = {
     // String
     'string-no-newline': true,
     'string-quotes': 'single',
-    
+
     // Length
     'length-zero-no-unit': true,
 
@@ -181,7 +181,7 @@ module.exports = {
     'at-rule-name-case': 'lower',
     'at-rule-name-newline-after': null,
     'at-rule-name-space-after': 'always',
-    'at-rule-no-unknown': true,
+    'at-rule-no-unknown': [true, {ignoreAtRules: ["mixin", "define-mixin"]}],
     'at-rule-no-vendor-prefix': null,
     'at-rule-semicolon-newline-after': 'always',
     'at-rule-whitelist': null,

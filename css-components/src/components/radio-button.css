@@ -7,31 +7,31 @@
   --material-radio-button-size: 20px;
   --material-radio-button-shadow-size: calc((48px - var(--material-radio-button-size)) / 2);
 
-  --radio-button: {
-    @apply(--reset-box-model);
+  @define-mixin radio-button {
+    @mixin reset-box-model;
     position: relative;
     display: inline-block;
     vertical-align: top;
-    @apply(--reset-cursor);
-    @apply(--reset-font);
-    @apply(--hide-input-parent);
+    @mixin reset-cursor;
+    @mixin reset-font;
+    @mixin hide-input-parent;
   }
 
-  --radio-button__label: {
+  @define-mixin radio-button__label {
     position: relative;
     display: inline-block;
     vertical-align: top;
-    @apply(--reset-cursor);
+    @mixin reset-cursor;
   }
 
-  --radio-button--before: {
+  @define-mixin radio-button--before {
     content: '';
     position: absolute;
     border-radius: 100%;
-    @apply(--reset-box-model);
+    @mixin reset-box-model;
   }
 
-  --radio-button--after: {
+  @define-mixin radio-button--after {
     content: '';
     position: absolute;
     border-radius: 100%;
@@ -40,8 +40,8 @@
     transform: translate(-50%, -50%);
   }
 
-  --radio-button--disabled: {
-    @apply(--disabled);
+  @define-mixin radio-button--disabled {
+    @mixin disabled;
   }
 }
 
@@ -70,7 +70,7 @@
 */
 
 .radio-button__input {
-  @apply(--hide-input);
+  @mixin hide-input;
 }
 
 .radio-button__input:active,
@@ -80,14 +80,14 @@
 }
 
 .radio-button {
-  @apply(--radio-button__label);
-  @apply(--hide-input-parent);
+  @mixin radio-button__label;
+  @mixin hide-input-parent;
   line-height: var(--radio-button-size);
   text-align: left;
 }
 
 .radio-button__checkmark:before {
-  @apply(--radio-button--before);
+  @mixin radio-button--before;
   width: var(--checkbox-size);
   height: var(--checkbox-size);
   background: transparent;
@@ -97,7 +97,7 @@
 }
 
 .radio-button__checkmark {
-  @apply(--radio-button);
+  @mixin radio-button;
   position: relative;
   width: var(--radio-button-size);
   height: var(--radio-button-size);
@@ -106,7 +106,7 @@
 }
 
 .radio-button__checkmark:after {
-  @apply(--checkmark);
+  @mixin checkmark;
 }
 
 :checked + .radio-button__checkmark {
@@ -123,7 +123,7 @@
 }
 
 :disabled + .radio-button__checkmark {
-  @apply(--radio-button--disabled);
+  @mixin radio-button--disabled;
 }
 
 /*~
@@ -155,7 +155,7 @@
 
 .radio-button--material {
   line-height: calc(var(--material-radio-button-size) + 2px);
-  @apply(--material-font);
+  @mixin material-font;
 }
 
 .radio-button--material__input:before {

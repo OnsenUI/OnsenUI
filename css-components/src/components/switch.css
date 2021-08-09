@@ -6,21 +6,21 @@
   --switch-height: 32px;
   --switch-width: 51px;
 
-  --switch: {
+  @define-mixin switch {
     display: inline-block;
     vertical-align: top;
-    @apply(--reset-box-model);
-    @apply(--hide-input-parent);
+    @mixin reset-box-model;
+    @mixin hide-input-parent;
     min-width: 51px;
   }
 
-  --switch__toggle: {
+  @define-mixin switch__toggle {
     position: relative;
     display: inline-block;
     vertical-align: top;
-    @apply(--reset-box-model);
-    @apply(--reset-base);
-    @apply(--reset-cursor);
+    @mixin reset-box-model;
+    @mixin reset-base;
+    @mixin reset-cursor;
   }
 }
 
@@ -50,7 +50,7 @@
 */
 
 .switch {
-  @apply(--switch);
+  @mixin switch;
   font-size: var(--font-size);
   padding: 0 20px;
   border: none;
@@ -62,7 +62,7 @@
 }
 
 .switch__input {
-  @apply(--hide-input);
+  @mixin hide-input;
   z-index: 0;
 }
 
@@ -83,7 +83,7 @@
 
 /* switch toggle circle */
 .switch__handle {
-  @apply(--reset-box-model);
+  @mixin reset-box-model;
   position: absolute;
   content: '';
   border-radius: 28px;
@@ -113,7 +113,7 @@
 }
 
 :disabled + .switch__toggle {
-  @apply(--disabled);
+  @mixin disabled;
 }
 
 .switch__touch {
@@ -167,7 +167,7 @@
 }
 
 .switch--material__input {
-  @apply(--hide-input);
+  @mixin hide-input;
   z-index: 0;
 }
 
@@ -177,7 +177,7 @@
   margin-top: -5px;
   width: 20px;
   height: 20px;
-  @apply(--material-shadow-2);
+  @mixin material-shadow-2;
 }
 
 :checked + .switch--material__toggle {
@@ -188,11 +188,11 @@
 :checked + .switch--material__toggle > .switch--material__handle {
   left: 16px;
   background-color: var(--material-switch-active-thumb-color);
-  @apply(--material-shadow-1);
+  @mixin material-shadow-1;
 }
 
 :disabled + .switch--material__toggle {
-  @apply(--disabled);
+  @mixin disabled;
 }
 
 .switch--material__handle:before {

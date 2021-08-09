@@ -29,7 +29,7 @@
   --material-list-title-line-height: 24px;
   --material-list-title-padding: 12px 0 12px var(--material-list-item-side-padding);
 
-  --retina-list-item-border: {
+  @define-mixin retina-list-item-border {
     border-bottom: none;
     background-size: 100% 1px;
     background-repeat: no-repeat;
@@ -41,7 +41,7 @@
     }
   }
 
-  --retina-material-list-item-border: {
+  @define-mixin retina-material-list-item-border {
     border-bottom: none;
     background-size: 100% 1px;
     background-repeat: no-repeat;
@@ -53,7 +53,7 @@
     }
   }
 
-  --retina-list-border: {
+  @define-mixin retina-list-border {
     @media (--retina-query) {
       border: none;
       background-size: 100% 1px, 100% 1px;
@@ -85,9 +85,9 @@
 */
 
 .list {
-  @apply(--reset-base);
-  @apply(--reset-cursor);
-  @apply(--reset-font);
+  @mixin reset-base;
+  @mixin reset-cursor;
+  @mixin reset-font;
   list-style-type: none;
   text-align: left;
   display: block;
@@ -154,7 +154,7 @@
 .list-item--expandable {
   display: flex;
   flex-direction: column;
-  @apply(--retina-list-item-border);
+  @mixin retina-list-item-border;
   background-position-x: var(--list-item-padding-side);
 }
 
@@ -201,7 +201,7 @@
   align-items: center;
   align-self: stretch;
   margin-left: 0;
-  @apply(--retina-list-item-border);
+  @mixin retina-list-item-border;
   padding: 12px 6px 12px 0;
   line-height: 1.2em;
   min-height: var(--list-item-min-height);
@@ -215,7 +215,7 @@
   order: 2;
   align-items: center;
   align-self: stretch;
-  @apply(--retina-list-item-border);
+  @mixin retina-list-item-border;
   line-height: 1.2em;
   min-height: var(--list-item-min-height);
 }
@@ -651,7 +651,7 @@
 */
 
 .list--material {
-  @apply(--material-font);
+  @mixin material-font;
   background-image: none;
   background-color: var(--material-list-background-color);
 }
@@ -681,7 +681,7 @@
 .list-item--material__center {
   padding: 14px 6px 14px 0;
   border-color: var(--material-list-item-separator-color);
-  @apply(--retina-material-list-item-border);
+  @mixin retina-material-list-item-border;
   min-height: var(--material-list-item-min-height);
 }
 
@@ -689,13 +689,13 @@
   padding: 14px 16px 14px 0;
   line-height: 1;
   border-color: var(--material-list-item-separator-color);
-  @apply(--retina-material-list-item-border);
+  @mixin retina-material-list-item-border;
   min-height: var(--material-list-item-min-height);
 }
 
 .list-item--material.list-item--expandable {
   border-bottom: 1px solid var(--material-list-item-separator-color);
-  @apply(--retina-material-list-item-border);
+  @mixin retina-material-list-item-border;
   background-position-x: var(--material-list-item-side-padding);
 }
 
@@ -703,7 +703,7 @@
 .list-item--material.list-item--expandable.list-item--longdivider
  {
   border-bottom: 1px solid var(--material-list-item-separator-color);
-  @apply(--retina-material-list-item-border);
+  @mixin retina-material-list-item-border;
 }
 
 /*~
@@ -968,7 +968,7 @@
 
 .list-item--longdivider {
   border-bottom: var(--list-border);
-  @apply(--retina-list-item-border);
+  @mixin retina-list-item-border;
 }
 
 .list-item--longdivider:last-of-type {
@@ -1002,9 +1002,9 @@
  */
 
 .list-title {
-  @apply(--reset-base);
-  @apply(--reset-cursor);
-  @apply(--reset-font);
+  @mixin reset-base;
+  @mixin reset-cursor;
+  @mixin reset-font;
   display: block;
   color: var(--list-title-color);
   text-align: left;
@@ -1034,7 +1034,7 @@
  */
 
 .list-title--material {
-  @apply(--material-font);
+  @mixin material-font;
   color: var(--material-list-title-color);
   font-size: var(--material-list-title-font-size);
   margin: 0;

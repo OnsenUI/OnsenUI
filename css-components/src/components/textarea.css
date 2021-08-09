@@ -14,9 +14,9 @@
 */
 
 .textarea {
-  @apply(--reset-box-model);
-  @apply(--reset-base);
-  @apply(--reset-font);
+  @mixin reset-box-model;
+  @mixin reset-base;
+  @mixin reset-font;
   vertical-align: top;
   resize: none;
   outline: none;
@@ -34,7 +34,7 @@
 }
 
 .textarea:disabled {
-  @apply(--disabled);
+  @mixin disabled;
 }
 
 .textarea::placeholder {
@@ -49,9 +49,9 @@
 */
 
 .textarea--transparent {
-  @apply(--reset-box-model);
-  @apply(--reset-base);
-  @apply(--reset-font);
+  @mixin reset-box-model;
+  @mixin reset-base;
+  @mixin reset-font;
   vertical-align: top;
   resize: none;
   outline: none;
@@ -71,7 +71,7 @@
 }
 
 .textarea--transparent:disabled {
-  @apply(--disabled);
+  @mixin disabled;
 }
 
 .textarea--transparent::placeholder {
