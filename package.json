@@ -13,7 +13,6 @@
     "build:css:components": "postcss css/css-components-src/{*-,}onsen-css-components.css --base css/css-components-src --dir css",
     "build:css:lint": "stylelint 'css/?(css-components-)src/**/*.css'",
     "clean": "rimraf ./js './css/onsenui?(-core)?(.min).css' './css/{*-,}onsen-css-components?(.min).css'",
-    "dist": "cpx '{package.json,README.md,CHANGELOG.md,LICENSE}' OnsenUI-dist && cpx 'build/{!(onsenui.zip|package.json),!(docs)/**/*}' OnsenUI-dist",
     "prebuild": "npm run clean",
     "serve": "npm run serve:watch-core & npm run serve:watch-css & npm run serve:browser-sync",
     "serve:browser-sync": "browser-sync start --config bs-config.js",
@@ -79,7 +78,6 @@
     "node": ">= 4.0.0"
   },
   "devDependencies": {
-    "@deboxsoft/cpx": "^1.5.0",
     "@types/node": "^14.14.11",
     "ansi-colors": "^4.1.1",
     "autoprefixer": "^10.3.1",
@@ -118,7 +116,6 @@
     "merge-stream": "^1.0.1",
     "mkpath": "^1.0.0",
     "mocha": "^4.1.0",
-    "ncp": "^2.0.0",
     "postcss": "^8.3.6",
     "postcss-base64": "^0.7.1",
     "postcss-cli": "^8.3.1",
