@@ -26,11 +26,11 @@
   vertical-align: top;
   font: inherit;
   border: none;
-  @apply(--reset-box-model);
-  @apply(--reset-base);
-  @apply(--reset-font);
-  @apply(--reset-cursor);
-  @apply(--ellipsis);
+  @mixin reset-box-model;
+  @mixin reset-base;
+  @mixin reset-font;
+  @mixin reset-cursor;
+  @mixin ellipsis;
   text-decoration: none;
   margin: 0;
   padding: var(--notification-padding);
@@ -60,7 +60,7 @@
 */
 
 .notification--material {
-  @apply(--material-font);
+  @mixin material-font;
   background-color: var(--material-notification-background-color);
   font-size: var(--material-notification-font-size);
   font-weight: var(--material-notification-font-weight);

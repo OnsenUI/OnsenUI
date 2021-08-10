@@ -9,7 +9,7 @@
   --material-range-thumb-vertical-margin: 24px;
   --material-range-thumb-horizontal-margin: 2px;
 
-  --range__thumb: {
+  @define-mixin range__thumb {
     cursor: pointer;
     position: relative;
     height: var(--range-thumb-size);
@@ -54,7 +54,7 @@
 }
 
 .range__input {
-  @apply(--reset-input);
+  @mixin reset-input;
   appearance: none;
   background-image: linear-gradient(var(--range-track-background-color-active), var(--range-track-background-color-active));
   background-position: left center;
@@ -85,7 +85,7 @@
 }
 
 .range__input::-webkit-slider-thumb {
-  @apply(--range__thumb);
+  @mixin range__thumb;
   box-sizing: border-box;
   appearance: none;
   top: 0;
@@ -93,11 +93,11 @@
 }
 
 .range__input::-moz-range-thumb {
-  @apply(--range__thumb);
+  @mixin range__thumb;
 }
 
 .range__input::-ms-thumb {
-  @apply(--range__thumb);
+  @mixin range__thumb;
   top: 0;
 }
 
@@ -120,7 +120,7 @@
   top: 0;
   left: 0;
   display: none;
-  @apply(--reset-input);
+  @mixin reset-input;
   appearance: none;
   background: none;
   height: calc(var(--range-thumb-size) + 2px);
@@ -130,7 +130,7 @@
 }
 
 .range--disabled {
-  @apply(--disabled);
+  @mixin disabled;
   pointer-events: none;
 }
 

@@ -28,7 +28,7 @@
 */
 
 .toolbar-button {
-  @apply(--reset-font);
+  @mixin reset-font;
   padding: var(--toolbar-button-padding);
   letter-spacing: 0;
   color: var(--toolbar-button-color);
@@ -48,7 +48,7 @@
 
 .toolbar-button:disabled,
 .toolbar-button[disabled] {
-  @apply(--disabled);
+  @mixin disabled;
 }
 
 .toolbar-button:focus {

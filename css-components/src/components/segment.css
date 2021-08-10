@@ -27,7 +27,7 @@
 */
 
 .segment {
-  @apply(--reset-font);
+  @mixin reset-font;
   display: inline-flex;
   align-items: stretch;
   align-content: stretch;
@@ -38,12 +38,12 @@
 }
 
 .segment__item {
-  @apply(--reset-font);
+  @mixin reset-font;
   border-radius: 0;
   width: 100%;
   padding: 0;
   margin: 0;
-  @apply(--hide-input-parent);
+  @mixin hide-input-parent;
   overflow: hidden;
   box-sizing: border-box;
   display: block;
@@ -52,11 +52,11 @@
 }
 
 .segment__input {
-  @apply(--hide-input);
+  @mixin hide-input;
 }
 
 .segment__button {
-  @apply(--reset-font);
+  @mixin reset-font;
   border-radius: 0;
   background-color: transparent;
   color: var(--segment-color);
@@ -77,7 +77,7 @@
 }
 
 .segment__item:disabled {
-  @apply(--disabled);
+  @mixin disabled;
 }
 
 .segment__button:hover {
@@ -142,7 +142,7 @@
 }
 
 .segment--material__button {
-  @apply(--material-font);
+  @mixin material-font;
   font-size: 14px;
   height: 32px;
   line-height: 32px;

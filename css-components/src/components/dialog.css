@@ -13,10 +13,10 @@
 */
 
 .dialog {
-  @apply(--reset-box-model);
-  @apply(--reset-base);
-  @apply(--reset-cursor);
-  @apply(--reset-font);
+  @mixin reset-box-model;
+  @mixin reset-base;
+  @mixin reset-cursor;
+  @mixin reset-font;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -39,8 +39,8 @@
 }
 
 .dialog-mask {
-  @apply(--reset-base);
-  @apply(--reset-cursor);
+  @mixin reset-base;
+  @mixin reset-cursor;
   position: absolute;
   top: 0;
   right: 0;
@@ -63,9 +63,9 @@
 */
 
 .dialog--material {
-  @apply(--material-font);
+  @mixin material-font;
   text-align: left;
-  @apply(--material-shadow-5);
+  @mixin material-shadow-5;
 }
 
 .dialog-container--material {

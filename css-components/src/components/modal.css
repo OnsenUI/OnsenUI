@@ -11,10 +11,10 @@
 */
 
 .modal {
-  @apply(--reset-container);
-  @apply(--reset-base);
-  @apply(--reset-box-model);
-  @apply(--reset-font);
+  @mixin reset-container;
+  @mixin reset-base;
+  @mixin reset-box-model;
+  @mixin reset-font;
   overflow: hidden;
   background-color: var(--modal-background-color);
   position: absolute;
@@ -29,10 +29,10 @@
 }
 
 .modal__content {
-  @apply(--reset-container);
-  @apply(--reset-base);
-  @apply(--reset-box-model);
-  @apply(--reset-font);
+  @mixin reset-container;
+  @mixin reset-base;
+  @mixin reset-box-model;
+  @mixin reset-font;
   display: table-cell;
   vertical-align: middle;
   text-align: center;

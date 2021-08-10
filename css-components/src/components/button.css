@@ -10,28 +10,28 @@
   --button-active-opacity: 0.2;
   --button-border-radius: 3px;
 
-  --button--quiet: {
+  @define-mixin button--quiet {
     background: transparent;
     border: 1px solid transparent;
     box-shadow: none;
   }
 
-  --button--disabled: {
-    @apply(--disabled);
+  @define-mixin button--disabled {
+    @mixin disabled;
   }
 
-  --button--hover: {
+  @define-mixin button--hover {
     transition: none;
   }
 
-  --button: {
+  @define-mixin button {
     position: relative;
     display: inline-block;
-    @apply(--reset-box-model);
-    @apply(--reset-base);
-    @apply(--reset-font);
-    @apply(--reset-cursor);
-    @apply(--ellipsis);
+    @mixin reset-box-model;
+    @mixin reset-base;
+    @mixin reset-font;
+    @mixin reset-cursor;
+    @mixin ellipsis;
     height: auto;
     text-decoration: none;
     padding: var(--button-padding);
@@ -46,20 +46,20 @@
     transition: none;
   }
 
-  --button--focus: {
+  @define-mixin button--focus {
     outline: 0;
   }
 
-  --button--active: {
+  @define-mixin button--active {
     background-color: var(--button-background-color);
     transition: none;
     opacity: var(--button-active-opacity);
   }
 
-  --button--material: {
-    @apply(--button);
-    @apply(--material-shadow-1);
-    @apply(--material-font);
+  @define-mixin button--material {
+    @mixin button;
+    @mixin material-shadow-1;
+    @mixin material-font;
     min-height: 36px;
     line-height: 36px;
     padding: 0 16px;
@@ -84,7 +84,7 @@
 */
 
 .button {
-  @apply(--button);
+  @mixin button;
 }
 
 .button::-moz-focus-inner {
@@ -92,19 +92,19 @@
 }
 
 .button:hover {
-  @apply(--button--hover);
+  @mixin button--hover;
 }
 
 .button:active {
-  @apply(--button--active);
+  @mixin button--active;
 }
 
 .button:focus {
-  @apply(--button--focus);
+  @mixin button--focus;
 }
 
 .button:disabled, .button[disabled] {
-  @apply(--button--disabled);
+  @mixin button--disabled;
 }
 
 /*~
@@ -166,8 +166,8 @@
 */
 
 .button--quiet {
-  @apply(--button);
-  @apply(--button--quiet);
+  @mixin button;
+  @mixin button--quiet;
   background: transparent;
   color: var(--button-quiet-color);
   border: none;
@@ -175,16 +175,16 @@
 
 .button--quiet:disabled,
 .button--quiet[disabled] {
-  @apply(--button--disabled);
+  @mixin button--disabled;
   border: none;
 }
 
 .button--quiet:hover {
-  @apply(--button--hover);
+  @mixin button--hover;
 }
 
 .button--quiet:focus {
-  @apply(--button--focus);
+  @mixin button--focus;
 }
 
 .button--quiet:active {
@@ -205,18 +205,18 @@
 */
 
 .button--cta {
-  @apply(--button);
+  @mixin button;
   border: none;
   background-color: var(--button-cta-background-color);
   color: var(--button-cta-color);
 }
 
 .button--cta:hover {
-  @apply(--button--hover);
+  @mixin button--hover;
 }
 
 .button--cta:focus {
-  @apply(--button--focus);
+  @mixin button--focus;
 }
 
 .button--cta:active {
@@ -228,7 +228,7 @@
 
 .button--cta:disabled,
 .button--cta[disabled] {
-  @apply(--button--disabled);
+  @mixin button--disabled;
 }
 
 /*
@@ -250,21 +250,21 @@
 }
 
 .button--large:active {
-  @apply(--button--active);
+  @mixin button--active;
   transition: none;
 }
 
 .button--large:disabled,
 .button--large[disabled] {
-  @apply(--button--disabled);
+  @mixin button--disabled;
 }
 
 .button--large:hover {
-  @apply(--button--hover);
+  @mixin button--hover;
 }
 
 .button--large:focus {
-  @apply(--button--focus);
+  @mixin button--focus;
 }
 
 /*~
@@ -276,14 +276,14 @@
 */
 
 .button--large--quiet { /* stylelint-disable-line */
-  @apply(--button);
+  @mixin button;
   font-size: var(--font-size);
   font-weight: var(--font-weight--large);
   line-height: var(--button-large-line-height);
   padding: var(--button-large-padding);
   display: block;
   width: 100%;
-  @apply(--button--quiet);
+  @mixin button--quiet;
   color: var(--button-quiet-color);
   text-align: center;
 }
@@ -292,15 +292,15 @@
   transition: none;
   opacity: var(--button-active-opacity);
   color: var(--button-quiet-color);
-  @apply(--button--quiet);
+  @mixin button--quiet;
 }
 
 .button--large--quiet:disabled, .button--large--quiet[disabled] { /* stylelint-disable-line */
-  @apply(--button--disabled);
+  @mixin button--disabled;
 }
 
 .button--large--quiet:hover { /* stylelint-disable-line */
-  @apply(--button--hover);
+  @mixin button--hover;
 }
 
 .button--large--quiet:focus { /* stylelint-disable-line */
@@ -316,7 +316,7 @@
 */
 
 .button--large--cta { /* stylelint-disable-line */
-  @apply(--button);
+  @mixin button;
   border: none;
   background-color: var(--button-cta-background-color);
   color: var(--button-cta-color);
@@ -330,11 +330,11 @@
 }
 
 .button--large--cta:hover { /* stylelint-disable-line */
-  @apply(--button--hover);
+  @mixin button--hover;
 }
 
 .button--large--cta:focus { /* stylelint-disable-line */
-  @apply(--button--focus);
+  @mixin button--focus;
 }
 
 .button--large--cta:active { /* stylelint-disable-line */
@@ -345,7 +345,7 @@
 }
 
 .button--large--cta:disabled, .button--large--cta[disabled] { /* stylelint-disable-line */
-  @apply(--button--disabled);
+  @mixin button--disabled;
 }
 
 /*~
@@ -358,7 +358,7 @@
 */
 
 .button--material {
-  @apply(--button--material);
+  @mixin button--material;
   opacity: 1;
   transition: all 0.25s linear;
 }
@@ -368,20 +368,20 @@
 }
 
 .button--material:active {
-  @apply(--material-shadow-3);
+  @mixin material-shadow-3;
   background-color: var(--material-button-background-color);
   opacity: 0.9;
   transition: all 0.25s linear;
 }
 
 .button--material:focus {
-  @apply(--button--focus);
+  @mixin button--focus;
 }
 
 .button--material:disabled,
 .button--material[disabled] {
   transition: none;
-  @apply(--material-shadow-0);
+  @mixin material-shadow-0;
   background-color: var(--material-button-disabled-background-color);
   color: var(--material-button-disabled-color);
   opacity: 1;
@@ -397,8 +397,8 @@
 */
 
 .button--material--flat { /* stylelint-disable-line */
-  @apply(--button--material);
-  @apply(--material-shadow-0);
+  @mixin button--material;
+  @mixin material-shadow-0;
   background-color: transparent;
   color: var(--material-button-background-color);
   transition: all 0.25s linear;
@@ -409,7 +409,7 @@
 }
 
 .button--material--flat:focus { /* stylelint-disable-line */
-  @apply(--material-shadow-0);
+  @mixin material-shadow-0;
   background-color: transparent;
   color: var(--material-button-background-color);
   outline: 0;
@@ -418,7 +418,7 @@
 }
 
 .button--material--flat:active { /* stylelint-disable-line */
-  @apply(--material-shadow-0);
+  @mixin material-shadow-0;
   outline: 0;
   opacity: 1;
   border: none;
@@ -430,7 +430,7 @@
 .button--material--flat:disabled, .button--material--flat[disabled] {/* stylelint-disable-line */
   transition: none;
   opacity: 1;
-  @apply(--material-shadow-0);
+  @mixin material-shadow-0;
   background-color: transparent;
   color: var(--material-button-disabled-color);
 }

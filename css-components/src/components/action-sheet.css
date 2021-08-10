@@ -30,7 +30,7 @@
 */
 
 .action-sheet {
-  @apply(--reset-font);
+  @mixin reset-font;
   cursor: default;
   position: absolute;
   left: 10px; /* iOS 9, 10, 11 */
@@ -52,7 +52,7 @@
   appearance: none;
   display: block;
   width: 100%;
-  @apply(--ellipsis);
+  @mixin ellipsis;
   background-size: 100% 1px;
   background-repeat: no-repeat;
   background-position: bottom;
@@ -106,7 +106,7 @@
   text-align: center;
   background-color: var(--action-sheet-button-background-color);
   line-height: 56px;
-  @apply(--ellipsis);
+  @mixin ellipsis;
   background-size: 100% 1px;
   background-repeat: no-repeat;
   background-position: bottom;
@@ -163,11 +163,11 @@
   left: 0;
   right: 0;
   bottom: 0;
-  @apply(--material-shadow-5);
+  @mixin material-shadow-5;
 }
 
 .action-sheet-title--material {
-  @apply(--material-font);
+  @mixin material-font;
   border-radius: 0;
   background-image: none;
   text-align: left;
@@ -185,7 +185,7 @@
 }
 
 .action-sheet-button--material {
-  @apply(--material-font);
+  @mixin material-font;
   border-radius: 0;
   background-image: none;
   height: 52px;

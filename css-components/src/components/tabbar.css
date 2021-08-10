@@ -12,7 +12,7 @@
   --tabbar-button-focus-box-shadow: none;
   --tabbar-border-top: 1px solid var(--tabbar-border-color);
 
-  --retina-tabbar-top-border: {
+  @define-mixin retina-tabbar-top-border {
     @media (--retina-query) {
       border-top: none;
       background-size: 100% 1px;
@@ -22,7 +22,7 @@
     }
   }
 
-  --retina-tabbar-bottom-border: {
+  @define-mixin retina-tabbar-bottom-border {
     @media (--retina-query) {
       border-bottom: none;
       background-size: 100% 1px;
@@ -96,7 +96,7 @@
 */
 
 .tabbar {
-  @apply(--reset-font);
+  @mixin reset-font;
   display: flex;
   position: absolute;
   bottom: 0;
@@ -109,12 +109,12 @@
   background-color: var(--tabbar-background-color);
   border-top: var(--tabbar-border-top);
   width: 100%;
-  @apply(--retina-tabbar-top-border);
+  @mixin retina-tabbar-top-border;
 }
 
 .tabbar__item {
-  @apply(--reset-font);
-  @apply(--hide-input-parent);
+  @mixin reset-font;
+  @mixin hide-input-parent;
   flex-grow: 1;
   flex-basis: 0;
   width: auto;
@@ -122,15 +122,15 @@
 }
 
 .tabbar__item > input {
-  @apply(--hide-input);
+  @mixin hide-input;
 }
 
 .tabbar__button {
-  @apply(--reset-font);
-  @apply(--reset-box-model);
-  @apply(--reset-base);
-  @apply(--reset-cursor);
-  @apply(--ellipsis);
+  @mixin reset-font;
+  @mixin reset-box-model;
+  @mixin reset-base;
+  @mixin reset-cursor;
+  @mixin ellipsis;
   position: relative;
   display: inline-block;
   text-decoration: none;
@@ -159,7 +159,7 @@
 }
 
 .tabbar__label {
-  @apply(--reset-font);
+  @mixin reset-font;
   display: inline-block;
 }
 
@@ -204,7 +204,7 @@
 }
 
 .tabbar__button:disabled {
-  @apply(--disabled);
+  @mixin disabled;
 }
 
 .tabbar__button:focus {
@@ -295,7 +295,7 @@
   bottom: auto;
   border-top: none;
   border-bottom: var(--tabbar-border-top);
-  @apply(--retina-tabbar-bottom-border);
+  @mixin retina-tabbar-bottom-border;
 }
 
 .tabbar--top__content {
@@ -407,7 +407,7 @@
   text-transform: uppercase;
   font-size: 14px;
   font-weight: 500;
-  @apply(--material-font);
+  @mixin material-font;
 }
 
 .tabbar--material__button:after {
@@ -507,11 +507,11 @@
 */
 
 .tabbar--material__label {
-  @apply(--material-font);
+  @mixin material-font;
 }
 
 .tabbar--material__label:first-child {
-  @apply(--material-font);
+  @mixin material-font;
   letter-spacing: 0.015em;
   font-weight: 500;
   font-size: 14px;

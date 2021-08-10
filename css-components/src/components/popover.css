@@ -96,10 +96,10 @@
 }
 
 .popover__content {
-  @apply(--reset-box-model);
-  @apply(--reset-base);
-  @apply(--reset-cursor);
-  @apply(--reset-font);
+  @mixin reset-box-model;
+  @mixin reset-base;
+  @mixin reset-cursor;
+  @mixin reset-font;
   display: block;
   width: 220px;
   overflow: auto;
@@ -189,7 +189,7 @@
   background-color: var(--material-popover-background-color);
   border-radius: var(--material-popover-radius);
   color: var(--material-popover-text-color);
-  @apply(--material-shadow-1);
+  @mixin material-shadow-1;
 }
 
 .popover--material__arrow {

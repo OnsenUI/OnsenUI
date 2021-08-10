@@ -18,13 +18,6 @@
   }
 */
 
-/*
-  Note:
-
-  @apply has been deprecated as of Oct, 2017.
-  Please do not use @apply to restore original styles.
-*/
-
 /* Bars and page contents */
 @media (orientation: portrait) {
   /* Outermost toolbar */

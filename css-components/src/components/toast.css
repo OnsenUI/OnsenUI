@@ -13,7 +13,7 @@
 */
 
 .toast {
-  @apply(--reset-font);
+  @mixin reset-font;
   position: absolute;
   z-index: 2;
   left: 8px;
@@ -78,11 +78,11 @@
 }
 
 .toast--material__message {
-  @apply(--material-font);
+  @mixin material-font;
   margin: 0 24px 0 0;
 }
 
 .toast--material__button {
-  @apply(--material-font);
+  @mixin material-font;
   color: var(--material-toast-button-text-color);
 }
