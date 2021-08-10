@@ -11,7 +11,7 @@ jobs:
       - checkout
       - run:
           name: Install npm
-          command: sudo npm install -g  npm@latest
+          command: sudo npm install -g npm@latest
       - run:
           name: Print system information
           command: |
