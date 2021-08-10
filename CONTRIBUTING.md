@@ -44,7 +44,6 @@ You will need a recent version of [Node.js](https://nodejs.org/) before continui
 Clone this repository and run the following commands to build the project:
 
     npm install
-    (cd css-components && npm install)
     npm run build
 
 The files will be built and copied into **OnsenUI/build** folder.
@@ -178,11 +177,11 @@ Once you have done the pre-release checks above, follow the steps below to publi
    - `git checkout production && git merge master && git push`
  - Tag production with the version number, and push
    - e.g. `git tag 2.10.2 && git push --tags`
- - Run the release script
-   - `cd scripts && ./dist-release.sh`
-   - This script builds Onsen UI to get it ready for release, which involves pulling the `OnsenUI-dist` repo. Once the script has finished, the built files, ready for release, will be located in the `OnsenUI-dist` folder. The `OnsenUI-dist` repository will also have been automatically tagged with the new version and pushed.
- - Publish to npm. This will also cause the Bower package to be updated.
-   - `cd ../OnsenUI-dist && npm publish`
+ - Build Onsen UI
+   - `npm install && npm run build`
+   - This installs the dependencies and builds Onsen UI.
+ - Publish to npm.
+   - `npm publish`
 
 Then, on GitHub, create new releases for `OnsenUI` and `OnsenUI-dist`.
  - On the New Release pages (linked below), _tag version_ and _Release title_ should both be the version number (e.g. `2.10.2`). Under _Describe this release_, copy the section for this release from `CHANGELOG.md`. Click _Publish Release_.
