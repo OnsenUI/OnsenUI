@@ -171,7 +171,9 @@ jobs:
           command: |
             if [ "${CIRCLE_BRANCH}" == "master" ]; then
               mkdir -p ~/artifacts
-              ./scripts/nightly.sh $CIRCLE_BUILD_NUM $CIRCLE_SHA1 ~/artifacts
+              CURRENT_VERSION=$(node -e "console.log(require('./package.json').version)")
+              npm version "$CURRENT_VERSION-build.$CIRCLE_BUILD_NUM" --no-git-tag-version
+              npm pack --pack-destination ~/artifacts
             fi
       - store_artifacts:
           path: ~/artifacts
