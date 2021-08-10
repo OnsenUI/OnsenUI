@@ -25,22 +25,6 @@ jobs:
           name: Install rsync
           command: sudo apt install -y rsync
 
-      # css-components
-      - restore_cache:
-          keys:
-            - v1-css-components-cache-{{ .Branch }}-{{ checksum "css-components/package-lock.json" }}
-            - v1-css-components-cache-{{ .Branch }}
-            - v1-css-components-cache-
-      - run:
-          name: Install css-components dependencies
-          command: |
-            cd css-components
-            npm ci
-      - save_cache:
-          key: v1-css-components-cache-{{ .Branch }}-{{ checksum "css-components/package-lock.json" }}
-          paths:
-            - ./css-components/node_modules
-
       # Core dependencies
       - restore_cache:
           keys:
@@ -78,22 +62,22 @@ jobs:
           name: Building Onsen UI core
           command: npm run build
 
-      # bindings/angular2
-      - restore_cache:
-          keys:
-            - v1-angular2-cache-{{ .Branch }}-{{ checksum "bindings/angular2/package-lock.json" }}
-            - v1-angular2-cache-{{ .Branch }}-
-            - v1-angular2-cache-
-      - run:
-          name: Install Angular 2 dependencies and build ngx-onsenui
-          command: |
-            cd bindings/angular2
-            npm ci
-            npm run build-dist
-      - save_cache:
-          key: v1-angular2-cache-{{ .Branch }}-{{ checksum "bindings/angular2/package-lock.json" }}
-          paths:
-            - ./bindings/angular2/node_modules
+      ## bindings/angular2
+      #- restore_cache:
+      #    keys:
+      #      - v1-angular2-cache-{{ .Branch }}-{{ checksum "bindings/angular2/package-lock.json" }}
+      #      - v1-angular2-cache-{{ .Branch }}-
+      #      - v1-angular2-cache-
+      #- run:
+      #    name: Install Angular 2 dependencies and build ngx-onsenui
+      #    command: |
+      #      cd bindings/angular2
+      #      npm ci
+      #      npm run build-dist
+      #- save_cache:
+      #    key: v1-angular2-cache-{{ .Branch }}-{{ checksum "bindings/angular2/package-lock.json" }}
+      #    paths:
+      #      - ./bindings/angular2/node_modules
 
       # bindings/react
       - restore_cache:
