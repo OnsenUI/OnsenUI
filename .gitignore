@@ -13,5 +13,7 @@ module-stats*.html
 /css/onsenui-core.min.css
 /css/onsenui.css
 /css/onsenui.min.css
+/css/*onsen-css-components.css
+/css/*onsen-css-components.min.css
 /OnsenUI-dist
 docs/gendocs
