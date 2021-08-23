@@ -2,7 +2,7 @@ import pkg from './package.json';
 import dateformat from 'dateformat';
 
 // Rollup plugins
-import babel from 'rollup-plugin-babel';
+import { babel } from '@rollup/plugin-babel';
 import eslint from 'rollup-plugin-eslint';
 import resolve from 'rollup-plugin-node-resolve';
 import string from 'rollup-plugin-string';
@@ -10,9 +10,6 @@ import progress from 'rollup-plugin-progress';
 
 const banner = name => `/* ${name} v${pkg.version} - ${dateformat(new Date(), 'yyyy-mm-dd')} */\n`;
 const stringOpt = { include: '**/*.svg', }; // SVG images
-const babelrc = Object.assign({}, pkg.babel);
-babelrc.babelrc = babelrc.presets[0][1].modules = false;
-babelrc.plugins = ['external-helpers'];
 
 export default [
   // Core UMD
@@ -37,7 +34,7 @@ export default [
       }),
       string(stringOpt),
       resolve(),
-      babel(babelrc),
+      babel({ babelHelpers: 'bundled' }),
       progress(),
     ],
     watch: {
