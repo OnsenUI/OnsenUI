@@ -170,7 +170,7 @@ export default class PageElement extends BaseElement {
 
     const background = util.findChild(this, '.page__background') || util.findChild(this, '.background') || document.createElement('div');
     background.classList.add('page__background');
-    this.insertBefore(background, !toolbar && this.firstChild || toolbar && toolbar.nextSibling);
+    this.insertBefore(background, toolbar ? toolbar.nextSibling : this.firstChild);
 
     const content = util.findChild(this, '.page__content') || util.findChild(this, '.content') || document.createElement('div');
     content.classList.add('page__content');
