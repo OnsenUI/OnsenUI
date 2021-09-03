@@ -20,10 +20,6 @@
     @mixin disabled;
   }
 
-  @define-mixin button--hover {
-    transition: none;
-  }
-
   @define-mixin button--focus {
     outline: 0;
   }
@@ -87,7 +83,7 @@
 }
 
 .button:hover {
-  @mixin button--hover;
+  transition: none;
 }
 
 .button:active {
@@ -173,10 +169,6 @@
   border: none;
 }
 
-.button--quiet:hover {
-  @mixin button--hover;
-}
-
 .button--quiet:focus {
   @mixin button--focus;
 }
@@ -202,10 +194,6 @@
   border: none;
   background-color: var(--button-cta-background-color);
   color: var(--button-cta-color);
-}
-
-.button--cta:hover {
-  @mixin button--hover;
 }
 
 .button--cta:focus {
@@ -252,10 +240,6 @@
   @mixin button--disabled;
 }
 
-.button--large:hover {
-  @mixin button--hover;
-}
-
 .button--large:focus {
   @mixin button--focus;
 }
@@ -291,10 +275,6 @@
   @mixin button--disabled;
 }
 
-.button--large--quiet:hover { /* stylelint-disable-line */
-  @mixin button--hover;
-}
-
 .button--large--quiet:focus { /* stylelint-disable-line */
   outline: 0;
 }
@@ -318,10 +298,6 @@
   width: 100%;
   text-align: center;
   display: block;
-}
-
-.button--large--cta:hover { /* stylelint-disable-line */
-  @mixin button--hover;
 }
 
 .button--large--cta:focus { /* stylelint-disable-line */
