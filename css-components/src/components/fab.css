@@ -11,8 +11,19 @@
   --material-fab-position: absolute;
   --material-fab-mini-width: 40px;
   --material-fab-mini-height: 40px;
+}
 
-  @define-mixin fab {
+/*~
+  name: Fab
+  category: Fab
+  elements: ons-fab
+  markup: |
+    <button class="fab"><i class="zmdi zmdi-car"></i></button>
+    <button class="fab" disabled><i class="zmdi zmdi-car"></i></button>
+*/
+/* stylelint-disable */
+ons-fab, ons-speed-dial-item, button {
+  &.fab {
     position: relative;
     display: inline-block;
     @mixin reset-box-model;
@@ -34,33 +45,7 @@
     overflow: hidden;
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.12);
     transition: all 0.1s linear;
-  }
 
-  @define-mixin fab--disabled {
-    background-color: color-mod(black alpha(50%));
-    @mixin material-shadow-0;
-    @mixin disabled;
-  }
-
-  @define-mixin material-fab--disabled {
-    background-color: color-mod(black alpha(50%));
-    @mixin material-shadow-0;
-    @mixin disabled;
-  }
-}
-
-/*~
-  name: Fab
-  category: Fab
-  elements: ons-fab
-  markup: |
-    <button class="fab"><i class="zmdi zmdi-car"></i></button>
-    <button class="fab" disabled><i class="zmdi zmdi-car"></i></button>
-*/
-/* stylelint-disable */
-ons-fab, ons-speed-dial-item, button {
-  &.fab {
-    @mixin fab;
     &:active {
       box-shadow: 0 3px 6 rgba(0, 0, 0, 0.12);
       background-color: var(--fab-active-background-color);
@@ -72,7 +57,9 @@ ons-fab, ons-speed-dial-item, button {
     }
     &:disabled,
     &[disabled] {
-      @mixin material-fab--disabled;
+      background-color: color-mod(black alpha(50%));
+      @mixin material-shadow-0;
+      @mixin disabled;
     }
   }
 
@@ -102,7 +89,6 @@ ons-fab, ons-speed-dial-item, button {
 /* stylelint-disable */
 ons-fab, ons-speed-dial-item, button {
   &.fab--material {
-    @mixin fab;
     @mixin material-font;
     width: var(--material-fab-width);
     height: var(--material-fab-height);
@@ -135,11 +121,6 @@ ons-fab, ons-speed-dial-item, button {
     padding: 0;
     z-index: 100;
     line-height: var(--material-fab-height);
-  }
-
-  &.fab--material:disabled,
-  &.fab--material[disabled] {
-    @mixin material-fab--disabled;
   }
 }
 /* stylelint-enable */
