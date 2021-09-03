@@ -16,12 +16,6 @@
     box-shadow: none;
   }
 
-  @define-mixin button--active {
-    background-color: var(--button-background-color);
-    transition: none;
-    opacity: var(--button-active-opacity);
-  }
-
   @define-mixin button--material {
     @mixin material-shadow-1;
     @mixin material-font;
@@ -79,7 +73,9 @@
 }
 
 .button:active {
-  @mixin button--active;
+  background-color: var(--button-background-color);
+  transition: none;
+  opacity: var(--button-active-opacity);
 }
 
 .button:focus {
@@ -209,7 +205,6 @@
 }
 
 .button--large:active {
-  @mixin button--active;
   transition: none;
 }
 
