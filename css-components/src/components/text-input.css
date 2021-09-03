@@ -9,11 +9,6 @@
     @mixin transparent;
     color: var(--input-placeholder-color);
   }
-
-  @define-mixin text-input--invalid {
-    @mixin transparent;
-    color: var(--input-invalid-text-color);
-  }
 }
 
 /*~
@@ -57,7 +52,8 @@
 }
 
 .text-input:invalid {
-  @mixin text-input--invalid;
+  @mixin transparent;
+  color: var(--input-invalid-text-color);
 }
 
 /*~
@@ -89,7 +85,6 @@
 }
 
 .text-input--underbar:invalid {
-  @mixin text-input--invalid;
   border: none;
   background-color: transparent;
   border-bottom: 1px solid var(--input-invalid-border-color);
