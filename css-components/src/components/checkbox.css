@@ -8,16 +8,6 @@
   --material-checkbox-focus-ring-size: 40px;
   --material-checkbox-focus-ring-shadow-size: calc((var(--material-checkbox-focus-ring-size) - var(--material-checkbox-size)) / 2);
 
-  @define-mixin checkbox {
-    @mixin reset-box-model;
-    position: relative;
-    display: inline-block;
-    vertical-align: top;
-    @mixin reset-cursor;
-    @mixin reset-font;
-    @mixin hide-input-parent;
-  }
-
   @define-mixin checkbox__label {
     position: relative;
     display: inline-block;
@@ -26,17 +16,9 @@
     @mixin reset-font;
   }
 
-  @define-mixin checkbox--disabled {
-    @mixin disabled;
-  }
-
   @define-mixin checkbox--before {
     content: '';
     position: absolute;
-  }
-
-  @define-mixin checkbox--after {
-    @mixin checkbox--before;
   }
 }
 
@@ -70,7 +52,13 @@
 }
 
 .checkbox__checkmark {
-  @mixin checkbox;
+  @mixin reset-box-model;
+  position: relative;
+  display: inline-block;
+  vertical-align: top;
+  @mixin reset-cursor;
+  @mixin reset-font;
+  @mixin hide-input-parent;
   height: var(--checkbox-size);
   width: var(--checkbox-size);
   pointer-events: none;
@@ -94,7 +82,7 @@
 
 /* checkmark's line */
 .checkbox__checkmark:after {
-  @mixin checkbox--after;
+  @mixin checkbox--before;
   top: 7px;
   left: 5px;
   width: 11px;
@@ -119,7 +107,7 @@
 }
 
 :disabled + .checkbox__checkmark {
-  @mixin checkbox--disabled;
+  @mixin disabled;
 }
 
 :disabled:active + .checkbox__checkmark:before { /* FIXME */

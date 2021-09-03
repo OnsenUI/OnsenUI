@@ -7,30 +7,6 @@
   --material-radio-button-size: 20px;
   --material-radio-button-shadow-size: calc((48px - var(--material-radio-button-size)) / 2);
 
-  @define-mixin radio-button {
-    @mixin reset-box-model;
-    position: relative;
-    display: inline-block;
-    vertical-align: top;
-    @mixin reset-cursor;
-    @mixin reset-font;
-    @mixin hide-input-parent;
-  }
-
-  @define-mixin radio-button__label {
-    position: relative;
-    display: inline-block;
-    vertical-align: top;
-    @mixin reset-cursor;
-  }
-
-  @define-mixin radio-button--before {
-    content: '';
-    position: absolute;
-    border-radius: 100%;
-    @mixin reset-box-model;
-  }
-
   @define-mixin radio-button--after {
     content: '';
     position: absolute;
@@ -38,10 +14,6 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-  }
-
-  @define-mixin radio-button--disabled {
-    @mixin disabled;
   }
 }
 
@@ -80,14 +52,20 @@
 }
 
 .radio-button {
-  @mixin radio-button__label;
+  position: relative;
+  display: inline-block;
+  vertical-align: top;
+  @mixin reset-cursor;
   @mixin hide-input-parent;
   line-height: var(--radio-button-size);
   text-align: left;
 }
 
 .radio-button__checkmark:before {
-  @mixin radio-button--before;
+  content: '';
+  position: absolute;
+  border-radius: 100%;
+  @mixin reset-box-model;
   width: var(--checkbox-size);
   height: var(--checkbox-size);
   background: transparent;
@@ -97,7 +75,13 @@
 }
 
 .radio-button__checkmark {
-  @mixin radio-button;
+  @mixin reset-box-model;
+  position: relative;
+  display: inline-block;
+  vertical-align: top;
+  @mixin reset-cursor;
+  @mixin reset-font;
+  @mixin hide-input-parent;
   position: relative;
   width: var(--radio-button-size);
   height: var(--radio-button-size);
@@ -123,7 +107,7 @@
 }
 
 :disabled + .radio-button__checkmark {
-  @mixin radio-button--disabled;
+  @mixin disabled;
 }
 
 /*~
