@@ -5,21 +5,6 @@
   --material-text-input-font-size: 16px;
   --material-text-input-color: var(--material-text-input-text-color);
 
-  @define-mixin text-input {
-    @mixin input;
-    @mixin transparent;
-    letter-spacing: 0;
-    box-shadow: none;
-    color: var(--input-text-color);
-    padding: 0;
-    margin: 0;
-    width: auto;
-    font-size: var(--text-input-font-size);
-    height: var(--text-input-height);
-    font-weight: var(--font-weight);
-    box-sizing: border-box;
-  }
-
   @define-mixin text-input--disabled {
     @mixin disabled;
   }
@@ -45,7 +30,18 @@
 */
 
 .text-input {
-  @mixin text-input;
+  @mixin input;
+  @mixin transparent;
+  letter-spacing: 0;
+  box-shadow: none;
+  color: var(--input-text-color);
+  padding: 0;
+  margin: 0;
+  width: auto;
+  font-size: var(--text-input-font-size);
+  height: var(--text-input-height);
+  font-weight: var(--font-weight);
+  box-sizing: border-box;
 }
 
 .text-input::-ms-clear {
@@ -78,7 +74,6 @@
 */
 
 .text-input--underbar {
-  @mixin text-input;
   border: none;
   background-color: transparent;
   border-bottom: 1px solid var(--text-input-border-color);
