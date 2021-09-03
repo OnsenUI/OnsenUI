@@ -16,10 +16,6 @@
     box-shadow: none;
   }
 
-  @define-mixin button--disabled {
-    @mixin disabled;
-  }
-
   @define-mixin button--active {
     background-color: var(--button-background-color);
     transition: none;
@@ -91,7 +87,7 @@
 }
 
 .button:disabled, .button[disabled] {
-  @mixin button--disabled;
+  @mixin disabled;
 }
 
 /*~
@@ -161,7 +157,6 @@
 
 .button--quiet:disabled,
 .button--quiet[disabled] {
-  @mixin button--disabled;
   border: none;
 }
 
@@ -195,11 +190,6 @@
   opacity: var(--button-active-opacity);
 }
 
-.button--cta:disabled,
-.button--cta[disabled] {
-  @mixin button--disabled;
-}
-
 /*
   name: Large Button
   category: Button
@@ -221,11 +211,6 @@
 .button--large:active {
   @mixin button--active;
   transition: none;
-}
-
-.button--large:disabled,
-.button--large[disabled] {
-  @mixin button--disabled;
 }
 
 /*~
@@ -253,10 +238,6 @@
   opacity: var(--button-active-opacity);
   color: var(--button-quiet-color);
   @mixin button--quiet;
-}
-
-.button--large--quiet:disabled, .button--large--quiet[disabled] { /* stylelint-disable-line */
-  @mixin button--disabled;
 }
 
 .button--large--quiet:focus { /* stylelint-disable-line */
@@ -289,10 +270,6 @@
   background-color: var(--button-cta-background-color);
   transition: none;
   opacity: var(--button-active-opacity);
-}
-
-.button--large--cta:disabled, .button--large--cta[disabled] { /* stylelint-disable-line */
-  @mixin button--disabled;
 }
 
 /*~
