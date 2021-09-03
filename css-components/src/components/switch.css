@@ -6,14 +6,6 @@
   --switch-height: 32px;
   --switch-width: 51px;
 
-  @define-mixin switch {
-    display: inline-block;
-    vertical-align: top;
-    @mixin reset-box-model;
-    @mixin hide-input-parent;
-    min-width: 51px;
-  }
-
   @define-mixin switch__toggle {
     position: relative;
     display: inline-block;
@@ -50,7 +42,11 @@
 */
 
 .switch {
-  @mixin switch;
+  display: inline-block;
+  vertical-align: top;
+  @mixin reset-box-model;
+  @mixin hide-input-parent;
+  min-width: 51px;
   font-size: var(--font-size);
   padding: 0 20px;
   border: none;
