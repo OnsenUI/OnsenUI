@@ -8,14 +8,6 @@
   --material-checkbox-focus-ring-size: 40px;
   --material-checkbox-focus-ring-shadow-size: calc((var(--material-checkbox-focus-ring-size) - var(--material-checkbox-size)) / 2);
 
-  @define-mixin checkbox__label {
-    position: relative;
-    display: inline-block;
-    vertical-align: top;
-    @mixin reset-cursor;
-    @mixin reset-font;
-  }
-
   @define-mixin checkbox--before {
     content: '';
     position: absolute;
@@ -47,7 +39,11 @@
 */
 
 .checkbox {
-  @mixin checkbox__label;
+  position: relative;
+  display: inline-block;
+  vertical-align: top;
+  @mixin reset-cursor;
+  @mixin reset-font;
   line-height: var(--checkbox-size);
 }
 
@@ -119,19 +115,19 @@
   category: Checkbox
   elements: ons-input
   markup: |
-    <label class="checkbox--noborder">
+    <label class="checkbox checkbox--noborder">
       <input type="checkbox" class="checkbox__input checkbox--noborder__input">
       <div class="checkbox__checkmark checkbox--noborder__checkmark"></div>
       OFF
     </label>
 
-    <label class="checkbox--noborder">
+    <label class="checkbox checkbox--noborder">
       <input type="checkbox" class="checkbox__input checkbox--noborder__input" checked="checked">
       <div class="checkbox__checkmark checkbox--noborder__checkmark"></div>
       ON
     </label>
 
-    <label class="checkbox--noborder">
+    <label class="checkbox checkbox--noborder">
       <input type="checkbox" class="checkbox__input checkbox--noborder__input" disabled checked="checked">
       <div class="checkbox__checkmark checkbox--noborder__checkmark"></div>
       Disabled
@@ -139,7 +135,6 @@
  */
 
 .checkbox--noborder {
-  @mixin checkbox__label;
   line-height: var(--checkbox-size);
   @mixin hide-input-parent;
 }
