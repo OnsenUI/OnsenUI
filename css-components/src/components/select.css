@@ -9,11 +9,6 @@
     @mixin transparent;
     color: var(--input-placeholder-color);
   }
-
-  @define-mixin select-input--invalid {
-    @mixin transparent;
-    color: var(--input-invalid-text-color);
-  }
 }
 
 /*~
@@ -74,7 +69,8 @@
 }
 
 .select-input:invalid {
-  @mixin select-input--invalid;
+  @mixin transparent;
+  color: var(--input-invalid-text-color);
 }
 
 .select-input[multiple] {
@@ -182,7 +178,6 @@
 }
 
 .select-input--underbar:invalid {
-  @mixin select-input--invalid;
   border: none;
   background-color: transparent;
   border-bottom: 1px solid var(--input-invalid-border-color);
