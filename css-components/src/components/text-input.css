@@ -5,10 +5,6 @@
   --material-text-input-font-size: 16px;
   --material-text-input-color: var(--material-text-input-text-color);
 
-  @define-mixin text-input--disabled {
-    @mixin disabled;
-  }
-
   @define-mixin input-placeholder {
     @mixin transparent;
     color: var(--input-placeholder-color);
@@ -49,7 +45,7 @@
 }
 
 .text-input:disabled {
-  @mixin text-input--disabled;
+  @mixin disabled;
 }
 
 .text-input::placeholder {
@@ -81,7 +77,6 @@
 }
 
 .text-input--underbar:disabled {
-  @mixin text-input--disabled;
   border: none;
   background-color: transparent;
   border-bottom: 1px solid var(--text-input-border-color);
