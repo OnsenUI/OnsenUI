@@ -5,15 +5,6 @@
   --switch-thumb-border-color-active: var(--switch-highlight-color);
   --switch-height: 32px;
   --switch-width: 51px;
-
-  @define-mixin switch__toggle {
-    position: relative;
-    display: inline-block;
-    vertical-align: top;
-    @mixin reset-box-model;
-    @mixin reset-base;
-    @mixin reset-cursor;
-  }
 }
 
 /*~
