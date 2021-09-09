@@ -21,27 +21,16 @@
 
   /* mixin: reset-input */
 
-  /* mixin: reset-box-model */
-  box-sizing: border-box;
-  background-clip: padding-box;
-
-  padding: 0;
-  margin: 0;
   font: inherit;
-  color: inherit;
   background: transparent;
-  border: none;
   vertical-align: top;
   outline: none;
   line-height: 1;
-
 
   /* mixin: reset-font */
   font-family: -apple-system, 'Helvetica Neue', 'Helvetica', 'Arial', 'Lucida Grande', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-weight: var(--font-weight);
-
 
   /* mixin: transparent */
   border: none;
@@ -114,11 +103,7 @@
 }
 
 .text-input--underbar:disabled::placeholder {
-
   /* mixin: input-placeholder */
-  /* mixin: transparent */
-  border: none;
-  background-color: transparent;
   color: var(--input-placeholder-color);
 
   border: none;
@@ -151,26 +136,16 @@
 
   /* mixin: reset-box-model */
   box-sizing: border-box;
-  background-clip: padding-box;
 
   padding: 0;
   margin: 0;
   font: inherit;
-  color: inherit;
   background: transparent;
-  border: none;
-  vertical-align: top;
   outline: none;
   line-height: 1;
 
-
   /* mixin: reset-font */
-  font-family: -apple-system, 'Helvetica Neue', 'Helvetica', 'Arial', 'Lucida Grande', sans-serif;
-  -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-weight: var(--font-weight);
-
-
 
   /* mixin: material-font */
   font-family: 'Roboto', 'Noto', sans-serif;
@@ -184,7 +159,6 @@
   background-position: center bottom;
   background-color: transparent;
   font-size: var(--material-text-input-font-size);
-  font-weight: 400;
   border: none;
   padding-bottom: 2px;
   border-radius: 0;
@@ -205,7 +179,6 @@
   left: 0;
   top: 2px;
   font-size: 16px;
-  font-weight: 400;
   pointer-events: none;
 }
 

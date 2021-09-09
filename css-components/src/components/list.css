@@ -49,21 +49,15 @@
 */
 
 .list {
-
   /* mixin: reset-base */
   padding: 0;
   margin: 0;
-  font: inherit;
   color: inherit;
-  background: transparent;
-  border: none;
   line-height: normal;
-
 
   /* mixin: reset-cursor */
   cursor: default;
   user-select: none;
-
 
   /* mixin: reset-font */
   font-family: -apple-system, 'Helvetica Neue', 'Helvetica', 'Arial', 'Lucida Grande', sans-serif;
@@ -732,8 +726,6 @@
 }
 
 .list-item--material.list-item--expandable {
-  border-bottom: 1px solid var(--material-list-item-separator-color);
-
   /* mixin: retina-material-list-item-border */
   border-bottom: none;
   background-size: 100% 1px;
@@ -750,8 +742,6 @@
 .list-item--material.list-item--longdivider,
 .list-item--material.list-item--expandable.list-item--longdivider
  {
-  border-bottom: 1px solid var(--material-list-item-separator-color);
-
   /* mixin: retina-material-list-item-border */
   border-bottom: none;
   background-size: 100% 1px;
@@ -1024,8 +1014,6 @@
  */
 
 .list-item--longdivider {
-  border-bottom: var(--list-border);
-
   /* mixin: retina-list-item-border */
   border-bottom: none;
   background-size: 100% 1px;
@@ -1068,27 +1056,18 @@
  */
 
 .list-title {
-
   /* mixin: reset-base */
-  padding: 0;
-  margin: 0;
-  font: inherit;
-  color: inherit;
   background: transparent;
   border: none;
-  line-height: normal;
-
 
   /* mixin: reset-cursor */
   cursor: default;
   user-select: none;
 
-
   /* mixin: reset-font */
   font-family: -apple-system, 'Helvetica Neue', 'Helvetica', 'Arial', 'Lucida Grande', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-weight: var(--font-weight);
 
   display: block;
   color: var(--list-title-color);
@@ -1123,7 +1102,6 @@
   /* mixin: material-font */
   font-family: 'Roboto', 'Noto', sans-serif;
   -webkit-font-smoothing: antialiased;
-  font-weight: var(--material-font-weight);
 
   color: var(--material-list-title-color);
   font-size: var(--material-list-title-font-size);

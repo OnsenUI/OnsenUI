@@ -59,14 +59,12 @@
 }
 
 .radio-button {
-  position: relative;
   display: inline-block;
   vertical-align: top;
 
   /* mixin: reset-cursor */
   cursor: default;
   user-select: none;
-
 
   /* mixin: hide-input-parent */
   position: relative;
@@ -78,11 +76,9 @@
 .radio-button__checkmark:before {
   content: '';
   position: absolute;
-  border-radius: 100%;
 
   /* mixin: reset-box-model */
   box-sizing: border-box;
-  background-clip: padding-box;
 
   width: var(--checkbox-size);
   height: var(--checkbox-size);
@@ -96,9 +92,7 @@
 
   /* mixin: reset-box-model */
   box-sizing: border-box;
-  background-clip: padding-box;
 
-  position: relative;
   display: inline-block;
   vertical-align: top;
 
@@ -106,18 +100,15 @@
   cursor: default;
   user-select: none;
 
-
   /* mixin: reset-font */
   font-family: -apple-system, 'Helvetica Neue', 'Helvetica', 'Arial', 'Lucida Grande', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: var(--font-weight);
 
-
   /* mixin: hide-input-parent */
   position: relative;
 
-  position: relative;
   width: var(--radio-button-size);
   height: var(--radio-button-size);
   background: var(--radio-button-background);

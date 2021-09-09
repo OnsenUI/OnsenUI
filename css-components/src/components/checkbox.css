@@ -70,9 +70,6 @@
   -moz-osx-font-smoothing: grayscale;
   font-weight: var(--font-weight);
 
-  /* mixin: hide-input-parent */
-  position: relative;
-
   height: var(--checkbox-size);
   width: var(--checkbox-size);
   pointer-events: none;
@@ -105,7 +102,6 @@
 
   /* mixin: reset-box-model */
   box-sizing: border-box;
-  background-clip: padding-box;
 
   width: var(--checkbox-size);
   height: var(--checkbox-size);
@@ -179,102 +175,32 @@
     </label>
  */
 
-.checkbox--noborder {
-  line-height: var(--checkbox-size);
-
-  /* mixin: hide-input-parent */
-  position: relative;
-}
-
-.checkbox--noborder__input {
-  /* mixin: hide-input */
-  position: absolute;
-  right: 0;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  padding: 0;
-  border: 0;
-  background-color: transparent;
-  z-index: 1;
-  vertical-align: top;
-  outline: none;
-  width: 100%;
-  height: 100%;
-  margin: 0;
-  appearance: none;
-}
-
 .checkbox--noborder__checkmark {
-  position: relative;
-  display: inline-block;
-  vertical-align: top;
-
-  /* mixin: reset-cursor */
-  cursor: default;
-  user-select: none;
-
-  /* mixin: reset-box-model */
-  box-sizing: border-box;
-  background-clip: padding-box;
-
-  width: var(--checkbox-size);
-  height: var(--checkbox-size);
   background: transparent;
   border: none;
 }
 
 .checkbox--noborder__checkmark:before {
-  content: '';
-  position: absolute;
-  width: var(--checkbox-size);
-  height: var(--checkbox-size);
-  background: transparent;
   border: none;
-  border-radius: var(--checkbox-size);
-  left: 0;
 }
 
 /* checkmark's line */
 .checkbox--noborder__checkmark:after {
   /* mixin: checkmark */
-  content: '';
-  position: absolute;
-  top: 7px;
   left: 4px;
-  opacity: 0;
-  width: 11px;
   height: 4px;
-  background: transparent;
   border: 2px solid var(--highlight-color);
-  border-top: none;
-  border-right: none;
-  border-radius: 0;
-  transform: rotate(-45deg);
 }
 
 :checked + .checkbox--noborder__checkmark:before {
   background: transparent;
-  border: none;
-}
-
-:checked + .checkbox--noborder__checkmark:after {
-  opacity: 1;
 }
 
 :focus + .checkbox--noborder__checkmark:before {
   border: none;
 }
 
-:disabled + .checkbox--noborder__checkmark {
-  /* mixin: disabled */
-  opacity: 0.3;
-  cursor: default;
-  pointer-events: none;
-}
-
 :disabled:active + .checkbox--noborder__checkmark:before {
-  background: transparent;
   border: none;
 }
 

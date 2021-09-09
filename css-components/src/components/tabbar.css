@@ -106,13 +106,11 @@
 }
 
 .tabbar__item {
-
   /* mixin: reset-font */
   font-family: -apple-system, 'Helvetica Neue', 'Helvetica', 'Arial', 'Lucida Grande', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: var(--font-weight);
-
 
   /* mixin: hide-input-parent */
   position: relative;
@@ -124,7 +122,6 @@
 }
 
 .tabbar__item > input {
-
   /* mixin: hide-input */
   position: absolute;
   right: 0;
@@ -144,33 +141,22 @@
 }
 
 .tabbar__button {
-
   /* mixin: reset-font */
-  font-family: -apple-system, 'Helvetica Neue', 'Helvetica', 'Arial', 'Lucida Grande', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-weight: var(--font-weight);
-
 
   /* mixin: reset-box-model */
   box-sizing: border-box;
-  background-clip: padding-box;
-
 
   /* mixin: reset-base */
-  padding: 0;
   margin: 0;
   font: inherit;
-  color: inherit;
   background: transparent;
   border: none;
-  line-height: normal;
-
 
   /* mixin: reset-cursor */
   cursor: default;
   user-select: none;
-
 
   /* mixin: ellipsis */
   text-overflow: ellipsis;
@@ -468,7 +454,6 @@
   color: var(--material-tabbar-text-color);
   text-transform: uppercase;
   font-size: 14px;
-  font-weight: 500;
 
   /* mixin: material-font */
   font-family: 'Roboto', 'Noto', sans-serif;
@@ -573,7 +558,6 @@
 */
 
 .tabbar--material__label {
-
   /* mixin: material-font */
   font-family: 'Roboto', 'Noto', sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -581,11 +565,9 @@
 }
 
 .tabbar--material__label:first-child {
-
   /* mixin: material-font */
   font-family: 'Roboto', 'Noto', sans-serif;
   -webkit-font-smoothing: antialiased;
-  font-weight: var(--material-font-weight);
 
   letter-spacing: 0.015em;
   font-weight: 500;

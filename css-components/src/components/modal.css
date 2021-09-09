@@ -11,20 +11,11 @@
 */
 
 .modal {
-
   /* mixin: reset-container */
-
-  /* mixin: reset-box-model */
-  box-sizing: border-box;
-  background-clip: padding-box;
-
-
   /* mixin: reset-overflow */
   white-space: nowrap;
-  overflow: hidden;
 
   word-spacing: 0;
-
 
   /* mixin: reset-base */
   padding: 0;
@@ -35,11 +26,9 @@
   border: none;
   line-height: normal;
 
-
   /* mixin: reset-box-model */
   box-sizing: border-box;
   background-clip: padding-box;
-
 
   /* mixin: reset-font */
   font-family: -apple-system, 'Helvetica Neue', 'Helvetica', 'Arial', 'Lucida Grande', sans-serif;
@@ -61,35 +50,23 @@
 }
 
 .modal__content {
-
   /* mixin: reset-container */
-
-  /* mixin: reset-box-model */
-  box-sizing: border-box;
-  background-clip: padding-box;
-
-
   /* mixin: reset-overflow */
-  white-space: nowrap;
   overflow: hidden;
 
   word-spacing: 0;
-
 
   /* mixin: reset-base */
   padding: 0;
   margin: 0;
   font: inherit;
-  color: inherit;
   background: transparent;
   border: none;
   line-height: normal;
 
-
   /* mixin: reset-box-model */
   box-sizing: border-box;
   background-clip: padding-box;
-
 
   /* mixin: reset-font */
   font-family: -apple-system, 'Helvetica Neue', 'Helvetica', 'Arial', 'Lucida Grande', sans-serif;

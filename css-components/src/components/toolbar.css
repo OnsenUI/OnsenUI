@@ -22,27 +22,20 @@
 */
 
 .toolbar {
-
   /* mixin: toolbar */
   /* mixin: reset-font */
-  font-family: -apple-system, 'Helvetica Neue', 'Helvetica', 'Arial', 'Lucida Grande', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-weight: var(--font-weight);
   /* mixin: reset-container */
   /* mixin: reset-box-model */
   box-sizing: border-box;
-  background-clip: padding-box;
   /* mixin: reset-overflow */
-  white-space: nowrap;
   overflow: hidden;
   word-spacing: 0;
   /* mixin: reset-base */
   padding: 0;
   margin: 0;
   font: inherit;
-  color: inherit;
-  background: transparent;
   border: none;
   line-height: normal;
   /* mixin: reset-cursor */
@@ -82,7 +75,6 @@
   /* mixin: toolbar__item */
   /* mixin: reset-box-model */
   box-sizing: border-box;
-  background-clip: padding-box;
   /* mixin: reset-base */
   padding: 0;
   margin: 0;
@@ -103,7 +95,6 @@
   /* mixin: toolbar__item */
   /* mixin: reset-box-model */
   box-sizing: border-box;
-  background-clip: padding-box;
   /* mixin: reset-base */
   padding: 0;
   margin: 0;
@@ -111,7 +102,6 @@
   color: inherit;
   background: transparent;
   border: none;
-  line-height: normal;
 
   max-width: 50%;
   width: 27%;
@@ -124,7 +114,6 @@
   /* mixin: toolbar__item */
   /* mixin: reset-box-model */
   box-sizing: border-box;
-  background-clip: padding-box;
   /* mixin: reset-base */
   padding: 0;
   margin: 0;
@@ -132,7 +121,6 @@
   color: inherit;
   background: transparent;
   border: none;
-  line-height: normal;
 
   max-width: 50%;
   width: 27%;
@@ -145,15 +133,12 @@
   /* mixin: toolbar__item */
   /* mixin: reset-box-model */
   box-sizing: border-box;
-  background-clip: padding-box;
   /* mixin: reset-base */
   padding: 0;
   margin: 0;
   font: inherit;
-  color: inherit;
   background: transparent;
   border: none;
-  line-height: normal;
 
   width: 46%;
   text-align: center;
@@ -233,17 +218,13 @@
 */
 
 .bottom-bar {
-
   /* mixin: toolbar */
   /* mixin: reset-font */
-  font-family: -apple-system, 'Helvetica Neue', 'Helvetica', 'Arial', 'Lucida Grande', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-weight: var(--font-weight);
   /* mixin: reset-container */
   /* mixin: reset-box-model */
   box-sizing: border-box;
-  background-clip: padding-box;
   /* mixin: reset-overflow */
   white-space: nowrap;
   overflow: hidden;
@@ -252,8 +233,6 @@
   padding: 0;
   margin: 0;
   font: inherit;
-  color: inherit;
-  background: transparent;
   border: none;
   line-height: normal;
   /* mixin: reset-cursor */
@@ -270,7 +249,6 @@
   box-shadow: var(--toolbar-box-shadow);
   font-weight: var(--font-weight);
   border-bottom: none;
-  border-top: var(--toolbar-separator);
   position: absolute;
   bottom: 0;
   right: 0;
@@ -382,7 +360,6 @@
   /* mixin: material-font */
   font-family: 'Roboto', 'Noto', sans-serif;
   -webkit-font-smoothing: antialiased;
-  font-weight: var(--material-font-weight);
   font-size: 20px;
   font-weight: 500;
   color: var(--material-toolbar-color);
@@ -399,7 +376,6 @@
   /* mixin: material-font */
   font-family: 'Roboto', 'Noto', sans-serif;
   -webkit-font-smoothing: antialiased;
-  font-weight: var(--material-font-weight);
   font-size: 20px;
   font-weight: 500;
   color: var(--material-toolbar-color);

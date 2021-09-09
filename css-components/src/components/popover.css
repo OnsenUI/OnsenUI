@@ -96,26 +96,20 @@
 }
 
 .popover__content {
-
   /* mixin: reset-box-model */
   box-sizing: border-box;
-  background-clip: padding-box;
-
 
   /* mixin: reset-base */
   padding: 0;
   margin: 0;
   font: inherit;
-  color: inherit;
   background: transparent;
   border: none;
   line-height: normal;
 
-
   /* mixin: reset-cursor */
   cursor: default;
   user-select: none;
-
 
   /* mixin: reset-font */
   font-family: -apple-system, 'Helvetica Neue', 'Helvetica', 'Arial', 'Lucida Grande', sans-serif;

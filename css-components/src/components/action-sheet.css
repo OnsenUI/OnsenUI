@@ -190,7 +190,6 @@
   /* mixin: material-font */
   font-family: 'Roboto', 'Noto', sans-serif;
   -webkit-font-smoothing: antialiased;
-  font-weight: var(--material-font-weight);
 
   border-radius: 0;
   background-image: none;
@@ -201,7 +200,7 @@
   padding: 0 0 0 16px;
   color: var(--material-action-sheet-text-color);
   background-color: white;
-  font-weight: 400;
+  font-weight: var(--material-font-weight);
 }
 
 .action-sheet-title--material:first-child {
@@ -212,7 +211,6 @@
   /* mixin: material-font */
   font-family: 'Roboto', 'Noto', sans-serif;
   -webkit-font-smoothing: antialiased;
-  font-weight: var(--material-font-weight);
 
   border-radius: 0;
   background-image: none;
@@ -222,7 +220,7 @@
   font-size: 16px;
   padding: 0 0 0 16px;
   color: var(--material-action-sheet-text-color);
-  font-weight: 400;
+  font-weight: var(--material-font-weight);
   background-color: white;
 }
 
