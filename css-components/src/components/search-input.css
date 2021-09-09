@@ -9,16 +9,6 @@
   --search-input-placeholder-color: #7a797b;
 
   --material-search-icon: url('../img/android-search-input-icon.svg');
-
-  @define-mixin search-input {
-    @mixin reset-input;
-    @mixin reset-font;
-    appearance: textfield;
-  }
-
-  @define-mixin search-input--disabled {
-    @mixin disabled;
-  }
 }
 
 /*~
@@ -29,7 +19,9 @@
 */
 
 .search-input {
-  @mixin search-input;
+  @mixin reset-input;
+  @mixin reset-font;
+  appearance: textfield;
   box-sizing: border-box;
   height: var(--search-input-height);
   font-size: var(--search-input-font-size);
@@ -72,7 +64,7 @@
 }
 
 .search-input:disabled {
-  @mixin search-input--disabled;
+  @mixin disabled;
 }
 
 /*~

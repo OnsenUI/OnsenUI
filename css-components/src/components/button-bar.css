@@ -4,25 +4,6 @@
   --button-bar-border-bottom: 1px solid var(--button-bar-color);
   --button-bar-border: 0 solid var(--button-bar-color);
   --button-bar-border-radius: 4px;
-
-  @define-mixin button-bar {
-    @mixin reset-font;
-    display: inline-flex;
-    align-items: stretch;
-    align-content: stretch;
-    flex-wrap: nowrap;
-    margin: 0;
-    padding: 0;
-    border: none;
-  }
-
-  @define-mixin button-bar__item {
-    @mixin reset-font;
-    border-radius: 0;
-    width: 100%;
-    padding: 0;
-    margin: 0;
-  }
 }
 
 /*~
@@ -43,11 +24,22 @@
 */
 
 .button-bar {
-  @mixin button-bar;
+  @mixin reset-font;
+  display: inline-flex;
+  align-items: stretch;
+  align-content: stretch;
+  flex-wrap: nowrap;
+  margin: 0;
+  padding: 0;
+  border: none;
 }
 
 .button-bar__item {
-  @mixin button-bar__item;
+  @mixin reset-font;
+  border-radius: 0;
+  width: 100%;
+  padding: 0;
+  margin: 0;
   @mixin hide-input-parent;
   overflow: hidden;
   box-sizing: border-box;

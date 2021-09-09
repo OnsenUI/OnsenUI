@@ -11,26 +11,6 @@
   --tabbar-active-box-shadow: none;
   --tabbar-button-focus-box-shadow: none;
   --tabbar-border-top: 1px solid var(--tabbar-border-color);
-
-  @define-mixin retina-tabbar-top-border {
-    @media (--retina-query) {
-      border-top: none;
-      background-size: 100% 1px;
-      background-repeat: no-repeat;
-      background-position: top;
-      background-image: linear-gradient(180deg, var(--tabbar-border-color), var(--tabbar-border-color) 50%, transparent 50%);
-    }
-  }
-
-  @define-mixin retina-tabbar-bottom-border {
-    @media (--retina-query) {
-      border-bottom: none;
-      background-size: 100% 1px;
-      background-repeat: no-repeat;
-      background-position: bottom;
-      background-image: linear-gradient(0deg, var(--tabbar-border-color), var(--tabbar-border-color) 50%, transparent 50%);
-    }
-  }
 }
 
 /*~
@@ -109,7 +89,14 @@
   background-color: var(--tabbar-background-color);
   border-top: var(--tabbar-border-top);
   width: 100%;
-  @mixin retina-tabbar-top-border;
+
+  @media (--retina-query) {
+    border-top: none;
+    background-size: 100% 1px;
+    background-repeat: no-repeat;
+    background-position: top;
+    background-image: linear-gradient(180deg, var(--tabbar-border-color), var(--tabbar-border-color) 50%, transparent 50%);
+  }
 }
 
 .tabbar__item {
@@ -295,7 +282,14 @@
   bottom: auto;
   border-top: none;
   border-bottom: var(--tabbar-border-top);
-  @mixin retina-tabbar-bottom-border;
+
+  @media (--retina-query) {
+    border-bottom: none;
+    background-size: 100% 1px;
+    background-repeat: no-repeat;
+    background-position: bottom;
+    background-image: linear-gradient(0deg, var(--tabbar-border-color), var(--tabbar-border-color) 50%, transparent 50%);
+  }
 }
 
 .tabbar--top__content {
