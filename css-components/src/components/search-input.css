@@ -19,8 +19,30 @@
 */
 
 .search-input {
-  @mixin reset-input;
-  @mixin reset-font;
+
+  /* mixin: reset-input */
+
+  /* mixin: reset-box-model */
+  box-sizing: border-box;
+  background-clip: padding-box;
+
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  background: transparent;
+  border: none;
+  vertical-align: top;
+  outline: none;
+  line-height: 1;
+
+
+  /* mixin: reset-font */
+  font-family: -apple-system, 'Helvetica Neue', 'Helvetica', 'Arial', 'Lucida Grande', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: var(--font-weight);
+
   appearance: textfield;
   box-sizing: border-box;
   height: var(--search-input-height);
@@ -64,7 +86,10 @@
 }
 
 .search-input:disabled {
-  @mixin disabled;
+  /* mixin: disabled */
+  opacity: 0.3;
+  cursor: default;
+  pointer-events: none;
 }
 
 /*~
@@ -75,7 +100,12 @@
 */
 
 .search-input--material {
-  @mixin material-font;
+
+  /* mixin: material-font */
+  font-family: 'Roboto', 'Noto', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  font-weight: var(--material-font-weight);
+
   border-radius: 2px;
   height: 48px;
   background-color: var(--material-search-background-color);

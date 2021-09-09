@@ -18,7 +18,12 @@
 */
 
 .card {
-  @mixin reset-font;
+  /* mixin: reset-font */
+  font-family: -apple-system, 'Helvetica Neue', 'Helvetica', 'Arial', 'Lucida Grande', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: var(--font-weight);
+
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.12);
   border-radius: 8px;
   background-color: var(--card-background-color);
@@ -50,7 +55,12 @@
 */
 
 .card__title {
-  @mixin reset-font;
+  /* mixin: reset-font */
+  font-family: -apple-system, 'Helvetica Neue', 'Helvetica', 'Arial', 'Lucida Grande', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: var(--font-weight);
+
   font-weight: 400;
   font-size: 20px;
   margin: 4px 0 8px 0;
@@ -73,8 +83,18 @@
 .card--material {
   background-color: var(--material-card-background-color);
   border-radius: 2px;
-  @mixin material-shadow-1;
-  @mixin material-font;
+
+  /* mixin: material-shadow-1 */
+  box-shadow:
+    0 2px 2px 0 rgba(0, 0, 0, 0.14),
+    0 1px 5px 0 rgba(0, 0, 0, 0.12),
+    0 3px 1px -2px rgba(0, 0, 0, 0.2);
+
+
+  /* mixin: material-font */
+  font-family: 'Roboto', 'Noto', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  font-weight: var(--material-font-weight);
 }
 
 .card--material__content {
@@ -96,7 +116,11 @@
 */
 
 .card--material__title {
-  @mixin material-font;
+  /* mixin: material-font */
+  font-family: 'Roboto', 'Noto', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  font-weight: var(--material-font-weight);
+
   font-size: 24px;
   margin: 8px 0 12px 0;
 }

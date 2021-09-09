@@ -13,7 +13,13 @@
 */
 
 .toast {
-  @mixin reset-font;
+
+  /* mixin: reset-font */
+  font-family: -apple-system, 'Helvetica Neue', 'Helvetica', 'Arial', 'Lucida Grande', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: var(--font-weight);
+
   position: absolute;
   z-index: 2;
   left: 8px;
@@ -78,11 +84,21 @@
 }
 
 .toast--material__message {
-  @mixin material-font;
+
+  /* mixin: material-font */
+  font-family: 'Roboto', 'Noto', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  font-weight: var(--material-font-weight);
+
   margin: 0 24px 0 0;
 }
 
 .toast--material__button {
-  @mixin material-font;
+
+  /* mixin: material-font */
+  font-family: 'Roboto', 'Noto', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  font-weight: var(--material-font-weight);
+
   color: var(--material-toast-button-text-color);
 }

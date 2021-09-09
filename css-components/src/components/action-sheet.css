@@ -30,7 +30,12 @@
 */
 
 .action-sheet {
-  @mixin reset-font;
+  /* mixin: reset-font */
+  font-family: -apple-system, 'Helvetica Neue', 'Helvetica', 'Arial', 'Lucida Grande', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: var(--font-weight);
+
   cursor: default;
   position: absolute;
   left: 10px; /* iOS 9, 10, 11 */
@@ -52,7 +57,12 @@
   appearance: none;
   display: block;
   width: 100%;
-  @mixin ellipsis;
+
+  /* mixin: ellipsis */
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+
   background-size: 100% 1px;
   background-repeat: no-repeat;
   background-position: bottom;
@@ -106,7 +116,12 @@
   text-align: center;
   background-color: var(--action-sheet-button-background-color);
   line-height: 56px;
-  @mixin ellipsis;
+
+  /* mixin: ellipsis */
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+
   background-size: 100% 1px;
   background-repeat: no-repeat;
   background-position: bottom;
@@ -163,11 +178,20 @@
   left: 0;
   right: 0;
   bottom: 0;
-  @mixin material-shadow-5;
+
+  /* mixin: material-shadow-5 */
+  box-shadow:
+    0 16px 24px 2px rgba(0, 0, 0, 0.14),
+    0 6px 30px 5px rgba(0, 0, 0, 0.12),
+    0 8px 10px -5px rgba(0, 0, 0, 0.4);
 }
 
 .action-sheet-title--material {
-  @mixin material-font;
+  /* mixin: material-font */
+  font-family: 'Roboto', 'Noto', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  font-weight: var(--material-font-weight);
+
   border-radius: 0;
   background-image: none;
   text-align: left;
@@ -185,7 +209,11 @@
 }
 
 .action-sheet-button--material {
-  @mixin material-font;
+  /* mixin: material-font */
+  font-family: 'Roboto', 'Noto', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  font-weight: var(--material-font-weight);
+
   border-radius: 0;
   background-image: none;
   height: 52px;

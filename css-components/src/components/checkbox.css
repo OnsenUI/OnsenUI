@@ -7,11 +7,6 @@
   --material-checkbox-size: 18px;
   --material-checkbox-focus-ring-size: 40px;
   --material-checkbox-focus-ring-shadow-size: calc((var(--material-checkbox-focus-ring-size) - var(--material-checkbox-size)) / 2);
-
-  @define-mixin checkbox--before {
-    content: '';
-    position: absolute;
-  }
 }
 
 /*~
@@ -42,19 +37,42 @@
   position: relative;
   display: inline-block;
   vertical-align: top;
-  @mixin reset-cursor;
-  @mixin reset-font;
+
+  /* mixin: reset-cursor */
+  cursor: default;
+  user-select: none;
+
+  /* mixin: reset-font */
+  font-family: -apple-system, 'Helvetica Neue', 'Helvetica', 'Arial', 'Lucida Grande', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: var(--font-weight);
+
   line-height: var(--checkbox-size);
 }
 
 .checkbox__checkmark {
-  @mixin reset-box-model;
+  /* mixin: reset-box-model */
+  box-sizing: border-box;
+  background-clip: padding-box;
+
   position: relative;
   display: inline-block;
   vertical-align: top;
-  @mixin reset-cursor;
-  @mixin reset-font;
-  @mixin hide-input-parent;
+
+  /* mixin: reset-cursor */
+  cursor: default;
+  user-select: none;
+
+  /* mixin: reset-font */
+  font-family: -apple-system, 'Helvetica Neue', 'Helvetica', 'Arial', 'Lucida Grande', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: var(--font-weight);
+
+  /* mixin: hide-input-parent */
+  position: relative;
+
   height: var(--checkbox-size);
   width: var(--checkbox-size);
   pointer-events: none;
@@ -62,12 +80,33 @@
 
 .checkbox__input,
 .checkbox__input:checked {
-  @mixin hide-input;
+  /* mixin: hide-input */
+  position: absolute;
+  right: 0;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  padding: 0;
+  border: 0;
+  background-color: transparent;
+  z-index: 1;
+  vertical-align: top;
+  outline: none;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  appearance: none;
 }
 
 .checkbox__checkmark:before {
-  @mixin checkbox--before;
-  @mixin reset-box-model;
+  /* mixin: checkbox--before */
+  content: '';
+  position: absolute;
+
+  /* mixin: reset-box-model */
+  box-sizing: border-box;
+  background-clip: padding-box;
+
   width: var(--checkbox-size);
   height: var(--checkbox-size);
   background: transparent;
@@ -78,7 +117,10 @@
 
 /* checkmark's line */
 .checkbox__checkmark:after {
-  @mixin checkbox--before;
+  /* mixin: checkbox--before */
+  content: '';
+  position: absolute;
+
   top: 7px;
   left: 5px;
   width: 11px;
@@ -103,7 +145,10 @@
 }
 
 :disabled + .checkbox__checkmark {
-  @mixin disabled;
+  /* mixin: disabled */
+  opacity: 0.3;
+  cursor: default;
+  pointer-events: none;
 }
 
 :disabled:active + .checkbox__checkmark:before { /* FIXME */
@@ -136,19 +181,43 @@
 
 .checkbox--noborder {
   line-height: var(--checkbox-size);
-  @mixin hide-input-parent;
+
+  /* mixin: hide-input-parent */
+  position: relative;
 }
 
 .checkbox--noborder__input {
-  @mixin hide-input;
+  /* mixin: hide-input */
+  position: absolute;
+  right: 0;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  padding: 0;
+  border: 0;
+  background-color: transparent;
+  z-index: 1;
+  vertical-align: top;
+  outline: none;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  appearance: none;
 }
 
 .checkbox--noborder__checkmark {
   position: relative;
   display: inline-block;
   vertical-align: top;
-  @mixin reset-cursor;
-  @mixin reset-box-model;
+
+  /* mixin: reset-cursor */
+  cursor: default;
+  user-select: none;
+
+  /* mixin: reset-box-model */
+  box-sizing: border-box;
+  background-clip: padding-box;
+
   width: var(--checkbox-size);
   height: var(--checkbox-size);
   background: transparent;
@@ -168,7 +237,20 @@
 
 /* checkmark's line */
 .checkbox--noborder__checkmark:after {
-  @mixin checkmark;
+  /* mixin: checkmark */
+  content: '';
+  position: absolute;
+  top: 7px;
+  left: 4px;
+  opacity: 0;
+  width: 11px;
+  height: 4px;
+  background: transparent;
+  border: 2px solid var(--highlight-color);
+  border-top: none;
+  border-right: none;
+  border-radius: 0;
+  transform: rotate(-45deg);
 }
 
 :checked + .checkbox--noborder__checkmark:before {
@@ -185,7 +267,10 @@
 }
 
 :disabled + .checkbox--noborder__checkmark {
-  @mixin disabled;
+  /* mixin: disabled */
+  opacity: 0.3;
+  cursor: default;
+  pointer-events: none;
 }
 
 :disabled:active + .checkbox--noborder__checkmark:before {
@@ -222,7 +307,12 @@
 
 .checkbox--material {
   line-height: var(--material-checkbox-size);
-  @mixin material-font;
+
+  /* mixin: material-font */
+  font-family: 'Roboto', 'Noto', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  font-weight: var(--material-font-weight);
+
   overflow: visible;
 }
 
