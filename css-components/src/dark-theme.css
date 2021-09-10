@@ -40,7 +40,7 @@
   --range-track-background-color: #6b6f74;
   --range-track-background-color-active: #bbb;
   --range-thumb-background-color: #fff;
-  --modal-background-color: color-mod(black a(70%));
+  --modal-background-color: rgba(0, 0, 0, 0.7); /* color-mod(black a(70%)) */
   --modal-text-color: #fff;
   --alert-dialog-background-color: #f4f4f4;
   --alert-dialog-text-color: #1f1f21;
@@ -59,7 +59,7 @@
   --action-sheet-cancel-button-background-color: #fff;
   --notification-background-color: #fe3824;
   --notification-color: white;
-  --search-input-background-color: color-mod(white a(9%));
+  --search-input-background-color: rgba(255, 255, 255, 0.09); /* color-mod(white a(9%)) */
   --fab-text-color: #ffffff;
   --fab-background-color: var(--highlight-color);
   --fab-active-background-color: color-mod(var(--fab-background-color) a(70%));
@@ -79,7 +79,7 @@
   --material-switch-active-thumb-color: #ffc107;
   --material-switch-active-background-color: color-mod(var(--material-switch-active-thumb-color) a(50%));
   --material-switch-inactive-thumb-color: #bdbdbd;
-  --material-switch-inactive-background-color: color-mod(white a(30%));
+  --material-switch-inactive-background-color: rgba(255, 255, 255, 0.3); /* color-mod(white a(30%)) */
   --material-range-track-color: #525252;
   --material-range-thumb-color: #cecec5;
   --material-range-disabled-thumb-color: #4f4f4f;
@@ -90,15 +90,15 @@
   --material-toolbar-button-color: var(--toolbar-button-color);
   --material-segment-background-color: #292929;
   --material-segment-active-background-color: #404040;
-  --material-segment-text-color: color-mod(#fff a(62%));
+  --material-segment-text-color: rgba(255, 255, 255, 0.62); /* color-mod(#fff a(62%)) */
   --material-segment-active-text-color: #cacaca;
   --material-button-background-color: #d68600;
   --material-button-text-color: #ffffff;
-  --material-button-disabled-background-color: color-mod(#b0b0b0 a(74%));
-  --material-button-disabled-color: color-mod(white a(74%));
-  --material-flat-button-active-background-color: color-mod(#666666 a(20%));
+  --material-button-disabled-background-color: rgba(176, 176, 176, 0.74); /* color-mod(#b0b0b0 a(74%)) */
+  --material-button-disabled-color: rgba(255, 255, 255, 0.74); /* color-mod(white a(74%)) */
+  --material-flat-button-active-background-color: rgba(102, 102, 102, 0.2); /* color-mod(#666666 a(20%)) */
   --material-list-background-color: color-mod(var(--material-background-color) l(+2%));
-  --material-list-item-separator-color: color-mod(white a(12%));
+  --material-list-item-separator-color: rgba(255, 255, 255, 0.12); /* color-mod(white a(12%)) */
   --material-list-header-text-color: #8a8a8a;
   --material-checkbox-active-color: #fff;
   --material-checkbox-inactive-color: #717171;
@@ -106,9 +106,9 @@
   --material-radio-button-active-color: #ffa101;
   --material-radio-button-inactive-color: #8e8e8e;
   --material-radio-button-disabled-color: #505050;
-  --material-text-input-text-color: color-mod(#fff a(75%));
-  --material-text-input-active-color: color-mod(#fff a(75%));
-  --material-text-input-inactive-color: color-mod(#fff a(30%));
+  --material-text-input-text-color: rgba(255, 255, 255, 0.75); /* color-mod(#fff a(75%)) */
+  --material-text-input-active-color: rgba(255, 255, 255, 0.75); /* color-mod(#fff a(75%)) */
+  --material-text-input-inactive-color: rgba(255, 255, 255, 0.3); /* color-mod(#fff a(30%)) */
   --material-search-background-color: #424242;
   --material-dialog-background-color: #424242;
   --material-dialog-text-color: var(--material-text-color);
@@ -128,16 +128,16 @@
   --material-tabbar-highlight-color: color-mod(var(--material-toolbar-background-color) l(+3%));
   --material-fab-text-color: #31313a;
   --material-fab-background-color: #ffffff;
-  --material-fab-active-background-color: color-mod(white a(75%));
+  --material-fab-active-background-color: rgba(255, 255, 255, 0.75); /* color-mod(white a(75%)) */
   --material-card-background-color: #424242;
-  --material-card-text-color: color-mod(white a(46%));
+  --material-card-text-color: rgba(255, 255, 255, 0.46); /* color-mod(white a(46%)) */
   --material-toast-background-color: #ccc;
   --material-toast-text-color: #000;
   --material-toast-button-text-color: #583905;
   --material-select-input-color: var(--material-text-color);
-  --material-select-input-active-color: color-mod(white a(85%));
-  --material-select-input-inactive-color: color-mod(white a(19%));
-  --material-select-border-color: color-mod(white a(88%));
+  --material-select-input-active-color: rgba(255, 255, 255, 0.85); /* color-mod(white a(85%)) */
+  --material-select-input-inactive-color: rgba(255, 255, 255, 0.19); /* color-mod(white a(19%)) */
+  --material-select-border-color: rgba(255, 255, 255, 0.88); /* color-mod(white a(88%)) */
   --material-popover-background-color: var(--material-alert-dialog-background-color);
   --material-popover-text-color: var(--material-text-color);
   --material-action-sheet-text-color: #686868;

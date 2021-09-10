@@ -90,13 +90,13 @@
   --material-toolbar-button-color: #ffffff;
   --material-segment-background-color: #fafafa;
   --material-segment-active-background-color: #c8c8c8;
-  --material-segment-text-color: color-mod(black a(38%));
+  --material-segment-text-color: rgba(0, 0, 0, 0.38); /* color-mod(black a(38%)) */
   --material-segment-active-text-color: #353535;
   --material-button-background-color: #009688;
   --material-button-text-color: #ffffff;
-  --material-button-disabled-background-color: color-mod(#4f4f4f a(26%));
-  --material-button-disabled-color: color-mod(black a(26%));
-  --material-flat-button-active-background-color: color-mod(#999 a(20%));
+  --material-button-disabled-background-color: rgba(79, 79, 79, 0.26); /* color-mod(#4f4f4f a(26%)) */
+  --material-button-disabled-color: rgba(0, 0, 0, 0.26); /* color-mod(black a(26%)) */
+  --material-flat-button-active-background-color: rgba(153, 153, 153, 0.2); /* color-mod(#999 a(20%)) */
   --material-list-background-color: #fff;
   --material-list-item-separator-color: #eee;
   --material-list-header-text-color: #757575;
@@ -140,7 +140,7 @@
   --material-select-input-color: var(--material-text-color);
   --material-select-input-active-color: rgba(0, 0, 0, 0.15);
   --material-select-input-inactive-color: rgba(0, 0, 0, 0.81);
-  --material-select-border-color: color-mod(black a(12%));
+  --material-select-border-color: rgba(0, 0, 0, 0.12); /* color-mod(black a(12%)) */
   --material-popover-background-color: #fafafa;
   --material-popover-text-color: var(--material-text-color);
   --material-action-sheet-text-color: #686868;

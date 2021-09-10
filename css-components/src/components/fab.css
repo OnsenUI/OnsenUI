@@ -80,7 +80,7 @@ ons-fab, ons-speed-dial-item, button {
     }
     &:disabled,
     &[disabled] {
-      background-color: color-mod(black alpha(50%));
+      background-color: rgba(0, 0, 0, 0.5); /* color-mod(black alpha(50%)) */
 
 /* mixin: material-shadow-0 */
     box-shadow: none;
