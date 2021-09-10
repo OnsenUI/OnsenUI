@@ -16,10 +16,14 @@
   --toolbar-border-color: #242424;
   --button-bar-color: var(--highlight-color);
   --button-bar-active-text-color: #fff;
-  --button-bar-active-background-color: color-mod(var(--button-bar-color) b(80%));
+  --button-bar-active-background-color: unset;
+  --button-bar-active-background-color-default-blend-color: black;
+  --button-bar-active-background-color-default-blend-time: -0.8s;
   --segment-color: var(--highlight-color);
   --segment-active-text-color: #fff;
-  --segment-active-background-color: color-mod(var(--segment-color) b(80%));
+  --segment-active-background-color: unset;
+  --segment-active-background-color-default-blend-color: black;
+  --segment-active-background-color-default-blend-time: -0.8s;
   --list-background-color: #181818;
   --list-header-background-color: #111;
   --list-tap-active-background-color: #262626;

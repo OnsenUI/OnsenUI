@@ -115,6 +115,22 @@
   transition: none;
 }
 
+/* Hack to replicate blend from the deprecated color-mod function. */
+.button-bar__button:active:before,
+:active + .button-bar__button:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: -1;
+  --blend-background-color__base: var(--button-bar-color);
+  --blend-background-color__color: var(--button-bar-active-background-color-default-blend-color);
+  /* stylelint-disable-next-line no-unknown-animations */
+  animation: blend-background-color 1s var(--button-bar-active-background-color-default-blend-time) linear forwards paused;
+}
+
 .button-bar__item:first-child > .button-bar__button {
   border-left-width: 1px;
   border-radius: var(--button-bar-border-radius) 0 0 var(--button-bar-border-radius);

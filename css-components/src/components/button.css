@@ -100,10 +100,15 @@
 }
 
 .button--outline:active {
-  background-color: color-mod(var(--button-background-color) tint(var(--alpha-lighten)));
   border: 1px solid var(--button-background-color);
   color: var(--button-background-color);
   opacity: 1;
+
+  /* Hack to replicate tint from the deprecated color-mod function. */
+  --blend-background-color__base: var(--button-background-color);
+  --blend-background-color__color: white;
+  /* stylelint-disable-next-line no-unknown-animations */
+  animation: blend-background-color 1s -0.7s linear forwards paused;
 }
 
 .button--outline:hover {

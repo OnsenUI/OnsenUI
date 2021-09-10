@@ -7,7 +7,6 @@
   --input-invalid-border-color: var(--border-color);
   --input-invalid-text-color: var(--text-color);
   --input-border: 1px solid var(--input-border-color);
-  --alpha-lighten: 70%;
   --font-size: 17px;
   --font-weight: 400;
   --material-font-size: 17px;
@@ -80,4 +79,23 @@ h3 {
 
 h4, h5, h6 {
   font-size: 18px;
+}
+
+/* Hack to replicate the deprecated color-mod function from postcss-color-mod-function.
+ * Replace this when an alternative function to color-mod is well-supported.
+ * See: https://css-tricks.com/mixing-colors-in-pure-css/
+ *
+ * For tint, set __base variable to base color, __color variable to white, and
+ * animation-delay to tint percentage in negative seconds e.g. 70% tint -> -0.7s.
+ *
+ * For blackness, do the same as tint but set __color variable to black.
+ */
+@keyframes blend-background-color {
+  0% {
+    background-color: var(--blend-background-color__base);
+  }
+
+  100% {
+    background-color: var(--blend-background-color__color);
+  }
 }
