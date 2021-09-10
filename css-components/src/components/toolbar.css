@@ -9,26 +9,6 @@
   --toolbar-separator: 1px solid var(--toolbar-separator-color);
   --toolbar-material-height: 56px;
   --material-toolbar-color: var(--material-toolbar-text-color);
-
-  @define-mixin toolbar {
-    @mixin reset-font;
-    @mixin reset-container;
-    @mixin reset-base;
-    @mixin reset-cursor;
-    z-index: 2;
-  }
-
-  @define-mixin toolbar__item {
-    @mixin reset-box-model;
-    @mixin reset-base;
-  }
-
-  @define-mixin toolbar--material-font {
-    @mixin material-font;
-    font-size: 20px;
-    font-weight: 500;
-    color: var(--material-toolbar-color);
-  }
 }
 
 /*~
@@ -42,7 +22,27 @@
 */
 
 .toolbar {
-  @mixin toolbar;
+  /* mixin: toolbar */
+  /* mixin: reset-font */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* mixin: reset-container */
+  /* mixin: reset-box-model */
+  box-sizing: border-box;
+  /* mixin: reset-overflow */
+  overflow: hidden;
+  word-spacing: 0;
+  /* mixin: reset-base */
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  border: none;
+  line-height: normal;
+  /* mixin: reset-cursor */
+  cursor: default;
+  user-select: none;
+  z-index: 2;
+
   display: flex;
   align-items: stretch;
   flex-wrap: nowrap;
@@ -71,7 +71,19 @@
 }
 
 .toolbar__item {
-  @mixin toolbar__item;
+
+  /* mixin: toolbar__item */
+  /* mixin: reset-box-model */
+  box-sizing: border-box;
+  /* mixin: reset-base */
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  background: transparent;
+  border: none;
+  line-height: normal;
+
   height: var(--toolbar-height);
   overflow: visible;
   display: block;
@@ -79,7 +91,18 @@
 }
 
 .toolbar__left {
-  @mixin toolbar__item;
+
+  /* mixin: toolbar__item */
+  /* mixin: reset-box-model */
+  box-sizing: border-box;
+  /* mixin: reset-base */
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  background: transparent;
+  border: none;
+
   max-width: 50%;
   width: 27%;
   text-align: left;
@@ -87,7 +110,18 @@
 }
 
 .toolbar__right {
-  @mixin toolbar__item;
+
+  /* mixin: toolbar__item */
+  /* mixin: reset-box-model */
+  box-sizing: border-box;
+  /* mixin: reset-base */
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  background: transparent;
+  border: none;
+
   max-width: 50%;
   width: 27%;
   text-align: right;
@@ -95,7 +129,17 @@
 }
 
 .toolbar__center {
-  @mixin toolbar__item;
+
+  /* mixin: toolbar__item */
+  /* mixin: reset-box-model */
+  box-sizing: border-box;
+  /* mixin: reset-base */
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  background: transparent;
+  border: none;
+
   width: 46%;
   text-align: center;
   line-height: var(--toolbar-height);
@@ -174,7 +218,28 @@
 */
 
 .bottom-bar {
-  @mixin toolbar;
+  /* mixin: toolbar */
+  /* mixin: reset-font */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* mixin: reset-container */
+  /* mixin: reset-box-model */
+  box-sizing: border-box;
+  /* mixin: reset-overflow */
+  white-space: nowrap;
+  overflow: hidden;
+  word-spacing: 0;
+  /* mixin: reset-base */
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  border: none;
+  line-height: normal;
+  /* mixin: reset-cursor */
+  cursor: default;
+  user-select: none;
+  z-index: 2;
+
   display: block;
   height: var(--toolbar-height);
   padding-left: var(--toolbar-padding);
@@ -184,7 +249,6 @@
   box-shadow: var(--toolbar-box-shadow);
   font-weight: var(--font-weight);
   border-bottom: none;
-  border-top: var(--toolbar-separator);
   position: absolute;
   bottom: 0;
   right: 0;
@@ -291,7 +355,15 @@
 }
 
 .toolbar--material__left, .toolbar--material__right {
-  @mixin toolbar--material-font;
+
+  /* mixin: toolbar--material-font */
+  /* mixin: material-font */
+  font-family: 'Roboto', 'Noto', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  font-size: 20px;
+  font-weight: 500;
+  color: var(--material-toolbar-color);
+
   height: var(--toolbar-material-height);
   min-width: 72px;
   width: auto;
@@ -299,7 +371,15 @@
 }
 
 .toolbar--material__center {
-  @mixin toolbar--material-font;
+
+  /* mixin: toolbar--material-font */
+  /* mixin: material-font */
+  font-family: 'Roboto', 'Noto', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  font-size: 20px;
+  font-weight: 500;
+  color: var(--material-toolbar-color);
+
   height: var(--toolbar-material-height);
   width: auto;
   flex-grow: 1;

@@ -24,7 +24,12 @@
 */
 
 .button-bar {
-  @mixin reset-font;
+  /* mixin: reset-font */
+  font-family: -apple-system, 'Helvetica Neue', 'Helvetica', 'Arial', 'Lucida Grande', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: var(--font-weight);
+
   display: inline-flex;
   align-items: stretch;
   align-content: stretch;
@@ -35,18 +40,30 @@
 }
 
 .button-bar__item {
-  @mixin reset-font;
+  /* mixin: reset-font */
+  font-family: -apple-system, 'Helvetica Neue', 'Helvetica', 'Arial', 'Lucida Grande', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: var(--font-weight);
+
   border-radius: 0;
   width: 100%;
   padding: 0;
   margin: 0;
-  @mixin hide-input-parent;
+
+  /* mixin: hide-input-parent */
+  position: relative;
+
   overflow: hidden;
   box-sizing: border-box;
 }
 
 .button-bar__button {
-  @mixin reset-font;
+  /* mixin: reset-font */
+  font-family: -apple-system, 'Helvetica Neue', 'Helvetica', 'Arial', 'Lucida Grande', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
   border-radius: 0;
   background-color: transparent;
   color: var(--button-bar-color);
@@ -66,7 +83,10 @@
 }
 
 .button-bar__button:disabled {
-  @mixin disabled;
+  /* mixin: disabled */
+  opacity: 0.3;
+  cursor: default;
+  pointer-events: none;
 }
 
 .button-bar__button:hover {

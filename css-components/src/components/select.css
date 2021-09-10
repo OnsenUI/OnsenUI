@@ -4,11 +4,6 @@
   --select-input-height: 32px;
 
   --material-select-input-font-size: 15px;
-
-  @define-mixin input-placeholder {
-    @mixin transparent;
-    color: var(--input-placeholder-color);
-  }
 }
 
 /*~
@@ -31,8 +26,26 @@
 */
 
 .select-input {
-  @mixin input;
-  @mixin transparent;
+
+  /* mixin: input */
+
+  /* mixin: reset-input */
+
+  /* mixin: reset-box-model */
+  box-sizing: border-box;
+
+  margin: 0;
+  font: inherit;
+  background: transparent;
+  vertical-align: top;
+  outline: none;
+
+  /* mixin: reset-font */
+  font-family: -apple-system, 'Helvetica Neue', 'Helvetica', 'Arial', 'Lucida Grande', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: var(--font-weight);
+
   position: relative;
   font-size: var(--select-input-font-size);
   height: var(--select-input-height);
@@ -60,16 +73,31 @@
 }
 
 .select-input:disabled {
-  @mixin disabled;
-  @mixin transparent;
+  /* mixin: disabled */
+  opacity: 0.3;
+  cursor: default;
+  pointer-events: none;
+
+  /* mixin: transparent */
+  border: none;
+  background-color: transparent;
 }
 
 .select-input:disabled::placeholder {
-  @mixin input-placeholder;
+
+  /* mixin: input-placeholder */
+  /* mixin: transparent */
+  border: none;
+  background-color: transparent;
+
+  color: var(--input-placeholder-color);
 }
 
 .select-input:invalid {
-  @mixin transparent;
+  /* mixin: transparent */
+  border: none;
+  background-color: transparent;
+
   color: var(--input-invalid-text-color);
 }
 
@@ -97,7 +125,11 @@
 */
 
 .select-input--material {
-  @mixin material-font;
+  /* mixin: material-font */
+  font-family: 'Roboto', 'Noto', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  font-weight: var(--material-font-weight);
+
   color: var(--material-select-input-color);
   font-size: var(--material-select-input-font-size);
   background-image: url('../img/select-arrow.svg'), linear-gradient(to top, var(--material-select-border-color) 50%, var(--material-select-border-color) 50%);
@@ -105,12 +137,16 @@
   background-repeat: no-repeat;
   background-position: right center, left bottom;
   border: none;
-  font-weight: 400;
   transform: translate3d(0, 0, 0); /* prevent ios flicker */
 }
 
 .select-input--material__label {
-  @mixin material-font;
+
+  /* mixin: material-font */
+  font-family: 'Roboto', 'Noto', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  font-weight: var(--material-font-weight);
+
   color: var(--material-select-input-inactive-color);
   position: absolute;
   left: 0;
@@ -172,7 +208,9 @@
 }
 
 .select-input--underbar:disabled::placeholder {
-  @mixin input-placeholder;
+  /* mixin: input-placeholder */
+  color: var(--input-placeholder-color);
+
   border: none;
   background-color: transparent;
 }

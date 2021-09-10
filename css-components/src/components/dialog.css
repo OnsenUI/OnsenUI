@@ -13,10 +13,27 @@
 */
 
 .dialog {
-  @mixin reset-box-model;
-  @mixin reset-base;
-  @mixin reset-cursor;
-  @mixin reset-font;
+  /* mixin: reset-box-model */
+  box-sizing: border-box;
+
+  /* mixin: reset-base */
+  padding: 0;
+  font: inherit;
+  color: inherit;
+  background: transparent;
+  border: none;
+  line-height: normal;
+
+  /* mixin: reset-cursor */
+  cursor: default;
+  user-select: none;
+
+  /* mixin: reset-font */
+  font-family: -apple-system, 'Helvetica Neue', 'Helvetica', 'Arial', 'Lucida Grande', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: var(--font-weight);
+
   position: absolute;
   top: 50%;
   left: 50%;
@@ -39,8 +56,19 @@
 }
 
 .dialog-mask {
-  @mixin reset-base;
-  @mixin reset-cursor;
+  /* mixin: reset-base */
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  background: transparent;
+  border: none;
+  line-height: normal;
+
+  /* mixin: reset-cursor */
+  cursor: default;
+  user-select: none;
+
   position: absolute;
   top: 0;
   right: 0;
@@ -63,9 +91,19 @@
 */
 
 .dialog--material {
-  @mixin material-font;
+
+  /* mixin: material-font */
+  font-family: 'Roboto', 'Noto', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  font-weight: var(--material-font-weight);
+
   text-align: left;
-  @mixin material-shadow-5;
+
+  /* mixin: material-shadow-5 */
+  box-shadow:
+    0 16px 24px 2px rgba(0, 0, 0, 0.14),
+    0 6px 30px 5px rgba(0, 0, 0, 0.12),
+    0 8px 10px -5px rgba(0, 0, 0, 0.4);
 }
 
 .dialog-container--material {

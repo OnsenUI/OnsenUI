@@ -4,11 +4,6 @@
   --text-input-border-color: var(--input-border-color);
   --material-text-input-font-size: 16px;
   --material-text-input-color: var(--material-text-input-text-color);
-
-  @define-mixin input-placeholder {
-    @mixin transparent;
-    color: var(--input-placeholder-color);
-  }
 }
 
 /*~
@@ -21,8 +16,26 @@
 */
 
 .text-input {
-  @mixin input;
-  @mixin transparent;
+
+  /* mixin: input */
+
+  /* mixin: reset-input */
+
+  font: inherit;
+  background: transparent;
+  vertical-align: top;
+  outline: none;
+  line-height: 1;
+
+  /* mixin: reset-font */
+  font-family: -apple-system, 'Helvetica Neue', 'Helvetica', 'Arial', 'Lucida Grande', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  /* mixin: transparent */
+  border: none;
+  background-color: transparent;
+
   letter-spacing: 0;
   box-shadow: none;
   color: var(--input-text-color);
@@ -40,7 +53,10 @@
 }
 
 .text-input:disabled {
-  @mixin disabled;
+  /* mixin: disabled */
+  opacity: 0.3;
+  cursor: default;
+  pointer-events: none;
 }
 
 .text-input::placeholder {
@@ -48,11 +64,19 @@
 }
 
 .text-input:disabled::placeholder {
-  @mixin input-placeholder;
+
+  /* mixin: input-placeholder */
+  /* mixin: transparent */
+  border: none;
+  background-color: transparent;
+  color: var(--input-placeholder-color);
 }
 
 .text-input:invalid {
-  @mixin transparent;
+  /* mixin: transparent */
+  border: none;
+  background-color: transparent;
+
   color: var(--input-invalid-text-color);
 }
 
@@ -79,7 +103,9 @@
 }
 
 .text-input--underbar:disabled::placeholder {
-  @mixin input-placeholder;
+  /* mixin: input-placeholder */
+  color: var(--input-placeholder-color);
+
   border: none;
   background-color: transparent;
 }
@@ -103,8 +129,29 @@
 */
 
 .text-input--material {
-  @mixin input;
-  @mixin material-font;
+
+  /* mixin: input */
+
+  /* mixin: reset-input */
+
+  /* mixin: reset-box-model */
+  box-sizing: border-box;
+
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  background: transparent;
+  outline: none;
+  line-height: 1;
+
+  /* mixin: reset-font */
+  -moz-osx-font-smoothing: grayscale;
+
+  /* mixin: material-font */
+  font-family: 'Roboto', 'Noto', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  font-weight: var(--material-font-weight);
+
   color: var(--material-text-input-color);
   background-image: linear-gradient(to top, transparent 1px, var(--material-text-input-inactive-color) 1px);
   background-size: 100% 2px;
@@ -112,7 +159,6 @@
   background-position: center bottom;
   background-color: transparent;
   font-size: var(--material-text-input-font-size);
-  font-weight: 400;
   border: none;
   padding-bottom: 2px;
   border-radius: 0;
@@ -122,13 +168,17 @@
 }
 
 .text-input--material__label {
-  @mixin material-font;
+
+  /* mixin: material-font */
+  font-family: 'Roboto', 'Noto', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  font-weight: var(--material-font-weight);
+
   color: var(--material-text-input-inactive-color);
   position: absolute;
   left: 0;
   top: 2px;
   font-size: 16px;
-  font-weight: 400;
   pointer-events: none;
 }
 

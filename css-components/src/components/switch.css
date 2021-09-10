@@ -35,8 +35,14 @@
 .switch {
   display: inline-block;
   vertical-align: top;
-  @mixin reset-box-model;
-  @mixin hide-input-parent;
+
+  /* mixin: reset-box-model */
+  box-sizing: border-box;
+  background-clip: padding-box;
+
+  /* mixin: hide-input-parent */
+  position: relative;
+
   min-width: 51px;
   font-size: var(--font-size);
   padding: 0 20px;
@@ -49,7 +55,23 @@
 }
 
 .switch__input {
-  @mixin hide-input;
+
+  /* mixin: hide-input */
+  position: absolute;
+  right: 0;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  padding: 0;
+  border: 0;
+  background-color: transparent;
+  vertical-align: top;
+  outline: none;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  appearance: none;
+
   z-index: 0;
 }
 
@@ -70,7 +92,10 @@
 
 /* switch toggle circle */
 .switch__handle {
-  @mixin reset-box-model;
+  /* mixin: reset-box-model */
+  box-sizing: border-box;
+  background-clip: padding-box;
+
   position: absolute;
   content: '';
   border-radius: 28px;
@@ -100,7 +125,10 @@
 }
 
 :disabled + .switch__toggle {
-  @mixin disabled;
+  /* mixin: disabled */
+  opacity: 0.3;
+  cursor: default;
+  pointer-events: none;
 }
 
 .switch__touch {
@@ -154,7 +182,23 @@
 }
 
 .switch--material__input {
-  @mixin hide-input;
+
+  /* mixin: hide-input */
+  position: absolute;
+  right: 0;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  padding: 0;
+  border: 0;
+  background-color: transparent;
+  vertical-align: top;
+  outline: none;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  appearance: none;
+
   z-index: 0;
 }
 
@@ -164,7 +208,12 @@
   margin-top: -5px;
   width: 20px;
   height: 20px;
-  @mixin material-shadow-2;
+
+  /* mixin: material-shadow-2 */
+  box-shadow:
+    0 4px 5px 0 rgba(0, 0, 0, 0.14),
+    0 1px 10px 0 rgba(0, 0, 0, 0.12),
+    0 2px 4px -1px rgba(0, 0, 0, 0.4);
 }
 
 :checked + .switch--material__toggle {
@@ -175,11 +224,12 @@
 :checked + .switch--material__toggle > .switch--material__handle {
   left: 16px;
   background-color: var(--material-switch-active-thumb-color);
-  @mixin material-shadow-1;
-}
 
-:disabled + .switch--material__toggle {
-  @mixin disabled;
+  /* mixin: material-shadow-1 */
+  box-shadow:
+    0 2px 2px 0 rgba(0, 0, 0, 0.14),
+    0 1px 5px 0 rgba(0, 0, 0, 0.12),
+    0 3px 1px -2px rgba(0, 0, 0, 0.2);
 }
 
 .switch--material__handle:before {

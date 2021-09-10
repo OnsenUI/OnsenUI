@@ -7,7 +7,6 @@ module.exports = {
       extensions: ['.svg'],
       root: 'src/components/'
     }),
-    require('postcss-mixins'),
     require('postcss-custom-media')({
       preserve: false
     }),

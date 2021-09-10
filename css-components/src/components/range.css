@@ -8,19 +8,6 @@
   --material-range-thumb-radius: calc(var(--material-range-thumb-size) / 2);
   --material-range-thumb-vertical-margin: 24px;
   --material-range-thumb-horizontal-margin: 2px;
-
-  @define-mixin range__thumb {
-    cursor: pointer;
-    position: relative;
-    height: var(--range-thumb-size);
-    width: var(--range-thumb-size);
-    background-color: var(--range-thumb-background-color);
-    border: none;
-    box-shadow: 0 0 1px 0 rgba(0, 0, 0, 0.25), 0 3px 2px rgba(0, 0, 0, 0.25);
-    border-radius: 50%;
-    margin: 0;
-    padding: 0;
-  }
 }
 
 /*~
@@ -54,7 +41,20 @@
 }
 
 .range__input {
-  @mixin reset-input;
+  /* mixin: reset-input */
+  /* mixin: reset-box-model */
+  box-sizing: border-box;
+
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  background: transparent;
+  border: none;
+  vertical-align: top;
+  outline: none;
+  line-height: 1;
+
   appearance: none;
   background-image: linear-gradient(var(--range-track-background-color-active), var(--range-track-background-color-active));
   background-position: left center;
@@ -85,7 +85,18 @@
 }
 
 .range__input::-webkit-slider-thumb {
-  @mixin range__thumb;
+  /* mixin: range__thumb */
+  cursor: pointer;
+  position: relative;
+  height: var(--range-thumb-size);
+  width: var(--range-thumb-size);
+  background-color: var(--range-thumb-background-color);
+  border: none;
+  box-shadow: 0 0 1px 0 rgba(0, 0, 0, 0.25), 0 3px 2px rgba(0, 0, 0, 0.25);
+  border-radius: 50%;
+  margin: 0;
+  padding: 0;
+
   box-sizing: border-box;
   appearance: none;
   top: 0;
@@ -93,11 +104,32 @@
 }
 
 .range__input::-moz-range-thumb {
-  @mixin range__thumb;
+  /* mixin: range__thumb */
+  cursor: pointer;
+  position: relative;
+  height: var(--range-thumb-size);
+  width: var(--range-thumb-size);
+  background-color: var(--range-thumb-background-color);
+  border: none;
+  box-shadow: 0 0 1px 0 rgba(0, 0, 0, 0.25), 0 3px 2px rgba(0, 0, 0, 0.25);
+  border-radius: 50%;
+  margin: 0;
+  padding: 0;
 }
 
 .range__input::-ms-thumb {
-  @mixin range__thumb;
+  /* mixin: range__thumb */
+  cursor: pointer;
+  position: relative;
+  height: var(--range-thumb-size);
+  width: var(--range-thumb-size);
+  background-color: var(--range-thumb-background-color);
+  border: none;
+  box-shadow: 0 0 1px 0 rgba(0, 0, 0, 0.25), 0 3px 2px rgba(0, 0, 0, 0.25);
+  border-radius: 50%;
+  margin: 0;
+  padding: 0;
+
   top: 0;
 }
 
@@ -120,7 +152,20 @@
   top: 0;
   left: 0;
   display: none;
-  @mixin reset-input;
+
+  /* mixin: reset-input */
+  /* mixin: reset-box-model */
+  box-sizing: border-box;
+
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  border: none;
+  vertical-align: top;
+  outline: none;
+  line-height: 1;
+
   appearance: none;
   background: none;
   height: calc(var(--range-thumb-size) + 2px);
@@ -130,7 +175,9 @@
 }
 
 .range--disabled {
-  @mixin disabled;
+  /* mixin: disabled */
+  opacity: 0.3;
+  cursor: default;
   pointer-events: none;
 }
 
