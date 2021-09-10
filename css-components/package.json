@@ -50,7 +50,6 @@
     "postcss-color-mod-function": "^3.0.3",
     "postcss-custom-media": "^8.0.0",
     "postcss-import": "^14.0.2",
-    "postcss-mixins": "^8.1.0",
     "postcss-nested": "^5.0.6",
     "postcss-preset-env": "^6.7.0",
     "postcss-reporter": "^7.0.2",
