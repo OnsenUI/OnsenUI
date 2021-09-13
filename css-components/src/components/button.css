@@ -127,14 +127,43 @@
 
 .button--light {
   background-color: transparent;
-  color: color-mod(var(--button-light-color) a(40%));
-  border: 1px solid color-mod(var(--button-light-color) a(20%));
+  border: 1px solid;
+
+  /* Hack to replicate color-mod(var(--button-light-color) a(40%)) */
+  --blend-color__base: transparent;
+  --blend-color__color: var(--button-light-color);
+
+  /* Hack to replicate color-mod(var(--button-light-color) a(20%)) */
+  --blend-border-color__base: transparent;
+  --blend-border-color__color: var(--button-light-color);
+
+  /* stylelint-disable no-unknown-animations */
+  animation: blend-color 1s -0.4s linear forwards paused,
+    blend-border-color 1s -0.2s linear forwards paused;
+  /* stylelint-enable no-unknown-animations */
 }
 
 .button--light:active {
-  background-color: color-mod(var(--button-light-color) a(5%));
-  color: color-mod(var(--button-light-color) a(40%));
-  border: 1px solid color-mod(var(--button-light-color) a(20%));
+  border: 1px solid;
+
+  /* Hack to replicate color-mod(var(--button-light-color) a(5%)) */
+  --blend-background-color__base: transparent;
+  --blend-background-color__color: var(--button-light-color);
+
+  /* Hack to replicate color-mod(var(--button-light-color) a(40%)) */
+  --blend-color__base: transparent;
+  --blend-color__color: var(--button-light-color);
+
+  /* Hack to replicate color-mod(var(--button-light-color) a(20%)) */
+  --blend-border-color__base: transparent;
+  --blend-border-color__color: var(--button-light-color);
+
+  /* stylelint-disable no-unknown-animations */
+  animation: blend-background-color 1s -0.05s linear forwards paused,
+    blend-color 1s -0.4s linear forwards paused,
+    blend-border-color 1s -0.2s linear forwards paused;
+  /* stylelint-enable no-unknown-animations */
+
   opacity: 1;
 }
 

@@ -89,6 +89,9 @@ h4, h5, h6 {
  * animation-delay to tint percentage in negative seconds e.g. 70% tint -> -0.7s.
  *
  * For blackness, do the same as tint but set __color variable to black.
+ *
+ * For alpha, do the same as tint but set __base variable (not __color!) to
+ * transparent, and set __color variable to the color to alter.
  */
 @keyframes blend-background-color {
   0% {
@@ -97,5 +100,25 @@ h4, h5, h6 {
 
   100% {
     background-color: var(--blend-background-color__color);
+  }
+}
+
+@keyframes blend-color {
+  0% {
+    color: var(--blend-color__base);
+  }
+
+  100% {
+    color: var(--blend-color__color);
+  }
+}
+
+@keyframes blend-border-color {
+  0% {
+    border-color: var(--blend-border-color__base);
+  }
+
+  100% {
+    border-color: var(--blend-border-color__color);
   }
 }
