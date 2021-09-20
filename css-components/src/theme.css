@@ -4,7 +4,8 @@
   --background-color: #efeff4;
   --text-color: #1f1f21;
   --sub-text-color: #999;
-  --highlight-color: #0076ff;
+  --highlight-color-rgb: 0, 118, 255;
+  --highlight-color: rgba(var(--highlight-color-rgb));
   --second-highlight-color: #25a6d9;
   --border-color: #ccc;
   --button-background-color: var(--highlight-color);
@@ -65,8 +66,9 @@
   --notification-color: white;
   --search-input-background-color: rgba(3, 3, 3, 0.09);
   --fab-text-color: #ffffff;
-  --fab-background-color: var(--highlight-color);
-  --fab-active-background-color: color-mod(var(--fab-background-color) a(70%));
+  --fab-background-color-rgb: var(--highlight-color-rgb);
+  --fab-background-color: rgba(var(--fab-background-color-rgb));
+  --fab-active-background-color: rgba(var(--fab-background-color-rgb), 0.7); /* color-mod(var(--fab-background-color) a(70%)) */
   --card-background-color: white;
   --card-text-color: #030303;
   --toast-background-color: rgba(0, 0, 0, 0.8);
