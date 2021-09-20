@@ -1,14 +1,12 @@
 
 :root {
   --toolbar-separator-color: var(--toolbar-border-color);
-  --toolbar-color: var(--toolbar-text-color);
 
   --toolbar-height: 44px;
   --toolbar-box-shadow: none;
   --toolbar-padding: 0;
   --toolbar-separator: 1px solid var(--toolbar-separator-color);
   --toolbar-material-height: 56px;
-  --material-toolbar-color: var(--material-toolbar-text-color);
 }
 
 /*~
@@ -50,7 +48,7 @@
   padding-left: var(--toolbar-padding);
   padding-right: var(--toolbar-padding);
   background: var(--toolbar-background-color);
-  color: var(--toolbar-color);
+  color: var(--toolbar-text-color);
   box-shadow: var(--toolbar-box-shadow);
   font-weight: var(--font-weight);
   width: 100%;
@@ -145,14 +143,14 @@
   line-height: var(--toolbar-height);
   font-size: var(--font-size);
   font-weight: var(--font-weight--large);
-  color: var(--toolbar-color);
+  color: var(--toolbar-text-color);
 }
 
 .toolbar__title {
   line-height: var(--toolbar-height);
   font-size: var(--font-size);
   font-weight: var(--font-weight--large);
-  color: var(--toolbar-color);
+  color: var(--toolbar-text-color);
   margin: 0;
   padding: 0;
   overflow: visible;
@@ -245,7 +243,7 @@
   padding-left: var(--toolbar-padding);
   padding-right: var(--toolbar-padding);
   background: var(--toolbar-background-color);
-  color: var(--toolbar-color);
+  color: var(--toolbar-text-color);
   box-shadow: var(--toolbar-box-shadow);
   font-weight: var(--font-weight);
   border-bottom: none;
@@ -362,7 +360,7 @@
   -webkit-font-smoothing: antialiased;
   font-size: 20px;
   font-weight: 500;
-  color: var(--material-toolbar-color);
+  color: var(--material-toolbar-text-color);
 
   height: var(--toolbar-material-height);
   min-width: 72px;
@@ -378,7 +376,7 @@
   -webkit-font-smoothing: antialiased;
   font-size: 20px;
   font-weight: 500;
-  color: var(--material-toolbar-color);
+  color: var(--material-toolbar-text-color);
 
   height: var(--toolbar-material-height);
   width: auto;
