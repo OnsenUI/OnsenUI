@@ -70,10 +70,10 @@ ons-fab, ons-speed-dial-item, button {
     transition: all 0.1s linear;
 
     &:active {
-      box-shadow: 0 3px 6 rgba(0, 0, 0, 0.12);
+      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.12);
       background-color: var(--fab-active-background-color);
       transition: all 0.2s ease;
-      box-shadow: 0 0 6 rgba(0, 0, 0, 0.12);
+      box-shadow: 0 0 6px rgba(0, 0, 0, 0.12);
     }
     &:focus {
       outline: 0;
