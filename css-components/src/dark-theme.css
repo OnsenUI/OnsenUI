@@ -30,10 +30,10 @@
   --list-tap-active-background-color: #262626;
   --list-item-chevron-color: #383833;
   --progress-bar-color: var(--highlight-color);
-  --progress-bar-secondary-color: color-mod(var(--progress-bar-color) b(55%));
+  --progress-bar-secondary-color: rgb(115, 73, 1); /* color-mod(var(--progress-bar-color) b(55%)) */
   --progress-bar-background-color: transparent;
   --progress-circle-primary-color: var(--progress-bar-color);
-  --progress-circle-secondary-color: color-mod(var(--progress-bar-secondary-color) b(55%));
+  --progress-circle-secondary-color: rgb(115, 73, 1); /* color-mod(var(--progress-bar-secondary-color) b(55%)) */
   --progress-circle-background-color: transparent;
   --tabbar-background-color: #212121;
   --tabbar-text-color: #aaa;
@@ -105,7 +105,7 @@
   --material-button-disabled-background-color: rgba(176, 176, 176, 0.74); /* color-mod(#b0b0b0 a(74%)) */
   --material-button-disabled-color: rgba(255, 255, 255, 0.74); /* color-mod(white a(74%)) */
   --material-flat-button-active-background-color: rgba(102, 102, 102, 0.2); /* color-mod(#666666 a(20%)) */
-  --material-list-background-color: color-mod(var(--material-background-color) l(+2%));
+  --material-list-background-color: hsl(0, 0%, 20.8235294118%); /* color-mod(var(--material-background-color) l(+2%)) */
   --material-list-item-separator-color: rgba(255, 255, 255, 0.12); /* color-mod(white a(12%)) */
   --material-list-header-text-color: #8a8a8a;
   --material-checkbox-active-color: #fff;
@@ -126,7 +126,7 @@
   --material-alert-dialog-content-color: rgba(var(--material-alert-dialog-title-color-rgb), 0.85); /* color-mod(var(--material-alert-dialog-title-color) a(85%)) */
   --material-alert-dialog-button-color: #d68600;
   --material-progress-bar-primary-color: #d68600;
-  --material-progress-bar-secondary-color: color-mod(var(--material-progress-bar-primary-color) b(55%));
+  --material-progress-bar-secondary-color: rgb(115, 72, 0); /* color-mod(var(--material-progress-bar-primary-color) b(55%)) */
   --material-progress-bar-background-color: transparent;
   --material-progress-circle-primary-color: var(--material-progress-bar-primary-color);
   --material-progress-circle-secondary-color: var(--material-progress-bar-secondary-color);
@@ -134,7 +134,7 @@
   --material-tabbar-background-color: var(--material-toolbar-background-color);
   --material-tabbar-text-color: rgba(var(--material-toolbar-text-color-rgb), 0.5); /* color-mod(var(--material-toolbar-text-color) a(50%)) */
   --material-tabbar-highlight-text-color: var(--material-toolbar-text-color);
-  --material-tabbar-highlight-color: color-mod(var(--material-toolbar-background-color) l(+3%));
+  --material-tabbar-highlight-color: hsl(0, 0%, 15.9411764706%); /* color-mod(var(--material-toolbar-background-color) l(+3%)) */
   --material-fab-text-color: #31313a;
   --material-fab-background-color: #ffffff;
   --material-fab-active-background-color: rgba(255, 255, 255, 0.75); /* color-mod(white a(75%)) */
