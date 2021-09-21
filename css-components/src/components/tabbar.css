@@ -96,7 +96,7 @@
   border-top: var(--tabbar-border-top);
   width: 100%;
 
-  @media (--retina-query) {
+  @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi), (min-resolution: 2dppx) { /* @media (--retina-query) */
     border-top: none;
     background-size: 100% 1px;
     background-repeat: no-repeat;
@@ -176,7 +176,7 @@
   width: 100%;
   font-weight: var(--font-weight);
   line-height: var(--tabbar-button-line-height);
-  @media (--retina-query) {
+  @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi), (min-resolution: 2dppx) { /* @media (--retina-query) */
     border-top: none;
   }
 }
@@ -337,7 +337,7 @@
   border-top: none;
   border-bottom: var(--tabbar-border-top);
 
-  @media (--retina-query) {
+  @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi), (min-resolution: 2dppx) { /* @media (--retina-query) */
     border-bottom: none;
     background-size: 100% 1px;
     background-repeat: no-repeat;
