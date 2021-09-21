@@ -7,7 +7,6 @@ module.exports = {
       preserve: false
     }),
     require('postcss-nested'),
-    require('postcss-color-mod-function'),
     require('postcss-preset-env')({
       browsers: browsers
     }),
