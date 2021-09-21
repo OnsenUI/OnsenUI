@@ -67,7 +67,11 @@
   background-repeat: no-repeat;
   background-position: bottom;
   background-image: linear-gradient(0deg, var(--action-sheet-button-separator-color), var(--action-sheet-button-separator-color) 100%);
-  @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi), (min-resolution: 2dppx) { /* @media (--retina-query) */
+}
+
+/* @media (--retina-query) */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi), (min-resolution: 2dppx) {
+  .action-sheet-button {
     background-image: linear-gradient(0deg, var(--action-sheet-button-separator-color), var(--action-sheet-button-separator-color) 50%, transparent 50%);
   }
 }
@@ -126,7 +130,11 @@
   background-repeat: no-repeat;
   background-position: bottom;
   background-image: linear-gradient(0deg, var(--action-sheet-button-separator-color), var(--action-sheet-button-separator-color) 100%);
-  @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi), (min-resolution: 2dppx) { /* @media (--retina-query) */
+}
+
+/* @media (--retina-query) */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi), (min-resolution: 2dppx) {
+  .action-sheet-title {
     background-image: linear-gradient(0deg, var(--action-sheet-button-separator-color), var(--action-sheet-button-separator-color) 50%, transparent 50%);
   }
 }

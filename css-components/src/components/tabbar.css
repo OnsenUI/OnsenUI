@@ -95,8 +95,11 @@
   background-color: var(--tabbar-background-color);
   border-top: var(--tabbar-border-top);
   width: 100%;
+}
 
-  @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi), (min-resolution: 2dppx) { /* @media (--retina-query) */
+/* @media (--retina-query) */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi), (min-resolution: 2dppx) {
+  .tabbar {
     border-top: none;
     background-size: 100% 1px;
     background-repeat: no-repeat;
@@ -176,7 +179,11 @@
   width: 100%;
   font-weight: var(--font-weight);
   line-height: var(--tabbar-button-line-height);
-  @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi), (min-resolution: 2dppx) { /* @media (--retina-query) */
+}
+
+/* @media (--retina-query) */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi), (min-resolution: 2dppx) {
+  .tabbar__button {
     border-top: none;
   }
 }
@@ -336,8 +343,11 @@
   bottom: auto;
   border-top: none;
   border-bottom: var(--tabbar-border-top);
+}
 
-  @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi), (min-resolution: 2dppx) { /* @media (--retina-query) */
+/* @media (--retina-query) */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi), (min-resolution: 2dppx) {
+  .tabbar--top {
     border-bottom: none;
     background-size: 100% 1px;
     background-repeat: no-repeat;
