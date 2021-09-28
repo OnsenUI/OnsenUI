@@ -249,7 +249,18 @@
 }
 
 :checked + .switch--material__toggle > .switch--active__handle:before {
-  box-shadow: 0 0 0 14px color-mod(var(--material-switch-active-thumb-color) alpha(20%));
+  /* Hack to replicate color-mod(var(--material-switch-active-thumb-color) alpha(20%)) */
+  animation: blend-box-shadow 1s -0.2s linear forwards paused;
+}
+
+@keyframes blend-box-shadow {
+  0% {
+    box-shadow: 0 0 0 14px transparent;
+  }
+
+  100% {
+    box-shadow: 0 0 0 14px var(--material-switch-active-thumb-color);
+  }
 }
 
 .switch--material__touch {
