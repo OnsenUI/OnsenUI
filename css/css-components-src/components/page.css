@@ -5,7 +5,12 @@
 }
 
 .page {
-  @mixin reset-font;
+
+  /* mixin: reset-font */
+  font-family: -apple-system, 'Helvetica Neue', 'Helvetica', 'Arial', 'Lucida Grande', sans-serif;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: var(--font-weight);
+
   background-color: var(--page-background-color);
   position: absolute;
   top: 0;
@@ -44,12 +49,21 @@
 }
 
 .page--material {
-  @mixin material-font;
+
+  /* mixin: material-font */
+  font-family: 'Roboto', 'Noto', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  font-weight: var(--material-font-weight);
+
   background-color: var(--page-material-background-color);
 }
 
 .page--material__content {
-  @mixin material-font;
+
+  /* mixin: material-font */
+  font-family: 'Roboto', 'Noto', sans-serif;
+  -webkit-font-smoothing: antialiased;
+
   font-weight: var(--font-weight);
 }
 
@@ -58,7 +72,11 @@
 .page__content h3,
 .page__content h4,
 .page__content h5 {
-  @mixin material-font;
+
+  /* mixin: material-font */
+  font-family: 'Roboto', 'Noto', sans-serif;
+  -webkit-font-smoothing: antialiased;
+
   font-weight: var(--font-weight--large);
   margin: 0.6em 0;
   padding: 0;
@@ -81,7 +99,11 @@
 .page--material__content h3,
 .page--material__content h4,
 .page--material__content h5 {
-  @mixin material-font;
+
+  /* mixin: material-font */
+  font-family: 'Roboto', 'Noto', sans-serif;
+  -webkit-font-smoothing: antialiased;
+
   font-weight: var(--font-weight--large);
   margin: 0.6em 0;
   padding: 0;

@@ -9,69 +9,6 @@
   --button-large-line-height: 36px;
   --button-active-opacity: 0.2;
   --button-border-radius: 3px;
-
-  @define-mixin button--quiet {
-    background: transparent;
-    border: 1px solid transparent;
-    box-shadow: none;
-  }
-
-  @define-mixin button--disabled {
-    @mixin disabled;
-  }
-
-  @define-mixin button--hover {
-    transition: none;
-  }
-
-  @define-mixin button {
-    position: relative;
-    display: inline-block;
-    @mixin reset-box-model;
-    @mixin reset-base;
-    @mixin reset-font;
-    @mixin reset-cursor;
-    @mixin ellipsis;
-    height: auto;
-    text-decoration: none;
-    padding: var(--button-padding);
-    font-size: var(--font-size);
-    line-height: var(--button-line-height);
-    letter-spacing: 0;
-    color: var(--button-text-color);
-    vertical-align: middle;
-    background-color: var(--button-background-color);
-    border: 0 solid currentColor;
-    border-radius: var(--button-border-radius);
-    transition: none;
-  }
-
-  @define-mixin button--focus {
-    outline: 0;
-  }
-
-  @define-mixin button--active {
-    background-color: var(--button-background-color);
-    transition: none;
-    opacity: var(--button-active-opacity);
-  }
-
-  @define-mixin button--material {
-    @mixin button;
-    @mixin material-shadow-1;
-    @mixin material-font;
-    min-height: 36px;
-    line-height: 36px;
-    padding: 0 16px;
-    text-align: center;
-    font-size: 14px;
-    transform: translate3d(0, 0, 0);
-    text-transform: uppercase;
-    background-color: var(--material-button-background-color);
-    color: var(--material-button-text-color);
-    font-weight: var(--font-weight--large);
-    transition: background-color 0.25s linear;
-  }
 }
 
 /*~
@@ -84,7 +21,42 @@
 */
 
 .button {
-  @mixin button;
+  position: relative;
+  display: inline-block;
+
+  /* mixin: reset-box-model */
+  box-sizing: border-box;
+
+  /* mixin: reset-base */
+  margin: 0;
+
+  /* mixin: reset-font */
+  font-family: -apple-system, 'Helvetica Neue', 'Helvetica', 'Arial', 'Lucida Grande', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: var(--font-weight);
+
+  /* mixin: reset-cursor */
+  cursor: default;
+  user-select: none;
+
+  /* mixin: ellipsis */
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+
+  height: auto;
+  text-decoration: none;
+  padding: var(--button-padding);
+  font-size: var(--font-size);
+  line-height: var(--button-line-height);
+  letter-spacing: 0;
+  color: var(--button-text-color);
+  vertical-align: middle;
+  background-color: var(--button-background-color);
+  border: 0 solid currentColor;
+  border-radius: var(--button-border-radius);
+  transition: none;
 }
 
 .button::-moz-focus-inner {
@@ -92,19 +64,24 @@
 }
 
 .button:hover {
-  @mixin button--hover;
+  transition: none;
 }
 
 .button:active {
-  @mixin button--active;
+  background-color: var(--button-background-color);
+  transition: none;
+  opacity: var(--button-active-opacity);
 }
 
 .button:focus {
-  @mixin button--focus;
+  outline: 0;
 }
 
 .button:disabled, .button[disabled] {
-  @mixin button--disabled;
+  /* mixin: disabled */
+  opacity: 0.3;
+  cursor: default;
+  pointer-events: none;
 }
 
 /*~
@@ -123,10 +100,15 @@
 }
 
 .button--outline:active {
-  background-color: color-mod(var(--button-background-color) tint(var(--alpha-lighten)));
   border: 1px solid var(--button-background-color);
   color: var(--button-background-color);
   opacity: 1;
+
+  /* Hack to replicate tint from the deprecated color-mod function. */
+  --blend-background-color__base: var(--button-background-color);
+  --blend-background-color__color: white;
+  /* stylelint-disable-next-line no-unknown-animations */
+  animation: blend-background-color 1s -0.7s linear forwards paused;
 }
 
 .button--outline:hover {
@@ -145,14 +127,43 @@
 
 .button--light {
   background-color: transparent;
-  color: color-mod(var(--button-light-color) a(40%));
-  border: 1px solid color-mod(var(--button-light-color) a(20%));
+  border: 1px solid;
+
+  /* Hack to replicate color-mod(var(--button-light-color) a(40%)) */
+  --blend-color__base: transparent;
+  --blend-color__color: var(--button-light-color);
+
+  /* Hack to replicate color-mod(var(--button-light-color) a(20%)) */
+  --blend-border-color__base: transparent;
+  --blend-border-color__color: var(--button-light-color);
+
+  /* stylelint-disable no-unknown-animations */
+  animation: blend-color 1s -0.4s linear forwards paused,
+    blend-border-color 1s -0.2s linear forwards paused;
+  /* stylelint-enable no-unknown-animations */
 }
 
 .button--light:active {
-  background-color: color-mod(var(--button-light-color) a(5%));
-  color: color-mod(var(--button-light-color) a(40%));
-  border: 1px solid color-mod(var(--button-light-color) a(20%));
+  border: 1px solid;
+
+  /* Hack to replicate color-mod(var(--button-light-color) a(5%)) */
+  --blend-background-color__base: transparent;
+  --blend-background-color__color: var(--button-light-color);
+
+  /* Hack to replicate color-mod(var(--button-light-color) a(40%)) */
+  --blend-color__base: transparent;
+  --blend-color__color: var(--button-light-color);
+
+  /* Hack to replicate color-mod(var(--button-light-color) a(20%)) */
+  --blend-border-color__base: transparent;
+  --blend-border-color__color: var(--button-light-color);
+
+  /* stylelint-disable no-unknown-animations */
+  animation: blend-background-color 1s -0.05s linear forwards paused,
+    blend-color 1s -0.4s linear forwards paused,
+    blend-border-color 1s -0.2s linear forwards paused;
+  /* stylelint-enable no-unknown-animations */
+
   opacity: 1;
 }
 
@@ -161,13 +172,14 @@
   category: Button
   elements: ons-button
   markup: |
-    <button class="button--quiet">Button</button>
-    <button class="button--quiet" disabled>Button</button>
+    <button class="button button--quiet">Button</button>
+    <button class="button button--quiet" disabled>Button</button>
 */
 
 .button--quiet {
-  @mixin button;
-  @mixin button--quiet;
+  /* mixin: button--quiet */
+  box-shadow: none;
+
   background: transparent;
   color: var(--button-quiet-color);
   border: none;
@@ -175,16 +187,7 @@
 
 .button--quiet:disabled,
 .button--quiet[disabled] {
-  @mixin button--disabled;
   border: none;
-}
-
-.button--quiet:hover {
-  @mixin button--hover;
-}
-
-.button--quiet:focus {
-  @mixin button--focus;
 }
 
 .button--quiet:active {
@@ -200,23 +203,14 @@
   category: Button
   elements: ons-button
   markup: |
-    <button class="button--cta">Button</button>
-    <button class="button--cta" disabled>Button</button>
+    <button class="button button--cta">Button</button>
+    <button class="button button--cta" disabled>Button</button>
 */
 
 .button--cta {
-  @mixin button;
   border: none;
   background-color: var(--button-cta-background-color);
   color: var(--button-cta-color);
-}
-
-.button--cta:hover {
-  @mixin button--hover;
-}
-
-.button--cta:focus {
-  @mixin button--focus;
 }
 
 .button--cta:active {
@@ -224,11 +218,6 @@
   background-color: var(--button-cta-background-color);
   transition: none;
   opacity: var(--button-active-opacity);
-}
-
-.button--cta:disabled,
-.button--cta[disabled] {
-  @mixin button--disabled;
 }
 
 /*
@@ -250,21 +239,7 @@
 }
 
 .button--large:active {
-  @mixin button--active;
   transition: none;
-}
-
-.button--large:disabled,
-.button--large[disabled] {
-  @mixin button--disabled;
-}
-
-.button--large:hover {
-  @mixin button--hover;
-}
-
-.button--large:focus {
-  @mixin button--focus;
 }
 
 /*~
@@ -272,18 +247,22 @@
   category: Button
   elements: ons-button
   markup: |
-    <button class="button--large--quiet" style="width: 95%; margin: 0 auto;">Button</button>
+    <button class="button button--large--quiet" style="width: 95%; margin: 0 auto;">Button</button>
 */
 
 .button--large--quiet { /* stylelint-disable-line */
-  @mixin button;
   font-size: var(--font-size);
   font-weight: var(--font-weight--large);
   line-height: var(--button-large-line-height);
   padding: var(--button-large-padding);
   display: block;
   width: 100%;
-  @mixin button--quiet;
+
+  /* mixin: button--quiet */
+  background: transparent;
+  border: 1px solid transparent;
+  box-shadow: none;
+
   color: var(--button-quiet-color);
   text-align: center;
 }
@@ -292,15 +271,11 @@
   transition: none;
   opacity: var(--button-active-opacity);
   color: var(--button-quiet-color);
-  @mixin button--quiet;
-}
 
-.button--large--quiet:disabled, .button--large--quiet[disabled] { /* stylelint-disable-line */
-  @mixin button--disabled;
-}
-
-.button--large--quiet:hover { /* stylelint-disable-line */
-  @mixin button--hover;
+  /* mixin: button--quiet */
+  background: transparent;
+  border: 1px solid transparent;
+  box-shadow: none;
 }
 
 .button--large--quiet:focus { /* stylelint-disable-line */
@@ -312,11 +287,10 @@
   category: Button
   elements: ons-button
   markup: |
-    <button class="button--large--cta" style="width: 95%; margin: 0 auto;">Button</button>
+    <button class="button button--large--cta" style="width: 95%; margin: 0 auto;">Button</button>
 */
 
 .button--large--cta { /* stylelint-disable-line */
-  @mixin button;
   border: none;
   background-color: var(--button-cta-background-color);
   color: var(--button-cta-color);
@@ -329,23 +303,11 @@
   display: block;
 }
 
-.button--large--cta:hover { /* stylelint-disable-line */
-  @mixin button--hover;
-}
-
-.button--large--cta:focus { /* stylelint-disable-line */
-  @mixin button--focus;
-}
-
 .button--large--cta:active { /* stylelint-disable-line */
   color: var(--button-cta-color);
   background-color: var(--button-cta-background-color);
   transition: none;
   opacity: var(--button-active-opacity);
-}
-
-.button--large--cta:disabled, .button--large--cta[disabled] { /* stylelint-disable-line */
-  @mixin button--disabled;
 }
 
 /*~
@@ -358,7 +320,28 @@
 */
 
 .button--material {
-  @mixin button--material;
+  /* mixin: button--material */
+  /* mixin: material-shadow-1 */
+  box-shadow:
+    0 2px 2px 0 rgba(0, 0, 0, 0.14),
+    0 1px 5px 0 rgba(0, 0, 0, 0.12),
+    0 3px 1px -2px rgba(0, 0, 0, 0.2);
+
+  /* mixin: material-font */
+  font-family: 'Roboto', 'Noto', sans-serif;
+  -webkit-font-smoothing: antialiased;
+
+  min-height: 36px;
+  line-height: 36px;
+  padding: 0 16px;
+  text-align: center;
+  font-size: 14px;
+  transform: translate3d(0, 0, 0);
+  text-transform: uppercase;
+  background-color: var(--material-button-background-color);
+  color: var(--material-button-text-color);
+  font-weight: var(--font-weight--large);
+
   opacity: 1;
   transition: all 0.25s linear;
 }
@@ -368,20 +351,24 @@
 }
 
 .button--material:active {
-  @mixin material-shadow-3;
+  /* mixin: material-shadow-3 */
+  box-shadow:
+    0 6px 10px 0 rgba(0, 0, 0, 0.14),
+    0 1px 18px 0 rgba(0, 0, 0, 0.12),
+    0 3px 5px -1px rgba(0, 0, 0, 0.4);
+
   background-color: var(--material-button-background-color);
   opacity: 0.9;
   transition: all 0.25s linear;
 }
 
-.button--material:focus {
-  @mixin button--focus;
-}
-
 .button--material:disabled,
 .button--material[disabled] {
   transition: none;
-  @mixin material-shadow-0;
+
+  /* mixin: material-shadow-0 */
+  box-shadow: none;
+
   background-color: var(--material-button-disabled-background-color);
   color: var(--material-button-disabled-color);
   opacity: 1;
@@ -397,8 +384,22 @@
 */
 
 .button--material--flat { /* stylelint-disable-line */
-  @mixin button--material;
-  @mixin material-shadow-0;
+  /* mixin: material-font */
+  font-family: 'Roboto', 'Noto', sans-serif;
+  -webkit-font-smoothing: antialiased;
+
+  min-height: 36px;
+  line-height: 36px;
+  padding: 0 16px;
+  text-align: center;
+  font-size: 14px;
+  transform: translate3d(0, 0, 0);
+  text-transform: uppercase;
+  font-weight: var(--font-weight--large);
+
+  /* mixin: material-shadow-0 */
+  box-shadow: none;
+
   background-color: transparent;
   color: var(--material-button-background-color);
   transition: all 0.25s linear;
@@ -409,7 +410,9 @@
 }
 
 .button--material--flat:focus { /* stylelint-disable-line */
-  @mixin material-shadow-0;
+  /* mixin: material-shadow-0 */
+  box-shadow: none;
+
   background-color: transparent;
   color: var(--material-button-background-color);
   outline: 0;
@@ -418,7 +421,9 @@
 }
 
 .button--material--flat:active { /* stylelint-disable-line */
-  @mixin material-shadow-0;
+  /* mixin: material-shadow-0 */
+  box-shadow: none;
+
   outline: 0;
   opacity: 1;
   border: none;
@@ -430,7 +435,10 @@
 .button--material--flat:disabled, .button--material--flat[disabled] {/* stylelint-disable-line */
   transition: none;
   opacity: 1;
-  @mixin material-shadow-0;
+
+  /* mixin: material-shadow-0 */
+  box-shadow: none;
+
   background-color: transparent;
   color: var(--material-button-disabled-color);
 }
