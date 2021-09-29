@@ -192,7 +192,7 @@ function previewJs() {
 ////////////////////////////////////////
 // reset-console
 ////////////////////////////////////////
-function reset(done) {
+function reset(done = () => {}) {
   process.stdout.write('\x1Bc');
   done();
 }
@@ -200,13 +200,16 @@ function reset(done) {
 const outputDevServerInfo = (() => {
   let defer = true;
 
-  return function () {
+  return function (done) {
     if (defer) {
       setTimeout(() => {
         output();
         defer = true;
       }, 60);
       defer = false;
+    }
+    if(typeof done == 'function'){
+      done();
     }
   }
 
@@ -247,14 +250,22 @@ function getCSSPaths() {
 // serve
 ////////////////////////////////////////
 function serve(done) {
-  gulp.watch(['src/**/*.css'], () => {
+  gulp.watch(['src/**/*.css'], (watchDone) => {
     reset();
-    gulp.series('build-css', 'generate-preview', outputDevServerInfo);
+    const runTasks = gulp.series('build-css', generatePreview, outputDevServerInfo, function over(localDone){
+      localDone();
+      watchDone();
+    });
+    runTasks();
   });
 
-  gulp.watch(['previewer-src/**', 'patterns.yaml'], () => {
+  gulp.watch(['previewer-src/**', 'patterns.yaml'], (watchDone) => {
     reset();
-    gulp.series('generate-preview-force', outputDevServerInfo)
+    const runTasks = gulp.series('generate-preview-force', outputDevServerInfo, function over(localDone){
+      localDone();
+      watchDone();
+    })
+    runTasks();
   });
 
   browserSync.emitter.on('init', outputDevServerInfo);
