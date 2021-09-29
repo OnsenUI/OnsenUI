@@ -213,6 +213,18 @@ describe('OnsPullHookElement', () => {
     });
   });
 
+  describe('#maxHeight', () => {
+    it('is 96 by default', () => {
+      expect(pullHook.maxHeight).to.equal(96);
+    });
+
+    it('changes the "max-height" attribute', () => {
+      pullHook.maxHeight = 100;
+      expect(pullHook.maxHeight).to.equal(100);
+      expect(pullHook.getAttribute('max-height')).to.equal('100px');
+    });
+  });
+
   describe('#state', () => {
     it('returns the state', () => {
       pullHook.setAttribute('state', 'hoge');

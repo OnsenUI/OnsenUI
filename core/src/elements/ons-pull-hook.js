@@ -112,6 +112,14 @@ export default class PullHookElement extends BaseElement {
    */
 
   /**
+   * @attribute max-height
+   * @type {String}
+   * @description
+   *   [en]Specify the max height when threshold-height is a negative value. The component won't be pulled down further than this height. The default value is "96px". A negative value will disable this property.[/en]
+   *   [ja]TODO need jp desc[/ja]
+   */
+
+  /**
    * @attribute fixed-content
    * @description
    *   [en]If this attribute is set the content of the page will not move when pulling.[/en]
@@ -212,7 +220,7 @@ export default class PullHookElement extends BaseElement {
         this._setState(STATE_INITIAL);
       }
 
-      this._translateTo(scroll);
+      this._translateTo(th > 0 ? scroll : Math.min(scroll, this.maxHeight));
     }
   }
 
@@ -226,7 +234,7 @@ export default class PullHookElement extends BaseElement {
     if (this._currentTranslation > 0) {
       const scroll = this._currentTranslation;
 
-      if (scroll > this.height) {
+      if (scroll >= this.height) {
         this._finish();
       } else {
         this._translateTo(0, {animate: true});
@@ -306,6 +314,25 @@ export default class PullHookElement extends BaseElement {
 
   get thresholdHeight() {
     return parseInt(this.getAttribute('threshold-height') || '96', 10);
+  }
+
+  /**
+   * @property maxHeight
+   * @type {Number}
+   * @description
+   *   [en]The maxHeight of the pull hook in pixels. The default value is `96px`.[/en]
+   *   [ja][/ja]
+   */
+  set maxHeight(value) {
+    if (!util.isInteger(value)) {
+      throwType('maxHeight', 'integer');
+    }
+
+    this.setAttribute('max-height', `${value}px`);
+  }
+
+  get maxHeight() {
+    return parseInt(this.getAttribute('max-height') || '96', 10);
   }
 
   _setState(state, noEvent) {

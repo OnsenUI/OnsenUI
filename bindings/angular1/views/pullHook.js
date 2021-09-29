@@ -61,7 +61,7 @@ limitations under the License.
 
     MicroEvent.mixin(PullHookView);
 
-    $onsen.derivePropertiesFromElement(PullHookView, ['state', 'onPull', 'pullDistance', 'height', 'thresholdHeight', 'disabled']);
+    $onsen.derivePropertiesFromElement(PullHookView, ['state', 'onPull', 'pullDistance', 'height', 'thresholdHeight', 'maxHeight', 'disabled']);
 
     return PullHookView;
   });
