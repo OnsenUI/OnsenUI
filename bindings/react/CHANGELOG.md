@@ -2,6 +2,13 @@
 CHANGELOG
 ====
 
+1.11.5
+----
+
+### Misc
+
+ * Bump non-breaking vulnerable dependencies, including all production vulnerabilities.
+
 1.11.4
 ----
 
