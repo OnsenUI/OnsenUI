@@ -478,7 +478,7 @@ declare namespace ons {
     * @description Returns the index of the currently visible `<ons-carousel-item>`.
     * @return The current carousel item index.
     */
-    getActiveIndex(): void;
+    getActiveIndex(): number;
     /**
      * @description Show next ons-carousel item
      * @return Resolves to the carousel element
