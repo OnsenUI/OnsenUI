@@ -50,12 +50,6 @@ export default class IOSLiftNavigatorAnimator extends NavigatorAnimator {
         .default(
           { transform: 'translate3D(0, 100%, 0)' },
           { transform: 'translate3D(0, 0, 0)' }
-        ),
-
-      animit(leavePage, this.def)
-        .default(
-          { transform: 'translate3D(0, 0, 0)', opacity: 1 },
-          { transform: 'translate3D(0, -10%, 0)', opacity: .9 }
         )
         .queue(done => {
           this.backgroundMask.remove();
@@ -79,23 +73,17 @@ export default class IOSLiftNavigatorAnimator extends NavigatorAnimator {
 
     animit.runAll(
 
-      animit(enterPage, this.def)
+      animit(leavePage, this.def)
         .default(
-          { transform: 'translate3D(0, -43px, 0)', opacity: .9 },
-          { transform: 'translate3D(0, 0, 0)', opacity: 1 }
+          { transform: 'translate3D(0, 0, 0)' },
+          { transform: 'translate3D(0, 100%, 0)' }
         )
         .queue(done => {
           this.backgroundMask.remove();
           unblock();
           callback();
           done();
-        }),
-
-      animit(leavePage, this.def)
-        .default(
-          { transform: 'translate3D(0, 0, 0)' },
-          { transform: 'translate3D(0, 100%, 0)' }
-        )
+        })
     );
   }
 }
