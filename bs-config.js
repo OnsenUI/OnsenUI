@@ -17,7 +17,8 @@ module.exports = {
         "port": 3001
     },
     "files": [
-      "build/**/*",
+      "js/**/*",
+      "css/{src,css-components-src}/**/*",
       "examples/**/*",
       "bindings/angular1/test/e2e/*/*.{js,css,html}",
       "bindings/angular1/examples/**/*.{js,css,html}",

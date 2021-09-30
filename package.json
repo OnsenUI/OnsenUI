@@ -14,10 +14,7 @@
     "build:css:lint": "stylelint 'css/?(css-components-)src/**/*.css'",
     "clean": "rimraf ./js './css/onsenui?(-core)?(.min).css' './css/{*-,}onsen-css-components?(.min).css'",
     "prebuild": "npm run clean",
-    "serve": "npm run serve:watch-core & npm run serve:watch-css & npm run serve:browser-sync",
-    "serve:browser-sync": "browser-sync start --config bs-config.js",
-    "serve:watch-core": "npm run build:js:rollup -- --watch",
-    "serve:watch-css": "watch 'npm run build:css:onsenui-css' core/css --ignoreDotFiles",
+    "serve": "rollup --config --watch & browser-sync start --config bs-config.js",
     "test": "npm run test:core-dts && npm run test:unit",
     "test:unit": "node scripts/unit-test.js",
     "test:core-dts": "node scripts/core-dts-test.js"
@@ -131,7 +128,6 @@
     "stylelint": "^13.8.0",
     "typescript": "^3.9.7",
     "uglify-js": "^3.12.1",
-    "watch": "^1.0.2",
     "wcdoc": "0.1.19",
     "webdriverio": "^6.10.5"
   },
