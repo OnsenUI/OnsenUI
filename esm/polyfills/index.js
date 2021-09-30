@@ -6,9 +6,6 @@
 // because import statements are hoisted during compilation.
 import './polyfill-switches.js';
 
-// Polyfill Custom Elements v1 with global namespace pollution
-import '@onsenui/custom-elements/src/custom-elements';
-
 // Polyfill MutationObserver with global namespace pollution
 import './MutationObserver@0.7.22/MutationObserver.js';
 
