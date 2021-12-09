@@ -4,8 +4,7 @@
   "description": "HTML5 Mobile Framework & UI Components",
   "private": false,
   "scripts": {
-    "build": "npm run build:umd && npm run build:css && npm run build:docs",
-    "build:docs": "node scripts/build-docs.js",
+    "build": "npm run build:umd && npm run build:css",
     "build:umd": "rollup --config && uglifyjs js/onsenui.js -c -m --comments '/onsenui v/' --output js/onsenui.min.js",
     "build:css": "npm run build:css:lint && npm run build:css:core && npm run build:css:components && npm run build:css:minify",
     "build:css:minify": "cleancss 'css/onsenui?(-core).css' --batch --batch-suffix '.min' --inline none && cleancss --batch 'css/{,*-}onsen-css-components.css' --batch-suffix '.min'",
@@ -13,6 +12,7 @@
     "build:css:components": "postcss css/css-components-src/{*-,}onsen-css-components.css --base css/css-components-src --dir css",
     "build:css:lint": "stylelint 'css/?(css-components-)src/**/*.css'",
     "clean": "rimraf ./js './css/onsenui?(-core)?(.min).css' './css/{*-,}onsen-css-components?(.min).css'",
+    "docs": "node scripts/build-docs.js",
     "prebuild": "npm run clean",
     "serve": "rollup --config --watch & browser-sync start --config bs-config.js",
     "test": "npm run test:core-dts && npm run test:unit",
