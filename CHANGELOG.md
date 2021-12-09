@@ -38,6 +38,7 @@ dev
  * The ES modules are now distributed as unbundled ES6 instead of bundled ES5. ([#2731](https://github.com/OnsenUI/OnsenUI/issues/2731)).
  * `module` key has been added to package.json. Bundlers will now use the ES modules version of Onsen UI by default instead of the UMD version.
  * The TypeScript declaration file has been moved to `esm/onsenui.d.ts`.
+ * The CSS components source has been moved to `css/css-components-src`.
 
 2.11.2
 ---
