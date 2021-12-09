@@ -30,7 +30,7 @@ const scheme = {
   '.back-button__label': 'back-button--*__label'
 };
 
-// original image file at ../../images/ios-back-button-icon.svg
+// original image file at misc/images/ios-back-button-icon.svg
 const iosBackButtonIcon = `
   <?xml version="1.0" encoding="UTF-8"?>
   <svg width="13px" height="21px" viewBox="0 0 13 21" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -45,7 +45,7 @@ const iosBackButtonIcon = `
   </svg>
 `;
 
-// original image file at ../../images/md-back-button-icon.svg
+// original image file at misc/images/md-back-button-icon.svg
 const mdBackButtonIcon = `
   <?xml version="1.0" encoding="UTF-8"?>
   <svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
