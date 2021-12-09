@@ -11,7 +11,7 @@
     "build:css:core": "postcss css/src/onsenui.css css/src/onsenui-core.css --dir css",
     "build:css:components": "postcss css/css-components-src/{*-,}onsen-css-components.css --base css/css-components-src --dir css",
     "build:css:lint": "stylelint 'css/?(css-components-)src/**/*.css'",
-    "clean": "rimraf ./js './css/onsenui?(-core)?(.min).css' './css/{*-,}onsen-css-components?(.min).css'",
+    "clean": "rimraf ./js './css/onsenui?(-core)?(.min).css' './css/{*-,}onsen-css-components?(.min).css' 'esm/core-dts-test.{js,ts}'",
     "docs": "node scripts/build-docs.js",
     "prebuild": "npm run clean",
     "serve": "rollup --config --watch & browser-sync start --config bs-config.js",
