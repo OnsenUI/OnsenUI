@@ -106,8 +106,8 @@ const createTestScript = (elementDefinitions, objectDefinitions) => {
 
 docsBuilder.collect({ // Retrive metadata of core elements and objects via `wcdoc`
   src: [
-    './core/src/elements/**/*.js',
-    './core/src/ons/**/*.js',
+    './esm/elements/**/*.js',
+    './esm/ons/**/*.js',
     '!**/*.spec.js'
   ]
 }).then(function(result) {
@@ -115,10 +115,10 @@ docsBuilder.collect({ // Retrive metadata of core elements and objects via `wcdo
   const testScript = createTestScript(result.element, result.object);
 
   // Write generated script to a file
-  fs.writeFileSync('core/src/core-dts-test.ts', testScript, {encoding: 'utf8'});
+  fs.writeFileSync('esm/core-dts-test.ts', testScript, {encoding: 'utf8'});
 
   // Test the d.ts file with the generated script
-  childProcess.spawn('node_modules/.bin/tsc', ['core/src/core-dts-test.ts', '--target', 'es6'],
+  childProcess.spawn('node_modules/.bin/tsc', ['esm/core-dts-test.ts', '--target', 'es6'],
     {stdio: 'inherit'} // redirect stdio/stdout/stderr to this process
   )
   .on('error', function (error) {
