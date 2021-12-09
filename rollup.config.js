@@ -5,7 +5,6 @@ import dateformat from 'dateformat';
 import { babel } from '@rollup/plugin-babel';
 import eslint from 'rollup-plugin-eslint';
 import resolve from 'rollup-plugin-node-resolve';
-import string from 'rollup-plugin-string';
 import progress from 'rollup-plugin-progress';
 
 const banner = name => `/* ${name} v${pkg.version} - ${dateformat(new Date(), 'yyyy-mm-dd')} */\n`;
@@ -35,7 +34,6 @@ export default [
           `${srcDir}/vendor/**/*.js`
         ]
       }),
-      string(stringOpt),
       resolve(),
       babel({ babelHelpers: 'bundled' }),
       progress(),

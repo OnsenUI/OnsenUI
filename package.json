@@ -122,7 +122,6 @@
     "rollup-plugin-filesize": "^1.5.0",
     "rollup-plugin-node-resolve": "^3.4.0",
     "rollup-plugin-progress": "^1.1.2",
-    "rollup-plugin-string": "^2.0.2",
     "rollup-plugin-visualizer": "^0.3.1",
     "stylelint": "^13.8.0",
     "typescript": "^3.9.7",
