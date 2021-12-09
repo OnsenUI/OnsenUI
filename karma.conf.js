@@ -1,7 +1,7 @@
 // Karma configuration
 // Generated on Thu Apr 09 2015 15:16:41 GMT+0900 (JST)
 
-var babelrc = require('../../../package.json').babel;
+var babelrc = require('./package.json').babel;
 babelrc.babelrc = babelrc.presets[0][1].modules = false;
 babelrc.plugins = ['external-helpers'];
 
@@ -18,22 +18,22 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
-      '../../../build/js/onsenui.js',
-      'setup.js',
-      `browser-${global.KARMA_BROWSER}.js`, // no error occurs even if not found
-      global.KARMA_DISABLE_WARNINGS ? 'disable-warnings.js' : null,
-      global.KARMA_SPEC_FILES || '../../../core/src/**/*.spec.js',
-      '../../../build/css/onsenui.css',
-      '../../../build/css/onsen-css-components.css',
-      {pattern: '../../../build/css/font_awesome/**/*', served: true, included: false},
-      {pattern: '../../../build/css/ionicons/**/*', served: true, included: false},
-      {pattern: '../../../build/css/material-design-iconic-font/**/*', served: true, included: false},
-      {pattern: 'test-template.html', served: true, included: false},
+      'js/onsenui.js',
+      'test/unit/setup.js',
+      `test/unit/browser-${global.KARMA_BROWSER}.js`, // no error occurs even if not found
+      global.KARMA_DISABLE_WARNINGS ? 'test/unit/disable-warnings.js' : null,
+      global.KARMA_SPEC_FILES || 'esm/**/*.spec.js',
+      'css/onsenui.css',
+      'css/onsen-css-components.css',
+      {pattern: 'css/font_awesome/**/*', served: true, included: false},
+      {pattern: 'css/ionicons/**/*', served: true, included: false},
+      {pattern: 'css/material-design-iconic-font/**/*', served: true, included: false},
+      {pattern: 'test/unit/test-template.html', served: true, included: false},
     ].filter(v => v != null),
 
     preprocessors: {
-      'setup.js': ['rollup'],
-      '../../../core/src/**/*.spec.js': ['rollup']
+      'test/unit/setup.js': ['rollup'],
+      'esm/**/*.spec.js': ['rollup']
     },
 
 		rollupPreprocessor: {

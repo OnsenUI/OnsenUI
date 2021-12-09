@@ -17,3 +17,6 @@ module-stats*.html
 /css/*onsen-css-components.min.css
 /OnsenUI-dist
 docs/gendocs
+/coverage
+/test-results.xml
+/TESTS-*.xml

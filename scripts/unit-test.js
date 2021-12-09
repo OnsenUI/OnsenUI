@@ -8,7 +8,7 @@ const log = require('fancy-log');
 const argv = yargs.argv;
 
 (async () => {
-  const specs = argv.specs || '../core/src/**/*.spec.js'; // you cannot use commas for --specs
+  const specs = argv.specs || '../esm/**/*.spec.js'; // you cannot use commas for --specs
   let browsers = argv.browsers ? argv.browsers.split(',').map(s => s.trim()) : ['local_chrome_headless', 'remote_macos_safari'];
 
   // If the Sauce credentials are not set, remove the remote builds from the queue.
@@ -58,11 +58,11 @@ const argv = yargs.argv;
 
         // Launch Karma server and wait until it exits
         await (async () => {
-          console.log(path.join(__dirname, '../core/test/unit/karma.conf.js'));
+          console.log(path.join(__dirname, '../karma.conf.js'));
           return new Promise((resolve, reject) => {
             new karma.Server(
               {
-                configFile: path.join(__dirname, '../core/test/unit/karma.conf.js'),
+                configFile: path.join(__dirname, '../karma.conf.js'),
                 singleRun: argv.watch ? false : true, // overrides the corresponding option in config file
                 autoWatch: argv.watch ? true : false // same as above
               },
