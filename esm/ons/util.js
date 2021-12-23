@@ -409,6 +409,7 @@ util.toggleModifier = (...args) => {
 };
 
 /**
+ * Restores default class and modifier classes if they were removed.
  * @param {Element} el
  * @param {String} defaultClass
  * @param {Object} scheme

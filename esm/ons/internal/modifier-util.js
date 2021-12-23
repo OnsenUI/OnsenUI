@@ -60,7 +60,11 @@ export default class ModifierUtil {
   static applyDiffToClassList(diff, classList, template) {
     diff.added
       .map(modifier => template.replace(/\*/g, modifier))
-      .forEach(klass => klass.split(/\s+/).forEach(k => classList.add(k)));
+      .forEach(klass =>
+        klass.split(/\s+/)
+          .filter(k => !classList.contains(k))
+          .forEach(k => classList.add(k))
+      );
 
     diff.removed
       .map(modifier => template.replace(/\*/g, modifier))

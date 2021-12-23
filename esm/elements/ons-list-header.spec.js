@@ -5,12 +5,36 @@ describe('ons-list-header', () => {
     expect(window.ons.elements.ListHeader).to.be.ok;
   });
 
-  it('classList contains \'list-header\' by default', () => {
-    const element = new ons.elements.ListHeader();
+  it("has the 'list-header' class when first connected", () => {
+    const element = document.createElement('ons-list-header');
+    document.body.appendChild(element);
     expect(element.classList.contains('list-header')).to.be.true;
+    element.remove();
+  });
+
+  it("restores the 'list-header' class when it is removed", () => {
+    const element = document.createElement('ons-list-header');
+    document.body.appendChild(element);
     element.setAttribute('class', 'foo');
     expect(element.classList.contains('list-header')).to.be.true;
+    element.remove();
+  });
+
+  it('restores modifier classes when they are removed', () => {
+    const element = document.createElement('ons-list-header');
+    document.body.appendChild(element);
+    element.setAttribute('modifier', 'hoge');
+    element.setAttribute('class', 'foo');
+    expect(element.classList.contains('list-header--hoge')).to.be.true;
+    element.remove();
+  });
+
+  it("does not overwrite existing classes when restoring classes", () => {
+    const element = document.createElement('ons-list-header');
+    document.body.appendChild(element);
+    element.setAttribute('class', 'foo');
     expect(element.classList.contains('foo')).to.be.true;
+    element.remove();
   });
 
   it('provides modifier attribute', () => {
@@ -29,22 +53,14 @@ describe('ons-list-header', () => {
     expect(element.classList.contains('list-header--fuga')).to.be.true;
   });
 
-  describe('#_compile()', () => {
-    it('does not compile twice', () => {
-      const div1 = document.createElement('div');
-      const div2 = document.createElement('div');
-      div1.innerHTML = '<ons-list-header>Content</ons-list-header>';
-      div2.innerHTML = div1.innerHTML;
-      expect(div1.isEqualNode(div2)).to.be.true;
-    });
-  });
-
   describe('autoStyling', () => {
-    it('adds \'material\' modifier on Android', () => {
+    it("adds 'material' modifier on Android when connected", () => {
       ons.platform.select('android');
       const e = document.createElement('ons-list-header');
+      document.body.appendChild(e);
       expect(e.getAttribute('modifier')).to.equal('material');
       ons.platform.select('');
+      e.remove();
     });
   });
 });
