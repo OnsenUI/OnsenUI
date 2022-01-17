@@ -224,6 +224,18 @@ export default class ListItemElement extends BaseElement {
   // PUBLIC METHODS
   ////////////////////////////////////////////////////////////////////////////////
 
+  get expandable() {
+    return this.hasAttribute('expandable');
+  }
+
+  set expandable(value) {
+    if (value) {
+      this.setAttribute('expandable', '');
+    } else {
+      this.removeAttribute('expandable');
+    }
+  }
+
   /**
    * @method showExpansion
    * @signature showExpansion()
