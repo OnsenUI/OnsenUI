@@ -175,10 +175,6 @@ export default class ListItemElement extends BaseElement {
     this._animatorFactory = this._updateAnimatorFactory();
     this.toggleExpansion = this.toggleExpansion.bind(this);
 
-    // Elements ignored when tapping
-    const re = /^ons-(?!col$|row$|if$)/i;
-    this._shouldIgnoreTap = e => e.hasAttribute('prevent-tap') || re.test(e.tagName);
-
     // show and hide functions for Vue hidable mixin
     this.show = this.showExpansion;
     this.hide = this.hideExpansion;
@@ -437,8 +433,12 @@ export default class ListItemElement extends BaseElement {
   }
 
   _onTouch(e) {
+    // Elements ignored when tapping
+    const re = /^ons-(?!col$|row$|if$)/i;
+    const shouldIgnoreTap = e => e.hasAttribute('prevent-tap') || re.test(e.tagName);
+
     if (this.tapped ||
-      (this !== e.target && (this._shouldIgnoreTap(e.target) || util.findParent(e.target, this._shouldIgnoreTap, p => p === this)))
+      (this !== e.target && (shouldIgnoreTap(e.target) || util.findParent(e.target, shouldIgnoreTap, p => p === this)))
     ) {
       return; // Ignore tap
     }
