@@ -188,6 +188,84 @@ export default class ListItemElement extends BaseElement {
     });
   }
 
+  connectedCallback() {
+    contentReady(this, () => {
+      this._setupListeners(true);
+      this._originalBackgroundColor = this.style.backgroundColor;
+      this.tapped = false;
+    });
+  }
+
+  disconnectedCallback() {
+    this._setupListeners(false);
+  }
+
+  static get observedAttributes() {
+    return ['modifier', 'class', 'ripple', 'animation', 'expanded'];
+  }
+
+  attributeChangedCallback(name, last, current) {
+    switch (name) {
+      case 'class':
+        util.restoreClass(this, defaultClassName, scheme);
+        break;
+      case 'modifier':
+        ModifierUtil.onModifierChanged(last, current, this, scheme);
+        break;
+      case 'ripple':
+        util.updateRipple(this);
+        break;
+      case 'animation':
+        this._animatorFactory = this._updateAnimatorFactory();
+        break;
+      case 'expanded':
+        this._animateExpansion();
+        break;
+    }
+  }
+
+  ////////////////////////////////////////////////////////////////////////////////
+  // PUBLIC METHODS
+  ////////////////////////////////////////////////////////////////////////////////
+
+  /**
+   * @method showExpansion
+   * @signature showExpansion()
+   * @description
+   *   [en]Show the expandable content if the element is expandable.[/en]
+   *   [ja][/ja]
+   */
+  showExpansion() {
+    this.expanded = true;
+  }
+
+  /**
+   * @method hideExpansion
+   * @signature hideExpansion()
+   * @description
+   *   [en]Hide the expandable content if the element expandable.[/en]
+   *   [ja][/ja]
+   */
+  hideExpansion() {
+    this.expanded = false;
+  }
+
+  toggleExpansion() {
+    this.expanded = !this.expanded;
+  }
+
+  get expandableContent() {
+    return this.querySelector('.list-item__expandable-content');
+  }
+
+  get expandChevron() {
+    return this.querySelector('.list-item__expand-chevron');
+  }
+
+  ////////////////////////////////////////////////////////////////////////////////
+  // PRIVATE METHODS
+  ////////////////////////////////////////////////////////////////////////////////
+
   /**
    * Compiles the list item.
    *
@@ -300,32 +378,6 @@ export default class ListItemElement extends BaseElement {
     ModifierUtil.initModifier(this, scheme);
   }
 
-  /**
-   * @method showExpansion
-   * @signature showExpansion()
-   * @description
-   *   [en]Show the expandable content if the element is expandable.[/en]
-   *   [ja][/ja]
-   */
-  showExpansion() {
-    this.expanded = true;
-  }
-
-  /**
-   * @method hideExpansion
-   * @signature hideExpansion()
-   * @description
-   *   [en]Hide the expandable content if the element expandable.[/en]
-   *   [ja][/ja]
-   */
-  hideExpansion() {
-    this.expanded = false;
-  }
-
-  toggleExpansion() {
-    this.expanded = !this.expanded;
-  }
-
   _animateExpansion() {
     // Stops the animation from running in the case where the list item should start already expanded
     const expandedAtStartup = this.expanded && this.classList.contains('list-item--expanded');
@@ -357,50 +409,6 @@ export default class ListItemElement extends BaseElement {
       baseClassName: 'ListItemAnimator',
       defaultAnimation: this.getAttribute('animation') || 'default'
     });
-  }
-
-  static get observedAttributes() {
-    return ['modifier', 'class', 'ripple', 'animation', 'expanded'];
-  }
-
-  get expandableContent() {
-    return this.querySelector('.list-item__expandable-content');
-  }
-
-  get expandChevron() {
-    return this.querySelector('.list-item__expand-chevron');
-  }
-
-  attributeChangedCallback(name, last, current) {
-    switch (name) {
-      case 'class':
-        util.restoreClass(this, defaultClassName, scheme);
-        break;
-      case 'modifier':
-        ModifierUtil.onModifierChanged(last, current, this, scheme);
-        break;
-      case 'ripple':
-        util.updateRipple(this);
-        break;
-      case 'animation':
-        this._animatorFactory = this._updateAnimatorFactory();
-        break;
-      case 'expanded':
-        this._animateExpansion();
-        break;
-    }
-  }
-
-  connectedCallback() {
-    contentReady(this, () => {
-      this._setupListeners(true);
-      this._originalBackgroundColor = this.style.backgroundColor;
-      this.tapped = false;
-    });
-  }
-
-  disconnectedCallback() {
-    this._setupListeners(false);
   }
 
   _setupListeners(add) {
