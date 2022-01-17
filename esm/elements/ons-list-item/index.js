@@ -188,7 +188,7 @@ export default class ListItemElement extends BaseElement {
     contentReady(this, () => {
       this._setupListeners(true);
       this._originalBackgroundColor = this.style.backgroundColor;
-      this.tapped = false;
+      this._tapped = false;
     });
   }
 
@@ -437,13 +437,13 @@ export default class ListItemElement extends BaseElement {
     const re = /^ons-(?!col$|row$|if$)/i;
     const shouldIgnoreTap = e => e.hasAttribute('prevent-tap') || re.test(e.tagName);
 
-    if (this.tapped ||
+    if (this._tapped ||
       (this !== e.target && (shouldIgnoreTap(e.target) || util.findParent(e.target, shouldIgnoreTap, p => p === this)))
     ) {
       return; // Ignore tap
     }
 
-    this.tapped = true;
+    this._tapped = true;
     const touchStyle = { transition: 'background-color 0.0s linear 0.02s, box-shadow 0.0s linear 0.02s' };
 
     if (this.hasAttribute('tappable')) {
@@ -459,7 +459,7 @@ export default class ListItemElement extends BaseElement {
   }
 
   _onRelease() {
-    this.tapped = false;
+    this._tapped = false;
     this.style.backgroundColor = this._originalBackgroundColor || '';
     styler.clear(this, 'transition boxShadow');
   }
