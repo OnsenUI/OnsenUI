@@ -45,13 +45,16 @@ export default class ListTitleElement extends BaseElement {
   constructor() {
     super();
 
-    this._compile();
+    this._connectedOnce = false;
   }
 
-  _compile() {
-    autoStyle.prepare(this);
-    this.classList.add(defaultClassName);
-    ModifierUtil.initModifier(this, scheme);
+  connectedCallback() {
+    if (!this._connectedOnce) {
+      this._connectedOnce = true;
+
+      this.classList.add(defaultClassName);
+      autoStyle.prepare(this);
+    }
   }
 
   static get observedAttributes() {
