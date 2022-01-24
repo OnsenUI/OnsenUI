@@ -49,8 +49,15 @@ export default class CarouselItemElement extends BaseElement {
   constructor() {
     super();
 
-    this.style.width = '100%';
-    ModifierUtil.initModifier(this, scheme);
+    this._connectedOnce = false;
+  }
+
+  connectedCallback() {
+    if (!this._connectedOnce) {
+      this._connectedOnce = true;
+
+      this.style.width = '100%';
+    }
   }
 
   static get observedAttributes() {
