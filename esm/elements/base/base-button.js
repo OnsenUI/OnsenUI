@@ -39,11 +39,21 @@ export default class BaseButtonElement extends BaseElement {
   constructor() {
     super();
 
+    this._connectedOnce = false;
+
     if (this.constructor === BaseButtonElement) {
       util.throwAbstract();
     }
+  }
 
-    contentReady(this, () => this._compile());
+  connectedCallback() {
+    super.connectedCallback?.();
+
+    if (!this._connectedOnce) {
+      this._connectedOnce = true;
+
+      contentReady(this, () => this._compile());
+    }
   }
 
   set disabled(value) {
