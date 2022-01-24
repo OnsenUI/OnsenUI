@@ -121,9 +121,19 @@ export default class IconElement extends BaseElement {
   constructor() {
     super();
 
-    contentReady(this, () => {
-      this._compile();
-    });
+    this._connectedOnce = false;
+  }
+
+  connectedCallback() {
+    super.connectedCallback?.();
+
+    if (!this._connectedOnce) {
+      this._connectedOnce = true;
+
+      contentReady(this, () => {
+        this._compile();
+      });
+    }
   }
 
   static get observedAttributes() {
