@@ -190,7 +190,17 @@ export default class ActionSheetElement extends BaseDialogElement {
   constructor() {
     super();
 
-    contentReady(this, () => this._compile());
+    this._connectedOnce = false;
+  }
+
+  connectedCallback() {
+    super.connectedCallback();
+
+    if (!this._connectedOnce) {
+      this._connectedOnce = true;
+
+      contentReady(this, () => this._compile());
+    }
   }
 
   get _scheme() {
