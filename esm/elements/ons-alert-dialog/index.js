@@ -192,7 +192,17 @@ export default class AlertDialogElement extends BaseDialogElement {
   constructor() {
     super();
 
-    contentReady(this, () => this._compile());
+    this._connectedOnce = false;
+  }
+
+  connectedCallback() {
+    super.connectedCallback();
+
+    if (!this._connectedOnce) {
+      this._connectedOnce = true;
+
+      this._compile();
+    }
   }
 
   get _scheme() {
