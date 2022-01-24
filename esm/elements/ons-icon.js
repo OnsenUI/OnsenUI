@@ -137,7 +137,7 @@ export default class IconElement extends BaseElement {
   }
 
   static get observedAttributes() {
-    return ['icon', 'size', 'modifier', 'class'];
+    return ['icon', 'size', 'modifier'];
   }
 
   attributeChangedCallback(name, last, current) {
