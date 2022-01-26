@@ -8,7 +8,12 @@ const log = require('fancy-log');
 const argv = yargs.argv;
 
 (async () => {
-  const specs = argv.specs || '../esm/**/*.spec.js'; // you cannot use commas for --specs
+  let specs;
+  if (argv.specs) { // you cannot use commas for --specs
+    specs = path.join(process.env.INIT_CWD, argv.specs);
+  } else {
+    specs = path.join(process.cwd(), 'esm/**/*.spec.js');
+  }
   let browsers = argv.browsers ? argv.browsers.split(',').map(s => s.trim()) : ['local_chrome_headless', 'remote_macos_safari'];
 
   // If the Sauce credentials are not set, remove the remote builds from the queue.
@@ -30,9 +35,9 @@ const argv = yargs.argv;
 
   let listOfSpecFiles;
   if (argv.separately) { // resolve glob pattern
-    listOfSpecFiles = glob.sync( path.join(__dirname, specs) );
+    listOfSpecFiles = glob.sync(specs);
   } else { // do not resolve glob pattern
-    listOfSpecFiles = new Array( path.join(__dirname, specs) );
+    listOfSpecFiles = new Array(specs);
   }
 
   // if --disable-warnings is specified, suppress warnings from Onsen UI
