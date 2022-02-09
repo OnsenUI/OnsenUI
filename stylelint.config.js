@@ -1,7 +1,7 @@
 module.exports = {
   ignoreFiles: [
-    './src/components/combination.css',
-    './src/iphonex-support/**/*.css'
+    './css/css-components-src/components/combination.css',
+    './css/css-components-src/iphonex-support/**/*.css'
   ],
 
   defaultSeverity: 'warning',

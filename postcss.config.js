@@ -1,11 +1,9 @@
-const browsers = require('../package.json')['browserslist'];
-
 module.exports = {
   plugins: [
-    require('postcss-import')({ from: null }),
-    require('postcss-preset-env')({
-      browsers: browsers
+    require('postcss-import')({
+      filter: (id) => !/\.\/(font_awesome|ionicons|material-design-iconic-font)\//.test(id)
     }),
+    require('postcss-preset-env'),
     require('postcss-reporter')({
       clearAllMessages: true,
       clearReportedMessages: true,
