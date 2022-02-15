@@ -1,20 +1,13 @@
 import 'babel-polyfill';
 
-import corePkg from '../../../package.json';
 import gulp from 'gulp';
 import * as glob from 'glob';
 import path from'path';
-import mergeStream from 'merge-stream';
 import fs from 'fs';
 import fse from 'fs-extra';
-import yargs, {argv} from 'yargs';
-import {spawn} from 'child_process';
-import { rollup, watch as rollupWatch } from 'rollup';
-import rawBundleConfig from './rollup.config.js';
 
 process.env.NODE_ENV = 'production'; // Important when bundling/transpiling
 
-const rollupConfig = rawBundleConfig.reduce((r, c) => (r[c.output.name] = c) && r, {})
 const $ = require('gulp-load-plugins')();
 
 const FLAGS = `--inline --colors --progress --display-error-details --display-cached`;

@@ -71,7 +71,6 @@
     "gulp": "^4.0.0",
     "gulp-load-plugins": "^2.0.4",
     "gulp-util": "^3.0.7",
-    "merge-stream": "^1.0.1",
     "rimraf": "^3.0.2",
     "rollup": "^2.52.3",
     "rollup-plugin-eslint": "^4.0.0",
