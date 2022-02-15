@@ -7,6 +7,7 @@
     "build": "cross-env NODE_ENV=production gulp build && npm run build:minify && npm run build:helper-json",
     "build:helper-json": "(cd ../../ && npm run build:docs) && gulp build:helper-json",
     "build:minify": "uglifyjs dist/vue-onsenui.js -c -m --comments '/vue-onsenui/' --output dist/vue-onsenui.min.js",
+    "clean": "rimraf ./esm ./dist",
     "prepublish": "npm run build",
     "test": "gulp test"
   },
@@ -65,6 +66,7 @@
     "gulp-util": "^3.0.7",
     "gulp-vue-compiler": "^1.0.0-beta.0",
     "merge-stream": "^1.0.1",
+    "rimraf": "^3.0.2",
     "rollup": "^2.52.3",
     "rollup-plugin-alias": "^1.4.0",
     "rollup-plugin-babel": "^3.0.2",
