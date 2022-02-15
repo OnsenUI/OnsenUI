@@ -20,7 +20,7 @@ import util from '../ons/util.js';
 import autoStyle from '../ons/autostyle.js';
 import ModifierUtil from '../ons/internal/modifier-util.js';
 import BaseElement from './base/base-element.js';
-import TabbarElement from './ons-tabbar/index.js';
+import TabbarElement from './ons-tabbar.js';
 import contentReady from '../ons/content-ready.js';
 import { PageLoader, defaultPageLoader } from '../ons/page-loader.js';
 

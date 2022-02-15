@@ -1,4 +1,4 @@
-import contentReady from '../../ons/content-ready.js';
+import contentReady from '../ons/content-ready.js';
 
 describe('OnsTabbarElement', () => {
   let element;

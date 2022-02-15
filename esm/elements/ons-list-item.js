@@ -15,16 +15,16 @@ limitations under the License.
 
 */
 
-import onsElements from '../../ons/elements.js';
-import animit from '../../ons/animit.js';
-import util from '../../ons/util.js';
-import styler from '../../ons/styler.js';
-import autoStyle from '../../ons/autostyle.js';
-import ModifierUtil from '../../ons/internal/modifier-util.js';
-import AnimatorFactory from '../../ons/internal/animator-factory.js';
-import { ListItemAnimator, SlideListItemAnimator } from './animator.js';
-import BaseElement from '../base/base-element.js';
-import contentReady from '../../ons/content-ready.js';
+import onsElements from '../ons/elements.js';
+import animit from '../ons/animit.js';
+import util from '../ons/util.js';
+import styler from '../ons/styler.js';
+import autoStyle from '../ons/autostyle.js';
+import ModifierUtil from '../ons/internal/modifier-util.js';
+import AnimatorFactory from '../ons/internal/animator-factory.js';
+import { ListItemAnimator, SlideListItemAnimator } from './ons-list-item/animator.js';
+import BaseElement from './base/base-element.js';
+import contentReady from '../ons/content-ready.js';
 
 const defaultClassName = 'list-item';
 const scheme = {

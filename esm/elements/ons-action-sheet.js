@@ -15,51 +15,54 @@ limitations under the License.
 
 */
 
-import onsElements from '../../ons/elements.js';
-import util from '../../ons/util.js';
-import autoStyle from '../../ons/autostyle.js';
-import ModifierUtil from '../../ons/internal/modifier-util.js';
-import AnimatorFactory from '../../ons/internal/animator-factory.js';
-import { DialogAnimator, IOSDialogAnimator, AndroidDialogAnimator, SlideDialogAnimator } from './animator.js';
-import platform from '../../ons/platform.js';
-import BaseDialogElement from '../base/base-dialog.js';
-import contentReady from '../../ons/content-ready.js';
+import onsElements from '../ons/elements.js';
+import util from '../ons/util.js';
+import autoStyle from '../ons/autostyle.js';
+import ModifierUtil from '../ons/internal/modifier-util.js';
+import AnimatorFactory from '../ons/internal/animator-factory.js';
+import { ActionSheetAnimator, IOSActionSheetAnimator, MDActionSheetAnimator } from './ons-action-sheet/animator.js';
+import platform from '../ons/platform.js';
+import BaseDialogElement from './base/base-dialog.js';
+import contentReady from '../ons/content-ready.js';
 
 const scheme = {
-  '.dialog': 'dialog--*',
-  '.dialog-container': 'dialog-container--*',
-  '.dialog-mask': 'dialog-mask--*'
+  '.action-sheet': 'action-sheet--*',
+  '.action-sheet-mask': 'action-sheet-mask--*',
+  '.action-sheet-title': 'action-sheet-title--*'
 };
 
 const _animatorDict = {
-  'default': function () { return  platform.isAndroid() ? AndroidDialogAnimator : IOSDialogAnimator; },
-  'slide': SlideDialogAnimator,
-  'none': DialogAnimator
+  'default': () => platform.isAndroid() ? MDActionSheetAnimator : IOSActionSheetAnimator,
+  'none': ActionSheetAnimator
 };
 
 /**
- * @element ons-dialog
+ * @element ons-action-sheet
  * @category dialog
  * @description
  *   [en]
- *     Dialog that is displayed on top of current screen. As opposed to the `<ons-alert-dialog>` element, this component can contain any kind of content.
+ *     Action/bottom sheet that is displayed on top of current screen.
  *
- *     To use the element it can either be attached directly to the `<body>` element or dynamically created from a template using the `ons.createDialog(template)` utility function and the `<template>` tag.
+ *     This element can either be attached directly to the `<body>` or dynamically created from a template using the `ons.createElement(template, { append: true })` utility function and the `<template>` tag.
  *
- *     The dialog is useful for displaying menus, additional information or to ask the user to make a decision.
+ *     The action sheet is useful for displaying a list of options and asking the user to make a decision. A `ons-action-sheet-button` is provided for this purpose, although it can contain any type of content.
  *
- *     It will automatically be displayed as Material Design when running on an Android device.
+ *     It will automatically be displayed as Material Design (bottom sheet) when running on an Android device.
  *   [/en]
- *   [ja][/ja]
+ *   [ja]
+ *     アクションシート、もしくはボトムシートを現在のスクリーン上に表示します。
+ *
+ *     この要素は、`<body>`要素に直接アタッチされるか、もしくは`ons.createElement(template, { append: true })`と`<template>`タグを使ってテンプレートから動的に生成されます。
+ *
+ *     アクションシートは、選択肢のリストを表示してユーザーに尋ねるのに便利です。`ons-action-sheet-button`は、この要素の中に置くために提供されていますが、それ以外にも他のどのような要素を含むことができます。
+ *
+ *     Androidデバイスで実行されるときには、自動的にマテリアルデザイン(ボトムシート)として表示されます。
+ *   [/ja]
  * @modifier material
- *   [en]Display a Material Design dialog.[/en]
- *   [ja]マテリアルデザインのダイアログを表示します。[/ja]
- * @codepen zxxaGa
- * @tutorial vanilla/Reference/dialog
+ *   [en]Display a Material Design bottom sheet.[/en]
+ *   [ja]マテリアルデザインのボトムシートを表示します。[/ja]
+ * @tutorial vanilla/reference/action-sheet
  * @guide theming.html#modifiers [en]More details about the `modifier` attribute[/en][ja]modifier属性の使い方[/ja]
- * @seealso ons-alert-dialog
- *   [en]`<ons-alert-dialog>` component[/en]
- *   [ja]ons-alert-dialogコンポーネント[/ja]
  * @seealso ons-popover
  *   [en]`<ons-popover>` component[/en]
  *   [ja]ons-popoverコンポーネント[/ja]
@@ -67,37 +70,38 @@ const _animatorDict = {
  *   [en]`<ons-modal>` component[/en]
  *   [ja]ons-modalコンポーネント[/ja]
  * @example
- * <ons-dialog id="dialog">
- *   <p>This is a dialog!</p>
- * </ons-dialog>
+ * <ons-action-sheet id="sheet">
+ *   <ons-action-sheet-button>Label</ons-action-sheet-button>
+ *   <ons-action-sheet-button>Label</ons-action-sheet-button>
+ * </ons-action-sheet>
  *
  * <script>
- *   document.getElementById('dialog').show();
+ *   document.getElementById('sheet').show();
  * </script>
  */
-export default class DialogElement extends BaseDialogElement {
+export default class ActionSheetElement extends BaseDialogElement {
 
   /**
    * @event preshow
    * @description
-   * [en]Fired just before the dialog is displayed.[/en]
+   * [en]Fired just before the action sheet is displayed.[/en]
    * [ja]ダイアログが表示される直前に発火します。[/ja]
    * @param {Object} event [en]Event object.[/en]
-   * @param {Object} event.dialog
+   * @param {Object} event.actionSheet
    *   [en]Component object.[/en]
    *   [ja]コンポーネントのオブジェクト。[/ja]
    * @param {Function} event.cancel
-   *   [en]Execute this function to stop the dialog from being shown.[/en]
+   *   [en]Execute this function to stop the action sheet from being shown.[/en]
    *   [ja]この関数を実行すると、ダイアログの表示がキャンセルされます。[/ja]
    */
 
   /**
    * @event postshow
    * @description
-   * [en]Fired just after the dialog is displayed.[/en]
+   * [en]Fired just after the action sheet is displayed.[/en]
    * [ja]ダイアログが表示された直後に発火します。[/ja]
    * @param {Object} event [en]Event object.[/en]
-   * @param {Object} event.dialog
+   * @param {Object} event.actionSheet
    *   [en]Component object.[/en]
    *   [ja]コンポーネントのオブジェクト。[/ja]
    */
@@ -105,47 +109,55 @@ export default class DialogElement extends BaseDialogElement {
   /**
    * @event prehide
    * @description
-   * [en]Fired just before the dialog is hidden.[/en]
+   * [en]Fired just before the action sheet is hidden.[/en]
    * [ja]ダイアログが隠れる直前に発火します。[/ja]
    * @param {Object} event [en]Event object.[/en]
-   * @param {Object} event.dialog
+   * @param {Object} event.actionSheet
    *   [en]Component object.[/en]
    *   [ja]コンポーネントのオブジェクト。[/ja]
    * @param {Function} event.cancel
-   *   [en]Execute this function to stop the dialog from being hidden.[/en]
+   *   [en]Execute this function to stop the action sheet from being hidden.[/en]
    *   [ja]この関数を実行すると、ダイアログの非表示がキャンセルされます。[/ja]
    */
 
   /**
    * @event posthide
    * @description
-   * [en]Fired just after the dialog is hidden.[/en]
+   * [en]Fired just after the action sheet is hidden.[/en]
    * [ja]ダイアログが隠れた後に発火します。[/ja]
    * @param {Object} event [en]Event object.[/en]
-   * @param {Object} event.dialog
+   * @param {Object} event.actionSheet
    *   [en]Component object.[/en]
    *   [ja]コンポーネントのオブジェクト。[/ja]
+   */
+
+  /**
+   * @attribute title
+   * @type {String}
+   * @description
+   *  [en]Optional title of the action sheet. A new element will be created containing this string.[/en]
+   *  [ja]アクションシートのタイトルを指定します。ここで指定した文字列を含む新しい要素が作成されます。[/ja]
    */
 
   /**
    * @attribute modifier
    * @type {String}
    * @description
-   *  [en]The appearance of the dialog.[/en]
+   *  [en]The appearance of the action sheet.[/en]
    *  [ja]ダイアログの表現を指定します。[/ja]
    */
 
   /**
    * @attribute cancelable
    * @description
-   *  [en]If this attribute is set the dialog can be closed by tapping the background or by pressing the back button on Android devices.[/en]
-   *  [ja][/ja]
+   *  [en]If this attribute is set the action sheet can be closed by tapping the background or by pressing the back button on Android devices.[/en]
+   *  [ja]この属性が設定されると、アクションシートの背景やAndroidデバイスのバックボタンを推すことでアクションシートが閉じるようになります。[/ja]
    */
 
   /**
    * @attribute disabled
    * @description
-   *  [en]If this attribute is set the dialog is disabled.[/en]
+   *  [en]If this attribute is set the action sheet is disabled.[/en]
    *  [ja]この属性がある時、ダイアログはdisabled状態になります。[/ja]
    */
 
@@ -154,7 +166,7 @@ export default class DialogElement extends BaseDialogElement {
    * @type {String}
    * @default default
    * @description
-   *  [en]The animation used when showing and hiding the dialog. Can be either `"none"` or `"default"`.[/en]
+   *  [en]The animation used when showing and hiding the action sheet. Can be either `"none"` or `"default"`.[/en]
    *  [ja]ダイアログを表示する際のアニメーション名を指定します。"none"もしくは"default"を指定できます。[/ja]
    */
 
@@ -186,18 +198,22 @@ export default class DialogElement extends BaseDialogElement {
   }
 
   get _mask() {
-    return util.findChild(this, '.dialog-mask');
+    return util.findChild(this, '.action-sheet-mask');
   }
 
-  get _dialog() {
-    return util.findChild(this, '.dialog');
+  get _sheet() {
+    return util.findChild(this, '.action-sheet');
+  }
+
+  get _title() {
+    return this.querySelector('.action-sheet-title');
   }
 
   _updateAnimatorFactory() {
     return new AnimatorFactory({
       animators: _animatorDict,
-      baseClass: DialogAnimator,
-      baseClassName: 'DialogAnimator',
+      baseClass: ActionSheetAnimator,
+      baseClassName: 'ActionSheetAnimator',
       defaultAnimation: this.getAttribute('animation')
     });
   }
@@ -209,40 +225,49 @@ export default class DialogElement extends BaseDialogElement {
     this.style.zIndex = 10001;
 
     /* Expected result:
-     *   <ons-dialog>
-     *     <div class="dialog-mask"></div>
-     *     <div class="dialog">
-     *       <div class="dialog-container">...</div>
+     *   <ons-action-sheet>
+     *     <div class="action-sheet-mask"></div>
+     *     <div class="action-sheet">
+     *       <div class="action-sheet-title></div>
+     *       ...
      *     </div>
-     *   </ons-dialog>
+     *   </ons-action-sheet>
      */
 
-    if (!this._dialog) {
-      const dialog = document.createElement('div');
-      dialog.classList.add('dialog');
+    if (!this._sheet) {
+      const sheet = document.createElement('div');
+      sheet.classList.add('action-sheet');
 
-      const container = document.createElement('div');
-      container.classList.add('dialog-container');
       while (this.firstChild) {
-        container.appendChild(this.firstChild);
+        sheet.appendChild(this.firstChild);
       }
-      dialog.appendChild(container);
 
-      this.appendChild(dialog);
+      this.appendChild(sheet);
+    }
+
+    if (!this._title && this.hasAttribute('title')) {
+      const title = document.createElement('div');
+      title.innerHTML = this.getAttribute('title');
+      title.classList.add('action-sheet-title');
+      this._sheet.insertBefore(title, this._sheet.firstChild);
     }
 
     if (!this._mask) {
       const mask = document.createElement('div');
-      mask.classList.add('dialog-mask');
+      mask.classList.add('action-sheet-mask');
       this.insertBefore(mask, this.firstChild);
     }
 
-    this._dialog.style.zIndex = 20001;
+    this._sheet.style.zIndex = 20001;
     this._mask.style.zIndex = 20000;
 
-    this.setAttribute('status-bar-fill', '');
-
     ModifierUtil.initModifier(this, this._scheme);
+  }
+
+  _updateTitle() {
+    if (this._title) {
+      this._title.innerHTML = this.getAttribute('title');
+    }
   }
 
   /**
@@ -266,10 +291,10 @@ export default class DialogElement extends BaseDialogElement {
    *   [en]Specify the animation's duration, delay and timing. E.g. `{duration: 0.2, delay: 0.4, timing: 'ease-in'}`.[/en]
    *   [ja]アニメーション時のduration, delay, timingを指定します。e.g. `{duration: 0.2, delay: 0.4, timing: 'ease-in'}` [/ja]
    * @param {Function} [options.callback]
-   *   [en]This function is called after the dialog has been revealed.[/en]
+   *   [en]This function is called after the action sheet has been revealed.[/en]
    *   [ja]ダイアログが表示され終わった後に呼び出される関数オブジェクトを指定します。[/ja]
    * @description
-   *  [en]Show the dialog.[/en]
+   *  [en]Show the action sheet.[/en]
    *  [ja]ダイアログを開きます。[/ja]
    * @return {Promise} Resolves to the displayed element.
    */
@@ -287,14 +312,14 @@ export default class DialogElement extends BaseDialogElement {
    *   [en]Specify the animation's duration, delay and timing. E.g. `{duration: 0.2, delay: 0.4, timing: 'ease-in'}`.[/en]
    *   [ja]アニメーション時のduration, delay, timingを指定します。e.g. `{duration: 0.2, delay: 0.4, timing: 'ease-in'}`[/ja]
    * @param {Function} [options.callback]
-   *   [en]This functions is called after the dialog has been hidden.[/en]
+   *   [en]This functions is called after the action sheet has been hidden.[/en]
    *   [ja]ダイアログが隠れた後に呼び出される関数オブジェクトを指定します。[/ja]
    * @description
-   *   [en]Hide the dialog.[/en]
+   *   [en]Hide the action sheet.[/en]
    *   [ja]ダイアログを閉じます。[/ja]
    * @return {Promise}
    *   [en]Resolves to the hidden element[/en]
-   *   [ja][/ja]
+   *   [ja]隠れた要素を解決します。[/ja]
    */
 
   /**
@@ -302,7 +327,7 @@ export default class DialogElement extends BaseDialogElement {
    * @readonly
    * @type {Boolean}
    * @description
-   *   [en]Whether the dialog is visible or not.[/en]
+   *   [en]Whether the action sheet is visible or not.[/en]
    *   [ja]要素が見える場合に`true`。[/ja]
    */
 
@@ -310,7 +335,7 @@ export default class DialogElement extends BaseDialogElement {
    * @property disabled
    * @type {Boolean}
    * @description
-   *   [en]Whether the dialog is disabled or not.[/en]
+   *   [en]Whether the action sheet is disabled or not.[/en]
    *   [ja]無効化されている場合に`true`。[/ja]
    */
 
@@ -318,17 +343,29 @@ export default class DialogElement extends BaseDialogElement {
    * @property cancelable
    * @type {Boolean}
    * @description
-   *   [en]Whether the dialog is cancelable or not. A cancelable dialog can be closed by tapping the background or by pressing the back button on Android devices.[/en]
-   *   [ja][/ja]
+   *   [en]Whether the action sheet is cancelable or not. A cancelable action sheet can be closed by tapping the background or by pressing the back button on Android devices.[/en]
+   *   [ja]アクションシートがキャンセル可能かどうかを設定します。キャンセル可能なアクションシートは、背景をタップしたりAndroidデバイスのバックボタンを推すことで閉じるようになります。[/ja]
    */
+
+  static get observedAttributes() {
+    return [...super.observedAttributes, 'title'];
+  }
+
+  attributeChangedCallback(name, last, current) {
+    if (name === 'title') {
+      this._updateTitle();
+    } else {
+      super.attributeChangedCallback(name, last, current);
+    }
+  }
 
   /**
    * @param {String} name
-   * @param {DialogAnimator} Animator
+   * @param {ActionSheetAnimator} Animator
    */
   static registerAnimator(name, Animator) {
-    if (!(Animator.prototype instanceof DialogAnimator)) {
-      util.throwAnimator('Dialog');
+    if (!(Animator.prototype instanceof ActionSheetAnimator)) {
+      util.throwAnimator('ActionSheet');
     }
     _animatorDict[name] = Animator;
   }
@@ -337,10 +374,10 @@ export default class DialogElement extends BaseDialogElement {
     return _animatorDict;
   }
 
-  static get DialogAnimator() {
-    return DialogAnimator;
+  static get ActionSheetAnimator() {
+    return ActionSheetAnimator;
   }
 }
 
-onsElements.Dialog = DialogElement;
-customElements.define('ons-dialog', DialogElement);
+onsElements.ActionSheet = ActionSheetElement;
+customElements.define('ons-action-sheet', ActionSheetElement);

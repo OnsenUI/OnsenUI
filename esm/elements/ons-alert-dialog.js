@@ -15,15 +15,15 @@ limitations under the License.
 
 */
 
-import onsElements from '../../ons/elements.js';
-import util from '../../ons/util.js';
-import autoStyle from '../../ons/autostyle.js';
-import ModifierUtil from '../../ons/internal/modifier-util.js';
-import AnimatorFactory from '../../ons/internal/animator-factory.js';
-import { AlertDialogAnimator, IOSAlertDialogAnimator, AndroidAlertDialogAnimator } from './animator.js';
-import platform from '../../ons/platform.js';
-import BaseDialogElement from '../base/base-dialog.js';
-import contentReady from '../../ons/content-ready.js';
+import onsElements from '../ons/elements.js';
+import util from '../ons/util.js';
+import autoStyle from '../ons/autostyle.js';
+import ModifierUtil from '../ons/internal/modifier-util.js';
+import AnimatorFactory from '../ons/internal/animator-factory.js';
+import { AlertDialogAnimator, IOSAlertDialogAnimator, AndroidAlertDialogAnimator } from './ons-alert-dialog/animator.js';
+import platform from '../ons/platform.js';
+import BaseDialogElement from './base/base-dialog.js';
+import contentReady from '../ons/content-ready.js';
 
 const scheme = {
   '.alert-dialog': 'alert-dialog--*',

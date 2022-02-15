@@ -15,19 +15,19 @@ limitations under the License.
 
 */
 
-import onsElements from '../../ons/elements.js';
-import util from '../../ons/util.js';
-import autoStyle from '../../ons/autostyle.js';
-import ModifierUtil from '../../ons/internal/modifier-util.js';
-import AnimatorFactory from '../../ons/internal/animator-factory.js';
-import ToastAnimator from './animator.js';
-import FadeToastAnimator from './fade-animator.js';
-import AscendToastAnimator from './ascend-animator.js';
-import LiftToastAnimator from './lift-animator.js';
-import FallToastAnimator from './fall-animator.js';
-import platform from '../../ons/platform.js';
-import BaseDialogElement from '../base/base-dialog.js';
-import contentReady from '../../ons/content-ready.js';
+import onsElements from '../ons/elements.js';
+import util from '../ons/util.js';
+import autoStyle from '../ons/autostyle.js';
+import ModifierUtil from '../ons/internal/modifier-util.js';
+import AnimatorFactory from '../ons/internal/animator-factory.js';
+import ToastAnimator from './ons-toast/animator.js';
+import FadeToastAnimator from './ons-toast/fade-animator.js';
+import AscendToastAnimator from './ons-toast/ascend-animator.js';
+import LiftToastAnimator from './ons-toast/lift-animator.js';
+import FallToastAnimator from './ons-toast/fall-animator.js';
+import platform from '../ons/platform.js';
+import BaseDialogElement from './base/base-dialog.js';
+import contentReady from '../ons/content-ready.js';
 
 const scheme = {
   '.toast': 'toast--*',

@@ -15,24 +15,24 @@ limitations under the License.
 
 */
 
-import onsElements from '../../ons/elements.js';
-import util from '../../ons/util.js';
-import internal from '../../ons/internal/index.js';
-import SwipeReveal from '../../ons/internal/swipe-reveal.js';
-import AnimatorFactory from '../../ons/internal/animator-factory.js';
-import NavigatorAnimator from './animator.js';
-import IOSSlideNavigatorAnimator from './ios-slide-animator.js';
-import IOSLiftNavigatorAnimator from './ios-lift-animator.js';
-import IOSFadeNavigatorAnimator from './ios-fade-animator.js';
-import MDSlideNavigatorAnimator from './md-slide-animator.js';
-import MDLiftNavigatorAnimator from './md-lift-animator.js';
-import MDFadeNavigatorAnimator from './md-fade-animator.js';
-import NoneNavigatorAnimator from './none-animator.js';
-import platform from '../../ons/platform.js';
-import contentReady from '../../ons/content-ready.js';
-import BaseElement from '../base/base-element.js';
-import deviceBackButtonDispatcher from '../../ons/internal/device-back-button-dispatcher.js';
-import {PageLoader, defaultPageLoader, instantPageLoader} from '../../ons/page-loader.js';
+import onsElements from '../ons/elements.js';
+import util from '../ons/util.js';
+import internal from '../ons/internal/index.js';
+import SwipeReveal from '../ons/internal/swipe-reveal.js';
+import AnimatorFactory from '../ons/internal/animator-factory.js';
+import NavigatorAnimator from './ons-navigator/animator.js';
+import IOSSlideNavigatorAnimator from './ons-navigator/ios-slide-animator.js';
+import IOSLiftNavigatorAnimator from './ons-navigator/ios-lift-animator.js';
+import IOSFadeNavigatorAnimator from './ons-navigator/ios-fade-animator.js';
+import MDSlideNavigatorAnimator from './ons-navigator/md-slide-animator.js';
+import MDLiftNavigatorAnimator from './ons-navigator/md-lift-animator.js';
+import MDFadeNavigatorAnimator from './ons-navigator/md-fade-animator.js';
+import NoneNavigatorAnimator from './ons-navigator/none-animator.js';
+import platform from '../ons/platform.js';
+import contentReady from '../ons/content-ready.js';
+import BaseElement from './base/base-element.js';
+import deviceBackButtonDispatcher from '../ons/internal/device-back-button-dispatcher.js';
+import {PageLoader, defaultPageLoader, instantPageLoader} from '../ons/page-loader.js';
 
 const _animatorDict = {
   'default': function () { return platform.isAndroid() ? MDFadeNavigatorAnimator : IOSSlideNavigatorAnimator; },
