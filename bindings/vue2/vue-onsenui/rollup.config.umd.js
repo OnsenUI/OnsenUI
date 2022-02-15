@@ -5,7 +5,7 @@ import dateformat from 'dateformat';
 import { babel } from '@rollup/plugin-babel';
 import eslint from '@rollup/plugin-eslint';
 import resolve from '@rollup/plugin-node-resolve';
-import replace from 'rollup-plugin-replace';
+import replace from '@rollup/plugin-replace';
 import progress from 'rollup-plugin-progress';
 import vue from 'rollup-plugin-vue';
 
@@ -37,6 +37,7 @@ export default {
       // Remove undefined imports to slightly reduce UMD bundle size
       include: './src/components/*.vue',
       'import \'onsenui/esm/elements/': '// \'',
+      preventAssignment: true
     }),
     vue(),
     babel({ babelHelpers: 'bundled' }),
