@@ -39,6 +39,7 @@ dev
  * `module` key has been added to package.json. Bundlers will now use the ES modules version of Onsen UI by default instead of the UMD version.
  * The TypeScript declaration file has been moved to `esm/onsenui.d.ts`.
  * The CSS components source has been moved to `css/css-components-src`.
+ * The paths to all components have been standardized. For ESM imports use `import onsenui/esm/elements/<component-name>.js` for all components.
 
 2.11.2
 ---

@@ -15,16 +15,16 @@ limitations under the License.
 
 */
 
-import onsElements from '../../ons/elements.js';
-import util from '../../ons/util.js';
-import ModifierUtil from '../../ons/internal/modifier-util.js';
-import AnimatorFactory from '../../ons/internal/animator-factory.js';
-import ModalAnimator from './animator.js';
-import FadeModalAnimator from './fade-animator.js';
-import LiftModalAnimator from './lift-animator.js';
-import platform from '../../ons/platform.js';
-import BaseDialogElement from '../base/base-dialog.js';
-import contentReady from '../../ons/content-ready.js';
+import onsElements from '../ons/elements.js';
+import util from '../ons/util.js';
+import ModifierUtil from '../ons/internal/modifier-util.js';
+import AnimatorFactory from '../ons/internal/animator-factory.js';
+import ModalAnimator from './ons-modal/animator.js';
+import FadeModalAnimator from './ons-modal/fade-animator.js';
+import LiftModalAnimator from './ons-modal/lift-animator.js';
+import platform from '../ons/platform.js';
+import BaseDialogElement from './base/base-dialog.js';
+import contentReady from '../ons/content-ready.js';
 
 const scheme = {
   '': 'modal--*',

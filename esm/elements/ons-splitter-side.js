@@ -27,7 +27,7 @@ import SwipeReveal from '../ons/internal/swipe-reveal.js';
 import DoorLock from '../ons/doorlock.js';
 import contentReady from '../ons/content-ready.js';
 import { PageLoader, defaultPageLoader} from '../ons/page-loader.js';
-import SplitterElement from './ons-splitter/index.js';
+import SplitterElement from './ons-splitter.js';
 
 const SPLIT_MODE = 'split';
 const COLLAPSE_MODE = 'collapse';
