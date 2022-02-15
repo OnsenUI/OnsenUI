@@ -3,7 +3,7 @@ import dateformat from 'dateformat';
 
 // Rollup plugins
 import { babel } from '@rollup/plugin-babel';
-import eslint from 'rollup-plugin-eslint';
+import eslint from '@rollup/plugin-eslint';
 import resolve from 'rollup-plugin-node-resolve';
 import replace from 'rollup-plugin-replace';
 import progress from 'rollup-plugin-progress';
