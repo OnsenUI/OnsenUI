@@ -83,7 +83,6 @@
     "ansi-colors": "^4.1.1",
     "babel-eslint": "^8.2.6",
     "babel-plugin-angularjs-annotate": "^0.8.2",
-    "babel-plugin-transform-runtime": "^6.23.0",
     "browser-sync": "^2.26.13",
     "chai": "^3.4.1",
     "chai-as-promised": "^5.2.0",
