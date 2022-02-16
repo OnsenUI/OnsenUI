@@ -79,22 +79,22 @@ jobs:
       #    paths:
       #      - ./bindings/angular2/node_modules
 
-      ## bindings/react
-      #- restore_cache:
-      #    keys:
-      #      - v1-react-cache-{{ .Branch }}-{{ checksum "bindings/react/package-lock.json" }}
-      #      - v1-react-cache-{{ .Branch }}-
-      #      - v1-react-cache-
-      #- run:
-      #    name: Install React dependencies and build react-onsenui
-      #    command: |
-      #      cd bindings/react
-      #      npm ci
-      #      npm run build
-      #- save_cache:
-      #    key: v1-react-cache-{{ .Branch }}-{{ checksum "bindings/react/package-lock.json" }}
-      #    paths:
-      #      - ./bindings/react/node_modules
+      # bindings/react
+      - restore_cache:
+          keys:
+            - v1-react-cache-{{ .Branch }}-{{ checksum "bindings/react/package-lock.json" }}
+            - v1-react-cache-{{ .Branch }}-
+            - v1-react-cache-
+      - run:
+          name: Install React dependencies and build react-onsenui
+          command: |
+            cd bindings/react
+            npm ci
+            npm run build
+      - save_cache:
+          key: v1-react-cache-{{ .Branch }}-{{ checksum "bindings/react/package-lock.json" }}
+          paths:
+            - ./bindings/react/node_modules
 
       # bindings/vue2
       - restore_cache:
