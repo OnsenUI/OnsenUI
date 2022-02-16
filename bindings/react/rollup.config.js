@@ -6,13 +6,13 @@ import dateformat from 'dateformat';
 // Rollup plugins
 import { babel } from '@rollup/plugin-babel';
 import eslint from 'rollup-plugin-eslint';
-import resolve from 'rollup-plugin-node-resolve';
-import commonjs from 'rollup-plugin-commonjs';
-import replace from 'rollup-plugin-replace';
+import resolve from '@rollup/plugin-node-resolve';
+import commonjs from '@rollup/plugin-commonjs';
+import replace from '@rollup/plugin-replace';
 import filesize from 'rollup-plugin-filesize';
 import progress from 'rollup-plugin-progress';
 import visualizer from 'rollup-plugin-visualizer';
-import alias from 'rollup-plugin-alias';
+import alias from '@rollup/plugin-alias';
 import uglify from 'rollup-plugin-uglify';
 import nodeGlobals from 'rollup-plugin-node-globals';
 
@@ -79,7 +79,10 @@ const builds = [
       banner,
     },
     plugins: [
-      replace({ 'process.env.NODE_ENV': JSON.stringify( 'production' ) }),
+      replace({
+        'process.env.NODE_ENV': JSON.stringify( 'production' ),
+        preventAssignment: true
+      }),
       resolve(resolveOpt),
       commonjs(cjsOpt),
       babel(babelrc),
