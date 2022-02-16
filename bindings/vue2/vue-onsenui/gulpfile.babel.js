@@ -1,73 +1,16 @@
 import 'babel-polyfill';
 
-import corePkg from '../../../package.json';
 import gulp from 'gulp';
 import * as glob from 'glob';
 import path from'path';
-import mergeStream from 'merge-stream';
 import fs from 'fs';
 import fse from 'fs-extra';
-import yargs, {argv} from 'yargs';
-import {spawn} from 'child_process';
-import { rollup, watch as rollupWatch } from 'rollup';
-import rawBundleConfig from './rollup.config.js';
 
 process.env.NODE_ENV = 'production'; // Important when bundling/transpiling
 
-const rollupConfig = rawBundleConfig.reduce((r, c) => (r[c.output.name] = c) && r, {})
 const $ = require('gulp-load-plugins')();
 
 const FLAGS = `--inline --colors --progress --display-error-details --display-cached`;
-
-////////////////////////////////////////
-// BUILD vue-bindings
-////////////////////////////////////////
-const bundle = config => rollup(config).then(bundle => bundle.write(config.output));
-
-function vueBindings() {
-  return bundle(rollupConfig.VueOnsen);
-}
-
-function vueBindingsEsmBundle() {
-  return bundle(rollupConfig.VueOnsenESM);
-}
-
-function vueBindingsEsm() {
-  const babelrc = Object.assign({}, corePkg.babel);
-  babelrc.babelrc = babelrc.presets[0][1].modules = false;
-  babelrc.plugins = [
-    'external-helpers',
-    'transform-runtime',
-  ];
-
-  // ES Modules (transpiled ES source codes)
-  return mergeStream(
-    gulp.src([
-      'src/**/*.js',
-      '!src/*.js',
-    ])
-    .pipe($.babel(babelrc))
-    .pipe(gulp.dest('esm/')),
-
-    // Compile Vue components
-    gulp.src([
-      'src/**/*.vue',
-    ])
-    .pipe($.vueCompiler({
-      babel: babelrc,
-      newExtension: 'js',
-    }))
-    .pipe(gulp.dest('esm/'))
-
-  );
-}
-
-function clean() {
-  return gulp.src([ 'dist', 'esm', ], { read: false, allowEmpty: true })
-    .pipe($.clean());
-}
-
-exports.build = gulp.series(clean, vueBindings, vueBindingsEsmBundle, vueBindingsEsm);
 
 ////////////////////////////////////////
 // generate-components
