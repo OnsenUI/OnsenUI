@@ -37,3 +37,5 @@ examples/build.js
 
 # Auto-generated docs directory
 docs
+
+dist
