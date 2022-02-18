@@ -67,6 +67,7 @@
     "@rollup/plugin-replace": "^3.1.0",
     "cpx": "^1.5.0",
     "cross-env": "^1.0.8",
+    "eslint-plugin-vue": "^6.2.2",
     "fs-extra": "^3.0.1",
     "glob": "^7.1.2",
     "gulp": "^4.0.0",
