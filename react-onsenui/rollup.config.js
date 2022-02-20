@@ -26,7 +26,6 @@ babelrc.babelHelpers = 'bundled'
 
 const banner = `/* ${pkg.name} v${pkg.version} - ${dateformat(new Date(), 'yyyy-mm-dd')} */\n`,
   resolveOpt = { extensions: ['.js', '.jsx'] },
-  cjsOpt = { include: 'node_modules/**' },
   globals = {
     'onsenui': 'ons',
     'react': 'React',
@@ -55,7 +54,7 @@ const builds = [
         ],
       }),
       resolve(resolveOpt),
-      commonjs(cjsOpt),
+      commonjs(),
       babel(babelrc),
       progress(),
       filesize(),
@@ -84,7 +83,7 @@ const builds = [
         preventAssignment: true
       }),
       resolve(resolveOpt),
-      commonjs(cjsOpt),
+      commonjs(),
       babel(babelrc),
       uglify(),
       progress(),
