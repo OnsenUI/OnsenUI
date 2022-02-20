@@ -52,7 +52,7 @@
     "colors": "^1.1.2",
     "cross-env": "^5.0.1",
     "css-loader": "0.26.0",
-    "eslint": "^4.10.0",
+    "eslint": "^7.32.0",
     "eslint-plugin-promise": "^3.0.0",
     "eslint-plugin-react": "^7.4.0",
     "eslint-plugin-standard": "^2.0.1",
