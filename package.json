@@ -8,7 +8,7 @@
     "build:react": "npm run --prefix react-onsenui build",
     "build:vue": "npm run --prefix vue-onsenui build",
     "serve": "npm run --prefix onsenui serve",
-    "serve:react": "npm run --prefix react-onsenui-examples serve",
+    "serve:react": "npm run --prefix react-onsenui-examples start",
     "serve:vue": "npm run --prefix vue-onsenui-examples serve"
   },
   "keywords": [],
