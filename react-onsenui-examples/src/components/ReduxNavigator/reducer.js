@@ -1,7 +1,6 @@
 import {RouterUtil} from 'react-onsenui';
 
 import MainPage from './main-page';
-import SecondaryPage from './secondary-page';
 
 const initialState = RouterUtil.init([{
 	component: MainPage,

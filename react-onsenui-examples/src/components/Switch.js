@@ -2,9 +2,6 @@ import React from 'react';
 
 import {
   Page,
-  Toolbar,
-  ToolbarButton,
-  BackButton,
   Switch
 } from 'react-onsenui';
 

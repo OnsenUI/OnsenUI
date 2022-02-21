@@ -3,15 +3,12 @@ import React from 'react';
 import {
   Page,
   Toolbar,
-  ToolbarButton,
   BackButton,
   Input,
   Checkbox,
   Radio,
   SearchInput
 } from 'react-onsenui';
-
-import MyToolbar from './MyToolbar';
 
 export default class extends React.Component {
   constructor(props) {

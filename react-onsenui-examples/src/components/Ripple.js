@@ -1,14 +1,10 @@
 import React from 'react';
 
-import {Button, Page, Ripple, Icon} from 'react-onsenui';
+import {Page, Ripple} from 'react-onsenui';
 
 import MyToolbar from './MyToolbar';
 
 export default class extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     return (
       <Page

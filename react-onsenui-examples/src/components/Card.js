@@ -13,10 +13,6 @@ import {
 import MyToolbar from './MyToolbar';
 
 export default class extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     return (
       <Page renderToolbar={() => <MyToolbar title='Card' />} >

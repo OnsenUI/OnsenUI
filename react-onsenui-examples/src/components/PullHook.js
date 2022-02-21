@@ -5,7 +5,6 @@ import {
   PullHook,
   Fab,
   Icon,
-  Toolbar,
   List,
   ListItem
 } from 'react-onsenui';

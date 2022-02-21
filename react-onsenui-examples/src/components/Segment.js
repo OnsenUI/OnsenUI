@@ -10,33 +10,31 @@ import {
   Button
 } from 'react-onsenui';
 
-import MyToolbar from './MyToolbar';
-
 class TabPage extends React.Component {
   render() {
     return (
-      <Page>
+        <Page>
         {this.props.active
-          ? <h2>{this.props.title}</h2>
-          : null}
+        ? <h2>{this.props.title}</h2>
+        : null}
         <Button onClick={this.props.logIndexes}>Log current button index</Button>
-      </Page>
-    );
+        </Page>
+        );
   }
 }
 
 class HomePage extends React.Component {
   render() {
     return (
-      <Page>
+        <Page>
         {this.props.active
-          ? <h2>{this.props.title}</h2>
-          : null}
+        ? <h2>{this.props.title}</h2>
+        : null}
         <Button onClick={this.props.changeTab}>Chang tab via tabbar</Button>
         <Button onClick={this.props.changeButton}>Change tab via segment</Button>
         <Button onClick={this.props.logIndexes}>Log current button index</Button>
-      </Page>
-    );
+        </Page>
+        );
   }
 }
 
@@ -44,8 +42,8 @@ export default class extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      segmentIndex: 0,
-      tabbarIndex: 0
+segmentIndex: 0,
+              tabbarIndex: 0
     };
     this.renderTabs = this.renderTabs.bind(this);
     this.onPostChange = (event) => {
@@ -58,8 +56,8 @@ export default class extends React.Component {
 
   renderTabs(activeIndex, tabbar) {
     return [
-      {
-        content: <HomePage key="page1" title="Page1" active={activeIndex == 0} tabbar={tabbar}
+    {
+content: <HomePage key="page1" title="Page1" active={activeIndex === 0} tabbar={tabbar}
           logIndexes={this.logIndexes}
           changeTab={() => this.setState({ tabbarIndex: 1 })}
           changeButton={() => this.setState({ segmentIndex: 1 })}
@@ -67,13 +65,13 @@ export default class extends React.Component {
         tab: <Tab key="page1" />
       },
       {
-        content: <TabPage key="page2" title="Page2" active={activeIndex == 1} tabbar={tabbar}
+        content: <TabPage key="page2" title="Page2" active={activeIndex === 1} tabbar={tabbar}
           logIndexes={this.logIndexes}
         />,
         tab: <Tab key="page2" />
       },
       {
-        content: <TabPage key="page3" title="Page3" active={activeIndex == 2} tabbar={tabbar}
+        content: <TabPage key="page3" title="Page3" active={activeIndex === 2} tabbar={tabbar}
           logIndexes={this.logIndexes}
         />,
         tab: <Tab key="page3" />

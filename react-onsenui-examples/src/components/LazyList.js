@@ -5,11 +5,9 @@ import ons from 'onsenui';
 
 import {
   Page,
-  BackButton,
   Button,
   ListItem,
   LazyList,
-  Toolbar
 } from 'react-onsenui';
 
 export default class extends React.Component {

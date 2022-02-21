@@ -7,9 +7,6 @@ import {
   ListItem,
   ListHeader,
   ListTitle,
-  Toolbar,
-  ToolbarButton,
-  BackButton,
   Button
 } from 'react-onsenui';
 

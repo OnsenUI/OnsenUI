@@ -1,15 +1,9 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import MyToolbar from './MyToolbar';
 
 import {
   Page,
   Button,
-  Navigator,
-  Toolbar,
-  List,
-  ListItem,
-  Ripple,
   Carousel,
   CarouselItem,
   BottomToolbar,

@@ -9,10 +9,6 @@ import {
 } from 'react-onsenui';
 
 export default class extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
   handleClick() {
     ons.notification.confirm('Do you really want to go back?')
       .then(

@@ -6,7 +6,7 @@ import {Provider, connect} from 'react-redux';
 import reducer from './reducer';
 import {postPush, postPop} from './actions';
 
-import {Page, Toolbar, Button, BackButton, RouterNavigator, RouterUtil} from 'react-onsenui';
+import {Page, Toolbar, BackButton, RouterNavigator} from 'react-onsenui';
 
 const store = createStore(reducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 
