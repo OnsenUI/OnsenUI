@@ -1,4 +1,4 @@
-# vue-onsenui-examples
+# vue-onsen-examples
 
 ## Project setup
 ```
