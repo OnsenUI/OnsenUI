@@ -81,10 +81,10 @@ gulp.task('generate-components', (done) => {
     const outputPath = path.join(__dirname, 'src', 'components', `VOns${camelize('-' + key)}.vue`);
     fs.writeFile(outputPath, generate(key, components[key]), 'utf8', error => {
       if (error) {
-        $.util.log(`Wrong generation of v-ons-${key}:`);
+        console.log(`Wrong generation of v-ons-${key}:`);
         throw error;
       } else {
-        $.util.log(`Generated v-ons-${key}.`);
+        console.log(`Generated v-ons-${key}.`);
       }
     });
   });
