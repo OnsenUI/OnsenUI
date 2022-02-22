@@ -38,24 +38,28 @@ jobs:
           key: v1-onsenui-cache-{{ .Branch }}-{{ checksum "package-lock.json" }}
           paths:
             - ./node_modules
+            - ./vue-onsenui/node_modules
+            - ./vue-onsenui-examples/node_modules
+            - ./react-onsenui/node_modules
+            - ./react-onsenui-examples/node_modules
 
       # bindings/angular1
       # TODO: For now, needs to be before the core build. After 2.11.0, this should be moved below it.
       - restore_cache:
           keys:
-            - v1-angular1-cache-{{ .Branch }}-{{ checksum "bindings/angular1/package-lock.json" }}
+            - v1-angular1-cache-{{ .Branch }}-{{ checksum "onsenui/bindings/angular1/package-lock.json" }}
             - v1-angular1-cache-{{ .Branch }}-
             - v1-angular1-cache-
       - run:
           name: Install AngularJS dependencies and build anglarjs-onsenui
           command: |
-            cd bindings/angular1
+            cd onsenui/bindings/angular1
             npm ci
             npm run build
       - save_cache:
-          key: v1-angular1-cache-{{ .Branch }}-{{ checksum "bindings/angular1/package-lock.json" }}
+          key: v1-angular1-cache-{{ .Branch }}-{{ checksum "onsenui/bindings/angular1/package-lock.json" }}
           paths:
-            - ./bindings/angular1/node_modules
+            - ./onsenui/bindings/angular1/node_modules
 
       # Core build
       - run:
@@ -80,38 +84,16 @@ jobs:
       #      - ./bindings/angular2/node_modules
 
       # bindings/react
-      - restore_cache:
-          keys:
-            - v1-react-cache-{{ .Branch }}-{{ checksum "bindings/react/package-lock.json" }}
-            - v1-react-cache-{{ .Branch }}-
-            - v1-react-cache-
       - run:
-          name: Install React dependencies and build react-onsenui
+          name: Build react-onsenui
           command: |
-            cd bindings/react
-            npm ci
-            npm run build
-      - save_cache:
-          key: v1-react-cache-{{ .Branch }}-{{ checksum "bindings/react/package-lock.json" }}
-          paths:
-            - ./bindings/react/node_modules
+            npm run build:react
 
       # bindings/vue2
-      - restore_cache:
-          keys:
-            - v1-vue2-cache-{{ .Branch }}-{{ checksum "bindings/vue2/package-lock.json" }}
-            - v1-vue2-cache-{{ .Branch }}-
-            - v1-vue2-cache-
       - run:
-          name: Install Vue 2 dependencies and build vue-onsenui for Vue 2
+          name: Build vue-onsenui for Vue 2
           command: |
-            cd bindings/vue2
-            npm ci
-            npm run build
-      - save_cache:
-          key: v1-vue2-cache-{{ .Branch }}-{{ checksum "bindings/vue2/package-lock.json" }}
-          paths:
-            - ./bindings/vue2/node_modules
+            npm run build:vue
 
       ## bindings/vue3
       #- restore_cache:
@@ -133,7 +115,7 @@ jobs:
       # Tests
       - run:
           name: Run OnsenUI Tests
-          command: npm run test
+          command: npm run --prefix onsenui test
 
       #- run: cd bindings/angular1; npm test    # TODO: make tests work again
       #- run: cd bindings/angular2; npm test
