@@ -100,7 +100,7 @@
     "karma-chai-as-promised": "^0.1.2",
     "karma-chai-spies": "^0.1.4",
     "karma-chrome-launcher": "^2.2.0",
-    "karma-coverage": "^1.1.2",
+    "karma-coverage": "^2.2.0",
     "karma-junit-reporter": "^1.2.0",
     "karma-mocha": "^2.0.1",
     "karma-rollup-preprocessor": "^7.0.7",
