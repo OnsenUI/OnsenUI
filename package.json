@@ -1,133 +1,24 @@
 {
-  "name": "onsenui",
-  "version": "2.11.2",
-  "description": "HTML5 Mobile Framework & UI Components",
-  "private": false,
+  "name": "onsenui-monorepo",
+  "version": "1.0.0",
+  "private": true,
+  "description": "",
   "scripts": {
-    "build": "npm run build:umd && npm run build:css",
-    "build:umd": "rollup --config && uglifyjs js/onsenui.js -c -m --comments '/onsenui v/' --output js/onsenui.min.js",
-    "build:css": "npm run build:css:lint && npm run build:css:core && npm run build:css:components && npm run build:css:minify",
-    "build:css:minify": "cleancss 'css/onsenui?(-core).css' --batch --batch-suffix '.min' --inline none && cleancss --batch 'css/{,*-}onsen-css-components.css' --batch-suffix '.min'",
-    "build:css:core": "postcss css/src/onsenui.css css/src/onsenui-core.css --dir css",
-    "build:css:components": "postcss css/css-components-src/{*-,}onsen-css-components.css --base css/css-components-src --dir css",
-    "build:css:lint": "stylelint 'css/?(css-components-)src/**/*.css'",
-    "clean": "rimraf ./js './css/onsenui?(-core)?(.min).css' './css/{*-,}onsen-css-components?(.min).css' 'esm/core-dts-test.{js,ts}'",
-    "docs": "node scripts/build-docs.js",
-    "prebuild": "npm run clean",
-    "serve": "rollup --config --watch & browser-sync start --config bs-config.js",
-    "test": "npm run test:core-dts && npm run test:unit",
-    "test:unit": "node scripts/unit-test.js",
-    "test:core-dts": "node scripts/core-dts-test.js"
+    "build": "npm run --prefix onsenui build",
+    "build:react": "npm run --prefix react-onsenui build",
+    "build:vue": "npm run --prefix vue-onsenui build",
+    "serve": "npm run --prefix onsenui serve",
+    "serve:react": "npm run --prefix react-onsenui-examples start",
+    "serve:vue": "npm run --prefix vue-onsenui-examples serve"
   },
-  "main": "js/onsenui.js",
-  "module": "esm/index.js",
-  "typings": "esm/onsenui.d.ts",
-  "files": [
-    "esm",
-    "!esm/{index.umd.js,**/*.spec.js}",
-    "css",
-    "!css/src",
-    "js"
-  ],
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/OnsenUI/OnsenUI"
-  },
-  "license": "Apache-2.0",
-  "bugs": {
-    "url": "https://github.com/OnsenUI/OnsenUI/issues"
-  },
-  "keywords": [
-    "phonegap",
-    "cordova",
-    "web-components",
-    "react",
-    "components",
-    "angular",
-    "vue",
-    "hybrid",
-    "app",
-    "ui",
-    "mobile",
-    "onsen",
-    "onsenui"
-  ],
-  "homepage": "https://onsen.io/",
-  "browserslist": [
-    "> 1%",
-    "iOS >= 8.0",
-    "Android >= 4.4",
-    "Chrome >= 30",
-    "Safari >= 9",
-    "Firefox ESR",
-    "Opera 12.1"
-  ],
-  "babel": {
-    "presets": [
-      [
-        "@babel/preset-env",
-        {
-          "modules": false
-        }
-      ]
-    ]
-  },
-  "engines": {
-    "node": ">= 4.0.0"
-  },
-  "devDependencies": {
-    "@babel/core": "^7.15.0",
-    "@babel/preset-env": "^7.15.0",
-    "@rollup/plugin-babel": "^5.3.0",
-    "@types/node": "^14.14.11",
-    "ansi-colors": "^4.1.1",
-    "babel-eslint": "^8.2.6",
-    "babel-plugin-angularjs-annotate": "^0.8.2",
-    "browser-sync": "^2.26.13",
-    "chai": "^3.4.1",
-    "chai-as-promised": "^5.2.0",
-    "chai-spies": "^1.0.0",
-    "clean-css-cli": "^5.3.3",
-    "dateformat": "^3.0.3",
-    "eslint": "^7.32.0",
-    "eslint-plugin-import": "^2.23.4",
-    "fancy-log": "^1.3.3",
-    "glob": "^7.1.6",
-    "jsonschema": "^1.4.0",
-    "karma": "^6.3.9",
-    "karma-chai": "^0.1.0",
-    "karma-chai-as-promised": "^0.1.2",
-    "karma-chai-spies": "^0.1.4",
-    "karma-chrome-launcher": "^2.2.0",
-    "karma-coverage": "^1.1.2",
-    "karma-junit-reporter": "^1.2.0",
-    "karma-mocha": "^2.0.1",
-    "karma-rollup-preprocessor": "^7.0.7",
-    "karma-safari-launcher": "^1.0.0",
-    "karma-sauce-launcher": "^4.3.6",
-    "merge-stream": "^1.0.1",
-    "mkpath": "^1.0.0",
-    "mocha": "^4.1.0",
-    "postcss": "^8.3.6",
-    "postcss-cli": "^8.3.1",
-    "postcss-import": "^14.0.2",
-    "postcss-preset-env": "^6.7.0",
-    "postcss-reporter": "^7.0.2",
-    "rimraf": "^3.0.2",
-    "rollup": "^2.56.2",
-    "rollup-plugin-commonjs": "^8.4.1",
-    "rollup-plugin-eslint": "^4.0.0",
-    "rollup-plugin-execute": "^1.1.1",
-    "rollup-plugin-filesize": "^1.5.0",
-    "rollup-plugin-node-resolve": "^3.4.0",
-    "rollup-plugin-progress": "^1.1.2",
-    "rollup-plugin-visualizer": "^0.3.1",
-    "stylelint": "^13.8.0",
-    "typescript": "^3.9.7",
-    "uglify-js": "^3.12.1",
-    "wcdoc": "0.1.19",
-    "webdriverio": "^6.10.5"
-  },
-  "dependencies": {
-  }
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "workspaces": [
+    "./onsenui",
+    "./react-onsenui",
+    "./react-onsenui-examples",
+    "./vue-onsenui",
+    "./vue-onsenui-examples"
+  ]
 }
