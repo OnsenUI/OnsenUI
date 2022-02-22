@@ -118,7 +118,8 @@ docsBuilder.collect({ // Retrive metadata of core elements and objects via `wcdo
   fs.writeFileSync('esm/core-dts-test.ts', testScript, {encoding: 'utf8'});
 
   // Test the d.ts file with the generated script
-  childProcess.spawn('node_modules/.bin/tsc', ['esm/core-dts-test.ts', '--target', 'es6'],
+  // --types flag with no value stops @types files from node_modules from being used
+  childProcess.spawn('npx', ['tsc', 'esm/core-dts-test.ts', '--types', '--target', 'es6'],
     {stdio: 'inherit'} // redirect stdio/stdout/stderr to this process
   )
   .on('error', function (error) {
