@@ -578,7 +578,8 @@ util.defineBooleanProperty = (object, propertyName) => {
       } else {
         this.removeAttribute(propertyName);
       }
-    }
+    },
+    configurable: true
   });
 };
 
@@ -601,7 +602,8 @@ util.defineListenerProperty = (object, eventName) => {
       object.addEventListener(eventName, newHandler);
 
       handler = newHandler;
-    }
+    },
+    configurable: true
   });
 };
 

@@ -9,7 +9,9 @@
     "build:vue": "npm run --prefix vue-onsenui build",
     "serve": "npm run --prefix onsenui serve",
     "serve:react": "npm run --prefix react-onsenui-examples start",
-    "serve:vue": "npm run --prefix vue-onsenui-examples serve"
+    "serve:vue": "npm run --prefix vue-onsenui-examples serve",
+    "test": "npm run --prefix onsenui test",
+    "test:react": "npm run --prefix react-onsenui test"
   },
   "keywords": [],
   "author": "",

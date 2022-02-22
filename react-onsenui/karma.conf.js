@@ -7,11 +7,11 @@ module.exports = function(config) {
     singleRun: true, // just run once by default
     frameworks: [ 'mocha', 'chai' ], // use the mocha test framework
     files: [
-      '../../build/css/onsenui.css',
-      '../../build/css/onsen-css-components.css',
-      {pattern: '../../build/css/font_awesome/**/*', served: true, included: false},
-      {pattern: '../../build/css/ionicons/**/*', served: true, included: false},
-      {pattern: '../../build/css/material-design-iconic-font/**/*', served: true, included: false},
+      '../onsenui/css/onsenui.css',
+      '../onsenui/css/onsen-css-components.css',
+      {pattern: '../onsenui/css/font_awesome/**/*', served: true, included: false},
+      {pattern: '../onsenui/css/ionicons/**/*', served: true, included: false},
+      {pattern: '../onsenui/css/material-design-iconic-font/**/*', served: true, included: false},
       'tests.webpack.js' // just load this file
     ],
     preprocessors: {
@@ -36,7 +36,7 @@ module.exports = function(config) {
             // see webpack 1 upgrade guide
 
             options: {
-              presets: ['env', 'stage-3', 'react'],
+              presets: ['@babel/preset-env', '@babel/preset-react'],
               babelrc: false
             }
             // options for the loader
@@ -59,7 +59,7 @@ module.exports = function(config) {
         alias: {
           // a list of module name aliases
 
-          'onsenui': path.join(__dirname, '../../build/js/onsenui.js')
+          'onsenui': path.join(__dirname, '../onsenui/js/onsenui.js')
           // modules aliases are imported relative to the current context
         }
       },
