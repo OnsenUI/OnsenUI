@@ -10,8 +10,7 @@
     "build:umd": "cross-env NODE_ENV=production rollup -c rollup.config.umd.js",
     "clean": "rimraf ./esm ./dist",
     "helper-json": "(cd ../../ && npm run build:docs) && gulp build:helper-json",
-    "prepublish": "npm run build",
-    "test": "gulp test"
+    "prepublish": "npm run build"
   },
   "main": "dist/vue-onsenui.js",
   "files": [
@@ -70,8 +69,6 @@
     "fs-extra": "^3.0.1",
     "glob": "^7.1.2",
     "gulp": "^4.0.0",
-    "gulp-load-plugins": "^2.0.4",
-    "gulp-util": "^3.0.7",
     "rimraf": "^3.0.2",
     "rollup": "^2.52.3",
     "rollup-plugin-progress": "^1.1.2",
