@@ -64,9 +64,9 @@ export class OnsTabbar {
 
   /**
    * @output swipe
-   * @param {Object} $event
-   * @param {number} $event.index
-   * @param {Object} $event.options
+   * @param $event
+   * @param $event.index
+   * @param $event.options
    * @desc
    *   [en]Triggers when the tabbar is swiped.[/en]
    *   [ja]`<ons-tabbar>`がスワイプされた時に発火します。[/ja]
@@ -124,7 +124,6 @@ export class OnsTab implements OnDestroy {
 
   /**
    * @input page
-   * @type {Type<any>}
    * @desc
    *   [en]Specify the page component that is displayed when the tab is active.[/en]
    *   [ja]読み込むページコンポーネントを指定します。[/ja]

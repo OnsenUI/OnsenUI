@@ -65,8 +65,8 @@ export class OnsSegment implements OnChanges {
 
   /**
    * @output postchange
-   * @param {Object} $event
-   * @param {number} $event.index
+   * @param $event
+   * @param $event.index
    * @desc
    *   [en]Triggers when the index of the active button is changed.[/en]
    *   [ja]`ons-segment`要素のアクティブなボタンのインデックスが変わった時に呼び出されます。[/ja]
@@ -74,7 +74,6 @@ export class OnsSegment implements OnChanges {
 
   /**
    * @input activeIndex
-   * @type {number}
    * @desc
    *   [en]Input index of the active button.[/en]
    *   [ja]アクティブなボタンのインデックスを設定します。[/ja]
@@ -83,7 +82,6 @@ export class OnsSegment implements OnChanges {
 
   /**
    * @output activeIndexChange
-   * @type {number}
    * @desc
    *   [en]Triggers when the index of the active button is changed.[/en]
    *   [ja]アクティブなボタンのインデックスが変化した時に発火します。[/ja]
@@ -92,7 +90,6 @@ export class OnsSegment implements OnChanges {
 
   /**
    * @input tabbar
-   * @type {Type<any>}
    * @desc
    *   [en]The tabbar component to "connect" to the segment. Must be inside the same page. Works only during initialization.[/en]
    *   [ja]このセグメントに紐づけるタブバーを指定します。タブバーはセグメントと同一ページ内に存在する必要があります。初期化時にのみ動作します。[/ja]

@@ -58,7 +58,6 @@ export class OnsSplitterSide {
 
   /**
    * @input page
-   * @type {Type<any>}
    * @desc
    *   [en]Page content.[/en]
    *   [ja]表示するページコンポーネントのクラスを指定します。[/ja]
@@ -134,7 +133,6 @@ export class OnsSplitterSide {
 export class OnsSplitterContent {
   /**
    * @input page
-   * @type {Type<any>}
    * @desc
    *   [en]Specify the page component.[/en]
    *   [ja]表示するページコンポーネントのクラスを指定します。[/ja]

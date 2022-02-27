@@ -42,7 +42,6 @@ export class OnsSwitch implements OnChanges, OnDestroy, ControlValueAccessor {
 
   /**
    * @input value
-   * @type {boolean}
    * @desc
    *   [en]Specify the value of the `<ons-switch>` component.[/en]
    *   [ja]`ons-switch`コンポーネントに設定する値を指定します。[/ja]
@@ -53,7 +52,6 @@ export class OnsSwitch implements OnChanges, OnDestroy, ControlValueAccessor {
 
   /**
    * @output valueChange
-   * @type {string}
    * @desc
    *   [en]Triggers when the value is changed.[/en]
    *   [ja]値が変更された時に発火します。[/ja]

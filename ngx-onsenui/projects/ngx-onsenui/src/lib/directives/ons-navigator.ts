@@ -62,7 +62,6 @@ export class OnsNavigator implements OnDestroy {
 
   /**
    * @input page
-   * @type {Type<any>}
    * @desc
    *   [en]Type of the page component.[/en]
    *   [ja]ページコンポーネントのクラスを指定します。[/ja]
@@ -118,7 +117,7 @@ export class OnsNavigator implements OnDestroy {
       },
       (element: any) => {
         const componentRef = componentRefMap.get(element);
-        
+
         if (componentRef) {
           componentRef.destroy();
           componentRefMap.delete(element);

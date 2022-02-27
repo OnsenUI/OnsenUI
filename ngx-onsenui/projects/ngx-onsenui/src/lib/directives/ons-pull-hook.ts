@@ -68,8 +68,8 @@ export class OnsPullHook implements OnDestroy {
 
   /**
    * @output action
-   * @param {Object} $event
-   * @param {Function} $event.done
+   * @param $event
+   * @param $event.done
    * @desc
    *   [en]Triggers when the page is pulled down.[/en]
    *   [ja]`ons-pull-hook`要素のアクションが必要なときに呼び出されます。[/ja]
@@ -78,8 +78,8 @@ export class OnsPullHook implements OnDestroy {
 
   /**
    * @output changestate
-   * @param {Object} $event
-   * @param {String} $event.state
+   * @param $event
+   * @param $event.state
    * @desc
    *   [en]Triggers when the state is changed.[/en]
    *   [ja]`ons-pull-hook`要素の状態が変わった時に呼び出されます。[/ja]
@@ -88,9 +88,9 @@ export class OnsPullHook implements OnDestroy {
 
   /**
    * @output pull
-   * @param {Object} $event
-   * @param {Number} $event.ratio
-   * @param {Object} $event.options
+   * @param $event
+   * @param $event.ratio
+   * @param $event.options
    * @desc
    *   [en]Triggers whenever the element is pulled.[/en]
    *   [ja]`ons-pull-hook`要素がプルされているときに呼び出されます。[/ja]
