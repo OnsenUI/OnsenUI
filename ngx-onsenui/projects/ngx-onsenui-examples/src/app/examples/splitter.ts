@@ -3,8 +3,7 @@ import {
   OnsenModule,
   NgModule,
   CUSTOM_ELEMENTS_SCHEMA
-} from '../src/ngx-onsenui';
-import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
+} from 'ngx-onsenui';
 
 @Component({
   selector: 'ons-page',
@@ -36,7 +35,7 @@ export class SidePageComponent {
 }
 
 @Component({
-  selector: 'app',
+  selector: 'app-splitter',
   template: `
   <ons-splitter>
     <ons-splitter-side [page]="sidePage" side="left" width="200px" style="border-right: 1px solid #ccc">
@@ -50,18 +49,18 @@ export class SidePageComponent {
   </ons-splitter>
   `
 })
-export class AppComponent {
+export class SplitterComponent {
   sidePage = SidePageComponent;
   contentPage = ContentPageComponent;
 }
 
 @NgModule({
   imports: [OnsenModule],
-  declarations: [AppComponent, SidePageComponent, ContentPageComponent],
-  bootstrap: [AppComponent],
+  exports: [SplitterComponent],
+  declarations: [SplitterComponent, SidePageComponent, ContentPageComponent],
+  bootstrap: [SplitterComponent],
   entryComponents: [SidePageComponent, ContentPageComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-class AppModule { }
+export class SplitterModule { }
 
-platformBrowserDynamic().bootstrapModule(AppModule);

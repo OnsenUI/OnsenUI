@@ -4,8 +4,7 @@ import {
   OnsenModule,
   NgModule,
   CUSTOM_ELEMENTS_SCHEMA
-} from '../src/ngx-onsenui';
-import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
+} from 'ngx-onsenui';
 
 @Component({
   selector: 'ons-page[home]',
@@ -44,7 +43,7 @@ export class PageComponent {
 }
 
 @Component({
-  selector: 'app',
+  selector: 'app-tabbar',
   template: `
     <ons-page>
       <ons-toolbar>
@@ -64,7 +63,7 @@ export class PageComponent {
     </ons-page>
   `
 })
-export class AppComponent {
+export class TabbarComponent {
   home = HomeComponent;
   page = PageComponent;
   index = 0.0;
@@ -78,11 +77,11 @@ export class AppComponent {
 
 @NgModule({
   imports: [OnsenModule],
-  declarations: [AppComponent, HomeComponent, PageComponent],
-  bootstrap: [AppComponent],
+  exports: [TabbarComponent],
+  declarations: [TabbarComponent, HomeComponent, PageComponent],
+  bootstrap: [TabbarComponent],
   entryComponents: [HomeComponent, PageComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-class AppModule { }
+export class TabbarModule { }
 
-platformBrowserDynamic().bootstrapModule(AppModule);

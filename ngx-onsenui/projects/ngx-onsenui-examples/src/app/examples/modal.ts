@@ -8,8 +8,7 @@ import {
   OnsenModule,
   NgModule,
   CUSTOM_ELEMENTS_SCHEMA
-} from '../src/ngx-onsenui';
-import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
+} from 'ngx-onsenui';
 
 @Component({
   template: `
@@ -28,7 +27,7 @@ class MyModalComponent {
 }
 
 @Component({
-  selector: 'app',
+  selector: 'app-modal',
   template: `
   <ons-page class="page">
     <ons-toolbar>
@@ -43,7 +42,7 @@ class MyModalComponent {
   </ons-page>
   `
 })
-export class AppComponent implements OnInit, OnDestroy {
+export class ModalComponent implements OnInit, OnDestroy {
   private _modal: any;
   private _destroyModal: Function;
 
@@ -72,11 +71,11 @@ export class AppComponent implements OnInit, OnDestroy {
 
 @NgModule({
   imports: [OnsenModule],
-  declarations: [AppComponent, MyModalComponent],
-  bootstrap: [AppComponent],
+  exports: [ModalComponent],
+  declarations: [ModalComponent, MyModalComponent],
+  bootstrap: [ModalComponent],
   entryComponents: [MyModalComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-class AppModule { }
+export class ModalModule { }
 
-platformBrowserDynamic().bootstrapModule(AppModule);

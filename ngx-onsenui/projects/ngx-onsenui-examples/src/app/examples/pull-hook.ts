@@ -5,11 +5,10 @@ import {
   ViewChild,
   AfterViewInit,
   CUSTOM_ELEMENTS_SCHEMA
-} from '../src/ngx-onsenui';
-import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
+} from 'ngx-onsenui';
 
 @Component({
-  selector: 'app',
+  selector: 'app-pull-hook',
   template: `
   <ons-page>
     <ons-toolbar>
@@ -31,7 +30,7 @@ import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
   </ons-page>
   `
 })
-export class AppComponent implements AfterViewInit {
+export class PullHookComponent implements AfterViewInit {
 
   message: string = 'Pull down to refresh';
 
@@ -39,7 +38,7 @@ export class AppComponent implements AfterViewInit {
 
   ratio = 0;
 
-  @ViewChild('pullhook', {static: true}) pullhook: any;
+  @ViewChild('pullhook') pullhook: any;
 
   constructor() {
   }
@@ -77,10 +76,10 @@ export class AppComponent implements AfterViewInit {
 
 @NgModule({
   imports: [OnsenModule],
-  declarations: [AppComponent],
-  bootstrap: [AppComponent],
+  exports: [PullHookComponent],
+  declarations: [PullHookComponent],
+  bootstrap: [PullHookComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-class AppModule { }
+export class PullHookModule { }
 
-platformBrowserDynamic().bootstrapModule(AppModule);

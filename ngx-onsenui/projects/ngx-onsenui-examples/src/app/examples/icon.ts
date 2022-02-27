@@ -3,11 +3,10 @@ import {
   OnsenModule,
   NgModule,
   CUSTOM_ELEMENTS_SCHEMA
-} from '../src/ngx-onsenui';
-import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
+} from 'ngx-onsenui';
 
 @Component({
-  selector: 'app',
+  selector: 'app-icon',
   template: `
   <ons-page>
     <ons-toolbar>
@@ -24,17 +23,17 @@ import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
   </ons-page>
     `
 })
-export class AppComponent {
+export class IconComponent {
   constructor() {
   }
 }
 
 @NgModule({
   imports: [OnsenModule],
-  declarations: [AppComponent],
-  bootstrap: [AppComponent],
+  exports: [IconComponent],
+  declarations: [IconComponent],
+  bootstrap: [IconComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-class AppModule { }
+export class IconModule { }
 
-platformBrowserDynamic().bootstrapModule(AppModule);

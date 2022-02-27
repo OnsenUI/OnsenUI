@@ -9,13 +9,12 @@ import {
   OnsenModule,
   NgModule,
   CUSTOM_ELEMENTS_SCHEMA
-} from '../src/ngx-onsenui';
-import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
+} from 'ngx-onsenui';
 
 import * as ons from 'onsenui';
 
 @Component({
-  selector: 'app',
+  selector: 'app-action-sheet',
   template: `
   <ons-page class="page">
     <ons-toolbar>
@@ -44,7 +43,7 @@ import * as ons from 'onsenui';
   </ons-action-sheet>
   `
 })
-export class AppComponent {
+export class ActionSheetComponent {
   animation: string = 'default';
 
   constructor() {
@@ -73,10 +72,10 @@ export class AppComponent {
 
 @NgModule({
   imports: [OnsenModule],
-  declarations: [AppComponent],
-  bootstrap: [AppComponent],
+  exports: [ActionSheetComponent],
+  declarations: [ActionSheetComponent],
+  bootstrap: [ActionSheetComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-class AppModule { }
+export class ActionSheetModule { }
 
-platformBrowserDynamic().bootstrapModule(AppModule);

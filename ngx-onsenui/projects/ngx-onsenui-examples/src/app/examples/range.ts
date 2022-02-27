@@ -4,12 +4,11 @@ import {
   OnsenModule,
   NgModule,
   CUSTOM_ELEMENTS_SCHEMA
-} from '../src/ngx-onsenui';
-import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
+} from 'ngx-onsenui';
 import { FormsModule, ReactiveFormsModule, FormControl } from '@angular/forms';
 
 @Component({
-  selector: 'app',
+  selector: 'app-range',
   template: `
   <ons-page>
     <ons-toolbar>
@@ -32,7 +31,7 @@ import { FormsModule, ReactiveFormsModule, FormControl } from '@angular/forms';
   </ons-page>
   `
 })
-export class AppComponent {
+export class RangeComponent {
   value: string = '10';
   rangeForm: FormControl;
   reactiveStartValue: 89;
@@ -44,10 +43,10 @@ export class AppComponent {
 
 @NgModule({
   imports: [OnsenModule, FormsModule, ReactiveFormsModule],
-  declarations: [AppComponent],
-  bootstrap: [AppComponent],
+  exports: [RangeComponent],
+  declarations: [RangeComponent],
+  bootstrap: [RangeComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-class AppModule { }
+export class RangeModule { }
 
-platformBrowserDynamic().bootstrapModule(AppModule);

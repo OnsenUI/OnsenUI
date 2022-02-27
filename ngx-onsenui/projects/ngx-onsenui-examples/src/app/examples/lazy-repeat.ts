@@ -6,11 +6,10 @@ import {
   OnsenModule,
   NgModule,
   CUSTOM_ELEMENTS_SCHEMA
-} from '../src/ngx-onsenui';
-import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
+} from 'ngx-onsenui';
 
 @Component({
-  selector: 'app',
+  selector: 'app-lazy-repeat',
   template: `
   <ons-page class="page">
     <ons-toolbar>
@@ -32,10 +31,10 @@ import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
   </ons-page>
   `
 })
-export class AppComponent {
+export class LazyRepeatComponent {
   public items: any[];
 
-  @ViewChild(OnsLazyRepeat, {static: false}) lazyRepeat: OnsLazyRepeat;
+  @ViewChild(OnsLazyRepeat) lazyRepeat: OnsLazyRepeat;
 
   constructor() {
     this.items = [];
@@ -56,10 +55,10 @@ export class AppComponent {
 
 @NgModule({
   imports: [OnsenModule],
-  declarations: [AppComponent],
-  bootstrap: [AppComponent],
+  exports: [LazyRepeatComponent],
+  declarations: [LazyRepeatComponent],
+  bootstrap: [LazyRepeatComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-class AppModule { }
+export class LazyRepeatModule { }
 
-platformBrowserDynamic().bootstrapModule(AppModule);

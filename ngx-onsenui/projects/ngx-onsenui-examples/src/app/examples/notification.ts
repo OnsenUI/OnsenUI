@@ -4,11 +4,10 @@ import {
   OnsenModule,
   NgModule,
   CUSTOM_ELEMENTS_SCHEMA
-} from '../src/ngx-onsenui';
-import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
+} from 'ngx-onsenui';
 
 @Component({
-  selector: 'app',
+  selector: 'app-notification',
   template: `
   <ons-page>
     <ons-toolbar>
@@ -28,7 +27,7 @@ import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
   </ons-page>
   `
 })
-export class AppComponent {
+export class NotificationComponent {
   constructor() { }
 
   alert() {
@@ -63,10 +62,10 @@ export class AppComponent {
 
 @NgModule({
   imports: [OnsenModule],
-  declarations: [AppComponent],
-  bootstrap: [AppComponent],
+  exports: [NotificationComponent],
+  declarations: [NotificationComponent],
+  bootstrap: [NotificationComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-class AppModule { }
+export class NotificationModule { }
 
-platformBrowserDynamic().bootstrapModule(AppModule);

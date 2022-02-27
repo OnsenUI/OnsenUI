@@ -3,13 +3,12 @@ import {
   OnsenModule,
   NgModule,
   CUSTOM_ELEMENTS_SCHEMA
-} from '../src/ngx-onsenui';
-import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
+} from 'ngx-onsenui';
 
 declare var alert: Function;
 
 @Component({
-  selector: 'app',
+  selector: 'app-button',
   template: `
   <ons-page>
     <ons-toolbar>
@@ -24,7 +23,7 @@ declare var alert: Function;
   </ons-page>
     `
 })
-export class AppComponent {
+export class ButtonComponent {
   constructor() {
   }
 
@@ -35,10 +34,10 @@ export class AppComponent {
 
 @NgModule({
   imports: [OnsenModule],
-  declarations: [AppComponent],
-  bootstrap: [AppComponent],
+  exports: [ButtonComponent],
+  declarations: [ButtonComponent],
+  bootstrap: [ButtonComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-class AppModule { }
+export class ButtonModule { }
 
-platformBrowserDynamic().bootstrapModule(AppModule);

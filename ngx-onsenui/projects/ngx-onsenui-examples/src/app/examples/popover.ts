@@ -8,8 +8,7 @@ import {
   OnsenModule,
   NgModule,
   CUSTOM_ELEMENTS_SCHEMA
-} from '../src/ngx-onsenui';
-import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
+} from 'ngx-onsenui';
 
 @Component({
   template: `
@@ -23,7 +22,7 @@ import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
 })
 class MyPopoverComponent implements OnInit {
 
-  @ViewChild('popover', {static: true}) _popover: any;
+  @ViewChild('popover') _popover: any;
 
   message = '';
 
@@ -41,7 +40,7 @@ class MyPopoverComponent implements OnInit {
 }
 
 @Component({
-  selector: 'app',
+  selector: 'app-popover',
   template: `
   <ons-page class="page">
     <ons-toolbar>
@@ -56,7 +55,7 @@ class MyPopoverComponent implements OnInit {
   </ons-page>
   `
 })
-export class AppComponent implements OnInit, OnDestroy {
+export class PopoverComponent implements OnInit, OnDestroy {
   private _popover: any;
   private _destroyPopover: Function;
 
@@ -84,11 +83,11 @@ export class AppComponent implements OnInit, OnDestroy {
 
 @NgModule({
   imports: [OnsenModule],
-  declarations: [AppComponent, MyPopoverComponent],
-  bootstrap: [AppComponent],
+  exports: [PopoverComponent],
+  declarations: [PopoverComponent, MyPopoverComponent],
+  bootstrap: [PopoverComponent],
   entryComponents: [MyPopoverComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-class AppModule { }
+export class PopoverModule { }
 
-platformBrowserDynamic().bootstrapModule(AppModule);

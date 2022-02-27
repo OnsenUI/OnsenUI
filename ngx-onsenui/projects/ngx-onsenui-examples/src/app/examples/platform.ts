@@ -4,12 +4,11 @@ import {
   OnsenModule,
   NgModule,
   CUSTOM_ELEMENTS_SCHEMA
-} from '../src/ngx-onsenui';
-import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
+} from 'ngx-onsenui';
 
 
 @Component({
-  selector: 'app',
+  selector: 'app-platform',
   template: `
   <ons-page>
     <ons-toolbar>
@@ -40,7 +39,7 @@ import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
   </ons-page>
   `
 })
-export class AppComponent {
+export class PlatformComponent {
   public platform = onsPlatform;
   constructor() { 
   }
@@ -48,10 +47,10 @@ export class AppComponent {
 
 @NgModule({
   imports: [OnsenModule],
-  declarations: [AppComponent],
-  bootstrap: [AppComponent],
+  exports: [PlatformComponent],
+  declarations: [PlatformComponent],
+  bootstrap: [PlatformComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-class AppModule { }
+export class PlatformModule { }
 
-platformBrowserDynamic().bootstrapModule(AppModule);

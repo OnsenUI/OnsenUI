@@ -4,12 +4,11 @@ import {
   OnsenModule,
   NgModule,
   CUSTOM_ELEMENTS_SCHEMA
-} from '../src/ngx-onsenui';
-import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+} from 'ngx-onsenui';
 import { FormsModule, ReactiveFormsModule, FormControl } from '@angular/forms';
 
 @Component({
-  selector: 'app',
+  selector: 'app-select',
   template: `
   <ons-page>
     <ons-toolbar>
@@ -37,7 +36,7 @@ import { FormsModule, ReactiveFormsModule, FormControl } from '@angular/forms';
   </ons-page>
   `
 })
-export class AppComponent {
+export class SelectComponent {
   selectedModifier: string = 'basic';
   modifiers = [
     {value: 'basic', label: 'Basic'},
@@ -54,10 +53,10 @@ export class AppComponent {
 
 @NgModule({
   imports: [OnsenModule, FormsModule, ReactiveFormsModule],
-  declarations: [AppComponent],
-  bootstrap: [AppComponent],
+  exports: [SelectComponent],
+  declarations: [SelectComponent],
+  bootstrap: [SelectComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-class AppModule { }
+export class SelectModule { }
 
-platformBrowserDynamic().bootstrapModule(AppModule);

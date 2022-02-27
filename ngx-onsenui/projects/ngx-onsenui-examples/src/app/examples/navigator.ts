@@ -6,8 +6,7 @@ import {
   OnsenModule,
   NgModule,
   CUSTOM_ELEMENTS_SCHEMA
-} from '../src/ngx-onsenui';
-import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
+} from 'ngx-onsenui';
 
 @Component({
   selector: 'ons-page',
@@ -59,33 +58,33 @@ export class DefaultPageComponent {
 
   constructor(private _navigator: OnsNavigator) {
   }
-  
+
     push() {
       this._navigator.nativeElement.pushPage(PageComponent, {data: {hoge: "fuga"}});
     }
-    
+
     pushWithNoAnimation() {
       this._navigator.nativeElement.pushPage(PageComponent, {animation: 'none', data: {hoge: "fuga"}});
     }
 }
 
 @Component({
-  selector: 'app',
+  selector: 'app-navigator',
   template: `
   <ons-navigator animation="slide" swipeable [page]="page"></ons-navigator>
   `
 })
-export class AppComponent {
+export class NavigatorComponent {
   page = DefaultPageComponent
 }
 
 @NgModule({
   imports: [OnsenModule],
-  declarations: [AppComponent, DefaultPageComponent, PageComponent],
+  exports: [NavigatorComponent],
+  declarations: [NavigatorComponent, DefaultPageComponent, PageComponent],
   entryComponents: [DefaultPageComponent, PageComponent],
-  bootstrap: [AppComponent],
+  bootstrap: [NavigatorComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-class AppModule { }
+export class NavigatorModule { }
 
-platformBrowserDynamic().bootstrapModule(AppModule);

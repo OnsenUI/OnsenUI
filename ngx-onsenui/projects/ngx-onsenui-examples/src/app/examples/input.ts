@@ -3,12 +3,11 @@ import {
   OnsenModule,
   NgModule,
   CUSTOM_ELEMENTS_SCHEMA
-} from '../src/ngx-onsenui';
-import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
+} from 'ngx-onsenui';
 import { ReactiveFormsModule, FormControl, FormGroup, FormsModule} from '@angular/forms';
 
 @Component({
-  selector: 'app',
+  selector: 'app-input',
   template: `
   <ons-page>
     <ons-toolbar>
@@ -49,7 +48,7 @@ import { ReactiveFormsModule, FormControl, FormGroup, FormsModule} from '@angula
   </ons-page>
   `
 })
-export class AppComponent{
+export class InputComponent{
   exampleForm: FormGroup;
   target: string = '';
 
@@ -63,10 +62,10 @@ export class AppComponent{
 
 @NgModule({
   imports: [OnsenModule, FormsModule, ReactiveFormsModule],
-  declarations: [AppComponent],
-  bootstrap: [AppComponent],
+  exports: [InputComponent],
+  declarations: [InputComponent],
+  bootstrap: [InputComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-class AppModule { }
+export class InputModule { }
 
-platformBrowserDynamic().bootstrapModule(AppModule);

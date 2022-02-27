@@ -5,12 +5,11 @@ import {
   Directive,
   NgModule,
   CUSTOM_ELEMENTS_SCHEMA
-} from '../src/ngx-onsenui';
-import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
+} from 'ngx-onsenui';
 import { FormsModule, ReactiveFormsModule, FormControl } from '@angular/forms';
 
 @Component({
-  selector: 'app',
+  selector: 'app-switch',
   template: `
   <ons-page>
     <ons-toolbar>
@@ -33,7 +32,7 @@ import { FormsModule, ReactiveFormsModule, FormControl } from '@angular/forms';
   </ons-page>
     `
 })
-export class AppComponent {
+export class SwitchComponent {
   target: boolean = true;
   switchControl: FormControl;
 
@@ -44,10 +43,10 @@ export class AppComponent {
 
 @NgModule({
   imports: [OnsenModule, FormsModule, ReactiveFormsModule],
-  declarations: [AppComponent],
-  bootstrap: [AppComponent],
+  exports: [SwitchComponent],
+  declarations: [SwitchComponent],
+  bootstrap: [SwitchComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-class AppModule { }
+export class SwitchModule { }
 
-platformBrowserDynamic().bootstrapModule(AppModule);

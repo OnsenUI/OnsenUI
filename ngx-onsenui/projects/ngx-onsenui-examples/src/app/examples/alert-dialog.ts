@@ -9,8 +9,7 @@ import {
   OnsenModule,
   NgModule,
   CUSTOM_ELEMENTS_SCHEMA
-} from '../src/ngx-onsenui';
-import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
+} from 'ngx-onsenui';
 
 @Component({
   template: `
@@ -37,7 +36,7 @@ class MyAlertDialogComponent {
 }
 
 @Component({
-  selector: 'app',
+  selector: 'app-alert-dialog',
   template: `
   <ons-page class="page">
     <ons-toolbar>
@@ -51,7 +50,7 @@ class MyAlertDialogComponent {
   </ons-page>
   `
 })
-export class AppComponent implements AfterViewInit, OnDestroy {
+export class AlertDialogComponent implements AfterViewInit, OnDestroy {
   private _alert: any;
   private _destroyAlert: Function;
 
@@ -80,11 +79,11 @@ export class AppComponent implements AfterViewInit, OnDestroy {
 
 @NgModule({
   imports: [OnsenModule],
-  declarations: [AppComponent, MyAlertDialogComponent],
-  bootstrap: [AppComponent],
+  exports: [AlertDialogComponent],
+  declarations: [AlertDialogComponent, MyAlertDialogComponent],
+  bootstrap: [AlertDialogComponent],
   entryComponents: [MyAlertDialogComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-class AppModule { }
+export class AlertDialogModule { }
 
-platformBrowserDynamic().bootstrapModule(AppModule);

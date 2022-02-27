@@ -3,11 +3,10 @@ import {
   OnsenModule,
   NgModule,
   CUSTOM_ELEMENTS_SCHEMA
-} from '../src/ngx-onsenui';
-import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
+} from 'ngx-onsenui';
 
 @Component({
-  selector: 'app',
+  selector: 'app-fab',
   template: `
   <ons-page>
     <ons-toolbar>
@@ -47,7 +46,7 @@ import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
   </ons-page>
   `
 })
-export class AppComponent{
+export class FabComponent{
 
   onClick() {
     alert('Clicked!');
@@ -56,10 +55,10 @@ export class AppComponent{
 
 @NgModule({
   imports: [OnsenModule],
-  declarations: [AppComponent],
-  bootstrap: [AppComponent],
+  exports: [FabComponent],
+  declarations: [FabComponent],
+  bootstrap: [FabComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-class AppModule { }
+export class FabModule { }
 
-platformBrowserDynamic().bootstrapModule(AppModule);

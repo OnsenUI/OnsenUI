@@ -3,12 +3,11 @@ import {
   OnsenModule,
   NgModule,
   CUSTOM_ELEMENTS_SCHEMA
-} from '../src/ngx-onsenui';
-import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
+} from 'ngx-onsenui';
 import { FormsModule, ReactiveFormsModule, FormControl } from '@angular/forms';
 
 @Component({
-  selector: 'app',
+  selector: 'app-search-input',
   template: `
   <ons-page>
     <ons-toolbar>
@@ -35,7 +34,7 @@ import { FormsModule, ReactiveFormsModule, FormControl } from '@angular/forms';
   </ons-page>
   `
 })
-export class AppComponent{
+export class SearchInputComponent{
   target: string = '';
   searchControl: FormControl;
 
@@ -46,10 +45,10 @@ export class AppComponent{
 
 @NgModule({
   imports: [OnsenModule, FormsModule, ReactiveFormsModule],
-  declarations: [AppComponent],
-  bootstrap: [AppComponent],
+  exports: [SearchInputComponent],
+  declarations: [SearchInputComponent],
+  bootstrap: [SearchInputComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-class AppModule { }
+export class SearchInputModule { }
 
-platformBrowserDynamic().bootstrapModule(AppModule);
