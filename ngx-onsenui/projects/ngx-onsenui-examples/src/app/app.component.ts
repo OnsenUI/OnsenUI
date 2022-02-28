@@ -122,11 +122,11 @@ export class ExampleViewComponent {
   @ViewChild('container', {read: ViewContainerRef}) container: ViewContainerRef;
 
   constructor(private params: Params, private resolver: ComponentFactoryResolver) {
-    this.factory = resolver.resolveComponentFactory(params.data.page);
   }
 
   ngAfterViewInit() {
-    this.container.createComponent(this.factory);
+    const factory = this.resolver.resolveComponentFactory(this.params.data.page);
+    this.container.createComponent(factory);
   }
 }
 
