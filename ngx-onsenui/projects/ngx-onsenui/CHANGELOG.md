@@ -11,8 +11,6 @@ dev
 ### Misc
 
  * Depend on OnsenUI ~v2.11.2
- * Support Angular 8+.
- * Support ng add schematic for Angular CLI ([#2566](https://github.com/OnsenUI/OnsenUI/issues/2566)).
 
 7.0.0
 ---
