@@ -3,7 +3,7 @@ jobs:
   build:
     working_directory: ~/working_directory
     docker:
-      - image: circleci/node:16.13.1-browsers
+      - image: circleci/node:14.18.2-browsers
         env:
           - DISPLAY=:99
           - CHROME_BIN=/usr/bin/google-chrome
@@ -66,22 +66,22 @@ jobs:
           name: Building Onsen UI core
           command: npm run build
 
-      ## bindings/angular2
-      #- restore_cache:
-      #    keys:
-      #      - v1-angular2-cache-{{ .Branch }}-{{ checksum "bindings/angular2/package-lock.json" }}
-      #      - v1-angular2-cache-{{ .Branch }}-
-      #      - v1-angular2-cache-
-      #- run:
-      #    name: Install Angular 2 dependencies and build ngx-onsenui
-      #    command: |
-      #      cd bindings/angular2
-      #      npm ci
-      #      npm run build-dist
-      #- save_cache:
-      #    key: v1-angular2-cache-{{ .Branch }}-{{ checksum "bindings/angular2/package-lock.json" }}
-      #    paths:
-      #      - ./bindings/angular2/node_modules
+      # ngx-onsenui
+      - restore_cache:
+          keys:
+            - v1-angular2-cache-{{ .Branch }}-{{ checksum "ngx-onsenui/package-lock.json" }}
+            - v1-angular2-cache-{{ .Branch }}-
+            - v1-angular2-cache-
+      - run:
+          name: Install Angular 2 dependencies and build ngx-onsenui
+          command: |
+            cd ngx-onsenui
+            npm ci
+            npm run build
+      - save_cache:
+          key: v1-angular2-cache-{{ .Branch }}-{{ checksum "ngx-onsenui/package-lock.json" }}
+          paths:
+            - ./ngx-onsenui/node_modules
 
       # bindings/react
       - run:

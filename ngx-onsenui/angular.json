@@ -1,0 +1,143 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "ngx-onsenui": {
+      "root": "projects/ngx-onsenui",
+      "sourceRoot": "projects/ngx-onsenui/src",
+      "projectType": "library",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/ngx-onsenui/tsconfig.lib.json",
+            "project": "projects/ngx-onsenui/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/ngx-onsenui/src/test.ts",
+            "tsConfig": "projects/ngx-onsenui/tsconfig.spec.json",
+            "karmaConfig": "projects/ngx-onsenui/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/ngx-onsenui/tsconfig.lib.json",
+              "projects/ngx-onsenui/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "ngx-onsenui-examples": {
+      "root": "projects/ngx-onsenui-examples/",
+      "sourceRoot": "projects/ngx-onsenui-examples/src",
+      "projectType": "application",
+      "prefix": "app",
+      "schematics": {},
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/ngx-onsenui-examples",
+            "index": "projects/ngx-onsenui-examples/src/index.html",
+            "main": "projects/ngx-onsenui-examples/src/main.ts",
+            "polyfills": "projects/ngx-onsenui-examples/src/polyfills.ts",
+            "tsConfig": "projects/ngx-onsenui-examples/tsconfig.app.json",
+            "assets": [
+              "projects/ngx-onsenui-examples/src/favicon.ico",
+              "projects/ngx-onsenui-examples/src/assets"
+            ],
+            "styles": [
+              "projects/ngx-onsenui-examples/src/styles.css"
+            ],
+            "scripts": [],
+            "es5BrowserSupport": true
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/ngx-onsenui-examples/src/environments/environment.ts",
+                  "with": "projects/ngx-onsenui-examples/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "ngx-onsenui-examples:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "ngx-onsenui-examples:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "ngx-onsenui-examples:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/ngx-onsenui-examples/src/test.ts",
+            "polyfills": "projects/ngx-onsenui-examples/src/polyfills.ts",
+            "tsConfig": "projects/ngx-onsenui-examples/tsconfig.spec.json",
+            "karmaConfig": "projects/ngx-onsenui-examples/karma.conf.js",
+            "styles": [
+              "projects/ngx-onsenui-examples/src/styles.css"
+            ],
+            "scripts": [],
+            "assets": [
+              "projects/ngx-onsenui-examples/src/favicon.ico",
+              "projects/ngx-onsenui-examples/src/assets"
+            ]
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/ngx-onsenui-examples/tsconfig.app.json",
+              "projects/ngx-onsenui-examples/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "defaultProject": "ngx-onsenui"
+}
