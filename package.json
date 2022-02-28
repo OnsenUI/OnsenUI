@@ -18,7 +18,6 @@
   "license": "ISC",
   "workspaces": [
     "./onsenui",
-    "./ngx-onsenui",
     "./react-onsenui",
     "./react-onsenui-examples",
     "./vue-onsenui",
