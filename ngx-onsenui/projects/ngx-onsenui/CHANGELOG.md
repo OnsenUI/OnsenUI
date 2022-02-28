@@ -11,6 +11,7 @@ dev
 ### Misc
 
  * Depend on OnsenUI ~v2.11.2
+ * Package directory structure has changed to follow the Angular Package Format.
 
 7.0.0
 ---
