@@ -4,11 +4,15 @@ CHANGELOG
 dev
 ---
 
-### New Features
+### Bug Fixes
 
+ * Fix 'setImmediate is not defined' bug ([#2735](https://github.com/OnsenUI/OnsenUI/pull/2735)).
+
+### Misc
+
+ * Depend on OnsenUI ~v2.11.2
  * Support Angular 8+.
  * Support ng add schematic for Angular CLI ([#2566](https://github.com/OnsenUI/OnsenUI/issues/2566)).
- * Fix 'setImmediate is not defined' bug ([#2735](https://github.com/OnsenUI/OnsenUI/pull/2735)).
 
 7.0.0
 ---
@@ -21,14 +25,14 @@ dev
  * Changed `OnsPullHook` directive to emit `pull` output ([#2457](https://github.com/OnsenUI/OnsenUI/issues/2457)).
 
 ### Misc
- 
+
  * Removed `ReflectiveInjector`s in favor of `StaticInjector`s.
 
 4.2.2
 ---
 
 ### Misc
- 
+
  * Depend on OnsenUI ~v2.10.0
 
 4.2.1
