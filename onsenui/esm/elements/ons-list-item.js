@@ -418,8 +418,10 @@ export default class ListItemElement extends BaseElement {
   }
 
   _onClickTop() {
-    this.toggleExpansion();
-    this.dispatchEvent(new Event('expansion'));
+    if (!this._expanding) {
+      this.toggleExpansion();
+      this.dispatchEvent(new Event('expansion'));
+    }
   }
 
   _onDrag(event) {

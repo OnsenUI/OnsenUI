@@ -141,6 +141,14 @@ describe('OnsListItemElement', () => {
       listItem.expanded = true;
       listItem.remove();
     });
+
+    it('does not toggle expanded when clicked if already expanding', () => {
+      document.body.appendChild(listItem);
+      listItem._expanding = true;
+      listItem.querySelector('.top').click();
+      expect(listItem.expanded).to.be.false;
+      listItem.remove();
+    });
   });
 
   describe('#_onDrag()', () => {
