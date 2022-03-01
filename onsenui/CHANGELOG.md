@@ -20,6 +20,7 @@ dev
  * ons-splitter-side: Stop creating new swipe reveals when connected if one already exists.
  * core: DOMContentReady and deviceready event listeners are removed after being invoked once. ([#2886](https://github.com/OnsenUI/OnsenUI/pull/2886)).
  * ons-button: Allow form submission on submit key keypress. ([#2857](https://github.com/OnsenUI/OnsenUI/issues/2857)).
+ * ons-list-item: `expansion` event is only omitted when the expandable list item is clicked, not when the `expanded` property is set.
 
  ### New Features
 

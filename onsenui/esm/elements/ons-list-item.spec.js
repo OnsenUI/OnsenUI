@@ -123,6 +123,24 @@ describe('OnsListItemElement', () => {
       const ignored = listItem.querySelector('#ignored');
       expect(ignored).to.be.null;
     });
+
+    it("emits an 'expansion' event when the top part is clicked", () => {
+      const promise = new Promise(resolve => {
+        listItem.addEventListener('expansion', resolve, {once: true});
+      });
+
+      document.body.appendChild(listItem);
+      listItem.querySelector('.top').click();
+      listItem.remove();
+      return expect(promise).to.eventually.be.fulfilled;
+    });
+
+    it("does not emit an 'expansion' event when the expanded property is set", () => {
+      listItem.addEventListener('expansion', assert.fail, {once: true});
+      document.body.appendChild(listItem);
+      listItem.expanded = true;
+      listItem.remove();
+    });
   });
 
   describe('#_onDrag()', () => {
