@@ -20,7 +20,6 @@ dev
  * ons-splitter-side: Stop creating new swipe reveals when connected if one already exists.
  * core: DOMContentReady and deviceready event listeners are removed after being invoked once. ([#2886](https://github.com/OnsenUI/OnsenUI/pull/2886)).
  * ons-button: Allow form submission on submit key keypress. ([#2857](https://github.com/OnsenUI/OnsenUI/issues/2857)).
- * ons-list-item: `expansion` event is only omitted when the expandable list item is clicked, not when the `expanded` property is set.
  * ons-list-item: Clicks are ignored while the expandable list item is expanding/contracting.
 
  ### New Features
@@ -33,6 +32,7 @@ dev
  * ons-speed-dial: Calling event.preventDefault for click events can be used to prevent speed dial opening/closing.
  * ons-splitter-side: Added `swipeable` property.
  * ons-list-item: Added `expandable` attribute and property. ([#2896](https://github.com/OnsenUI/OnsenUI/issues/2896)).
+ * ons-list-item: Added `expand` event that fires when an expandable list item is clicked and expands or contracts.
 
  ### Misc
 

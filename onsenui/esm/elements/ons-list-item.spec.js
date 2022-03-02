@@ -124,9 +124,9 @@ describe('OnsListItemElement', () => {
       expect(ignored).to.be.null;
     });
 
-    it("emits an 'expansion' event when the top part is clicked", () => {
+    it("emits an 'expand' event when the top part is clicked", () => {
       const promise = new Promise(resolve => {
-        listItem.addEventListener('expansion', resolve, {once: true});
+        listItem.addEventListener('expand', resolve, {once: true});
       });
 
       document.body.appendChild(listItem);
@@ -135,8 +135,8 @@ describe('OnsListItemElement', () => {
       return expect(promise).to.eventually.be.fulfilled;
     });
 
-    it("does not emit an 'expansion' event when the expanded property is set", () => {
-      listItem.addEventListener('expansion', assert.fail, {once: true});
+    it("does not emit an 'expand' event when the expanded property is set", () => {
+      listItem.addEventListener('expand', assert.fail, {once: true});
       document.body.appendChild(listItem);
       listItem.expanded = true;
       listItem.remove();
