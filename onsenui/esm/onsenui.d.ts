@@ -916,6 +916,11 @@ declare namespace ons {
      * @description A boolean value that specifies if the button is disabled or not.
      */
     disabled: boolean;
+
+    /**
+     * @description A boolean value that specifies if the button has a ripple effect or not.
+     */
+    ripple: boolean;
   }
 
   interface OnsAlertDialogButtonElement extends HTMLElement {

@@ -56,6 +56,18 @@ export default class BaseButtonElement extends BaseElement {
     return this.hasAttribute('disabled');
   }
 
+  get ripple() {
+    return this.hasAttribute('ripple');
+  }
+
+  set ripple(value) {
+    if (value) {
+      this.setAttribute('ripple', '');
+    } else {
+      this.removeAttribute('ripple');
+    }
+  }
+
   get _icon() {
     return util.findChild(this, 'ons-icon');
   }
