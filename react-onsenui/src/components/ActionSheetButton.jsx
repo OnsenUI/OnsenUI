@@ -1,5 +1,6 @@
 import SimpleWrapper from './SimpleWrapper.jsx';
 import PropTypes from 'prop-types';
+import 'onsenui/esm/elements/ons-action-sheet-button';
 
 /**
  * @original ons-action-sheet-button

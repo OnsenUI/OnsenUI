@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import BaseInput from './BaseInput.jsx';
+import 'onsenui/esm/elements/ons-search-input';
 
 /**
  * @original ons-search-input

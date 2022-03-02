@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 import SimpleWrapper from './SimpleWrapper.jsx';
+import 'onsenui/esm/elements/ons-splitter';
 
 /**
  * @original ons-splitter

@@ -1,5 +1,6 @@
 import SimpleWrapper from './SimpleWrapper.jsx';
 import PropTypes from 'prop-types';
+import 'onsenui/esm/elements/ons-card';
 
 /**
  * @original ons-card

@@ -1,4 +1,5 @@
 import SimpleWrapper from './SimpleWrapper.jsx';
+import 'onsenui/esm/elements/ons-splitter-content';
 /**
  * @original ons-splitter-content
  * @category menu

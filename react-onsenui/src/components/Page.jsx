@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 import BasicComponent from './BasicComponent.jsx';
 import Util from './Util.js';
+import 'onsenui/esm/elements/ons-page';
 
 /**
  * @original ons-page

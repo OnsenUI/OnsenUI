@@ -1,6 +1,7 @@
 import BaseDialog from './BaseDialog.jsx';
 import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
+import 'onsenui/esm/elements/ons-popover';
 
 /**
  * @original ons-popover

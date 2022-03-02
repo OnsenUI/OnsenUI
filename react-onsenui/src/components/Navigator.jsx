@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import BasicComponent from './BasicComponent.jsx';
 import Util from './Util.js';
+import 'onsenui/esm/elements/ons-navigator';
 
 /**
  * @original ons-navigator

@@ -3,6 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {findDOMNode} from 'react-dom';
 import Util from './Util.js';
+import 'onsenui/esm/elements/ons-segment';
 
 /**
  * @original ons-segment

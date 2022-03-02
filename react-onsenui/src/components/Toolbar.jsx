@@ -2,6 +2,7 @@ import SimpleWrapper from './SimpleWrapper.jsx';
 import ReactDOM from 'react-dom';
 
 import PropTypes from 'prop-types';
+import 'onsenui/esm/elements/ons-toolbar';
 
 /**
  * @original ons-toolbar

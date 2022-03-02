@@ -1,6 +1,7 @@
 import BaseDialog from './BaseDialog.jsx';
 
 import PropTypes from 'prop-types';
+import 'onsenui/esm/elements/ons-dialog';
 
 /**
  * @original ons-dialog

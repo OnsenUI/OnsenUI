@@ -1,6 +1,7 @@
 import SimpleWrapper from './SimpleWrapper.jsx';
 import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
+import 'onsenui/esm/elements/ons-back-button';
 
 /**
  * @original ons-back-button

@@ -2,6 +2,7 @@ import SimpleWrapper from './SimpleWrapper.jsx';
 import React from 'react';
 import PropTypes from 'prop-types';
 import Util from './Util.js';
+import 'onsenui/esm/elements/ons-icon';
 
 /**
  * @original ons-icon

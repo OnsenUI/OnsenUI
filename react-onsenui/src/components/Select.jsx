@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import BaseInput from './BaseInput.jsx';
 import Util from './Util.js';
+import 'onsenui/esm/elements/ons-select';
 
 /**
  * @original ons-select

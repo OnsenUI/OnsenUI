@@ -1,6 +1,7 @@
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import SimpleWrapper from './SimpleWrapper.jsx';
+import 'onsenui/esm/elements/ons-list-item';
 
 /**
  * @original ons-list-item

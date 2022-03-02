@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import BasicComponent from './BasicComponent.jsx';
+import 'onsenui/esm/elements/ons-lazy-repeat';
 
 /**
  * @original ons-lazy-repeat

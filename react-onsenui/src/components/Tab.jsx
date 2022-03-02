@@ -1,4 +1,5 @@
 import SimpleWrapper from './SimpleWrapper.jsx';
+import 'onsenui/esm/elements/ons-tab';
 
 /**
  * @original ons-tab

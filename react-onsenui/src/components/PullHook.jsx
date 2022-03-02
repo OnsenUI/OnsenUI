@@ -3,6 +3,7 @@ import BasicComponent from './BasicComponent.jsx';
 import React from 'react';
 import PropTypes from 'prop-types';
 import Util from './Util.js';
+import 'onsenui/esm/elements/ons-pull-hook';
 
 /**
  * @original ons-pull-hook

@@ -1,6 +1,7 @@
 import SimpleWrapper from './SimpleWrapper.jsx';
 import PropTypes from 'prop-types';
 import {findDOMNode} from 'react-dom';
+import 'onsenui/esm/elements/ons-gesture-detector';
 
 /**
  * @original ons-gesture-detector
