@@ -21,6 +21,7 @@ dev
  * core: DOMContentReady and deviceready event listeners are removed after being invoked once. ([#2886](https://github.com/OnsenUI/OnsenUI/pull/2886)).
  * ons-button: Allow form submission on submit key keypress. ([#2857](https://github.com/OnsenUI/OnsenUI/issues/2857)).
  * ons-list-item: Clicks are ignored while the expandable list item is expanding/contracting.
+ * ons-button, ons-alert-dialog-button, ons-toolbar-button, ons-action-sheet-button: Ensure ons-ripple is imported when button is imported.
 
  ### New Features
 

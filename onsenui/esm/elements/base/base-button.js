@@ -22,6 +22,8 @@ import contentReady from '../../ons/content-ready.js';
 import ModifierUtil from '../../ons/internal/modifier-util.js';
 import BaseElement from './base-element.js';
 
+import '../ons-ripple.js';
+
 export default class BaseButtonElement extends BaseElement {
 
   get _scheme() {

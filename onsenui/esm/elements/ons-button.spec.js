@@ -38,6 +38,17 @@ describe('ons-button', () => {
       div2.innerHTML = div1.innerHTML;
       expect(div1.isEqualNode(div2)).to.be.true;
     });
+
+    it('compiles an ons-ripple element when the ripple attribute is set', done => {
+      const button = ons.createElement('<ons-button ripple>button</ons-button>');
+      document.body.appendChild(button);
+      setImmediate(() => {
+        const ripple = button.querySelector('ons-ripple');
+        expect(ripple.hasChildNodes()).to.be.true;
+        button.remove();
+        done();
+      });
+    });
   });
 
   describe('autoStyling', () => {
