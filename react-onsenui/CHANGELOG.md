@@ -9,6 +9,11 @@ dev
 
  * Setting BackButton's `onClick` prop no longer prevents default behaviour. Use `event.preventDefault()` in the `onClick` handler to prevent default behaviour.
 
+### New Features
+
+ * ListItem: Added `animation` prop.
+ * ListItem: Added `onExpand` prop.
+
 ### Misc
 
  * Depend on OnsenUI ~v2.12.0.
