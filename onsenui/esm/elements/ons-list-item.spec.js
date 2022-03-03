@@ -301,6 +301,15 @@ describe('OnsListItemElement', () => {
     });
   });
 
+  describe('attribute animation', () => {
+    it('does not throw an error when animating expandable list item when animation is set to none', () => {
+      const listItem = ons._util.createElement('<ons-list-item expandable animation="none">content<div class="expandable-content">expanded</div></ons-list-item>');
+      document.body.appendChild(listItem);
+      listItem.expanded = true;
+      listItem.remove();
+    });
+  });
+
   describe('attribute expanded', () => {
     let animatorMock;
 

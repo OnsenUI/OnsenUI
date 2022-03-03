@@ -335,8 +335,7 @@ export default class ListItemElement extends BaseElement {
 
     this._expanding = true;
 
-    const animator = this._animatorFactory.newAnimator();
-    animator._animateExpansion(this, this.expanded, () => {
+    const expandedCallback = () => {
       this._expanding = false;
 
       if (this.expanded) {
@@ -344,7 +343,15 @@ export default class ListItemElement extends BaseElement {
       } else {
         this.classList.remove('list-item--expanded');
       }
-    });
+    }
+
+    const animator = this._animatorFactory.newAnimator();
+
+    if (animator._animateExpansion) {
+      animator._animateExpansion(this, this.expanded, expandedCallback);
+    } else {
+      expandedCallback();
+    }
   }
 
   _updateAnimatorFactory() {
