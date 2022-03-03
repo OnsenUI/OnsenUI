@@ -2,6 +2,17 @@
 CHANGELOG
 ====
 
+dev
+---
+
+### BREAKING CHANGES
+
+ * Setting BackButton's `onClick` prop no longer prevents default behaviour. Use `event.preventDefault()` in the `onClick` handler to prevent default behaviour.
+
+### Misc
+
+ * Depend on OnsenUI ~v2.12.0.
+
 1.11.5
 ----
 
