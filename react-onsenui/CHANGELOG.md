@@ -13,6 +13,7 @@ dev
 
  * ListItem: Added `animation` prop.
  * ListItem: Added `onExpand` prop.
+ * BackButton: Add `options` prop.
 
 ### Misc
 
