@@ -132,6 +132,13 @@ export default class PopoverElement extends BaseDialogElement {
    */
 
   /**
+   * @event dialogcancel
+   * @description
+   * [en]Fired when the popover is canceled.[/en]
+   * [ja][/ja]
+   */
+
+  /**
    * @attribute modifier
    * @type {String}
    * @description

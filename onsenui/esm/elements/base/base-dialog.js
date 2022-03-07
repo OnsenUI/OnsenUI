@@ -71,7 +71,8 @@ export default class BaseDialogElement extends BaseElement {
         .then(
           () => {
             this._running = false;
-            util.triggerElementEvent(this, 'dialog-cancel');
+            util.triggerElementEvent(this, 'dialogcancel');
+            util.triggerElementEvent(this, 'dialog-cancel');  // dialog-cancel is deprecated but still emit to avoid breaking user code
           },
           () => this._running = false
         );
@@ -209,6 +210,6 @@ export default class BaseDialogElement extends BaseElement {
   }
 
   static get events() {
-    return ['preshow', 'postshow', 'prehide', 'posthide', 'dialog-cancel'];
+    return ['preshow', 'postshow', 'prehide', 'posthide', 'dialogcancel', 'dialog-cancel'];
   }
 }

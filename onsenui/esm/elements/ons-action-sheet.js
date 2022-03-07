@@ -132,6 +132,13 @@ export default class ActionSheetElement extends BaseDialogElement {
    */
 
   /**
+   * @event dialogcancel
+   * @description
+   * [en]Fired when the action sheet is canceled.[/en]
+   * [ja][/ja]
+   */
+
+  /**
    * @attribute title
    * @type {String}
    * @description

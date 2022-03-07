@@ -128,6 +128,13 @@ export default class DialogElement extends BaseDialogElement {
    */
 
   /**
+   * @event dialogcancel
+   * @description
+   * [en]Fired when the dialog is canceled.[/en]
+   * [ja][/ja]
+   */
+
+  /**
    * @attribute modifier
    * @type {String}
    * @description

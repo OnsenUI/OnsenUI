@@ -125,7 +125,7 @@ notification._createAlertDialog = (...params) => new Promise(resolve => {
   let el = {};
   const _destroyDialog = () => {
     if (el.dialog.onDialogCancel) {
-      el.dialog.removeEventListener('dialog-cancel', el.dialog.onDialogCancel);
+      el.dialog.removeEventListener('dialogcancel', el.dialog.onDialogCancel);
     }
 
     Object.keys(el).forEach(key => delete el[key]);
@@ -220,7 +220,7 @@ notification._createAlertDialog = (...params) => new Promise(resolve => {
       options.callback(resolveValue);
       resolve(resolveValue);
     };
-    el.dialog.addEventListener('dialog-cancel', el.dialog.onDialogCancel, false);
+    el.dialog.addEventListener('dialogcancel', el.dialog.onDialogCancel, false);
   }
 
   // Show dialog

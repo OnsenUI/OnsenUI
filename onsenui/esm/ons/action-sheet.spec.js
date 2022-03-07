@@ -82,7 +82,7 @@ describe('ons.openActionSheet', () => {
     });
 
     it('accepts a \'cancelable\' attribute', () => {
-      dialog.dispatchEvent(new CustomEvent('dialog-cancel'));
+      dialog.dispatchEvent(new CustomEvent('dialogcancel'));
       return resolvePromise.then(index => expect(index).to.equal(-1));
     });
 

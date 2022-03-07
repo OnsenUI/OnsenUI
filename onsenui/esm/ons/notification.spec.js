@@ -52,7 +52,7 @@ describe('ons.notification', () => {
     });
 
     it('accepts a \'cancelable\' attribute', () => {
-      const event = new CustomEvent('dialog-cancel');
+      const event = new CustomEvent('dialogcancel');
       dialog.dispatchEvent(event);
       expect(callback).to.have.been.called.with(-1);
     });
@@ -127,7 +127,7 @@ describe('ons.notification', () => {
     });
 
     it('accepts a \'cancelable\' attribute', () => {
-      const event = new CustomEvent('dialog-cancel');
+      const event = new CustomEvent('dialogcancel');
       dialog.dispatchEvent(event);
       expect(callback).to.have.been.called.with(-1);
     });
@@ -213,7 +213,7 @@ describe('ons.notification', () => {
     });
 
     it('accepts a \'cancelable\' attribute', () => {
-      const event = new CustomEvent('dialog-cancel');
+      const event = new CustomEvent('dialogcancel');
       dialog.dispatchEvent(event);
       expect(callback).to.have.been.called.with(null);
     });

@@ -101,9 +101,9 @@ describe('OnsActionSheetElement', () => {
       expect(spy).to.have.been.called.once;
     });
 
-    it('emits a \'dialog-cancel\' event', () => {
+    it('emits a \'dialogcancel\' event', () => {
       const promise = new Promise((resolve) => {
-        sheet.addEventListener('dialog-cancel', resolve);
+        sheet.addEventListener('dialogcancel', resolve);
       });
 
       sheet.setAttribute('cancelable', '');
