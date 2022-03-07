@@ -1,73 +1,9 @@
-import SimpleWrapper from './SimpleWrapper.jsx';
 import PropTypes from 'prop-types';
-import {findDOMNode} from 'react-dom';
 import 'onsenui/esm/elements/ons-gesture-detector';
 
-/**
- * @original ons-gesture-detector
- * @category gesture
- * @tutorial react/Reference/gesture-detector
- * @description
- * [en]Component to detect finger gestures within a wrapped element.
- [/en]
- * [ja][/ja]
- * @example
- * <GestureDetector
- *   onTap={() => console.log('tap')}
- *   onSwipeleft={() => console.log('swipe left')}
- * >
- *   <div style={{backgroundColor: 'pink', width: '100px', height: '100px'}}>
- *     Swipe Here
- *   </div>
- * </GestureDetector>
- *
- */
-class GestureDetector extends SimpleWrapper {
-  constructor(props) {
-    super(props);
+import onsCustomElement from './onsCustomElement';
 
-    this.gestures = [
-      'Drag',
-      'DragLeft',
-      'DragRight',
-      'DragUp',
-      'DragDown',
-      'Hold',
-      'Release',
-      'Swipe',
-      'SwipeLeft',
-      'SwipeRight',
-      'SwipeUp',
-      'SwipeDown',
-      'Tap',
-      'DoubleTap',
-      'Pinch',
-      'PinchIn',
-      'PinchOut',
-      'Touch',
-      'Transform',
-      'Rotate'
-    ];
-  }
-
-  _getDomNodeName() {
-    return 'ons-gesture-detector';
-  }
-
-  componentDidMount() {
-    const node = findDOMNode(this);
-    this.gestures.forEach(gesture =>
-      node.addEventListener(gesture.toLowerCase(), this.props['on' + gesture]));
-  }
-
-  componentWillUnmount() {
-    const node = findDOMNode(this);
-    this.gestures.forEach(gesture =>
-      node.removeEventListener(gesture.toLowerCase(), this.props['on' + gesture]));
-  }
-}
-
-GestureDetector.propTypes = {
+const propTypes = {
 
   /**
    * @name onDrag
@@ -249,5 +185,27 @@ GestureDetector.propTypes = {
    */
   onRotate: PropTypes.func
 };
+
+/**
+ * @original ons-gesture-detector
+ * @category gesture
+ * @tutorial react/Reference/gesture-detector
+ * @description
+ * [en]Component to detect finger gestures within a wrapped element.
+ [/en]
+ * [ja][/ja]
+ * @example
+ * <GestureDetector
+ *   onTap={() => console.log('tap')}
+ *   onSwipeleft={() => console.log('swipe left')}
+ * >
+ *   <div style={{backgroundColor: 'pink', width: '100px', height: '100px'}}>
+ *     Swipe Here
+ *   </div>
+ * </GestureDetector>
+ *
+ */
+const GestureDetector = onsCustomElement('ons-gesture-detector', propTypes);
+GestureDetector.propTypes = propTypes;
 
 export default GestureDetector;
