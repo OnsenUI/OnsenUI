@@ -111,7 +111,9 @@ export default class BackButtonElement extends BaseElement {
     this._options = {};
     this._boundOnClick = this._onClick.bind(this);
 
-    util.defineListenerProperty(this, 'click');
+    const {onConnected, onDisconnected} = util.defineListenerProperty(this, 'click');
+    this._connectOnClick = onConnected;
+    this._disconnectOnClick = onDisconnected;
   }
 
   _updateIcon(icon = util.findChild(this, '.back-button__icon')) {
@@ -208,6 +210,7 @@ export default class BackButtonElement extends BaseElement {
 
   connectedCallback() {
     this.addEventListener('click', this._boundOnClick, false);
+    this._connectOnClick();
   }
 
   static get observedAttributes() {
@@ -229,7 +232,7 @@ export default class BackButtonElement extends BaseElement {
 
   disconnectedCallback() {
     this.removeEventListener('click', this._boundOnClick, false);
-    util.disconnectListenerProperty(this, 'click');
+    this._disconnectOnClick();
   }
 
   show() {

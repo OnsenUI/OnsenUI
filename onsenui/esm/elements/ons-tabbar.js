@@ -230,7 +230,9 @@ export default class TabbarElement extends BaseElement {
     this._loadInactive = util.defer(); // Improves #2324
     contentReady(this, () => this._compile());
 
-    util.defineListenerProperty(this, 'swipe');
+    const {onConnected, onDisconnected} = util.defineListenerProperty(this, 'swipe');
+    this._connectOnSwipe = onConnected;
+    this._disconnectOnSwipe = onDisconnected;
   }
 
   connectedCallback() {
@@ -260,6 +262,8 @@ export default class TabbarElement extends BaseElement {
         this._show(); // This tabbar is the top component
       }
     });
+
+    this._connectOnSwipe();
   }
 
   disconnectedCallback() {
@@ -270,7 +274,7 @@ export default class TabbarElement extends BaseElement {
       this._tabsRect = null;
     }
 
-    util.disconnectListenerProperty(this, 'swipe');
+    this._disconnectOnSwipe();
   }
 
   _normalizeEvent(event) {

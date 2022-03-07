@@ -584,41 +584,47 @@ util.defineBooleanProperty = (object, propertyName) => {
 };
 
 /**
- * Makes a property for a listener e.g. onClick
+ * Makes a property for a listener e.g. onClick.
+ *
+ * Returns `onConnected` function which should be called in the element's
+ * connectedCallback, and `onDisconnected` function which should be called in
+ * the element's disconnectedCallback.
  */
-util.defineListenerProperty = (object, eventName) => {
+util.defineListenerProperty = (element, eventName) => {
   const camelized = util.camelize(eventName);
   const propertyName = 'on' + camelized.charAt(0).toUpperCase() + camelized.slice(1);
 
   let handler;
-  Object.defineProperty(object, propertyName, {
+  Object.defineProperty(element, propertyName, {
     get() {
       return handler;
     },
     set(newHandler) {
-      if (handler) {
-        object.removeEventListener(eventName, handler);
+      if (element.isConnected) {
+        if (handler) {
+          element.removeEventListener(eventName, handler);
+        }
+        element.addEventListener(eventName, newHandler);
       }
-      object.addEventListener(eventName, newHandler);
 
       handler = newHandler;
     },
     configurable: true
   });
-};
 
-/**
- * Removes the listener for a listener property e.g. onClick
- * Useful for removing listeners during disconnectedCallback.
- */
-util.disconnectListenerProperty = (object, eventName) => {
-  const camelized = util.camelize(eventName);
-  const propertyName = 'on' + camelized.charAt(0).toUpperCase() + camelized.slice(1);
+  return {
+    onConnected() {
+      if (element[propertyName]) {
+        element.addEventListener(eventName, element[propertyName]);
+      }
+    },
 
-  if (object[propertyName]) {
-    object.removeEventListener(eventName, object[propertyName]);
-    object[propertyName] = null;
-  }
+    onDisconnected() {
+      if (element[propertyName]) {
+        element.removeEventListener(eventName, element[propertyName]);
+      }
+    }
+  };
 };
 
 export default util;

@@ -228,7 +228,9 @@ export default class CarouselElement extends BaseElement {
   constructor() {
     super();
 
-    util.defineListenerProperty(this, 'swipe');
+    const {onConnected, onDisconnected} = util.defineListenerProperty(this, 'swipe');
+    this._connectOnSwipe = onConnected;
+    this._disconnectOnSwipe = onDisconnected;
 
     contentReady(this, () => this._compile());
   }
@@ -271,6 +273,8 @@ export default class CarouselElement extends BaseElement {
         autoRefresh: this.hasAttribute('auto-refresh')
       }));
     }
+
+    this._connectOnSwipe();
   }
 
   disconnectedCallback() {
@@ -279,7 +283,7 @@ export default class CarouselElement extends BaseElement {
       this._swiper = null;
     }
 
-    util.disconnectListenerProperty(this, 'swipe');
+    this._disconnectOnSwipe();
   }
 
   static get observedAttributes() {

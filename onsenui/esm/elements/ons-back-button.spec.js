@@ -90,12 +90,49 @@ describe('OnsBackButtonElement', () => {
   });
 
   describe('#onClick', () => {
-    it('prevents the default click handler when event.preventDefault is called', () => {
+    it('adds an event listener when set while the back button is already connected', () => {
       const backButton = ons._util.createElement('<ons-back-button></ons-back-button>');
-      backButton.onClick = function (event) { event.preventDefault(); };
+      document.body.appendChild(backButton);
+      backButton.onClick = () => {};
       const spy = chai.spy.on(backButton, 'onClick');
       backButton.dispatchEvent(new Event('click'));
       expect(spy).to.have.been.called.once;
+      backButton.remove();
+    });
+
+    it('does not add an event listener when set while the back button is not already connected', () => {
+      const backButton = ons._util.createElement('<ons-back-button></ons-back-button>');
+      backButton.onClick = () => {};
+      const spy = chai.spy.on(backButton, 'onClick');
+      backButton.dispatchEvent(new Event('click'));
+      expect(spy).not.to.have.been.called;
+    });
+
+    it('removes the previous event listener when onClick is set again', () => {
+      const backButton = ons._util.createElement('<ons-back-button></ons-back-button>');
+      document.body.appendChild(backButton);
+      backButton.onClick = assert.fail;
+      backButton.onClick = () => {};
+      backButton.dispatchEvent(new Event('click'));
+      backButton.remove();
+    });
+
+    it('adds the event listener when the back button is connected', () => {
+      const backButton = ons._util.createElement('<ons-back-button></ons-back-button>');
+      backButton.onClick = () => {};
+      const spy = chai.spy.on(backButton, 'onClick');
+      document.body.appendChild(backButton);
+      backButton.dispatchEvent(new Event('click'));
+      expect(spy).to.have.been.called.once;
+      backButton.remove();
+    });
+
+    it('removes the event listener when the back button is disconnected', () => {
+      const backButton = ons._util.createElement('<ons-back-button></ons-back-button>');
+      document.body.appendChild(backButton);
+      backButton.onClick = assert.fail;
+      backButton.remove();
+      backButton.dispatchEvent(new Event('click'));
     });
   });
 

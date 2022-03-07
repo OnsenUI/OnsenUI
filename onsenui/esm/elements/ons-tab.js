@@ -146,7 +146,9 @@ export default class TabElement extends BaseElement {
     this._pageLoader = defaultPageLoader;
     this._onClick = this._onClick.bind(this);
 
-    util.defineListenerProperty(this, 'click');
+    const {onConnected, onDisconnected} = util.defineListenerProperty(this, 'click');
+    this._connectOnClick = onConnected;
+    this._disconnectOnClick = onDisconnected;
   }
 
   set pageLoader(loader) {
@@ -301,7 +303,7 @@ export default class TabElement extends BaseElement {
       this.loaded = null;
     }
 
-    util.disconnectListenerProperty(this, 'click');
+    this._disconnectOnClick();
   }
 
   connectedCallback() {
@@ -351,6 +353,8 @@ export default class TabElement extends BaseElement {
         });
       }
     });
+
+    this._connectOnClick();
   }
 
   static get observedAttributes() {

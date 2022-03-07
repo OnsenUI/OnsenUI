@@ -129,7 +129,9 @@ export default class PullHookElement extends BaseElement {
     this._setState(STATE_INITIAL, true);
     this._hide(); // Fix for transparent toolbar transitions
 
-    util.defineListenerProperty(this, 'pull');
+    const {onConnected, onDisconnected} = util.defineListenerProperty(this, 'pull');
+    this._connectOnPull = onConnected;
+    this._disconnectOnPull = onDisconnected;
   }
 
   _setStyle() {
@@ -441,12 +443,15 @@ export default class PullHookElement extends BaseElement {
 
     this._setupListeners(true);
     this._setStyle();
+
+    this._connectOnPull();
   }
 
   disconnectedCallback() {
     this._hide();
     this._setupListeners(false);
-    util.disconnectListenerProperty(this, 'pull');
+
+    this._disconnectOnPull();
   }
 
   static get observedAttributes() {
