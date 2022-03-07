@@ -1,7 +1,20 @@
-import SimpleWrapper from './SimpleWrapper.jsx';
-
 import PropTypes from 'prop-types';
 import 'onsenui/esm/elements/ons-list-header';
+
+import onsCustomElement from './onsCustomElement';
+
+const propTypes = {
+  /**
+   * @name modifier
+   * @type string
+   * @description
+   *  [en]
+   *  Specify modifier name to specify custom styles. Optional.
+   *  [/en]
+   *  [ja][/ja]
+   */
+  modifier: PropTypes.string
+};
 
 /**
  * @original ons-list-header
@@ -21,23 +34,5 @@ import 'onsenui/esm/elements/ons-list-header';
     )}
   />
  */
-class ListHeader extends SimpleWrapper {
-  _getDomNodeName() {
-    return 'ons-list-header';
-  }
-}
-
-ListHeader.propTypes = {
-  /**
-   * @name modifier
-   * @type string
-   * @description
-   *  [en]
-   *  Specify modifier name to specify custom styles. Optional.
-   *  [/en]
-   *  [ja][/ja]
-   */
-  modifier: PropTypes.string
-};
-
+const ListHeader = onsCustomElement('ons-list-header', propTypes);
 export default ListHeader;
