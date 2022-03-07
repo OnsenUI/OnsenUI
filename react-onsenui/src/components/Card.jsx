@@ -1,6 +1,20 @@
-import SimpleWrapper from './SimpleWrapper.jsx';
 import PropTypes from 'prop-types';
 import 'onsenui/esm/elements/ons-card';
+
+import onsCustomElement from './onsCustomElement';
+
+const propTypes = {
+  /**
+   * @name modifier
+   * @type string
+   * @description
+   *  [en]
+   *  Specify modifier name to specify custom styles. Optional.
+   *  [/en]
+   *  [ja][/ja]
+   */
+  modifier: PropTypes.string
+};
 
 /**
  * @original ons-card
@@ -15,23 +29,7 @@ import 'onsenui/esm/elements/ons-card';
   <p>Some content</p>
 </Card>
  */
-class Card extends SimpleWrapper {
-  _getDomNodeName() {
-    return 'ons-card';
-  }
-}
-
-Card.propTypes = {
-  /**
-   * @name modifier
-   * @type string
-   * @description
-   *  [en]
-   *  Specify modifier name to specify custom styles. Optional.
-   *  [/en]
-   *  [ja][/ja]
-   */
-  modifier: PropTypes.string
-};
+const Card = onsCustomElement('ons-card', propTypes);
+Card.propTypes = propTypes;
 
 export default Card;
