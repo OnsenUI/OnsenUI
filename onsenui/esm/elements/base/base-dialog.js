@@ -80,15 +80,24 @@ export default class BaseDialogElement extends BaseElement {
   }
 
   show(...args) {
-    return this._setVisible(true, ...args);
+    return this._setVisible(true, ...args).then(dialog => {
+      this.visible = true;
+      return dialog;
+    });
   }
 
   hide(...args) {
-    return this._setVisible(false, ...args);
+    return this._setVisible(false, ...args).then(dialog => {
+      this.visible = false;
+      return dialog;
+    });
   }
 
   toggle(...args) {
-    return this._setVisible(!this.visible, ...args);
+    return this._setVisible(!this.visible, ...args).then(dialog => {
+      this.visible = this._visible;
+      return dialog;
+    });
   }
 
   _setVisible(shouldShow, options = {}) {
@@ -141,7 +150,15 @@ export default class BaseDialogElement extends BaseElement {
   }
 
   get visible() {
-    return this._visible;
+    return this.hasAttribute('visible');
+  }
+
+  set visible(value) {
+    if (value) {
+      this.setAttribute('visible', '');
+    } else {
+      this.removeAttribute('visible');
+    }
   }
 
   set disabled(value) {
@@ -192,7 +209,7 @@ export default class BaseDialogElement extends BaseElement {
   }
 
   static get observedAttributes() {
-    return ['modifier', 'animation', 'mask-color'];
+    return ['modifier', 'animation', 'mask-color', 'visible'];
   }
 
   attributeChangedCallback(name, last, current) {
@@ -205,6 +222,11 @@ export default class BaseDialogElement extends BaseElement {
         break;
       case 'mask-color':
         this._updateMask();
+        break;
+      case 'visible':
+        if (this.visible !== this._visible) {
+          contentReady(this, () => this._setVisible(this.visible));
+        }
         break;
     }
   }

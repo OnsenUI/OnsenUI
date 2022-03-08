@@ -173,11 +173,19 @@ describe('OnsActionSheetElement', () => {
         }
       );
     });
+
+    it("sets the 'visible' property to true", () => {
+      return expect(sheet.show()).to.eventually.be.fulfilled.then(
+        element => {
+          expect(sheet.visible).to.be.true;
+        }
+      );
+    });
   });
 
   describe('#hide()', () => {
-    beforeEach(() => {
-      sheet.show({animation: 'none'});
+    beforeEach(done => {
+      sheet.show({animation: 'none'}).then(() => done());
     });
 
     it('hides the action sheet', () => {
@@ -223,13 +231,21 @@ describe('OnsActionSheetElement', () => {
         }
       );
     });
+
+    it("sets the 'visible' property to false", () => {
+      return expect(sheet.hide()).to.eventually.be.fulfilled.then(
+        element => {
+          expect(sheet.visible).to.be.false;
+        }
+      );
+    });
   });
 
   describe('#visible', () => {
     it('returns whether the action sheet is visible or not', () => {
       expect(sheet.visible).to.be.false;
-      sheet.show({animation: 'none'});
-      expect(sheet.visible).to.be.true;
+      return sheet.show({animation: 'none'})
+        .then(() => expect(sheet.visible).to.be.true);
     });
   });
 

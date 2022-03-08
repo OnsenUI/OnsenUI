@@ -199,6 +199,14 @@ export default class PopoverElement extends BaseDialogElement {
    *   [ja]背景のマスクの色を指定します。デフォルトは"rgba(0, 0, 0, 0.2)"です。[/ja]
    */
 
+  /**
+   * @attribute visible
+   * @type {Boolean}
+   * @description
+   *   [en]Whether the popover is visible or not.[/en]
+   *   [ja]要素が見える場合に`true`。[/ja]
+   */
+
   constructor() {
     super();
 
@@ -465,7 +473,6 @@ export default class PopoverElement extends BaseDialogElement {
 
   /**
    * @property visible
-   * @readonly
    * @type {Boolean}
    * @description
    *   [en]Whether the element is visible or not.[/en]

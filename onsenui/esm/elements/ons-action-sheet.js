@@ -194,6 +194,14 @@ export default class ActionSheetElement extends BaseDialogElement {
    *  [ja]背景のマスクの色を指定します。"rgba(0, 0, 0, 0.2)"がデフォルト値です。[/ja]
    */
 
+  /**
+   * @attribute visible
+   * @type {Boolean}
+   * @description
+   *   [en]Whether the action sheet is visible or not.[/en]
+   *   [ja]要素が見える場合に`true`。[/ja]
+   */
+
   constructor() {
     super();
 
@@ -331,7 +339,6 @@ export default class ActionSheetElement extends BaseDialogElement {
 
   /**
    * @property visible
-   * @readonly
    * @type {Boolean}
    * @description
    *   [en]Whether the action sheet is visible or not.[/en]

@@ -164,11 +164,19 @@ describe('OnsDialogElement', () => {
         }
       );
     });
+
+    it("sets the 'visible' property to true", () => {
+      return expect(dialog.show()).to.eventually.be.fulfilled.then(
+        element => {
+          expect(dialog.visible).to.be.true;
+        }
+      );
+    });
   });
 
   describe('#hide()', () => {
-    beforeEach(() => {
-      dialog.show({animation: 'none'});
+    beforeEach(done => {
+      dialog.show({animation: 'none'}).then(() => done());
     });
 
     it('hides the dialog', () => {
@@ -214,16 +222,23 @@ describe('OnsDialogElement', () => {
         }
       );
     });
+
+    it("sets the 'visible' property to false", () => {
+      return expect(dialog.hide()).to.eventually.be.fulfilled.then(
+        element => {
+          expect(dialog.visible).to.be.false;
+        }
+      );
+    });
   });
 
   describe('#visible', () => {
     it('returns whether the dialog is visible or not', () => {
       expect(dialog.visible).to.be.false;
-      dialog.show({animation: 'none'});
-      expect(dialog.visible).to.be.true;
+      return dialog.show({animation: 'none'})
+        .then(() => expect(dialog.visible).to.be.true);
     });
   });
-
 
   describe('#registerAnimator()', () => {
     it('throws an error if animator is not a DialogAnimator', () => {

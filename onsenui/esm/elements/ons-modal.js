@@ -143,6 +143,14 @@ export default class ModalElement extends BaseDialogElement {
    *  [ja]アニメーション時のduration, timing, delayをオブジェクトリテラルで指定します。e.g. <code>{duration: 0.2, delay: 1, timing: 'ease-in'}</code>[/ja]
    */
 
+  /**
+   * @attribute visible
+   * @type {Boolean}
+   * @description
+   *   [en]Whether the modal is visible or not.[/en]
+   *   [ja]要素が見える場合に`true`。[/ja]
+   */
+
   constructor() {
     super();
 
@@ -206,7 +214,6 @@ export default class ModalElement extends BaseDialogElement {
 
   /**
    * @property visible
-   * @readonly
    * @type {Boolean}
    * @description
    *   [en]Whether the element is visible or not.[/en]

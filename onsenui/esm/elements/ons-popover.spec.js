@@ -143,11 +143,19 @@ describe('OnsPopoverElement', () => {
         expect(popoverDisplay()).to.equal('block');
       });
     });
+
+    it("sets the 'visible' property to true", () => {
+      return expect(popover.show(target)).to.eventually.be.fulfilled.then(
+        element => {
+          expect(popover.visible).to.be.true;
+        }
+      );
+    });
   });
 
   describe('#hide()', () => {
-    beforeEach(() => {
-      popover.show(target, {animation: 'none'});
+    beforeEach(done => {
+      popover.show(target, {animation: 'none'}).then(() => done());
     });
 
     it('hides the popover', () => {
@@ -184,12 +192,20 @@ describe('OnsPopoverElement', () => {
         expect(popoverDisplay()).to.equal('none');
       });
     });
+
+    it("sets the 'visible' property to false", () => {
+      return expect(popover.hide()).to.eventually.be.fulfilled.then(
+        element => {
+          expect(popover.visible).to.be.false;
+        }
+      );
+    });
   });
 
   describe('#visible', () => {
     it('should return \'true\' if popover is visible', () => {
-      popover.show(target, {animation: 'none'});
-      expect(popover.visible).to.be.true;
+      return popover.show(target, {animation: 'none'})
+        .then(() => expect(popover.visible).to.be.true);
     });
 
     it('should return \'false\' if popover is not visible', () => {

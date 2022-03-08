@@ -36,6 +36,8 @@ dev
  * ons-list-item: Added `expandable` attribute and property. ([#2896](https://github.com/OnsenUI/OnsenUI/issues/2896)).
  * ons-list-item: Added `expand` event that fires when an expandable list item is clicked and expands or contracts.
  * ons-button: Added `ripple` property to mirror existing `ripple` attribute.
+ * ons-dialog, ons-alert-dialog, ons-modal, ons-popover, ons-action-sheet: Added `visible` attribute.
+ * ons-dialog, ons-alert-dialog, ons-modal, ons-popover, ons-action-sheet: Can now be shown or hidden by setting the `visible` property/attribute.
 
  ### Misc
 

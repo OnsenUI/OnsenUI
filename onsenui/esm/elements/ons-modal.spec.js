@@ -71,11 +71,19 @@ describe('OnsModalElement', () => {
         }
       );
     });
+
+    it("sets the 'visible' property to true", () => {
+      return expect(element.show()).to.eventually.be.fulfilled.then(
+        element => {
+          expect(element.visible).to.be.true;
+        }
+      );
+    });
   });
 
   describe('#hide()', () => {
-    beforeEach(() => {
-      element.show();
+    beforeEach(done => {
+      element.show().then(() => done());
     });
 
     it('hides the modal', () => {
@@ -93,17 +101,28 @@ describe('OnsModalElement', () => {
         }
       );
     });
+
+    it("sets the 'visible' property to false", () => {
+      return expect(element.hide()).to.eventually.be.fulfilled.then(
+        element => {
+          expect(element.visible).to.be.false;
+        }
+      );
+    });
   });
 
   describe('#toggle()', () => {
     it('alternates the modal displaying state', () => {
       expect(element.style.display).to.equal('none');
-      element.toggle();
-      expect(element.style.display).to.equal('table');
-      element.toggle();
-      expect(element.style.display).to.equal('none');
-      element.toggle();
-      expect(element.style.display).to.equal('table');
+      return element.toggle().then(() => {
+        expect(element.style.display).to.equal('table');
+        return element.toggle();
+      }).then(() => {
+        expect(element.style.display).to.equal('none');
+        return element.toggle();
+      }).then(() => {
+        expect(element.style.display).to.equal('table');
+      });
     });
   });
 
@@ -111,9 +130,10 @@ describe('OnsModalElement', () => {
     it('returns whether the modal is shown', () => {
       expect(element.style.display).to.equal('none');
       expect(element.visible).to.be.false;
-      element.show();
-      expect(element.style.display).to.equal('table');
-      expect(element.visible).to.be.true;
+      return element.show().then(() => {
+        expect(element.style.display).to.equal('table');
+        expect(element.visible).to.be.true;
+      });
     });
   });
 
