@@ -8,16 +8,18 @@ dev
 ### BREAKING CHANGES
 
  * Setting BackButton's `onClick` prop no longer prevents default behaviour. Use `event.preventDefault()` in the `onClick` handler to prevent default behaviour.
+ * AlertDialogs are no longer cancelable by default. Set the `cancelable` prop to make an alert dialog cancelable.
 
 ### New Features
 
  * ListItem: Added `animation` prop.
  * ListItem: Added `onExpand` prop.
- * BackButton: Add `options` prop.
+ * BackButton: Added `options` prop.
 
 ### Misc
 
  * Depend on OnsenUI ~v2.12.0.
+ * AlertDialog: `onCancel`, `isOpen`, `isDisabled` and `isCancelable` are deprecated and renamed to `onDialogCancel`, `visible`, `disabled`, and `cancelable`.
 
 1.11.5
 ----
