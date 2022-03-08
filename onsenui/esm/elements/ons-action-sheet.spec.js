@@ -271,4 +271,19 @@ describe('OnsActionSheetElement', () => {
       ons.platform.select('');
     });
   });
+
+  describe('#maskColor', () => {
+    it('sets the mask background color when set', () => {
+      sheet.maskColor = 'pink';
+      const mask = sheet.querySelector('.action-sheet-mask');
+      expect(mask.style.backgroundColor).to.equal('pink');
+    });
+
+    it('unsets the mask background color when undefined', () => {
+      sheet.maskColor = 'pink';
+      sheet.maskColor = undefined;
+      const mask = sheet.querySelector('.action-sheet-mask');
+      expect(mask.style.backgroundColor).to.equal('');
+    });
+  });
 });

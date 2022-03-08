@@ -320,6 +320,15 @@ export default class AlertDialogElement extends BaseDialogElement {
    */
 
   /**
+   * @property maskColor
+   * @type {String}
+   * @default rgba(0, 0, 0, 0.2)
+   * @description
+   *  [en]Color of the background mask. Default is "rgba(0, 0, 0, 0.2)".[/en]
+   *  [ja]背景のマスクの色を指定します。"rgba(0, 0, 0, 0.2)"がデフォルト値です。[/ja]
+   */
+
+  /**
    * @method show
    * @signature show([options])
    * @param {Object} [options]

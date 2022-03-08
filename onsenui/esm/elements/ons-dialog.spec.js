@@ -261,4 +261,19 @@ describe('OnsDialogElement', () => {
       ons.platform.select('');
     });
   });
+
+  describe('#maskColor', () => {
+    it('sets the mask background color when set', () => {
+      dialog.maskColor = 'pink';
+      const mask = dialog.querySelector('.dialog-mask');
+      expect(mask.style.backgroundColor).to.equal('pink');
+    });
+
+    it('unsets the mask background color when undefined', () => {
+      dialog.maskColor = 'pink';
+      dialog.maskColor = undefined;
+      const mask = dialog.querySelector('.dialog-mask');
+      expect(mask.style.backgroundColor).to.equal('');
+    });
+  });
 });

@@ -177,10 +177,22 @@ export default class BaseDialogElement extends BaseElement {
     return this.hasAttribute('cancelable');
   }
 
+  get maskColor() {
+    return this.getAttribute('mask-color');
+  }
+
+  set maskColor(value) {
+    if (value === null || value === undefined) {
+      this.removeAttribute('mask-color');
+    } else {
+      this.setAttribute('mask-color', value);
+    }
+  }
+
   _updateMask() {
     contentReady(this, () => {
-      if (this._mask && this.getAttribute('mask-color')) {
-        this._mask.style.backgroundColor = this.getAttribute('mask-color');
+      if (this._mask) {
+        this._mask.style.backgroundColor = this.maskColor;
       }
     });
   }

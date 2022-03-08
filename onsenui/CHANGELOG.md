@@ -38,6 +38,7 @@ dev
  * ons-button: Added `ripple` property to mirror existing `ripple` attribute.
  * ons-dialog, ons-alert-dialog, ons-modal, ons-popover, ons-action-sheet: Added `visible` attribute.
  * ons-dialog, ons-alert-dialog, ons-modal, ons-popover, ons-action-sheet: Can now be shown or hidden by setting the `visible` property/attribute.
+ * ons-dialog, ons-alert-dialog, ons-popover, ons-action-sheet: Added `maskColor` property.
 
  ### Misc
 
