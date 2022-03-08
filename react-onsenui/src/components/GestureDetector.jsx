@@ -205,7 +205,7 @@ const propTypes = {
  * </GestureDetector>
  *
  */
-const GestureDetector = onsCustomElement('ons-gesture-detector', propTypes);
+const GestureDetector = onsCustomElement('ons-gesture-detector', {propTypes});
 GestureDetector.propTypes = propTypes;
 
 export default GestureDetector;

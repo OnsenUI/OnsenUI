@@ -37,6 +37,8 @@ const propTypes = {
   })
 };
 
+const notAttributes = ['options'];
+
 /**
  * @original ons-back-button
  * @category navigation
@@ -54,7 +56,7 @@ const propTypes = {
       <div className="center">{this.props.title}</div>
    </Toolbar>
  */
-const BackButton = onsCustomElement('ons-back-button', propTypes, ['options']);
+const BackButton = onsCustomElement('ons-back-button', {propTypes, notAttributes});
 BackButton.propTypes = propTypes;
 
 export default BackButton;

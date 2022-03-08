@@ -34,5 +34,5 @@ const propTypes = {
     )}
   />
  */
-const ListHeader = onsCustomElement('ons-list-header', propTypes);
+const ListHeader = onsCustomElement('ons-list-header', {propTypes});
 export default ListHeader;

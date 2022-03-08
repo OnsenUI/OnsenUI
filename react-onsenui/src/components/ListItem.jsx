@@ -99,7 +99,7 @@ const propTypes = {
  *   <div className="expandable-content">Expandable content</div>
  * </ListItem>
  */
-const ListItem = onsCustomElement('ons-list-item', propTypes);
+const ListItem = onsCustomElement('ons-list-item', {propTypes});
 ListItem.propTypes = propTypes;
 
 export default ListItem;

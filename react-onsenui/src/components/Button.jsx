@@ -59,7 +59,7 @@ const propTypes = {
  *   Tap Me
  * </Button>
  */
-const Button = onsCustomElement('ons-button', propTypes);
+const Button = onsCustomElement('ons-button', {propTypes});
 Button.propTypes = propTypes;
 
 export default Button;

@@ -35,7 +35,7 @@ const propTypes = {
     )}
   />
  */
-const ListTitle = onsCustomElement('ons-list-title', propTypes);
+const ListTitle = onsCustomElement('ons-list-title', {propTypes});
 ListTitle.propTypes = propTypes;
 
 export default ListTitle;

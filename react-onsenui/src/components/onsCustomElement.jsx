@@ -15,8 +15,11 @@ function useCustomElementListener(ref, prop, handler) {
   }, [ref, handler]);
 }
 
-function useCustomElement(props, propTypes, notAttributes = []) {
+function useCustomElement(props, options = {}) {
   const ref = useRef();
+
+  const propTypes = options.propTypes || {};
+  const notAttributes = options.notAttributes || [];
 
   const properties = {};
 
@@ -39,10 +42,10 @@ function useCustomElement(props, propTypes, notAttributes = []) {
   return {ref, properties};
 }
 
-export default function onsCustomElement(WrappedComponent, propTypes, notAttributes) {
+export default function onsCustomElement(WrappedComponent, options) {
   return function (props) {
 
-    const {ref, properties} = useCustomElement(props, propTypes, notAttributes);
+    const {ref, properties} = useCustomElement(props, options);
 
     return (
       <WrappedComponent

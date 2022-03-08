@@ -29,7 +29,7 @@ const propTypes = {
   <p>Some content</p>
 </Card>
  */
-const Card = onsCustomElement('ons-card', propTypes);
+const Card = onsCustomElement('ons-card', {propTypes});
 Card.propTypes = propTypes;
 
 export default Card;
