@@ -64,6 +64,56 @@ const _animatorDict = {
 export default class ToastElement extends BaseDialogElement {
 
   /**
+   * @event preshow
+   * @description
+   *   [en]Fired just before the toast is displayed.[/en]
+   *   [ja]ダイアログが表示される直前に発火します。[/ja]
+   * @param {Object} event [en]Event object.[/en]
+   * @param {Object} event.toast
+   *   [en]Toast object.[/en]
+   *   [ja]ダイアログのオブジェクト。[/ja]
+   * @param {Function} event.cancel
+   *   [en]Execute to stop the toast from showing.[/en]
+   *   [ja]この関数を実行すると、ダイアログの表示を止めます。[/ja]
+   */
+
+  /**
+   * @event postshow
+   * @description
+   *   [en]Fired just after the toast is displayed.[/en]
+   *   [ja]ダイアログが表示された直後に発火します。[/ja]
+   * @param {Object} event [en]Event object.[/en]
+   * @param {Object} event.toast
+   *   [en]Toast object.[/en]
+   *   [ja]ダイアログのオブジェクト。[/ja]
+   */
+
+  /**
+   * @event prehide
+   * @description
+   *   [en]Fired just before the toast is hidden.[/en]
+   *   [ja]ダイアログが隠れる直前に発火します。[/ja]
+   * @param {Object} event [en]Event object.[/en]
+   * @param {Object} event.toast
+   *   [en]Toast object.[/en]
+   *   [ja]ダイアログのオブジェクト。[/ja]
+   * @param {Function} event.cancel
+   *   [en]Execute to stop the toast from hiding.[/en]
+   *   [ja]この関数を実行すると、ダイアログが閉じようとするのを止めます。[/ja]
+   */
+
+  /**
+   * @event posthide
+   * @description
+   * [en]Fired just after the toast is hidden.[/en]
+   * [ja]ダイアログが隠れた後に発火します。[/ja]
+   * @param {Object} event [en]Event object.[/en]
+   * @param {Object} event.toast
+   *   [en]Toast object.[/en]
+   *   [ja]ダイアログのオブジェクト。[/ja]
+   */
+
+  /**
    * @attribute animation
    * @type {String}
    * @default default
