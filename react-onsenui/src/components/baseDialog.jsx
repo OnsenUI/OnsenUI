@@ -23,13 +23,25 @@ class Portal extends React.Component {
   }
 }
 
-const baseDialog = WrappedComponent =>
-  React.forwardRef((props, ref) => (
-    <Portal>
-      <WrappedComponent {...props} ref={ref}>
-        {props.children}
-      </WrappedComponent>
-    </Portal>
-  ));
+const baseDialog = DialogComponent =>
+  React.forwardRef((props, ref) => {
+
+    // visible prop should be applied last since it depends on animation and
+    // maskColor props being set first
+    const {visible, ...rest} = props;
+
+    return (
+      <Portal>
+        <DialogComponent
+          {...rest}
+          visible={visible}
+
+          ref={ref}
+        >
+          {props.children}
+        </DialogComponent>
+      </Portal>
+    );
+  });
 
 export default baseDialog;
