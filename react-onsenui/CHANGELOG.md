@@ -20,6 +20,9 @@ dev
 
  * Depend on OnsenUI ~v2.12.0.
  * AlertDialog: `onCancel`, `isOpen`, `isDisabled` and `isCancelable` are deprecated and renamed to `onDialogCancel`, `visible`, `disabled`, and `cancelable`.
+ * AlertDialog: `isOpen` is no longer required.
+ * Dialog: `onCancel`, `isOpen`, `isDisabled` and `isCancelable` are deprecated and renamed to `onDialogCancel`, `visible`, `disabled`, and `cancelable`.
+ * Dialog: `isOpen` is no longer required.
 
 1.11.5
 ----

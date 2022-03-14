@@ -1,40 +1,65 @@
-import BaseDialog from './BaseDialog.jsx';
-
 import PropTypes from 'prop-types';
 import 'onsenui/esm/elements/ons-dialog';
 
-/**
- * @original ons-dialog
- * @category dialog
- * @tutorial react/Reference/dialog
- * @description
- * [en]  Dialog that is displayed on top of current screen. As opposed to the AlertDialog element, this component can contain any kind of content.  The dialog is useful for displaying menus, additional information or to ask the user to make a decision.  It will automatically be displayed as Material Design when running on an Android device.
- [/en]
- * [ja][/ja]
- * @example
-   <Dialog onCancel={this.onCancel}
-     isOpen={this.props.isOpen}
-     style={{height: 250}}  cancelable>
-     <Page>
-       Page Content
-     </Page>
-    </Dialog>
+import onsCustomElement from './onsCustomElement';
+import baseDialog from './baseDialog';
 
- */
-class Dialog extends BaseDialog {
-  _getDomNodeName() {
-    return 'ons-dialog';
-  }
-}
+const propTypes = {
+  /**
+   * @name visible
+   * @type bool
+   * @description
+   *  [en]
+   *  Indicates whether the dialog is open and shown.
+   *  [/en]
+   *  [ja][/ja]
+   */
+  visible: PropTypes.bool,
 
-Dialog.propTypes = {
+  /**
+   * @name disabled
+   * @type bool
+   * @required false
+   * @description
+   *  [en]
+   *  Specifies whether the dialog is disabled.
+   *  [/en]
+   *  [ja][/ja]
+   */
+  disabled: PropTypes.bool,
+
+  /**
+   * @name cancelable
+   * @type bool
+   * @required false
+   * @description
+   *  [en]
+   *  Specifies whether the dialog is cancelable or not.
+   *  A cancelable dialog will call `onDialogCancel` when tapping the background or pressing the back button on Android devices.
+   *  [/en]
+   *  [ja][/ja]
+   */
+  cancelable: PropTypes.bool,
+
+  /**
+   * @name onDialogCancel
+   * @type function
+   * @required false
+   * @description
+   *  [en]
+   *  Called only if `cancelable` is true. It will be called after tapping the background or by pressing the back button on Android devices.
+   *  [/en]
+   *  [ja][/ja]
+   */
+  onDialogCancel: PropTypes.func,
+
   /**
    * @name onCancel
    * @type function
    * @required false
    * @description
    *  [en]
-   *  Called only if isCancelable is true. It will be called after tapping the background or by pressing the back button on Android devices.
+   *  DEPRECATED! Use `onDialogCancel` instead.
    *  [/en]
    *  [ja][/ja]
    */
@@ -43,14 +68,13 @@ Dialog.propTypes = {
   /**
    * @name isOpen
    * @type bool
-   * @required true
    * @description
    *  [en]
-   *  Indicates whether the dialog is open and shown.
+   *  DEPRECATED! Use `visible` instead.
    *  [/en]
    *  [ja][/ja]
    */
-  isOpen: PropTypes.bool.isRequired,
+  isOpen: PropTypes.bool,
 
   /**
    * @name isCancelable
@@ -58,8 +82,7 @@ Dialog.propTypes = {
    * @required false
    * @description
    *  [en]
-   *  Specifies whether the dialog is cancelable or not.
-   *  A cancelable dialog will call onCancel  when tapping the background or or  pressing the back button on Android devices
+   *  DEPRECATED! Use `cancelable` instead.
    *  [/en]
    *  [ja][/ja]
    */
@@ -71,7 +94,7 @@ Dialog.propTypes = {
    * @required false
    * @description
    *  [en]
-   *  Specifies whether the dialog is disabled.
+   *  DEPRECATED! Use `disabled` instead.
    *  [/en]
    *  [ja][/ja]
    */
@@ -175,5 +198,35 @@ Dialog.propTypes = {
    */
   onDeviceBackButton: PropTypes.func
 };
+
+const deprecated = {
+  onCancel: 'onDialogCancel',
+  isOpen: 'visible',
+  isDisabled: 'disabled',
+  isCancelable: 'cancelable'
+};
+
+const notAttributes = ['onDeviceBackButton'];
+
+/**
+ * @original ons-dialog
+ * @category dialog
+ * @tutorial react/Reference/dialog
+ * @description
+ * [en]  Dialog that is displayed on top of current screen. As opposed to the AlertDialog element, this component can contain any kind of content.  The dialog is useful for displaying menus, additional information or to ask the user to make a decision.  It will automatically be displayed as Material Design when running on an Android device.
+ [/en]
+ * [ja][/ja]
+ * @example
+   <Dialog onCancel={this.onCancel}
+     isOpen={this.props.isOpen}
+     style={{height: 250}}  cancelable>
+     <Page>
+       Page Content
+     </Page>
+    </Dialog>
+
+ */
+const Dialog = onsCustomElement(baseDialog('ons-dialog'), {propTypes, deprecated, notAttributes});
+Dialog.propTypes = propTypes;
 
 export default Dialog;
