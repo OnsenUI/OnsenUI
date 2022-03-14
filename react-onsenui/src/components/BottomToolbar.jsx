@@ -1,6 +1,18 @@
-import SimpleWrapper from './SimpleWrapper.jsx';
 import PropTypes from 'prop-types';
 import 'onsenui/esm/elements/ons-bottom-toolbar';
+
+import onsCustomElement from './onsCustomElement';
+
+const propTypes = {
+  /**
+   * @name modifier
+   * @type string
+   * @description
+   *  [en]Specify modifier name to specify custom styles. Optional.[/en]
+   *  [ja][/ja]
+   */
+  modifier: PropTypes.string
+};
 
 /**
  * @original ons-bottom-toolbar
@@ -11,21 +23,7 @@ import 'onsenui/esm/elements/ons-bottom-toolbar';
  * @example
  * <BottomToolbar modifier="material"> Content </BottomToolbar>
  */
-class BottomToolbar extends SimpleWrapper {
-  _getDomNodeName() {
-    return 'ons-bottom-toolbar';
-  }
-}
-
-BottomToolbar.propTypes = {
-  /**
-   * @name modifier
-   * @type string
-   * @description
-   *  [en]Specify modifier name to specify custom styles. Optional.[/en]
-   *  [ja][/ja]
-   */
-  modifier: PropTypes.string
-};
+const BottomToolbar = onsCustomElement('ons-bottom-toolbar', {propTypes});
+BottomToolbar.propTypes = propTypes;
 
 export default BottomToolbar;
