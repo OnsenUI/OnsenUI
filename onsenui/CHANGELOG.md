@@ -23,6 +23,7 @@ dev
  * ons-list-item: Clicks are ignored while the expandable list item is expanding/contracting.
  * ons-button, ons-alert-dialog-button, ons-toolbar-button, ons-action-sheet-button: Ensure ons-ripple is imported when button is imported.
  * ons-dialog, ons-alert-dialog, ons-modal, ons-popover, ons-action-sheet: `dialog-cancel` event is renamed to `dialogcancel`.
+ * ons-action-sheet: Hide title element when title is null or undefined.
 
  ### New Features
 

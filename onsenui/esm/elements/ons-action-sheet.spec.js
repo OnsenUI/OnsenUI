@@ -22,12 +22,35 @@ describe('OnsActionSheetElement', () => {
     expect(window.ons.elements.ActionSheet).to.be.ok;
   });
 
-  it('provides \'title\' attribute', (done) => {
-    const element = ons.createElement('<ons-action-sheet title="test"></ons-action-sheet>', { append: true });
-    setImmediate(() => {
-      expect(element._title).to.be.ok;
-      element.remove();
-      done();
+  describe('title attribute', () => {
+    it('provides \'title\' attribute', (done) => {
+      const element = ons.createElement('<ons-action-sheet title="test"></ons-action-sheet>', { append: true });
+      setImmediate(() => {
+        expect(element._title).to.be.ok;
+        element.remove();
+        done();
+      });
+    });
+
+    it('hides the title element when title is undefined', done => {
+      const element = ons.createElement('<ons-action-sheet title="test"></ons-action-sheet>', { append: true });
+      setImmediate(() => {
+        element.title = undefined;
+        expect(element._title.hidden).to.be.true;
+        element.remove();
+        done();
+      });
+    });
+
+    it('unhides the title element when title is set', done => {
+      const element = ons.createElement('<ons-action-sheet title="test"></ons-action-sheet>', { append: true });
+      setImmediate(() => {
+        element.title = undefined;
+        element.title = 'title';
+        expect(element._title.hidden).to.be.false;
+        element.remove();
+        done();
+      });
     });
   });
 

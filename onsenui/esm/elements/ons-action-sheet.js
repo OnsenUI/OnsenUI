@@ -278,7 +278,7 @@ export default class ActionSheetElement extends BaseDialogElement {
 
     if (!this._title && this.hasAttribute('title')) {
       const title = document.createElement('div');
-      title.innerHTML = this.getAttribute('title');
+      title.innerHTML = this.title;
       title.classList.add('action-sheet-title');
       this._sheet.insertBefore(title, this._sheet.firstChild);
     }
@@ -297,7 +297,12 @@ export default class ActionSheetElement extends BaseDialogElement {
 
   _updateTitle() {
     if (this._title) {
-      this._title.innerHTML = this.getAttribute('title');
+      if (!this.title) {
+        this._title.hidden = true;
+      } else {
+        this._title.innerHTML = this.title;
+        this._title.hidden = false;
+      }
     }
   }
 
