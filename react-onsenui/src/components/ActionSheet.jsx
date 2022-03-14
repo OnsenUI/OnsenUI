@@ -1,33 +1,77 @@
-import BaseDialog from './BaseDialog.jsx';
 import PropTypes from 'prop-types';
 import 'onsenui/esm/elements/ons-action-sheet';
 
-/**
- * @original ons-action-sheet
- * @category dialog
- * @tutorial react/Reference/action-sheet
- * @description
- * [en]
- *  Action/bottom sheet that is displayed on top of current screen.
- *  The action sheet is useful for displaying a list of options and asking the user to make a decision. An ActionSheetButton component is provided for this purpose, although it can contain any type of content.
- *  It will automatically be displayed as Material Design (bottom sheet) when running on an Android device.
- * [/en]
- * [ja][/ja]
- */
-class ActionSheet extends BaseDialog {
-  _getDomNodeName() {
-    return 'ons-action-sheet';
-  }
-}
+import onsCustomElement from './onsCustomElement';
+import baseDialog from './baseDialog';
 
-ActionSheet.propTypes = {
+const propTypes = {
+  /**
+   * @name title
+   * @type string
+   * @required false
+   * @description
+   *  [en]
+   *  Optional title of the action sheet. A new element will be created containing this string.
+   *  [/en]
+   *  [ja][/ja]
+   */
+  title: PropTypes.string,
+
+  /**
+   * @name onDialogCancel
+   * @type function
+   * @required false
+   * @description
+   *  [en]
+   *  Called only if cancelable is true. It will be called after tapping the background or by pressing the back button on Android devices.
+   *  [/en]
+   *  [ja][/ja]
+   */
+  onDialogCancel: PropTypes.func,
+
+  /**
+   * @name visible
+   * @type bool
+   * @description
+   *  [en]
+   *  Indicates whether the dialog is open and shown.
+   *  [/en]
+   *  [ja][/ja]
+   */
+  visible: PropTypes.bool,
+
+  /**
+   * @name cancelable
+   * @type bool
+   * @required false
+   * @description
+   *  [en]
+   *  Specifies whether the dialog is cancelable or not.
+   *  A cancelable dialog will call onCancel  when tapping the background or or  pressing the back button on Android devices
+   *  [/en]
+   *  [ja][/ja]
+   */
+  cancelable: PropTypes.bool,
+
+  /**
+   * @name disabled
+   * @type bool
+   * @required false
+   * @description
+   *  [en]
+   *  Specifies whether the dialog is disabled.
+   *  [/en]
+   *  [ja][/ja]
+   */
+  disabled: PropTypes.bool,
+
   /**
    * @name onCancel
    * @type function
    * @required false
    * @description
    *  [en]
-   *  Called only if isCancelable is true. It will be called after tapping the background or by pressing the back button on Android devices.
+   *  DEPRECATED! Use `onDialogCancel` instead.
    *  [/en]
    *  [ja][/ja]
    */
@@ -36,14 +80,13 @@ ActionSheet.propTypes = {
   /**
    * @name isOpen
    * @type bool
-   * @required true
    * @description
    *  [en]
-   *  Indicates whether the dialog is open and shown.
+   *  DEPRECATED! Use `visible` instead.
    *  [/en]
    *  [ja][/ja]
    */
-  isOpen: PropTypes.bool.isRequired,
+  isOpen: PropTypes.bool,
 
   /**
    * @name isCancelable
@@ -51,8 +94,7 @@ ActionSheet.propTypes = {
    * @required false
    * @description
    *  [en]
-   *  Specifies whether the dialog is cancelable or not.
-   *  A cancelable dialog will call onCancel  when tapping the background or or  pressing the back button on Android devices
+   *  DEPRECATED! Use `cancelable` instead.
    *  [/en]
    *  [ja][/ja]
    */
@@ -64,7 +106,7 @@ ActionSheet.propTypes = {
    * @required false
    * @description
    *  [en]
-   *  Specifies whether the dialog is disabled.
+   *  DEPRECATED! Use `disabled` instead.
    *  [/en]
    *  [ja][/ja]
    */
@@ -168,5 +210,29 @@ ActionSheet.propTypes = {
    */
   onDeviceBackButton: PropTypes.func
 };
+
+const deprecated = {
+  onCancel: 'onDialogCancel',
+  isOpen: 'visible',
+  isDisabled: 'disabled',
+  isCancelable: 'cancelable'
+};
+
+const notAttributes = ['onDeviceBackButton'];
+
+/**
+ * @original ons-action-sheet
+ * @category dialog
+ * @tutorial react/Reference/action-sheet
+ * @description
+ * [en]
+ *  Action/bottom sheet that is displayed on top of current screen.
+ *  The action sheet is useful for displaying a list of options and asking the user to make a decision. An ActionSheetButton component is provided for this purpose, although it can contain any type of content.
+ *  It will automatically be displayed as Material Design (bottom sheet) when running on an Android device.
+ * [/en]
+ * [ja][/ja]
+ */
+const ActionSheet = onsCustomElement(baseDialog('ons-action-sheet'), {propTypes, deprecated, notAttributes});
+ActionSheet.propTypes = propTypes;
 
 export default ActionSheet;

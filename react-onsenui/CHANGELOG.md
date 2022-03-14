@@ -15,6 +15,7 @@ dev
  * ListItem: Added `animation` prop.
  * ListItem: Added `onExpand` prop.
  * BackButton: Added `options` prop.
+ * ActionSheet: Added `title` prop.
 
 ### Misc
 
@@ -26,6 +27,8 @@ dev
  * Toast: `isOpen` is deprecated and renamed to `visible`.
  * Toast: `isOpen` is no longer required.
  * Modal: `isOpen` is deprecated and renamed to `visible`.
+ * ActionSheet: `onCancel`, `isOpen`, `isDisabled` and `isCancelable` are deprecated and renamed to `onDialogCancel`, `visible`, `disabled`, and `cancelable`.
+ * ActionSheet: `isOpen` is no longer required.
 
 1.11.5
 ----
