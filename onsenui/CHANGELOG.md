@@ -40,6 +40,7 @@ dev
  * ons-dialog, ons-alert-dialog, ons-modal, ons-popover, ons-action-sheet: Can now be shown or hidden by setting the `visible` property/attribute.
  * ons-dialog, ons-alert-dialog, ons-popover, ons-action-sheet: Added `maskColor` property.
  * ons-alert-dialog, ons-toast, ons-modal, ons-dialog, ons-action-sheet, ons-popover: Added `animationOptions` property.
+ * ons-action-sheet: Added `title` property to mirror existing `title` attribute.
 
  ### Misc
 

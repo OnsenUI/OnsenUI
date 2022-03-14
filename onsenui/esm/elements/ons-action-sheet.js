@@ -147,6 +147,14 @@ export default class ActionSheetElement extends BaseDialogElement {
    */
 
   /**
+   * @property title
+   * @type {String}
+   * @description
+   *  [en]Optional title of the action sheet. A new element will be created containing this string.[/en]
+   *  [ja]アクションシートのタイトルを指定します。ここで指定した文字列を含む新しい要素が作成されます。[/ja]
+   */
+
+  /**
    * @attribute modifier
    * @type {String}
    * @description
@@ -290,6 +298,18 @@ export default class ActionSheetElement extends BaseDialogElement {
   _updateTitle() {
     if (this._title) {
       this._title.innerHTML = this.getAttribute('title');
+    }
+  }
+
+  get title() {
+    return this.getAttribute('title');
+  }
+
+  set title(value) {
+    if (value === null || value === undefined) {
+      this.removeAttribute('title');
+    } else {
+      this.setAttribute('title', value);
     }
   }
 
