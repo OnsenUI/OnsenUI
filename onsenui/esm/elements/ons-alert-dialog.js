@@ -391,6 +391,14 @@ export default class AlertDialogElement extends BaseDialogElement {
    */
 
   /**
+   * @property animationOptions
+   * @type {Object}
+   * @description
+   *   [en]Specify the animation's duration, timing and delay with an object literal. E.g. `{duration: 0.2, delay: 1, timing: 'ease-in'}`.[/en]
+   *   [ja]アニメーション時のduration, timing, delayをオブジェクトリテラルで指定します。例：{duration: 0.2, delay: 1, timing: 'ease-in'}[/ja]
+   */
+
+  /**
    * @param {String} name
    * @param {DialogAnimator} Animator
    */

@@ -106,7 +106,7 @@ export default class BaseDialogElement extends BaseElement {
     options = { ...options };
     options.animationOptions = util.extend(
       options.animationOptions || {},
-      AnimatorFactory.parseAnimationOptionsString(this.getAttribute('animation-options'))
+      this.animationOptions
     );
 
     let canceled = false;
@@ -186,6 +186,18 @@ export default class BaseDialogElement extends BaseElement {
       this.removeAttribute('mask-color');
     } else {
       this.setAttribute('mask-color', value);
+    }
+  }
+
+  get animationOptions() {
+    return AnimatorFactory.parseAnimationOptionsString(this.getAttribute('animation-options'));
+  }
+
+  set animationOptions(value) {
+    if (value === undefined || value === null) {
+      this.removeAttribute('animation-options');
+    } else {
+      this.setAttribute('animation-options', JSON.stringify(value));
     }
   }
 

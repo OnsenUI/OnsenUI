@@ -286,4 +286,11 @@ describe('OnsAlertDialogElement', () => {
       expect(mask.style.backgroundColor).to.equal('');
     });
   });
+
+  describe('#animationOptions', () => {
+    it('sets the animation-options attribute correctly', () => {
+      dialog.animationOptions = { duration: 5 };
+      expect(dialog.getAttribute('animation-options')).to.equal('{"duration":5}');
+    });
+  });
 });
