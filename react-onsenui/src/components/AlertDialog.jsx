@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import 'onsenui/esm/elements/ons-alert-dialog';
 
 import onsCustomElement from './onsCustomElement';
-import withPortal from './withPortal';
+import baseDialog from './baseDialog';
 
 const propTypes = {
   /**
@@ -233,7 +233,7 @@ const notAttributes = ['onDeviceBackButton'];
      </div>
    </AlertDialog>
  */
-const AlertDialog = onsCustomElement(withPortal('ons-alert-dialog'), {propTypes, deprecated, notAttributes});
+const AlertDialog = onsCustomElement(baseDialog('ons-alert-dialog'), {propTypes, deprecated, notAttributes});
 AlertDialog.propTypes = propTypes;
 
 export default AlertDialog;

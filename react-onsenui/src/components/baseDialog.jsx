@@ -23,7 +23,7 @@ class Portal extends React.Component {
   }
 }
 
-const withPortal = WrappedComponent =>
+const baseDialog = WrappedComponent =>
   React.forwardRef((props, ref) => (
     <Portal>
       <WrappedComponent {...props} ref={ref}>
@@ -32,4 +32,4 @@ const withPortal = WrappedComponent =>
     </Portal>
   ));
 
-export default withPortal;
+export default baseDialog;
