@@ -197,6 +197,10 @@ export default class BaseDialogElement extends BaseElement {
     });
   }
 
+  _updateAnimation() {
+    this._animatorFactory = this._updateAnimatorFactory();
+  }
+
   connectedCallback() {
     if (typeof this._defaultDBB === 'function') {
       this.onDeviceBackButton = this._defaultDBB.bind(this);
@@ -230,14 +234,21 @@ export default class BaseDialogElement extends BaseElement {
         ModifierUtil.onModifierChanged(last, current, this, this._scheme);
         break;
       case 'animation':
-        this._animatorFactory = this._updateAnimatorFactory();
+        this._updateAnimation();
         break;
       case 'mask-color':
         this._updateMask();
         break;
       case 'visible':
         if (this.visible !== this._visible) {
-          contentReady(this, () => this._setVisible(this.visible));
+          // update the mask and animation early in case `visible` attribute
+          // changed callback is called before `animation` or `mask-color`
+          this._updateMask();
+          this._updateAnimation();
+
+          contentReady(this, () => {
+            this._setVisible(this.visible)
+          });
         }
         break;
     }
