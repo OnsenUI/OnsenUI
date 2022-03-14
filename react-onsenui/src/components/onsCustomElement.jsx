@@ -46,6 +46,8 @@ function useCustomElement(props, options = {}) {
       useCustomElementListener(ref, prop, value);
     } else if (propTypes[prop] === PropTypes.bool) {
       properties[jsName] = value ? '' : null;
+    } else if (propTypes[prop] === PropTypes.object) {
+      properties[jsName] = JSON.stringify(value);
     } else {
       properties[jsName] = value;
     }
