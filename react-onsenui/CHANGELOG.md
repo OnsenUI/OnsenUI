@@ -25,6 +25,7 @@ dev
  * Dialog: `isOpen` is no longer required.
  * Toast: `isOpen` is deprecated and renamed to `visible`.
  * Toast: `isOpen` is no longer required.
+ * Modal: `isOpen` is deprecated and renamed to `visible`.
 
 1.11.5
 ----

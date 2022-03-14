@@ -1,39 +1,10 @@
-import BaseDialog from './BaseDialog.jsx';
 import PropTypes from 'prop-types';
 import 'onsenui/esm/elements/ons-modal';
 
-/**
- * @original ons-modal
- * @category dialog
- * @tutorial react/Reference/modal
- * @description
- * [en]
- *   A modal component covers the entire screen. Underlying components are not
- *   subject to any events while the modal component is shown.
- *
- *   This component can be used to block user input while some operation is
- *   running or to show some information to the user.
- * [/en]
- * [ja]
- *   画面全体をマスクするモーダル用コンポーネントです。下側にあるコンポーネントは、
- *   モーダルが表示されている間はイベント通知が行われません
- * [/ja]
- * @example
-  <Page>
-    <div> Page content </div>
+import onsCustomElement from './onsCustomElement';
+import baseDialog from './baseDialog';
 
-    <Modal isOpen={this.state.isLoading}>
-      Loading ...
-    </Modal>
-  </Page>
- */
-class Modal extends BaseDialog {
-  _getDomNodeName() {
-    return 'ons-modal';
-  }
-}
-
-Modal.propTypes = {
+const propTypes = {
   /**
    * @name animation
    * @type {String}
@@ -97,10 +68,18 @@ Modal.propTypes = {
   onPostHide: PropTypes.func,
 
   /**
-   * @name isOpen
+   * @name visible
    * @type boolean
    * @description
    *  [en]When `true` the modal will show itself.[/en]
+   */
+  visible: PropTypes.bool,
+
+  /**
+   * @name isOpen
+   * @type boolean
+   * @description
+   *  [en]DEPRECATED! Use `visible` instead.[/en]
    */
   isOpen: PropTypes.bool,
 
@@ -117,9 +96,38 @@ Modal.propTypes = {
   onDeviceBackButton: PropTypes.func
 };
 
-Modal.defaultProps = {
-  isOpen: false,
-  animation: 'none'
-};
+const deprecated = {
+  isOpen: 'visible'
+}
+
+const notAttributes = ['onDeviceBackButton'];
+
+/**
+ * @original ons-modal
+ * @category dialog
+ * @tutorial react/Reference/modal
+ * @description
+ * [en]
+ *   A modal component covers the entire screen. Underlying components are not
+ *   subject to any events while the modal component is shown.
+ *
+ *   This component can be used to block user input while some operation is
+ *   running or to show some information to the user.
+ * [/en]
+ * [ja]
+ *   画面全体をマスクするモーダル用コンポーネントです。下側にあるコンポーネントは、
+ *   モーダルが表示されている間はイベント通知が行われません
+ * [/ja]
+ * @example
+  <Page>
+    <div> Page content </div>
+
+    <Modal isOpen={this.state.isLoading}>
+      Loading ...
+    </Modal>
+  </Page>
+ */
+const Modal = onsCustomElement(baseDialog('ons-modal'), {propTypes, deprecated, notAttributes});
+Modal.propTypes = propTypes;
 
 export default Modal;
