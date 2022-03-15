@@ -3,7 +3,34 @@ import 'onsenui/esm/elements/ons-toolbar-button';
 
 import onsCustomElement from './onsCustomElement';
 
-const propTypes = {
+/**
+ * @original ons-toolbar-button
+ * @category page
+ * @tutorial react/Reference/page
+ * @description
+ *   [en]
+ *   Button component for the Toolbar. Using this component gives a nice default style.
+ *
+ *
+ *   [/en]
+ * [ja][/ja]
+ * @example
+ * <Page
+     renderToolbar = { () =>
+      <Toolbar>
+        <div className='left'><BackButton>Back</BackButton></div>
+        <div className='center'>Input</div>
+        <div className='right'>
+          <ToolbarButton onClick={this.add} >Add</ToolbarButton>
+        </div>
+      </Toolbar>
+     }>
+      Page Content
+    </Page>
+ */
+const ToolbarButton = onsCustomElement('ons-toolbar-button');
+
+ToolbarButton.propTypes = {
   /**
    * @name modifier
    * @type string
@@ -43,33 +70,5 @@ const propTypes = {
    */
   onClick: PropTypes.func
 };
-
-/**
- * @original ons-toolbar-button
- * @category page
- * @tutorial react/Reference/page
- * @description
- *   [en]
- *   Button component for the Toolbar. Using this component gives a nice default style.
- *
- *
- *   [/en]
- * [ja][/ja]
- * @example
- * <Page
-     renderToolbar = { () =>
-      <Toolbar>
-        <div className='left'><BackButton>Back</BackButton></div>
-        <div className='center'>Input</div>
-        <div className='right'>
-          <ToolbarButton onClick={this.add} >Add</ToolbarButton>
-        </div>
-      </Toolbar>
-     }>
-      Page Content
-    </Page>
- */
-const ToolbarButton = onsCustomElement('ons-toolbar-button', {propTypes});
-ToolbarButton.propTypes = propTypes;
 
 export default ToolbarButton;

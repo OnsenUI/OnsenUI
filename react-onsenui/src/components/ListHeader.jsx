@@ -3,19 +3,6 @@ import 'onsenui/esm/elements/ons-list-header';
 
 import onsCustomElement from './onsCustomElement';
 
-const propTypes = {
-  /**
-   * @name modifier
-   * @type string
-   * @description
-   *  [en]
-   *  Specify modifier name to specify custom styles. Optional.
-   *  [/en]
-   *  [ja][/ja]
-   */
-  modifier: PropTypes.string
-};
-
 /**
  * @original ons-list-header
  * @category list
@@ -34,5 +21,19 @@ const propTypes = {
     )}
   />
  */
-const ListHeader = onsCustomElement('ons-list-header', {propTypes});
+const ListHeader = onsCustomElement('ons-list-header');
+
+ListHeader.propTypes = {
+  /**
+   * @name modifier
+   * @type string
+   * @description
+   *  [en]
+   *  Specify modifier name to specify custom styles. Optional.
+   *  [/en]
+   *  [ja][/ja]
+   */
+  modifier: PropTypes.string
+};
+
 export default ListHeader;

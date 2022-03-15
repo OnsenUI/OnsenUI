@@ -4,7 +4,43 @@ import 'onsenui/esm/elements/ons-alert-dialog';
 import onsCustomElement from './onsCustomElement';
 import baseDialog from './baseDialog';
 
-const propTypes = {
+const deprecated = {
+  onCancel: 'onDialogCancel',
+  isOpen: 'visible',
+  isDisabled: 'disabled',
+  isCancelable: 'cancelable'
+};
+
+const notAttributes = ['onDeviceBackButton'];
+
+/**
+ * @original ons-alert-dialog
+ * @category dialog
+ * @tutorial react/Reference/alert-dialog
+ * @description
+ * [en]
+ *   Alert dialog that is displayed on top of the current screen. Useful for displaying questions, warnings or error messages to the user. The title, content and buttons can be easily customized and it will automatically switch style based on the platform.
+ * [/en]
+ * [ja][/ja]
+ * @example
+   <AlertDialog isOpen={this.state.isOpen} onCancel={this.handleCancel.bind(this)} cancelable>
+     <div className="alert-dialog-title">Warning!</div>
+     <div className="alert-dialog-content">
+       An error has occurred!
+     </div>
+     <div className="alert-dialog-footer">
+       <Button onClick={this.handleCancel.bind(this)} className="alert-dialog-button">
+         Cancel
+       </Button>
+       <Button onClick={this.handleCancel.bind(this)} className="alert-dialog-button">
+         Ok
+       </Button>
+     </div>
+   </AlertDialog>
+ */
+const AlertDialog = onsCustomElement(baseDialog('ons-alert-dialog'), {deprecated, notAttributes});
+
+AlertDialog.propTypes = {
   /**
    * @name visible
    * @type bool
@@ -198,42 +234,5 @@ const propTypes = {
    */
   onDeviceBackButton: PropTypes.func
 };
-
-const deprecated = {
-  onCancel: 'onDialogCancel',
-  isOpen: 'visible',
-  isDisabled: 'disabled',
-  isCancelable: 'cancelable'
-};
-
-const notAttributes = ['onDeviceBackButton'];
-
-/**
- * @original ons-alert-dialog
- * @category dialog
- * @tutorial react/Reference/alert-dialog
- * @description
- * [en]
- *   Alert dialog that is displayed on top of the current screen. Useful for displaying questions, warnings or error messages to the user. The title, content and buttons can be easily customized and it will automatically switch style based on the platform.
- * [/en]
- * [ja][/ja]
- * @example
-   <AlertDialog isOpen={this.state.isOpen} onCancel={this.handleCancel.bind(this)} cancelable>
-     <div className="alert-dialog-title">Warning!</div>
-     <div className="alert-dialog-content">
-       An error has occurred!
-     </div>
-     <div className="alert-dialog-footer">
-       <Button onClick={this.handleCancel.bind(this)} className="alert-dialog-button">
-         Cancel
-       </Button>
-       <Button onClick={this.handleCancel.bind(this)} className="alert-dialog-button">
-         Ok
-       </Button>
-     </div>
-   </AlertDialog>
- */
-const AlertDialog = onsCustomElement(baseDialog('ons-alert-dialog'), {propTypes, deprecated, notAttributes});
-AlertDialog.propTypes = propTypes;
 
 export default AlertDialog;

@@ -3,7 +3,17 @@ import 'onsenui/esm/elements/ons-alert-dialog-button';
 
 import onsCustomElement from './onsCustomElement';
 
-const propTypes = {
+/**
+ * @original ons-alert-dialog-button
+ * @category dialog
+ * @tutorial react/Reference/dialog
+ * @description
+ * [en]Component that represent each button of the alert dialog.[/en]
+ * [ja][/ja]
+ */
+const AlertDialogButton = onsCustomElement('ons-alert-dialog-button');
+
+AlertDialogButton.propTypes = {
   /**
    * @name modifier
    * @type string
@@ -34,16 +44,5 @@ const propTypes = {
    */
   onClick: PropTypes.func
 };
-
-/**
- * @original ons-alert-dialog-button
- * @category dialog
- * @tutorial react/Reference/dialog
- * @description
- * [en]Component that represent each button of the alert dialog.[/en]
- * [ja][/ja]
- */
-const AlertDialogButton = onsCustomElement('ons-alert-dialog-button', {propTypes});
-AlertDialogButton.propTypes = propTypes;
 
 export default AlertDialogButton;

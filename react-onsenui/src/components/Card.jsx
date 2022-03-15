@@ -3,19 +3,6 @@ import 'onsenui/esm/elements/ons-card';
 
 import onsCustomElement from './onsCustomElement';
 
-const propTypes = {
-  /**
-   * @name modifier
-   * @type string
-   * @description
-   *  [en]
-   *  Specify modifier name to specify custom styles. Optional.
-   *  [/en]
-   *  [ja][/ja]
-   */
-  modifier: PropTypes.string
-};
-
 /**
  * @original ons-card
  * @category visual
@@ -29,7 +16,19 @@ const propTypes = {
   <p>Some content</p>
 </Card>
  */
-const Card = onsCustomElement('ons-card', {propTypes});
-Card.propTypes = propTypes;
+const Card = onsCustomElement('ons-card');
+
+Card.propTypes = {
+  /**
+   * @name modifier
+   * @type string
+   * @description
+   *  [en]
+   *  Specify modifier name to specify custom styles. Optional.
+   *  [/en]
+   *  [ja][/ja]
+   */
+  modifier: PropTypes.string
+};
 
 export default Card;

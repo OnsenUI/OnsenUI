@@ -3,7 +3,38 @@ import 'onsenui/esm/elements/ons-toolbar';
 
 import onsCustomElement from './onsCustomElement';
 
-const propTypes = {
+const notAttributes = ['visible'];
+
+/**
+ * @original ons-toolbar
+ * @category page
+ * @tutorial react/Reference/toolbar
+ * @description
+ * [en]Toolbar component that can be used with navigation. Left, center and right container can be specified by class names. This component will automatically displays as a Material Design toolbar when running on Android devices.[/en]
+ * [ja][/ja]
+ * @example
+ *
+<Page renderToolbar={() =>
+  <Toolbar>
+    <div className="left">
+      <BackButton>
+          Back
+      </BackButton>
+    </div>
+    <div className="center">
+      Title
+    </div>
+    <div className="right">
+      <ToolbarButton>
+        <Icon icon="md-menu" />
+      </ToolbarButton>
+    </div>
+  </Toolbar> }
+/>
+ */
+const Toolbar = onsCustomElement('ons-toolbar', {notAttributes});
+
+Toolbar.propTypes = {
   /**
    * @name modifier
    * @type string
@@ -42,37 +73,5 @@ const propTypes = {
    */
   inline: PropTypes.bool
 };
-
-const notAttributes = ['visible'];
-
-/**
- * @original ons-toolbar
- * @category page
- * @tutorial react/Reference/toolbar
- * @description
- * [en]Toolbar component that can be used with navigation. Left, center and right container can be specified by class names. This component will automatically displays as a Material Design toolbar when running on Android devices.[/en]
- * [ja][/ja]
- * @example
- *
-<Page renderToolbar={() =>
-  <Toolbar>
-    <div className="left">
-      <BackButton>
-          Back
-      </BackButton>
-    </div>
-    <div className="center">
-      Title
-    </div>
-    <div className="right">
-      <ToolbarButton>
-        <Icon icon="md-menu" />
-      </ToolbarButton>
-    </div>
-  </Toolbar> }
-/>
- */
-const Toolbar = onsCustomElement('ons-toolbar', {propTypes, notAttributes});
-Toolbar.propTypes = propTypes;
 
 export default Toolbar;

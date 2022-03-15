@@ -1,6 +1,4 @@
 import React, { useRef, useEffect } from 'react';
-import PropTypes from 'prop-types';
-
 const kebabize = camelString =>
   camelString.replace(/([a-zA-Z])([A-Z])/g, '$1-$2').toLowerCase();
 
@@ -30,7 +28,6 @@ function useCustomElementListener(ref, prop, handler) {
 function useCustomElement(props, options = {}) {
   const ref = useRef();
 
-  const propTypes = options.propTypes || {};
   const notAttributes = options.notAttributes || [];
   const deprecated = options.deprecated || {};
 
@@ -44,9 +41,9 @@ function useCustomElement(props, options = {}) {
       });
     } else if (/^on[A-Z]/.test(prop)) {
       useCustomElementListener(ref, prop, value);
-    } else if (propTypes[prop] === PropTypes.bool) {
+    } else if (typeof value === 'boolean') {
       properties[jsName] = value ? '' : null;
-    } else if (propTypes[prop] === PropTypes.object) {
+    } else if (typeof value === 'object' && value !== null) {
       properties[jsName] = JSON.stringify(value);
     } else {
       properties[jsName] = value;

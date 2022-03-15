@@ -4,7 +4,40 @@ import 'onsenui/esm/elements/ons-modal';
 import onsCustomElement from './onsCustomElement';
 import baseDialog from './baseDialog';
 
-const propTypes = {
+const deprecated = {
+  isOpen: 'visible'
+}
+
+const notAttributes = ['onDeviceBackButton'];
+
+/**
+ * @original ons-modal
+ * @category dialog
+ * @tutorial react/Reference/modal
+ * @description
+ * [en]
+ *   A modal component covers the entire screen. Underlying components are not
+ *   subject to any events while the modal component is shown.
+ *
+ *   This component can be used to block user input while some operation is
+ *   running or to show some information to the user.
+ * [/en]
+ * [ja]
+ *   画面全体をマスクするモーダル用コンポーネントです。下側にあるコンポーネントは、
+ *   モーダルが表示されている間はイベント通知が行われません
+ * [/ja]
+ * @example
+  <Page>
+    <div> Page content </div>
+
+    <Modal isOpen={this.state.isLoading}>
+      Loading ...
+    </Modal>
+  </Page>
+ */
+const Modal = onsCustomElement(baseDialog('ons-modal'), {deprecated, notAttributes});
+
+Modal.propTypes = {
   /**
    * @name animation
    * @type {String}
@@ -95,39 +128,5 @@ const propTypes = {
    */
   onDeviceBackButton: PropTypes.func
 };
-
-const deprecated = {
-  isOpen: 'visible'
-}
-
-const notAttributes = ['onDeviceBackButton'];
-
-/**
- * @original ons-modal
- * @category dialog
- * @tutorial react/Reference/modal
- * @description
- * [en]
- *   A modal component covers the entire screen. Underlying components are not
- *   subject to any events while the modal component is shown.
- *
- *   This component can be used to block user input while some operation is
- *   running or to show some information to the user.
- * [/en]
- * [ja]
- *   画面全体をマスクするモーダル用コンポーネントです。下側にあるコンポーネントは、
- *   モーダルが表示されている間はイベント通知が行われません
- * [/ja]
- * @example
-  <Page>
-    <div> Page content </div>
-
-    <Modal isOpen={this.state.isLoading}>
-      Loading ...
-    </Modal>
-  </Page>
- */
-const Modal = onsCustomElement(baseDialog('ons-modal'), {propTypes, deprecated, notAttributes});
-Modal.propTypes = propTypes;
 
 export default Modal;

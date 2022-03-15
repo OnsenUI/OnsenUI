@@ -3,7 +3,28 @@ import 'onsenui/esm/elements/ons-back-button';
 
 import onsCustomElement from './onsCustomElement';
 
-const propTypes = {
+const notAttributes = ['options'];
+
+/**
+ * @original ons-back-button
+ * @category navigation
+ * @tutorial react/Reference/back-button
+ * @description
+ * [en]
+ *   Back button component for Toolbar. It enables to automatically to pop the top page of the navigator. When only presented with one page, the button is hidden automatically.
+ *
+ *   The default behavior can be overridden using the `onClick` prop.
+ * [/en]
+ * [ja][/ja]
+ * @example
+ * <Toolbar modifier={this.props.modifier} >
+      <div className="left"><BackButton modifier={this.props.modifier}>Back</BackButton></div>
+      <div className="center">{this.props.title}</div>
+   </Toolbar>
+ */
+const BackButton = onsCustomElement('ons-back-button', {notAttributes});
+
+BackButton.propTypes = {
   /**
    * @name modifier
    * @type string
@@ -36,27 +57,5 @@ const propTypes = {
     callback: PropTypes.func
   })
 };
-
-const notAttributes = ['options'];
-
-/**
- * @original ons-back-button
- * @category navigation
- * @tutorial react/Reference/back-button
- * @description
- * [en]
- *   Back button component for Toolbar. It enables to automatically to pop the top page of the navigator. When only presented with one page, the button is hidden automatically.
- *
- *   The default behavior can be overridden using the `onClick` prop.
- * [/en]
- * [ja][/ja]
- * @example
- * <Toolbar modifier={this.props.modifier} >
-      <div className="left"><BackButton modifier={this.props.modifier}>Back</BackButton></div>
-      <div className="center">{this.props.title}</div>
-   </Toolbar>
- */
-const BackButton = onsCustomElement('ons-back-button', {propTypes, notAttributes});
-BackButton.propTypes = propTypes;
 
 export default BackButton;
