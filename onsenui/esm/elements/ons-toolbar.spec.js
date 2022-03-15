@@ -131,4 +131,20 @@ describe('OnsToolbarElement', () => {
       expect(element.style.display).not.to.equal('none');
     });
   });
+
+  describe('#visible', () => {
+    it('should be true by default', () => {
+      expect(element.visible).to.be.true;
+    });
+
+    it('should hide the toolbar', () => {
+      element.visible = false;
+      expect(element.style.display).to.equal('none');
+    });
+
+    it('should show the toolbar', () => {
+      element.visible = true;
+      expect(element.style.display).not.to.equal('none');
+    });
+  });
 });
