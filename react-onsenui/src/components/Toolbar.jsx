@@ -1,8 +1,49 @@
-import SimpleWrapper from './SimpleWrapper.jsx';
-import ReactDOM from 'react-dom';
-
 import PropTypes from 'prop-types';
 import 'onsenui/esm/elements/ons-toolbar';
+
+import onsCustomElement from './onsCustomElement';
+
+const propTypes = {
+  /**
+   * @name modifier
+   * @type string
+   * @description
+   *  [en]
+   *  Specify modifier name to specify custom styles. Optional.
+   *  [/en]
+   *  [ja][/ja]
+   */
+  modifier: PropTypes.string,
+
+  /**
+   * @name visible
+   * @type bool
+   * @description
+   *  [en]If true, the toolbar is shown on the screen. Otherwise, the toolbar is not shown.[/en]
+   *  [ja][/ja]
+   */
+  visible: PropTypes.bool,
+
+  /**
+   * @name static
+   * @type bool
+   * @description
+   *   [en]Static toolbars are not animated by `ons-navigator` when pushing or popping pages. This can be useful to improve performance in some situations.[/en]
+   *  [ja][/ja]
+   */
+  static: PropTypes.bool,
+
+  /**
+   * @name inline
+   * @type bool
+   * @description
+   *   [en]Display the toolbar as an inline element.[/en]
+   *   [ja]ツールバーをインラインに置きます。スクロール領域内にそのまま表示されます。[/ja]
+   */
+  inline: PropTypes.bool
+};
+
+const notAttributes = ['visible'];
 
 /**
  * @original ons-toolbar
@@ -31,46 +72,7 @@ import 'onsenui/esm/elements/ons-toolbar';
   </Toolbar> }
 />
  */
-class Toolbar extends SimpleWrapper {
-  _getDomNodeName() {
-    return 'ons-toolbar';
-  }
-
-  componentDidMount() {
-    super.componentDidMount();
-
-    if (this.props.visible !== undefined) {
-      ReactDOM.findDOMNode(this).setVisibility(this.props.visible);
-    }
-  }
-
-  UNSAFE_componentWillReceiveProps(nextProps) {
-    if (this.props.visible !== nextProps.visible) {
-      ReactDOM.findDOMNode(this).setVisibility(nextProps.visible);
-    }
-  }
-}
-
-Toolbar.propTypes = {
-  /**
-   * @name modifier
-   * @type string
-   * @description
-   *  [en]
-   *  Specify modifier name to specify custom styles. Optional.
-   *  [/en]
-   *  [ja][/ja]
-   */
-  modifier: PropTypes.string,
-
-  /**
-   * @name visible
-   * @type bool
-   * @description
-   *  [en]If true, the toolbar is shown on the screen. Otherwise, the toolbar is not shown.[/en]
-   *  [ja][/ja]
-   */
-  visible: PropTypes.bool
-};
+const Toolbar = onsCustomElement('ons-toolbar', {propTypes, notAttributes});
+Toolbar.propTypes = propTypes;
 
 export default Toolbar;

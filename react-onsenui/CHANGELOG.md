@@ -16,6 +16,7 @@ dev
  * ListItem: Added `onExpand` prop.
  * BackButton: Added `options` prop.
  * ActionSheet: Added `title` prop.
+ * Toolbar: Added `inline` and `static` props.
 
 ### Misc
 
