@@ -1,6 +1,7 @@
-import SimpleWrapper from './SimpleWrapper.jsx';
 import PropTypes from 'prop-types';
 import 'onsenui/esm/elements/ons-progress-bar';
+
+import onsCustomElement from './onsCustomElement';
 
 /**
  * @original ons-progress-bar
@@ -13,11 +14,7 @@ import 'onsenui/esm/elements/ons-progress-bar';
  *<ProgressBar value={55} secondaryValue={87} />
  *<ProgressBar indeterminate />
  */
-class ProgressBar extends SimpleWrapper {
-  _getDomNodeName() {
-    return 'ons-progress-bar';
-  }
-}
+const ProgressBar = onsCustomElement('ons-progress-bar');
 
 ProgressBar.propTypes = {
   /**
