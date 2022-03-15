@@ -261,5 +261,13 @@ describe('OnsCarouselElement', () => {
       element.dispatchEvent(new Event('swipe'));
     });
   });
+
+  describe('#animationOptions', () => {
+    it('sets the animation-options attribute correctly', () => {
+      const element = ons._util.createElement('<ons-carousel></ons-carousel>');
+      element.animationOptions = { duration: 5 };
+      expect(element.getAttribute('animation-options')).to.equal('{"duration":5}');
+    });
+  });
 });
 

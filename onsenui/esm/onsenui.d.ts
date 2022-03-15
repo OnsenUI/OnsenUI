@@ -542,6 +542,7 @@ declare namespace ons {
      * @description Whether the carousel is centered or not.
      **/
     centered: boolean;
+    animationOptions: object;
   }
 
   /**

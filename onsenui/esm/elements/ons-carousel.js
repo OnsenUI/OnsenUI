@@ -372,9 +372,7 @@ export default class CarouselElement extends BaseElement {
   setActiveIndex(index, options = {}) {
     options = {
       animation: this.getAttribute('animation'),
-      animationOptions: this.hasAttribute('animation-options')
-        ? util.animationOptionsParse(this.getAttribute('animation-options'))
-        : { duration: .3, timing: 'cubic-bezier(.4, .7, .5, 1)' },
+      animationOptions: this.animationOptions || { duration: .3, timing: 'cubic-bezier(.4, .7, .5, 1)' },
       ...options
     };
 
@@ -635,6 +633,31 @@ export default class CarouselElement extends BaseElement {
 
   static get events() {
     return ['postchange', 'refresh', 'overscroll'];
+  }
+
+  /**
+   * @property animationOptions
+   * @type {Object}
+   * @description
+   *   [en]Specify the animation's duration, timing and delay with an object literal. E.g. `{duration: 0.2, delay: 1, timing: 'ease-in'}`.[/en]
+   *   [ja]アニメーション時のduration, timing, delayをオブジェクトリテラルで指定します。例：{duration: 0.2, delay: 1, timing: 'ease-in'}[/ja]
+   */
+
+  get animationOptions() {
+    const attr = this.getAttribute('animation-options');
+    if (attr) {
+      return util.animationOptionsParse(attr);
+    } else {
+      return attr;
+    }
+  }
+
+  set animationOptions(value) {
+    if (value === undefined || value === null) {
+      this.removeAttribute('animation-options');
+    } else {
+      this.setAttribute('animation-options', JSON.stringify(value));
+    }
   }
 }
 
