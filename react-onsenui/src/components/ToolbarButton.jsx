@@ -1,7 +1,48 @@
-import SimpleWrapper from './SimpleWrapper.jsx';
-
 import PropTypes from 'prop-types';
 import 'onsenui/esm/elements/ons-toolbar-button';
+
+import onsCustomElement from './onsCustomElement';
+
+const propTypes = {
+  /**
+   * @name modifier
+   * @type string
+   * @required false
+   * @description
+   *  [en]The appearance of the button.[/en]
+   *  [ja][/ja]
+   */
+  modifier: PropTypes.string,
+
+  /**
+   * @name disabled
+   * @type bool
+   * @description
+   *  [en]
+   *  Indicates whether the button is disabled.
+   *  [/en]
+   *  [ja][/ja]
+   */
+  disabled: PropTypes.bool,
+
+  /**
+   * @name icon
+   * @type string
+   * @description
+   *  [en]Creates an `Icon` component with this string.[/en]
+   *  [ja][/ja]
+   */
+  icon: PropTypes.string,
+
+  /**
+   * @name onClick
+   * @type function
+   * @description
+   *  [en]This function will be called when the button is clicked.[/en]
+   *  [ja][/ja]
+   */
+  onClick: PropTypes.func
+};
 
 /**
  * @original ons-toolbar-button
@@ -28,33 +69,7 @@ import 'onsenui/esm/elements/ons-toolbar-button';
       Page Content
     </Page>
  */
-class ToolbarButton extends SimpleWrapper {
-  _getDomNodeName() {
-    return 'ons-toolbar-button';
-  }
-}
-
-ToolbarButton.propTypes = {
-  /**
-   * @name modifier
-   * @type string
-   * @required false
-   * @description
-   *  [en]The appearance of the button.[/en]
-   *  [ja][/ja]
-   */
-  modifier: PropTypes.string,
-
-  /**
-   * @name disabled
-   * @type bool
-   * @description
-   *  [en]
-   *  Indicates whether the button is disabled.
-   *  [/en]
-   *  [ja][/ja]
-   */
-  disabled: PropTypes.bool
-};
+const ToolbarButton = onsCustomElement('ons-toolbar-button', {propTypes});
+ToolbarButton.propTypes = propTypes;
 
 export default ToolbarButton;

@@ -17,6 +17,7 @@ dev
  * BackButton: Added `options` prop.
  * ActionSheet: Added `title` prop.
  * Toolbar: Added `inline` and `static` props.
+ * ToolbarButton: Added `onClick` and `icon` props.
 
 ### Misc
 
