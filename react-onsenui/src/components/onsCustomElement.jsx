@@ -31,8 +31,10 @@ function useCustomElement(props, options = {}) {
   const notAttributes = options.notAttributes || [];
   const deprecated = options.deprecated || {};
 
+  const {children, ...rest} = props; // remove children
+
   const properties = {};
-  for (const [prop, value] of Object.entries(addDeprecated(props, deprecated))) {
+  for (const [prop, value] of Object.entries(addDeprecated(rest, deprecated))) {
     const jsName = kebabize(prop);
 
     if (notAttributes.includes(prop)) {
