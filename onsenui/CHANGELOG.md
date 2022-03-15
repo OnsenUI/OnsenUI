@@ -43,6 +43,7 @@ dev
  * ons-alert-dialog, ons-toast, ons-modal, ons-dialog, ons-action-sheet, ons-popover: Added `animationOptions` property.
  * ons-action-sheet: Added `title` property to mirror existing `title` attribute.
  * ons-carousel: Added `animationOptions` property.
+ * ons-carousel: Added `active-index` attribute and `activeIndex` property.
 
  ### Misc
 

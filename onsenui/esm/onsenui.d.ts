@@ -543,6 +543,7 @@ declare namespace ons {
      **/
     centered: boolean;
     animationOptions: object;
+    activeIndex: number;
   }
 
   /**

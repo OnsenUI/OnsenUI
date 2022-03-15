@@ -269,5 +269,74 @@ describe('OnsCarouselElement', () => {
       expect(element.getAttribute('animation-options')).to.equal('{"duration":5}');
     });
   });
+
+  describe('#initial-index attribute', () => {
+    it('sets the initial index if active-index is not set', done => {
+      const element = ons._util.createElement(`
+        <ons-carousel initial-index="1">
+          <ons-carousel-item>one</ons-carousel-item>
+          <ons-carousel-item>two</ons-carousel-item>
+          <ons-carousel-item>three</ons-carousel-item>
+        </ons-carousel>
+      `);
+      document.body.appendChild(element);
+      setImmediate(() => {
+        expect(element.getActiveIndex()).to.equal(1);
+        element.remove();
+        done();
+      });
+    });
+
+    it('does nothing if active-index is set', done => {
+      const element = ons._util.createElement(`
+        <ons-carousel initial-index="1" active-index="2">
+          <ons-carousel-item>one</ons-carousel-item>
+          <ons-carousel-item>two</ons-carousel-item>
+          <ons-carousel-item>three</ons-carousel-item>
+        </ons-carousel>
+      `);
+      document.body.appendChild(element);
+      setImmediate(() => {
+        expect(element.getActiveIndex()).to.equal(2);
+        element.remove();
+        done();
+      });
+    });
+  });
+
+  describe('#activeIndex', () => {
+    it('sets the initial index', done => {
+      const element = ons._util.createElement(`
+        <ons-carousel active-index="2">
+          <ons-carousel-item>one</ons-carousel-item>
+          <ons-carousel-item>two</ons-carousel-item>
+          <ons-carousel-item>three</ons-carousel-item>
+        </ons-carousel>
+      `);
+      document.body.appendChild(element);
+      setImmediate(() => {
+        expect(element.getActiveIndex()).to.equal(2);
+        element.remove();
+        done();
+      });
+    });
+
+    it('changes the active index when changed', done => {
+      const element = ons._util.createElement(`
+        <ons-carousel active-index="2">
+          <ons-carousel-item>one</ons-carousel-item>
+          <ons-carousel-item>two</ons-carousel-item>
+          <ons-carousel-item>three</ons-carousel-item>
+        </ons-carousel>
+      `);
+      document.body.appendChild(element);
+      setImmediate(() => {
+        element.activeIndex = 1;
+        expect(element.getActiveIndex()).to.equal(1);
+        element.remove();
+        done();
+      });
+    });
+  });
 });
 
