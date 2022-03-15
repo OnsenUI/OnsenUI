@@ -1,6 +1,7 @@
-import SimpleWrapper from './SimpleWrapper.jsx';
 import PropTypes from 'prop-types';
 import 'onsenui/esm/elements/ons-progress-circular';
+
+import onsCustomElement from './onsCustomElement';
 
 /**
  * @original ons-progress-circular
@@ -14,11 +15,7 @@ import 'onsenui/esm/elements/ons-progress-circular';
  *<ProgressCircular value={55} secondaryValue={87} />
  *<ProgressCircular indeterminate />
  */
-class ProgressCircular extends SimpleWrapper {
-  _getDomNodeName() {
-    return 'ons-progress-circular';
-  }
-}
+const ProgressCircular = onsCustomElement('ons-progress-circular');
 
 ProgressCircular.propTypes = {
   /**
