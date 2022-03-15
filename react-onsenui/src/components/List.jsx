@@ -1,8 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import BasicComponent from './BasicComponent.jsx';
-import Util from './Util.js';
 import 'onsenui/esm/elements/ons-list';
+
+import onsCustomElement from './onsCustomElement';
+
+const Element = onsCustomElement('ons-list');
 
 /**
  * @original ons-list
@@ -25,21 +27,24 @@ import 'onsenui/esm/elements/ons-list';
   renderFooter={this.renderFooter}
   />
  */
-class List extends BasicComponent {
-  render() {
-    const attrs = Util.getAttrs(this);
-    const pages = this.props.dataSource.map((data, idx) => this.props.renderRow(data, idx));
+const List = React.forwardRef((props, ref) => {
 
-    return (
-      <ons-list { ...attrs } ref={(list) => { this._list = list; }}>
-        {this.props.renderHeader()}
-        {pages}
-        {this.props.children}
-        {this.props.renderFooter()}
-      </ons-list>
-    );
-  }
-}
+  const {renderHeader, renderFooter, renderRow, dataSource, ...rest} = props;
+
+  const rows = dataSource.map((data, index) => renderRow(data, index));
+
+  return (
+    <Element
+      {...rest}
+      ref={ref}
+    >
+      {renderHeader()}
+      {rows}
+      {props.children}
+      {renderFooter()}
+    </Element>
+  );
+});
 
 List.propTypes = {
   /**
