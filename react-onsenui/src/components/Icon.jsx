@@ -1,8 +1,34 @@
-import SimpleWrapper from './SimpleWrapper.jsx';
 import React from 'react';
 import PropTypes from 'prop-types';
-import Util from './Util.js';
 import 'onsenui/esm/elements/ons-icon';
+
+import onsCustomElement from './onsCustomElement';
+
+const parseIcon = icon => {
+  if (icon) {
+    if ((typeof icon) === 'string') {
+      return icon;
+    } else {
+      const keys = Object.keys(icon).filter((a) => a !== 'default');
+      const innerString = keys.map((key) => key + ':' + icon[key] + '');
+      return icon.default + ', ' + innerString.join(',');
+    }
+  }
+}
+
+const parseSize = size => {
+  if (size) {
+    if ((typeof size) === 'number') {
+      return `${size}px`;
+    } else {
+      const keys = Object.keys(size).filter((a) => a !== 'default');
+      const innerString = keys.map((key) => key + ':' + size[key] + 'px');
+      return size.default + 'px, ' + innerString.join(',');
+    }
+  }
+}
+
+const Element = onsCustomElement('ons-icon');
 
 /**
  * @original ons-icon
@@ -22,38 +48,20 @@ import 'onsenui/esm/elements/ons-icon';
     icon={{default: 'ion-navicon', material: 'md-menu'}}
   />
 */
-class Icon extends SimpleWrapper {
-  _getDomNodeName() {
-    return 'ons-icon';
-  }
+const Icon = React.forwardRef((props, ref) => {
+  const {icon, size, ...rest} = props;
 
-  render() {
-    const { icon, size, ...others } = this.props;
-    const attrs = Util.getAttrs(this, others);
-
-    if (icon) {
-      if ((typeof icon) === 'string') {
-        attrs.icon = icon;
-      } else {
-        const keys = Object.keys(icon).filter((a) => a !== 'default');
-        const innerString = keys.map((key) => key + ':' + icon[key] + '');
-        attrs.icon = icon.default + ', ' + innerString.join(',');
-      }
-    }
-
-    if (size) {
-      if ((typeof size) === 'number') {
-        attrs.size = `${size}px`;
-      } else {
-        const keys = Object.keys(size).filter((a) => a !== 'default');
-        const innerString = keys.map((key) => key + ':' + size[key] + 'px');
-        attrs.size = size.default + 'px, ' + innerString.join(',');
-      }
-    }
-
-    return React.createElement(this._getDomNodeName(), attrs, this.props.children);
-  }
-}
+  return (
+    <Element
+      icon={parseIcon(icon)}
+      size={parseSize(size)}
+      {...rest}
+      ref={ref}
+    >
+      {props.children}
+    </Element>
+  );
+});
 
 Icon.propTypes = {
   /**
@@ -116,7 +124,6 @@ Icon.propTypes = {
    *  [ja][/ja]
    */
   spin: PropTypes.bool
-
 };
 
 export default Icon;
