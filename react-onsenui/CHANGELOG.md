@@ -18,6 +18,11 @@ dev
  * ActionSheet: Added `title` prop.
  * Toolbar: Added `inline` and `static` props.
  * ToolbarButton: Added `onClick` and `icon` props.
+ * Carousel: Added `onPreChange` and `animation` props.
+
+### Bug Fixes
+
+ * Carousel: Allow only PropTypes.string for itemWidth and itemHeight.
 
 ### Misc
 
@@ -31,6 +36,7 @@ dev
  * Modal: `isOpen` is deprecated and renamed to `visible`.
  * ActionSheet: `onCancel`, `isOpen`, `isDisabled` and `isCancelable` are deprecated and renamed to `onDialogCancel`, `visible`, `disabled`, and `cancelable`.
  * ActionSheet: `isOpen` is no longer required.
+ * Carousel: `index` is deprecated and renamed to `activeIndex`.
 
 1.11.5
 ----

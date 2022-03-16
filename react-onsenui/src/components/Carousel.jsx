@@ -5,6 +5,12 @@ import {findDOMNode} from 'react-dom';
 import Util from './Util.js';
 import 'onsenui/esm/elements/ons-carousel';
 
+import onsCustomElement from './onsCustomElement';
+
+const deprecated = {
+  index: 'activeIndex'
+};
+
 /**
  * @original ons-carousel
  * @category carousel
@@ -35,69 +41,7 @@ import 'onsenui/esm/elements/ons-carousel';
         </Carousel>
 
  */
-class Carousel extends SimpleWrapper {
-  constructor(...args) {
-    super(...args);
-
-    const callback = (name, event) => {
-      if (this.props[name]) {
-        return this.props[name](event);
-      }
-    };
-    this.onChange = callback.bind(this, 'onPostChange');
-    this.onRefresh = callback.bind(this, 'onRefresh');
-    this.onOverscroll = callback.bind(this, 'onOverscroll');
-  }
-
-  _getDomNodeName() {
-    return 'ons-carousel';
-  }
-
-  componentDidMount() {
-    super.componentDidMount();
-    const node = findDOMNode(this);
-    node.addEventListener('postchange', this.onChange);
-    node.addEventListener('refresh', this.onRefresh);
-    node.addEventListener('overscroll', this.onOverscroll);
-    node.onSwipe = this.props.onSwipe || null;
-  }
-
-  componentWillUnmount() {
-    const node = findDOMNode(this);
-    node.removeEventListener('postchange', this.onPostChange);
-    node.removeEventListener('refresh', this.onRefresh);
-    node.removeEventListener('overscroll', this.onOverscroll);
-  }
-
-  componentDidUpdate(props) {
-    const node = findDOMNode(this);
-
-    if (this.props.index !== node.getActiveIndex()) {
-      node.setActiveIndex(this.props.index, props.animationOptions);
-    }
-
-    if (this.props.children.length !== props.children.length) {
-      node.refresh();
-    }
-
-    if (this.props.onSwipe !== props.onSwipe) {
-      node.onSwipe = this.props.onSwipe;
-    }
-  }
-
-  render() {
-    const attrs = Util.getAttrs(this, this.props, { index: 'initial-index' });
-
-    return (
-      <ons-carousel {...attrs}>
-        <div>
-          {this.props.children}
-        </div>
-        <div></div>
-      </ons-carousel>
-    );
-  }
-}
+const Carousel = onsCustomElement('ons-carousel', {deprecated});
 
 Carousel.propTypes = {
 
@@ -142,19 +86,19 @@ Carousel.propTypes = {
    * @name itemWidth
    * @type number
    * @description
-   *  [en]ons-carousel-item's width. Only works when the direction is set to "horizontal".[/en]
+   *  [en]ons-carousel-item's width. Only works when the direction is set to "horizontal". Can be in pixels or a percentage.[/en]
    *  [ja][/ja]
    */
-  itemWidth: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  itemWidth: PropTypes.string,
 
   /**
    * @name itemHeight
    * @type number
    * @description
-   *  [en]ons-carousel-item's height. Only works when the direction is set to "vertical".[/en]
+   *  [en]ons-carousel-item's height. Only works when the direction is set to "vertical". Can be in pixels or a percentage.[/en]
    *  [ja][/ja]
    */
-  itemHeight: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  itemHeight: PropTypes.string,
 
   /**
    * @name autoScroll
@@ -193,10 +137,19 @@ Carousel.propTypes = {
   disabled: PropTypes.bool,
 
   /**
-   * @name index
+   * @name activeIndex
    * @type number
    * @description
    *  [en]Specify the index of the ons-carousel-item to show. Default is 0.[/en]
+   *  [ja][/ja]
+   */
+  activeIndex: PropTypes.number,
+
+  /**
+   * @name index
+   * @type number
+   * @description
+   *  [en]DEPRECATED! Use `activeIndex` instead.[/en]
    *  [ja][/ja]
    */
   index: PropTypes.number,
@@ -211,10 +164,19 @@ Carousel.propTypes = {
   autoRefresh: PropTypes.bool,
 
   /**
+   * @name onPreChange
+   * @type function
+   * @description
+   *  [en]Called just before the current carousel item changes.[/en]
+   *  [ja][/ja]
+   */
+  onPreChange: PropTypes.func,
+
+  /**
    * @name onPostChange
    * @type function
    * @description
-   *  [en]Called just after the current carousel item has changed.  [/en]
+   *  [en]Called just after the current carousel item has changed.[/en]
    *  [ja][/ja]
    */
   onPostChange: PropTypes.func,
@@ -236,6 +198,16 @@ Carousel.propTypes = {
    *  [ja][/ja]
    */
   onOverscroll: PropTypes.func,
+
+  /**
+   * @name animation
+   * @type string
+   * @required false
+   * @description
+   *  [en]If this prop is set to "none" the transitions will not be animated.[/en]
+   *  [ja][/ja]
+   */
+  animation: PropTypes.string,
 
   /**
    * @name animationOptions
