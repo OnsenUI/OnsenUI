@@ -19,6 +19,7 @@ dev
  * Toolbar: Added `inline` and `static` props.
  * ToolbarButton: Added `onClick` and `icon` props.
  * Carousel: Added `onPreChange` and `animation` props.
+ * Ripple: Added `modifier`, `size` and `center` props.
 
 ### Bug Fixes
 

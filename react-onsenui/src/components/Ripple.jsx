@@ -1,7 +1,7 @@
-import SimpleWrapper from './SimpleWrapper.jsx';
-
 import PropTypes from 'prop-types';
 import 'onsenui/esm/elements/ons-ripple';
+
+import onsCustomElement from './onsCustomElement';
 
 /**
  * @original ons-ripple
@@ -17,11 +17,7 @@ import 'onsenui/esm/elements/ons-ripple';
      <Ripple color='red' />
    </div>
  */
-class Ripple extends SimpleWrapper {
-  _getDomNodeName() {
-    return 'ons-ripple';
-  }
-}
+const Ripple = onsCustomElement('ons-ripple');
 
 Ripple.propTypes = {
   /**
@@ -35,6 +31,16 @@ Ripple.propTypes = {
   color: PropTypes.string,
 
   /**
+   * @name modifier
+   * @type string
+   * @required false
+   * @description
+   *  [en]The appearance of the ripple effect.[/en]
+   *  [ja][/ja]
+   */
+  modifier: PropTypes.string,
+
+  /**
    * @name background
    * @type string
    * @required false
@@ -43,6 +49,26 @@ Ripple.propTypes = {
    *  [ja][/ja]
    */
   background: PropTypes.string,
+
+  /**
+   * @name size
+   * @type string
+   * @required false
+   * @description
+   *  [en]Sizing of the wave on ripple effect. Set "cover" or "contain". Default is "cover".[/en]
+   *  [ja][/ja]
+   */
+  size: PropTypes.string,
+
+  /**
+   * @name size
+   * @type string
+   * @required false
+   * @description
+   *  [en]Changes the position of wave effect to center of the target element.[/en]
+   *  [ja][/ja]
+   */
+  center: PropTypes.bool,
 
   /**
    * @name disabled
