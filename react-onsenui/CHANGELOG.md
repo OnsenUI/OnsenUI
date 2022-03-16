@@ -37,6 +37,7 @@ dev
  * ActionSheet: `onCancel`, `isOpen`, `isDisabled` and `isCancelable` are deprecated and renamed to `onDialogCancel`, `visible`, `disabled`, and `cancelable`.
  * ActionSheet: `isOpen` is no longer required.
  * Carousel: `index` is deprecated and renamed to `activeIndex`.
+ * PullHook: `onLoad` and `onChange` are deprecated and renamed to `onAction` and `onChangeState`.
 
 1.11.5
 ----
