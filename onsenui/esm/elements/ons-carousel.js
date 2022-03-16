@@ -68,6 +68,25 @@ export default class CarouselElement extends BaseElement {
    */
 
   /**
+   * @event prechange
+   * @description
+   *   [en]Fired just before the current carousel item changes.[/en]
+   *   [ja][/ja]
+   * @param {Object} event
+   *   [en]Event object.[/en]
+   *   [ja]イベントオブジェクトです。[/ja]
+   * @param {Object} event.carousel
+   *   [en]Carousel object.[/en]
+   *   [ja]イベントが発火したCarouselオブジェクトです。[/ja]
+   * @param {Number} event.activeIndex
+   *   [en]Current active index.[/en]
+   *   [ja]現在アクティブになっている要素のインデックス。[/ja]
+   * @param {Number} event.lastActiveIndex
+   *   [en]Previous active index.[/en]
+   *   [ja]以前アクティブだった要素のインデックス。[/ja]
+   */
+
+  /**
    * @event refresh
    * @description
    *   [en]Fired when the carousel has been refreshed.[/en]
