@@ -1,6 +1,7 @@
-import SimpleWrapper from './SimpleWrapper.jsx';
 import PropTypes from 'prop-types';
 import 'onsenui/esm/elements/ons-col';
+
+import onsCustomElement from './onsCustomElement';
 
 /**
  * @original ons-col
@@ -17,11 +18,7 @@ import 'onsenui/esm/elements/ons-col';
  *   <Col>Text</Col>
  * </Row>
  */
-class Col extends SimpleWrapper {
-  _getDomNodeName() {
-    return 'ons-col';
-  }
-}
+const Col = onsCustomElement('ons-col');
 
 Col.propTypes = {
 

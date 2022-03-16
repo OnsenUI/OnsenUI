@@ -1,6 +1,7 @@
-import SimpleWrapper from './SimpleWrapper.jsx';
 import PropTypes from 'prop-types';
 import 'onsenui/esm/elements/ons-row';
+
+import onsCustomElement from './onsCustomElement';
 
 /**
  * @original ons-row
@@ -17,11 +18,7 @@ import 'onsenui/esm/elements/ons-row';
  *   <Col>Text</Col>
  * </Row>
  */
-class Row extends SimpleWrapper {
-  _getDomNodeName() {
-    return 'ons-row';
-  }
-}
+const Row = onsCustomElement('ons-row');
 
 Row.propTypes = {
 
