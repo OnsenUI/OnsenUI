@@ -31,10 +31,8 @@ function useCustomElement(props, options = {}) {
   const notAttributes = options.notAttributes || [];
   const deprecated = options.deprecated || {};
 
-  const {children, ...rest} = props; // remove children
-
   const properties = {};
-  for (const [prop, value] of Object.entries(addDeprecated(rest, deprecated))) {
+  for (const [prop, value] of Object.entries(addDeprecated(props, deprecated))) {
     const jsName = kebabize(prop);
 
     if (notAttributes.includes(prop)) {
@@ -58,14 +56,16 @@ function useCustomElement(props, options = {}) {
 export default function onsCustomElement(WrappedComponent, options) {
   return function (props) {
 
-    const {ref, properties} = useCustomElement(props, options);
+    const {style, children, ...rest} = props;
+    const {ref, properties} = useCustomElement(rest, options);
 
     return (
       <WrappedComponent
         ref={ref}
+        style={style}
         {...properties}
       >
-        {props.children}
+        {children}
       </WrappedComponent>
     );
   };
