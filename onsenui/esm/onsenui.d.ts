@@ -413,6 +413,7 @@ declare namespace ons {
      * @description Whether the element is disabled or not.
      */
     disabled: boolean;
+    activeIndex: number;
   }
 
   interface OnsTemplateElement extends HTMLElement {

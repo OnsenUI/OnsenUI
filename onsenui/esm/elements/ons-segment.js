@@ -97,11 +97,19 @@ export default class SegmentElement extends BaseElement {
 
   /**
    * @attribute active-index
-   * @initonly
    * @default 0
    * @type {Number}
    * @description
-   *  [en]Index of the first active button, only works if there is no connected tabbar (in which case the active tab sets the active button).[/en]
+   *  [en]Index of the active button. If a tabbar is connected, this will be set to the tabbar's active index.[/en]
+   *  [ja][/ja]
+   */
+
+  /**
+   * @property activeIndex
+   * @default 0
+   * @type {Number}
+   * @description
+   *  [en]Index of the active button. If a tabbar is connected, this will be set to the tabbar's active index.[/en]
    *  [ja][/ja]
    */
 
@@ -139,7 +147,7 @@ export default class SegmentElement extends BaseElement {
       input.type = 'radio';
       input.value = index;
       input.name = input.name || this._segmentId;
-      input.checked = !this.hasAttribute('tabbar-id') && index === (parseInt(this.getAttribute('active-index')) || 0);
+      input.checked = !this.hasAttribute('tabbar-id') && index === (this.activeIndex || 0);
 
       const button = util.findChild(item, '.segment__button') || util.create('.segment__button');
       if (button.parentElement !== item) {
@@ -165,7 +173,11 @@ export default class SegmentElement extends BaseElement {
         }
 
         this._tabbar.setAttribute('hide-tabs', '');
-        setImmediate(() => this._setChecked(this._tabbar.getActiveTabIndex()));
+        setImmediate(() => {
+          const index = this._tabbar.getActiveTabIndex();
+          this._setChecked(index);
+          this.activeIndex = index;
+        });
 
         this._tabbar.addEventListener('prechange', this._onTabbarPreChange);
       }
@@ -257,6 +269,7 @@ export default class SegmentElement extends BaseElement {
       segmentItem: this.children[index]
     });
     this._lastActiveIndex = index;
+    this.activeIndex = index;
   }
 
   /**
@@ -274,8 +287,18 @@ export default class SegmentElement extends BaseElement {
     return this.hasAttribute('disabled');
   }
 
+  get activeIndex() {
+    return parseInt(this.getAttribute('active-index'));
+  }
+
+  set activeIndex(value) {
+    if (value !== null && value !== undefined) {
+      this.setAttribute('active-index', value);
+    }
+  }
+
   static get observedAttributes() {
-    return ['class', 'modifier'];
+    return ['class', 'modifier', 'active-index'];
   }
 
   attributeChangedCallback(name, last, current) {
@@ -285,6 +308,13 @@ export default class SegmentElement extends BaseElement {
         break;
       case 'modifier':
         ModifierUtil.onModifierChanged(last, current, this, scheme);
+        break;
+      case 'active-index':
+        contentReady(this, () => {
+          if (this.getActiveButtonIndex() !== this.activeIndex) {
+            this.setActiveButton(this.activeIndex);
+          }
+        });
         break;
     }
   }

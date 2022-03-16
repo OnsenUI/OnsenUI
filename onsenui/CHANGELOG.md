@@ -44,6 +44,7 @@ dev
  * ons-action-sheet: Added `title` property to mirror existing `title` attribute.
  * ons-carousel: Added `animationOptions` property.
  * ons-carousel: Added `active-index` attribute and `activeIndex` property.
+ * ons-segment: `active-index` can now be set at any time, not just during initialization. Also added corresponding `activeIndex` property.
 
  ### Misc
 
