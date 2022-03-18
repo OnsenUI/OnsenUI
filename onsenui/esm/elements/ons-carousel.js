@@ -705,7 +705,7 @@ export default class CarouselElement extends BaseElement {
    *   [ja][/ja]
    */
   get activeIndex() {
-    return this.getAttribute('active-index');
+    return parseInt(this.getAttribute('active-index'));
   }
 
   set activeIndex(value) {
