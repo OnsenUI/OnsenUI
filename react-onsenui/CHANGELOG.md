@@ -20,6 +20,7 @@ dev
  * ToolbarButton: Added `onClick` and `icon` props.
  * Carousel: Added `onPreChange` and `animation` props.
  * Ripple: Added `modifier`, `size` and `center` props.
+ * Segment: Added `disabled` prop.
 
 ### Bug Fixes
 
@@ -39,6 +40,7 @@ dev
  * ActionSheet: `isOpen` is no longer required.
  * Carousel: `index` is deprecated and renamed to `activeIndex`.
  * PullHook: `onLoad` and `onChange` are deprecated and renamed to `onAction` and `onChangeState`.
+ * Segment: `index` is deprecated and renamed to `activeIndex`.
 
 1.11.5
 ----

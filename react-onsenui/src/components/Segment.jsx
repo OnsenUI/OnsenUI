@@ -1,9 +1,11 @@
-import BasicComponent from './BasicComponent.jsx';
-import React from 'react';
 import PropTypes from 'prop-types';
-import {findDOMNode} from 'react-dom';
-import Util from './Util.js';
 import 'onsenui/esm/elements/ons-segment';
+
+import onsCustomElement from './onsCustomElement';
+
+const deprecated = {
+  index: 'activeIndex'
+};
 
 /**
  * @original ons-segment
@@ -21,59 +23,23 @@ import 'onsenui/esm/elements/ons-segment';
  *  <button>Label 3</button>
  * </Segment>
  */
-class Segment extends BasicComponent {
-  constructor(...args) {
-    super(...args);
-
-    this.onPostChange = (event) => {
-      if (this.props.onPostChange) {
-        return this.props.onPostChange(event);
-      }
-    };
-  }
-
-  _getDomNodeName() {
-    return 'ons-segment';
-  }
-
-  componentDidMount() {
-    super.componentDidMount();
-    const node = findDOMNode(this);
-
-    node.addEventListener('postchange', this.onPostChange);
-  }
-
-  componentWillUnmount() {
-    const node = findDOMNode(this);
-
-    node.removeEventListener('postchange', this.onPostChange);
-  }
-
-  shouldComponentUpdate() {
-    return false;
-  }
-
-  UNSAFE_componentWillReceiveProps(props) {
-    const node = findDOMNode(this);
-
-    if (this.props.index !== props.index && props.index !== node.getActiveButtonIndex()) {
-      node.setActiveButton(props.index, { reject: false });
-    }
-  }
-
-  render() {
-    const attrs = Util.getAttrs(this, this.props, { index: 'active-index' });
-    return React.createElement(this._getDomNodeName(), attrs, this.props.children);
-  }
-}
+const Segment = onsCustomElement('ons-segment', {deprecated});
 
 Segment.propTypes = {
   /**
+   * @name activeIndex
+   * @type number
+   * @description
+   *  [en]The index of the button to highlight.[/en]
+   *  [ja][/ja]
+   */
+  activeIndex: PropTypes.number,
+
+  /**
    * @name index
    * @type number
-   * @required
    * @description
-   *  [en] The index of the button to highlight.[/en]
+   *  [en]DEPRECATED! Use `activeIndex` instead.[/en]
    *  [ja][/ja]
    */
   index: PropTypes.number,
@@ -104,7 +70,16 @@ Segment.propTypes = {
    *  [en] Called after the active button changes.[/en]
    *  [ja][/ja]
    */
-  onPostChange: PropTypes.func
+  onPostChange: PropTypes.func,
+
+  /**
+   * @name disabled
+   * @type boolean
+   * @description
+   *   [en]Specifies whether the segment should be disabled.[/en]
+   *   [ja][/ja]
+   */
+  disabled: PropTypes.bool
 };
 
 export default Segment;
