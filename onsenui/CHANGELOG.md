@@ -45,6 +45,8 @@ dev
  * ons-carousel: Added `animationOptions` property.
  * ons-carousel: Added `active-index` attribute and `activeIndex` property.
  * ons-segment: `active-index` can now be set at any time, not just during initialization. Also added corresponding `activeIndex` property.
+ * ons-tabbar: Added `hideTabs` property.
+ * ons-tabbar: Added `activeIndex` property. The active tab can now be changed by setting either the `active-index` attribute or the `activeIndex` property.
 
  ### Misc
 

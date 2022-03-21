@@ -826,6 +826,8 @@ declare namespace ons {
      * @description Hook called whenever the user slides the tabbar.
      **/
     onSwipe?: Function;
+    hideTabs: boolean;
+    activeIndex: number;
   }
 
   /**

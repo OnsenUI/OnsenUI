@@ -254,13 +254,15 @@ export default class TabElement extends BaseElement {
   }
 
   setActive(active = true) {
-    this._input.checked = active;
-    this.classList.toggle('active', active);
-    util.toggleAttribute(this, 'active', active);
+    contentReady(this, () => {
+      this._input.checked = active;
+      this.classList.toggle('active', active);
+      util.toggleAttribute(this, 'active', active);
 
-    if (this.hasAttribute('icon') && this.hasAttribute('active-icon')) {
-      this._icon.children[0].setAttribute('icon', this.getAttribute(active ? 'active-icon' : 'icon'));
-    }
+      if (this.hasAttribute('icon') && this.hasAttribute('active-icon')) {
+        this._icon.children[0].setAttribute('icon', this.getAttribute(active ? 'active-icon' : 'icon'));
+      }
+    });
   }
 
   _loadPageElement(parent, page) {
@@ -330,7 +332,7 @@ export default class TabElement extends BaseElement {
       if (!this._hasLoaded) {
         if (this.hasAttribute('active')) {
           this.setActive(true);
-          tabbar.setAttribute('activeIndex', index);
+          tabbar.activeIndex = index;
         }
 
         if (index === tabbar.tabs.length - 1) {
