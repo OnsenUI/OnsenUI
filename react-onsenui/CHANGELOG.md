@@ -22,6 +22,7 @@ dev
  * Ripple: Added `modifier`, `size` and `center` props.
  * Segment: Added `disabled` prop.
  * Tabbar: Added `modifier` prop.
+ * Tab: Added `icon`, `activeIcon`, `label` and `badge` props.
 
 ### Bug Fixes
 
