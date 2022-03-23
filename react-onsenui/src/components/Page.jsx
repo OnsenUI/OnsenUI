@@ -1,9 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import ReactDOM from 'react-dom';
-import BasicComponent from './BasicComponent.jsx';
-import Util from './Util.js';
 import 'onsenui/esm/elements/ons-page';
+
+import onsCustomElement from './onsCustomElement';
+
+const notAttributes = ['onInfiniteScroll', 'onDeviceBackButton'];
+const Element = onsCustomElement('ons-page', {notAttributes});
 
 /**
  * @original ons-page
@@ -26,74 +28,36 @@ import 'onsenui/esm/elements/ons-page';
     <div> Page content </div>
   </Page>
  */
-class Page extends BasicComponent {
-  constructor(...args) {
-    super(...args);
+const Page = React.forwardRef((props, ref) => {
 
-    const callback = (name, event) => {
-      if (this.props[name]) {
-        return this.props[name](event);
-      }
-    };
-    this.onInit = callback.bind(this, 'onInit');
-    this.onShow = callback.bind(this, 'onShow');
-    this.onHide = callback.bind(this, 'onHide');
-  }
+  const {
+    renderToolbar,
+    renderBottomToolbar,
+    renderModal,
+    renderFixed,
+    contentStyle,
+    children,
+    ...rest
+  } = props;
 
-  componentDidMount() {
-    super.componentDidMount();
-    const node = ReactDOM.findDOMNode(this);
-    node.addEventListener('init', this.onInit);
-    node.addEventListener('show', this.onShow);
-    node.addEventListener('hide', this.onHide);
-
-    if (this.props.onDeviceBackButton instanceof Function) {
-      node.onDeviceBackButton = this.props.onDeviceBackButton;
-    }
-    if (this.props.onInfiniteScroll instanceof Function) {
-      node.onInfiniteScroll = this.props.onInfiniteScroll;
-    }
-  }
-
-  UNSAFE_componentWillReceiveProps(newProps) {
-    if (newProps.onDeviceBackButton !== undefined) {
-      ReactDOM.findDOMNode(this).onDeviceBackButton = newProps.onDeviceBackButton;
-    }
-    if (newProps.onInfiniteScroll !== undefined) {
-      ReactDOM.findDOMNode(this).onInfiniteScroll = newProps.onInfiniteScroll;
-    }
-  }
-
-  componentWillUnmount() {
-    const node = ReactDOM.findDOMNode(this);
-    node.removeEventListener('init', this.onInit);
-    node.removeEventListener('show', this.onShow);
-    node.removeEventListener('hide', this.onHide);
-  }
-
-  render() {
-    const toolbar = this.props.renderToolbar(this);
-    const bottomToolbar = this.props.renderBottomToolbar(this);
-    const modal = this.props.renderModal(this);
-    const fixed = this.props.renderFixed(this);
-
-    const {contentStyle, ...other} = this.props;
-    const attrs = Util.getAttrs(this, other);
-
-    return <ons-page {...attrs} >
-      {toolbar}
-      <div className='page__background'> </div>
-      <div className='page__content' style={contentStyle}>
-        {this.props.children}
+  return (
+    <Element
+      {...rest}
+      ref={ref}
+    >
+      {renderToolbar(ref)}
+      <div className="page__background"> </div>
+      <div className="page__content" style={contentStyle}>
+        {children}
       </div>
-      <div className='page__extra' style={{zIndex: 10001}}>
-        {modal}
+      <div className="page__extra" style={{zIndex: 10001}}>
+        {renderModal(ref)}
       </div>
-      {fixed}
-      {bottomToolbar}
-    </ons-page>;
-  }
-}
+      {renderFixed(ref)}
+      {renderBottomToolbar(ref)}
+    </Element>
+  );
+});
 
 Page.propTypes = {
 
