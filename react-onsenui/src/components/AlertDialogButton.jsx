@@ -1,6 +1,6 @@
 import SimpleWrapper from './SimpleWrapper.jsx';
 import PropTypes from 'prop-types';
-
+import dummy example from 'justPractice';
 /**
  * @original ons-alert-dialog-button
  * @category dialog
