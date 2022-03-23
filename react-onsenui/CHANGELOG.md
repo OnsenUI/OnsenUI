@@ -21,10 +21,12 @@ dev
  * Carousel: Added `onPreChange` and `animation` props.
  * Ripple: Added `modifier`, `size` and `center` props.
  * Segment: Added `disabled` prop.
+ * Tabbar: Added `modifier` prop.
 
 ### Bug Fixes
 
  * Carousel: Allow only PropTypes.string for itemWidth and itemHeight.
+ * Tabbar: `ignoreEdgeWidth` prop type is now `number`.
 
 ### Misc
 
@@ -41,6 +43,8 @@ dev
  * Carousel: `index` is deprecated and renamed to `activeIndex`.
  * PullHook: `onLoad` and `onChange` are deprecated and renamed to `onAction` and `onChangeState`.
  * Segment: `index` is deprecated and renamed to `activeIndex`.
+ * Tabbar: `index` and `visible` are deprecated and renamed to `activeIndex` and `hideTabs`.
+ * Tabbar: `index` is no longer required.
 
 1.11.5
 ----
