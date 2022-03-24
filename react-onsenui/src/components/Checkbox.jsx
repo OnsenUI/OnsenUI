@@ -1,6 +1,13 @@
 import PropTypes from 'prop-types';
-import BaseInput from './BaseInput.jsx';
 import 'onsenui/esm/elements/ons-checkbox';
+
+import onsCustomElement from './onsCustomElement';
+import oneTimeProp from './oneTimeProp';
+import INPUT_PROPS from './inputProps';
+
+const nameMap = {
+  ...INPUT_PROPS
+};
 
 /**
  * @original ons-checkbox
@@ -18,15 +25,8 @@ import 'onsenui/esm/elements/ons-checkbox';
  *   onChange={event => { this.setState({checked: event.target.checked})} }
  *   modifier='material' />
  */
-class Checkbox extends BaseInput {
-  _getDomNodeName() {
-    return 'ons-checkbox';
-  }
-
-  get EVENT_TYPES() {
-    return ['change'];
-  }
-}
+const withDefaultChecked = component => oneTimeProp(component, 'defaultChecked', 'checked');
+const Checkbox = withDefaultChecked(onsCustomElement('ons-checkbox', {deprecated: nameMap}));
 
 Checkbox.propTypes = {
   /**
@@ -54,10 +54,19 @@ Checkbox.propTypes = {
    * @name onChange
    * @type function
    * @description
-   *  [en] Called when the checkbox state changes.[/en]
+   *  [en]Called when the inner checkbox fires a `change` event.[/en]
    *  [ja][/ja]
    */
   onChange: PropTypes.func,
+
+  /**
+   * @name onInput
+   * @type function
+   * @description
+   *  [en]Called when the inner checkbox fires an `input` event.[/en]
+   *  [ja][/ja]
+   */
+  onInput: PropTypes.func,
 
   /**
    * @name value
@@ -81,10 +90,10 @@ Checkbox.propTypes = {
   checked: PropTypes.bool,
 
   /**
-   * @name checked
+   * @name defaultChecked
    * @type boolean
    * @description
-   *  [en]Defined the state of the radio button at first render for uncontrolled inputs.[/en]
+   *  [en]Defined the state of the checkbox at first render for uncontrolled inputs.[/en]
    *  [ja][/ja]
    */
   defaultChecked: PropTypes.bool,
