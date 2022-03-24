@@ -1,6 +1,13 @@
 import PropTypes from 'prop-types';
-import BaseInput from './BaseInput.jsx';
 import 'onsenui/esm/elements/ons-search-input';
+
+import onsCustomElement from './onsCustomElement';
+import oneTimeProp from './oneTimeProp';
+import INPUT_PROPS from './inputProps';
+
+const nameMap = {
+  ...INPUT_PROPS
+};
 
 /**
  * @original ons-search-input
@@ -20,11 +27,8 @@ import 'onsenui/esm/elements/ons-search-input';
  *   modifier='material'
  *   placeholder='Username' />
  */
-class SearchInput extends BaseInput {
-  _getDomNodeName() {
-    return 'ons-search-input';
-  }
-}
+const withDefaultValue = component => oneTimeProp(component, 'defaultValue', 'value');
+const SearchInput = withDefaultValue(onsCustomElement('ons-search-input', {deprecated: nameMap}));
 
 SearchInput.propTypes = {
   /**
@@ -47,25 +51,64 @@ SearchInput.propTypes = {
   disabled: PropTypes.bool,
 
   /**
+   * @name readOnly
+   * @type bool
+   * @description
+   *  [en]Specifies whether the input is read-only.[/en]
+   *  [ja][/ja]
+   */
+  readOnly: PropTypes.bool,
+
+  /**
    * @name onChange
    * @type function
    * @description
-   *  [en]Called when the text of the input changes.[/en]
+   *  [en]Called when the inner input fires a `change` event.[/en]
    *  [ja][/ja]
    */
   onChange: PropTypes.func,
 
   /**
+   * @name onInput
+   * @type function
+   * @description
+   *  [en]Called when the inner input fires an `input` event.[/en]
+   *  [ja][/ja]
+   */
+  onInput: PropTypes.func,
+
+  /**
    * @name value
    * @type string
    * @description
-   *  [en]Content of the input.[/en]
+   *  [en]Content of the input (controlled).[/en]
    *  [ja][/ja]
    */
   value: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.instanceOf(Date)
   ]),
+
+  /**
+   * @name defaultValue
+   * @type string
+   * @description
+   *  [en]Content of the input at first render (uncontrolled).[/en]
+   *  [ja][/ja]
+   */
+  defaultValue: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.instanceOf(Date)
+  ]),
+
+  /**
+   * @name placeholder
+   * @type string
+   * @description
+   *  [en] Placeholder text. In Material Design this placeholder will be a floating label. [/en]
+   *  [ja][/ja]
+   */
+  placeholder: PropTypes.string,
 
   /**
    * @name inputId

@@ -24,13 +24,14 @@ dev
  * Tabbar: Added `modifier` prop.
  * Tab: Added `icon`, `activeIcon`, `label` and `badge` props.
  * Input: Added `onInput` prop.
+ * SearchInput: Added `readOnly`, `defaultValue`, `onInput` and `placeholder` props.
 
 ### Bug Fixes
 
  * Carousel: Allow only PropTypes.string for itemWidth and itemHeight.
  * Tabbar: `ignoreEdgeWidth` prop type is now `number`.
- * Input: `onChange` is no longer triggered by the `input` event.
- * Input: Camel-cased props are now recognised for known input attributes (e.g. `readOnly`). ([#2570](https://github.com/OnsenUI/OnsenUI/issues/2570)).
+ * Input, SearchInput: `onChange` is no longer triggered by the `input` event.
+ * Input, SearchInput: Camel-cased props are now recognised for known input attributes (e.g. `readOnly`). ([#2570](https://github.com/OnsenUI/OnsenUI/issues/2570)).
 
 ### Misc
 
