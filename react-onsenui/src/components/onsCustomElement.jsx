@@ -17,17 +17,16 @@ const addDeprecated = (props, deprecated) => {
 function useCustomElementListener(ref, prop, handler) {
   const event = prop.slice(2).toLowerCase();
   useEffect(() => {
-    ref.current.addEventListener(event, handler);
+    const current = ref.current;
+    current.addEventListener(event, handler);
 
     return function cleanup() {
-      ref.current.removeEventListener(event, handler);
+      current.removeEventListener(event, handler);
     };
   }, [ref, handler]);
 }
 
-function useCustomElement(props, options = {}) {
-  const ref = useRef();
-
+function useCustomElement(props, options = {}, ref) {
   const notAttributes = options.notAttributes || [];
   const deprecated = options.deprecated || {};
 
@@ -50,14 +49,16 @@ function useCustomElement(props, options = {}) {
     }
   }
 
-  return {ref, properties};
+  return {properties};
 }
 
 export default function onsCustomElement(WrappedComponent, options) {
-  return function (props) {
+  return React.forwardRef((props, _ref) => {
+
+    const ref = _ref || useRef();
 
     const {style, children, ...rest} = props;
-    const {ref, properties} = useCustomElement(rest, options);
+    const {properties} = useCustomElement(rest, options, ref);
 
     return (
       <WrappedComponent
@@ -68,5 +69,5 @@ export default function onsCustomElement(WrappedComponent, options) {
         {children}
       </WrappedComponent>
     );
-  };
+  });
 }
