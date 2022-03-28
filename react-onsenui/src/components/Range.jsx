@@ -1,6 +1,13 @@
 import PropTypes from 'prop-types';
-import BaseInput from './BaseInput.jsx';
 import 'onsenui/esm/elements/ons-range';
+
+import onsCustomElement from './onsCustomElement';
+import oneTimeProp from './oneTimeProp';
+import INPUT_PROPS from './inputProps';
+
+const nameMap = {
+  ...INPUT_PROPS
+};
 
 /**
  * @original ons-range
@@ -17,11 +24,8 @@ import 'onsenui/esm/elements/ons-range';
  *   onChange={(event) => this.setState({value: parseInt(event.target.value)})}
  *   />
  */
-class Range extends BaseInput {
-  _getDomNodeName() {
-    return 'ons-range';
-  }
-}
+const withDefaultValue = component => oneTimeProp(component, 'defaultValue', 'value');
+const Range = withDefaultValue(onsCustomElement('ons-range', {deprecated: nameMap}));
 
 Range.propTypes = {
   /**
@@ -44,6 +48,15 @@ Range.propTypes = {
   onChange: PropTypes.func,
 
   /**
+   * @name onInput
+   * @type function
+   * @description
+   *  [en] Called when the inner range fires an `input` event.[/en]
+   *  [ja][/ja]
+   */
+  onInput: PropTypes.func,
+
+  /**
    * @name value
    * @type number
    * @description
@@ -53,6 +66,17 @@ Range.propTypes = {
    *  [ja][/ja]
    */
   value: PropTypes.number,
+
+  /**
+   * @name value
+   * @type number
+   * @description
+   *  [en]
+   *  Default value of the element (for uncontrolled components).
+   *  [/en]
+   *  [ja][/ja]
+   */
+  defaultValue: PropTypes.number,
 
   /**
    * @name disabled

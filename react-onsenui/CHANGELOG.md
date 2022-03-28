@@ -28,6 +28,7 @@ dev
  * Checkbox: Added `onInput` prop.
  * Switch: Added `modifier` and `defaultChecked` props.
  * Radio: Added `name` prop.
+ * Range: Added `defaultValue` and `onInput` props.
 
 ### Bug Fixes
 
