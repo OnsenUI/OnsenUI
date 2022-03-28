@@ -26,13 +26,14 @@ dev
  * Input: Added `onInput` prop.
  * SearchInput: Added `readOnly`, `defaultValue`, `onInput` and `placeholder` props.
  * Checkbox: Added `onInput` prop.
+ * Switch: Added `modifier` and `defaultChecked` props.
 
 ### Bug Fixes
 
  * Carousel: Allow only PropTypes.string for itemWidth and itemHeight.
  * Tabbar: `ignoreEdgeWidth` prop type is now `number`.
- * Input, SearchInput, Checkbox: `onChange` is no longer triggered by the `input` event.
- * Input, SearchInput, Checkbox: Camel-cased props are now recognised for known input attributes (e.g. `readOnly`). ([#2570](https://github.com/OnsenUI/OnsenUI/issues/2570)).
+ * Input, SearchInput, Checkbox, Switch: `onChange` is no longer triggered by the `input` event.
+ * Input, SearchInput, Checkbox, Switch: Camel-cased props are now recognised for known input attributes (e.g. `readOnly`). ([#2570](https://github.com/OnsenUI/OnsenUI/issues/2570)).
 
 ### Misc
 
