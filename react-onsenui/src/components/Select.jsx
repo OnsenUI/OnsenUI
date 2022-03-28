@@ -1,8 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import BaseInput from './BaseInput.jsx';
-import Util from './Util.js';
 import 'onsenui/esm/elements/ons-select';
+
+import onsCustomElement from './onsCustomElement';
+import oneTimeProp from './oneTimeProp';
+import INPUT_PROPS from './inputProps';
+
+const nameMap = {
+  ...INPUT_PROPS
+};
 
 /**
  * @original ons-select
@@ -22,24 +28,16 @@ import 'onsenui/esm/elements/ons-select';
  *   <option value="3">3rd option</option>
  * </Select>
  */
-class Select extends BaseInput {
-  get EVENT_TYPES() {
-    return ['change'];
-  }
+const withDefaultValue = component => oneTimeProp(component, 'defaultValue', 'value');
+const Element = withDefaultValue(onsCustomElement('ons-select', {deprecated: nameMap}));
 
-  render() {
-    const { value, onChange, ...props } = this.props;
-    const attrs = Util.getAttrs(this, props);
-
-    return (
-      <ons-select { ...attrs }>
-        <select>
-          {this.props.children}
-        </select>
-      </ons-select>
-    );
-  }
-}
+const Select = React.forwardRef((props, ref) => (
+  <Element {...props} ref={ref}>
+    <select>
+      {props.children}
+    </select>
+  </Element>
+));
 
 Select.propTypes = {
   /**
@@ -79,6 +77,15 @@ Select.propTypes = {
   value: PropTypes.string,
 
   /**
+   * @name defaultValue
+   * @type string
+   * @description
+   *  [en]Use this prop to set the defalut selected option value (uncontrolled components).[/en]
+   *  [ja][/ja]
+   */
+  defaultValue: PropTypes.string,
+
+  /**
    * @name multiple
    * @type boolean
    * @description
@@ -116,12 +123,21 @@ Select.propTypes = {
 
   /**
    * @name size
-   * @type string
+   * @type number
    * @description
    *  [en]How many options are displayed; if there are more than the size then a scroll appears to navigate them[/en]
    *  [ja][/ja]
    */
-  size: PropTypes.string
+  size: PropTypes.number,
+
+  /**
+   * @name name
+   * @type string
+   * @description
+   *  [en]Name the select element, useful for instance if it is part of a form.[/en]
+   *  [ja][/ja]
+   */
+  name: PropTypes.string
 };
 
 export default Select;

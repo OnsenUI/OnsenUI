@@ -36,6 +36,7 @@ dev
  * Tabbar: `ignoreEdgeWidth` prop type is now `number`.
  * Input, SearchInput, Checkbox, Switch: `onChange` is no longer triggered by the `input` event.
  * Input, SearchInput, Checkbox, Switch: Camel-cased props are now recognised for known input attributes (e.g. `readOnly`). ([#2570](https://github.com/OnsenUI/OnsenUI/issues/2570)).
+ * Select: `size` prop type is now `number`.
 
 ### Misc
 
