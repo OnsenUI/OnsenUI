@@ -1,3 +1,6 @@
+// make sure Onsen UI setup is done (polyfills etc.)
+import 'onsenui';
+
 import ActionSheet from './components/ActionSheet.jsx';
 import ActionSheetButton from './components/ActionSheetButton.jsx';
 import AlertDialog from './components/AlertDialog.jsx';
