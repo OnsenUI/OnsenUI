@@ -24,20 +24,31 @@ babelrc.babelrc = babelrc.presets[0][1].modules = false;
 babelrc.exclude = [local('node_modules/**'), local('../../build/**')];
 babelrc.babelHelpers = 'bundled'
 
-const banner = `/* ${pkg.name} v${pkg.version} - ${dateformat(new Date(), 'yyyy-mm-dd')} */\n`,
-  resolveOpt = { extensions: ['.js', '.jsx'] },
-  globals = {
+const banner = `/* ${pkg.name} v${pkg.version} - ${dateformat(new Date(), 'yyyy-mm-dd')} */\n`;
+const resolveOpt = { extensions: ['.js', '.jsx'] };
+
+const globals = id => {
+  const rest = {
     'onsenui': 'ons',
     'react': 'React',
     'react-dom': 'ReactDOM',
     'prop-types': 'PropTypes',
   };
 
+  const element = id.match(/^onsenui\/esm\/elements\/ons-([a-z-]+)(\.js)?$/)?.[1];
+  if (element) {
+    const camel = element.charAt(0).toUpperCase() + element.slice(1).replace(/-([a-z])/g, match => match[1].toUpperCase());
+    return `ons.elements.${camel}`;
+  } else {
+    return rest[id];
+  }
+};
+
 const builds = [
   // React bindings UMD development
   {
     input: 'src/index.umd.js',
-    external: id => /^(onsenui|react|react-dom|prop-types)$/.test(id),
+    external: id => /^(onsenui|react|react-dom|prop-types)(\/.*)?$/.test(id),
     output: {
       file: 'dist/react-onsenui.js',
       format: 'umd',
@@ -68,7 +79,7 @@ const builds = [
   // React bindings UMD production
   {
     input: 'src/index.umd.js',
-    external: id => /^(onsenui|react|react-dom)$/.test(id),
+    external: id => /^(onsenui|react|react-dom|prop-types)(\/.*)?$/.test(id),
     output: {
       file: 'dist/react-onsenui.min.js',
       format: 'umd',
