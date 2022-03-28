@@ -27,6 +27,7 @@ dev
  * SearchInput: Added `readOnly`, `defaultValue`, `onInput` and `placeholder` props.
  * Checkbox: Added `onInput` prop.
  * Switch: Added `modifier` and `defaultChecked` props.
+ * Radio: Added `name` prop.
 
 ### Bug Fixes
 

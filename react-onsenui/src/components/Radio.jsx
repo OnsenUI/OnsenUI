@@ -1,6 +1,13 @@
 import PropTypes from 'prop-types';
-import BaseInput from './BaseInput.jsx';
 import 'onsenui/esm/elements/ons-radio';
+
+import onsCustomElement from './onsCustomElement';
+import oneTimeProp from './oneTimeProp';
+import INPUT_PROPS from './inputProps';
+
+const nameMap = {
+  ...INPUT_PROPS
+};
 
 /**
  * @original ons-radio
@@ -18,17 +25,19 @@ import 'onsenui/esm/elements/ons-radio';
  *   onChange={event => { this.setState({checked: event.target.checked})} }
  *   modifier='material' />
  */
-class Radio extends BaseInput {
-  _getDomNodeName() {
-    return 'ons-radio';
-  }
-
-  get EVENT_TYPES() {
-    return ['change'];
-  }
-}
+const withDefaultChecked = component => oneTimeProp(component, 'defaultChecked', 'checked');
+const Radio = withDefaultChecked(onsCustomElement('ons-radio', {deprecated: nameMap}));
 
 Radio.propTypes = {
+  /**
+   * @name name
+   * @type string
+   * @description
+   *  [en]The name of the radio button.[/en]
+   *  [ja][/ja]
+   */
+  name: PropTypes.string,
+
   /**
    * @name modifier
    * @type string
