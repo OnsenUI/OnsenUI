@@ -1,8 +1,7 @@
-import SimpleWrapper from './SimpleWrapper.jsx';
-import ReactDOM from 'react-dom';
-
 import PropTypes from 'prop-types';
 import 'onsenui/esm/elements/ons-speed-dial-item';
+
+import onsCustomElement from './onsCustomElement';
 
 /**
  * @original ons-speed-dial-item
@@ -22,32 +21,7 @@ import 'onsenui/esm/elements/ons-speed-dial-item';
      <SpeedDialItem onClick={() => console.log('speed D')}> D </SpeedDialItem>
    </SpeedDial>
  */
-class SpeedDialItem extends SimpleWrapper {
-  constructor(...args) {
-    super(...args);
-
-    this.onClick = event => {
-      if (this.props.onClick) {
-        return this.props.onClick(event);
-      }
-    };
-  }
-
-  _getDomNodeName() {
-    return 'ons-speed-dial-item';
-  }
-
-  componentDidMount() {
-    super.componentDidMount();
-    var node = ReactDOM.findDOMNode(this);
-    node.addEventListener('click', this.onClick);
-  }
-
-  componentWillUnmount() {
-    var node = ReactDOM.findDOMNode(this);
-    node.removeEventListener('click', this.onClick);
-  }
-}
+const SpeedDialItem = onsCustomElement('ons-speed-dial-item');
 
 SpeedDialItem.propTypes = {
   /**
@@ -64,7 +38,7 @@ SpeedDialItem.propTypes = {
    * @name onClick
    * @type function
    * @description
-   *  [en] This function will be called ones the button is clicked. [/en]
+   *  [en]This function will be called when the button is clicked.[/en]
    *  [ja][/ja]
    */
   onClick: PropTypes.func
