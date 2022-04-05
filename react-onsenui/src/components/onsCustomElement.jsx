@@ -5,7 +5,12 @@ const kebabize = camelString =>
 const addDeprecated = (props, deprecated) => {
   const propsCopy = { ...props };
 
-  for (const [oldName, newName] of Object.entries(deprecated)) {
+  const nameMap = {
+    className: 'class',
+    ...deprecated
+  };
+
+  for (const [oldName, newName] of Object.entries(nameMap)) {
     if (propsCopy[newName] === undefined && propsCopy[oldName] !== undefined) {
       propsCopy[newName] = propsCopy[oldName];
     }
