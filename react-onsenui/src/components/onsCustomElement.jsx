@@ -13,6 +13,7 @@ const addDeprecated = (props, deprecated) => {
   for (const [oldName, newName] of Object.entries(nameMap)) {
     if (propsCopy[newName] === undefined && propsCopy[oldName] !== undefined) {
       propsCopy[newName] = propsCopy[oldName];
+      delete propsCopy[oldName];
     }
   }
 
