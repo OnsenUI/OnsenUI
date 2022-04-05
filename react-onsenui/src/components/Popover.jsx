@@ -1,7 +1,17 @@
-import BaseDialog from './BaseDialog.jsx';
+import React, { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
-import ReactDOM from 'react-dom';
 import 'onsenui/esm/elements/ons-popover';
+
+import onsCustomElement from './onsCustomElement';
+import baseDialog from './baseDialog';
+
+const deprecated = {
+  onCancel: 'onDialogCancel',
+  isDisabled: 'disabled',
+  isCancelable: 'cancelable'
+};
+
+const notAttributes = ['onDeviceBackButton'];
 
 /**
  * @original ons-popover
@@ -33,17 +43,33 @@ import 'onsenui/esm/elements/ons-popover';
         </Popover>
  * </Page>
  */
-class Popover extends BaseDialog {
-  _getDomNodeName() {
-    return 'ons-popover';
-  }
+const Element = onsCustomElement(baseDialog('ons-popover'), {deprecated, notAttributes});
 
-  show() {
-    var target = this.props.getTarget();
-    target = ReactDOM.findDOMNode(target);
-    return this.node.firstChild.show(target);
-  }
-}
+const Popover = React.forwardRef((props, forwardedRef) => {
+
+  const {isOpen, getTarget, children, ...rest} = props;
+  const ref = forwardedRef || useRef();
+
+  useEffect(() => {
+    if (isOpen !== ref.current.visible) {
+      if (isOpen) {
+        const target = getTarget();
+        ref.current.show({target});
+      } else {
+        ref.current.hide();
+      }
+    }
+  });
+
+  return (
+    <Element
+      ref={ref}
+      {...rest}
+    >
+      {children}
+    </Element>
+  );
+});
 
 Popover.propTypes = {
   /**
@@ -52,18 +78,31 @@ Popover.propTypes = {
    * @required true
    * @description
    *  [en]
-   *  This function should return react component or a domnode that the popover is showing on.
+   *  This function should return a ref to the DOM node that the popover will target.
    *  [/en]
    *  [ja][/ja]
    */
   getTarget: PropTypes.func.isRequired,
+
+  /**
+   * @name onDialogCancel
+   * @type function
+   * @required false
+   * @description
+   *  [en]
+   *  Called only if isCancelable is true. It will be called after tapping the background or by pressing the back button on Android devices.
+   *  [/en]
+   *  [ja][/ja]
+   */
+  onDialogCancel: PropTypes.func,
+
   /**
    * @name onCancel
    * @type function
    * @required false
    * @description
    *  [en]
-   *  Called only if isCancelable is true. It will be called after tapping the background or by pressing the back button on Android devices.
+   *  DEPRECATED! Use `onDialogCancel` instead.
    *  [/en]
    *  [ja][/ja]
    */
@@ -82,7 +121,7 @@ Popover.propTypes = {
   isOpen: PropTypes.bool.isRequired,
 
   /**
-   * @name isCancelable
+   * @name cancelable
    * @type bool
    * @required false
    * @description
@@ -92,7 +131,31 @@ Popover.propTypes = {
    *  [/en]
    *  [ja][/ja]
    */
+  cancelable: PropTypes.bool,
+
+  /**
+   * @name isCancelable
+   * @type bool
+   * @required false
+   * @description
+   *  [en]
+   *  DEPRECATED! Use `cancelable` instead.
+   *  [/en]
+   *  [ja][/ja]
+   */
   isCancelable: PropTypes.bool,
+
+  /**
+   * @name disabled
+   * @type bool
+   * @required false
+   * @description
+   *  [en]
+   *  Specifies whether the dialog is disabled.
+   *  [/en]
+   *  [ja][/ja]
+   */
+  disabled: PropTypes.bool,
 
   /**
    * @name isDisabled
@@ -100,7 +163,7 @@ Popover.propTypes = {
    * @required false
    * @description
    *  [en]
-   *  Specifies whether the dialog is disabled.
+   *  DEPRECATED! Use `disabled` instead.
    *  [/en]
    *  [ja][/ja]
    */

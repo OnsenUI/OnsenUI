@@ -9,6 +9,7 @@ dev
 
  * Setting BackButton's `onClick` prop no longer prevents default behaviour. Use `event.preventDefault()` in the `onClick` handler to prevent default behaviour.
  * AlertDialogs are no longer cancelable by default. Set the `cancelable` prop to make an alert dialog cancelable.
+ * Popover's `getTarget` prop should now return a ref to DOM node.
 
 ### New Features
 
@@ -59,6 +60,7 @@ dev
  * Tabbar: `index` and `visible` are deprecated and renamed to `activeIndex` and `hideTabs`.
  * Tabbar: `index` is no longer required.
  * SplitterSide: `onOpen` and `onClose` are deprecated and renamed to `onPostOpen` and `onPostClose`.
+ * Popover: `isDisabled`, `isCancelable` and `onCancel` are deprecated and renamed to `disabled`, `cancelable` and `onDialogCancel`.
 
 1.11.5
 ----
