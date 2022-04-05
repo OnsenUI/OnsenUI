@@ -150,5 +150,11 @@ describe('OnsSplitterSideElement', () => {
       right.setAttribute('side', 'right');
     });
   });
+
+  describe('#animation-options attribute', () => {
+    it('should not throw an error if animation-options is set', () => {
+      ons._util.createElement(`<ons-splitter-side animation-options="{duration: 5}"></ons-splitter-side>`);
+    });
+  });
 });
 

@@ -424,6 +424,10 @@ export default class SplitterSideElement extends BaseElement {
         current = this.getAttribute('width'); // Sometimes undefined. CE bug?
         this.style.width = /^\d+(px|%)$/.test(current) ? current : '80%';
         break;
+      case 'animation':
+      case 'animation-options':
+        this._updateAnimation();
+        break;
       default:
         this[util.camelize(`_update-${name}`)](current);
     }
@@ -479,7 +483,10 @@ export default class SplitterSideElement extends BaseElement {
     }
   }
 
-  _updateAnimation(animation = this.getAttribute('animation')) {
+  _updateAnimation() {
+    const animation = this.getAttribute('animation');
+    const animationOptions = this.getAttribute('animation-options');
+
     if (this.parentNode) {
       this._animator && this._animator.deactivate();
       this._animator = this._animatorFactory.newAnimator({animation});
@@ -488,11 +495,8 @@ export default class SplitterSideElement extends BaseElement {
         timing: this._animator.duration,
         duration: this._animator.duration
       };
+      this._animator.updateOptions(AnimatorFactory.parseAnimationOptionsString(animationOptions));
     }
-  }
-
-  _updateAnimationOptions(value = this.getAttribute('animation-options')) {
-    this._animator.updateOptions(AnimatorFactory.parseAnimationOptionsString(value));
   }
 
   /**
