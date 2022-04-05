@@ -1,5 +1,7 @@
-import SimpleWrapper from './SimpleWrapper.jsx';
 import 'onsenui/esm/elements/ons-splitter-content';
+
+import onsCustomElement from './onsCustomElement';
+
 /**
  * @original ons-splitter-content
  * @category menu
@@ -32,10 +34,6 @@ import 'onsenui/esm/elements/ons-splitter-content';
     </SplitterSide>
   </Splitter>
  */
-class SplitterContent extends SimpleWrapper {
-  _getDomNodeName() {
-    return 'ons-splitter-content';
-  }
-}
+const SplitterContent = onsCustomElement('ons-splitter-content');
 
 export default SplitterContent;

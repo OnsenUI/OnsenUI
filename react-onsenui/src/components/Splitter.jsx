@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
-import ReactDOM from 'react-dom';
-import SimpleWrapper from './SimpleWrapper.jsx';
 import 'onsenui/esm/elements/ons-splitter';
+
+import onsCustomElement from './onsCustomElement';
 
 /**
  * @original ons-splitter
@@ -36,27 +36,9 @@ import 'onsenui/esm/elements/ons-splitter';
     </SplitterSide>
   </Splitter>
  */
+const notAttributes = ['onDeviceBackButton'];
 
-class Splitter extends SimpleWrapper {
-  _getDomNodeName() {
-    return 'ons-splitter';
-  }
-
-  componentDidMount() {
-    super.componentDidMount();
-    const node = ReactDOM.findDOMNode(this);
-
-    if (this.props.onDeviceBackButton instanceof Function) {
-      node.onDeviceBackButton = this.props.onDeviceBackButton;
-    }
-  }
-
-  UNSAFE_componentWillReceiveProps(newProps) {
-    if (newProps.onDeviceBackButton !== undefined) {
-      ReactDOM.findDOMNode(this).onDeviceBackButton = newProps.onDeviceBackButton;
-    }
-  }
-}
+const Splitter = onsCustomElement('ons-splitter', {notAttributes});
 
 Splitter.propTypes = {
   /**

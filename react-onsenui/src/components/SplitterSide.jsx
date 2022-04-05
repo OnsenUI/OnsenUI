@@ -1,9 +1,7 @@
-import React from 'react';
 import PropTypes from 'prop-types';
-import ReactDOM from 'react-dom';
-import BasicComponent from './BasicComponent.jsx';
-import Util from './Util.js';
 import 'onsenui/esm/elements/ons-splitter-side';
+
+import onsCustomElement from './onsCustomElement';
 
 /**
  * @original ons-splitter-side
@@ -37,66 +35,13 @@ import 'onsenui/esm/elements/ons-splitter-side';
     </SplitterSide>
   </Splitter>
  */
+const deprecated = {
+  onOpen: 'onPostOpen',
+  onClose: 'onPostClose'
+};
+const notAttributes = ['isOpen'];
 
-class SplitterSide extends BasicComponent {
-  constructor(...args) {
-    super(...args);
-
-    const callback = (name, event) => {
-      if (this.props[name]) {
-        return this.props[name](event);
-      }
-    };
-    this.onOpen = callback.bind(this, 'onOpen');
-    this.onClose = callback.bind(this, 'onClose');
-    this.onPreOpen = callback.bind(this, 'onPreOpen');
-    this.onPreClose = callback.bind(this, 'onPreClose');
-    this.onModeChange = callback.bind(this, 'onModeChange');
-  }
-
-  componentDidMount() {
-    super.componentDidMount();
-    this.node = ReactDOM.findDOMNode(this);
-    this.UNSAFE_componentWillReceiveProps(this.props);
-
-    this.node.addEventListener('postopen', this.onOpen);
-    this.node.addEventListener('postclose', this.onClose);
-    this.node.addEventListener('preopen', this.onPreOpen);
-    this.node.addEventListener('preclose', this.onPreClose);
-    this.node.addEventListener('modechange', this.onModeChange);
-  }
-
-  componentWillUnmount() {
-    this.node.removeEventListener('postopen', this.onOpen);
-    this.node.removeEventListener('postclose', this.onClose);
-    this.node.removeEventListener('preopen', this.onPreOpen);
-    this.node.removeEventListener('preclose', this.onPreClose);
-    this.node.removeEventListener('modechange', this.onModeChange);
-  }
-
-  UNSAFE_componentWillReceiveProps(newProps) {
-    if (newProps.isOpen) {
-      this.node.open();
-    } else {
-      this.node.close();
-    }
-  }
-
-  render() {
-    ['isCollapsed', 'isSwipeable'].forEach(p => this.props.hasOwnProperty(p) && console.error(
-      `The property '${p}' is deprecated, please use '${p.toLowerCase().slice(2)}', see https://onsen.io/v2/docs/react/SplitterSide.html.`
-    ));
-
-    const { isOpen, ...props } = this.props;
-    const attrs = Util.getAttrs(this, props);
-
-    return (
-      <ons-splitter-side { ...attrs } >
-        {this.props.children}
-      </ons-splitter-side>
-    );
-  }
-}
+const SplitterSide = onsCustomElement('ons-splitter-side', {deprecated, notAttributes});
 
 SplitterSide.propTypes = {
   /**
@@ -130,19 +75,37 @@ SplitterSide.propTypes = {
   isOpen: PropTypes.bool,
 
   /**
-   * @name onOpen
+   * @name onPostOpen
    * @type function
    * @description
    *  [en]Called after the menu is opened.[/en]
    *  [ja][/ja]
    */
+  onPostOpen: PropTypes.func,
+
+  /**
+   * @name onOpen
+   * @type function
+   * @description
+   *  [en]DEPRECATED! Use `onPostOpen` instead.[/en]
+   *  [ja][/ja]
+   */
   onOpen: PropTypes.func,
+
+  /**
+   * @name onPostClose
+   * @type function
+   * @description
+   *  [en]Called after the menu is closed.[/en]
+   *  [ja][/ja]
+   */
+  onPostClose: PropTypes.func,
 
   /**
    * @name onClose
    * @type function
    * @description
-   *  [en]Called after the menu is closed.[/en]
+   *  [en]DEPRECATED! Use `onPostClose` instead.[/en]
    *  [ja][/ja]
    */
   onClose: PropTypes.func,
@@ -160,19 +123,19 @@ SplitterSide.propTypes = {
    * @name swipeTargetWidth
    * @type number
    * @description
-   *  [en]Specifies the width of the menu with a number (for pixels) or a string (e.g. "20%" for percentage).[/en]
+   *  [en]The width of swipeable area calculated from the edge (in pixels). Use this to enable swipe only when the finger touch on the screen edge.[/en]
    *  [ja][/ja]
    */
-  swipeTargetWidth: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+  swipeTargetWidth: PropTypes.number,
 
   /**
    * @name width
    * @type  number
    * @description
-   *  [en]Specifies the width of the menu with a number (for pixels) or a string (e.g. "20%" for percentage).[/en]
+   *  [en]Specifies the width of the menu. Can be specified in either pixels or as a percentage, e.g. `"90%"` or `"200px"`.[/en]
    *  [ja][/ja]
    */
-  width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+  width: PropTypes.string,
 
   /**
    * @name animation
@@ -203,16 +166,6 @@ SplitterSide.propTypes = {
    *  [ja][/ja]
    */
   openThreshold: PropTypes.number,
-
-  /**
-   * @name mode
-   * @type string
-   * @required false
-   * @description
-   *  [en] Current mode. Possible values are `"collapse"` or `"split"`. This attribute is read only.  [/en]
-   *  [ja][/ja]
-   */
-  mode: PropTypes.oneOf(['collapse', 'split']),
 
   /**
    * @name onPreOpen

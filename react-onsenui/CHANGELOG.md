@@ -37,6 +37,9 @@ dev
  * Input, SearchInput, Checkbox, Switch: `onChange` is no longer triggered by the `input` event.
  * Input, SearchInput, Checkbox, Switch: Camel-cased props are now recognised for known input attributes (e.g. `readOnly`). ([#2570](https://github.com/OnsenUI/OnsenUI/issues/2570)).
  * Select: `size` prop type is now `number`.
+ * SplitterSide: `swipeTargetWidth` prop type is now number.
+ * SplitterSide: `width` prop type is now string.
+ * SplitterSide: Removed `mode` prop.
 
 ### Misc
 
@@ -55,6 +58,7 @@ dev
  * Segment: `index` is deprecated and renamed to `activeIndex`.
  * Tabbar: `index` and `visible` are deprecated and renamed to `activeIndex` and `hideTabs`.
  * Tabbar: `index` is no longer required.
+ * SplitterSide: `onOpen` and `onClose` are deprecated and renamed to `onPostOpen` and `onPostClose`.
 
 1.11.5
 ----
