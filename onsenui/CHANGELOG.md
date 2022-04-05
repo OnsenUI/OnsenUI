@@ -25,6 +25,7 @@ dev
  * ons-dialog, ons-alert-dialog, ons-modal, ons-popover, ons-action-sheet: `dialog-cancel` event is renamed to `dialogcancel`.
  * ons-action-sheet: Hide title element when title is null or undefined.
  * ons-splitter-side: Fix error being thrown when `animation-options` attribute is set.
+ * ons-popover: Use regular function instead of arrow function to stop default animation breaking.
 
  ### New Features
 
