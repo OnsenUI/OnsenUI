@@ -567,13 +567,16 @@ export default class SplitterSideElement extends BaseElement {
   /**
    * @property isOpen
    * @type {Boolean}
-   * @readonly
    * @description
-   *   [en]This value is `true` when the menu is open.[/en]
+   *   [en]Specifies whether the menu is opened.[/en]
    *   [ja][/ja]
    */
   get isOpen() {
     return this._mode === COLLAPSE_MODE && this._state !== CLOSED_STATE;
+  }
+
+  set isOpen(value) {
+    this.toggle({}, value);
   }
 
   /**
