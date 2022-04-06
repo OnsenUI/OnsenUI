@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Util from './Util.js';
 import 'onsenui/esm/elements/ons-navigator';
+
+import onsCustomElement from './onsCustomElement';
 
 /**
  * @original ons-navigator
@@ -24,6 +25,8 @@ import 'onsenui/esm/elements/ons-navigator';
    }
  }
  */
+const Element = onsCustomElement('ons-navigator');
+
 class NavigatorClass extends React.Component {
   constructor(...args) {
     super(...args);
@@ -324,17 +327,36 @@ class NavigatorClass extends React.Component {
   }
 
   render() {
-    const attrs = Util.getAttrs(this);
-    const pages = this.routes ? this.routes.map((route) => this.props.renderPage(route, this)) : null;
+    const {
+      innerRef,
+      renderPage,
 
-    if (this.props.innerRef && this.props.innerRef !== this.ref) {
-      this.ref = this.props.innerRef;
+      // these props should not be passed down
+      initialRouteStack,
+      initialRoute,
+      onPrePush,
+      onPostPush,
+      onPrePop,
+      onPostPop,
+      swipePop,
+      onDeviceBackButton,
+
+      ...rest
+    } = this.props;
+
+    const pages = this.routes ? this.routes.map((route) => renderPage(route, this)) : null;
+
+    if (innerRef && innerRef !== this.ref) {
+      this.ref = innerRef;
     }
 
     return (
-      <ons-navigator { ...attrs } ref={this.ref}>
+      <Element
+        ref={this.ref}
+        {...rest}
+      >
         {pages}
-      </ons-navigator>
+      </Element>
     );
   }
 }
