@@ -192,18 +192,30 @@ class RouterNavigator extends BasicComponent {
     this.update();
   }
 
-  UNSAFE_componentWillReceiveProps(newProps) {
-    const processStack = [...newProps.routeConfig.processStack];
+  componentWillUnmount() {
+    const node = this._navi;
+    node.removeEventListener('prepush', this.onPrePush);
+    node.removeEventListener('postpush', this.onPostPush);
+    node.removeEventListener('prepop', this.onPrePop);
+    node.removeEventListener('postpop', this.onPostPop);
+    this.cancelUpdate = true;
+  }
 
-    if (newProps.onDeviceBackButton !== undefined) {
-      this._navi.onDeviceBackButton = newProps.onDeviceBackButton;
+  componentDidUpdate(prevProps) {
+    /* When the component updates we now have the page we're pushing in our routeConfig, so we no longer need to render it specially */
+    this.page = null;
+
+    if (this.props.onDeviceBackButton !== undefined) {
+      this._navi.onDeviceBackButton = this.props.onDeviceBackButton;
     }
+
+    const processStack = [...this.props.routeConfig.processStack];
 
     /**
      * Fix for Redux Timetravel.
      */
-    if (this.props.routeConfig.processStack.length < newProps.routeConfig.processStack.length &&
-      this.props.routeConfig.routeStack.length > newProps.routeConfig.routeStack.length) {
+    if (prevProps.routeConfig.processStack.length < this.props.routeConfig.processStack.length &&
+      prevProps.routeConfig.routeStack.length > this.props.routeConfig.routeStack.length) {
       return;
     }
 
@@ -231,20 +243,6 @@ class RouterNavigator extends BasicComponent {
           throw new Error(`Unknown type ${type} in processStack`);
       }
     }
-  }
-
-  componentWillUnmount() {
-    const node = this._navi;
-    node.removeEventListener('prepush', this.onPrePush);
-    node.removeEventListener('postpush', this.onPostPush);
-    node.removeEventListener('prepop', this.onPrePop);
-    node.removeEventListener('postpop', this.onPostPop);
-    this.cancelUpdate = true;
-  }
-
-  componentDidUpdate() {
-    /* When the component updates we now have the page we're pushing in our routeConfig, so we no longer need to render it specially */
-    this.page = null;
   }
 
   render() {
