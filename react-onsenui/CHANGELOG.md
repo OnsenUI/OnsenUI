@@ -13,6 +13,7 @@ dev
 
 ### New Features
 
+ * Support React 17. ([#2851](https://github.com/OnsenUI/OnsenUI/issues/2851))
  * ListItem: Added `animation` prop.
  * ListItem: Added `onExpand` prop.
  * BackButton: Added `options` prop.
@@ -30,17 +31,24 @@ dev
  * Switch: Added `modifier` and `defaultChecked` props.
  * Radio: Added `name` prop.
  * Range: Added `defaultValue` and `onInput` props.
+ * Allow arbitrary events by setting a prop `on<EventName>` e.g. `onKeyup`. ([#2959](https://github.com/OnsenUI/OnsenUI/issues/2959)).
 
 ### Bug Fixes
 
+ * Components now forward refs properly to the inner Custom Element. ([#2959](https://github.com/OnsenUI/OnsenUI/issues/2959)).
+ * Removed all references to deprecated `ReactDOM.findDOMNode`. ([#2822](https://github.com/OnsenUI/OnsenUI/issues/2822)).
+ * Removed all unsafe lifecycle methods. ([#2680](https://github.com/OnsenUI/OnsenUI/issues/2680)).
  * Carousel: Allow only PropTypes.string for itemWidth and itemHeight.
  * Tabbar: `ignoreEdgeWidth` prop type is now `number`.
  * Input, SearchInput, Checkbox, Switch: `onChange` is no longer triggered by the `input` event.
  * Input, SearchInput, Checkbox, Switch: Camel-cased props are now recognised for known input attributes (e.g. `readOnly`). ([#2570](https://github.com/OnsenUI/OnsenUI/issues/2570)).
- * Select: `size` prop type is now `number`.
+ * Select: `size` prop type is now `number`. ([#2526](https://github.com/OnsenUI/OnsenUI/issues/2526)).
  * SplitterSide: `swipeTargetWidth` prop type is now number.
  * SplitterSide: `width` prop type is now string.
  * SplitterSide: Removed `mode` prop.
+ * SplitterSide: Stop error being thrown when `animationOptions` prop is set. ([#2494](https://github.com/OnsenUI/OnsenUI/issues/2494)).
+ * Navigator, RouterNavigator: Pass `animationOptions` properly. ([#2705](https://github.com/OnsenUI/OnsenUI/issues/2705)).
+ * Select: Stop first option getting lost when Select is a direct child of ListItem. ([#2560](https://github.com/OnsenUI/OnsenUI/issues/2560)).
 
 ### Misc
 
