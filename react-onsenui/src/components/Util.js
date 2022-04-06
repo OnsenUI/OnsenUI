@@ -29,7 +29,7 @@ export default {
       const reactValue = props[reactName];
 
       // onClick and anything that isn't a valid React prop get added immediately
-      if (!validProps.hasOwnProperty(reactName) || reactName === 'onClick') {
+      if (!Object.prototype.hasOwnProperty.call(validProps, reactName) || reactName === 'onClick') {
         jsProperties[reactName] = reactValue;
 
       // don't add any props we specifically want to ignore
