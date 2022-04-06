@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import BasicComponent from './BasicComponent.jsx';
 import Util from './Util.js';
 import 'onsenui/esm/elements/ons-navigator';
 
@@ -25,9 +24,10 @@ import 'onsenui/esm/elements/ons-navigator';
    }
  }
  */
-class Navigator extends BasicComponent {
+class NavigatorClass extends React.Component {
   constructor(...args) {
     super(...args);
+    this.ref = React.createRef();
     this.pages = [];
     this.state = { };
     this._prePush = this._prePush.bind(this);
@@ -79,7 +79,7 @@ class Navigator extends BasicComponent {
     }
 
     const hidePages = () => {
-      const pageElements = this._navi.pages;
+      const pageElements = this.ref.current.pages;
       for (let i = pageElements.length - 2; i >= 0; i--) {
         pageElements[i].style.display = 'none';
       }
@@ -97,7 +97,7 @@ class Navigator extends BasicComponent {
       };
 
       return this.update(this.pages)
-        .then(() => this._navi._popPage(options, update))
+        .then(() => this.ref.current._popPage(options, update))
         .then(() => hidePages());
     }
 
@@ -110,7 +110,7 @@ class Navigator extends BasicComponent {
       return new Promise((resolve) => this.forceUpdate(resolve));
     };
 
-    return this._navi._pushPage(options, update).then(() => {
+    return this.ref.current._pushPage(options, update).then(() => {
       this.routes = routes;
       this.pages = routes.map(route => this.props.renderPage(route, this));
       return this.update(this.pages).then(() => hidePages());
@@ -144,7 +144,7 @@ class Navigator extends BasicComponent {
       };
 
       this.routes.push(route);
-      this._navi
+      this.ref.current
         ._pushPage(
           options,
           update
@@ -159,7 +159,7 @@ class Navigator extends BasicComponent {
   }
 
   isRunning() {
-    return this._navi._isRunning;
+    return this.ref.current._isRunning;
   }
 
   /*
@@ -184,7 +184,7 @@ class Navigator extends BasicComponent {
       const pos = this.pages.length - 2;
       this.pages.splice(pos, 1);
       this.routes.splice(pos, 1);
-      this._navi.topPage.updateBackButton(this.pages.length > 1);
+      this.ref.current.topPage.updateBackButton(this.pages.length > 1);
       this.forceUpdate();
     });
   }
@@ -216,7 +216,7 @@ class Navigator extends BasicComponent {
       });
     };
 
-    return this._navi._popPage(options, update);
+    return this.ref.current._popPage(options, update);
   }
 
   _onDeviceBackButton(event) {
@@ -228,7 +228,7 @@ class Navigator extends BasicComponent {
   }
 
   _prePop(event) {
-    if (event.target !== this._navi) {
+    if (event.target !== this.ref.current) {
       return;
     }
 
@@ -241,7 +241,7 @@ class Navigator extends BasicComponent {
   }
 
   _postPop(event) {
-    if (event.target !== this._navi) {
+    if (event.target !== this.ref.current) {
       return;
     }
 
@@ -254,7 +254,7 @@ class Navigator extends BasicComponent {
   }
 
   _prePush(event) {
-    if (event.target !== this._navi) {
+    if (event.target !== this.ref.current) {
       return;
     }
 
@@ -267,7 +267,7 @@ class Navigator extends BasicComponent {
   }
 
   _postPush(event) {
-    if (event.target !== this._navi) {
+    if (event.target !== this.ref.current) {
       return;
     }
 
@@ -280,7 +280,7 @@ class Navigator extends BasicComponent {
   }
 
   componentDidMount() {
-    const node = this._navi;
+    const node = this.ref.current;
     node.popPage = this.popPage.bind(this);
 
     node.addEventListener('prepush', this._prePush);
@@ -311,12 +311,12 @@ class Navigator extends BasicComponent {
 
   componentDidUpdate() {
     if (this.props.onDeviceBackButton !== undefined) {
-      this._navi.onDeviceBackButton = this.props.onDeviceBackButton;
+      this.ref.current.onDeviceBackButton = this.props.onDeviceBackButton;
     }
   }
 
   componentWillUnmount() {
-    const node = this._navi;
+    const node = this.ref.current;
     node.removeEventListener('prepush', this.props.onPrePush);
     node.removeEventListener('postpush', this.props.onPostPush);
     node.removeEventListener('prepop', this.props.onPrePop);
@@ -327,13 +327,21 @@ class Navigator extends BasicComponent {
     const attrs = Util.getAttrs(this);
     const pages = this.routes ? this.routes.map((route) => this.props.renderPage(route, this)) : null;
 
+    if (this.props.innerRef && this.props.innerRef !== this.ref) {
+      this.ref = this.props.innerRef;
+    }
+
     return (
-      <ons-navigator { ...attrs } ref={(navi) => { this._navi = navi; }}>
+      <ons-navigator { ...attrs } ref={this.ref}>
         {pages}
       </ons-navigator>
     );
   }
 }
+
+const Navigator = React.forwardRef((props, ref) => (
+  <NavigatorClass innerRef={ref} {...props}>{props.children}</NavigatorClass>
+));
 
 Navigator.propTypes = {
   /**
