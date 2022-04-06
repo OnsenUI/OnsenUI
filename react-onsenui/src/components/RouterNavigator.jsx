@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import BasicComponent from './BasicComponent.jsx';
 import Util from './Util.js';
 import 'onsenui/esm/elements/ons-navigator';
 
@@ -12,7 +11,7 @@ import 'onsenui/esm/elements/ons-navigator';
  * [en] This component is a variant of the Navigator with a declarative API. In order to manage to display the pages, the  navigator needs to define the `renderPage` method, that takes an route and a navigator and  converts it to an page.[/en]
  * [ja][/ja]
  */
-class RouterNavigator extends BasicComponent {
+class RouterNavigatorClass extends React.Component {
   constructor(...args) {
     super(...args);
 
@@ -28,6 +27,8 @@ class RouterNavigator extends BasicComponent {
     this.onPostPush = callback.bind(this, 'onPostPush');
     this.onPrePop = callback.bind(this, 'onPrePop');
     this.onPostPop = callback.bind(this, 'onPostPop');
+
+    this.ref = React.createRef();
   }
 
   update(cb) {
@@ -61,7 +62,7 @@ class RouterNavigator extends BasicComponent {
       });
     };
 
-    return this._navi._pushPage(options, update)
+    return this.ref.current._pushPage(options, update)
       .then(() => {
         this.pages = routes.map(route => this.props.renderPage(route));
         this.update();
@@ -93,7 +94,7 @@ class RouterNavigator extends BasicComponent {
       });
     };
 
-    return this._navi._pushPage(options, update)
+    return this.ref.current._pushPage(options, update)
       .then(() => {
         this.page = null;
         this.update();
@@ -101,7 +102,7 @@ class RouterNavigator extends BasicComponent {
   }
 
   isRunning() {
-    return this._navi._isRunning;
+    return this.ref.current._isRunning;
   }
 
   /*
@@ -126,7 +127,7 @@ class RouterNavigator extends BasicComponent {
       });
     };
 
-    return this._navi._pushPage(options, update)
+    return this.ref.current._pushPage(options, update)
       .then(() => {
         this.pages.splice(this.pages.length - 2, 1);
         this.update();
@@ -155,7 +156,7 @@ class RouterNavigator extends BasicComponent {
       });
     };
 
-    return this._navi._popPage(options, update);
+    return this.ref.current._popPage(options, update);
   }
 
   _onDeviceBackButton(event) {
@@ -167,7 +168,7 @@ class RouterNavigator extends BasicComponent {
   }
 
   componentDidMount() {
-    const node = this._navi;
+    const node = this.ref.current;
 
     this.cancelUpdate = false;
 
@@ -193,7 +194,7 @@ class RouterNavigator extends BasicComponent {
   }
 
   componentWillUnmount() {
-    const node = this._navi;
+    const node = this.ref.current;
     node.removeEventListener('prepush', this.onPrePush);
     node.removeEventListener('postpush', this.onPostPush);
     node.removeEventListener('prepop', this.onPrePop);
@@ -206,7 +207,7 @@ class RouterNavigator extends BasicComponent {
     this.page = null;
 
     if (this.props.onDeviceBackButton !== undefined) {
-      this._navi.onDeviceBackButton = this.props.onDeviceBackButton;
+      this.ref.current.onDeviceBackButton = this.props.onDeviceBackButton;
     }
 
     const processStack = [...this.props.routeConfig.processStack];
@@ -252,13 +253,21 @@ class RouterNavigator extends BasicComponent {
     const pagesToRender = this.props.routeConfig.routeStack.map(route => this.props.renderPage(route));
     pagesToRender.push(this.page);
 
+    if (this.props.innerRef && this.props.innerRef !== this.ref) {
+      this.ref = this.props.innerRef;
+    }
+
     return (
-      <ons-navigator { ...attrs } ref={(navi) => { this._navi = navi; }}>
+      <ons-navigator { ...attrs } ref={this.ref}>
         {pagesToRender}
       </ons-navigator>
     );
   }
 }
+
+const RouterNavigator = React.forwardRef((props, ref) => (
+  <RouterNavigatorClass innerRef={ref} {...props}>{props.children}</RouterNavigatorClass>
+));
 
 RouterNavigator.propTypes = {
   /**
