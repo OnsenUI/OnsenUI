@@ -243,8 +243,16 @@ export default class SelectElement extends BaseElement {
     this._select.add(option, index);
   }
 
+  // If called with an index argument, removes the option element with the given index.
+  // If called with no arguments, removes this.
+  // This behaviour might sound crazy but it is the same as <select>'s `remove` method.
+  // https://developer.mozilla.org/en-US/docs/Web/API/HTMLSelectElement/remove
   remove(index) {
-    this._select.remove(index);
+    if (index === undefined) {
+      Element.prototype.remove.call(this);
+    } else {
+      this._select.remove(index);
+    }
   }
 }
 

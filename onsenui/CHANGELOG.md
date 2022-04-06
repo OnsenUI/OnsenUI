@@ -26,6 +26,7 @@ dev
  * ons-action-sheet: Hide title element when title is null or undefined.
  * ons-splitter-side: Fix error being thrown when `animation-options` attribute is set.
  * ons-popover: Use regular function instead of arrow function to stop default animation breaking.
+ * ons-select: Remove ons-select element when `remove` is called with no arguments.
 
  ### New Features
 
