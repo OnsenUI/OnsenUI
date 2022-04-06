@@ -309,9 +309,9 @@ class Navigator extends BasicComponent {
     this.forceUpdate();
   }
 
-  UNSAFE_componentWillReceiveProps(newProps) {
-    if (newProps.onDeviceBackButton !== undefined) {
-      this._navi.onDeviceBackButton = newProps.onDeviceBackButton;
+  componentDidUpdate() {
+    if (this.props.onDeviceBackButton !== undefined) {
+      this._navi.onDeviceBackButton = this.props.onDeviceBackButton;
     }
   }
 
