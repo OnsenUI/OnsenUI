@@ -46,7 +46,6 @@ const notAttributes = ['onDeviceBackButton'];
 const Element = onsCustomElement(baseDialog('ons-popover'), {deprecated, notAttributes});
 
 const Popover = React.forwardRef((props, forwardedRef) => {
-
   const {isOpen, getTarget, children, ...rest} = props;
   const ref = forwardedRef || useRef();
 

@@ -14,7 +14,7 @@ const parseIcon = icon => {
       return icon.default + ', ' + innerString.join(',');
     }
   }
-}
+};
 
 const parseSize = size => {
   if (size) {
@@ -26,7 +26,7 @@ const parseSize = size => {
       return size.default + 'px, ' + innerString.join(',');
     }
   }
-}
+};
 
 const Element = onsCustomElement('ons-icon');
 

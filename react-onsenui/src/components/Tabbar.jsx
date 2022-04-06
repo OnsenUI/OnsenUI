@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import 'onsenui/esm/elements/ons-tabbar';
 
@@ -39,7 +39,6 @@ const Element = onsCustomElement('ons-tabbar', {deprecated});
   </Page>
  */
 const Tabbar = React.forwardRef((props, ref) => {
-
   const {visible, hideTabs, renderTabs, ...rest} = props;
 
   const tabs = renderTabs(props.activeIndex, ref);
@@ -60,15 +59,15 @@ const Tabbar = React.forwardRef((props, ref) => {
 
       ref={ref}
     >
-      <div className="tabbar__content">
+      <div className='tabbar__content'>
         <div>
           {tabs.map(tab => tab.content)}
         </div>
         <div></div>
       </div>
-      <div className="tabbar">
+      <div className='tabbar'>
         {tabs.map(tab => tab.tab)}
-        <div className="tabbar__border"></div>
+        <div className='tabbar__border'></div>
       </div>
     </Element>
   );

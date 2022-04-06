@@ -6,7 +6,7 @@ import baseDialog from './baseDialog';
 
 const deprecated = {
   isOpen: 'visible'
-}
+};
 
 const notAttributes = ['onDeviceBackButton'];
 

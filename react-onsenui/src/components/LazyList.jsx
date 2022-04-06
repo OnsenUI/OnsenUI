@@ -44,7 +44,6 @@ import List from './List';
 }
  */
 const LazyList = React.forwardRef((props, forwardedRef) => {
-
   const ref = forwardedRef || useRef();
   const [children, setChildren] = useState([]);
   const [, setUpdateTop] = useState();
@@ -73,7 +72,7 @@ const LazyList = React.forwardRef((props, forwardedRef) => {
   return (
     <List
       {...rest}
-      style={{position: "relative"}}
+      style={{position: 'relative'}}
     >
       <ons-lazy-repeat ref={ref} />
       {children}

@@ -29,7 +29,6 @@ const Element = onsCustomElement('ons-page', {notAttributes});
   </Page>
  */
 const Page = React.forwardRef((props, ref) => {
-
   const {
     renderToolbar,
     renderBottomToolbar,
@@ -46,11 +45,11 @@ const Page = React.forwardRef((props, ref) => {
       ref={ref}
     >
       {renderToolbar(ref)}
-      <div className="page__background"> </div>
-      <div className="page__content" style={contentStyle}>
+      <div className='page__background'> </div>
+      <div className='page__content' style={contentStyle}>
         {children}
       </div>
-      <div className="page__extra" style={{zIndex: 10001}}>
+      <div className='page__extra' style={{zIndex: 10001}}>
         {renderModal(ref)}
       </div>
       {renderFixed(ref)}

@@ -18,7 +18,7 @@ const addDeprecated = (props, deprecated) => {
   }
 
   return propsCopy;
-}
+};
 
 function useCustomElementListener(ref, prop, handler) {
   const event = prop.slice(2).toLowerCase();
@@ -60,7 +60,6 @@ function useCustomElement(props, options = {}, ref) {
 
 export default function onsCustomElement(WrappedComponent, options) {
   return React.forwardRef((props, _ref) => {
-
     const ref = _ref || useRef();
 
     const {style, children, ...rest} = props;

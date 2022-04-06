@@ -25,7 +25,6 @@ class Portal extends React.Component {
 
 const baseDialog = DialogComponent =>
   React.forwardRef((props, ref) => {
-
     // visible prop should be applied last since it depends on animation and
     // maskColor props being set first
     const {visible, ...rest} = props;

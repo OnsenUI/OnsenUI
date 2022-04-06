@@ -28,7 +28,6 @@ const Element = onsCustomElement('ons-list');
   />
  */
 const List = React.forwardRef((props, ref) => {
-
   const {renderHeader, renderFooter, renderRow, dataSource, ...rest} = props;
 
   const rows = dataSource.map((data, index) => renderRow(data, index));

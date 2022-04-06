@@ -6,7 +6,6 @@ import React from 'react';
 // For example, Input has a defaulttValue prop that should set the inner input's
 // value when the component mounted and do nothing afterwards.
 const oneTimeProp = (WrappedComponent, defaultProp, prop) => {
-
   class OneTimeProp extends React.Component {
     constructor(props) {
       super(props);
@@ -42,6 +41,6 @@ const oneTimeProp = (WrappedComponent, defaultProp, prop) => {
   return React.forwardRef((props, ref) =>
     <OneTimeProp innerRef={ref} {...props}>{props.children}</OneTimeProp>
   );
-}
+};
 
 export default oneTimeProp;
