@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Util from './Util.js';
 import 'onsenui/esm/elements/ons-navigator';
+
+import onsCustomElement from './onsCustomElement';
 
 /**
  * @original ons-navigator
@@ -11,6 +12,8 @@ import 'onsenui/esm/elements/ons-navigator';
  * [en] This component is a variant of the Navigator with a declarative API. In order to manage to display the pages, the  navigator needs to define the `renderPage` method, that takes an route and a navigator and  converts it to an page.[/en]
  * [ja][/ja]
  */
+const Element = onsCustomElement('ons-navigator');
+
 class RouterNavigatorClass extends React.Component {
   constructor(...args) {
     super(...args);
@@ -247,20 +250,34 @@ class RouterNavigatorClass extends React.Component {
   }
 
   render() {
-    const attrs = Util.getAttrs(this);
+    const {
+      innerRef,
+      routeConfig,
+      renderPage,
+
+      // these props should not be passed down
+      onPrePush,
+      onPostPush,
+      onPrePop,
+      onPostPop,
+      swipePop,
+      onDeviceBackButton,
+
+      ...rest
+    } = this.props;
 
     /* Gather pages to render and the animating page in one array so React reuses components. */
-    const pagesToRender = this.props.routeConfig.routeStack.map(route => this.props.renderPage(route));
+    const pagesToRender = routeConfig.routeStack.map(route => renderPage(route));
     pagesToRender.push(this.page);
 
-    if (this.props.innerRef && this.props.innerRef !== this.ref) {
-      this.ref = this.props.innerRef;
+    if (innerRef && innerRef !== this.ref) {
+      this.ref = innerRef;
     }
 
     return (
-      <ons-navigator { ...attrs } ref={this.ref}>
+      <Element {...rest} ref={this.ref}>
         {pagesToRender}
-      </ons-navigator>
+      </Element>
     );
   }
 }
