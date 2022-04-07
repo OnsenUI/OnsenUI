@@ -1,6 +1,6 @@
 import 'onsenui/esm/elements/ons-splitter-content';
 
-import onsCustomElement from './onsCustomElement';
+import onsCustomElement from '../onsCustomElement';
 
 /**
  * @original ons-splitter-content

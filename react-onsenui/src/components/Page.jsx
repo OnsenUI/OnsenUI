@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import 'onsenui/esm/elements/ons-page';
 
-import onsCustomElement from './onsCustomElement';
+import onsCustomElement from '../onsCustomElement';
 
 const notAttributes = ['onInfiniteScroll', 'onDeviceBackButton'];
 const Element = onsCustomElement('ons-page', {notAttributes});

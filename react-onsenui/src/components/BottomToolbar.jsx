@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import 'onsenui/esm/elements/ons-bottom-toolbar';
 
-import onsCustomElement from './onsCustomElement';
+import onsCustomElement from '../onsCustomElement';
 
 const propTypes = {
   /**

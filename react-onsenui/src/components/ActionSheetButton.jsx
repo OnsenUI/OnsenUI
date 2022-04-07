@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import 'onsenui/esm/elements/ons-action-sheet-button';
 
-import onsCustomElement from './onsCustomElement';
+import onsCustomElement from '../onsCustomElement';
 
 const propTypes = {
   /**

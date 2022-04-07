@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import 'onsenui/esm/elements/ons-pull-hook';
 
-import onsCustomElement from './onsCustomElement';
+import onsCustomElement from '../onsCustomElement';
 
 const deprecated = {
   onLoad: 'onAction',

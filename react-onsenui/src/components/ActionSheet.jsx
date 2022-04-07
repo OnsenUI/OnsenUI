@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types';
 import 'onsenui/esm/elements/ons-action-sheet';
 
-import onsCustomElement from './onsCustomElement';
-import baseDialog from './baseDialog';
+import onsCustomElement from '../onsCustomElement';
+import baseDialog from '../baseDialog';
 
 const propTypes = {
   /**

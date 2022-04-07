@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import 'onsenui/esm/elements/ons-carousel-item';
 
-import onsCustomElement from './onsCustomElement';
+import onsCustomElement from '../onsCustomElement';
 
 /**
  * @original ons-carousel-item

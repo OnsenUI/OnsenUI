@@ -1,9 +1,9 @@
 import PropTypes from 'prop-types';
 import 'onsenui/esm/elements/ons-range';
 
-import onsCustomElement from './onsCustomElement';
-import oneTimeProp from './oneTimeProp';
-import INPUT_PROPS from './inputProps';
+import onsCustomElement from '../onsCustomElement';
+import oneTimeProp from '../oneTimeProp';
+import INPUT_PROPS from '../inputProps';
 
 const nameMap = {
   ...INPUT_PROPS

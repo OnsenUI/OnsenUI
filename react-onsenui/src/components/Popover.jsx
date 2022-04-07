@@ -2,8 +2,8 @@ import React, { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import 'onsenui/esm/elements/ons-popover';
 
-import onsCustomElement from './onsCustomElement';
-import baseDialog from './baseDialog';
+import onsCustomElement from '../onsCustomElement';
+import baseDialog from '../baseDialog';
 
 const deprecated = {
   onCancel: 'onDialogCancel',
