@@ -1,0 +1,29 @@
+--- ../../node_modules/react-docgen/dist/resolver/findExportedComponentDefinition.js	2022-04-07 09:52:03.219300544 +0100
++++ findExportedComponentDefinition.js	2022-04-07 09:56:09.060289666 +0100
+@@ -84,16 +84,7 @@
+ 
+   function exportDeclaration(path) {
+     const definitions = (0, _resolveExportDeclaration.default)(path).reduce((acc, definition) => {
+-      if (isComponentDefinition(definition)) {
+-        acc.push(definition);
+-      } else {
+-        const resolved = (0, _resolveToValue.default)((0, _resolveHOC.default)(definition));
+-
+-        if (isComponentDefinition(resolved)) {
+-          acc.push(resolved);
+-        }
+-      }
+-
++      acc.push(definition);
+       return acc;
+     }, []);
+ 
+@@ -106,7 +97,7 @@
+       throw new Error(ERROR_MULTIPLE_DEFINITIONS);
+     }
+ 
+-    foundDefinition = resolveDefinition(definitions[0]);
++    foundDefinition = definitions[0];
+     return false;
+   }
+ 

@@ -8,7 +8,7 @@
     "prepublish": "npm run build",
     "postpublish": "npm run gen-docs",
     "test": "karma start",
-    "gen-docs": "node ./docgen.js"
+    "gen-docs": "node ./scripts/docgen.js"
   },
   "main": "dist/react-onsenui.js",
   "files": [
@@ -64,7 +64,7 @@
     "karma-webpack": "^5.0.0",
     "mocha": "^9.2.1",
     "prompt": "^1.0.0",
-    "react-docgen": "^2.21.0",
+    "react-docgen": "^5.4.0",
     "react-hot-loader": "^3.0.0-beta.6",
     "redux": "^3.7.2",
     "rollup": "^2.67.2",
