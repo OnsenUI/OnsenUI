@@ -8,13 +8,9 @@ import { babel } from '@rollup/plugin-babel';
 import eslint from '@rollup/plugin-eslint';
 import resolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
-import replace from '@rollup/plugin-replace';
 import filesize from 'rollup-plugin-filesize';
 import progress from 'rollup-plugin-progress';
 import visualizer from 'rollup-plugin-visualizer';
-import alias from '@rollup/plugin-alias';
-import uglify from 'rollup-plugin-uglify';
-import nodeGlobals from 'rollup-plugin-node-globals';
 
 const local = (...args) => path.resolve(__dirname, ...args);
 
@@ -44,92 +40,32 @@ const globals = id => {
   }
 };
 
-const builds = [
-  // React bindings UMD development
-  {
-    input: 'src/index.umd.js',
-    external: id => /^(onsenui|react|react-dom|prop-types)(\/.*)?$/.test(id),
-    output: {
-      file: 'dist/react-onsenui.js',
-      format: 'umd',
-      name: 'Ons',
-      sourcemap: 'inline',
-      globals,
-      banner,
-    },
-    plugins: [
-      eslint({
-        include: [
-          'src/**/*.js',
-          'src/**/*.jsx',
-        ],
-      }),
-      resolve(resolveOpt),
-      commonjs(),
-      babel(babelrc),
-      progress(),
-      filesize(),
-      visualizer({
-        filename: 'module-stats.umd.html',
-        sourcemap: true,
-      }),
-    ],
-  },
-
-  // React bindings UMD production
-  {
-    input: 'src/index.umd.js',
-    external: id => /^(onsenui|react|react-dom|prop-types)(\/.*)?$/.test(id),
-    output: {
-      file: 'dist/react-onsenui.min.js',
-      format: 'umd',
-      name: 'Ons',
-      sourcemap: true,
-      globals,
-      banner,
-    },
-    plugins: [
-      replace({
-        'process.env.NODE_ENV': JSON.stringify( 'production' ),
-        preventAssignment: true
-      }),
-      resolve(resolveOpt),
-      commonjs(),
-      babel(babelrc),
-      uglify(),
-      progress(),
-      filesize(),
-    ],
-  },
-];
-
-builds.devConfig = {
-  input: local('examples/main.js'),
+export default {
+  input: 'src/index.umd.js',
+  external: id => /^(onsenui|react|react-dom|prop-types)(\/.*)?$/.test(id),
   output: {
-    file: local('examples/build.js'),
+    file: 'dist/react-onsenui.js',
     format: 'umd',
-    name: 'reactOnsenDev',
+    name: 'Ons',
     sourcemap: 'inline',
+    globals,
+    banner,
   },
   plugins: [
-    alias({
-      resolve: ['.js', '.jsx', '\/index.js'],
-      'react-onsenui': local('src', 'index.umd.js'),
-      'onsenui': local('../../build/js/onsenui.js'),
+    eslint({
+      include: [
+        'src/**/*.js',
+        'src/**/*.jsx',
+      ],
     }),
     resolve(resolveOpt),
-    commonjs({
-      include: [local('node_modules/**'), local('../../build/**')],
-      namedExports: {
-        [local('node_modules', 'react-dom')]: ['findDOMNode'],
-        [local('node_modules', 'react')]: ['Component', 'Children', 'createElement'],
-      },
-    }),
+    commonjs(),
     babel(babelrc),
-    nodeGlobals(),
     progress(),
     filesize(),
-  ],
+    visualizer({
+      filename: 'module-stats.umd.html',
+      sourcemap: true,
+    })
+  ]
 };
-
-export default builds;
