@@ -83,6 +83,14 @@ export default class ButtonElement extends BaseButtonElement {
    */
 
   /**
+   * @property ripple
+   * @type {Boolean}
+   * @description
+   *  [en]Whether the button has a ripple effect or not.[/en]
+   *  [ja][/ja]
+   */
+
+  /**
    * @attribute disabled
    * @description
    *   [en]Specify if button should be disabled.[/en]

@@ -1,6 +1,17 @@
-import BaseDialog from './BaseDialog.jsx';
-
 import PropTypes from 'prop-types';
+import 'onsenui/esm/elements/ons-dialog';
+
+import onsCustomElement from '../onsCustomElement';
+import baseDialog from '../baseDialog';
+
+const deprecated = {
+  onCancel: 'onDialogCancel',
+  isOpen: 'visible',
+  isDisabled: 'disabled',
+  isCancelable: 'cancelable'
+};
+
+const notAttributes = ['onDeviceBackButton'];
 
 /**
  * @original ons-dialog
@@ -20,20 +31,64 @@ import PropTypes from 'prop-types';
     </Dialog>
 
  */
-class Dialog extends BaseDialog {
-  _getDomNodeName() {
-    return 'ons-dialog';
-  }
-}
+const Dialog = onsCustomElement(baseDialog('ons-dialog'), {deprecated, notAttributes});
 
 Dialog.propTypes = {
+  /**
+   * @name visible
+   * @type bool
+   * @description
+   *  [en]
+   *  Indicates whether the dialog is open and shown.
+   *  [/en]
+   *  [ja][/ja]
+   */
+  visible: PropTypes.bool,
+
+  /**
+   * @name disabled
+   * @type bool
+   * @required false
+   * @description
+   *  [en]
+   *  Specifies whether the dialog is disabled.
+   *  [/en]
+   *  [ja][/ja]
+   */
+  disabled: PropTypes.bool,
+
+  /**
+   * @name cancelable
+   * @type bool
+   * @required false
+   * @description
+   *  [en]
+   *  Specifies whether the dialog is cancelable or not.
+   *  A cancelable dialog will call `onDialogCancel` when tapping the background or pressing the back button on Android devices.
+   *  [/en]
+   *  [ja][/ja]
+   */
+  cancelable: PropTypes.bool,
+
+  /**
+   * @name onDialogCancel
+   * @type function
+   * @required false
+   * @description
+   *  [en]
+   *  Called only if `cancelable` is true. It will be called after tapping the background or by pressing the back button on Android devices.
+   *  [/en]
+   *  [ja][/ja]
+   */
+  onDialogCancel: PropTypes.func,
+
   /**
    * @name onCancel
    * @type function
    * @required false
    * @description
    *  [en]
-   *  Called only if isCancelable is true. It will be called after tapping the background or by pressing the back button on Android devices.
+   *  DEPRECATED! Use `onDialogCancel` instead.
    *  [/en]
    *  [ja][/ja]
    */
@@ -42,14 +97,13 @@ Dialog.propTypes = {
   /**
    * @name isOpen
    * @type bool
-   * @required true
    * @description
    *  [en]
-   *  Indicates whether the dialog is open and shown.
+   *  DEPRECATED! Use `visible` instead.
    *  [/en]
    *  [ja][/ja]
    */
-  isOpen: PropTypes.bool.isRequired,
+  isOpen: PropTypes.bool,
 
   /**
    * @name isCancelable
@@ -57,8 +111,7 @@ Dialog.propTypes = {
    * @required false
    * @description
    *  [en]
-   *  Specifies whether the dialog is cancelable or not.
-   *  A cancelable dialog will call onCancel  when tapping the background or or  pressing the back button on Android devices
+   *  DEPRECATED! Use `cancelable` instead.
    *  [/en]
    *  [ja][/ja]
    */
@@ -70,7 +123,7 @@ Dialog.propTypes = {
    * @required false
    * @description
    *  [en]
-   *  Specifies whether the dialog is disabled.
+   *  DEPRECATED! Use `disabled` instead.
    *  [/en]
    *  [ja][/ja]
    */

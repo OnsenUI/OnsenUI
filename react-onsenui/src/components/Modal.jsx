@@ -1,5 +1,14 @@
-import BaseDialog from './BaseDialog.jsx';
 import PropTypes from 'prop-types';
+import 'onsenui/esm/elements/ons-modal';
+
+import onsCustomElement from '../onsCustomElement';
+import baseDialog from '../baseDialog';
+
+const deprecated = {
+  isOpen: 'visible'
+};
+
+const notAttributes = ['onDeviceBackButton'];
 
 /**
  * @original ons-modal
@@ -26,11 +35,7 @@ import PropTypes from 'prop-types';
     </Modal>
   </Page>
  */
-class Modal extends BaseDialog {
-  _getDomNodeName() {
-    return 'ons-modal';
-  }
-}
+const Modal = onsCustomElement(baseDialog('ons-modal'), {deprecated, notAttributes});
 
 Modal.propTypes = {
   /**
@@ -96,10 +101,18 @@ Modal.propTypes = {
   onPostHide: PropTypes.func,
 
   /**
-   * @name isOpen
+   * @name visible
    * @type boolean
    * @description
    *  [en]When `true` the modal will show itself.[/en]
+   */
+  visible: PropTypes.bool,
+
+  /**
+   * @name isOpen
+   * @type boolean
+   * @description
+   *  [en]DEPRECATED! Use `visible` instead.[/en]
    */
   isOpen: PropTypes.bool,
 
@@ -114,11 +127,6 @@ Modal.propTypes = {
    *  [ja][/ja]
    */
   onDeviceBackButton: PropTypes.func
-};
-
-Modal.defaultProps = {
-  isOpen: false,
-  animation: 'none'
 };
 
 export default Modal;

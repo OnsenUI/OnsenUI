@@ -64,6 +64,56 @@ const _animatorDict = {
 export default class ToastElement extends BaseDialogElement {
 
   /**
+   * @event preshow
+   * @description
+   *   [en]Fired just before the toast is displayed.[/en]
+   *   [ja]ダイアログが表示される直前に発火します。[/ja]
+   * @param {Object} event [en]Event object.[/en]
+   * @param {Object} event.toast
+   *   [en]Toast object.[/en]
+   *   [ja]ダイアログのオブジェクト。[/ja]
+   * @param {Function} event.cancel
+   *   [en]Execute to stop the toast from showing.[/en]
+   *   [ja]この関数を実行すると、ダイアログの表示を止めます。[/ja]
+   */
+
+  /**
+   * @event postshow
+   * @description
+   *   [en]Fired just after the toast is displayed.[/en]
+   *   [ja]ダイアログが表示された直後に発火します。[/ja]
+   * @param {Object} event [en]Event object.[/en]
+   * @param {Object} event.toast
+   *   [en]Toast object.[/en]
+   *   [ja]ダイアログのオブジェクト。[/ja]
+   */
+
+  /**
+   * @event prehide
+   * @description
+   *   [en]Fired just before the toast is hidden.[/en]
+   *   [ja]ダイアログが隠れる直前に発火します。[/ja]
+   * @param {Object} event [en]Event object.[/en]
+   * @param {Object} event.toast
+   *   [en]Toast object.[/en]
+   *   [ja]ダイアログのオブジェクト。[/ja]
+   * @param {Function} event.cancel
+   *   [en]Execute to stop the toast from hiding.[/en]
+   *   [ja]この関数を実行すると、ダイアログが閉じようとするのを止めます。[/ja]
+   */
+
+  /**
+   * @event posthide
+   * @description
+   * [en]Fired just after the toast is hidden.[/en]
+   * [ja]ダイアログが隠れた後に発火します。[/ja]
+   * @param {Object} event [en]Event object.[/en]
+   * @param {Object} event.toast
+   *   [en]Toast object.[/en]
+   *   [ja]ダイアログのオブジェクト。[/ja]
+   */
+
+  /**
    * @attribute animation
    * @type {String}
    * @default default
@@ -78,6 +128,22 @@ export default class ToastElement extends BaseDialogElement {
    * @description
    *  [en]Specify the animation's duration, timing and delay with an object literal. E.g. `{duration: 0.2, delay: 1, timing: 'ease-in'}`.[/en]
    *  [ja]アニメーション時のduration, timing, delayをオブジェクトリテラルで指定します。e.g. <code>{duration: 0.2, delay: 1, timing: 'ease-in'}</code>[/ja]
+   */
+
+  /**
+   * @property animationOptions
+   * @type {Object}
+   * @description
+   *   [en]Specify the animation's duration, timing and delay with an object literal. E.g. `{duration: 0.2, delay: 1, timing: 'ease-in'}`.[/en]
+   *   [ja]アニメーション時のduration, timing, delayをオブジェクトリテラルで指定します。例：{duration: 0.2, delay: 1, timing: 'ease-in'}[/ja]
+   */
+
+  /**
+   * @attribute visible
+   * @type {Boolean}
+   * @description
+   *   [en]Whether the toast is visible or not.[/en]
+   *   [ja]要素が見える場合に`true`。[/ja]
    */
 
   constructor() {
@@ -167,7 +233,6 @@ export default class ToastElement extends BaseDialogElement {
 
   /**
    * @property visible
-   * @readonly
    * @type {Boolean}
    * @description
    *   [en]Whether the element is visible or not.[/en]

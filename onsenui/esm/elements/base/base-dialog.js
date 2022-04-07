@@ -71,7 +71,8 @@ export default class BaseDialogElement extends BaseElement {
         .then(
           () => {
             this._running = false;
-            util.triggerElementEvent(this, 'dialog-cancel');
+            util.triggerElementEvent(this, 'dialogcancel');
+            util.triggerElementEvent(this, 'dialog-cancel');  // dialog-cancel is deprecated but still emit to avoid breaking user code
           },
           () => this._running = false
         );
@@ -79,15 +80,24 @@ export default class BaseDialogElement extends BaseElement {
   }
 
   show(...args) {
-    return this._setVisible(true, ...args);
+    return this._setVisible(true, ...args).then(dialog => {
+      this.visible = true;
+      return dialog;
+    });
   }
 
   hide(...args) {
-    return this._setVisible(false, ...args);
+    return this._setVisible(false, ...args).then(dialog => {
+      this.visible = false;
+      return dialog;
+    });
   }
 
   toggle(...args) {
-    return this._setVisible(!this.visible, ...args);
+    return this._setVisible(!this.visible, ...args).then(dialog => {
+      this.visible = this._visible;
+      return dialog;
+    });
   }
 
   _setVisible(shouldShow, options = {}) {
@@ -96,7 +106,7 @@ export default class BaseDialogElement extends BaseElement {
     options = { ...options };
     options.animationOptions = util.extend(
       options.animationOptions || {},
-      AnimatorFactory.parseAnimationOptionsString(this.getAttribute('animation-options'))
+      this.animationOptions
     );
 
     let canceled = false;
@@ -140,7 +150,15 @@ export default class BaseDialogElement extends BaseElement {
   }
 
   get visible() {
-    return this._visible;
+    return this.hasAttribute('visible');
+  }
+
+  set visible(value) {
+    if (value) {
+      this.setAttribute('visible', '');
+    } else {
+      this.removeAttribute('visible');
+    }
   }
 
   set disabled(value) {
@@ -159,12 +177,40 @@ export default class BaseDialogElement extends BaseElement {
     return this.hasAttribute('cancelable');
   }
 
+  get maskColor() {
+    return this.getAttribute('mask-color');
+  }
+
+  set maskColor(value) {
+    if (value === null || value === undefined) {
+      this.removeAttribute('mask-color');
+    } else {
+      this.setAttribute('mask-color', value);
+    }
+  }
+
+  get animationOptions() {
+    return AnimatorFactory.parseAnimationOptionsString(this.getAttribute('animation-options'));
+  }
+
+  set animationOptions(value) {
+    if (value === undefined || value === null) {
+      this.removeAttribute('animation-options');
+    } else {
+      this.setAttribute('animation-options', JSON.stringify(value));
+    }
+  }
+
   _updateMask() {
     contentReady(this, () => {
-      if (this._mask && this.getAttribute('mask-color')) {
-        this._mask.style.backgroundColor = this.getAttribute('mask-color');
+      if (this._mask) {
+        this._mask.style.backgroundColor = this.maskColor;
       }
     });
+  }
+
+  _updateAnimation() {
+    this._animatorFactory = this._updateAnimatorFactory();
   }
 
   connectedCallback() {
@@ -191,7 +237,7 @@ export default class BaseDialogElement extends BaseElement {
   }
 
   static get observedAttributes() {
-    return ['modifier', 'animation', 'mask-color'];
+    return ['modifier', 'animation', 'mask-color', 'visible'];
   }
 
   attributeChangedCallback(name, last, current) {
@@ -200,15 +246,27 @@ export default class BaseDialogElement extends BaseElement {
         ModifierUtil.onModifierChanged(last, current, this, this._scheme);
         break;
       case 'animation':
-        this._animatorFactory = this._updateAnimatorFactory();
+        this._updateAnimation();
         break;
       case 'mask-color':
         this._updateMask();
+        break;
+      case 'visible':
+        if (this.visible !== this._visible) {
+          // update the mask and animation early in case `visible` attribute
+          // changed callback is called before `animation` or `mask-color`
+          this._updateMask();
+          this._updateAnimation();
+
+          contentReady(this, () => {
+            this._setVisible(this.visible)
+          });
+        }
         break;
     }
   }
 
   static get events() {
-    return ['preshow', 'postshow', 'prehide', 'posthide', 'dialog-cancel'];
+    return ['preshow', 'postshow', 'prehide', 'posthide', 'dialogcancel', 'dialog-cancel'];
   }
 }

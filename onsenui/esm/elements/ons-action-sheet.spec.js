@@ -22,12 +22,35 @@ describe('OnsActionSheetElement', () => {
     expect(window.ons.elements.ActionSheet).to.be.ok;
   });
 
-  it('provides \'title\' attribute', (done) => {
-    const element = ons.createElement('<ons-action-sheet title="test"></ons-action-sheet>', { append: true });
-    setImmediate(() => {
-      expect(element._title).to.be.ok;
-      element.remove();
-      done();
+  describe('title attribute', () => {
+    it('provides \'title\' attribute', (done) => {
+      const element = ons.createElement('<ons-action-sheet title="test"></ons-action-sheet>', { append: true });
+      setImmediate(() => {
+        expect(element._title).to.be.ok;
+        element.remove();
+        done();
+      });
+    });
+
+    it('hides the title element when title is undefined', done => {
+      const element = ons.createElement('<ons-action-sheet title="test"></ons-action-sheet>', { append: true });
+      setImmediate(() => {
+        element.title = undefined;
+        expect(element._title.hidden).to.be.true;
+        element.remove();
+        done();
+      });
+    });
+
+    it('unhides the title element when title is set', done => {
+      const element = ons.createElement('<ons-action-sheet title="test"></ons-action-sheet>', { append: true });
+      setImmediate(() => {
+        element.title = undefined;
+        element.title = 'title';
+        expect(element._title.hidden).to.be.false;
+        element.remove();
+        done();
+      });
     });
   });
 
@@ -101,9 +124,9 @@ describe('OnsActionSheetElement', () => {
       expect(spy).to.have.been.called.once;
     });
 
-    it('emits a \'dialog-cancel\' event', () => {
+    it('emits a \'dialogcancel\' event', () => {
       const promise = new Promise((resolve) => {
-        sheet.addEventListener('dialog-cancel', resolve);
+        sheet.addEventListener('dialogcancel', resolve);
       });
 
       sheet.setAttribute('cancelable', '');
@@ -173,11 +196,19 @@ describe('OnsActionSheetElement', () => {
         }
       );
     });
+
+    it("sets the 'visible' property to true", () => {
+      return expect(sheet.show()).to.eventually.be.fulfilled.then(
+        element => {
+          expect(sheet.visible).to.be.true;
+        }
+      );
+    });
   });
 
   describe('#hide()', () => {
-    beforeEach(() => {
-      sheet.show({animation: 'none'});
+    beforeEach(done => {
+      sheet.show({animation: 'none'}).then(() => done());
     });
 
     it('hides the action sheet', () => {
@@ -223,13 +254,21 @@ describe('OnsActionSheetElement', () => {
         }
       );
     });
+
+    it("sets the 'visible' property to false", () => {
+      return expect(sheet.hide()).to.eventually.be.fulfilled.then(
+        element => {
+          expect(sheet.visible).to.be.false;
+        }
+      );
+    });
   });
 
   describe('#visible', () => {
     it('returns whether the action sheet is visible or not', () => {
       expect(sheet.visible).to.be.false;
-      sheet.show({animation: 'none'});
-      expect(sheet.visible).to.be.true;
+      return sheet.show({animation: 'none'})
+        .then(() => expect(sheet.visible).to.be.true);
     });
   });
 
@@ -253,6 +292,21 @@ describe('OnsActionSheetElement', () => {
       const e = ons._util.createElement('<ons-action-sheet>contents</ons-action-sheet>');
       expect(e.getAttribute('modifier')).to.equal('material');
       ons.platform.select('');
+    });
+  });
+
+  describe('#maskColor', () => {
+    it('sets the mask background color when set', () => {
+      sheet.maskColor = 'pink';
+      const mask = sheet.querySelector('.action-sheet-mask');
+      expect(mask.style.backgroundColor).to.equal('pink');
+    });
+
+    it('unsets the mask background color when undefined', () => {
+      sheet.maskColor = 'pink';
+      sheet.maskColor = undefined;
+      const mask = sheet.querySelector('.action-sheet-mask');
+      expect(mask.style.backgroundColor).to.equal('');
     });
   });
 });

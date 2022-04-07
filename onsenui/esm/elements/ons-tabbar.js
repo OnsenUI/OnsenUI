@@ -204,7 +204,32 @@ export default class TabbarElement extends BaseElement {
    */
 
   /**
+   * @attribute active-index
+   * @type {Number}
+   * @default 0
+   * @description
+   *   [en]The index of the tab that is currently active.[/en]
+   *   [ja][/ja]
+   */
+
+  /**
+   * @property activeIndex
+   * @type {Number}
+   * @default 0
+   * @description
+   *   [en]The index of the tab that is currently active.[/en]
+   *   [ja][/ja]
+   */
+
+  /**
    * @attribute hide-tabs
+   * @description
+   *   [en]Whether to hide the tabs.[/en]
+   *   [ja]タブを非表示にする場合に指定します。[/ja]
+   */
+
+  /**
+   * @property hideTabs
    * @description
    *   [en]Whether to hide the tabs.[/en]
    *   [ja]タブを非表示にする場合に指定します。[/ja]
@@ -230,14 +255,16 @@ export default class TabbarElement extends BaseElement {
     this._loadInactive = util.defer(); // Improves #2324
     contentReady(this, () => this._compile());
 
-    util.defineListenerProperty(this, 'swipe');
+    const {onConnected, onDisconnected} = util.defineListenerProperty(this, 'swipe');
+    this._connectOnSwipe = onConnected;
+    this._disconnectOnSwipe = onDisconnected;
   }
 
   connectedCallback() {
     if (!this._swiper) {
       this._swiper = new Swiper({
         getElement: () => this._contentElement,
-        getInitialIndex: () => this.getAttribute('activeIndex') || this.getAttribute('active-index'),
+        getInitialIndex: () => this.activeIndex || this.getAttribute('activeIndex'),
         getAutoScrollRatio: this._getAutoScrollRatio.bind(this),
         getBubbleWidth: () => parseInt(this.getAttribute('ignore-edge-width') || 25, 10),
         isAutoScrollable: () => true,
@@ -255,11 +282,14 @@ export default class TabbarElement extends BaseElement {
 
     contentReady(this, () => {
       this._updatePosition();
+      this._updateVisibility();
 
       if (!util.findParent(this, 'ons-page', p => p === document.body)) {
         this._show(); // This tabbar is the top component
       }
     });
+
+    this._connectOnSwipe();
   }
 
   disconnectedCallback() {
@@ -270,7 +300,7 @@ export default class TabbarElement extends BaseElement {
       this._tabsRect = null;
     }
 
-    util.disconnectListenerProperty(this, 'swipe');
+    this._disconnectOnSwipe();
   }
 
   _normalizeEvent(event) {
@@ -366,9 +396,8 @@ export default class TabbarElement extends BaseElement {
       }
     }
 
-    const activeIndex = Number(this.getAttribute('activeIndex')); // 0 by default
-    if (tabbar.children.length > activeIndex && !util.findChild(tabbar, '[active]')) {
-      tabbar.children[activeIndex].setAttribute('active', '');
+    if (tabbar.children.length > this.activeIndex && !util.findChild(tabbar, '[active]')) {
+      tabbar.children[this.activeIndex].setAttribute('active', '');
     }
 
     this._tabbarBorder = util.findChild(tabbar, '.tabbar__border') || util.create('.tabbar__border');
@@ -460,7 +489,15 @@ export default class TabbarElement extends BaseElement {
    *   [ja][/ja]
    */
   setActiveTab(nextIndex, options = {}) {
-    const prevIndex = this.getActiveTabIndex();
+    const previousIndex = this.activeIndex;
+
+    this._activeIndexSkipEffect = true;
+    this.activeIndex = nextIndex;
+
+    return this._updateActiveIndex(nextIndex, previousIndex, options);
+  }
+
+  _updateActiveIndex(nextIndex, prevIndex, options = {}) {
     const prevTab = this.tabs[prevIndex],
       nextTab = this.tabs[nextIndex];
 
@@ -489,6 +526,7 @@ export default class TabbarElement extends BaseElement {
         options.callback instanceof Function && options.callback(nextPage);
         return nextPage;
       }));
+
   }
 
   /**
@@ -500,19 +538,36 @@ export default class TabbarElement extends BaseElement {
    *   [ja][/ja]
    */
   setTabbarVisibility(visible) {
+    this.hideTabs = !visible;
+  }
+
+  show() {
+    this.hideTabs = false;
+  }
+
+  hide() {
+    this.hideTabs = true;
+  }
+
+  get hideTabs() {
+    return this.hasAttribute('hide-tabs');
+  }
+
+  set hideTabs(value) {
+    if (value) {
+      this.setAttribute('hide-tabs', '');
+    } else {
+      this.removeAttribute('hide-tabs');
+    }
+  }
+
+  _updateVisibility() {
     contentReady(this, () => {
+      const visible = !this.hideTabs;
       this._contentElement.style[this._top ? 'top' : 'bottom'] = visible ? '' : '0px';
       this._tabbarElement.style.display = visible ? '' : 'none';
       visible && this._onRefresh();
     });
-  }
-
-  show() {
-    this.setTabbarVisibility(true);
-  }
-
-  hide() {
-    this.setTabbarVisibility(false);
   }
 
   /**
@@ -569,6 +624,16 @@ export default class TabbarElement extends BaseElement {
     return -1;
   }
 
+  get activeIndex() {
+    return Number(this.getAttribute('active-index'));
+  }
+
+  set activeIndex(value) {
+    if (value !== null && value !== undefined) {
+      this.setAttribute('active-index', value);
+    }
+  }
+
   _show() {
     this._swiper.show();
 
@@ -594,7 +659,7 @@ export default class TabbarElement extends BaseElement {
   }
 
   static get observedAttributes() {
-    return ['modifier', 'position', 'swipeable', 'tab-border', 'hide-tabs'];
+    return ['modifier', 'position', 'swipeable', 'tab-border', 'hide-tabs', 'active-index'];
   }
 
   attributeChangedCallback(name, last, current) {
@@ -607,7 +672,13 @@ export default class TabbarElement extends BaseElement {
     } else if (name === 'swipeable') {
       this._swiper && this._swiper.updateSwipeable(this.hasAttribute('swipeable'));
     } else if (name === 'hide-tabs') {
-      this.setTabbarVisibility(!this.hasAttribute('hide-tabs') || current === 'false');
+      this.isConnected && this._updateVisibility();
+    } else if (name === 'active-index') {
+      if (this._activeIndexSkipEffect) {
+        this._activeIndexSkipEffect = false;
+      } else if (this.isConnected) {
+        contentReady(this, () => this._updateActiveIndex(current, last));
+      }
     }
   }
 

@@ -112,8 +112,17 @@ export default class ToolbarElement extends BaseElement {
    *   [ja]ツールバーの表現を指定します。[/ja]
    */
 
+  /**
+   * @property visible
+   * @description
+   *   [en]Whether the toolbar is shown or not.[/en]
+   *   [ja][/ja]
+   */
+
   constructor() {
     super();
+
+    this._visible = true;
 
     contentReady(this, () => {
       this._compile();
@@ -147,6 +156,8 @@ export default class ToolbarElement extends BaseElement {
    */
   setVisibility(visible) {
     contentReady(this, () => {
+      this._visible = visible;
+
       this.style.display = visible ? '' : 'none';
 
       if (this.parentNode) {
@@ -183,6 +194,14 @@ export default class ToolbarElement extends BaseElement {
    */
   hide() {
     this.setVisibility(false);
+  }
+
+  get visible() {
+    return this._visible;
+  }
+
+  set visible(value) {
+    this.setVisibility(value);
   }
 
   /**

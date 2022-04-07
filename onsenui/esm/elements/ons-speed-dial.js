@@ -126,7 +126,9 @@ export default class SpeedDialElement extends BaseElement {
     this._itemShown = false;
     this._boundOnClick = this._onClick.bind(this);
 
-    util.defineListenerProperty(this, 'click');
+    const {onConnected, onDisconnected} = util.defineListenerProperty(this, 'click');
+    this._connectOnClick = onConnected;
+    this._disconnectOnClick = onDisconnected;
   }
 
   _compile() {
@@ -170,11 +172,12 @@ export default class SpeedDialElement extends BaseElement {
 
   connectedCallback() {
     this.addEventListener('click', this._boundOnClick, false);
+    this._connectOnClick();
   }
 
   disconnectedCallback() {
     this.removeEventListener('click', this._boundOnClick, false);
-    util.disconnectListenerProperty(this, 'click');
+    this._disconnectOnClick();
   }
 
   get items() {

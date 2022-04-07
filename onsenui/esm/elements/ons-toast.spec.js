@@ -96,11 +96,16 @@ describe('OnsToastElement', () => {
         }
       );
     });
+
+    it("sets the 'visible' property to true", () => {
+      return expect(element.show()).to.eventually.be.fulfilled
+        .then(() => expect(element.visible).to.be.true);
+    });
   });
 
   describe('#hide()', () => {
-    beforeEach(() => {
-      element.show({animation: 'none'});
+    beforeEach(done => {
+      element.show({animation: 'none'}).then(() => done());
     });
 
     it('hides the element', () => {
@@ -118,17 +123,25 @@ describe('OnsToastElement', () => {
         }
       );
     });
+
+    it("sets the 'visible' property to false", () => {
+      return expect(element.hide()).to.eventually.be.fulfilled
+        .then(() => expect(element.visible).to.be.false);
+    });
   });
 
   describe('#toggle()', () => {
     it('alternates the element displaying state', () => {
       expect(element.style.display).to.equal('none');
-      element.toggle({animation: 'none'});
-      expect(element.style.display).to.equal('block');
-      element.toggle({animation: 'none'});
-      expect(element.style.display).to.equal('none');
-      element.toggle({animation: 'none'});
-      expect(element.style.display).to.equal('block');
+      return element.toggle({animation: 'none'}).then(() => {
+        expect(element.style.display).to.equal('block');
+        return element.toggle({animation: 'none'});
+      }).then(() => {
+        expect(element.style.display).to.equal('none');
+        return element.toggle({animation: 'none'});
+      }).then(() => {
+        expect(element.style.display).to.equal('block');
+      });
     });
   });
 
@@ -136,9 +149,10 @@ describe('OnsToastElement', () => {
     it('returns whether the element is shown', () => {
       expect(element.style.display).to.equal('none');
       expect(element.visible).to.be.false;
-      element.show({animation: 'none'});
-      expect(element.style.display).to.equal('block');
-      expect(element.visible).to.be.true;
+      return element.show({animation: 'none'}).then(() => {
+        expect(element.style.display).to.equal('block');
+        expect(element.visible).to.be.true;
+      });
     });
   });
 

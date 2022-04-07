@@ -92,9 +92,9 @@ describe('OnsDialogElement', () => {
       expect(spy).to.have.been.called.once;
     });
 
-    it('emits a \'dialog-cancel\' event', () => {
+    it('emits a \'dialogcancel\' event', () => {
       const promise = new Promise((resolve) => {
-        dialog.addEventListener('dialog-cancel', resolve);
+        dialog.addEventListener('dialogcancel', resolve);
       });
 
       dialog.setAttribute('cancelable', '');
@@ -164,11 +164,19 @@ describe('OnsDialogElement', () => {
         }
       );
     });
+
+    it("sets the 'visible' property to true", () => {
+      return expect(dialog.show()).to.eventually.be.fulfilled.then(
+        element => {
+          expect(dialog.visible).to.be.true;
+        }
+      );
+    });
   });
 
   describe('#hide()', () => {
-    beforeEach(() => {
-      dialog.show({animation: 'none'});
+    beforeEach(done => {
+      dialog.show({animation: 'none'}).then(() => done());
     });
 
     it('hides the dialog', () => {
@@ -214,16 +222,23 @@ describe('OnsDialogElement', () => {
         }
       );
     });
+
+    it("sets the 'visible' property to false", () => {
+      return expect(dialog.hide()).to.eventually.be.fulfilled.then(
+        element => {
+          expect(dialog.visible).to.be.false;
+        }
+      );
+    });
   });
 
   describe('#visible', () => {
     it('returns whether the dialog is visible or not', () => {
       expect(dialog.visible).to.be.false;
-      dialog.show({animation: 'none'});
-      expect(dialog.visible).to.be.true;
+      return dialog.show({animation: 'none'})
+        .then(() => expect(dialog.visible).to.be.true);
     });
   });
-
 
   describe('#registerAnimator()', () => {
     it('throws an error if animator is not a DialogAnimator', () => {
@@ -244,6 +259,21 @@ describe('OnsDialogElement', () => {
       const e = ons._util.createElement('<ons-dialog>contents</ons-dialog>');
       expect(e.getAttribute('modifier')).to.equal('material');
       ons.platform.select('');
+    });
+  });
+
+  describe('#maskColor', () => {
+    it('sets the mask background color when set', () => {
+      dialog.maskColor = 'pink';
+      const mask = dialog.querySelector('.dialog-mask');
+      expect(mask.style.backgroundColor).to.equal('pink');
+    });
+
+    it('unsets the mask background color when undefined', () => {
+      dialog.maskColor = 'pink';
+      dialog.maskColor = undefined;
+      const mask = dialog.querySelector('.dialog-mask');
+      expect(mask.style.backgroundColor).to.equal('');
     });
   });
 });

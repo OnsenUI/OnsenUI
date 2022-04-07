@@ -34,7 +34,7 @@ const scheme = {
 };
 
 const _animatorDict = {
-  'default': () => platform.isAndroid() ? MDFadePopoverAnimator : IOSFadePopoverAnimator,
+  'default': function() { return platform.isAndroid() ? MDFadePopoverAnimator : IOSFadePopoverAnimator },
   'none': PopoverAnimator,
   'fade-ios': IOSFadePopoverAnimator,
   'fade-md': MDFadePopoverAnimator
@@ -132,6 +132,13 @@ export default class PopoverElement extends BaseDialogElement {
    */
 
   /**
+   * @event dialogcancel
+   * @description
+   * [en]Fired when the popover is canceled.[/en]
+   * [ja][/ja]
+   */
+
+  /**
    * @attribute modifier
    * @type {String}
    * @description
@@ -185,11 +192,27 @@ export default class PopoverElement extends BaseDialogElement {
    */
 
   /**
+   * @property animationOptions
+   * @type {Object}
+   * @description
+   *   [en]Specify the animation's duration, timing and delay with an object literal. E.g. `{duration: 0.2, delay: 1, timing: 'ease-in'}`.[/en]
+   *   [ja]アニメーション時のduration, timing, delayをオブジェクトリテラルで指定します。例：{duration: 0.2, delay: 1, timing: 'ease-in'}[/ja]
+   */
+
+  /**
    * @attribute mask-color
    * @type {Color}
    * @description
    *   [en]Color of the background mask. Default is `"rgba(0, 0, 0, 0.2)"`.[/en]
    *   [ja]背景のマスクの色を指定します。デフォルトは"rgba(0, 0, 0, 0.2)"です。[/ja]
+   */
+
+  /**
+   * @attribute visible
+   * @type {Boolean}
+   * @description
+   *   [en]Whether the popover is visible or not.[/en]
+   *   [ja]要素が見える場合に`true`。[/ja]
    */
 
   constructor() {
@@ -458,7 +481,6 @@ export default class PopoverElement extends BaseDialogElement {
 
   /**
    * @property visible
-   * @readonly
    * @type {Boolean}
    * @description
    *   [en]Whether the element is visible or not.[/en]
@@ -483,6 +505,15 @@ export default class PopoverElement extends BaseDialogElement {
    * @description
    *   [en]Back-button handler.[/en]
    *   [ja]バックボタンハンドラ。[/ja]
+   */
+
+  /**
+   * @property maskColor
+   * @type {String}
+   * @default rgba(0, 0, 0, 0.2)
+   * @description
+   *  [en]Color of the background mask. Default is "rgba(0, 0, 0, 0.2)".[/en]
+   *  [ja]背景のマスクの色を指定します。"rgba(0, 0, 0, 0.2)"がデフォルト値です。[/ja]
    */
 
   connectedCallback() {

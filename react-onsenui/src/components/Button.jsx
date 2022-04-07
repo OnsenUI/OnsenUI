@@ -1,26 +1,9 @@
-import SimpleWrapper from './SimpleWrapper.jsx';
 import PropTypes from 'prop-types';
+import 'onsenui/esm/elements/ons-button';
 
-/**
- * @original ons-button
- * @category form
- * @tutorial react/Reference/button
- * @description
- * [en] Button component. If you want to place a button in a toolbar, use `ToolbarButton` or `BackButton` instead. Will automatically display as a Material Design button with a ripple effect on Android.
- [/en]
- * [ja][/ja]
- * @example
- * <Button modifier="large--cta">
- *   Tap Me
- * </Button>
- */
-class Button extends SimpleWrapper {
-  _getDomNodeName() {
-    return 'ons-button';
-  }
-}
+import onsCustomElement from '../onsCustomElement';
 
-Button.propTypes = {
+const propTypes = {
   /**
    * @name modifier
    * @type string
@@ -62,5 +45,21 @@ Button.propTypes = {
    */
   onClick: PropTypes.func
 };
+
+/**
+ * @original ons-button
+ * @category form
+ * @tutorial react/Reference/button
+ * @description
+ * [en] Button component. If you want to place a button in a toolbar, use `ToolbarButton` or `BackButton` instead. Will automatically display as a Material Design button with a ripple effect on Android.
+ [/en]
+ * [ja][/ja]
+ * @example
+ * <Button modifier="large--cta">
+ *   Tap Me
+ * </Button>
+ */
+const Button = onsCustomElement('ons-button', {propTypes});
+Button.propTypes = propTypes;
 
 export default Button;

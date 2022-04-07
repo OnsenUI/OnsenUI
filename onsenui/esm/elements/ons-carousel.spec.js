@@ -214,5 +214,129 @@ describe('OnsCarouselElement', () => {
       expect(div1.isEqualNode(div2)).to.be.true;
     });
   });
+
+  describe('#onSwipe', () => {
+    it('adds an event listener when set while the element is already connected', () => {
+      const element = ons._util.createElement('<ons-carousel></ons-carousel>');
+      document.body.appendChild(element);
+      element.onSwipe = () => {};
+      const spy = chai.spy.on(element, 'onSwipe');
+      element.dispatchEvent(new Event('swipe'));
+      expect(spy).to.have.been.called.once;
+      element.remove();
+    });
+
+    it('does not add an event listener when set while the element is not already connected', () => {
+      const element = ons._util.createElement('<ons-carousel></ons-carousel>');
+      element.onSwipe = () => {};
+      const spy = chai.spy.on(element, 'onSwipe');
+      element.dispatchEvent(new Event('swipe'));
+      expect(spy).not.to.have.been.called;
+    });
+
+    it('removes the previous event listener when onSwipe is set again', () => {
+      const element = ons._util.createElement('<ons-carousel></ons-carousel>');
+      document.body.appendChild(element);
+      element.onSwipe = assert.fail;
+      element.onSwipe = () => {};
+      element.dispatchEvent(new Event('swipe'));
+      element.remove();
+    });
+
+    it('adds the event listener when the element is connected', () => {
+      const element = ons._util.createElement('<ons-carousel></ons-carousel>');
+      element.onSwipe = () => {};
+      const spy = chai.spy.on(element, 'onSwipe');
+      document.body.appendChild(element);
+      element.dispatchEvent(new Event('swipe'));
+      expect(spy).to.have.been.called.once;
+      element.remove();
+    });
+
+    it('removes the event listener when the element is disconnected', () => {
+      const element = ons._util.createElement('<ons-carousel></ons-carousel>');
+      document.body.appendChild(element);
+      element.onSwipe = assert.fail;
+      element.remove();
+      element.dispatchEvent(new Event('swipe'));
+    });
+  });
+
+  describe('#animationOptions', () => {
+    it('sets the animation-options attribute correctly', () => {
+      const element = ons._util.createElement('<ons-carousel></ons-carousel>');
+      element.animationOptions = { duration: 5 };
+      expect(element.getAttribute('animation-options')).to.equal('{"duration":5}');
+    });
+  });
+
+  describe('#initial-index attribute', () => {
+    it('sets the initial index if active-index is not set', done => {
+      const element = ons._util.createElement(`
+        <ons-carousel initial-index="1">
+          <ons-carousel-item>one</ons-carousel-item>
+          <ons-carousel-item>two</ons-carousel-item>
+          <ons-carousel-item>three</ons-carousel-item>
+        </ons-carousel>
+      `);
+      document.body.appendChild(element);
+      setImmediate(() => {
+        expect(element.getActiveIndex()).to.equal(1);
+        element.remove();
+        done();
+      });
+    });
+
+    it('does nothing if active-index is set', done => {
+      const element = ons._util.createElement(`
+        <ons-carousel initial-index="1" active-index="2">
+          <ons-carousel-item>one</ons-carousel-item>
+          <ons-carousel-item>two</ons-carousel-item>
+          <ons-carousel-item>three</ons-carousel-item>
+        </ons-carousel>
+      `);
+      document.body.appendChild(element);
+      setImmediate(() => {
+        expect(element.getActiveIndex()).to.equal(2);
+        element.remove();
+        done();
+      });
+    });
+  });
+
+  describe('#activeIndex', () => {
+    it('sets the initial index', done => {
+      const element = ons._util.createElement(`
+        <ons-carousel active-index="2">
+          <ons-carousel-item>one</ons-carousel-item>
+          <ons-carousel-item>two</ons-carousel-item>
+          <ons-carousel-item>three</ons-carousel-item>
+        </ons-carousel>
+      `);
+      document.body.appendChild(element);
+      setImmediate(() => {
+        expect(element.getActiveIndex()).to.equal(2);
+        element.remove();
+        done();
+      });
+    });
+
+    it('changes the active index when changed', done => {
+      const element = ons._util.createElement(`
+        <ons-carousel active-index="2">
+          <ons-carousel-item>one</ons-carousel-item>
+          <ons-carousel-item>two</ons-carousel-item>
+          <ons-carousel-item>three</ons-carousel-item>
+        </ons-carousel>
+      `);
+      document.body.appendChild(element);
+      setImmediate(() => {
+        element.activeIndex = 1;
+        expect(element.getActiveIndex()).to.equal(1);
+        element.remove();
+        done();
+      });
+    });
+  });
 });
 

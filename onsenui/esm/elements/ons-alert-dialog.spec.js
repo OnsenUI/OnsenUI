@@ -1,5 +1,7 @@
 'use strict';
 
+import contentReady from '../ons/content-ready.js';
+
 describe('OnsAlertDialogElement', () => {
   let dialog;
 
@@ -129,11 +131,19 @@ describe('OnsAlertDialogElement', () => {
         }
       );
     });
+
+    it("sets the 'visible' property to true", () => {
+      return expect(dialog.show()).to.eventually.be.fulfilled.then(
+        element => {
+          expect(dialog.visible).to.be.true;
+        }
+      );
+    });
   });
 
   describe('#hide()', () => {
-    beforeEach(() => {
-      dialog.show({animation: 'none'});
+    beforeEach(done => {
+      dialog.show({animation: 'none'}).then(() => done());
     });
 
     it('hides the dialog', () => {
@@ -179,6 +189,14 @@ describe('OnsAlertDialogElement', () => {
         }
       );
     });
+
+    it("sets the 'visible' property to false", () => {
+      return expect(dialog.hide()).to.eventually.be.fulfilled.then(
+        element => {
+          expect(dialog.visible).to.be.false;
+        }
+      );
+    });
   });
 
   describe('#onDeviceBackButton', () => {
@@ -210,8 +228,16 @@ describe('OnsAlertDialogElement', () => {
   describe('#visible', () => {
     it('returns whether the dialog is visible or not', () => {
       expect(dialog.visible).to.be.false;
-      dialog.show({animation: 'none'});
-      expect(dialog.visible).to.be.true;
+      return dialog.show({animation: 'none'})
+        .then(() => expect(dialog.visible).to.be.true);
+    });
+
+    it('shows the dialog when visible is set at startup', done => {
+      const shown = ons._util.createElement('<ons-alert-dialog visible></ons-alert-dialog>');
+      contentReady(shown, () => {
+        expect(shown.style.display).to.equal('block')
+        done();
+      });
     });
   });
 
@@ -236,7 +262,6 @@ describe('OnsAlertDialogElement', () => {
       expect(div1.isEqualNode(div2)).to.be.true;
     });
   });
-});
 
   describe('autoStyling', () => {
     it('adds \'material\' modifier on Android', () => {
@@ -246,3 +271,26 @@ describe('OnsAlertDialogElement', () => {
       ons.platform.select('');
     });
   });
+
+  describe('#maskColor', () => {
+    it('sets the mask background color when set', () => {
+      dialog.maskColor = 'pink';
+      const mask = dialog.querySelector('.alert-dialog-mask');
+      expect(mask.style.backgroundColor).to.equal('pink');
+    });
+
+    it('unsets the mask background color when undefined', () => {
+      dialog.maskColor = 'pink';
+      dialog.maskColor = undefined;
+      const mask = dialog.querySelector('.alert-dialog-mask');
+      expect(mask.style.backgroundColor).to.equal('');
+    });
+  });
+
+  describe('#animationOptions', () => {
+    it('sets the animation-options attribute correctly', () => {
+      dialog.animationOptions = { duration: 5 };
+      expect(dialog.getAttribute('animation-options')).to.equal('{"duration":5}');
+    });
+  });
+});

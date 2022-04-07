@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import BasicComponent from './BasicComponent.jsx';
+import 'onsenui/esm/elements/ons-lazy-repeat';
+
+import List from './List';
 
 /**
  * @original ons-lazy-repeat
@@ -41,63 +43,42 @@ import BasicComponent from './BasicComponent.jsx';
   }
 }
  */
-class LazyList extends BasicComponent {
-  constructor(...args) {
-    super(...args);
-    this.state = {children: []};
-    this.update = this.update.bind(this);
-  }
+const LazyList = React.forwardRef((props, forwardedRef) => {
+  const ref = forwardedRef || useRef();
+  const [children, setChildren] = useState([]);
+  const [, setUpdateTop] = useState();
 
-  update(props) {
-    var self = this;
+  const {calculateItemHeight, renderRow, length, ...rest} = props;
 
-    this._lazyRepeat.delegate = {
+  useEffect(() => {
+    ref.current.delegate = {
       calculateItemHeight: function(index) {
-        return props.calculateItemHeight(index);
+        return calculateItemHeight(index);
       },
-      // _render: function(items, newHeight) {
       _render: function(start, limit, updateTop) {
-        var createElement = function(index) {
-          return props.renderRow(index);
-        };
-
         const el = [];
         for (let i = start; i < limit; i++) {
-          el.push(createElement(i));
+          el.push(renderRow(i));
         }
-
-        self.setState({children: el}, updateTop);
+        setChildren(el);
+        setUpdateTop(updateTop); // doesn't work without this, but why? does it just trigger a rerender?
       },
       countItems: function() {
-        return props.length;
+        return length;
       }
     };
-  }
+  }, [calculateItemHeight, renderRow, length]);
 
-  UNSAFE_componentWillReceiveProps(newProps) {
-    var helpProps = {
-      ...this.props,
-      ...newProps
-    };
-    this.update(helpProps);
-  }
-
-  componentDidMount() {
-    super.componentDidMount();
-    this.update(this.props);
-  }
-
-  render() {
-    return (
-      <ons-list {...this.props} ref={(list) => { this._list = list; }}
-        class='list' style={{position: 'relative', height: this.state.height}}
-      >
-        <ons-lazy-repeat ref={(lazyRepeat) => { this._lazyRepeat = lazyRepeat; }} />
-        {this.state.children}
-      </ons-list>
-    );
-  }
-}
+  return (
+    <List
+      {...rest}
+      style={{position: 'relative'}}
+    >
+      <ons-lazy-repeat ref={ref} />
+      {children}
+    </List>
+  );
+});
 
 LazyList.propTypes = {
   /**

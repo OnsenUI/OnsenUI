@@ -132,7 +132,22 @@ export default class ActionSheetElement extends BaseDialogElement {
    */
 
   /**
+   * @event dialogcancel
+   * @description
+   * [en]Fired when the action sheet is canceled.[/en]
+   * [ja][/ja]
+   */
+
+  /**
    * @attribute title
+   * @type {String}
+   * @description
+   *  [en]Optional title of the action sheet. A new element will be created containing this string.[/en]
+   *  [ja]アクションシートのタイトルを指定します。ここで指定した文字列を含む新しい要素が作成されます。[/ja]
+   */
+
+  /**
+   * @property title
    * @type {String}
    * @description
    *  [en]Optional title of the action sheet. A new element will be created containing this string.[/en]
@@ -179,12 +194,28 @@ export default class ActionSheetElement extends BaseDialogElement {
    */
 
   /**
+   * @property animationOptions
+   * @type {Object}
+   * @description
+   *   [en]Specify the animation's duration, timing and delay with an object literal. E.g. `{duration: 0.2, delay: 1, timing: 'ease-in'}`.[/en]
+   *   [ja]アニメーション時のduration, timing, delayをオブジェクトリテラルで指定します。例：{duration: 0.2, delay: 1, timing: 'ease-in'}[/ja]
+   */
+
+  /**
    * @attribute mask-color
    * @type {String}
    * @default rgba(0, 0, 0, 0.2)
    * @description
    *  [en]Color of the background mask. Default is `"rgba(0, 0, 0, 0.2)"`.[/en]
    *  [ja]背景のマスクの色を指定します。"rgba(0, 0, 0, 0.2)"がデフォルト値です。[/ja]
+   */
+
+  /**
+   * @attribute visible
+   * @type {Boolean}
+   * @description
+   *   [en]Whether the action sheet is visible or not.[/en]
+   *   [ja]要素が見える場合に`true`。[/ja]
    */
 
   constructor() {
@@ -247,7 +278,7 @@ export default class ActionSheetElement extends BaseDialogElement {
 
     if (!this._title && this.hasAttribute('title')) {
       const title = document.createElement('div');
-      title.innerHTML = this.getAttribute('title');
+      title.innerHTML = this.title;
       title.classList.add('action-sheet-title');
       this._sheet.insertBefore(title, this._sheet.firstChild);
     }
@@ -266,7 +297,24 @@ export default class ActionSheetElement extends BaseDialogElement {
 
   _updateTitle() {
     if (this._title) {
-      this._title.innerHTML = this.getAttribute('title');
+      if (!this.title) {
+        this._title.hidden = true;
+      } else {
+        this._title.innerHTML = this.title;
+        this._title.hidden = false;
+      }
+    }
+  }
+
+  get title() {
+    return this.getAttribute('title');
+  }
+
+  set title(value) {
+    if (value === null || value === undefined) {
+      this.removeAttribute('title');
+    } else {
+      this.setAttribute('title', value);
     }
   }
 
@@ -276,6 +324,15 @@ export default class ActionSheetElement extends BaseDialogElement {
    * @description
    *   [en]Back-button handler.[/en]
    *   [ja]バックボタンハンドラ。[/ja]
+   */
+
+  /**
+   * @property maskColor
+   * @type {String}
+   * @default rgba(0, 0, 0, 0.2)
+   * @description
+   *  [en]Color of the background mask. Default is "rgba(0, 0, 0, 0.2)".[/en]
+   *  [ja]背景のマスクの色を指定します。"rgba(0, 0, 0, 0.2)"がデフォルト値です。[/ja]
    */
 
   /**
@@ -324,7 +381,6 @@ export default class ActionSheetElement extends BaseDialogElement {
 
   /**
    * @property visible
-   * @readonly
    * @type {Boolean}
    * @description
    *   [en]Whether the action sheet is visible or not.[/en]

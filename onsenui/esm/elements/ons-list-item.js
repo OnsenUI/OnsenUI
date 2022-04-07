@@ -173,7 +173,6 @@ export default class ListItemElement extends BaseElement {
     util.defineBooleanProperty(this, 'expanded');
 
     this._animatorFactory = this._updateAnimatorFactory();
-    this.toggleExpansion = this.toggleExpansion.bind(this);
 
     // Elements ignored when tapping
     const re = /^ons-(?!col$|row$|if$)/i;
@@ -336,10 +335,7 @@ export default class ListItemElement extends BaseElement {
 
     this._expanding = true;
 
-    this.dispatchEvent(new Event('expansion'));
-
-    const animator = this._animatorFactory.newAnimator();
-    animator._animateExpansion(this, this.expanded, () => {
+    const expandedCallback = () => {
       this._expanding = false;
 
       if (this.expanded) {
@@ -347,7 +343,15 @@ export default class ListItemElement extends BaseElement {
       } else {
         this.classList.remove('list-item--expanded');
       }
-    });
+    }
+
+    const animator = this._animatorFactory.newAnimator();
+
+    if (animator._animateExpansion) {
+      animator._animateExpansion(this, this.expanded, expandedCallback);
+    } else {
+      expandedCallback();
+    }
   }
 
   _updateAnimatorFactory() {
@@ -416,7 +420,14 @@ export default class ListItemElement extends BaseElement {
     this[action]('mouseout', this._onRelease);
 
     if (this._top) {
-      this._top[action]('click', this.toggleExpansion);
+      this._top[action]('click', this._onClickTop.bind(this));
+    }
+  }
+
+  _onClickTop() {
+    if (!this._expanding) {
+      this.toggleExpansion();
+      this.dispatchEvent(new Event('expand'));
     }
   }
 

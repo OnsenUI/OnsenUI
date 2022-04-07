@@ -385,6 +385,8 @@ declare namespace ons {
     visible: any;
     disabled: any;
     cancelable: any;
+    animationOptions?: object;
+    maskColor?: string;
   }
 
   interface OnsSelectElement extends HTMLElement {
@@ -411,6 +413,7 @@ declare namespace ons {
      * @description Whether the element is disabled or not.
      */
     disabled: boolean;
+    activeIndex: number;
   }
 
   interface OnsTemplateElement extends HTMLElement {
@@ -423,6 +426,7 @@ declare namespace ons {
     hide(...args: any[]): any;
     onDeviceBackButton: any;
     visible: any;
+    animationOptions: object;
   }
 
   interface OnsToolbarElement extends HTMLElement {
@@ -440,6 +444,8 @@ declare namespace ons {
      * @description Hide the toolbar element
      */
     hide(): void;
+
+    visible: boolean;
   }
 
   interface OnsToolbarButtonElement extends HTMLElement {
@@ -537,6 +543,8 @@ declare namespace ons {
      * @description Whether the carousel is centered or not.
      **/
     centered: boolean;
+    animationOptions: object;
+    activeIndex: number;
   }
 
   /**
@@ -606,6 +614,8 @@ declare namespace ons {
     cancelable: boolean;
     visible: any;
     onDeviceBackButton: any;
+    animationOptions?: object;
+    maskColor?: string;
   }
 
   /**
@@ -644,6 +654,8 @@ declare namespace ons {
       * @description A boolean value that specifies whether the dialog is cancelable or not. When the dialog is cancelable it can be closed by tapping the background or by pressing the back button on Android devices.
       */
     cancelable: boolean;
+    animationOptions?: object;
+    maskColor?: string;
   }
 
   /**
@@ -700,6 +712,7 @@ declare namespace ons {
       * @description Whether the dialog is visible or not.
       */
     visible: boolean;
+    animationOptions?: object;
   }
 
   /**
@@ -813,6 +826,8 @@ declare namespace ons {
      * @description Hook called whenever the user slides the tabbar.
      **/
     onSwipe?: Function;
+    hideTabs: boolean;
+    activeIndex: number;
   }
 
   /**
@@ -847,6 +862,8 @@ declare namespace ons {
      * @description Retrieve the back- button handler.
      */
     onDeviceBackButton: any;
+    animationOptions?: object;
+    maskColor?: string;
   }
 
   interface OnsSplitterSideElement extends HTMLElement {
@@ -916,6 +933,11 @@ declare namespace ons {
      * @description A boolean value that specifies if the button is disabled or not.
      */
     disabled: boolean;
+
+    /**
+     * @description A boolean value that specifies if the button has a ripple effect or not.
+     */
+    ripple: boolean;
   }
 
   interface OnsAlertDialogButtonElement extends HTMLElement {

@@ -362,4 +362,59 @@ describe('OnsTabElement', () => {
       });
     });
   });
+
+  describe('#onClick', () => {
+
+    let tab, parent;
+    beforeEach(done => {
+      parent = ons._util.createElement('<ons-tabbar><ons-tab></ons-tab></ons-tabbar>');
+      tab = parent.querySelector('ons-tab');
+      contentReady(tab, done);
+    });
+
+    afterEach(() => {
+      parent = null;
+      tab = null;
+    });
+
+    it('adds an event listener when set while the element is already connected', () => {
+      document.body.appendChild(parent);
+      tab.onClick = () => {};
+      const spy = chai.spy.on(tab, 'onClick');
+      tab.dispatchEvent(new Event('click'));
+      expect(spy).to.have.been.called.once;
+      parent.remove();
+    });
+
+    it('does not add an event listener when set while the tab is not already connected', () => {
+      tab.onClick = () => {};
+      const spy = chai.spy.on(tab, 'onClick');
+      tab.dispatchEvent(new Event('click'));
+      expect(spy).not.to.have.been.called;
+    });
+
+    it('removes the previous event listener when onClick is set again', () => {
+      document.body.appendChild(parent);
+      tab.onClick = assert.fail;
+      tab.onClick = () => {};
+      tab.dispatchEvent(new Event('click'));
+      parent.remove();
+    });
+
+    it('adds the event listener when the tab is connected', () => {
+      tab.onClick = () => {};
+      const spy = chai.spy.on(tab, 'onClick');
+      document.body.appendChild(parent);
+      tab.dispatchEvent(new Event('click'));
+      expect(spy).to.have.been.called.once;
+      parent.remove();
+    });
+
+    it('removes the event listener when the tab is disconnected', () => {
+      document.body.appendChild(parent);
+      tab.onClick = assert.fail;
+      parent.remove();
+      tab.dispatchEvent(new Event('click'));
+    });
+  });
 });

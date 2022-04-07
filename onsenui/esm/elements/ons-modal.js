@@ -120,6 +120,13 @@ export default class ModalElement extends BaseDialogElement {
    */
 
   /**
+   * @event dialogcancel
+   * @description
+   * [en]Fired when the modal is canceled.[/en]
+   * [ja][/ja]
+   */
+
+  /**
    * @attribute animation
    * @type {String}
    * @default default
@@ -134,6 +141,22 @@ export default class ModalElement extends BaseDialogElement {
    * @description
    *  [en]Specify the animation's duration, timing and delay with an object literal. E.g. `{duration: 0.2, delay: 1, timing: 'ease-in'}`.[/en]
    *  [ja]アニメーション時のduration, timing, delayをオブジェクトリテラルで指定します。e.g. <code>{duration: 0.2, delay: 1, timing: 'ease-in'}</code>[/ja]
+   */
+
+  /**
+   * @property animationOptions
+   * @type {Object}
+   * @description
+   *   [en]Specify the animation's duration, timing and delay with an object literal. E.g. `{duration: 0.2, delay: 1, timing: 'ease-in'}`.[/en]
+   *   [ja]アニメーション時のduration, timing, delayをオブジェクトリテラルで指定します。例：{duration: 0.2, delay: 1, timing: 'ease-in'}[/ja]
+   */
+
+  /**
+   * @attribute visible
+   * @type {Boolean}
+   * @description
+   *   [en]Whether the modal is visible or not.[/en]
+   *   [ja]要素が見える場合に`true`。[/ja]
    */
 
   constructor() {
@@ -199,7 +222,6 @@ export default class ModalElement extends BaseDialogElement {
 
   /**
    * @property visible
-   * @readonly
    * @type {Boolean}
    * @description
    *   [en]Whether the element is visible or not.[/en]

@@ -1,6 +1,7 @@
-import SimpleWrapper from './SimpleWrapper.jsx';
-
 import PropTypes from 'prop-types';
+import 'onsenui/esm/elements/ons-carousel-item';
+
+import onsCustomElement from '../onsCustomElement';
 
 /**
  * @original ons-carousel-item
@@ -20,11 +21,7 @@ import PropTypes from 'prop-types';
      </CarouselItem>
    </Carousel>
  */
-class CarouselItem extends SimpleWrapper {
-  _getDomNodeName() {
-    return 'ons-carousel-item';
-  }
-}
+const CarouselItem = onsCustomElement('ons-carousel-item');
 
 CarouselItem.propTypes = {
   /**

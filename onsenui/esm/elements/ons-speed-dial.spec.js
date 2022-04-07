@@ -337,4 +337,51 @@ describe('OnsSpeedDialElement', () => {
       expect(div1.isEqualNode(div2)).to.be.true;
     });
   });
+
+  describe('#onClick', () => {
+    it('adds an event listener when set while the element is already connected', () => {
+      const element = ons._util.createElement('<ons-speed-dial></ons-speed-dial>');
+      document.body.appendChild(element);
+      element.onClick = () => {};
+      const spy = chai.spy.on(element, 'onClick');
+      element.dispatchEvent(new Event('click'));
+      expect(spy).to.have.been.called.once;
+      element.remove();
+    });
+
+    it('does not add an event listener when set while the element is not already connected', () => {
+      const element = ons._util.createElement('<ons-speed-dial></ons-speed-dial>');
+      element.onClick = () => {};
+      const spy = chai.spy.on(element, 'onClick');
+      element.dispatchEvent(new Event('click'));
+      expect(spy).not.to.have.been.called;
+    });
+
+    it('removes the previous event listener when onClick is set again', () => {
+      const element = ons._util.createElement('<ons-speed-dial></ons-speed-dial>');
+      document.body.appendChild(element);
+      element.onClick = assert.fail;
+      element.onClick = () => {};
+      element.dispatchEvent(new Event('click'));
+      element.remove();
+    });
+
+    it('adds the event listener when the element is connected', () => {
+      const element = ons._util.createElement('<ons-speed-dial></ons-speed-dial>');
+      element.onClick = () => {};
+      const spy = chai.spy.on(element, 'onClick');
+      document.body.appendChild(element);
+      element.dispatchEvent(new Event('click'));
+      expect(spy).to.have.been.called.once;
+      element.remove();
+    });
+
+    it('removes the event listener when the element is disconnected', () => {
+      const element = ons._util.createElement('<ons-speed-dial></ons-speed-dial>');
+      document.body.appendChild(element);
+      element.onClick = assert.fail;
+      element.remove();
+      element.dispatchEvent(new Event('click'));
+    });
+  });
 });

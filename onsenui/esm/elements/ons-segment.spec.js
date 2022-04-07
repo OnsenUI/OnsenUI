@@ -81,4 +81,45 @@ describe('ons-segment', () => {
       expect(div1.isEqualNode(div2)).to.be.true;
     });
   });
+
+  describe('#activeIndex', () => {
+    it('sets the active button', done => {
+      const segment = ons.createElement(`
+        <ons-segment>
+          <button>Label 1</button>
+          <button theChosenOne>Label 2</button>
+        </ons-segment>
+      `);
+      const button = segment.querySelector('button[theChosenOne]');
+      document.body.appendChild(segment);
+
+      setImmediate(() => {
+        segment.activeIndex = 1;
+        expect(button.firstElementChild.checked).to.be.true;
+        done();
+      });
+    });
+
+    it('is set when connected to a tabbar', done => {
+      const page = ons.createElement(`
+        <ons-page>
+          <ons-tabbar id="tabbar">
+            <ons-tab>one</ons-tab>
+            <ons-tab active>two</ons-tab>
+          </ons-tabbar>
+          <ons-segment tabbar-id="tabbar">
+            <button>Label 1</button>
+            <button>Label 2</button>
+          </ons-segment>
+        </ons-page>
+      `);
+      const segment = page.querySelector('ons-segment');
+      document.body.appendChild(page);
+
+      setImmediate(() => {
+        expect(segment.activeIndex).to.equal(1);
+        done();
+      });
+    });
+  });
 });

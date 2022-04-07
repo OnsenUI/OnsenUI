@@ -1,49 +1,9 @@
-import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
-import SimpleWrapper from './SimpleWrapper.jsx';
+import 'onsenui/esm/elements/ons-list-item';
 
-/**
- * @original ons-list-item
- * @category list
- * @tutorial react/Reference/list
- * @description
- *   [en]
- *   Component that represents each item in the list. Must be put inside the `List` component. The list item is composed of four parts that are represented with the `left`, `center`, `right` and `expandable-content` classes. These classes can be used to ensure that the content of the list items is properly aligned.
- *   [/en]
- * [ja][/ja]
- * @example
-   <ListItem>
- *   <div className="left">Left</div>
- *   <div className="center">Center</div>
- *   <div className="right">Right</div>
- *   <div className="expandable-content">Expandable content</div>
- * </ListItem>
- */
-class ListItem extends SimpleWrapper {
-  _getDomNodeName() {
-    return 'ons-list-item';
-  }
+import onsCustomElement from '../onsCustomElement';
 
-  componentDidMount() {
-    super.componentDidMount();
-    this.node = ReactDOM.findDOMNode(this);
-    this.node.expanded = this.props.expanded === true;
-    if (this.node.expanded) {
-      this.node.classList.add('expanded');
-    }
-  }
-
-  componentDidUpdate() {
-    super.componentDidUpdate();
-
-    if (this.props.expanded !== this.node.expanded) {
-      const action = this.props.expanded ? 'show' : 'hide';
-      this.node[action + 'Expansion']();
-    }
-  }
-}
-
-ListItem.propTypes = {
+const propTypes = {
   /**
    * @name modifier
    * @type string
@@ -101,7 +61,45 @@ ListItem.propTypes = {
    *  [en]For expandable list items, specifies whether item is expanded[/en]
    *  [ja][/ja]
    */
-  expanded: PropTypes.bool
+  expanded: PropTypes.bool,
+
+  /**
+   * @name onExpand
+   * @type function
+   * @description
+   *  [en] This function will be called when the expandable list item expands or contracts.[/en]
+   *  [ja][/ja]
+   */
+  onExpand: PropTypes.func,
+
+  /**
+   * @name animation
+   * @type string
+   * @description
+   *  [en]The animation used when showing and hiding the expandable content. Can be either "default" or "none".[/en]
+   *  [ja][/ja]
+   */
+  animation: PropTypes.string
 };
+
+/**
+ * @original ons-list-item
+ * @category list
+ * @tutorial react/Reference/list
+ * @description
+ *   [en]
+ *   Component that represents each item in the list. Must be put inside the `List` component. The list item is composed of four parts that are represented with the `left`, `center`, `right` and `expandable-content` classes. These classes can be used to ensure that the content of the list items is properly aligned.
+ *   [/en]
+ * [ja][/ja]
+ * @example
+   <ListItem>
+ *   <div className="left">Left</div>
+ *   <div className="center">Center</div>
+ *   <div className="right">Right</div>
+ *   <div className="expandable-content">Expandable content</div>
+ * </ListItem>
+ */
+const ListItem = onsCustomElement('ons-list-item', {propTypes});
+ListItem.propTypes = propTypes;
 
 export default ListItem;

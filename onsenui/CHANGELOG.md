@@ -20,6 +20,13 @@ dev
  * ons-splitter-side: Stop creating new swipe reveals when connected if one already exists.
  * core: DOMContentReady and deviceready event listeners are removed after being invoked once. ([#2886](https://github.com/OnsenUI/OnsenUI/pull/2886)).
  * ons-button: Allow form submission on submit key keypress. ([#2857](https://github.com/OnsenUI/OnsenUI/issues/2857)).
+ * ons-list-item: Clicks are ignored while the expandable list item is expanding/contracting.
+ * ons-button, ons-alert-dialog-button, ons-toolbar-button, ons-action-sheet-button: Ensure ons-ripple is imported when button is imported.
+ * ons-dialog, ons-alert-dialog, ons-modal, ons-popover, ons-action-sheet: `dialog-cancel` event is renamed to `dialogcancel`.
+ * ons-action-sheet: Hide title element when title is null or undefined.
+ * ons-splitter-side: Fix error being thrown when `animation-options` attribute is set.
+ * ons-popover: Use regular function instead of arrow function to stop default animation breaking.
+ * ons-select: Remove ons-select element when `remove` is called with no arguments.
 
  ### New Features
 
@@ -31,6 +38,18 @@ dev
  * ons-speed-dial: Calling event.preventDefault for click events can be used to prevent speed dial opening/closing.
  * ons-splitter-side: Added `swipeable` property.
  * ons-list-item: Added `expandable` attribute and property. ([#2896](https://github.com/OnsenUI/OnsenUI/issues/2896)).
+ * ons-list-item: Added `expand` event that fires when an expandable list item is clicked and expands or contracts.
+ * ons-button: Added `ripple` property to mirror existing `ripple` attribute.
+ * ons-dialog, ons-alert-dialog, ons-modal, ons-popover, ons-action-sheet: Added `visible` attribute.
+ * ons-dialog, ons-alert-dialog, ons-modal, ons-popover, ons-action-sheet: Can now be shown or hidden by setting the `visible` property/attribute.
+ * ons-dialog, ons-alert-dialog, ons-popover, ons-action-sheet: Added `maskColor` property.
+ * ons-alert-dialog, ons-toast, ons-modal, ons-dialog, ons-action-sheet, ons-popover: Added `animationOptions` property.
+ * ons-action-sheet: Added `title` property to mirror existing `title` attribute.
+ * ons-carousel: Added `animationOptions` property.
+ * ons-carousel: Added `active-index` attribute and `activeIndex` property.
+ * ons-segment: `active-index` can now be set at any time, not just during initialization. Also added corresponding `activeIndex` property.
+ * ons-tabbar: Added `hideTabs` property.
+ * ons-tabbar: Added `activeIndex` property. The active tab can now be changed by setting either the `active-index` attribute or the `activeIndex` property.
 
  ### Misc
 

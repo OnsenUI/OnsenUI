@@ -1,7 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import BasicComponent from './BasicComponent.jsx';
-import Util from './Util.js';
+import 'onsenui/esm/elements/ons-tabbar';
+
+import onsCustomElement from '../onsCustomElement';
+
+const deprecated = {
+  index: 'activeIndex'
+};
+const Element = onsCustomElement('ons-tabbar', {deprecated});
 
 /**
  * @original ons-tabbar
@@ -32,96 +38,65 @@ import Util from './Util.js';
     />
   </Page>
  */
+const Tabbar = React.forwardRef((props, ref) => {
+  const {visible, hideTabs, renderTabs, ...rest} = props;
 
-class Tabbar extends BasicComponent {
-  constructor(...args) {
-    super(...args);
+  const tabs = renderTabs(props.activeIndex, ref);
 
-    const callback = (name, event) => {
-      if (this.props[name]) {
-        return this.props[name](event);
-      }
-    };
-    this.onPreChange = callback.bind(this, 'onPreChange');
-    this.onPostChange = callback.bind(this, 'onPostChange');
-    this.onReactive = callback.bind(this, 'onReactive');
+  // visible is deprecated in favour of hideTabs, but if visible is defined and
+  // hideTabs is not, we use its negation as the value of hideTabs
+  let reallyHideTabs;
+  if (hideTabs === undefined && visible !== undefined) {
+    reallyHideTabs = !visible;
+  } else {
+    reallyHideTabs = hideTabs;
   }
 
-  componentDidMount() {
-    super.componentDidMount();
-    const node = this._tabbar;
-    node.addEventListener('prechange', this.onPreChange);
-    node.addEventListener('postchange', this.onPostChange);
-    node.addEventListener('reactive', this.onReactive);
-    node.onSwipe = this.props.onSwipe || null;
-    if (this.props.visible !== undefined) {
-      node.setTabbarVisibility(this.props.visible);
-    }
-  }
+  return (
+    <Element
+      hideTabs={reallyHideTabs}
+      {...rest}
 
-  componentWillUnmount() {
-    const node = this._tabbar;
-    node.removeEventListener('prechange', this.onPreChange);
-    node.removeEventListener('postchange', this.onPostChange);
-    node.removeEventListener('reactive', this.onReactive);
-  }
-
-  UNSAFE_componentWillReceiveProps(nextProps) {
-    const node = this._tabbar;
-    if (nextProps.index !== this.props.index && nextProps.index !== node.getActiveTabIndex()) {
-      node.setActiveTab(nextProps.index, { reject: false });
-    }
-    if (this.props.onSwipe !== nextProps.onSwipe) {
-      node.onSwipe = nextProps.onSwipe;
-    }
-    if (this.props.visible !== nextProps.visible) {
-      node.setTabbarVisibility(nextProps.visible);
-    }
-  }
-
-  render() {
-    const attrs = Util.getAttrs(this, this.props, { index: 'activeIndex' });
-    const tabs = this.props.renderTabs(this.props.index, this);
-
-    if (!this.tabPages) {
-      this.tabPages = tabs.map((tab) => tab.content);
-    } else {
-      this.tabPages[this.props.index] = tabs[this.props.index].content;
-    }
-
-    return (
-      <ons-tabbar {...attrs} ref={(tabbar) => { this._tabbar = tabbar; }}>
-        <div className={'tabbar__content'}>
-          <div>
-            {this.tabPages}
-          </div>
-          <div></div>
+      ref={ref}
+    >
+      <div className='tabbar__content'>
+        <div>
+          {tabs.map(tab => tab.content)}
         </div>
-        <div className={'tabbar'}>
-          {tabs.map((tab) => tab.tab)}
-          <div className='tabbar__border'></div>
-        </div>
-      </ons-tabbar>
-    );
-  }
-}
+        <div></div>
+      </div>
+      <div className='tabbar'>
+        {tabs.map(tab => tab.tab)}
+        <div className='tabbar__border'></div>
+      </div>
+    </Element>
+  );
+});
 
 Tabbar.propTypes = {
   /**
-   * @name index
+   * @name activeIndex
    * @type number
-   * @required
    * @description
-   *  [en] The index of the tab to highlight.[/en]
+   *  [en]The index of the tab to highlight.[/en]
    *  [ja][/ja]
    */
-  index: PropTypes.number.isRequired,
+  activeIndex: PropTypes.number,
+
+  /**
+   * @name index
+   * @type number
+   * @description
+   *  [en]DEPRECATED! Use `activeIndex` instead.[/en]
+   *  [ja][/ja]
+   */
+  index: PropTypes.number,
 
   /**
    * @name renderTabs
    * @type function
    * @description
-   *  [en] Function that returns an array of objects with the keys `content` and `tab`.[/en]
+   *  [en]Function that returns an array of objects with the keys `content` and `tab`.[/en]
    *  [ja][/ja]
    */
   renderTabs: PropTypes.func.isRequired,
@@ -130,7 +105,7 @@ Tabbar.propTypes = {
    * @name position
    * @type string
    * @description
-   *  [en] Tabbar's position. Available values are `"bottom"` and `"top"`. Use `"auto"` to choose position depending on platform (iOS bottom, Android top). [/en]
+   *  [en]Tabbar's position. Available values are `"bottom"` and `"top"`. Use `"auto"` to choose position depending on platform (iOS bottom, Android top). [/en]
    *  [ja][/ja]
    */
   position: PropTypes.string,
@@ -139,7 +114,7 @@ Tabbar.propTypes = {
    * @name swipeable
    * @type bool
    * @description
-   *  [en]Ennable swipe interaction.[/en]
+   *  [en]Enable swipe interaction.[/en]
    *  [ja][/ja]
    */
   swipeable: PropTypes.bool,
@@ -151,7 +126,7 @@ Tabbar.propTypes = {
    *  [en]Distance in pixels from both edges. Swiping on these areas will prioritize parent components such as `Splitter` or `Navigator`.[/en]
    *  [ja][/ja]
    */
-  ignoreEdgeWidth: PropTypes.bool,
+  ignoreEdgeWidth: PropTypes.number,
 
   /**
    * @name animation
@@ -221,14 +196,28 @@ Tabbar.propTypes = {
    * @name visible
    * @type bool
    * @description
-   *  [en]If true, the tabbar is shown on the screen. Otherwise, the tabbar is not shown.[/en]
+   *  [en]If true, the tabbar is not shown on the screen. Otherwise, the tabbar is shown.[/en]
    *  [ja][/ja]
    */
-  visible: PropTypes.bool
-};
+  hideTabs: PropTypes.bool,
 
-Tabbar.defaultProps = {
-  index: 0
+  /**
+   * @name visible
+   * @type bool
+   * @description
+   *  [en]DEPRECATED! Use `hideTabs` instead.[/en]
+   *  [ja][/ja]
+   */
+  visible: PropTypes.bool,
+
+  /**
+   * @name modifier
+   * @type string
+   * @description
+   *  [en]The appearance of the tabbar.[/en]
+   *  [ja][/ja]
+   */
+  modifier: PropTypes.string
 };
 
 export default Tabbar;

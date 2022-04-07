@@ -54,7 +54,7 @@ export default (options = {}) => new Promise(resolve => {
     if (actionSheet) {
       options.destroy && options.destroy(actionSheet);
 
-      actionSheet.removeEventListener('dialog-cancel', finish, false);
+      actionSheet.removeEventListener('dialogcancel', finish, false);
       actionSheet.remove();
       actionSheet = null;
 
@@ -64,7 +64,7 @@ export default (options = {}) => new Promise(resolve => {
   };
 
   // Link cancel handler
-  actionSheet.addEventListener('dialog-cancel', finish, false);
+  actionSheet.addEventListener('dialogcancel', finish, false);
 
   // Create buttons and link action handler
   const buttons = document.createDocumentFragment();

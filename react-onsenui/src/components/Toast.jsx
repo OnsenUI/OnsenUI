@@ -1,36 +1,31 @@
-import BaseDialog from './BaseDialog.jsx';
 import PropTypes from 'prop-types';
+import 'onsenui/esm/elements/ons-toast';
 
-/**
- * @original ons-toast
- * @category dialog
- * @tutorial react/Reference/toast
- * @description
- * [en]
- *  The Toast or Snackbar component is useful for displaying dismissable information or simple actions at (normally) the bottom of the page.
- *
- *  This component does not block user input, allowing the app to continue its flow. Furthermore, it can be automatically hidden after a timeout.
- * [/en]
- * [ja][/ja]
- */
-class Toast extends BaseDialog {
-  _getDomNodeName() {
-    return 'ons-toast';
-  }
-}
+import onsCustomElement from '../onsCustomElement';
+import baseDialog from '../baseDialog';
 
-Toast.propTypes = {
+const propTypes = {
   /**
-   * @name isOpen
+   * @name visible
    * @type bool
-   * @required true
    * @description
    *  [en]
    *  Indicates whether the toast open and shown.
    *  [/en]
    *  [ja][/ja]
    */
-  isOpen: PropTypes.bool.isRequired,
+  visible: PropTypes.bool,
+
+  /**
+   * @name isOpen
+   * @type bool
+   * @description
+   *  [en]
+   *  DEPRECATED! Use `visible` instead.
+   *  [/en]
+   *  [ja][/ja]
+   */
+  isOpen: PropTypes.bool,
 
   /**
    * @name animation
@@ -118,5 +113,26 @@ Toast.propTypes = {
    */
   onDeviceBackButton: PropTypes.func
 };
+
+const deprecated = {
+  isOpen: 'visible'
+};
+
+const notAttributes = ['onDeviceBackButton'];
+
+/**
+ * @original ons-toast
+ * @category dialog
+ * @tutorial react/Reference/toast
+ * @description
+ * [en]
+ *  The Toast or Snackbar component is useful for displaying dismissable information or simple actions at (normally) the bottom of the page.
+ *
+ *  This component does not block user input, allowing the app to continue its flow. Furthermore, it can be automatically hidden after a timeout.
+ * [/en]
+ * [ja][/ja]
+ */
+const Toast = onsCustomElement(baseDialog('ons-toast'), {propTypes, deprecated, notAttributes});
+Toast.propTypes = propTypes;
 
 export default Toast;

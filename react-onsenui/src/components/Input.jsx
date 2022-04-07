@@ -1,5 +1,13 @@
 import PropTypes from 'prop-types';
-import BaseInput from './BaseInput.jsx';
+import 'onsenui/esm/elements/ons-input';
+
+import onsCustomElement from '../onsCustomElement';
+import oneTimeProp from '../oneTimeProp';
+import INPUT_PROPS from '../inputProps';
+
+const nameMap = {
+  ...INPUT_PROPS
+};
 
 /**
  * @original ons-input
@@ -17,11 +25,8 @@ import BaseInput from './BaseInput.jsx';
  *   modifier='material'
  *   placeholder='Username' />
  */
-class Input extends BaseInput {
-  _getDomNodeName() {
-    return 'ons-input';
-  }
-}
+const withDefaultValue = component => oneTimeProp(component, 'defaultValue', 'value');
+const Input = withDefaultValue(onsCustomElement('ons-input', {deprecated: nameMap}));
 
 Input.propTypes = {
   /**
@@ -56,10 +61,19 @@ Input.propTypes = {
    * @name onChange
    * @type function
    * @description
-   *  [en]Called when the text of the input changes.[/en]
+   *  [en]Called when the inner input fires a `change` event.[/en]
    *  [ja][/ja]
    */
   onChange: PropTypes.func,
+
+  /**
+   * @name onInput
+   * @type function
+   * @description
+   *  [en]Called when the inner input fires an `input` event.[/en]
+   *  [ja][/ja]
+   */
+  onInput: PropTypes.func,
 
   /**
    * @name value

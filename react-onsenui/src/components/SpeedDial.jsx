@@ -1,6 +1,7 @@
-import SimpleWrapper from './SimpleWrapper.jsx';
-
 import PropTypes from 'prop-types';
+import 'onsenui/esm/elements/ons-speed-dial';
+
+import onsCustomElement from '../onsCustomElement';
 
 /**
  * @original ons-speed-dial
@@ -22,11 +23,7 @@ import PropTypes from 'prop-types';
      <SpeedDialItem onClick={() => console.log('speed D')}> D </SpeedDialItem>
    </SpeedDial>
  */
-class SpeedDial extends SimpleWrapper {
-  _getDomNodeName() {
-    return 'ons-speed-dial';
-  }
-}
+const SpeedDial = onsCustomElement('ons-speed-dial');
 
 SpeedDial.propTypes = {
   /**

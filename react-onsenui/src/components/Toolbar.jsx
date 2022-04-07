@@ -1,7 +1,9 @@
-import SimpleWrapper from './SimpleWrapper.jsx';
-import ReactDOM from 'react-dom';
-
 import PropTypes from 'prop-types';
+import 'onsenui/esm/elements/ons-toolbar';
+
+import onsCustomElement from '../onsCustomElement';
+
+const notAttributes = ['visible'];
 
 /**
  * @original ons-toolbar
@@ -30,25 +32,7 @@ import PropTypes from 'prop-types';
   </Toolbar> }
 />
  */
-class Toolbar extends SimpleWrapper {
-  _getDomNodeName() {
-    return 'ons-toolbar';
-  }
-
-  componentDidMount() {
-    super.componentDidMount();
-
-    if (this.props.visible !== undefined) {
-      ReactDOM.findDOMNode(this).setVisibility(this.props.visible);
-    }
-  }
-
-  UNSAFE_componentWillReceiveProps(nextProps) {
-    if (this.props.visible !== nextProps.visible) {
-      ReactDOM.findDOMNode(this).setVisibility(nextProps.visible);
-    }
-  }
-}
+const Toolbar = onsCustomElement('ons-toolbar', {notAttributes});
 
 Toolbar.propTypes = {
   /**
@@ -69,7 +53,25 @@ Toolbar.propTypes = {
    *  [en]If true, the toolbar is shown on the screen. Otherwise, the toolbar is not shown.[/en]
    *  [ja][/ja]
    */
-  visible: PropTypes.bool
+  visible: PropTypes.bool,
+
+  /**
+   * @name static
+   * @type bool
+   * @description
+   *   [en]Static toolbars are not animated by `ons-navigator` when pushing or popping pages. This can be useful to improve performance in some situations.[/en]
+   *  [ja][/ja]
+   */
+  static: PropTypes.bool,
+
+  /**
+   * @name inline
+   * @type bool
+   * @description
+   *   [en]Display the toolbar as an inline element.[/en]
+   *   [ja]ツールバーをインラインに置きます。スクロール領域内にそのまま表示されます。[/ja]
+   */
+  inline: PropTypes.bool
 };
 
 export default Toolbar;

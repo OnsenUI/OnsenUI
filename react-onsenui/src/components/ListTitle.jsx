@@ -1,6 +1,20 @@
-import SimpleWrapper from './SimpleWrapper.jsx';
-
 import PropTypes from 'prop-types';
+import 'onsenui/esm/elements/ons-list-title';
+
+import onsCustomElement from '../onsCustomElement';
+
+const propTypes = {
+  /**
+   * @name modifier
+   * @type string
+   * @description
+   *  [en]
+   *  Specify modifier name to specify custom styles. Optional.
+   *  [/en]
+   *  [ja][/ja]
+   */
+  modifier: PropTypes.string
+};
 
 /**
  * @original ons-list-title
@@ -21,23 +35,7 @@ import PropTypes from 'prop-types';
     )}
   />
  */
-class ListTitle extends SimpleWrapper {
-  _getDomNodeName() {
-    return 'ons-list-title';
-  }
-}
-
-ListTitle.propTypes = {
-  /**
-   * @name modifier
-   * @type string
-   * @description
-   *  [en]
-   *  Specify modifier name to specify custom styles. Optional.
-   *  [/en]
-   *  [ja][/ja]
-   */
-  modifier: PropTypes.string
-};
+const ListTitle = onsCustomElement('ons-list-title', {propTypes});
+ListTitle.propTypes = propTypes;
 
 export default ListTitle;

@@ -128,6 +128,13 @@ export default class DialogElement extends BaseDialogElement {
    */
 
   /**
+   * @event dialogcancel
+   * @description
+   * [en]Fired when the dialog is canceled.[/en]
+   * [ja][/ja]
+   */
+
+  /**
    * @attribute modifier
    * @type {String}
    * @description
@@ -167,12 +174,28 @@ export default class DialogElement extends BaseDialogElement {
    */
 
   /**
+   * @property animationOptions
+   * @type {Object}
+   * @description
+   *   [en]Specify the animation's duration, timing and delay with an object literal. E.g. `{duration: 0.2, delay: 1, timing: 'ease-in'}`.[/en]
+   *   [ja]アニメーション時のduration, timing, delayをオブジェクトリテラルで指定します。例：{duration: 0.2, delay: 1, timing: 'ease-in'}[/ja]
+   */
+
+  /**
    * @attribute mask-color
    * @type {String}
    * @default rgba(0, 0, 0, 0.2)
    * @description
    *  [en]Color of the background mask. Default is `"rgba(0, 0, 0, 0.2)"`.[/en]
    *  [ja]背景のマスクの色を指定します。"rgba(0, 0, 0, 0.2)"がデフォルト値です。[/ja]
+   */
+
+  /**
+   * @attribute visible
+   * @type {Boolean}
+   * @description
+   *   [en]Whether the dialog is visible or not.[/en]
+   *   [ja]要素が見える場合に`true`。[/ja]
    */
 
   constructor() {
@@ -299,7 +322,6 @@ export default class DialogElement extends BaseDialogElement {
 
   /**
    * @property visible
-   * @readonly
    * @type {Boolean}
    * @description
    *   [en]Whether the dialog is visible or not.[/en]
@@ -320,6 +342,15 @@ export default class DialogElement extends BaseDialogElement {
    * @description
    *   [en]Whether the dialog is cancelable or not. A cancelable dialog can be closed by tapping the background or by pressing the back button on Android devices.[/en]
    *   [ja][/ja]
+   */
+
+  /**
+   * @property maskColor
+   * @type {String}
+   * @default rgba(0, 0, 0, 0.2)
+   * @description
+   *  [en]Color of the background mask. Default is "rgba(0, 0, 0, 0.2)".[/en]
+   *  [ja]背景のマスクの色を指定します。"rgba(0, 0, 0, 0.2)"がデフォルト値です。[/ja]
    */
 
   /**

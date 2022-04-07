@@ -1,5 +1,13 @@
 import PropTypes from 'prop-types';
-import BaseInput from './BaseInput.jsx';
+import 'onsenui/esm/elements/ons-switch';
+
+import onsCustomElement from '../onsCustomElement';
+import oneTimeProp from '../oneTimeProp';
+import INPUT_PROPS from '../inputProps';
+
+const nameMap = {
+  ...INPUT_PROPS
+};
 
 /**
  * @original ons-switch
@@ -13,17 +21,20 @@ import BaseInput from './BaseInput.jsx';
  * @example
  * <Switch checked={this.state.checked} onChange={this.onChange} />
  */
-class Switch extends BaseInput {
-  _getDomNodeName() {
-    return 'ons-switch';
-  }
-
-  get EVENT_TYPES() {
-    return ['change'];
-  }
-}
+const withDefaultChecked = component => oneTimeProp(component, 'defaultChecked', 'checked');
+const Switch = withDefaultChecked(onsCustomElement('ons-switch', {deprecated: nameMap}));
 
 Switch.propTypes = {
+  /**
+   * @name modifier
+   * @type string
+   * @required false
+   * @description
+   *  [en]The appearance of the checkbox.[/en]
+   *  [ja][/ja]
+   */
+  modifier: PropTypes.string,
+
   /**
    * @name onChange
    * @type function
@@ -41,6 +52,15 @@ Switch.propTypes = {
    *  [ja][/ja]
    */
   checked: PropTypes.bool,
+
+  /**
+   * @name defaultChecked
+   * @type boolean
+   * @description
+   *  [en]Defined the state of the switch at first render for uncontrolled inputs.[/en]
+   *  [ja][/ja]
+   */
+  defaultChecked: PropTypes.bool,
 
   /**
    * @name disabled

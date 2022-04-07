@@ -1,6 +1,7 @@
-import SimpleWrapper from './SimpleWrapper.jsx';
-
 import PropTypes from 'prop-types';
+import 'onsenui/esm/elements/ons-toolbar-button';
+
+import onsCustomElement from '../onsCustomElement';
 
 /**
  * @original ons-toolbar-button
@@ -27,11 +28,7 @@ import PropTypes from 'prop-types';
       Page Content
     </Page>
  */
-class ToolbarButton extends SimpleWrapper {
-  _getDomNodeName() {
-    return 'ons-toolbar-button';
-  }
-}
+const ToolbarButton = onsCustomElement('ons-toolbar-button');
 
 ToolbarButton.propTypes = {
   /**
@@ -53,7 +50,25 @@ ToolbarButton.propTypes = {
    *  [/en]
    *  [ja][/ja]
    */
-  disabled: PropTypes.bool
+  disabled: PropTypes.bool,
+
+  /**
+   * @name icon
+   * @type string
+   * @description
+   *  [en]Creates an `Icon` component with this string.[/en]
+   *  [ja][/ja]
+   */
+  icon: PropTypes.string,
+
+  /**
+   * @name onClick
+   * @type function
+   * @description
+   *  [en]This function will be called when the button is clicked.[/en]
+   *  [ja][/ja]
+   */
+  onClick: PropTypes.func
 };
 
 export default ToolbarButton;

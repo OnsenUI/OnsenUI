@@ -1,8 +1,14 @@
-import ReactDOM from 'react-dom';
-import BasicComponent from './BasicComponent.jsx';
-import React from 'react';
 import PropTypes from 'prop-types';
-import Util from './Util.js';
+import 'onsenui/esm/elements/ons-pull-hook';
+
+import onsCustomElement from '../onsCustomElement';
+
+const deprecated = {
+  onLoad: 'onAction',
+  onChange: 'onChangeState'
+};
+
+const notAttributes = ['onAction'];
 
 /**
  * @original ons-pull-hook
@@ -34,62 +40,45 @@ import Util from './Util.js';
       </PullHook>
     );
  */
-class PullHook extends BasicComponent {
-  constructor(...args) {
-    super(...args);
-
-    this.onChange = (event) => {
-      if (this.props.onChange) {
-        return this.props.onChange(event);
-      }
-    };
-  }
-
-  componentDidMount() {
-    super.componentDidMount();
-    const node = ReactDOM.findDOMNode(this);
-    node.addEventListener('changestate', this.onChange);
-    this._pullHook.onAction = this.props.onLoad || null;
-    this._pullHook.onPull = this.props.onPull || null;
-  }
-
-  componentWillUnmount() {
-    const node = ReactDOM.findDOMNode(this);
-    node.removeEventListener('changestate', this.onChange);
-  }
-
-  componentDidUpdate(prevProps) {
-    if (this.props.onLoad !== prevProps.onLoad) {
-      this._pullHook.onAction = this.props.onLoad;
-    }
-    if (this.props.onPull !== prevProps.onPull) {
-      this._pullHook.onPull = this.props.onPull;
-    }
-  }
-
-  render() {
-    const attrs = Util.getAttrs(this);
-    return <ons-pull-hook { ...attrs } ref={(pullHook) => { this._pullHook = pullHook; }} />;
-  }
-}
+const PullHook = onsCustomElement('ons-pull-hook', {deprecated, notAttributes});
 
 PullHook.propTypes = {
   /**
-   * @name onChange
+   * @name onChangeState
    * @type function
    * @required false
    * @description
    *  [en]Called when the pull hook inner state is changed. The state can be either "initial", "preaction" or "action"[/en]
    *  [ja][/ja]
    */
+  onChangeState: PropTypes.func,
+
+  /**
+   * @name onChange
+   * @type function
+   * @required false
+   * @description
+   *  [en]DEPRECATED! Use `onChangeState` instead.[/en]
+   *  [ja][/ja]
+   */
   onChange: PropTypes.func,
+
+  /**
+   * @name onAction
+   * @type function
+   * @required false
+   * @description
+   *  [en]Called when the pull hook is in the `action` state[/en]
+   *  [ja][/ja]
+   */
+  onAction: PropTypes.func,
 
   /**
    * @name onLoad
    * @type function
    * @required false
    * @description
-   *  [en]Called when the pull hook is in the `action` state[/en]
+   *  [en]DEPRECATED! Use `onAction` instead.[/en]
    *  [ja][/ja]
    */
   onLoad: PropTypes.func,

@@ -233,5 +233,52 @@ describe('OnsPullHookElement', () => {
       expect(pullHook.hasAttribute('disabled')).to.be.true;
     });
   });
+
+  describe('#onPull', () => {
+    it('adds an event listener when set while the element is already connected', () => {
+      const element = ons._util.createElement('<ons-pull-hook></ons-pull-hook>');
+      document.body.appendChild(element);
+      element.onPull = () => {};
+      const spy = chai.spy.on(element, 'onPull');
+      element.dispatchEvent(new Event('pull'));
+      expect(spy).to.have.been.called.once;
+      element.remove();
+    });
+
+    it('does not add an event listener when set while the element is not already connected', () => {
+      const element = ons._util.createElement('<ons-pull-hook></ons-pull-hook>');
+      element.onPull = () => {};
+      const spy = chai.spy.on(element, 'onPull');
+      element.dispatchEvent(new Event('pull'));
+      expect(spy).not.to.have.been.called;
+    });
+
+    it('removes the previous event listener when onPull is set again', () => {
+      const element = ons._util.createElement('<ons-pull-hook></ons-pull-hook>');
+      document.body.appendChild(element);
+      element.onPull = assert.fail;
+      element.onPull = () => {};
+      element.dispatchEvent(new Event('pull'));
+      element.remove();
+    });
+
+    it('adds the event listener when the element is connected', () => {
+      const element = ons._util.createElement('<ons-pull-hook></ons-pull-hook>');
+      element.onPull = () => {};
+      const spy = chai.spy.on(element, 'onPull');
+      document.body.appendChild(element);
+      element.dispatchEvent(new Event('pull'));
+      expect(spy).to.have.been.called.once;
+      element.remove();
+    });
+
+    it('removes the event listener when the element is disconnected', () => {
+      const element = ons._util.createElement('<ons-pull-hook></ons-pull-hook>');
+      document.body.appendChild(element);
+      element.onPull = assert.fail;
+      element.remove();
+      element.dispatchEvent(new Event('pull'));
+    });
+  });
 });
 

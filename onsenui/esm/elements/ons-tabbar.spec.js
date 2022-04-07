@@ -120,12 +120,17 @@ describe('OnsTabbarElement', () => {
     });
   });
 
-  it('sets tab initial index if none is provided', () => {
+  it('sets tab initial index if none is provided', done => {
     let element = ons.createElement(`<ons-tabbar><ons-tab label="t1"></ons-tab></ons-tabbar>`);
     expect(element.tabs[0].hasAttribute('active')).to.be.true;
 
-    element = ons.createElement(`<ons-tabbar activeIndex="1"><ons-tab label="t1"></ons-tab><ons-tab label="t2"></ons-tab></ons-tabbar>`);
-    expect(element.tabs[1].hasAttribute('active')).to.be.true;
+    element = ons.createElement(`<ons-tabbar active-index="1"><ons-tab label="t1"></ons-tab><ons-tab label="t2"></ons-tab></ons-tabbar>`);
+    document.body.appendChild(element);
+    setImmediate(() => {
+      expect(element.tabs[1].hasAttribute('active')).to.be.true;
+      element.remove();
+      done();
+    });
   });
 
   describe('#setTabbarVisibility()', () => {
@@ -297,6 +302,81 @@ describe('OnsTabbarElement', () => {
         ons.platform.select('');
         done();
       });
+    });
+  });
+
+  describe('#onSwipe', () => {
+    it('adds an event listener when set while the element is already connected', () => {
+      const element = ons._util.createElement('<ons-tabbar></ons-tabbar>');
+      document.body.appendChild(element);
+      element.onSwipe = () => {};
+      const spy = chai.spy.on(element, 'onSwipe');
+      element.dispatchEvent(new Event('swipe'));
+      expect(spy).to.have.been.called.once;
+      element.remove();
+    });
+
+    it('does not add an event listener when set while the element is not already connected', () => {
+      const element = ons._util.createElement('<ons-tabbar></ons-tabbar>');
+      element.onSwipe = () => {};
+      const spy = chai.spy.on(element, 'onSwipe');
+      element.dispatchEvent(new Event('swipe'));
+      expect(spy).not.to.have.been.called;
+    });
+
+    it('removes the previous event listener when onSwipe is set again', () => {
+      const element = ons._util.createElement('<ons-tabbar></ons-tabbar>');
+      document.body.appendChild(element);
+      element.onSwipe = assert.fail;
+      element.onSwipe = () => {};
+      element.dispatchEvent(new Event('swipe'));
+      element.remove();
+    });
+
+    it('adds the event listener when the element is connected', () => {
+      const element = ons._util.createElement('<ons-tabbar></ons-tabbar>');
+      element.onSwipe = () => {};
+      const spy = chai.spy.on(element, 'onSwipe');
+      document.body.appendChild(element);
+      element.dispatchEvent(new Event('swipe'));
+      expect(spy).to.have.been.called.once;
+      element.remove();
+    });
+
+    it('removes the event listener when the element is disconnected', () => {
+      const element = ons._util.createElement('<ons-tabbar></ons-tabbar>');
+      document.body.appendChild(element);
+      element.onSwipe = assert.fail;
+      element.remove();
+      element.dispatchEvent(new Event('swipe'));
+    });
+  });
+
+  describe('#hideTabs', () => {
+    it('hides the tabbar when set', done => {
+      const element = ons._util.createElement('<ons-tabbar hide-tabs></ons-tabbar>');
+      document.body.appendChild(element);
+      setImmediate(() => {
+        const tabs = element.querySelector('.tabbar');
+        expect(tabs.style.display).to.equal('none');
+        element.remove();
+        done();
+      });
+    });
+  });
+
+  describe('#activeIndex', () => {
+    it("doesn't throw an error when the tabbar is not connected", () => {
+      const element = ons._util.createElement(`
+        <ons-page>
+          <ons-tabbar active-index="2">
+            <ons-tab page="page"></ons-tab>
+            <ons-tab page="page"></ons-tab>
+            <ons-tab page="page"></ons-tab>
+          </ons-tabbar>
+          <template id="page">page</template>
+        </ons-page>
+      `);
     });
   });
 });

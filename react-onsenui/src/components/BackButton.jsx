@@ -1,6 +1,9 @@
-import SimpleWrapper from './SimpleWrapper.jsx';
 import PropTypes from 'prop-types';
-import ReactDOM from 'react-dom';
+import 'onsenui/esm/elements/ons-back-button';
+
+import onsCustomElement from '../onsCustomElement';
+
+const notAttributes = ['options'];
 
 /**
  * @original ons-back-button
@@ -19,29 +22,7 @@ import ReactDOM from 'react-dom';
       <div className="center">{this.props.title}</div>
    </Toolbar>
  */
-class BackButton extends SimpleWrapper {
-  _getDomNodeName() {
-    return 'ons-back-button';
-  }
-
-  _updateOnClick(props) {
-    const node = ReactDOM.findDOMNode(this);
-
-    if (props.onClick) {
-      node.onClick = () => null;
-    } else {
-      delete node.onClick;
-    }
-  }
-
-  componentDidMount() {
-    this._updateOnClick(this.props);
-  }
-
-  UNSAFE_componentWillReceiveProps(props) {
-    this._updateOnClick(props);
-  }
-}
+const BackButton = onsCustomElement('ons-back-button', {notAttributes});
 
 BackButton.propTypes = {
   /**
@@ -58,10 +39,23 @@ BackButton.propTypes = {
    * @name onClick
    * @type function
    * @description
-   *  [en]This function will be called ones the button is clicked. It overrides the default behavior of the back button.[/en]
+   *  [en]This function will be called when the button is clicked. To prevent the default click behaviour, call `event.preventDefault()`.[/en]
    *  [ja][/ja]
    */
-  onClick: PropTypes.func
+  onClick: PropTypes.func,
+
+  /**
+   * @name options
+   * @type object
+   * @description
+   *  [en]Specifies the animation, animationOptions, and callback.[/en]
+   *  [ja][/ja]
+   */
+  options: PropTypes.shape({
+    animation: PropTypes.string,
+    animationOptions: PropTypes.object,
+    callback: PropTypes.func
+  })
 };
 
 export default BackButton;

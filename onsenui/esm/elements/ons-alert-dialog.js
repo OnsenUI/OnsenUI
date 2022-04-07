@@ -142,6 +142,13 @@ export default class AlertDialogElement extends BaseDialogElement {
    */
 
   /**
+   * @event dialogcancel
+   * @description
+   * [en]Fired when the dialog is canceled.[/en]
+   * [ja][/ja]
+   */
+
+  /**
    * @attribute modifier
    * @type {String}
    * @description
@@ -187,6 +194,14 @@ export default class AlertDialogElement extends BaseDialogElement {
    * @description
    *  [en]Color of the background mask. Default is "rgba(0, 0, 0, 0.2)".[/en]
    *  [ja]背景のマスクの色を指定します。"rgba(0, 0, 0, 0.2)"がデフォルト値です。[/ja]
+   */
+
+  /**
+   * @attribute visible
+   * @type {Boolean}
+   * @description
+   *   [en]Whether the alert dialog is visible or not.[/en]
+   *   [ja]要素が見える場合に`true`。[/ja]
    */
 
   constructor() {
@@ -305,6 +320,15 @@ export default class AlertDialogElement extends BaseDialogElement {
    */
 
   /**
+   * @property maskColor
+   * @type {String}
+   * @default rgba(0, 0, 0, 0.2)
+   * @description
+   *  [en]Color of the background mask. Default is "rgba(0, 0, 0, 0.2)".[/en]
+   *  [ja]背景のマスクの色を指定します。"rgba(0, 0, 0, 0.2)"がデフォルト値です。[/ja]
+   */
+
+  /**
    * @method show
    * @signature show([options])
    * @param {Object} [options]
@@ -352,7 +376,6 @@ export default class AlertDialogElement extends BaseDialogElement {
 
   /**
    * @property visible
-   * @readonly
    * @type {Boolean}
    * @description
    *   [en]Whether the dialog is visible or not.[/en]
@@ -365,6 +388,14 @@ export default class AlertDialogElement extends BaseDialogElement {
    * @description
    *   [en]Back-button handler.[/en]
    *   [ja]バックボタンハンドラ。[/ja]
+   */
+
+  /**
+   * @property animationOptions
+   * @type {Object}
+   * @description
+   *   [en]Specify the animation's duration, timing and delay with an object literal. E.g. `{duration: 0.2, delay: 1, timing: 'ease-in'}`.[/en]
+   *   [ja]アニメーション時のduration, timing, delayをオブジェクトリテラルで指定します。例：{duration: 0.2, delay: 1, timing: 'ease-in'}[/ja]
    */
 
   /**

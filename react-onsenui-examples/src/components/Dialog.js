@@ -62,14 +62,15 @@ class MyDialog extends React.Component {
     this.onNameChanged = this.onNameChanged.bind(this);
     this.onDescriptionChanged = this.onDescriptionChanged.bind(this);
     this.renderPage = this.renderPage.bind(this);
+    this.navi = React.createRef();
   }
 
   popPage() {
-    this.refs.navi.popPage();
+    this.navi.current.popPage();
   }
 
   pushPage() {
-    this.refs.navi.pushPage(
+    this.navi.current.pushPage(
       {comp: MyPage2, props: {onChange: this.onDescriptionChanged, popPage: this.popPage}});
       // <MyPage2 description={this.props.description} onChange={this.onDescriptionChanged} popPage={this.popPage} />);
   }
@@ -96,7 +97,7 @@ class MyDialog extends React.Component {
     return (
       <Dialog
         onCancel={this.props.onCancel} isOpen={this.props.isOpen} animation='default' isCancelable={true}>
-      <Navigator animation='slide' ref='navi'
+      <Navigator animation='slide' ref={this.navi}
         initialRoute={{comp: FirstPage, props: {
           pushPage: this.pushPage, onNameChanged: this.onNameChanged }}}
         renderPage={this.renderPage}>

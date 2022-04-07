@@ -1,5 +1,7 @@
-import SimpleWrapper from './SimpleWrapper.jsx';
 import PropTypes from 'prop-types';
+import 'onsenui/esm/elements/ons-alert-dialog-button';
+
+import onsCustomElement from '../onsCustomElement';
 
 /**
  * @original ons-alert-dialog-button
@@ -9,11 +11,7 @@ import PropTypes from 'prop-types';
  * [en]Component that represent each button of the alert dialog.[/en]
  * [ja][/ja]
  */
-class AlertDialogButton extends SimpleWrapper {
-  _getDomNodeName() {
-    return 'ons-alert-dialog-button';
-  }
-}
+const AlertDialogButton = onsCustomElement('ons-alert-dialog-button');
 
 AlertDialogButton.propTypes = {
   /**

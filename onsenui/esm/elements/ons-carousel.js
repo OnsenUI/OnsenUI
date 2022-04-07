@@ -68,6 +68,25 @@ export default class CarouselElement extends BaseElement {
    */
 
   /**
+   * @event prechange
+   * @description
+   *   [en]Fired just before the current carousel item changes.[/en]
+   *   [ja][/ja]
+   * @param {Object} event
+   *   [en]Event object.[/en]
+   *   [ja]イベントオブジェクトです。[/ja]
+   * @param {Object} event.carousel
+   *   [en]Carousel object.[/en]
+   *   [ja]イベントが発火したCarouselオブジェクトです。[/ja]
+   * @param {Number} event.activeIndex
+   *   [en]Current active index.[/en]
+   *   [ja]現在アクティブになっている要素のインデックス。[/ja]
+   * @param {Number} event.lastActiveIndex
+   *   [en]Previous active index.[/en]
+   *   [ja]以前アクティブだった要素のインデックス。[/ja]
+   */
+
+  /**
    * @event refresh
    * @description
    *   [en]Fired when the carousel has been refreshed.[/en]
@@ -198,7 +217,7 @@ export default class CarouselElement extends BaseElement {
    * @default 0
    * @type {Number}
    * @description
-   *   [en]Specify the index of the ons-carousel-item to show initially. Default is 0.[/en]
+   *   [en]Specify the index of the ons-carousel-item to show initially. Default is 0. If active-index is set, initial-index is ignored.[/en]
    *   [ja]最初に表示するons-carousel-itemを0始まりのインデックスで指定します。デフォルト値は 0 です。[/ja]
    */
 
@@ -228,7 +247,9 @@ export default class CarouselElement extends BaseElement {
   constructor() {
     super();
 
-    util.defineListenerProperty(this, 'swipe');
+    const {onConnected, onDisconnected} = util.defineListenerProperty(this, 'swipe');
+    this._connectOnSwipe = onConnected;
+    this._disconnectOnSwipe = onDisconnected;
 
     contentReady(this, () => this._compile());
   }
@@ -252,7 +273,7 @@ export default class CarouselElement extends BaseElement {
     if (!this._swiper) {
       this._swiper = new Swiper({
         getElement: () => this,
-        getInitialIndex: () => this.getAttribute('initial-index'),
+        getInitialIndex: () => this.getAttribute('active-index') || this.getAttribute('initial-index'),
         getAutoScrollRatio: () => this.autoScrollRatio,
         isVertical: () => this.vertical,
         isOverScrollable: () => this.overscrollable,
@@ -260,8 +281,8 @@ export default class CarouselElement extends BaseElement {
         isAutoScrollable: () => this.autoScroll,
         itemSize: this.itemSize,
         overScrollHook: this._onOverScroll.bind(this),
-        preChangeHook: this._onChange.bind(this, 'prechange'),
-        postChangeHook: this._onChange.bind(this, 'postchange'),
+        preChangeHook: this._onPreChange.bind(this),
+        postChangeHook: this._onPostChange.bind(this),
         refreshHook: this._onRefresh.bind(this),
         scrollHook: (index, options) => util.triggerElementEvent(this, 'swipe', { index, options })
       });
@@ -271,6 +292,8 @@ export default class CarouselElement extends BaseElement {
         autoRefresh: this.hasAttribute('auto-refresh')
       }));
     }
+
+    this._connectOnSwipe();
   }
 
   disconnectedCallback() {
@@ -279,11 +302,11 @@ export default class CarouselElement extends BaseElement {
       this._swiper = null;
     }
 
-    util.disconnectListenerProperty(this, 'swipe');
+    this._disconnectOnSwipe();
   }
 
   static get observedAttributes() {
-    return ['swipeable', 'auto-refresh', 'direction', 'item-height', 'item-width'];
+    return ['swipeable', 'auto-refresh', 'direction', 'item-height', 'item-width', 'active-index'];
   }
 
   attributeChangedCallback(name, last, current) {
@@ -306,6 +329,12 @@ export default class CarouselElement extends BaseElement {
         break;
       case 'direction':
         this._swiper.refresh();
+        break;
+      case 'active-index':
+        if (this.getActiveIndex() !== this.activeIndex) {
+          this.setActiveIndex(this.activeIndex);
+        }
+        break;
     }
   }
 
@@ -332,8 +361,13 @@ export default class CarouselElement extends BaseElement {
     return waitForAction;
   }
 
-  _onChange(eventName, { activeIndex, lastActiveIndex }) {
-    util.triggerElementEvent(this, eventName, { carousel: this, activeIndex, lastActiveIndex });
+  _onPreChange({ activeIndex, lastActiveIndex }) {
+    util.triggerElementEvent(this, 'prechange', { carousel: this, activeIndex, lastActiveIndex });
+  }
+
+  _onPostChange({ activeIndex, lastActiveIndex }) {
+    this.activeIndex = activeIndex;
+    util.triggerElementEvent(this, 'postchange', { carousel: this, activeIndex, lastActiveIndex });
   }
 
   _onRefresh() {
@@ -368,9 +402,7 @@ export default class CarouselElement extends BaseElement {
   setActiveIndex(index, options = {}) {
     options = {
       animation: this.getAttribute('animation'),
-      animationOptions: this.hasAttribute('animation-options')
-        ? util.animationOptionsParse(this.getAttribute('animation-options'))
-        : { duration: .3, timing: 'cubic-bezier(.4, .7, .5, 1)' },
+      animationOptions: this.animationOptions || { duration: .3, timing: 'cubic-bezier(.4, .7, .5, 1)' },
       ...options
     };
 
@@ -631,6 +663,55 @@ export default class CarouselElement extends BaseElement {
 
   static get events() {
     return ['postchange', 'refresh', 'overscroll'];
+  }
+
+  /**
+   * @property animationOptions
+   * @type {Object}
+   * @description
+   *   [en]Specify the animation's duration, timing and delay with an object literal. E.g. `{duration: 0.2, delay: 1, timing: 'ease-in'}`.[/en]
+   *   [ja]アニメーション時のduration, timing, delayをオブジェクトリテラルで指定します。例：{duration: 0.2, delay: 1, timing: 'ease-in'}[/ja]
+   */
+  get animationOptions() {
+    const attr = this.getAttribute('animation-options');
+    if (attr) {
+      return util.animationOptionsParse(attr);
+    } else {
+      return attr;
+    }
+  }
+
+  set animationOptions(value) {
+    if (value === undefined || value === null) {
+      this.removeAttribute('animation-options');
+    } else {
+      this.setAttribute('animation-options', JSON.stringify(value));
+    }
+  }
+
+  /**
+   * @attribute active-index
+   * @type {Number}
+   * @description
+   *   [en]Specify the index of the carousel item that should be shown.[/en]
+   *   [ja][/ja]
+   */
+
+  /**
+   * @property activeIndex
+   * @type {Number}
+   * @description
+   *   [en]Specify the index of the carousel item that should be shown.[/en]
+   *   [ja][/ja]
+   */
+  get activeIndex() {
+    return parseInt(this.getAttribute('active-index'));
+  }
+
+  set activeIndex(value) {
+    if (value !== undefined && value !== null) {
+      this.setAttribute('active-index', value);
+    }
   }
 }
 

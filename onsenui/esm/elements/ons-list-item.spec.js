@@ -123,6 +123,32 @@ describe('OnsListItemElement', () => {
       const ignored = listItem.querySelector('#ignored');
       expect(ignored).to.be.null;
     });
+
+    it("emits an 'expand' event when the top part is clicked", () => {
+      const promise = new Promise(resolve => {
+        listItem.addEventListener('expand', resolve, {once: true});
+      });
+
+      document.body.appendChild(listItem);
+      listItem.querySelector('.top').click();
+      listItem.remove();
+      return expect(promise).to.eventually.be.fulfilled;
+    });
+
+    it("does not emit an 'expand' event when the expanded property is set", () => {
+      listItem.addEventListener('expand', assert.fail, {once: true});
+      document.body.appendChild(listItem);
+      listItem.expanded = true;
+      listItem.remove();
+    });
+
+    it('does not toggle expanded when clicked if already expanding', () => {
+      document.body.appendChild(listItem);
+      listItem._expanding = true;
+      listItem.querySelector('.top').click();
+      expect(listItem.expanded).to.be.false;
+      listItem.remove();
+    });
   });
 
   describe('#_onDrag()', () => {
@@ -272,6 +298,15 @@ describe('OnsListItemElement', () => {
     it('does not call animator._animateExpansion when expandable is not set', () => {
       listItem.hideExpansion();
       expect(animatorMock._animateExpansion).to.not.have.been.called;
+    });
+  });
+
+  describe('attribute animation', () => {
+    it('does not throw an error when animating expandable list item when animation is set to none', () => {
+      const listItem = ons._util.createElement('<ons-list-item expandable animation="none">content<div class="expandable-content">expanded</div></ons-list-item>');
+      document.body.appendChild(listItem);
+      listItem.expanded = true;
+      listItem.remove();
     });
   });
 

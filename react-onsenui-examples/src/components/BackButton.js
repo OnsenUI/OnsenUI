@@ -9,7 +9,8 @@ import {
 } from 'react-onsenui';
 
 export default class extends React.Component {
-  handleClick() {
+  handleClick(e) {
+    e.preventDefault();
     ons.notification.confirm('Do you really want to go back?')
       .then(
         (response) => {
