@@ -416,10 +416,6 @@ declare namespace ons {
     activeIndex: number;
   }
 
-  interface OnsTemplateElement extends HTMLElement {
-    template: any;
-  }
-
   interface OnsToastElement extends HTMLElement {
     show(...args: any[]): any;
     toggle(...args: any[]): any;
@@ -726,7 +722,7 @@ declare namespace ons {
      */
     popPage(options?: NavigatorOptions): Promise<HTMLElement>;
     /**
-     * @param {*} page Page URL. Can be either a HTML document or a <code>&lt;ons-template&gt;</code>
+     * @param {*} page Page URL. Can be either a HTML document or a <code>&lt;template&gt;</code>
      * @param {Object} [options] Parameter object
      * @param {String} [options.animation] Animation name. Available animations are "slide", "simpleslide", "lift", "fade" and "none"
      * @param {Function} [options.callback] Function that is called when the transition has ended
@@ -741,7 +737,7 @@ declare namespace ons {
     replacePage(page: any, options?: PushPageOptions): Promise<HTMLElement>;
     /**
      * @param {Number} index The index where it should be inserted
-     * @param {*} page Page URL. Can be either a HTML document or a <code>&lt;ons-template&gt;</code>
+     * @param {*} page Page URL. Can be either a HTML document or a <code>&lt;template&gt;</code>
      * @param {Object} [options] Parameter object
      * @param {String} [options.animation] Animation name. Available animations are "slide", "simpleslide", "lift", "fade" and "none"
      * @description Insert the specified page into the page stack with specified index
@@ -749,7 +745,7 @@ declare namespace ons {
     insertPage(index: number, page: any, options?: NavigatorOptions): Promise<HTMLElement>;
     removePage(...args: any[]): any;
     /**
-     * @param {*} page Page URL. Can be either a HTML document or an <code>&lt;ons-template&gt;</code>
+     * @param {*} page Page URL. Can be either a HTML document or an <code>&lt;template&gt;</code>
      * @param {Object} [options] Parameter object
      * @param {String} [options.animation] Animation name. Available animations are "slide", "simpleslide", "lift", "fade" and "none"
      * @param {Function} [options.callback] Function that is called when the transition has ended
@@ -792,7 +788,7 @@ declare namespace ons {
    */
   interface OnsTabbarElement extends HTMLElement {
     /**
-     * @param {*} url Page URL. Can be either an HTML document or an <code>&lt;ons-template&gt;</code>
+     * @param {*} url Page URL. Can be either an HTML document or an <code>&lt;template&gt;</code>
      * @return Resolves to the new page element.
      * @description Displays a new page without changing the active index
      */
@@ -900,7 +896,7 @@ declare namespace ons {
     toggle(options?: SplitterSideOptions): Promise<HTMLElement | boolean>;
     /**
      * @description Show the page specified in pageUrl in the right section
-     * @param {*} page Page URL. Can be either an HTML document or an <ons-template>.
+     * @param {*} page Page URL. Can be either an HTML document or an <template>.
      * @param {Object} [option]
      * @return Resolves to the new page element
      */

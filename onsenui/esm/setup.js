@@ -6,7 +6,6 @@ import internal from './ons/internal/index.js';
 
 export default function setup(ons) {
   internal.waitDOMContentLoaded(function() {
-    register('script[type="text/ons-template"]');
     register('script[type="text/template"]');
     register('script[type="text/ng-template"]');
     register('template');

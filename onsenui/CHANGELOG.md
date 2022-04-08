@@ -14,6 +14,7 @@ dev
  * core: The ES modules are now distributed in ES6 instead of transpiled ES5. If you need to support ES5, you should transpile the contents of the `esm` directory.
  * core: Bundlers will now use the ES modules version of Onsen UI by default instead of the UMD version.
  * The TypeScript declaration file has been moved to `esm/onsenui.d.ts`.
+ * ons-template: `ons-template` has been removed. Use `template` instead.
 
  ### Bug Fixes
 
