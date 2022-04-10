@@ -2,7 +2,6 @@ import setup from './setup.js'; // Add polyfills
 import ons from './ons/index.js'; // Add ons internals
 
 // Add and register Custom Elements
-import './elements/ons-template.js';
 import './elements/ons-if.js';
 import './elements/ons-action-sheet.js';
 import './elements/ons-action-sheet-button.js';

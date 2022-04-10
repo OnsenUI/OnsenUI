@@ -95,12 +95,6 @@ internal.templateStore = {
   }
 };
 
-window.document.addEventListener('_templateloaded', function(e) {
-  if (e.target.nodeName.toLowerCase() === 'ons-template') {
-    internal.templateStore.set(e.templateId, e.template);
-  }
-}, false);
-
 /**
  * @param {String} page
  * @return {Promise}
