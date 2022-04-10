@@ -242,8 +242,8 @@ export class LazyRepeatProvider {
 
   _getItemHeight(i) {
     // Item is rendered
-    if (this._renderedItems.hasOwnProperty(i)) {
-      if (!this._renderedItems[i].hasOwnProperty('height')) {
+    if (Object.prototype.hasOwnProperty.call(this._renderedItems, i)) {
+      if (!Object.prototype.hasOwnProperty.call(this._renderedItems[i], 'height')) {
         this._renderedItems[i].height = this._renderedItems[i].element.offsetHeight;
       }
       return this._renderedItems[i].height;

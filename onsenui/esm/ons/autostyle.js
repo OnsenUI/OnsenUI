@@ -41,7 +41,7 @@ platforms.android = element => {
   if (!util.hasModifier(element, 'material')) {
     const oldModifier = element.getAttribute('modifier') || '';
 
-    const newModifier = oldModifier.trim().split(/\s+/).map(e => modifiersMap.hasOwnProperty(e) ? modifiersMap[e] : e);
+    const newModifier = oldModifier.trim().split(/\s+/).map(e => Object.prototype.hasOwnProperty.call(modifiersMap, e) ? modifiersMap[e] : e);
     newModifier.unshift('material');
 
     element.setAttribute('modifier', newModifier.join(' ').trim());
@@ -106,7 +106,7 @@ const unlocked = {
 const getPlatform = (element, force) => {
   if (autoStyleEnabled && !element.hasAttribute('disable-auto-styling')) {
     const mobileOS = onsPlatform.getMobileOS();
-    if (platforms.hasOwnProperty(mobileOS) && (unlocked.hasOwnProperty(mobileOS) || force)) {
+    if (Object.prototype.hasOwnProperty.call(platforms, mobileOS) && (Object.prototype.hasOwnProperty.call(unlocked, mobileOS) || force)) {
       return mobileOS;
     }
   }
@@ -120,7 +120,7 @@ const prepare = (element, force) => {
 
 const mapModifier = (modifier, element, force) => {
   if (getPlatform(element, force)) {
-    return modifier.split(/\s+/).map(m => modifiersMap.hasOwnProperty(m) ? modifiersMap[m] : m).join(' ');
+    return modifier.split(/\s+/).map(m => Object.prototype.hasOwnProperty.call(modifiersMap, m) ? modifiersMap[m] : m).join(' ');
   }
   return modifier;
 };

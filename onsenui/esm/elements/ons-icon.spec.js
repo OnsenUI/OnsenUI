@@ -2,13 +2,13 @@ import contentReady from '../ons/content-ready.js';
 
 describe('OnsIconElement', () => {
   let element;
-  
+
   beforeEach(done => {
     element = new ons.elements.Icon();
     document.body.appendChild(element);
     contentReady(element, done);
   });
-  
+
   it('should exist', () => {
     expect(window.ons.elements.Icon).to.be.ok;
   });
@@ -80,7 +80,7 @@ describe('OnsIconElement', () => {
       expect(element.classList.contains('ion-navicon')).to.be.true;
       expect(element.classList.contains('zmdi-face')).not.to.be.true;
     });
-    
+
     it('supports a second icon depending on modifiers (material)', () => {
       element.setAttribute('modifier', 'material');
       element.setAttribute('icon', 'ion-navicon, material:md-face');
@@ -145,7 +145,7 @@ describe('OnsIconElement', () => {
       element.setAttribute('size', '20px, material:30px');
       expect(element.style.fontSize).to.equal('20px');
     });
-    
+
     it('supports a second size depending on modifiers (material)', () => {
       element.setAttribute('modifier', 'material');
       element.setAttribute('size', '20px, material:30px');
@@ -162,7 +162,7 @@ describe('OnsIconElement', () => {
       expect(div1.isEqualNode(div2)).to.be.true;
     });
   });
-  
+
   describe('autoStyling', () => {
     it('adds \'material\' modifier on Android', done => {
       ons.platform.select('android');

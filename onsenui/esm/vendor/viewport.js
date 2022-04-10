@@ -1,7 +1,7 @@
 (function() {
   var DEFAULT_VIEWPORT = 'width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no';
 
-  var Viewport = { 
+  var Viewport = {
     ensureViewportElement: function() {
       var viewportElement = document.querySelector('meta[name=viewport]');
 

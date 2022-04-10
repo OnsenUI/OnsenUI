@@ -343,7 +343,7 @@ export default class ListItemElement extends BaseElement {
       } else {
         this.classList.remove('list-item--expanded');
       }
-    }
+    };
 
     const animator = this._animatorFactory.newAnimator();
 

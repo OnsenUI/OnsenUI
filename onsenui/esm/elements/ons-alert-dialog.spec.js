@@ -235,7 +235,7 @@ describe('OnsAlertDialogElement', () => {
     it('shows the dialog when visible is set at startup', done => {
       const shown = ons._util.createElement('<ons-alert-dialog visible></ons-alert-dialog>');
       contentReady(shown, () => {
-        expect(shown.style.display).to.equal('block')
+        expect(shown.style.display).to.equal('block');
         done();
       });
     });
