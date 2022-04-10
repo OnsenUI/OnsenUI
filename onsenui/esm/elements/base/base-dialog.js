@@ -259,7 +259,7 @@ export default class BaseDialogElement extends BaseElement {
           this._updateAnimation();
 
           contentReady(this, () => {
-            this._setVisible(this.visible)
+            this._setVisible(this.visible);
           });
         }
         break;

@@ -34,7 +34,7 @@ const scheme = {
 };
 
 const _animatorDict = {
-  'default': function() { return platform.isAndroid() ? MDFadePopoverAnimator : IOSFadePopoverAnimator },
+  'default': function() { return platform.isAndroid() ? MDFadePopoverAnimator : IOSFadePopoverAnimator; },
   'none': PopoverAnimator,
   'fade-ios': IOSFadePopoverAnimator,
   'fade-md': MDFadePopoverAnimator

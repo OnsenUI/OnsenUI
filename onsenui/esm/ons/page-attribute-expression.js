@@ -37,7 +37,7 @@ const pageAttributeExpression = {
     else if (typeof value !== 'string' && typeof value !== 'function') {
       error('Variable value must be a string or a function');
     }
-    else if (this._variables.hasOwnProperty(name) && !overwrite) {
+    else if (Object.prototype.hasOwnProperty.call(this._variables, name) && !overwrite) {
       error(`"${name}" is already defined`);
     }
     this._variables[name] = value;
@@ -50,7 +50,7 @@ const pageAttributeExpression = {
    * @return {String|Function|null}
    */
   getVariable: function(name) {
-    if (!this._variables.hasOwnProperty(name)) {
+    if (!Object.prototype.hasOwnProperty.call(this._variables, name)) {
       return null;
     }
 

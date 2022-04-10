@@ -13,6 +13,7 @@
     "build:css:lint": "stylelint 'css/?(css-components-)src/**/*.css'",
     "clean": "rimraf ./js './css/onsenui?(-core)?(.min).css' './css/{*-,}onsen-css-components?(.min).css' 'esm/core-dts-test.{js,ts}'",
     "docs": "node scripts/build-docs.js",
+    "lint": "eslint esm",
     "prebuild": "npm run clean",
     "serve": "rollup --config --watch & browser-sync start --config bs-config.js",
     "test": "npm run test:core-dts && npm run test:unit",

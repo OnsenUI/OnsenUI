@@ -21,7 +21,7 @@ import ToastQueue from './internal/toast-queue.js';
 
 const _setAttributes = (element, options) => {
   ['id', 'class', 'animation']
-    .forEach(a => options.hasOwnProperty(a) && element.setAttribute(a, options[a]));
+    .forEach(a => Object.prototype.hasOwnProperty.call(options, a) && element.setAttribute(a, options[a]));
 
   if (options.modifier) {
     util.addModifier(element, options.modifier);
@@ -35,7 +35,7 @@ const _normalizeArguments = (message, options = {}, defaults = {}) => {
     util.throw('Notifications must contain a message');
   }
 
-  if (options.hasOwnProperty('buttonLabels') || options.hasOwnProperty('buttonLabel')) {
+  if (Object.prototype.hasOwnProperty.call(options, 'buttonLabels') || Object.prototype.hasOwnProperty.call(options, 'buttonLabel')) {
     options.buttonLabels = options.buttonLabels || options.buttonLabel;
     if (!Array.isArray(options.buttonLabels)) {
       options.buttonLabels = [options.buttonLabels || ''];

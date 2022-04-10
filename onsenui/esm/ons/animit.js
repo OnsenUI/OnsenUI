@@ -57,6 +57,12 @@ util.onceOnTransitionEnd = function(element, callback) {
     return function() {};
   }
 
+  var removeListeners = function() {
+    util._transitionEndEvents.forEach(function(eventName) {
+      element.removeEventListener(eventName, fn, false);
+    });
+  };
+
   var fn = function(event) {
     if (element == event.target) {
       event.stopPropagation();
@@ -64,12 +70,6 @@ util.onceOnTransitionEnd = function(element, callback) {
 
       callback();
     }
-  };
-
-  var removeListeners = function() {
-    util._transitionEndEvents.forEach(function(eventName) {
-      element.removeEventListener(eventName, fn, false);
-    });
   };
 
   util._transitionEndEvents.forEach(function(eventName) {
