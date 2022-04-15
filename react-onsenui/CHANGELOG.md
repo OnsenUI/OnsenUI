@@ -2,7 +2,7 @@
 CHANGELOG
 ====
 
-dev
+1.12.0
 ---
 
 ### BREAKING CHANGES
@@ -13,6 +13,7 @@ dev
 ### New Features
 
  * Support React 17. ([#2851](https://github.com/OnsenUI/OnsenUI/issues/2851))
+ * Support Onsen UI 2.12.0.
  * ListItem: Added `animation` prop.
  * ListItem: Added `onExpand` prop.
  * BackButton: Added `options` prop.
@@ -51,7 +52,6 @@ dev
 
 ### Misc
 
- * Depend on OnsenUI ~v2.12.0.
  * AlertDialog: `onCancel`, `isOpen`, `isDisabled` and `isCancelable` are deprecated and renamed to `onDialogCancel`, `visible`, `disabled`, and `cancelable`.
  * AlertDialog: `isOpen` is no longer required.
  * Dialog: `onCancel`, `isOpen`, `isDisabled` and `isCancelable` are deprecated and renamed to `onDialogCancel`, `visible`, `disabled`, and `cancelable`.
