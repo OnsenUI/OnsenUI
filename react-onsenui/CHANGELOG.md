@@ -9,7 +9,6 @@ dev
 
  * Setting BackButton's `onClick` prop no longer prevents default behaviour. Use `event.preventDefault()` in the `onClick` handler to prevent default behaviour.
  * AlertDialogs are no longer cancelable by default. Set the `cancelable` prop to make an alert dialog cancelable.
- * Popover's `getTarget` prop should now return a ref to DOM node.
 
 ### New Features
 
