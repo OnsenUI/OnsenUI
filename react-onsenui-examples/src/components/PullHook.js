@@ -65,13 +65,13 @@ export default class extends React.Component {
   render() {
     return (
       <Page
-        renderToolbar={() => <MyToolbar title='Dialog' />}
+        renderToolbar={() => <MyToolbar title='Pull Hook' />}
         renderFixed={() => <Fab position='bottom right'><Icon icon='md-plus' /></Fab>}>
         <MyPullHook />
 
         <List
           dataSource={[1, 2, 3, 4]}
-          renderRow={(data) => <ListItem>{data}</ListItem>} />
+          renderRow={(data, index) => <ListItem key={index}>{data}</ListItem>} />
       </Page>
     );
   }

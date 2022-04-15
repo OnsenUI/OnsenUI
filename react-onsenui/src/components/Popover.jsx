@@ -43,7 +43,7 @@ const notAttributes = ['onDeviceBackButton'];
         </Popover>
  * </Page>
  */
-const Element = onsCustomElement(baseDialog('ons-popover'), {deprecated, notAttributes});
+const Elem = onsCustomElement(baseDialog('ons-popover'), {deprecated, notAttributes});
 
 const Popover = React.forwardRef((props, forwardedRef) => {
   const {isOpen, getTarget, children, ...rest} = props;
@@ -52,7 +52,14 @@ const Popover = React.forwardRef((props, forwardedRef) => {
   useEffect(() => {
     if (isOpen !== ref.current.visible) {
       if (isOpen) {
-        const target = getTarget();
+        let target = getTarget();
+
+        // if React ref was returned instead of DOM Element, use ref.current instead
+        const isElement = x => x instanceof Element || x instanceof HTMLDocument;
+        if (!isElement(target) && target.current) {
+          target = target.current;
+        }
+
         ref.current.show({target});
       } else {
         ref.current.hide();
@@ -61,12 +68,12 @@ const Popover = React.forwardRef((props, forwardedRef) => {
   });
 
   return (
-    <Element
+    <Elem
       ref={ref}
       {...rest}
     >
       {children}
-    </Element>
+    </Elem>
   );
 });
 

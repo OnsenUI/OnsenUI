@@ -32,7 +32,7 @@ const scheme = {
 };
 
 const _animatorDict = {
-  'default': () => platform.isAndroid() ? MDActionSheetAnimator : IOSActionSheetAnimator,
+  'default': function () { return platform.isAndroid() ? MDActionSheetAnimator : IOSActionSheetAnimator },
   'none': ActionSheetAnimator
 };
 

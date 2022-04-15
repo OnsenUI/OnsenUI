@@ -55,7 +55,8 @@ export default class extends React.Component {
                title: 'Input',
                component: Page2,
                props: {
-                 navigator: this.props.navigator
+                 navigator: this.props.navigator,
+                 key: 'someotherpage'
                }
             })
           }> Replace Page </Button>

@@ -46,9 +46,10 @@ export default class extends React.Component {
             fixed-width='false'
             icon='ion-ios-brush, material:md-edit' size='20px, material:20px' />
           <p> Button standard2</p>
-          {[0, 90, 180, 270].map((val) =>
+          {[0, 90, 180, 270].map((val, index) =>
 
           <Icon
+            key={index}
             modifier={this.state.modifier}
             fixedWidth={true}
             rotate={val}

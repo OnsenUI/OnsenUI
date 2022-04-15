@@ -66,7 +66,7 @@ export default class extends React.Component {
 
         {
           [0, 1, 2].map((idx) => (
-            <div>
+            <div key={idx}>
               <input
                 type='checkbox'
                 onChange={this.handleCheckbox.bind(this, idx)}
@@ -86,7 +86,7 @@ export default class extends React.Component {
 
         {
           [0, 1, 2].map((idx) => (
-            <div>
+            <div key={idx}>
               <input
                 type='radio'
                 onChange={this.handleRadio.bind(this, idx)}

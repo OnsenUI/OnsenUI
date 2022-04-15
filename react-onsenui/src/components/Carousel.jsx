@@ -1,3 +1,4 @@
+import React from 'react';
 import PropTypes from 'prop-types';
 import 'onsenui/esm/elements/ons-carousel';
 
@@ -37,7 +38,28 @@ const deprecated = {
         </Carousel>
 
  */
-const Carousel = onsCustomElement('ons-carousel', {deprecated});
+const Element = onsCustomElement('ons-carousel', {deprecated});
+
+const Carousel = React.forwardRef((props, ref) => {
+  const {itemWidth, itemHeight, ...rest} = props;
+
+  // string values for itemWidth and itemHeight are deprecated but handle them
+  // safely anyway to avoid breaking user code
+  const stringify = x => typeof x === 'number' ? `${x}px` : x;
+  const realItemWidth = stringify(itemWidth);
+  const realItemHeight = stringify(itemHeight);
+
+  return (
+    <Element
+      itemWidth={realItemWidth}
+      itemHeight={realItemHeight}
+      ref={ref}
+      {...rest}
+    >
+      {props.children}
+    </Element>
+  );
+});
 
 Carousel.propTypes = {
 
@@ -80,7 +102,7 @@ Carousel.propTypes = {
 
   /**
    * @name itemWidth
-   * @type number
+   * @type string
    * @description
    *  [en]ons-carousel-item's width. Only works when the direction is set to "horizontal". Can be in pixels or a percentage.[/en]
    *  [ja][/ja]
@@ -89,7 +111,7 @@ Carousel.propTypes = {
 
   /**
    * @name itemHeight
-   * @type number
+   * @type string
    * @description
    *  [en]ons-carousel-item's height. Only works when the direction is set to "vertical". Can be in pixels or a percentage.[/en]
    *  [ja][/ja]
