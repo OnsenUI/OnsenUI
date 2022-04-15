@@ -1,3 +1,4 @@
+import React from 'react';
 import PropTypes from 'prop-types';
 import 'onsenui/esm/elements/ons-splitter-side';
 
@@ -41,7 +42,24 @@ const deprecated = {
 };
 const notAttributes = ['isOpen'];
 
-const SplitterSide = onsCustomElement('ons-splitter-side', {deprecated, notAttributes});
+const Element = onsCustomElement('ons-splitter-side', {deprecated, notAttributes});
+
+const SplitterSide = React.forwardRef((props, ref) => {
+  const {width, ...rest} = props;
+
+  // number values for width are deprecated but handle them safely to avoid breaking user code
+  const realWidth = typeof width === 'number' ? `${width}px` : width;
+
+  return (
+    <Element
+      width={realWidth}
+      ref={ref}
+      {...rest}
+    >
+      {props.children}
+    </Element>
+  );
+});
 
 SplitterSide.propTypes = {
   /**
