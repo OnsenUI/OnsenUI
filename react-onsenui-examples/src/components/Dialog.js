@@ -89,6 +89,7 @@ class MyDialog extends React.Component {
     var props = route.props;
     props.description = this.props.description;
     props.name = this.props.name;
+    props.key = this.props.name;
 
     return React.createElement(comp, props);
   }

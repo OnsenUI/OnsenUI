@@ -11,7 +11,7 @@ class App extends React.Component {
     const props = route.props || {};
     props.navigator = navigator;
 
-    return React.createElement(route.component, route.props);
+    return React.createElement(route.component, props);
   }
 
   render() {

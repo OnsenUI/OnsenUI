@@ -51,7 +51,7 @@ export default class extends React.Component {
           dataSource={this.state.data}
           renderHeader={() => <ListHeader style={{fontSize: 15}} className="testClass"> Header Text </ListHeader> }
           renderRow={(row, idx) => (
-            <ListItem modifier={idx === this.state.data.length - 1 ? 'longdivider' : null}>
+            <ListItem key={idx} modifier={idx === this.state.data.length - 1 ? 'longdivider' : null}>
               {row}
               <Button modifier="quiet" onClick={this.remove.bind(this, idx)}>Remove</Button>
             </ListItem>

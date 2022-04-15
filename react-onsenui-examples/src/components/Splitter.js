@@ -53,7 +53,7 @@ export default class extends React.Component {
         <Splitter>
           <SplitterSide
             side="left"
-            width={200}
+            width="200px"
             collapse={!this.state.showLeft}
             isOpen={this.state.openLeft}
             onClose={this.handleLeftClose.bind(this)}
@@ -102,7 +102,7 @@ export default class extends React.Component {
 
           <SplitterSide
             side="right"
-            width={300}
+            width="300px"
             collapse={!this.state.showRight}
             isOpen={this.state.openRight}
             onClose={this.handleRightClose.bind(this)}

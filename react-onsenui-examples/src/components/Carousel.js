@@ -55,13 +55,13 @@ export default class extends React.Component {
           onPostChange={(event) => this.setState({index: event.activeIndex})}
           onOverscroll={() => console.log('onOverscroll')}
           onRefresh={() => console.log('onRefresh')}
-          ref='carousel' swipeable overscrollable autoScroll fullscreen autoScrollRatio={0.2}>
+          swipeable overscrollable autoScroll fullscreen autoScrollRatio={0.2}>
 
-          {this.state.items.map((item) =>
-            <CarouselItem style={{backgroundColor: item}}>
+          {this.state.items.map((item, index) =>
+            <CarouselItem key={index} style={{backgroundColor: item}}>
               <div className='item-label'>{item}</div>
               {this.state.items.map((item, index) =>
-                <Button onClick={() => this.goTo(index)}> Go to page {index + 1}</Button>
+                <Button key={index} onClick={() => this.goTo(index)}> Go to page {index + 1}</Button>
               )}
               <Button onClick={() => this.setState({items: this.state.items.slice(0, this.state.items.length - 1)})}>Remove</Button>
               <Button onClick={() => this.setState({items: [...this.state.items, 'yellow']})}>Add</Button>
