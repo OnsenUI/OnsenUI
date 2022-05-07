@@ -9,6 +9,8 @@ const nameMap = {
   ...INPUT_PROPS
 };
 
+const withDefaultChecked = component => oneTimeProp(component, 'defaultChecked', 'checked');
+
 /**
  * @original ons-radio
  * @category form
@@ -25,7 +27,6 @@ const nameMap = {
  *   onChange={event => { this.setState({checked: event.target.checked})} }
  *   modifier='material' />
  */
-const withDefaultChecked = component => oneTimeProp(component, 'defaultChecked', 'checked');
 const Radio = withDefaultChecked(onsCustomElement('ons-radio', {deprecated: nameMap}));
 
 Radio.propTypes = {

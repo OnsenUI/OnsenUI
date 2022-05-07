@@ -9,6 +9,8 @@ const nameMap = {
   ...INPUT_PROPS
 };
 
+const withDefaultValue = component => oneTimeProp(component, 'defaultValue', 'value');
+
 /**
  * @original ons-search-input
  * @category form
@@ -27,7 +29,6 @@ const nameMap = {
  *   modifier='material'
  *   placeholder='Username' />
  */
-const withDefaultValue = component => oneTimeProp(component, 'defaultValue', 'value');
 const SearchInput = withDefaultValue(onsCustomElement('ons-search-input', {deprecated: nameMap}));
 
 SearchInput.propTypes = {

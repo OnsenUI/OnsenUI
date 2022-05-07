@@ -10,6 +10,9 @@ const nameMap = {
   ...INPUT_PROPS
 };
 
+const withDefaultValue = component => oneTimeProp(component, 'defaultValue', 'value');
+const Element = withDefaultValue(onsCustomElement('ons-select', {deprecated: nameMap}));
+
 /**
  * @original ons-select
  * @category form
@@ -28,9 +31,6 @@ const nameMap = {
  *   <option value="3">3rd option</option>
  * </Select>
  */
-const withDefaultValue = component => oneTimeProp(component, 'defaultValue', 'value');
-const Element = withDefaultValue(onsCustomElement('ons-select', {deprecated: nameMap}));
-
 const Select = React.forwardRef((props, ref) => (
   <Element {...props} ref={ref}>
     <select>

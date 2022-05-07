@@ -3,6 +3,8 @@ import 'onsenui/esm/elements/ons-splitter';
 
 import onsCustomElement from '../onsCustomElement';
 
+const notAttributes = ['onDeviceBackButton'];
+
 /**
  * @original ons-splitter
  * @category menu
@@ -36,8 +38,6 @@ import onsCustomElement from '../onsCustomElement';
     </SplitterSide>
   </Splitter>
  */
-const notAttributes = ['onDeviceBackButton'];
-
 const Splitter = onsCustomElement('ons-splitter', {notAttributes});
 
 Splitter.propTypes = {

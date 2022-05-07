@@ -8,6 +8,8 @@ const deprecated = {
   index: 'activeIndex'
 };
 
+const Element = onsCustomElement('ons-carousel', {deprecated});
+
 /**
  * @original ons-carousel
  * @category carousel
@@ -38,8 +40,6 @@ const deprecated = {
         </Carousel>
 
  */
-const Element = onsCustomElement('ons-carousel', {deprecated});
-
 const Carousel = React.forwardRef((props, ref) => {
   const {itemWidth, itemHeight, ...rest} = props;
 

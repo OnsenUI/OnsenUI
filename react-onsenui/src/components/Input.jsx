@@ -9,6 +9,8 @@ const nameMap = {
   ...INPUT_PROPS
 };
 
+const withDefaultValue = component => oneTimeProp(component, 'defaultValue', 'value');
+
 /**
  * @original ons-input
  * @category form
@@ -25,7 +27,6 @@ const nameMap = {
  *   modifier='material'
  *   placeholder='Username' />
  */
-const withDefaultValue = component => oneTimeProp(component, 'defaultValue', 'value');
 const Input = withDefaultValue(onsCustomElement('ons-input', {deprecated: nameMap}));
 
 Input.propTypes = {

@@ -9,6 +9,8 @@ const nameMap = {
   ...INPUT_PROPS
 };
 
+const withDefaultChecked = component => oneTimeProp(component, 'defaultChecked', 'checked');
+
 /**
  * @original ons-checkbox
  * @category form
@@ -25,7 +27,6 @@ const nameMap = {
  *   onChange={event => { this.setState({checked: event.target.checked})} }
  *   modifier='material' />
  */
-const withDefaultChecked = component => oneTimeProp(component, 'defaultChecked', 'checked');
 const Checkbox = withDefaultChecked(onsCustomElement('ons-checkbox', {deprecated: nameMap}));
 
 Checkbox.propTypes = {
