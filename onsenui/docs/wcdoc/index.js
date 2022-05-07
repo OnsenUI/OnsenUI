@@ -24,10 +24,17 @@ function createFileIndex(docs) {
       fileIndex[path][doc.docType] = [];
     }
 
-    var matches = path.match(/bindings\/([^\/]+)\//);
-    if (matches) {
-      var name = matches[1];
-      doc.extensionOf = name;
+    const extensionMap = {
+      vue: /^\.\.\/vue-onsenui\//,
+      angular1: /^bindings\/angular1\//,
+      angular2: /^\.\.\/ngx-onsenui\//
+    };
+
+    for (const [extension, regex] of Object.entries(extensionMap)) {
+      if (regex.test(path)) {
+        doc.extensionOf = extension;
+        break;
+      }
     }
 
     fileIndex[path][doc.docType].push(doc);
@@ -213,12 +220,12 @@ function build(out) {
   out = resolve(out);
   return collect({
     src: [
-      './core/src/elements/**/*.js',
-      './core/src/ons/**/*.js',
+      './esm/elements/**/*.js',
+      './esm/ons/**/*.js',
       './bindings/angular1/directives/*.js',
       './bindings/angular1/js/*.js',
-      './bindings/angular2/src/directives/*.ts',
-      './bindings/vue/src/docs/*.wcdoc',
+      '../ngx-onsenui/projects/ngx-onsenui/src/lib/directives/*.ts',
+      '../vue-onsenui/src/docs/*.wcdoc',
       '!**/*.spec.js'
     ]
   }).then(function(result) {
