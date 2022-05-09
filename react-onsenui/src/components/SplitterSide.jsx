@@ -4,6 +4,14 @@ import 'onsenui/esm/elements/ons-splitter-side';
 
 import onsCustomElement from '../onsCustomElement';
 
+const deprecated = {
+  onOpen: 'onPostOpen',
+  onClose: 'onPostClose'
+};
+const notAttributes = ['isOpen'];
+
+const Element = onsCustomElement('ons-splitter-side', {deprecated, notAttributes});
+
 /**
  * @original ons-splitter-side
  * @category menu
@@ -36,14 +44,6 @@ import onsCustomElement from '../onsCustomElement';
     </SplitterSide>
   </Splitter>
  */
-const deprecated = {
-  onOpen: 'onPostOpen',
-  onClose: 'onPostClose'
-};
-const notAttributes = ['isOpen'];
-
-const Element = onsCustomElement('ons-splitter-side', {deprecated, notAttributes});
-
 const SplitterSide = React.forwardRef((props, ref) => {
   const {width, ...rest} = props;
 

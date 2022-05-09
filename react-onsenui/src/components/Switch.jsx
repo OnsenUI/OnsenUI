@@ -9,6 +9,8 @@ const nameMap = {
   ...INPUT_PROPS
 };
 
+const withDefaultChecked = component => oneTimeProp(component, 'defaultChecked', 'checked');
+
 /**
  * @original ons-switch
  * @category form
@@ -21,7 +23,6 @@ const nameMap = {
  * @example
  * <Switch checked={this.state.checked} onChange={this.onChange} />
  */
-const withDefaultChecked = component => oneTimeProp(component, 'defaultChecked', 'checked');
 const Switch = withDefaultChecked(onsCustomElement('ons-switch', {deprecated: nameMap}));
 
 Switch.propTypes = {

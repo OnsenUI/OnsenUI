@@ -4,27 +4,6 @@ import 'onsenui/esm/elements/ons-navigator';
 
 import onsCustomElement from '../onsCustomElement';
 
-/**
- * @original ons-navigator
- * @category navigation
- * @tutorial react/Reference/navigator
- * @description
- * [en] This component is responsible for page transitioning and managing the pages of your OnsenUI application. In order to manage to display the pages, the  navigator needs to define the `renderPage` method, that takes an route and a navigator and  converts it to an page.  [/en]
- * [ja][/ja]
- * @example
-  <Navigator
-    renderPage={(route, navigator) =>
-     <MyPage
-       title={route.title}
-       onPop={() => navigator.popPage()}
-       />
-    }
-    initialRoute={{
-        title: 'First Page'
-    }} />
-   }
- }
- */
 const Element = onsCustomElement('ons-navigator');
 
 class NavigatorClass extends React.Component {
@@ -361,6 +340,27 @@ class NavigatorClass extends React.Component {
   }
 }
 
+/**
+ * @original ons-navigator
+ * @category navigation
+ * @tutorial react/Reference/navigator
+ * @description
+ * [en] This component is responsible for page transitioning and managing the pages of your OnsenUI application. In order to manage to display the pages, the  navigator needs to define the `renderPage` method, that takes an route and a navigator and  converts it to an page.  [/en]
+ * [ja][/ja]
+ * @example
+  <Navigator
+    renderPage={(route, navigator) =>
+     <MyPage
+       title={route.title}
+       onPop={() => navigator.popPage()}
+       />
+    }
+    initialRoute={{
+        title: 'First Page'
+    }} />
+   }
+ }
+ */
 const Navigator = React.forwardRef((props, ref) => (
   <NavigatorClass innerRef={ref} {...props}>{props.children}</NavigatorClass>
 ));

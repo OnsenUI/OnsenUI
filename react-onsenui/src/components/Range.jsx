@@ -9,6 +9,8 @@ const nameMap = {
   ...INPUT_PROPS
 };
 
+const withDefaultValue = component => oneTimeProp(component, 'defaultValue', 'value');
+
 /**
  * @original ons-range
  * @category form
@@ -24,7 +26,6 @@ const nameMap = {
  *   onChange={(event) => this.setState({value: parseInt(event.target.value)})}
  *   />
  */
-const withDefaultValue = component => oneTimeProp(component, 'defaultValue', 'value');
 const Range = withDefaultValue(onsCustomElement('ons-range', {deprecated: nameMap}));
 
 Range.propTypes = {

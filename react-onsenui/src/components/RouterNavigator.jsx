@@ -4,14 +4,6 @@ import 'onsenui/esm/elements/ons-navigator';
 
 import onsCustomElement from '../onsCustomElement';
 
-/**
- * @original ons-navigator
- * @category navigation
- * @tutorial react/Reference/navigator
- * @description
- * [en] This component is a variant of the Navigator with a declarative API. In order to manage to display the pages, the  navigator needs to define the `renderPage` method, that takes an route and a navigator and  converts it to an page.[/en]
- * [ja][/ja]
- */
 const Element = onsCustomElement('ons-navigator');
 
 class RouterNavigatorClass extends React.Component {
@@ -282,6 +274,14 @@ class RouterNavigatorClass extends React.Component {
   }
 }
 
+/**
+ * @original ons-navigator
+ * @category navigation
+ * @tutorial react/Reference/navigator
+ * @description
+ * [en] This component is a variant of the Navigator with a declarative API. In order to manage to display the pages, the  navigator needs to define the `renderPage` method, that takes an route and a navigator and  converts it to an page.[/en]
+ * [ja][/ja]
+ */
 const RouterNavigator = React.forwardRef((props, ref) => (
   <RouterNavigatorClass innerRef={ref} {...props}>{props.children}</RouterNavigatorClass>
 ));
