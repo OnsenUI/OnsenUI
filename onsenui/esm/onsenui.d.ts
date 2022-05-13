@@ -1153,6 +1153,10 @@ declare namespace ons {
      * @description Whether the element is visible or not.
      */
     visible: boolean;
+    /**
+     * @description Whether the speed items are visible or not.
+     */
+    open: boolean;
   }
 
   interface OnsListItemElement extends HTMLElement {

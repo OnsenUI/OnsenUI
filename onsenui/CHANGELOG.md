@@ -2,6 +2,13 @@
 CHANGELOG
 ====
 
+dev
+---
+
+ ### New Features
+
+ * ons-speed-dial: Added `open` attribute and property.
+
 2.12.0
 ---
 
