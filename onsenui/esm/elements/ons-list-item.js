@@ -428,6 +428,7 @@ export default class ListItemElement extends BaseElement {
     if (!this._expanding) {
       this.toggleExpansion();
       this.dispatchEvent(new Event('expand'));
+      this.dispatchEvent(new Event('expansion')); // expansion is deprecated but emit to avoid breaking user code
     }
   }
 
