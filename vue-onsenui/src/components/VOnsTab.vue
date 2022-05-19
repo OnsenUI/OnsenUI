@@ -19,7 +19,9 @@
     },
 
     methods: {
-      action() {
+      action(event) {
+        event.preventDefault();
+
         let runDefault = true;
         this.$emit('click', { preventDefault: () => runDefault = false });
 

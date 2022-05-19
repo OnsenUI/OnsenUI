@@ -1,5 +1,5 @@
 <template>
-  <ons-speed-dial :on-click.prop="action">
+  <ons-speed-dial v-on="unrecognizedListeners">
     <slot></slot>
   </ons-speed-dial>
 </template>
@@ -20,14 +20,6 @@
     },
 
     methods: {
-      action() {
-        let runDefault = true;
-        this.$emit('click', { preventDefault: () => runDefault = false });
-
-        if (runDefault) {
-          this.$el.toggleItems();
-        }
-      },
       _shouldUpdate() {
         return this.open !== undefined && this.open !== this.$el.isOpen();
       },
