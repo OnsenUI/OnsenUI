@@ -123,7 +123,6 @@ export default class SpeedDialElement extends BaseElement {
       this._compile();
     });
 
-    this._itemShown = false;
     this._boundOnClick = this._onClick.bind(this);
 
     const {onConnected, onDisconnected} = util.defineListenerProperty(this, 'click');
@@ -147,7 +146,7 @@ export default class SpeedDialElement extends BaseElement {
   }
 
   static get observedAttributes() {
-    return ['class', 'modifier', 'ripple', 'direction', 'position'];
+    return ['class', 'modifier', 'ripple', 'direction', 'position', 'open'];
   }
 
   attributeChangedCallback(name, last, current) {
@@ -166,6 +165,11 @@ export default class SpeedDialElement extends BaseElement {
         break;
       case 'position':
         contentReady(this, () => this._updatePosition());
+        break;
+      case 'open':
+        if (!this._ignoreOpenSideEffect) {
+          contentReady(this, () => this._updateOpen(last));
+        }
         break;
     }
   }
@@ -337,32 +341,12 @@ export default class SpeedDialElement extends BaseElement {
    *   [ja]Speed dialの子要素を表示します。[/ja]
    */
   showItems() {
-    if (this.hasAttribute('direction')) {
-      this._updateDirection(this.getAttribute('direction'));
-    } else {
-      this._updateDirection('up');
-    }
+    const last = this.open;
+    this._ignoreOpenSideEffect = true;
+    this.open = true;
+    this._ignoreOpenSideEffect = false;
 
-    let totalDelay = 0;
-    if (!this._itemShown) {
-      const children = this.items;
-      for (let i = 0; i < children.length; i++) {
-        const delay = 25 * i;
-        totalDelay += delay;
-        styler(children[i], {
-          transform: 'scale(1)',
-          transitionDelay: delay + 'ms'
-        });
-      }
-      totalDelay += 50;
-
-      this._itemShown = true;
-      util.triggerElementEvent(this, 'open');
-    }
-
-    const deferred = util.defer();
-    setTimeout(deferred.resolve, totalDelay);
-    return deferred.promise;
+    return this._updateOpen(last);
   }
 
   /**
@@ -373,21 +357,38 @@ export default class SpeedDialElement extends BaseElement {
    *   [ja]Speed dialの子要素を非表示にします。[/ja]
    */
   hideItems() {
+    const last = this.open;
+    this._ignoreOpenSideEffect = true;
+    this.open = false;
+    this._ignoreOpenSideEffect = false;
+
+    return this._updateOpen(last);
+  }
+
+  _updateOpen(last) {
+    // update direction
+    if (this.open) {
+      if (this.hasAttribute('direction')) {
+        this._updateDirection(this.getAttribute('direction'));
+      } else {
+        this._updateDirection('up');
+      }
+    }
+
     let totalDelay = 0;
-    if (this._itemShown) {
+    if (last !== this.open) { // do nothing if already open/closed
       const children = this.items;
       for (let i = 0; i < children.length; i++) {
-        const delay = 25 * (children.length - i);
+        const delay = 25 * (this.open ? i : children.length - i);
         totalDelay += delay;
         styler(children[i], {
-          transform: 'scale(0)',
+          transform: `scale(${this.open ? 1 : 0})`,
           transitionDelay: delay + 'ms'
         });
       }
       totalDelay += 50;
 
-      this._itemShown = false;
-      util.triggerElementEvent(this, 'close');
+      util.triggerElementEvent(this, this.open ? 'open' : 'close');
     }
 
     const deferred = util.defer();
@@ -438,7 +439,7 @@ export default class SpeedDialElement extends BaseElement {
    *   [ja]要素が見える場合に`true`。[/ja]
    */
   get visible() {
-    return this._fab.visible && this.style.display !== 'none';
+    return this._fab && this._fab.visible && this.style.display !== 'none';
   }
 
   /**
@@ -449,7 +450,34 @@ export default class SpeedDialElement extends BaseElement {
    *   [ja][/ja]
    */
   isOpen() {
-    return this._itemShown;
+    return this.open;
+  }
+
+  /**
+   * @attribute open
+   * @type {Boolean}
+   * @description
+   *   [en]Returns whether the menu is open or not.[/en]
+   *   [ja][/ja]
+   */
+
+  /**
+   * @property open
+   * @type {Boolean}
+   * @description
+   *   [en]Returns whether the menu is open or not.[/en]
+   *   [ja][/ja]
+   */
+  get open() {
+    return this.hasAttribute('open');
+  }
+
+  set open(value) {
+    if (value) {
+      this.setAttribute('open', '');
+    } else {
+      this.removeAttribute('open');
+    }
   }
 
   /**
@@ -471,7 +499,7 @@ export default class SpeedDialElement extends BaseElement {
    *   [ja]Speed dialの子要素の表示非表示を切り替えます。[/ja]
    */
   toggleItems() {
-    return this.isOpen() ? this.hideItems() : this.showItems();
+    return this.open ? this.hideItems() : this.showItems();
   }
 
   static get events() {

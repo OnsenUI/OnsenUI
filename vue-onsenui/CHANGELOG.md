@@ -8,6 +8,10 @@ dev
 
  * ESM build is now distributed as untranspiled ES6. If you need ES5 code, use the UMD build (dist/vue-onsenui.js) or transpile the `esm` directory using a tool such as Babel.
 
+ ### New Features
+
+ * Support OnsenUI ~v2.12.0.
+
  ### Misc
 
  * ESM build is now distributed as untranspiled ES6.

@@ -280,6 +280,41 @@ describe('OnsSpeedDialElement', () => {
     });
   });
 
+  describe('#open', () => {
+    it('returns true if the items are currently shown', done => {
+      speedDial.showItems().then(() => {
+        expect(speedDial.open).to.be.true;
+        done();
+      });
+    });
+
+    it('returns false if the items are currently hidden', done => {
+      speedDial.hideItems().then(() => {
+        expect(speedDial.open).to.be.false;
+        done();
+      });
+    });
+
+    it('shows the items when set to true', done => {
+      speedDial.open = true;
+      setImmediate(() => {
+        const item = speedDial.querySelector('ons-speed-dial-item');
+        expect(item.style.transform).to.equal('scale(1)');
+        done();
+      });
+    });
+
+    it('hides the items when set to false', done => {
+      speedDial.open = true;
+      speedDial.open = false;
+      setImmediate(() => {
+        const item = speedDial.querySelector('ons-speed-dial-item');
+        expect(item.style.transform).to.equal('scale(0)');
+        done();
+      });
+    });
+  });
+
   describe('#toggle()', () => {
     it('calls #show() if element is hidden', () => {
       const spy = chai.spy.on(speedDial, 'show');

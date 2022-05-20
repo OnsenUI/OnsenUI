@@ -89,11 +89,11 @@ jobs:
           command: |
             npm run build:react
 
-      ## bindings/vue2
-      #- run:
-      #    name: Build vue-onsenui for Vue 2
-      #    command: |
-      #      npm run build:vue
+      # bindings/vue2
+      - run:
+          name: Build vue-onsenui for Vue 2
+          command: |
+            npm run build:vue
 
       ## bindings/vue3
       #- restore_cache:

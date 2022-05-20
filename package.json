@@ -19,6 +19,8 @@
   "workspaces": [
     "./onsenui",
     "./react-onsenui",
-    "./react-onsenui-examples"
+    "./react-onsenui-examples",
+    "./vue-onsenui",
+    "./vue-onsenui-examples"
   ]
 }
