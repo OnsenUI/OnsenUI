@@ -1,3 +1,4 @@
+const process = require('process');
 const karma = require('karma');
 const path = require('path');
 const yargs = require('yargs');
@@ -107,6 +108,6 @@ const argv = yargs.argv;
     log(colors.green('Passed unit tests on all browsers!'));
   } else {
     log(colors.red('Failed to pass unit tests on some browsers.'));
-    throw new Error('unit-test has failed');
+    process.exit(1);
   }
 })();
