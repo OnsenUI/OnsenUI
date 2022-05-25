@@ -16,11 +16,11 @@
 
 <script>
   import 'onsenui/esm/elements/ons-alert-dialog';
-  import { hidable, hasOptions, dialogCancel, deriveEvents, deriveDBB, portal, modifier } from '../mixins';
+  import { hasOptions, dialogCancel, deriveEvents, deriveDBB, portal, modifier } from '../mixins';
 
   export default {
     name: 'v-ons-alert-dialog',
-    mixins: [hidable, hasOptions, dialogCancel, deriveEvents, deriveDBB, portal, modifier],
+    mixins: [hasOptions, dialogCancel, deriveEvents, deriveDBB, portal, modifier],
 
     props: {
       title: {

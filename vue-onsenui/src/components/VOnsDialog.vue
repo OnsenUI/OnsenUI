@@ -7,10 +7,10 @@
 <script>
   /* This file was generated automatically by 'generate-components' task in bindings/vue/gulpfile.babel.js */
   import 'onsenui/esm/elements/ons-dialog';
-  import { deriveEvents, hidable, hasOptions, dialogCancel, deriveDBB, portal, modifier } from '../mixins';
+  import { deriveEvents, hasOptions, dialogCancel, deriveDBB, portal, modifier } from '../mixins';
 
   export default {
     name: 'v-ons-dialog',
-    mixins: [deriveEvents, hidable, hasOptions, dialogCancel, deriveDBB, portal, modifier]
+    mixins: [deriveEvents, hasOptions, dialogCancel, deriveDBB, portal, modifier]
   };
 </script>
