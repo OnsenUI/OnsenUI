@@ -687,7 +687,7 @@ export default class TabbarElement extends BaseElement {
   }
 
   static get events() {
-    return ['prechange', 'postchange', 'reactive'];
+    return ['prechange', 'postchange', 'reactive', 'swipe'];
   }
 }
 

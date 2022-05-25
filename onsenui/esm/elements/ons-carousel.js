@@ -662,7 +662,7 @@ export default class CarouselElement extends BaseElement {
   }
 
   static get events() {
-    return ['postchange', 'refresh', 'overscroll'];
+    return ['postchange', 'refresh', 'overscroll', 'prechange', 'swipe'];
   }
 
   /**
