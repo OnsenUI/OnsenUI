@@ -1,4 +1,6 @@
-import { camelize, eventToHandler, handlerToProp } from '../internal/util';
+import ons from 'onsenui';
+
+import { camelize, eventToHandler, handlerToProp, capitalize } from '../internal/util';
 
 /* Private */
 const _setupDBB = component => {
@@ -42,39 +44,34 @@ const deriveDBB = {
   }
 };
 
-const deriveEvents = {
-  computed: {
-    unrecognizedListeners() {
-      const name = camelize('-' + this.$options._componentTag.slice(6));
-      return Object.keys(this.$listeners || {})
-        .filter(k => (this.$ons.elements[name].events || []).indexOf(k) === -1)
-        .reduce((r, k) => {
-          r[k] = this.$listeners[k];
-          return r;
-        }, {});
+const deriveEvents = name => {
+
+  const nativeEvents = ons.elements[capitalize(camelize(name.slice(6)))].events || [];
+
+  return {
+    emits: nativeEvents,
+
+    mounted() {
+      this._handlers = {};
+
+      nativeEvents.forEach(key => {
+        this._handlers[eventToHandler(key)] = event => {
+          // Filter events from different components with the same name
+          if (event.target === this.$el || !/^ons-/i.test(event.target.tagName)) {
+            this.$emit(key, event);
+          }
+        };
+        this.$el.addEventListener(key, this._handlers[eventToHandler(key)]);
+      });
+    },
+
+    beforeDestroy() {
+      Object.keys(this._handlers).forEach(key => {
+        this.$el.removeEventListener(key, this._handlers[key]);
+      });
+      this._handlers = null;
     }
-  },
-
-  mounted() {
-    this._handlers = {};
-
-    (this.$el.constructor.events || []).forEach(key => {
-      this._handlers[eventToHandler(key)] = event => {
-        // Filter events from different components with the same name
-        if (event.target === this.$el || !/^ons-/i.test(event.target.tagName)) {
-          this.$emit(key, event);
-        }
-      };
-      this.$el.addEventListener(key, this._handlers[eventToHandler(key)]);
-    });
-  },
-
-  beforeDestroy() {
-    Object.keys(this._handlers).forEach(key => {
-      this.$el.removeEventListener(key, this._handlers[key]);
-    });
-    this._handlers = null;
-  }
+  };
 };
 
 export { deriveDBB, deriveEvents };
