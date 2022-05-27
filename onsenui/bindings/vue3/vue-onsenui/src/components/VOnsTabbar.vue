@@ -3,7 +3,6 @@
     :on-swipe.prop="onSwipe"
     :activeIndex="index"
     :modifier="normalizedModifier"
-    v-on="unrecognizedListeners"
     @prechange.self="$nextTick(() => !$event.detail.canceled && $emit('update:index', $event.index))"
   >
     <div class="tabbar__content">
@@ -27,9 +26,11 @@
   import 'onsenui/esm/elements/ons-tabbar';
   import { deriveEvents, hasOptions, hidable, selfProvider, modifier } from '../mixins';
 
+  const name = 'v-ons-tabbar';
+
   export default {
-    name: 'v-ons-tabbar',
-    mixins: [deriveEvents, hasOptions, hidable, selfProvider, modifier],
+    name,
+    mixins: [deriveEvents(name), hasOptions, hidable, selfProvider, modifier],
 
     props: {
       index: {

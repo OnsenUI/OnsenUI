@@ -1,5 +1,5 @@
 <template>
-  <ons-progress-bar v-on="unrecognizedListeners" :modifier="normalizedModifier">
+  <ons-progress-bar :modifier="normalizedModifier">
     <slot></slot>
   </ons-progress-bar>
 </template>
@@ -9,8 +9,10 @@
   import 'onsenui/esm/elements/ons-progress-bar';
   import { deriveEvents, modifier } from '../mixins';
 
+  const name = 'v-ons-progress-bar';
+
   export default {
-    name: 'v-ons-progress-bar',
-    mixins: [deriveEvents, modifier]
+    name,
+    mixins: [deriveEvents(name), modifier]
   };
 </script>

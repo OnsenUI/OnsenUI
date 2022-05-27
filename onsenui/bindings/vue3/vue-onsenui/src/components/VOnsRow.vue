@@ -1,5 +1,5 @@
 <template>
-  <ons-row v-on="unrecognizedListeners">
+  <ons-row>
     <slot></slot>
   </ons-row>
 </template>
@@ -9,8 +9,10 @@
   import 'onsenui/esm/elements/ons-row';
   import { deriveEvents } from '../mixins';
 
+  const name = 'v-ons-row';
+
   export default {
-    name: 'v-ons-row',
-    mixins: [deriveEvents]
+    name,
+    mixins: [deriveEvents(name)]
   };
 </script>

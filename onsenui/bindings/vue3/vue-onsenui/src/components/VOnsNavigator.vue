@@ -1,5 +1,5 @@
 <template>
-  <ons-navigator @postpop.self="_checkSwipe" :options.prop="options" v-on="unrecognizedListeners">
+  <ons-navigator @postpop.self="_checkSwipe" :options.prop="options">
     <slot>
       <component
         v-for="page in pageStack"
@@ -16,9 +16,11 @@
   import 'onsenui/esm/elements/ons-navigator';
   import { hasOptions, selfProvider, deriveEvents, deriveDBB } from '../mixins';
 
+  const name = 'v-ons-navigator';
+
   export default {
-    name: 'v-ons-navigator',
-    mixins: [hasOptions, selfProvider, deriveEvents, deriveDBB],
+    name,
+    mixins: [hasOptions, selfProvider, deriveEvents(name), deriveDBB],
 
     props: {
       pageStack: {

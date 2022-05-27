@@ -1,5 +1,5 @@
 <template>
-  <ons-input v-on="unrecognizedListeners" :modifier="normalizedModifier">
+  <ons-input :modifier="normalizedModifier">
     <slot></slot>
   </ons-input>
 </template>
@@ -9,8 +9,10 @@
   import 'onsenui/esm/elements/ons-input';
   import { deriveEvents, modelInput, modifier } from '../mixins';
 
+  const name = 'v-ons-input';
+
   export default {
-    name: 'v-ons-input',
-    mixins: [deriveEvents, modelInput, modifier]
+    name,
+    mixins: [deriveEvents(name), modelInput, modifier]
   };
 </script>

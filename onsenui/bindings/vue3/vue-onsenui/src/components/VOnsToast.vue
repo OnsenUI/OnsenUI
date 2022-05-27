@@ -1,5 +1,5 @@
 <template>
-  <ons-toast v-on="unrecognizedListeners" :modifier="normalizedModifier">
+  <ons-toast :modifier="normalizedModifier">
     <slot></slot>
   </ons-toast>
 </template>
@@ -9,8 +9,10 @@
   import 'onsenui/esm/elements/ons-toast';
   import { deriveEvents, hasOptions, deriveDBB, portal, modifier } from '../mixins';
 
+  const name = 'v-ons-toast';
+
   export default {
-    name: 'v-ons-toast',
-    mixins: [deriveEvents, hasOptions, deriveDBB, portal, modifier]
+    name,
+    mixins: [deriveEvents(name), hasOptions, deriveDBB, portal, modifier]
   };
 </script>

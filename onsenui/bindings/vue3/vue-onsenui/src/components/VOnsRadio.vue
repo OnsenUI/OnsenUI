@@ -1,5 +1,5 @@
 <template>
-  <ons-radio v-on="unrecognizedListeners" :modifier="normalizedModifier">
+  <ons-radio :modifier="normalizedModifier">
     <slot></slot>
   </ons-radio>
 </template>
@@ -9,8 +9,10 @@
   import 'onsenui/esm/elements/ons-radio';
   import { deriveEvents, modelRadio, modifier } from '../mixins';
 
+  const name = 'v-ons-radio';
+
   export default {
-    name: 'v-ons-radio',
-    mixins: [deriveEvents, modelRadio, modifier]
+    name,
+    mixins: [deriveEvents(name), modelRadio, modifier]
   };
 </script>

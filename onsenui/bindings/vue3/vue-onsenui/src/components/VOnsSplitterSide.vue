@@ -1,5 +1,5 @@
 <template>
-  <ons-splitter-side v-on="unrecognizedListeners">
+  <ons-splitter-side>
     <slot></slot>
   </ons-splitter-side>
 </template>
@@ -8,9 +8,11 @@
   import 'onsenui/esm/elements/ons-splitter-side';
   import { hasOptions, deriveEvents } from '../mixins';
 
+  const name = 'v-ons-splitter-side';
+
   export default {
-    name: 'v-ons-splitter-side',
-    mixins: [hasOptions, deriveEvents],
+    name,
+    mixins: [hasOptions, deriveEvents(name)],
 
     props: {
       open: {

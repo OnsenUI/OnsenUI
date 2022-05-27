@@ -1,5 +1,5 @@
 <template>
-  <ons-action-sheet-button v-on="unrecognizedListeners" :modifier="normalizedModifier">
+  <ons-action-sheet-button :modifier="normalizedModifier">
     <slot></slot>
   </ons-action-sheet-button>
 </template>
@@ -9,8 +9,10 @@
   import 'onsenui/esm/elements/ons-action-sheet-button';
   import { deriveEvents, modifier } from '../mixins';
 
+  const name = 'v-ons-action-sheet-button';
+
   export default {
-    name: 'v-ons-action-sheet-button',
-    mixins: [deriveEvents, modifier]
+    name,
+    mixins: [deriveEvents(name), modifier]
   };
 </script>

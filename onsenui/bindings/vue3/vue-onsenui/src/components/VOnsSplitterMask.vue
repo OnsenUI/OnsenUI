@@ -1,5 +1,5 @@
 <template>
-  <ons-splitter-mask v-on="unrecognizedListeners">
+  <ons-splitter-mask>
     <slot></slot>
   </ons-splitter-mask>
 </template>
@@ -9,8 +9,10 @@
   import 'onsenui/esm/elements/ons-splitter-mask';
   import { deriveEvents } from '../mixins';
 
+  const name = 'v-ons-splitter-mask';
+
   export default {
-    name: 'v-ons-splitter-mask',
-    mixins: [deriveEvents]
+    name,
+    mixins: [deriveEvents(name)]
   };
 </script>

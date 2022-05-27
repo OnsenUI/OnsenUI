@@ -1,5 +1,5 @@
 <template>
-  <ons-speed-dial v-on="unrecognizedListeners">
+  <ons-speed-dial>
     <slot></slot>
   </ons-speed-dial>
 </template>
@@ -8,9 +8,11 @@
   import 'onsenui/esm/elements/ons-speed-dial';
   import { hidable, deriveEvents } from '../mixins';
 
+  const name = 'v-ons-speed-dial';
+
   export default {
-    name: 'v-ons-speed-dial',
-    mixins: [deriveEvents, hidable],
+    name,
+    mixins: [deriveEvents(name), hidable],
 
     props: {
       open: {

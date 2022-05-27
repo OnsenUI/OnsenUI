@@ -1,5 +1,5 @@
 <template>
-  <ons-progress-circular v-on="unrecognizedListeners" :modifier="normalizedModifier">
+  <ons-progress-circular :modifier="normalizedModifier">
     <slot></slot>
   </ons-progress-circular>
 </template>
@@ -9,8 +9,10 @@
   import 'onsenui/esm/elements/ons-progress-circular';
   import { deriveEvents, modifier } from '../mixins';
 
+  const name = 'v-ons-progress-circular';
+
   export default {
-    name: 'v-ons-progress-circular',
-    mixins: [deriveEvents, modifier]
+    name,
+    mixins: [deriveEvents(name), modifier]
   };
 </script>

@@ -1,5 +1,5 @@
 <template>
-  <ons-card v-on="unrecognizedListeners" :modifier="normalizedModifier">
+  <ons-card :modifier="normalizedModifier">
     <slot></slot>
   </ons-card>
 </template>
@@ -9,8 +9,10 @@
   import 'onsenui/esm/elements/ons-card';
   import { deriveEvents, modifier } from '../mixins';
 
+  const name = 'v-ons-card';
+
   export default {
-    name: 'v-ons-card',
-    mixins: [deriveEvents, modifier]
+    name,
+    mixins: [deriveEvents(name), modifier]
   };
 </script>

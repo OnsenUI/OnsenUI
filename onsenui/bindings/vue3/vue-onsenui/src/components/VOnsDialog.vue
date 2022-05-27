@@ -1,5 +1,5 @@
 <template>
-  <ons-dialog v-on="unrecognizedListeners" :modifier="normalizedModifier">
+  <ons-dialog :modifier="normalizedModifier">
     <slot></slot>
   </ons-dialog>
 </template>
@@ -9,8 +9,10 @@
   import 'onsenui/esm/elements/ons-dialog';
   import { deriveEvents, hasOptions, dialogCancel, deriveDBB, portal, modifier } from '../mixins';
 
+  const name = 'v-ons-dialog';
+
   export default {
-    name: 'v-ons-dialog',
-    mixins: [deriveEvents, hasOptions, dialogCancel, deriveDBB, portal, modifier]
+    name,
+    mixins: [deriveEvents(name), hasOptions, dialogCancel, deriveDBB, portal, modifier]
   };
 </script>

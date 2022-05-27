@@ -1,5 +1,5 @@
 <template>
-  <ons-popover v-on="unrecognizedListeners">
+  <ons-popover>
     <slot></slot>
   </ons-popover>
 </template>
@@ -8,9 +8,11 @@
   import 'onsenui/esm/elements/ons-popover';
   import { hidable, hasOptions, dialogCancel, deriveEvents, deriveDBB, portal } from '../mixins';
 
+  const name = 'v-ons-popover';
+
   export default {
-    name: 'v-ons-popover',
-    mixins: [hidable, hasOptions, dialogCancel, deriveEvents, deriveDBB, portal],
+    name,
+    mixins: [hidable, hasOptions, dialogCancel, deriveEvents(name), deriveDBB, portal],
 
     props: {
       target: {
