@@ -14,6 +14,8 @@
     name,
     mixins: [deriveEvents(name), hidable],
 
+    emits: ['update:open'],
+
     props: {
       open: {
         type: Boolean,
@@ -37,9 +39,15 @@
     },
 
     mounted() {
-      this.$on(['open', 'close'], () => this._shouldUpdate() && this.$emit('update:open', this.$el.isOpen()));
+      this._updateOpenHandler = () => this._shouldUpdate() && this.$emit('update:open', this.$el.isOpen());
+
+      ['open', 'close'].forEach(event => this.$el.addEventListener(event, this._updateOpenHandler));
 
       this._updateToggle();
+    },
+
+    beforeDestroy() {
+      ['open', 'close'].forEach(event => this.$el.removeEventListener(event, this._updateOpenHandler));
     }
   };
 </script>

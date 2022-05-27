@@ -20,6 +20,7 @@
   export default {
     name,
     mixins: [hasOptions, deriveEvents(name)],
+    emits: ['update:index'],
 
     props: {
       index: {
