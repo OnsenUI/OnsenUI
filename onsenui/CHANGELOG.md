@@ -11,6 +11,7 @@ dev
  * ons-list-item: Added `expandable` property.
  * ons-list-item: Added `tappable` property.
  * ons-ripple: Added `center` property.
+ * ons-icon: Added `fixedWidth` property.
 
 2.12.0
 ---
