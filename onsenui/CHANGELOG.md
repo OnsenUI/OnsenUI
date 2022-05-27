@@ -9,6 +9,7 @@ dev
 
  * ons-speed-dial: Added `open` attribute and property.
  * ons-list-item: Added `expandable` property.
+ * ons-list-item: Added `tappable` property.
  * ons-ripple: Added `center` property.
 
 2.12.0
