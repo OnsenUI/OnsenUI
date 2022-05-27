@@ -99,6 +99,14 @@ export default class RippleElement extends BaseElement {
    */
 
   /**
+   * @property center
+   * @type {Boolean}
+   * @description
+   *   [en]If this attribute presents, change the position of wave effect to center of the target element.[/en]
+   *   [ja]この要素を設定すると、エフェクトの位置が要素の真ん中から始まります。[/ja]
+   */
+
+  /**
    * @attribute disabled
    * @description
    *   [en]If this attribute is set, the ripple effect will be disabled.[/en]
@@ -348,7 +356,7 @@ export default class RippleElement extends BaseElement {
    */
 }
 
-util.defineBooleanProperties(RippleElement, ['disabled']);
+util.defineBooleanProperties(RippleElement, ['disabled', 'center']);
 
 onsElements.Ripple = RippleElement;
 customElements.define('ons-ripple', RippleElement);
