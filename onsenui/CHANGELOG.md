@@ -8,6 +8,7 @@ dev
  ### New Features
 
  * ons-speed-dial: Added `open` attribute and property.
+ * ons-list-item: Added `expandable` property.
 
 2.12.0
 ---

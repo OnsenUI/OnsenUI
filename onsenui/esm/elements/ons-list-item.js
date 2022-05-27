@@ -143,6 +143,15 @@ export default class ListItemElement extends BaseElement {
    */
 
   /**
+   * @property expandable
+   * @initonly
+   * @type {Boolean}
+   * @description
+   *   [en]Makes the element able to be expanded to reveal extra content. For this to work, the expandable content must be defined in `div.expandable-content`.[/en]
+   *   [ja][/ja]
+   */
+
+  /**
    * @attribute expanded
    * @type {Boolean}
    * @description
@@ -373,6 +382,18 @@ export default class ListItemElement extends BaseElement {
 
   get expandChevron() {
     return this.querySelector('.list-item__expand-chevron');
+  }
+
+  get expandable() {
+    return this.hasAttribute('expandable');
+  }
+
+  set expandable(value) {
+    if (value) {
+      this.setAttribute('expandable', '');
+    } else {
+      this.removeAttribute('expandable');
+    }
   }
 
   attributeChangedCallback(name, last, current) {
