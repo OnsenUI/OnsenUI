@@ -58,7 +58,7 @@ const hasOptions = {
 const selfProvider = {
   provide() {
     return {
-      [this.$options._componentTag.slice(6)]: this
+      [this.$options.name.slice(6)]: this
     }
   }
 };
