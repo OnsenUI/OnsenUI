@@ -346,14 +346,9 @@ export default class RippleElement extends BaseElement {
    *   [en]Whether the element is disabled or not.[/en]
    *   [ja]無効化されている場合に`true`。[/ja]
    */
-  set disabled(value) {
-    return util.toggleAttribute(this, 'disabled', value);
-  }
-
-  get disabled() {
-    return this.hasAttribute('disabled');
-  }
 }
+
+util.defineBooleanProperties(RippleElement, ['disabled']);
 
 onsElements.Ripple = RippleElement;
 customElements.define('ons-ripple', RippleElement);

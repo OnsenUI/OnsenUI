@@ -149,34 +149,6 @@ export default class BaseDialogElement extends BaseElement {
     });
   }
 
-  get visible() {
-    return this.hasAttribute('visible');
-  }
-
-  set visible(value) {
-    if (value) {
-      this.setAttribute('visible', '');
-    } else {
-      this.removeAttribute('visible');
-    }
-  }
-
-  set disabled(value) {
-    return util.toggleAttribute(this, 'disabled', value);
-  }
-
-  get disabled() {
-    return this.hasAttribute('disabled');
-  }
-
-  set cancelable(value) {
-    return util.toggleAttribute(this, 'cancelable', value);
-  }
-
-  get cancelable() {
-    return this.hasAttribute('cancelable');
-  }
-
   get maskColor() {
     return this.getAttribute('mask-color');
   }
@@ -270,3 +242,5 @@ export default class BaseDialogElement extends BaseElement {
     return ['preshow', 'postshow', 'prehide', 'posthide', 'dialogcancel', 'dialog-cancel'];
   }
 }
+
+util.defineBooleanProperties(BaseDialogElement, ['visible', 'disabled', 'cancelable']);

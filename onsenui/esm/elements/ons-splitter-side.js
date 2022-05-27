@@ -315,8 +315,6 @@ export default class SplitterSideElement extends BaseElement {
   constructor() {
     super();
 
-    util.defineBooleanProperty(this, 'swipeable');
-
     this._page = null;
     this._state = CLOSED_STATE;
     this._lock = new DoorLock();
@@ -737,6 +735,8 @@ export default class SplitterSideElement extends BaseElement {
     return rewritables;
   }
 }
+
+util.defineBooleanProperties(SplitterSideElement, ['swipeable']);
 
 onsElements.SplitterSide = SplitterSideElement;
 customElements.define('ons-splitter-side', SplitterSideElement);

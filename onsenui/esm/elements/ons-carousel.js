@@ -561,13 +561,6 @@ export default class CarouselElement extends BaseElement {
    *   [en]true if the carousel is swipeable.[/en]
    *   [ja]swipeableであればtrueを返します。[/ja]
    */
-  get swipeable() {
-    return this.hasAttribute('swipeable');
-  }
-
-  set swipeable(value) {
-    return util.toggleAttribute(this, 'swipeable', value);
-  }
 
   /**
    * @property onSwipe
@@ -584,13 +577,6 @@ export default class CarouselElement extends BaseElement {
    *   [en]true if auto scroll is enabled.[/en]
    *   [ja]オートスクロールが有効であればtrueを返します。[/ja]
    */
-  get autoScroll() {
-    return this.hasAttribute('auto-scroll');
-  }
-
-  set autoScroll(value) {
-    return util.toggleAttribute(this, 'auto-scroll', value);
-  }
 
   get vertical() {
     return this.getAttribute('direction') === 'vertical';
@@ -623,13 +609,6 @@ export default class CarouselElement extends BaseElement {
    *   [en]Whether the carousel is disabled or not.[/en]
    *   [ja]無効化されている場合に`true`。[/ja]
    */
-  get disabled() {
-    return this.hasAttribute('disabled');
-  }
-
-  set disabled(value) {
-    return util.toggleAttribute(this, 'disabled', value);
-  }
 
   /**
    * @property overscrollable
@@ -638,13 +617,6 @@ export default class CarouselElement extends BaseElement {
    *   [en]Whether the carousel is overscrollable or not.[/en]
    *   [ja]overscrollできればtrueを返します。[/ja]
    */
-  get overscrollable() {
-    return this.hasAttribute('overscrollable');
-  }
-
-  set overscrollable(value) {
-    return util.toggleAttribute(this, 'overscrollable', value);
-  }
 
   /**
    * @property centered
@@ -653,13 +625,6 @@ export default class CarouselElement extends BaseElement {
    *   [en]Whether the carousel is centered or not.[/en]
    *   [ja]centered状態になっていればtrueを返します。[/ja]
    */
-  get centered() {
-    return this.hasAttribute('centered');
-  }
-
-  set centered(value) {
-    return util.toggleAttribute(this, 'centered', value);
-  }
 
   static get events() {
     return ['postchange', 'refresh', 'overscroll', 'prechange', 'swipe'];
@@ -714,6 +679,8 @@ export default class CarouselElement extends BaseElement {
     }
   }
 }
+
+util.defineBooleanProperties(CarouselElement, ['swipeable', 'disabled', 'overscrollable', 'auto-scroll', 'centered']);
 
 onsElements.Carousel = CarouselElement;
 customElements.define('ons-carousel', CarouselElement);

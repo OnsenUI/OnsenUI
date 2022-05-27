@@ -238,13 +238,6 @@ export default class FabElement extends BaseElement {
    *   [en]Whether the element is disabled or not.[/en]
    *   [ja]無効化されている場合に`true`。[/ja]
    */
-  set disabled(value) {
-    return util.toggleAttribute(this, 'disabled', value);
-  }
-
-  get disabled() {
-    return this.hasAttribute('disabled');
-  }
 
   /**
    * @property visible
@@ -258,6 +251,8 @@ export default class FabElement extends BaseElement {
     return this.style.transform.indexOf('scale(0)') === -1 && this.style.display !== 'none';
   }
 }
+
+util.defineBooleanProperties(FabElement, ['disabled']);
 
 onsElements.Fab = FabElement;
 customElements.define('ons-fab', FabElement);

@@ -565,21 +565,25 @@ util.checkMissingImport = (...elementNames) => {
 };
 
 /**
- * On a given object, defines a boolean property that reflects an attribute of the same name.
+ * Defines a boolean property that reflects an attribute of the same name for a
+ * given list of attributes.
  */
-util.defineBooleanProperty = (object, propertyName) => {
-  Object.defineProperty(object, propertyName, {
-    get() {
-      return this.hasAttribute(propertyName);
-    },
-    set(value) {
-      if (value) {
-        this.setAttribute(propertyName, '');
-      } else {
-        this.removeAttribute(propertyName);
-      }
-    },
-    configurable: true
+util.defineBooleanProperties = (object, attributeList) => {
+  attributeList.forEach(attributeName => {
+    const propertyName = util.camelize(attributeName);
+    Object.defineProperty(object.prototype, propertyName, {
+      get() {
+        return this.hasAttribute(attributeName);
+      },
+      set(value) {
+        if (value) {
+          this.setAttribute(attributeName, '');
+        } else {
+          this.removeAttribute(attributeName);
+        }
+      },
+      configurable: true
+    });
   });
 };
 

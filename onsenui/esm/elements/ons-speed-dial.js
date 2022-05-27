@@ -468,17 +468,6 @@ export default class SpeedDialElement extends BaseElement {
    *   [en]Returns whether the menu is open or not.[/en]
    *   [ja][/ja]
    */
-  get open() {
-    return this.hasAttribute('open');
-  }
-
-  set open(value) {
-    if (value) {
-      this.setAttribute('open', '');
-    } else {
-      this.removeAttribute('open');
-    }
-  }
 
   /**
    * @method toggle
@@ -506,6 +495,8 @@ export default class SpeedDialElement extends BaseElement {
     return ['open', 'close'];
   }
 }
+
+util.defineBooleanProperties(SpeedDialElement, ['open']);
 
 onsElements.SpeedDial = SpeedDialElement;
 customElements.define('ons-speed-dial', SpeedDialElement);

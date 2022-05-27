@@ -135,14 +135,6 @@ export default class BaseInputElement extends BaseElement {
     });
   }
 
-  set disabled(value) {
-    return util.toggleAttribute(this, 'disabled', value);
-  }
-
-  get disabled() {
-    return this.hasAttribute('disabled');
-  }
-
   connectedCallback() {
     contentReady(this, () => {
       this._input.addEventListener('focus', this._boundDelegateEvent);
@@ -187,3 +179,5 @@ export default class BaseInputElement extends BaseElement {
     this._input.focus();
   }
 }
+
+util.defineBooleanProperties(BaseInputElement, ['disabled']);

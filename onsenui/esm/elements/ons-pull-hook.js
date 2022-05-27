@@ -355,13 +355,6 @@ export default class PullHookElement extends BaseElement {
    *   [en]Whether the element is disabled or not.[/en]
    *   [ja]無効化されている場合に`true`。[/ja]
    */
-  set disabled(value) {
-    return util.toggleAttribute(this, 'disabled', value);
-  }
-
-  get disabled() {
-    return this.hasAttribute('disabled');
-  }
 
   _show() {
     // Run asyncrhonously to avoid conflicts with Animit's style clean
@@ -468,6 +461,8 @@ export default class PullHookElement extends BaseElement {
     return ['changestate', 'pull'];
   }
 }
+
+util.defineBooleanProperties(PullHookElement, ['disabled']);
 
 onsElements.PullHook = PullHookElement;
 customElements.define('ons-pull-hook', PullHookElement);

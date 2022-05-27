@@ -549,18 +549,6 @@ export default class TabbarElement extends BaseElement {
     this.hideTabs = true;
   }
 
-  get hideTabs() {
-    return this.hasAttribute('hide-tabs');
-  }
-
-  set hideTabs(value) {
-    if (value) {
-      this.setAttribute('hide-tabs', '');
-    } else {
-      this.removeAttribute('hide-tabs');
-    }
-  }
-
   _updateVisibility() {
     contentReady(this, () => {
       const visible = !this.hideTabs;
@@ -589,13 +577,6 @@ export default class TabbarElement extends BaseElement {
    *   [en]Enable swipe interaction.[/en]
    *   [ja]swipeableであればtrueを返します。[/ja]
    */
-  get swipeable() {
-    return this.hasAttribute('swipeable');
-  }
-
-  set swipeable(value) {
-    return util.toggleAttribute(this, 'swipeable', value);
-  }
 
   /**
    * @property onSwipe
@@ -690,6 +671,8 @@ export default class TabbarElement extends BaseElement {
     return ['prechange', 'postchange', 'reactive', 'swipe'];
   }
 }
+
+util.defineBooleanProperties(TabbarElement, ['hide-tabs', 'swipeable']);
 
 onsElements.Tabbar = TabbarElement;
 customElements.define('ons-tabbar', TabbarElement);

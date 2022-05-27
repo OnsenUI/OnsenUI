@@ -179,8 +179,6 @@ export default class ListItemElement extends BaseElement {
   constructor() {
     super();
 
-    util.defineBooleanProperty(this, 'expanded');
-
     this._animatorFactory = this._updateAnimatorFactory();
 
     // Elements ignored when tapping
@@ -384,18 +382,6 @@ export default class ListItemElement extends BaseElement {
     return this.querySelector('.list-item__expand-chevron');
   }
 
-  get expandable() {
-    return this.hasAttribute('expandable');
-  }
-
-  set expandable(value) {
-    if (value) {
-      this.setAttribute('expandable', '');
-    } else {
-      this.removeAttribute('expandable');
-    }
-  }
-
   attributeChangedCallback(name, last, current) {
     switch (name) {
       case 'class':
@@ -489,6 +475,8 @@ export default class ListItemElement extends BaseElement {
     styler.clear(this, 'transition boxShadow');
   }
 }
+
+util.defineBooleanProperties(ListItemElement, ['expanded', 'expandable']);
 
 onsElements.ListItem = ListItemElement;
 customElements.define('ons-list-item', ListItemElement);
