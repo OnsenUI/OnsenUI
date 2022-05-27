@@ -114,7 +114,7 @@ const modifier = {
           .trim();
       }
 
-      return false;
+      return null;
     }
   }
 };
