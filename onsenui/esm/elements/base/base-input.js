@@ -44,15 +44,15 @@ export default class BaseInputElement extends BaseElement {
 
   _update() {} // Optionally implemented
 
-  get _scheme() {
+  get _scheme() { // eslint-disable-line getter-return
     util.throwMember();
   }
 
-  get _template() {
+  get _template() { // eslint-disable-line getter-return
     util.throwMember();
   }
 
-  get type() {
+  get type() { // eslint-disable-line getter-return
     util.throwMember();
   }
 

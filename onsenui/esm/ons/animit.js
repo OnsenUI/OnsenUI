@@ -15,6 +15,7 @@ limitations under the License.
 
 */
 
+/* eslint-disable no-use-before-define */
 
 /**
  * Minimal animation library for managing css transition on mobile browsers.

@@ -26,11 +26,11 @@ import '../ons-ripple.js';
 
 export default class BaseButtonElement extends BaseElement {
 
-  get _scheme() {
+  get _scheme() { // eslint-disable-line getter-return
     util.throwMember();
   }
 
-  get _defaultClassName() {
+  get _defaultClassName() { // eslint-disable-line getter-return
     util.throwMember();
   }
 

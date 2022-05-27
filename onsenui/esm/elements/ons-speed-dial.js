@@ -411,7 +411,7 @@ export default class SpeedDialElement extends BaseElement {
       util.match(e, '.fab') && util.toggleAttribute(e, 'disabled', value);
     });
 
-    return util.toggleAttribute(this, 'disabled', value);
+    util.toggleAttribute(this, 'disabled', value);
   }
 
   get disabled() {

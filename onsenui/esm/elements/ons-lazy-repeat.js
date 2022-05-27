@@ -150,7 +150,7 @@ export default class LazyRepeatElement extends BaseElement {
     this._lazyRepeatProvider = new LazyRepeatProvider(this.parentElement, delegate);
   }
 
-  get delegate() {
+  get delegate() { // eslint-disable-line getter-return
     util.throw('No delegate getter');
   }
 

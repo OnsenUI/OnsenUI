@@ -39,7 +39,7 @@ platform._runOnActualPlatform(() => {
 
 try {
   const opts = Object.defineProperty({}, 'passive', {
-    get() { util.globals.supportsPassive = true; }
+    get() { util.globals.supportsPassive = true; } // eslint-disable-line getter-return
   });
   window.addEventListener('testPassive', null, opts);
   window.removeEventListener('testPassive', null, opts);

@@ -25,7 +25,7 @@ import contentReady from '../../ons/content-ready.js';
 
 export default class BaseDialogElement extends BaseElement {
 
-  get _scheme() {
+  get _scheme() { // eslint-disable-line getter-return
     util.throwMember();
   }
 

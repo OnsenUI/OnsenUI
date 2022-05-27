@@ -15,6 +15,8 @@ limitations under the License.
 
 */
 
+/* eslint-disable no-use-before-define */
+
 'use strict';
 
 const startsWith = (s, c) => s.substr(0, c.length) === c;
