@@ -15,7 +15,7 @@ export default {
       required: true,
       validator(value) {
         const component = value(0);
-        if (component._isVue && !component._isMounted) {
+        if (component.__isVue && !component._isMounted) {
           component.$destroy();
           return true;
         }

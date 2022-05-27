@@ -17,14 +17,14 @@
     props: {
       target: {
         validator(value) {
-          return value._isVue || typeof value === 'string' || value instanceof Event || value instanceof HTMLElement;
+          return value.__isVue || typeof value === 'string' || value instanceof Event || value instanceof HTMLElement;
         }
       }
     },
 
     computed: {
       normalizedTarget() {
-        if (this.target && this.target._isVue) {
+        if (this.target && this.target.__isVue) {
           return this.target.$el;
         }
         return this.target;
