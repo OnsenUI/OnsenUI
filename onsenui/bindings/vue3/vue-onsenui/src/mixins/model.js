@@ -1,17 +1,10 @@
-/* Private */
-const model = {
-  prop: 'modelProp',
-  event: 'modelEvent'
-};
-
-/* Public */
-
 // Generic input
 const modelInput = {
-  model,
+  emits: ['update:modelValue'],
+
   props: {
-    [model.prop]: [Number, String],
-    [model.event]: {
+    modelValue: [Number, String],
+    modelEvent: {
       type: String,
       default: 'input'
     }
@@ -19,27 +12,27 @@ const modelInput = {
 
   methods: {
     _updateValue() {
-      if (this[model.prop] !== undefined && this.$el.value !== this[model.prop]) {
-        this.$el.value = this[model.prop];
+      if (this.modelValue !== undefined && this.$el.value !== this.modelValue) {
+        this.$el.value = this.modelValue;
       }
     },
     _onModelEvent(event) {
-      this.$emit(model.event, event.target.value);
+      this.$emit('update:modelValue', event.target.value);
     }
   },
 
   watch: {
-    [model.prop]() {
+    modelValue() {
       this._updateValue();
     }
   },
 
   mounted() {
     this._updateValue();
-    this.$el.addEventListener(this[model.event], this._onModelEvent);
+    this.$el.addEventListener(this.modelEvent, this._onModelEvent);
   },
   beforeDestroy() {
-    this.$el.removeEventListener(this[model.event], this._onModelEvent);
+    this.$el.removeEventListener(this.modelEvent, this._onModelEvent);
   }
 };
 
@@ -48,8 +41,8 @@ const modelCheckbox = {
   mixins: [modelInput],
 
   props: {
-    [model.prop]: [Array, Boolean],
-    [model.event]: {
+    modelValue: [Array, Boolean],
+    modelEvent: {
       type: String,
       default: 'change'
     }
@@ -57,30 +50,30 @@ const modelCheckbox = {
 
   methods: {
     _updateValue() {
-      if (this[model.prop] instanceof Array) {
-        this.$el.checked = this[model.prop].indexOf(this.$el.value) >= 0;
+      if (this.modelValue instanceof Array) {
+        this.$el.checked = this.modelValue.indexOf(this.$el.value) >= 0;
       } else {
-        this.$el.checked = this[model.prop];
+        this.$el.checked = this.modelValue;
       }
     },
     _onModelEvent(event) {
       const { value, checked } = event.target;
       let newValue;
 
-      if (this[model.prop] instanceof Array) {
+      if (this.modelValue instanceof Array) {
         // Is Array
-        const index = this[model.prop].indexOf(value);
+        const index = this.modelValue.indexOf(value);
         const included = index >= 0;
 
         if (included && !checked) {
           newValue = [
-            ...this[model.prop].slice(0, index),
-            ...this[model.prop].slice(index + 1, this[model.prop].length)
+            ...this.modelValue.slice(0, index),
+            ...this.modelValue.slice(index + 1, this.modelValue.length)
           ];
         }
 
         if (!included && checked) {
-          newValue = [ ...this[model.prop], value ];
+          newValue = [ ...this.modelValue, value ];
         }
 
       } else {
@@ -89,7 +82,7 @@ const modelCheckbox = {
       }
 
       // Emit if value changed
-      newValue !== undefined && this.$emit(model.event, newValue);
+      newValue !== undefined && this.$emit('update:modelValue', newValue);
     }
   }
 };
@@ -98,7 +91,7 @@ const modelCheckbox = {
 const modelRadio = {
   mixins: [modelInput],
   props: {
-    [model.event]: {
+    modelEvent: {
       type: String,
       default: 'change'
     }
@@ -106,11 +99,11 @@ const modelRadio = {
 
   methods: {
     _updateValue() {
-      this.$el.checked = this[model.prop] === this.$el.value;
+      this.$el.checked = this.modelValue === this.$el.value;
     },
     _onModelEvent(event) {
       const { value, checked } = event.target;
-      checked && this.$emit(model.event, value);
+      checked && this.$emit('update:modelValue', value);
     }
   }
 };

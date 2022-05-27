@@ -4,6 +4,10 @@ CHANGELOG
 dev
 ---
 
+ ### BREAKING CHANGES
+
+ * For v-model, `modelValue` prop and `update:modelValue` event are now used instead of `modelProp` prop and `modelEvent` event. However, the `modelEvent` *prop* is unchanged.
+
  ### Bug Fixes
 
  * VOnsSplitterSide: animation option is respected when swiping splitter at startup.

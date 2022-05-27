@@ -13,24 +13,17 @@
   export default {
     name: 'v-ons-select',
     mixins: [modifier],
-    model: {
-      prop: 'modelProp',
-      event: 'modelEvent'
-    },
+    emits: ['update:modelValue'],
     props: {
-      modelProp: [Number, String],
-      modelEvent: {
-        type: String,
-        default: 'input'
-      }
+      modelValue: [Number, String]
     },
     computed: {
       selectedValue: {
         get() {
-          return this.modelProp;
+          return this.modelValue;
         },
         set(val) {
-          this.$emit('modelEvent', val);
+          this.$emit('update:modelValue', val);
         }
       }
     }
