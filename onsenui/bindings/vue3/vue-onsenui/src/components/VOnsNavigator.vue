@@ -5,16 +5,17 @@
         v-for="page in pageStack"
         :is="page"
         :key="page.key || page.name"
-        v-on="unrecognizedListeners"
-        v-bind="page.onsNavigatorProps"
+        v-bind="{ ...unrecognizedListeners, ...page.onsNavigatorProps }"
+        ref="children"
       ></component>
     </slot>
   </ons-navigator>
 </template>
 
 <script>
-  import 'onsenui/esm/elements/ons-navigator';
+  import NavigatorElement from 'onsenui/esm/elements/ons-navigator';
   import { hasOptions, selfProvider, deriveEvents, deriveDBB } from '../mixins';
+  import { camelize } from '../internal/util';
 
   const name = 'v-ons-navigator';
 
@@ -32,6 +33,16 @@
         default() {
           this.pageStack.pop();
         }
+      }
+    },
+
+    computed: {
+      unrecognizedListeners() {
+        const isListener = ([attribute]) => /^on[^a-z]/.test(attribute);
+        const isUnknown = ([attribute]) => !NavigatorElement.events.includes(camelize(attribute.slice(2)))
+
+        return Object.fromEntries(Object.entries(this.$attrs)
+          .filter(attribute => isListener(attribute) && isUnknown(attribute)));
       }
     },
 
@@ -56,7 +67,7 @@
       },
       _eachPage(start, end, cb) {
         for (let i = start; i < end; i++) {
-          cb(this.$children[i].$el);
+          cb(this.$refs.children[i].$el);
         }
       },
       _reattachPage(pageElement, position = null, restoreScroll) {
@@ -115,7 +126,7 @@
       },
       _checkSwipe(event) {
         if (this.$el.hasAttribute('swipeable') &&
-          event.leavePage !== this.$el.lastChild && event.leavePage === this.$children[this.$children.length - 1].$el
+          event.leavePage !== this.$el.lastChild && event.leavePage === this.$refs.children[this.$refs.children.length - 1].$el
         ) {
           this.popPage();
         }
@@ -124,7 +135,7 @@
 
     watch: {
       pageStack(after, before) {
-        if (this.$el.hasAttribute('swipeable') && this.$children.length !== this.$el.children.length) {
+        if (this.$el.hasAttribute('swipeable') && this.$refs.children.length !== this.$el.children.length) {
           return;
         }
 
@@ -135,13 +146,13 @@
         }
 
         const propWasMutated = after === before; // Can be mutated or replaced
-        const lastTopPage = this.$children[this.$children.length - 1].$el;
+        const lastTopPage = this.$refs.children[this.$refs.children.length - 1].$el;
         const scrollElement = this._findScrollPage(lastTopPage);
         const scrollValue = scrollElement.scrollTop || 0;
 
         this._pageStackUpdate = {
           lastTopPage,
-          lastLength: propWasMutated ? this.$children.length : before.length,
+          lastLength: propWasMutated ? this.$refs.children.length : before.length,
           currentLength: !propWasMutated && after.length,
           restoreScroll: () => scrollElement.scrollTop = scrollValue
         };
@@ -152,10 +163,12 @@
 
     updated() {
       if (this._pageStackUpdate) {
-        let currentTopPage = this.$children[this.$children.length - 1].$el;
+        const currentTopComponent = this.$refs.children[this.$refs.children.length - 1];
+        let currentTopPage = currentTopComponent.$el;
+        currentTopPage.__vue__ = currentTopComponent;
         let { lastTopPage, currentLength } = this._pageStackUpdate;
         const { lastLength, restoreScroll } = this._pageStackUpdate;
-        currentLength = currentLength === false ? this.$children.length : currentLength;
+        currentLength = currentLength === false ? this.$refs.children.length : currentLength;
 
         if (currentTopPage !== lastTopPage) {
           this._ready = this._animate({ lastLength, currentLength, lastTopPage, currentTopPage, restoreScroll });
