@@ -1,8 +1,6 @@
 <template>
   <ons-pull-hook
-    :on-action.prop="action"
-    :on-pull.prop="onPull"
-
+    :onAction.prop="action"
   >
     <slot></slot>
   </ons-pull-hook>
@@ -20,9 +18,6 @@
 
     props: {
       action: {
-        type: Function
-      },
-      onPull: {
         type: Function
       }
     }
