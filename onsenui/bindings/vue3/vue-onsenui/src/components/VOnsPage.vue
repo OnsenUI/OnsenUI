@@ -1,8 +1,7 @@
 <template>
   <ons-page
-    :on-infinite-scroll.prop="infiniteScroll"
+    :onInfiniteScroll.prop="infiniteScroll"
     :modifier="normalizedModifier"
-
   >
     <slot></slot>
   </ons-page>
