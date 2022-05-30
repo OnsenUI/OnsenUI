@@ -9,6 +9,7 @@
   export default {
     name: 'v-ons-tab',
     inject: ['tabbar'],
+    emits: ['click'],
 
     props: {
       page: { },

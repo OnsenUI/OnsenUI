@@ -25,6 +25,8 @@ const _setupDBB = component => {
 /* Public */
 // Device Back Button Handler
 const deriveDBB = {
+  emits: ['deviceBackButton'],
+
   mounted() {
     _setupDBB(this);
   },

@@ -1,5 +1,5 @@
 <template>
-  <ons-back-button :on-click.prop="action">
+  <ons-back-button>
     <slot></slot>
   </ons-back-button>
 </template>
@@ -11,19 +11,6 @@
   export default {
     name: 'v-ons-back-button',
     inject: ['navigator'],
-    mixins: [modifier],
-
-    methods: {
-      action(event) {
-        event.preventDefault();
-
-        let runDefault = true;
-        this.$emit('click', { preventDefault: () => runDefault = false });
-
-        if (runDefault && this.navigator.pageStack.length > 1) {
-          this.navigator.popPage();
-        }
-      }
-    }
+    mixins: [modifier]
   };
 </script>

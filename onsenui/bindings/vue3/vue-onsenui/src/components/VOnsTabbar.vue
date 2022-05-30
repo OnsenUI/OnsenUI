@@ -31,6 +31,7 @@
   export default {
     name,
     mixins: [deriveEvents(name), hasOptions, hidable, selfProvider, modifier],
+    emits: ['update:index'],
 
     props: {
       index: {

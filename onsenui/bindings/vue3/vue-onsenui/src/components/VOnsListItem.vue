@@ -13,6 +13,7 @@
   export default {
     name,
     mixins: [deriveEvents(name), modifier],
+    emits: ['update:expanded'],
     methods: {
       onExpand() {
         this.$emit('update:expanded', this.$el.expanded);

@@ -13,6 +13,7 @@
   export default {
     name,
     mixins: [deriveEvents(name)],
+    emits: ['update:index'],
 
     props: {
       index: {
