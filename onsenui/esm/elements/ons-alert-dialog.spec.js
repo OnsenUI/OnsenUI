@@ -293,4 +293,19 @@ describe('OnsAlertDialogElement', () => {
       expect(dialog.getAttribute('animation-options')).to.equal('{"duration":5}');
     });
   });
+
+  describe('deviceBackButton', () => {
+    it('does not overwrite the callback set by the user when connecting', done => {
+      const e = ons._util.createElement('<ons-alert-dialog></ons-alert-dialog>');
+      let called = false;
+      e.onDeviceBackButton = () => called = true;
+      document.body.appendChild(e);
+      setImmediate(() => {
+        e.onDeviceBackButton._callback();
+        expect(called).to.be.true;
+        e.remove();
+        done();
+      });
+    });
+  });
 });

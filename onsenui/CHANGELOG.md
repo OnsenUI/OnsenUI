@@ -5,6 +5,12 @@ CHANGELOG
 dev
 ---
 
+ ### Bug Fixes
+
+ * ons-alert-dialog: User's onDeviceBackButton setting is no longer ignored in when connecting element.
+ * ons-alert-dialog: User's onDeviceBackButton setting is no longer ignored when connecting element.
+ * ons-splitter-side: Fix options.animation being ignored.
+
  ### New Features
 
  * ons-speed-dial: Added `open` attribute and property.

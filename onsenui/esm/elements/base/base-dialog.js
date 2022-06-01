@@ -61,6 +61,7 @@ export default class BaseDialogElement extends BaseElement {
       this._backButtonHandler.destroy();
     }
 
+    this._backButtonCallback = callback;
     this._backButtonHandler = deviceBackButtonDispatcher.createHandler(this, callback);
   }
 
@@ -186,7 +187,9 @@ export default class BaseDialogElement extends BaseElement {
   }
 
   connectedCallback() {
-    if (typeof this._defaultDBB === 'function') {
+    if (typeof this._backButtonCallback === 'function') {
+      this.onDeviceBackButton = this._backButtonCallback;
+    } else if (typeof this._defaultDBB === 'function') {
       this.onDeviceBackButton = this._defaultDBB.bind(this);
     }
 
