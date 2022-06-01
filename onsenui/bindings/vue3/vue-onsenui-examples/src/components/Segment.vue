@@ -17,7 +17,7 @@
       <button>Label 3</button>
     </v-ons-segment> -->
 
-    <v-ons-tabbar swipeable id="tabbar" v-model:tabs="tabs" :index="tabbarIndex"></v-ons-tabbar>
+    <v-ons-tabbar swipeable id="tabbar" :tabs="tabs" v-model:index="tabbarIndex"></v-ons-tabbar>
   </v-ons-page>
 </template>
 

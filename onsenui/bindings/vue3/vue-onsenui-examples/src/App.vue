@@ -18,8 +18,8 @@
       <keep-alive>
         <component
           :is="currentView"
-          :examples="examples"
-          :changeExample="changeExample"
+          :examples="examplesKeys"
+          @changeExample="changeExample"
         ></component>
       </keep-alive>
     </div>
@@ -44,6 +44,12 @@ export default {
       examples,
       title: 'Main List',
       currentView: initialView
+    }
+  },
+
+  computed: {
+    examplesKeys() {
+      return Object.keys(this.examples);
     }
   },
 
