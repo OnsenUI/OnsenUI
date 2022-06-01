@@ -14,14 +14,14 @@
 
 <script>
   import NavigatorElement from 'onsenui/esm/elements/ons-navigator';
-  import { hasOptions, selfProvider, deriveEvents, deriveDBB } from '../mixins';
+  import { hasOptions, selfProvider, deriveEvents, deriveDBB, unrecognizedListeners } from '../mixins';
   import { camelize } from '../internal/util';
 
   const name = 'v-ons-navigator';
 
   export default {
     name,
-    mixins: [hasOptions, selfProvider, deriveEvents(name), deriveDBB],
+    mixins: [hasOptions, selfProvider, deriveEvents(name), deriveDBB, unrecognizedListeners(NavigatorElement)],
 
     props: {
       pageStack: {
@@ -33,16 +33,6 @@
         default() {
           this.pageStack.pop();
         }
-      }
-    },
-
-    computed: {
-      unrecognizedListeners() {
-        const isListener = ([attribute]) => /^on[^a-z]/.test(attribute);
-        const isUnknown = ([attribute]) => !NavigatorElement.events.includes(camelize(attribute.slice(2)))
-
-        return Object.fromEntries(Object.entries(this.$attrs)
-          .filter(attribute => isListener(attribute) && isUnknown(attribute)));
       }
     },
 

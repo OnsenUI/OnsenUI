@@ -8,7 +8,7 @@
     <div class="tabbar__content">
       <div>
         <slot name="pages">
-          <component v-for="tab in tabs" v-bind="tab.props" :is="tab.page" :key="(tab.page.key || tab.page.name || _tabKey(tab))" v-on="unrecognizedListeners"></component>
+          <component v-for="tab in tabs" v-bind="{ ...unrecognizedListeners, ...tab.props }" :is="tab.page" :key="(tab.page.key || tab.page.name || _tabKey(tab))"></component>
         </slot>
       </div>
       <div></div>
@@ -23,14 +23,14 @@
 </template>
 
 <script>
-  import 'onsenui/esm/elements/ons-tabbar';
-  import { deriveEvents, hasOptions, hidable, selfProvider, modifier } from '../mixins';
+  import TabbarElement from 'onsenui/esm/elements/ons-tabbar';
+  import { deriveEvents, hasOptions, hidable, selfProvider, modifier, unrecognizedListeners } from '../mixins';
 
   const name = 'v-ons-tabbar';
 
   export default {
     name,
-    mixins: [deriveEvents(name), hasOptions, hidable, selfProvider, modifier],
+    mixins: [deriveEvents(name), hasOptions, hidable, selfProvider, modifier, unrecognizedListeners(TabbarElement)],
     emits: ['update:index'],
 
     props: {

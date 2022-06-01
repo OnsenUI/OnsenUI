@@ -76,4 +76,16 @@ const deriveEvents = name => {
   };
 };
 
-export { deriveDBB, deriveEvents };
+const unrecognizedListeners = nativeElement => ({
+  computed: {
+    unrecognizedListeners() {
+      const isListener = ([attribute]) => /^on[^a-z]/.test(attribute);
+      const isUnknown = ([attribute]) => !nativeElement.events.includes(camelize(attribute.slice(2)))
+
+      return Object.fromEntries(Object.entries(this.$attrs)
+        .filter(attribute => isListener(attribute) && isUnknown(attribute)));
+    }
+  }
+});
+
+export { deriveDBB, deriveEvents, unrecognizedListeners };
