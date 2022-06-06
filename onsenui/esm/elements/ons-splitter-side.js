@@ -481,8 +481,7 @@ export default class SplitterSideElement extends BaseElement {
     }
   }
 
-  _updateAnimation() {
-    const animation = this.getAttribute('animation');
+  _updateAnimation(animation = this.getAttribute('animation')) {
     const animationOptions = this.getAttribute('animation-options');
 
     if (this.parentNode) {
