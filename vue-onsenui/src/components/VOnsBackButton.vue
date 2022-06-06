@@ -1,5 +1,5 @@
 <template>
-  <ons-back-button :on-click.prop="action">
+  <ons-back-button @click.prevent="action">
     <slot></slot>
   </ons-back-button>
 </template>
@@ -14,9 +14,7 @@
     mixins: [modifier],
 
     methods: {
-      action(event) {
-        event.preventDefault();
-
+      action() {
         let runDefault = true;
         this.$emit('click', { preventDefault: () => runDefault = false });
 
