@@ -1,5 +1,5 @@
 <template>
-  <ons-tab :active="active" :on-click.prop="action">
+  <ons-tab :active="active || null" @click.prevent="action">
   </ons-tab>
 </template>
 
@@ -21,8 +21,6 @@
 
     methods: {
       action(event) {
-        event.preventDefault();
-
         let runDefault = true;
         this.$emit('click', { preventDefault: () => runDefault = false });
 
