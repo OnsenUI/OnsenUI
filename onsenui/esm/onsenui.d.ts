@@ -1196,6 +1196,10 @@ declare namespace ons {
      * @description Whether the speed items are visible or not.
      */
     open: boolean;
+    /**
+     * @description If this property is defined, the button will have a ripple effect when tapped.
+     */
+    ripple: boolean;
   }
 
   interface OnsSpeedDialItemElement extends HTMLElement {
