@@ -3,14 +3,6 @@
  */
 
 /**
- * @attribute visible
- * @type {Boolean}
- * @description
- *   [en]Specify the visibility of the component.[/en]
- *   [ja][/ja]
- */
-
-/**
  * @event update:visible
  * @description
  *   [en]Fired right after user interaction. Useful to update `visible` prop.[/en]
