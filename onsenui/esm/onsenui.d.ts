@@ -541,6 +541,10 @@ declare namespace ons {
     centered: boolean;
     animationOptions: object;
     activeIndex: number;
+    /**
+     * @description If this property is set the carousel will cover the whole screen.
+     **/
+    fullscreen: boolean;
   }
 
   /**

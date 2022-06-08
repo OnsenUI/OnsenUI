@@ -153,6 +153,14 @@ export default class CarouselElement extends BaseElement {
    */
 
   /**
+   * @property fullscreen
+   * @type {Boolean}
+   * @description
+   *   [en]If this property is set the carousel will cover the whole screen.[/en]
+   *   [ja]この属性があると、absoluteポジションを使ってカルーセルが自動的に画面いっぱいに広がります。[/ja]
+   */
+
+  /**
    * @attribute overscrollable
    * @description
    *   [en]If this attribute is set the carousel will be scrollable over the edge. It will bounce back when released.[/en]
@@ -680,7 +688,7 @@ export default class CarouselElement extends BaseElement {
   }
 }
 
-util.defineBooleanProperties(CarouselElement, ['swipeable', 'disabled', 'overscrollable', 'auto-scroll', 'centered']);
+util.defineBooleanProperties(CarouselElement, ['swipeable', 'disabled', 'overscrollable', 'auto-scroll', 'centered', 'fullscreen']);
 
 onsElements.Carousel = CarouselElement;
 customElements.define('ons-carousel', CarouselElement);
