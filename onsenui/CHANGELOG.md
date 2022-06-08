@@ -27,6 +27,7 @@ dev
  * ons-popover: Added `coverTarget` property.
  * ons-pull-hook: Added `fixedContent` property.
  * ons-speed-dial-item: Added `ripple` property.
+ * ons-tabbar: Added `tabBorder` property.
 
 2.12.0
 ---

@@ -829,6 +829,10 @@ declare namespace ons {
      **/
     swipeable: boolean;
     /**
+     * @description If this property is set the tabs show a dynamic bottom border. Only works for iOS flat design since the border is always visible in Material Design.
+     **/
+    tabBorder: boolean;
+    /**
      * @param {Number} index Decimal index of the current swipe.
      * @param {Object} animationOptions Object containing duration and timing.
      * @description Hook called whenever the user slides the tabbar.
