@@ -545,6 +545,10 @@ declare namespace ons {
      * @description If this property is set the carousel will cover the whole screen.
      **/
     fullscreen: boolean;
+    /**
+     * @description When this property is set the carousel will automatically refresh when the number of child nodes change.
+     **/
+    autoRefresh: boolean;
   }
 
   /**

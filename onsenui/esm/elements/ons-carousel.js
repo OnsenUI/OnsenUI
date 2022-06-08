@@ -237,6 +237,14 @@ export default class CarouselElement extends BaseElement {
    */
 
   /**
+   * @property autoRefresh
+   * @type {Boolean}
+   * @description
+   *   [en]When this property is set the carousel will automatically refresh when the number of child nodes change.[/en]
+   *   [ja]この属性がある時、子要素の数が変わるとカルーセルは自動的に更新されるようになります。[/ja]
+   */
+
+  /**
    * @attribute animation
    * @type {String}
    * @description
@@ -688,7 +696,7 @@ export default class CarouselElement extends BaseElement {
   }
 }
 
-util.defineBooleanProperties(CarouselElement, ['swipeable', 'disabled', 'overscrollable', 'auto-scroll', 'centered', 'fullscreen']);
+util.defineBooleanProperties(CarouselElement, ['swipeable', 'disabled', 'overscrollable', 'auto-scroll', 'centered', 'fullscreen', 'auto-refresh']);
 
 onsElements.Carousel = CarouselElement;
 customElements.define('ons-carousel', CarouselElement);

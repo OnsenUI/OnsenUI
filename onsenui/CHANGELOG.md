@@ -19,6 +19,7 @@ dev
  * ons-ripple: Added `center` property.
  * ons-icon: Added `fixedWidth` property.
  * ons-carousel: Added `fullscreen` property.
+ * ons-carousel: Added `autoRefresh` property.
 
 2.12.0
 ---
