@@ -1198,6 +1198,13 @@ declare namespace ons {
     open: boolean;
   }
 
+  interface OnsSpeedDialItemElement extends HTMLElement {
+    /**
+     * @description If this property is defined, the button will have a ripple effect when tapped.
+     */
+    ripple: boolean;
+  }
+
   interface OnsListItemElement extends HTMLElement {
     /**
      * @description Show the expandable content if element is expandable

@@ -25,6 +25,7 @@ dev
  * ons-input: Added `float` property.
  * ons-popover: Added `coverTarget` property.
  * ons-pull-hook: Added `fixedContent` property.
+ * ons-speed-dial-item: Added `ripple` property.
 
 2.12.0
 ---
