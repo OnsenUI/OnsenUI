@@ -991,6 +991,10 @@ declare namespace ons {
      * @description A boolean value that specifies whether the input is disabled or not.
      */
     disabled: boolean;
+    /**
+     * @description If this property is present, the placeholder will be animated in Material Design.
+     */
+    float: boolean;
   }
 
   interface OnsSearchInputElement extends HTMLElement {

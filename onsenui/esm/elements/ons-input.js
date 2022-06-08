@@ -171,6 +171,14 @@ export default class InputElement extends BaseInputElement {
    */
 
   /**
+   * @property float
+   * @type {Boolean}
+   * @description
+   *  [en]If this property is present, the placeholder will be animated in Material Design.[/en]
+   *  [ja]この属性が設定された時、ラベルはアニメーションするようになります。[/ja]
+   */
+
+  /**
    * @attribute type
    * @type {String}
    * @description
@@ -222,6 +230,8 @@ export default class InputElement extends BaseInputElement {
    *   [ja][/ja]
    */
 }
+
+util.defineBooleanProperties(InputElement, ['float']);
 
 onsElements.Input = InputElement;
 customElements.define('ons-input', InputElement);
