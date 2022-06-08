@@ -18,6 +18,7 @@ dev
  * ons-list-item: Added `tappable` property.
  * ons-ripple: Added `center` property.
  * ons-icon: Added `fixedWidth` property.
+ * ons-icon: Added `spin` property.
  * ons-carousel: Added `fullscreen` property.
  * ons-carousel: Added `autoRefresh` property.
  * ons-fab: Added `ripple` property.

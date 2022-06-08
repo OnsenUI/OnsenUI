@@ -127,6 +127,14 @@ export default class IconElement extends BaseElement {
    *   [ja]アイコンを回転するかどうかを指定します。[/ja]
    */
 
+  /**
+   * @property spin
+   * @type {Boolean}
+   * @description
+   *   [en]Specify whether the icon should be spinning.[/en]
+   *   [ja]アイコンを回転するかどうかを指定します。[/ja]
+   */
+
   constructor() {
     super();
 
@@ -226,7 +234,7 @@ export default class IconElement extends BaseElement {
   }
 }
 
-util.defineBooleanProperties(IconElement, ['fixed-width']);
+util.defineBooleanProperties(IconElement, ['fixed-width', 'spin']);
 
 onsElements.Icon = IconElement;
 customElements.define('ons-icon', IconElement);

@@ -1136,6 +1136,10 @@ declare namespace ons {
      * @description When used in a list, you want the icons to have the same width so that they align vertically by defining this attribute.
      */
     fixedWidth(): boolean;
+    /**
+     * @description Specify whether the icon should be spinning.
+     */
+    spin(): boolean;
   }
 
   interface OnsSpeedDialElement extends HTMLElement {
