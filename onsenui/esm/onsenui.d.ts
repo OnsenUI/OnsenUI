@@ -578,6 +578,10 @@ declare namespace ons {
      */
     disabled: boolean;
     /**
+     * @description If this property is set the content of the page will not move when pulling.
+     */
+    fixedContent: boolean;
+    /**
      * @param {Number} ratio Pulled ratio (scroll / height).
      * @param {Object} animationOptions Object containing duration and timing.
      * @description Hook called whenever the user pulls the element.

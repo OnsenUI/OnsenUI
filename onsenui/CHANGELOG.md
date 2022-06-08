@@ -24,6 +24,7 @@ dev
  * ons-fab: Added `ripple` property.
  * ons-input: Added `float` property.
  * ons-popover: Added `coverTarget` property.
+ * ons-pull-hook: Added `fixedContent` property.
 
 2.12.0
 ---

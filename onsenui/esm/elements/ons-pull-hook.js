@@ -118,6 +118,14 @@ export default class PullHookElement extends BaseElement {
    *   [ja]この属性がある時、プルフックが引き出されている時にもコンテンツは動きません。[/ja]
    */
 
+  /**
+   * @property fixedContent
+   * @type {Boolean}
+   * @description
+   *   [en]If this property is set the content of the page will not move when pulling.[/en]
+   *   [ja]この属性がある時、プルフックが引き出されている時にもコンテンツは動きません。[/ja]
+   */
+
   constructor() {
     super();
 
@@ -462,7 +470,7 @@ export default class PullHookElement extends BaseElement {
   }
 }
 
-util.defineBooleanProperties(PullHookElement, ['disabled']);
+util.defineBooleanProperties(PullHookElement, ['disabled', 'fixed-content']);
 
 onsElements.PullHook = PullHookElement;
 customElements.define('ons-pull-hook', PullHookElement);
