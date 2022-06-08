@@ -1038,6 +1038,10 @@ declare namespace ons {
      * @description A boolean value that specifies whether the input is disabled or not.
      */
     disabled: boolean;
+    /**
+     * @description If this property is present, change the position of wave effect to center of the target element.
+     */
+    center: boolean;
   }
 
   interface OnsSplitterContentElement extends HTMLElement {
@@ -1115,6 +1119,13 @@ declare namespace ons {
     indeterminate: boolean;
   }
 
+  interface OnsIconElement extends HTMLElement {
+    /**
+     * @description When used in a list, you want the icons to have the same width so that they align vertically by defining this attribute.
+     */
+    fixedWidth(): boolean;
+  }
+
   interface OnsSpeedDialElement extends HTMLElement {
     /**
      * @description Show the speed dial.
@@ -1172,6 +1183,14 @@ declare namespace ons {
      * @description For expandable list items, specifies whether the expandable content is expanded or not.
      **/
     expanded: boolean;
+    /**
+     * @description Whether the list item is expandable or not.
+     **/
+    expandable: boolean;
+    /**
+     * @description Makes the element react to taps.
+     **/
+    tappable: boolean;
   }
 
 }
