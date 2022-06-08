@@ -63,6 +63,14 @@ export default class FabElement extends BaseElement {
    */
 
   /**
+   * @property ripple
+   * @type {Boolean}
+   * @description
+   *  [en]If this property is defined, the button will have a ripple effect when tapped.[/en]
+   *  [ja][/ja]
+   */
+
+  /**
    * @attribute position
    * @type {String}
    * @description
@@ -252,7 +260,7 @@ export default class FabElement extends BaseElement {
   }
 }
 
-util.defineBooleanProperties(FabElement, ['disabled']);
+util.defineBooleanProperties(FabElement, ['disabled', 'ripple']);
 
 onsElements.Fab = FabElement;
 customElements.define('ons-fab', FabElement);

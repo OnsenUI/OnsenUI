@@ -969,9 +969,13 @@ declare namespace ons {
      */
     disabled: boolean;
     /**
-     * @description Weher the dialog is visible or not.
+     * @description Whether the dialog is visible or not.
      */
     visible: boolean;
+    /**
+     * @description If this property is defined, the button will have a ripple effect when tapped.
+     */
+    ripple: boolean;
   }
 
   interface OnsInputElement extends HTMLElement {
