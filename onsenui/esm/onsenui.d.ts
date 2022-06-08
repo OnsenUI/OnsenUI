@@ -863,6 +863,10 @@ declare namespace ons {
      */
     cancelable: boolean;
     /**
+     * @description If set the popover will cover the target on the screen.
+     */
+    coverTarget: boolean;
+    /**
      * @description Retrieve the back- button handler.
      */
     onDeviceBackButton: any;

@@ -23,6 +23,7 @@ dev
  * ons-carousel: Added `autoRefresh` property.
  * ons-fab: Added `ripple` property.
  * ons-input: Added `float` property.
+ * ons-popover: Added `coverTarget` property.
 
 2.12.0
 ---

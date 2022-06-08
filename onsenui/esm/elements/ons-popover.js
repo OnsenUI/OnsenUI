@@ -176,6 +176,13 @@ export default class PopoverElement extends BaseDialogElement {
    */
 
   /**
+   * @property coverTarget
+   * @description
+   *   [en]If set the popover will cover the target on the screen.[/en]
+   *   [ja][/ja]
+   */
+
+  /**
    * @attribute animation
    * @type {String}
    * @description
@@ -565,6 +572,8 @@ export default class PopoverElement extends BaseDialogElement {
     return PopoverAnimator;
   }
 }
+
+util.defineBooleanProperties(PopoverElement, ['cover-target']);
 
 onsElements.Popover = PopoverElement;
 customElements.define('ons-popover', PopoverElement);
