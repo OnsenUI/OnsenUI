@@ -541,6 +541,14 @@ declare namespace ons {
     centered: boolean;
     animationOptions: object;
     activeIndex: number;
+    /**
+     * @description If this property is set the carousel will cover the whole screen.
+     **/
+    fullscreen: boolean;
+    /**
+     * @description When this property is set the carousel will automatically refresh when the number of child nodes change.
+     **/
+    autoRefresh: boolean;
   }
 
   /**
@@ -569,6 +577,10 @@ declare namespace ons {
      * @description A boolean value that specifies whether the element is disabled or not.
      */
     disabled: boolean;
+    /**
+     * @description If this property is set the content of the page will not move when pulling.
+     */
+    fixedContent: boolean;
     /**
      * @param {Number} ratio Pulled ratio (scroll / height).
      * @param {Object} animationOptions Object containing duration and timing.
@@ -817,6 +829,10 @@ declare namespace ons {
      **/
     swipeable: boolean;
     /**
+     * @description If this property is set the tabs show a dynamic bottom border. Only works for iOS flat design since the border is always visible in Material Design.
+     **/
+    tabBorder: boolean;
+    /**
      * @param {Number} index Decimal index of the current swipe.
      * @param {Object} animationOptions Object containing duration and timing.
      * @description Hook called whenever the user slides the tabbar.
@@ -854,6 +870,10 @@ declare namespace ons {
      * @description A boolean value that specifies whether the popover is cancelable or not. When the popover is cancelable it can be closed by tapping the background or by pressing the back button on Android devices.
      */
     cancelable: boolean;
+    /**
+     * @description If set the popover will cover the target on the screen.
+     */
+    coverTarget: boolean;
     /**
      * @description Retrieve the back- button handler.
      */
@@ -961,9 +981,13 @@ declare namespace ons {
      */
     disabled: boolean;
     /**
-     * @description Weher the dialog is visible or not.
+     * @description Whether the dialog is visible or not.
      */
     visible: boolean;
+    /**
+     * @description If this property is defined, the button will have a ripple effect when tapped.
+     */
+    ripple: boolean;
   }
 
   interface OnsInputElement extends HTMLElement {
@@ -979,6 +1003,10 @@ declare namespace ons {
      * @description A boolean value that specifies whether the input is disabled or not.
      */
     disabled: boolean;
+    /**
+     * @description If this property is present, the placeholder will be animated in Material Design.
+     */
+    float: boolean;
   }
 
   interface OnsSearchInputElement extends HTMLElement {
@@ -1038,6 +1066,10 @@ declare namespace ons {
      * @description A boolean value that specifies whether the input is disabled or not.
      */
     disabled: boolean;
+    /**
+     * @description If this property is present, change the position of wave effect to center of the target element.
+     */
+    center: boolean;
   }
 
   interface OnsSplitterContentElement extends HTMLElement {
@@ -1115,6 +1147,17 @@ declare namespace ons {
     indeterminate: boolean;
   }
 
+  interface OnsIconElement extends HTMLElement {
+    /**
+     * @description When used in a list, you want the icons to have the same width so that they align vertically by defining this attribute.
+     */
+    fixedWidth(): boolean;
+    /**
+     * @description Specify whether the icon should be spinning.
+     */
+    spin(): boolean;
+  }
+
   interface OnsSpeedDialElement extends HTMLElement {
     /**
      * @description Show the speed dial.
@@ -1157,6 +1200,17 @@ declare namespace ons {
      * @description Whether the speed items are visible or not.
      */
     open: boolean;
+    /**
+     * @description If this property is defined, the button will have a ripple effect when tapped.
+     */
+    ripple: boolean;
+  }
+
+  interface OnsSpeedDialItemElement extends HTMLElement {
+    /**
+     * @description If this property is defined, the button will have a ripple effect when tapped.
+     */
+    ripple: boolean;
   }
 
   interface OnsListItemElement extends HTMLElement {
@@ -1172,6 +1226,14 @@ declare namespace ons {
      * @description For expandable list items, specifies whether the expandable content is expanded or not.
      **/
     expanded: boolean;
+    /**
+     * @description Whether the list item is expandable or not.
+     **/
+    expandable: boolean;
+    /**
+     * @description Makes the element react to taps.
+     **/
+    tappable: boolean;
   }
 
 }

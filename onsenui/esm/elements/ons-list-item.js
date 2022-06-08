@@ -127,6 +127,14 @@ export default class ListItemElement extends BaseElement {
    */
 
   /**
+   * @property tappable
+   * @type {Boolean}
+   * @description
+   *   [en]Makes the element react to taps. `prevent-tap` attribute can be added to child elements like buttons or inputs to prevent this effect. `ons-*` elements are ignored by default.[/en]
+   *   [ja][/ja]
+   */
+
+  /**
    * @attribute tap-background-color
    * @type {Color}
    * @description
@@ -136,6 +144,15 @@ export default class ListItemElement extends BaseElement {
 
   /**
    * @attribute expandable
+   * @type {Boolean}
+   * @description
+   *   [en]Makes the element able to be expanded to reveal extra content. For this to work, the expandable content must be defined in `div.expandable-content`.[/en]
+   *   [ja][/ja]
+   */
+
+  /**
+   * @property expandable
+   * @initonly
    * @type {Boolean}
    * @description
    *   [en]Makes the element able to be expanded to reveal extra content. For this to work, the expandable content must be defined in `div.expandable-content`.[/en]
@@ -169,8 +186,6 @@ export default class ListItemElement extends BaseElement {
 
   constructor() {
     super();
-
-    util.defineBooleanProperty(this, 'expanded');
 
     this._animatorFactory = this._updateAnimatorFactory();
 
@@ -468,6 +483,8 @@ export default class ListItemElement extends BaseElement {
     styler.clear(this, 'transition boxShadow');
   }
 }
+
+util.defineBooleanProperties(ListItemElement, ['expanded', 'expandable', 'tappable']);
 
 onsElements.ListItem = ListItemElement;
 customElements.define('ons-list-item', ListItemElement);

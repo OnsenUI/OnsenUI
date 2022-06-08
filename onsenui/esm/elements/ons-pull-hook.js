@@ -118,6 +118,14 @@ export default class PullHookElement extends BaseElement {
    *   [ja]この属性がある時、プルフックが引き出されている時にもコンテンツは動きません。[/ja]
    */
 
+  /**
+   * @property fixedContent
+   * @type {Boolean}
+   * @description
+   *   [en]If this property is set the content of the page will not move when pulling.[/en]
+   *   [ja]この属性がある時、プルフックが引き出されている時にもコンテンツは動きません。[/ja]
+   */
+
   constructor() {
     super();
 
@@ -355,13 +363,6 @@ export default class PullHookElement extends BaseElement {
    *   [en]Whether the element is disabled or not.[/en]
    *   [ja]無効化されている場合に`true`。[/ja]
    */
-  set disabled(value) {
-    return util.toggleAttribute(this, 'disabled', value);
-  }
-
-  get disabled() {
-    return this.hasAttribute('disabled');
-  }
 
   _show() {
     // Run asyncrhonously to avoid conflicts with Animit's style clean
@@ -465,9 +466,11 @@ export default class PullHookElement extends BaseElement {
   }
 
   static get events() {
-    return ['changestate'];
+    return ['changestate', 'pull'];
   }
 }
+
+util.defineBooleanProperties(PullHookElement, ['disabled', 'fixed-content']);
 
 onsElements.PullHook = PullHookElement;
 customElements.define('ons-pull-hook', PullHookElement);

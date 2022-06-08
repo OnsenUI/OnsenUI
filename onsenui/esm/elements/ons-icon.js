@@ -112,7 +112,24 @@ export default class IconElement extends BaseElement {
    */
 
   /**
+   * @property fixedWidth
+   * @type {Boolean}
+   * @default false
+   * @description
+   *  [en]When used in a list, you want the icons to have the same width so that they align vertically by defining this attribute.[/en]
+   *  [ja][/ja]
+   */
+
+  /**
    * @attribute spin
+   * @description
+   *   [en]Specify whether the icon should be spinning.[/en]
+   *   [ja]アイコンを回転するかどうかを指定します。[/ja]
+   */
+
+  /**
+   * @property spin
+   * @type {Boolean}
    * @description
    *   [en]Specify whether the icon should be spinning.[/en]
    *   [ja]アイコンを回転するかどうかを指定します。[/ja]
@@ -216,6 +233,8 @@ export default class IconElement extends BaseElement {
     autoPrefix = prefix ? (typeof prefix === 'string' && prefix || 'fa') : '';
   }
 }
+
+util.defineBooleanProperties(IconElement, ['fixed-width', 'spin']);
 
 onsElements.Icon = IconElement;
 customElements.define('ons-icon', IconElement);

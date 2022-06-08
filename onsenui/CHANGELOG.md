@@ -5,9 +5,29 @@ CHANGELOG
 dev
 ---
 
+ ### Bug Fixes
+
+ * ons-alert-dialog: User's onDeviceBackButton setting is no longer ignored in when connecting element.
+ * ons-alert-dialog: User's onDeviceBackButton setting is no longer ignored when connecting element.
+ * ons-splitter-side: Fix options.animation being ignored.
+
  ### New Features
 
  * ons-speed-dial: Added `open` attribute and property.
+ * ons-speed-dial: Added `ripple` property.
+ * ons-list-item: Added `expandable` property.
+ * ons-list-item: Added `tappable` property.
+ * ons-ripple: Added `center` property.
+ * ons-icon: Added `fixedWidth` property.
+ * ons-icon: Added `spin` property.
+ * ons-carousel: Added `fullscreen` property.
+ * ons-carousel: Added `autoRefresh` property.
+ * ons-fab: Added `ripple` property.
+ * ons-input: Added `float` property.
+ * ons-popover: Added `coverTarget` property.
+ * ons-pull-hook: Added `fixedContent` property.
+ * ons-speed-dial-item: Added `ripple` property.
+ * ons-tabbar: Added `tabBorder` property.
 
 2.12.0
 ---
@@ -45,7 +65,7 @@ dev
  * ons-back-button: Calling event.preventDefault for click events can be used to prevent navigator going back a page.
  * ons-speed-dial: Calling event.preventDefault for click events can be used to prevent speed dial opening/closing.
  * ons-splitter-side: Added `swipeable` property.
- * ons-list-item: Added `expandable` attribute and property. ([#2896](https://github.com/OnsenUI/OnsenUI/issues/2896)).
+ * ons-list-item: Added `expanded` attribute and property. ([#2896](https://github.com/OnsenUI/OnsenUI/issues/2896)).
  * ons-list-item: Added `expand` event that fires when an expandable list item is clicked and expands or contracts.
  * ons-button: Added `ripple` property to mirror existing `ripple` attribute.
  * ons-dialog, ons-alert-dialog, ons-modal, ons-popover, ons-action-sheet: Added `visible` attribute.

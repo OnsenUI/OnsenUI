@@ -25,7 +25,7 @@ import contentReady from '../../ons/content-ready.js';
 
 export default class BaseDialogElement extends BaseElement {
 
-  get _scheme() {
+  get _scheme() { // eslint-disable-line getter-return
     util.throwMember();
   }
 
@@ -61,6 +61,7 @@ export default class BaseDialogElement extends BaseElement {
       this._backButtonHandler.destroy();
     }
 
+    this._backButtonCallback = callback;
     this._backButtonHandler = deviceBackButtonDispatcher.createHandler(this, callback);
   }
 
@@ -149,34 +150,6 @@ export default class BaseDialogElement extends BaseElement {
     });
   }
 
-  get visible() {
-    return this.hasAttribute('visible');
-  }
-
-  set visible(value) {
-    if (value) {
-      this.setAttribute('visible', '');
-    } else {
-      this.removeAttribute('visible');
-    }
-  }
-
-  set disabled(value) {
-    return util.toggleAttribute(this, 'disabled', value);
-  }
-
-  get disabled() {
-    return this.hasAttribute('disabled');
-  }
-
-  set cancelable(value) {
-    return util.toggleAttribute(this, 'cancelable', value);
-  }
-
-  get cancelable() {
-    return this.hasAttribute('cancelable');
-  }
-
   get maskColor() {
     return this.getAttribute('mask-color');
   }
@@ -214,7 +187,9 @@ export default class BaseDialogElement extends BaseElement {
   }
 
   connectedCallback() {
-    if (typeof this._defaultDBB === 'function') {
+    if (typeof this._backButtonCallback === 'function') {
+      this.onDeviceBackButton = this._backButtonCallback;
+    } else if (typeof this._defaultDBB === 'function') {
       this.onDeviceBackButton = this._defaultDBB.bind(this);
     }
 
@@ -270,3 +245,5 @@ export default class BaseDialogElement extends BaseElement {
     return ['preshow', 'postshow', 'prehide', 'posthide', 'dialogcancel', 'dialog-cancel'];
   }
 }
+
+util.defineBooleanProperties(BaseDialogElement, ['visible', 'disabled', 'cancelable']);

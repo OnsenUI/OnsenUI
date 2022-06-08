@@ -315,8 +315,6 @@ export default class SplitterSideElement extends BaseElement {
   constructor() {
     super();
 
-    util.defineBooleanProperty(this, 'swipeable');
-
     this._page = null;
     this._state = CLOSED_STATE;
     this._lock = new DoorLock();
@@ -483,8 +481,7 @@ export default class SplitterSideElement extends BaseElement {
     }
   }
 
-  _updateAnimation() {
-    const animation = this.getAttribute('animation');
+  _updateAnimation(animation = this.getAttribute('animation')) {
     const animationOptions = this.getAttribute('animation-options');
 
     if (this.parentNode) {
@@ -737,6 +734,8 @@ export default class SplitterSideElement extends BaseElement {
     return rewritables;
   }
 }
+
+util.defineBooleanProperties(SplitterSideElement, ['swipeable']);
 
 onsElements.SplitterSide = SplitterSideElement;
 customElements.define('ons-splitter-side', SplitterSideElement);

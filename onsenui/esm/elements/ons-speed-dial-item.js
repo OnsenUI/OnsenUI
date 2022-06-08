@@ -68,6 +68,14 @@ export default class SpeedDialItemElement extends BaseElement {
    *  [ja][/ja]
    */
 
+  /**
+   * @property ripple
+   * @type {Boolean}
+   * @description
+   *  [en]If this property is defined, the button will have a ripple effect when tapped.[/en]
+   *  [ja][/ja]
+   */
+
   constructor() {
     super();
 
@@ -120,6 +128,8 @@ export default class SpeedDialItemElement extends BaseElement {
     ModifierUtil.initModifier(this, scheme);
   }
 }
+
+util.defineBooleanProperties(SpeedDialItemElement, ['ripple']);
 
 onsElements.SpeedDialItem = SpeedDialItemElement;
 customElements.define('ons-speed-dial-item', SpeedDialItemElement);

@@ -7,7 +7,7 @@
     <v-ons-tabbar :visible="tabbarVisibility" @init.native="log('init')">
       <template slot="pages">
         <keep-alive>
-          <div :is="currentPage"></div>
+          <div shown :is="currentPage"></div>
         </keep-alive>
       </template>
 
@@ -38,7 +38,7 @@
     data() {
       return {
         tab1Label: 'Home',
-        tab1Icon: 'ion-ios-home-outline',
+        tab1Icon: 'ion-ios-home',
         tabbarVisibility: true,
         currentPage: 'home'
       };

@@ -26,11 +26,11 @@ import '../ons-ripple.js';
 
 export default class BaseButtonElement extends BaseElement {
 
-  get _scheme() {
+  get _scheme() { // eslint-disable-line getter-return
     util.throwMember();
   }
 
-  get _defaultClassName() {
+  get _defaultClassName() { // eslint-disable-line getter-return
     util.throwMember();
   }
 
@@ -46,26 +46,6 @@ export default class BaseButtonElement extends BaseElement {
     }
 
     contentReady(this, () => this._compile());
-  }
-
-  set disabled(value) {
-    return util.toggleAttribute(this, 'disabled', value);
-  }
-
-  get disabled() {
-    return this.hasAttribute('disabled');
-  }
-
-  get ripple() {
-    return this.hasAttribute('ripple');
-  }
-
-  set ripple(value) {
-    if (value) {
-      this.setAttribute('ripple', '');
-    } else {
-      this.removeAttribute('ripple');
-    }
   }
 
   get _icon() {
@@ -130,3 +110,5 @@ export default class BaseButtonElement extends BaseElement {
     }
   }
 }
+
+util.defineBooleanProperties(BaseButtonElement, ['ripple', 'disabled']);

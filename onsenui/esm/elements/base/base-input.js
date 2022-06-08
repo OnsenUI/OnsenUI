@@ -44,15 +44,15 @@ export default class BaseInputElement extends BaseElement {
 
   _update() {} // Optionally implemented
 
-  get _scheme() {
+  get _scheme() { // eslint-disable-line getter-return
     util.throwMember();
   }
 
-  get _template() {
+  get _template() { // eslint-disable-line getter-return
     util.throwMember();
   }
 
-  get type() {
+  get type() { // eslint-disable-line getter-return
     util.throwMember();
   }
 
@@ -135,14 +135,6 @@ export default class BaseInputElement extends BaseElement {
     });
   }
 
-  set disabled(value) {
-    return util.toggleAttribute(this, 'disabled', value);
-  }
-
-  get disabled() {
-    return this.hasAttribute('disabled');
-  }
-
   connectedCallback() {
     contentReady(this, () => {
       this._input.addEventListener('focus', this._boundDelegateEvent);
@@ -187,3 +179,5 @@ export default class BaseInputElement extends BaseElement {
     this._input.focus();
   }
 }
+
+util.defineBooleanProperties(BaseInputElement, ['disabled']);

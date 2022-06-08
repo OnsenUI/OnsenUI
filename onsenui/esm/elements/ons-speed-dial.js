@@ -84,6 +84,14 @@ export default class SpeedDialElement extends BaseElement {
    */
 
   /**
+   * @property ripple
+   * @type {Boolean}
+   * @description
+   *  [en]If this property is defined, the button will have a ripple effect when tapped.[/en]
+   *  [ja][/ja]
+   */
+
+  /**
    * @attribute position
    * @type {String}
    * @description
@@ -411,7 +419,7 @@ export default class SpeedDialElement extends BaseElement {
       util.match(e, '.fab') && util.toggleAttribute(e, 'disabled', value);
     });
 
-    return util.toggleAttribute(this, 'disabled', value);
+    util.toggleAttribute(this, 'disabled', value);
   }
 
   get disabled() {
@@ -468,17 +476,6 @@ export default class SpeedDialElement extends BaseElement {
    *   [en]Returns whether the menu is open or not.[/en]
    *   [ja][/ja]
    */
-  get open() {
-    return this.hasAttribute('open');
-  }
-
-  set open(value) {
-    if (value) {
-      this.setAttribute('open', '');
-    } else {
-      this.removeAttribute('open');
-    }
-  }
 
   /**
    * @method toggle
@@ -506,6 +503,8 @@ export default class SpeedDialElement extends BaseElement {
     return ['open', 'close'];
   }
 }
+
+util.defineBooleanProperties(SpeedDialElement, ['open', 'ripple']);
 
 onsElements.SpeedDial = SpeedDialElement;
 customElements.define('ons-speed-dial', SpeedDialElement);

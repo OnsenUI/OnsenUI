@@ -243,6 +243,14 @@ export default class TabbarElement extends BaseElement {
    */
 
   /**
+   * @property tabBorder
+   * @type {Boolean}
+   * @description
+   *   [en]If this property is set the tabs show a dynamic bottom border. Only works for iOS flat design since the border is always visible in Material Design.[/en]
+   *   [ja][/ja]
+   */
+
+  /**
    * @attribute modifier
    * @type {String}
    * @description
@@ -549,18 +557,6 @@ export default class TabbarElement extends BaseElement {
     this.hideTabs = true;
   }
 
-  get hideTabs() {
-    return this.hasAttribute('hide-tabs');
-  }
-
-  set hideTabs(value) {
-    if (value) {
-      this.setAttribute('hide-tabs', '');
-    } else {
-      this.removeAttribute('hide-tabs');
-    }
-  }
-
   _updateVisibility() {
     contentReady(this, () => {
       const visible = !this.hideTabs;
@@ -589,13 +585,6 @@ export default class TabbarElement extends BaseElement {
    *   [en]Enable swipe interaction.[/en]
    *   [ja]swipeableであればtrueを返します。[/ja]
    */
-  get swipeable() {
-    return this.hasAttribute('swipeable');
-  }
-
-  set swipeable(value) {
-    return util.toggleAttribute(this, 'swipeable', value);
-  }
 
   /**
    * @property onSwipe
@@ -687,9 +676,11 @@ export default class TabbarElement extends BaseElement {
   }
 
   static get events() {
-    return ['prechange', 'postchange', 'reactive'];
+    return ['prechange', 'postchange', 'reactive', 'swipe'];
   }
 }
+
+util.defineBooleanProperties(TabbarElement, ['hide-tabs', 'swipeable', 'tab-border']);
 
 onsElements.Tabbar = TabbarElement;
 customElements.define('ons-tabbar', TabbarElement);

@@ -279,13 +279,6 @@ export default class SegmentElement extends BaseElement {
    *   [en]Whether the segment is disabled or not.[/en]
    *   [ja]無効化されている場合に`true`。[/ja]
    */
-  set disabled(value) {
-    return util.toggleAttribute(this, 'disabled', value);
-  }
-
-  get disabled() {
-    return this.hasAttribute('disabled');
-  }
 
   get activeIndex() {
     return parseInt(this.getAttribute('active-index'));
@@ -323,6 +316,8 @@ export default class SegmentElement extends BaseElement {
     return ['postchange'];
   }
 }
+
+util.defineBooleanProperties(SegmentElement, ['disabled']);
 
 onsElements.Segment = SegmentElement;
 customElements.define('ons-segment', SegmentElement);
