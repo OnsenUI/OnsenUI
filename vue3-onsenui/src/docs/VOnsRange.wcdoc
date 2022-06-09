@@ -1,0 +1,25 @@
+/**
+ * @element ons-range
+ */
+
+/**
+ * @attribute modelValue
+ * @description
+ *   [en]Fired right after the event set in the modelEvent prop.[/en]
+ *   [ja][/ja]
+ */
+
+/**
+ * @attribute modelEvent
+ * @default input
+ * @description
+ *   [en]The native event which should trigger the update:modelValue event.[/en]
+ *   [ja][/ja]
+ */
+
+/**
+ * @event update:modelValue
+ * @description
+ *   [en]Fired right after the event set in the modelEvent prop.[/en]
+ *   [ja][/ja]
+ */
