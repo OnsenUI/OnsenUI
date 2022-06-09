@@ -17,3 +17,12 @@
  *   [en]Runs the handler for the immediate parent that supports device back button.[/en]
  *   [ja][/ja]
  */
+/**
+ * @event update:visible
+ * @description
+ *   [en]Fired right after user interaction. Useful to update `visible` prop.[/en]
+ *   [ja][/ja]
+ * @param {Number} event
+ *   [en]New value for `visible` prop.[/en]
+ *   [ja][/ja]
+ */
