@@ -1,4 +1,3 @@
-// Generic components:
 export { default as VOnsToolbar } from './VOnsToolbar';
 export { default as VOnsBottomToolbar } from './VOnsBottomToolbar';
 export { default as VOnsToolbarButton } from './VOnsToolbarButton';
@@ -32,8 +31,6 @@ export { default as VOnsActionSheet } from './VOnsActionSheet';
 export { default as VOnsActionSheetButton } from './VOnsActionSheetButton';
 export { default as VOnsModal } from './VOnsModal';
 export { default as VOnsToast } from './VOnsToast';
-
-// Manual components:
 export { default as VOnsPopover } from './VOnsPopover';
 export { default as VOnsAlertDialog } from './VOnsAlertDialog';
 export { default as VOnsSpeedDial } from './VOnsSpeedDial';
