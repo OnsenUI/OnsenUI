@@ -7,6 +7,7 @@ dev
  ### BREAKING CHANGES
 
  * For v-model, `modelValue` prop and `update:modelValue` event are now used instead of `modelProp` prop and `modelEvent` event. However, the `modelEvent` *prop* is unchanged.
+ * VOnsLazyRepeat: The renderItem prop should be a function that returns an *object* describing a Vue component.
 
  ### Bug Fixes
 
