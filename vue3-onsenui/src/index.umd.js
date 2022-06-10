@@ -1,6 +1,6 @@
 import ons from 'onsenui';
-import setup from './setup';
-import * as components from './components';
+import setup from './setup.js';
+import * as components from './components/index.js';
 
 const $ons = setup(ons);
 

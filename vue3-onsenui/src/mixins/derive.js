@@ -1,6 +1,6 @@
 import ons from 'onsenui';
 
-import { camelize, eventToHandler, handlerToProp, capitalize } from '../internal/util';
+import { camelize, eventToHandler, handlerToProp, capitalize } from '../internal/util.js';
 
 /* Private */
 const _setupDBB = component => {

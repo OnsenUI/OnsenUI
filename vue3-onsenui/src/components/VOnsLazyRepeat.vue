@@ -5,7 +5,7 @@
 
 <script>
 import { createVNode, render } from 'vue';
-import 'onsenui/esm/elements/ons-lazy-repeat';
+import 'onsenui/esm/elements/ons-lazy-repeat.js';
 
 export default {
   name: 'v-ons-lazy-repeat',

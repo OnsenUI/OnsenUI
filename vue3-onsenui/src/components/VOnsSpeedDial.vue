@@ -5,8 +5,8 @@
 </template>
 
 <script>
-  import 'onsenui/esm/elements/ons-speed-dial';
-  import { hidable, deriveEvents } from '../mixins';
+  import 'onsenui/esm/elements/ons-speed-dial.js';
+  import { hidable, deriveEvents } from '../mixins/index.js';
 
   const name = 'v-ons-speed-dial';
 

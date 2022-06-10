@@ -7,8 +7,8 @@
 </template>
 
 <script>
-  import 'onsenui/esm/elements/ons-pull-hook';
-  import { deriveEvents } from '../mixins';
+  import 'onsenui/esm/elements/ons-pull-hook.js';
+  import { deriveEvents } from '../mixins/index.js';
 
   const name = 'v-ons-pull-hook';
 

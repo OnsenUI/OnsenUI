@@ -23,8 +23,8 @@
 </template>
 
 <script>
-  import TabbarElement from 'onsenui/esm/elements/ons-tabbar';
-  import { deriveEvents, hasOptions, hidable, selfProvider, modifier, unrecognizedListeners } from '../mixins';
+  import TabbarElement from 'onsenui/esm/elements/ons-tabbar.js';
+  import { deriveEvents, hasOptions, hidable, selfProvider, modifier, unrecognizedListeners } from '../mixins/index.js';
 
   const name = 'v-ons-tabbar';
 

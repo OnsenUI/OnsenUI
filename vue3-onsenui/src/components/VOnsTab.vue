@@ -4,7 +4,7 @@
 </template>
 
 <script>
-  import 'onsenui/esm/elements/ons-tab';
+  import 'onsenui/esm/elements/ons-tab.js';
 
   export default {
     name: 'v-ons-tab',

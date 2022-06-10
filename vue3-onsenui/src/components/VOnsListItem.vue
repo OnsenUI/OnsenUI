@@ -5,8 +5,8 @@
 </template>
 
 <script>
-  import 'onsenui/esm/elements/ons-list-item';
-  import { deriveEvents, modifier } from '../mixins';
+  import 'onsenui/esm/elements/ons-list-item.js';
+  import { deriveEvents, modifier } from '../mixins/index.js';
 
   const name = 'v-ons-list-item';
 

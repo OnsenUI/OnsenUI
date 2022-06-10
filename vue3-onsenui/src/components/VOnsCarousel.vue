@@ -11,8 +11,8 @@
 </template>
 
 <script>
-  import 'onsenui/esm/elements/ons-carousel';
-  import { hasOptions, deriveEvents } from '../mixins';
+  import 'onsenui/esm/elements/ons-carousel.js';
+  import { hasOptions, deriveEvents } from '../mixins/index.js';
 
   const name = 'v-ons-carousel';
 

@@ -5,8 +5,8 @@
 </template>
 
 <script>
-  import 'onsenui/esm/elements/ons-splitter-side';
-  import { hasOptions, deriveEvents } from '../mixins';
+  import 'onsenui/esm/elements/ons-splitter-side.js';
+  import { hasOptions, deriveEvents } from '../mixins/index.js';
 
   const name = 'v-ons-splitter-side';
 

@@ -7,8 +7,8 @@
 </template>
 
 <script>
-  import 'onsenui/esm/elements/ons-select';
-  import { modifier } from '../mixins';
+  import 'onsenui/esm/elements/ons-select.js';
+  import { modifier } from '../mixins/index.js';
 
   export default {
     name: 'v-ons-select',
