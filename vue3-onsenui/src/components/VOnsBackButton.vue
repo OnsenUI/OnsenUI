@@ -5,8 +5,8 @@
 </template>
 
 <script>
-  import 'onsenui/esm/elements/ons-back-button';
-  import { modifier } from '../mixins';
+  import 'onsenui/esm/elements/ons-back-button.js';
+  import { modifier } from '../mixins/index.js';
 
   export default {
     name: 'v-ons-back-button',

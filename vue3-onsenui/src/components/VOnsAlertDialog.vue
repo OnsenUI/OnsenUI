@@ -15,8 +15,8 @@
 </template>
 
 <script>
-  import 'onsenui/esm/elements/ons-alert-dialog';
-  import { hasOptions, dialogCancel, deriveEvents, deriveDBB, portal, modifier } from '../mixins';
+  import 'onsenui/esm/elements/ons-alert-dialog.js';
+  import { hasOptions, dialogCancel, deriveEvents, deriveDBB, portal, modifier } from '../mixins/index.js';
 
   const name = 'v-ons-alert-dialog';
 

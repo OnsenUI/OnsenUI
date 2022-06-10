@@ -6,8 +6,8 @@
 
 <script>
   /* This file was generated automatically by 'generate-components' task in bindings/vue/gulpfile.babel.js */
-  import 'onsenui/esm/elements/ons-dialog';
-  import { deriveEvents, hasOptions, dialogCancel, deriveDBB, portal, modifier } from '../mixins';
+  import 'onsenui/esm/elements/ons-dialog.js';
+  import { deriveEvents, hasOptions, dialogCancel, deriveDBB, portal, modifier } from '../mixins/index.js';
 
   const name = 'v-ons-dialog';
 

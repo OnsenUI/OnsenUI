@@ -1,5 +1,5 @@
-import ons from 'onsenui/esm';
-import setup from './setup';
+import ons from 'onsenui';
+import setup from './setup.js';
 
 const $ons = setup(ons);
 

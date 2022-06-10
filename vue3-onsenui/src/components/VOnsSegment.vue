@@ -5,8 +5,8 @@
 </template>
 
 <script>
-  import 'onsenui/esm/elements/ons-segment';
-  import { deriveEvents } from '../mixins';
+  import 'onsenui/esm/elements/ons-segment.js';
+  import { deriveEvents } from '../mixins/index.js';
 
   const name = 'v-ons-segment';
 

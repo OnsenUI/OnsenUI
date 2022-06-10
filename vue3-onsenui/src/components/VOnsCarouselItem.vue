@@ -6,8 +6,8 @@
 
 <script>
   /* This file was generated automatically by 'generate-components' task in bindings/vue/gulpfile.babel.js */
-  import 'onsenui/esm/elements/ons-carousel-item';
-  import { deriveEvents } from '../mixins';
+  import 'onsenui/esm/elements/ons-carousel-item.js';
+  import { deriveEvents } from '../mixins/index.js';
 
   const name = 'v-ons-carousel-item';
 

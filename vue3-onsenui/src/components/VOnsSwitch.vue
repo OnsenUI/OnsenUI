@@ -6,8 +6,8 @@
 
 <script>
   /* This file was generated automatically by 'generate-components' task in bindings/vue/gulpfile.babel.js */
-  import 'onsenui/esm/elements/ons-switch';
-  import { deriveEvents, modelCheckbox, modifier } from '../mixins';
+  import 'onsenui/esm/elements/ons-switch.js';
+  import { deriveEvents, modelCheckbox, modifier } from '../mixins/index.js';
 
   const name = 'v-ons-switch';
 
