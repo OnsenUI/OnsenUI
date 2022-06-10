@@ -26,6 +26,7 @@ function createFileIndex(docs) {
 
     const extensionMap = {
       vue: /^\.\.\/vue-onsenui\//,
+      vue3: /^\.\.\/vue3-onsenui\//,
       angular1: /^bindings\/angular1\//,
       angular2: /^\.\.\/ngx-onsenui\//
     };
@@ -226,6 +227,7 @@ function build(out) {
       './bindings/angular1/js/*.js',
       '../ngx-onsenui/projects/ngx-onsenui/src/lib/directives/*.ts',
       '../vue-onsenui/src/docs/*.wcdoc',
+      '../vue3-onsenui/src/docs/*.wcdoc',
       '!**/*.spec.js'
     ]
   }).then(function(result) {
