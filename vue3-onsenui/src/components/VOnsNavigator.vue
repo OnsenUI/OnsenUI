@@ -15,7 +15,6 @@
 <script>
   import NavigatorElement from 'onsenui/esm/elements/ons-navigator.js';
   import { hasOptions, selfProvider, deriveEvents, deriveDBB, unrecognizedListeners } from '../mixins/index.js';
-  import { camelize } from '../internal/util.js';
 
   const name = 'v-ons-navigator';
 
