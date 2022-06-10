@@ -7,6 +7,7 @@ $ons.install = app => {
   /**
    * Expose ons object.
    */
+  $ons._app = app;
   app.config.globalProperties.$ons = $ons;
 };
 

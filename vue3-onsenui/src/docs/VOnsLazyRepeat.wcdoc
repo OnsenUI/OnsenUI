@@ -7,7 +7,7 @@
  * @type {Function}
  * @required true
  * @description
- *   [en]Item generator. This function gets an index as its first argument and must return an unmounted Vue component corresponding to a row in the list. The index should be used to get the necessary data for the new item.[/en]
+ *   [en]Item generator. This function gets an index as its first argument and must return an object describing a Vue component. The index should be used to get the necessary data for the new item.[/en]
  *   [ja][/ja]
  */
 

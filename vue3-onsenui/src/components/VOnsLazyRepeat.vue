@@ -4,6 +4,7 @@
 </template>
 
 <script>
+import { createVNode, render } from 'vue';
 import 'onsenui/esm/elements/ons-lazy-repeat';
 
 export default {
@@ -12,15 +13,7 @@ export default {
   props: {
     renderItem: {
       type: Function,
-      required: true,
-      validator(value) {
-        const component = value(0);
-        if (component.__isVue && !component._isMounted) {
-          component.$destroy();
-          return true;
-        }
-        return false;
-      }
+      required: true
     },
     length: {
       type: Number,
@@ -44,8 +37,23 @@ export default {
 
       const delegate = new this.$ons._ons._internal.LazyRepeatDelegate({
         calculateItemHeight: this.calculateItemHeight,
-        createItemContent: i => this.renderItem(i).$mount().$el,
-        destroyItem: (i, { element }) => element.__vue__.$destroy(),
+        createItemContent: i => {
+          let vnode = createVNode(this.renderItem(i));
+          vnode.appContext = this.$ons._app._context;
+
+          let fragment = document.createDocumentFragment();
+          render(vnode, fragment);
+          let element = fragment.firstChild;
+
+          element.destroy = () => {
+            fragment = null;
+            vnode = null;
+            element = null;
+          };
+
+          return fragment.firstChild;
+        },
+        destroyItem: (i, { element }) => element.destroy(),
         countItems: () => this.length
       }, null);
 
@@ -70,12 +78,9 @@ export default {
 
   mounted() {
     this._setup();
-    this.$vnode.context.$on('refresh', this.refresh);
   },
 
   beforeDestroy() {
-    this.$vnode.context.$off('refresh', this.refresh);
-
     // This will destroy the provider once the rendered element
     // is detached (detachedCallback). Therefore, animations
     // have time to finish before elements start to disappear.
