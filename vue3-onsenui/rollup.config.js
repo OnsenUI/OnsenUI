@@ -1,36 +1,79 @@
-import path from 'path';
-import pkg from './package.json';
-import corePkg from '../../../package.json';
+import vue from 'rollup-plugin-vue';
+import { babel } from '@rollup/plugin-babel';
+import replace from '@rollup/plugin-replace';
+
+import glob from 'glob';
 import dateformat from 'dateformat';
 
-// Rollup plugins
-import babel from 'rollup-plugin-babel';
-import { eslint } from 'rollup-plugin-eslint';
-import resolve from 'rollup-plugin-node-resolve';
-import commonjs from 'rollup-plugin-commonjs';
-import replace from 'rollup-plugin-replace';
-import filesize from 'rollup-plugin-filesize';
-import progress from 'rollup-plugin-progress';
-import visualizer from 'rollup-plugin-visualizer';
-import alias from 'rollup-plugin-alias';
-import vue from 'rollup-plugin-vue';
+import pkg from './package.json';
 
-const local = (...args) => path.resolve(__dirname, ...args);
 
-const babelrc = Object.assign({}, corePkg.babel);
-babelrc.babelrc = babelrc.presets[0][1].modules = false;
-babelrc.plugins = ['external-helpers'];
-babelrc.exclude = [local('node_modules/**'), local('../../build/**')];
+////////////////////////////////////////////////////////////////////////////////
+// ESM config
+////////////////////////////////////////////////////////////////////////////////
+const esmConfig = (() => {
+  const sourceFiles = glob.sync('./src/**/*', { absolute: true });
+  const vueFiles = glob.sync('./src/**/*.vue');
+  const jsFiles = glob.sync('./src/**/!(index.umd).js');
 
-const globals = { 'onsenui': 'ons', 'onsenui/esm': 'ons' },
-  external = id => /^onsenui/.test(id),
-  banner = `/* ${pkg.name} v${pkg.version} - ${dateformat(new Date(), 'yyyy-mm-dd')} */\n`;
+  const jsConfig = input => ({
+    input,
+    output: {
+      format: 'esm',
+      file: input.replace('./src', './esm').replace('.vue', '.js')
+    },
+    external: id => !/\.vue\?vue/.test(id),
+    plugins: [
+      replace({
+        include: './src/components/index.js',
+        preventAssignment: true,
+        '.vue': '.js'
+      })
+    ]
+  });
 
-const builds = [
-  // Vue bindings UMD
-  {
+  const vueConfig = input => ({
+    ...jsConfig(input),
+    plugins: [
+      vue({
+        compilerOptions: {
+          isCustomElement: tag => tag.startsWith('ons-')
+        }
+      })
+    ]
+  });
+
+  return [
+    ...jsFiles.map(file => jsConfig(file)),
+    ...vueFiles.map(file => vueConfig(file))
+  ];
+})();
+
+
+////////////////////////////////////////////////////////////////////////////////
+// UMD config
+////////////////////////////////////////////////////////////////////////////////
+const umdConfig = (() => {
+  const banner = `/* ${pkg.name} v${pkg.version} - ${dateformat(new Date(), 'yyyy-mm-dd')} */\n`;
+
+  const globals = id => {
+    const rest = {
+      'onsenui': 'ons',
+      'vue': 'Vue'
+    };
+
+    const element = id.match(/^onsenui\/esm\/elements\/ons-([a-z-]+)(\.js)?$/)?.[1];
+    if (element) {
+      const camel = element.charAt(0).toUpperCase() + element.slice(1).replace(/-([a-z])/g, match => match[1].toUpperCase());
+      return `ons.elements.${camel}`;
+    } else {
+      return rest[id];
+    }
+  };
+
+  return {
     input: 'src/index.umd.js',
-    external,
+    external: id => /^(onsenui|vue)(\/.*)?$/.test(id),
     output: {
       file: 'dist/vue-onsenui.js',
       format: 'umd',
@@ -40,83 +83,30 @@ const builds = [
       banner,
     },
     plugins: [
-      eslint({
-        exclude: [
-          /vue&type=/,
-          /node_modules/
-        ]
+      vue({
+        compilerOptions: {
+          isCustomElement: tag => tag.startsWith('ons-')
+        }
       }),
-      resolve({ extensions: ['.js', '.vue'] }),
-      replace({
-        // Remove undefined imports to slightly reduce UMD bundle size
-        include: './src/components/*.vue',
-        'import \'onsenui/esm/elements/': '// \'',
-      }),
-      vue(),
-      babel(babelrc),
-      progress(),
-      filesize(),
-      visualizer({
-        filename: 'module-stats.umd.html',
-        sourcemap: true,
-      })
-    ],
-  },
+      babel({ babelHelpers: 'bundled' }),
+    ]
+  };
+})();
 
-  // Vue bindings ES Modules
-  {
-    input: 'src/index.esm.js',
-    external,
-    output: {
-      file: 'esm/index.js',
-      format: 'es',
-      name: 'VueOnsenESM',
-      sourcemap: 'inline',
-      globals,
-      banner,
-    },
-    plugins: [
-      babel(babelrc),
-      progress(),
-      filesize(),
-      visualizer({
-        filename: 'module-stats.esm.html',
-        sourcemap: false,
-      }),
-    ],
-  },
-];
 
-// Make it work with rollup CLI and Gulp
-builds.devConfig = {
-  input: local('examples/main.js'),
-  output: {
-    file: local('examples/build.js'),
-    format: 'umd',
-    name: 'VueOnsenDev',
-    sourcemap: 'inline',
-  },
-  plugins: [
-    alias({
-      resolve: ['.js', '.vue', '\/index.js'],
-      vue: local('node_modules/vue/dist/vue.esm.js'),
-      'vue-onsenui/esm/components': local('src', 'components'),
-      'vue-onsenui/esm': local('src', 'index.esm.js'),
-      'vue-onsenui': local('src', 'index.umd.js'),
-      'onsenui/esm': local('../../build/esm'),
-      'onsenui': local('../../build/js/onsenui'),
-    }),
-    resolve({ extensions: ['.js', '.vue'] }),
-    replace({
-      'import \'onsenui/esm/elements/': '// \'',
-      'process.env.NODE_ENV': JSON.stringify( 'development' )
-    }),
-    commonjs({ include: ['node_modules/**', local('../../build/js/*')] }),
-    vue(),
-    babel(babelrc),
-    progress(),
-    filesize(),
-  ],
+/**
+ * Command line instructions
+ * -------------------------
+ * ESM build:          rollup -c --configEsm
+ * UMD build:          rollup -c --configUmd
+ * Build everything:   rollup -c
+ */
+export default commandLineArgs => {
+  if (commandLineArgs.configEsm) {
+    return esmConfig;
+  } else if (commandLineArgs.configUmd) {
+    return umdConfig;
+  } else {
+    return [...esmConfig, umdConfig];
+  }
 };
-
-export default builds;

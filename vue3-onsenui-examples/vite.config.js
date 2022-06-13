@@ -11,5 +11,15 @@ export default defineConfig({
       '@': fileURLToPath(new URL('./src', import.meta.url)),
       'vue': 'vue/dist/vue.esm-bundler.js'
     }
-  }
+  },
+
+  // uncomment this when using the UMD build of vue-onsenui
+  //optimizeDeps: {
+  //  include: ['vue-onsenui']
+  //},
+  //build: {
+  //  commonJsOptions: {
+  //    include: [/vue-onsenui/]
+  //  }
+  //}
 })
