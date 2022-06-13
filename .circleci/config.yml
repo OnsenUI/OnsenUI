@@ -95,22 +95,22 @@ jobs:
           command: |
             npm run build:vue
 
-      ## bindings/vue3
-      #- restore_cache:
-      #    keys:
-      #      - v1-vue3-cache-{{ .Branch }}-{{ checksum "bindings/vue3/package-lock.json" }}
-      #      - v1-vue3-cache-{{ .Branch }}-
-      #      - v1-vue3-cache-
-      #- run:
-      #    name: Install Vue 3 dependencies and build vue-onsenui for Vue 3
-      #    command: |
-      #      cd bindings/vue3
-      #      npm ci
-      #      npm run build
-      #- save_cache:
-      #    key: v1-vue3-cache-{{ .Branch }}-{{ checksum "bindings/vue3/package-lock.json" }}
-      #    paths:
-      #      - ./bindings/vue3/node_modules
+      # bindings/vue3
+      - restore_cache:
+          keys:
+            - v1-vue3-cache-{{ .Branch }}-{{ checksum "vue3-onsenui/package-lock.json" }}
+            - v1-vue3-cache-{{ .Branch }}-
+            - v1-vue3-cache-
+      - run:
+          name: Install Vue 3 dependencies and build vue-onsenui for Vue 3
+          command: |
+            cd vue3-onsenui
+            npm ci
+            npm run build
+      - save_cache:
+          key: v1-vue3-cache-{{ .Branch }}-{{ checksum "vue3-onsenui/package-lock.json" }}
+          paths:
+            - ./vue3-onsenui/node_modules
 
       # Tests
       - run:
