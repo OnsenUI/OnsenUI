@@ -126,7 +126,7 @@
             <v-ons-icon icon="md-volume-down"></v-ons-icon>
           </v-ons-col>
           <v-ons-col>
-            <v-ons-range v-model.number="volume" style="width: 100%;"></v-ons-range>
+            <v-ons-range v-model="volume" style="width: 100%;"></v-ons-range>
           </v-ons-col>
           <v-ons-col width="40px" style="text-align: center; line-height: 31px;">
             <v-ons-icon icon="md-volume-up"></v-ons-icon>
