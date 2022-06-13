@@ -36,6 +36,16 @@ const modelInput = {
   }
 };
 
+// Input with number value
+const modelInputNumber = {
+  mixins: [modelInput],
+  methods: {
+    _onModelEvent(event) {
+      this.$emit('update:modelValue', event.target.valueAsNumber);
+    }
+  }
+}
+
 // Checkable inputs
 const modelCheckbox = {
   mixins: [modelInput],
@@ -108,5 +118,5 @@ const modelRadio = {
   }
 };
 
-export { modelInput, modelCheckbox, modelRadio };
+export { modelInput, modelInputNumber, modelCheckbox, modelRadio };
 

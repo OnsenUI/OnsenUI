@@ -13,7 +13,7 @@ dev
 
  * VOnsSplitterSide: animation option is respected when swiping splitter at startup.
  * VOnsPage: Page content is updated when adding content dynamically with `v-for`. [#2512](https://github.com/OnsenUI/OnsenUI/issues/2512)).
-
+ * VOnsRange: Model value as a number instead of a string. [#2771](https://github.com/OnsenUI/OnsenUI/issues/2771).
 
 Older changes
 -------------
