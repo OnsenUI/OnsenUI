@@ -1,6 +1,13 @@
 CHANGELOG
 ====
 
+dev
+---
+
+ ### Bug Fixes
+
+ * VOnsRange: Model value as a number instead of a string.  [#2771](https://github.com/OnsenUI/OnsenUI/issues/2771).
+
 2.7.0
 ---
 
