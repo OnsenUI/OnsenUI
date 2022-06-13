@@ -1,6 +1,5 @@
 <template>
   <ons-tabbar
-    :on-swipe.prop="onSwipe"
     :activeIndex="index"
     :modifier="normalizedModifier"
     v-on="unrecognizedListeners"
@@ -40,9 +39,6 @@
         validator(value) {
           return value.every(tab => ['icon', 'label', 'page'].some(prop => !!Object.getOwnPropertyDescriptor(tab, prop)));
         }
-      },
-      onSwipe: {
-        type: Function
       },
       tabbarStyle: {
         type: null
