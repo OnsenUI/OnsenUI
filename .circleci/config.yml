@@ -38,8 +38,8 @@ jobs:
           key: v1-onsenui-cache-{{ .Branch }}-{{ checksum "package-lock.json" }}
           paths:
             - ./node_modules
-            - ./vue-onsenui/node_modules
-            - ./vue-onsenui-examples/node_modules
+            - ./vue3-onsenui/node_modules
+            - ./vue3-onsenui-examples/node_modules
             - ./react-onsenui/node_modules
             - ./react-onsenui-examples/node_modules
 
@@ -89,28 +89,28 @@ jobs:
           command: |
             npm run build:react
 
-      # bindings/vue2
+      # bindings/vue3
       - run:
-          name: Build vue-onsenui for Vue 2
+          name: Build vue-onsenui for Vue 3
           command: |
             npm run build:vue
 
-      # bindings/vue3
+      # bindings/vue2
       - restore_cache:
           keys:
-            - v1-vue3-cache-{{ .Branch }}-{{ checksum "vue3-onsenui/package-lock.json" }}
-            - v1-vue3-cache-{{ .Branch }}-
-            - v1-vue3-cache-
+            - v1-vue-cache-{{ .Branch }}-{{ checksum "vue-onsenui/package-lock.json" }}
+            - v1-vue-cache-{{ .Branch }}-
+            - v1-vue-cache-
       - run:
-          name: Install Vue 3 dependencies and build vue-onsenui for Vue 3
+          name: Install Vue 2 dependencies and build vue-onsenui for Vue 2
           command: |
-            cd vue3-onsenui
+            cd vue-onsenui
             npm ci
             npm run build
       - save_cache:
-          key: v1-vue3-cache-{{ .Branch }}-{{ checksum "vue3-onsenui/package-lock.json" }}
+          key: v1-vue-cache-{{ .Branch }}-{{ checksum "vue-onsenui/package-lock.json" }}
           paths:
-            - ./vue3-onsenui/node_modules
+            - ./vue-onsenui/node_modules
 
       # Tests
       - run:
