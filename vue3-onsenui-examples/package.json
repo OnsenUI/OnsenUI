@@ -10,7 +10,7 @@
   "dependencies": {
     "vue": "^3.2.33",
     "onsenui": "~2.12.0",
-    "vue-onsenui": "~3.0.0"
+    "vue-onsenui": "3.0.0-alpha"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^2.3.1",
