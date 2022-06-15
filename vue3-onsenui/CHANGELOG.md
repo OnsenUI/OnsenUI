@@ -6,6 +6,7 @@ dev
 
  ### BREAKING CHANGES
 
+ * The ESM build is now the default when vue-onsenui is used with a bundler. When using the ESM build, components must be registered using `app.component` before they can be used.
  * For v-model, `modelValue` prop and `update:modelValue` event are now used instead of `modelProp` prop and `modelEvent` event. However, the `modelEvent` *prop* is unchanged.
  * VOnsLazyRepeat: The renderItem prop should be a function that returns an *object* describing a Vue component.
 
