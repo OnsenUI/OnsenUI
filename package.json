@@ -6,10 +6,10 @@
   "scripts": {
     "build": "npm run --prefix onsenui build",
     "build:react": "npm run --prefix react-onsenui build",
-    "build:vue": "npm run --prefix vue-onsenui build",
+    "build:vue": "npm run --prefix vue3-onsenui build",
     "serve": "npm run --prefix onsenui serve",
     "serve:react": "npm run --prefix react-onsenui-examples start",
-    "serve:vue": "npm run --prefix vue-onsenui-examples serve",
+    "serve:vue": "npm run --prefix vue3-onsenui-examples serve",
     "test": "npm run --prefix onsenui test",
     "test:react": "npm run --prefix react-onsenui test"
   },
@@ -20,7 +20,7 @@
     "./onsenui",
     "./react-onsenui",
     "./react-onsenui-examples",
-    "./vue-onsenui",
-    "./vue-onsenui-examples"
+    "./vue3-onsenui",
+    "./vue3-onsenui-examples"
   ]
 }
