@@ -1,6 +1,8 @@
 import { createApp } from 'vue';
 
-import VueOnsen from 'vue-onsenui'; // umd
+import VueOnsen from 'vue-onsenui';
+import * as components from 'vue-onsenui/esm/components';
+
 import Vuex from 'vuex';
 
 import App from './App.vue';
@@ -8,15 +10,11 @@ import App from './App.vue';
 import 'onsenui/css/onsenui.css';
 import 'onsenui/css/onsen-css-components.css';
 
-// import VueOnsen from 'vue-onsenui/esm'; // esm
-// // import * as VOns from 'vue-onsenui/esm/components';
-// // Object.values(VOns).forEach(component => Vue.component(component.name, component));
-// import VOnsPage from '../src/components/VOnsPage';
-// import VOnsToolbar from '../src/components/VOnsToolbar';
-// Vue.component(VOnsPage.name, VOnsPage);
-// Vue.component(VOnsToolbar.name, VOnsToolbar);
-
 const app = createApp(App);
+
+// Register all vue-onsenui components
+Object.values(components).forEach(component =>
+  app.component(component.name, component));
 
 app.use(VueOnsen);
 app.use(Vuex);
