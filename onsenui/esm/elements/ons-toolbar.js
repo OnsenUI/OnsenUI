@@ -106,6 +106,14 @@ export default class ToolbarElement extends BaseElement {
    */
 
   /**
+   * @property static
+   * @type {Boolean}
+   * @description
+   *   [en]Static toolbars are not animated by `ons-navigator` when pushing or popping pages. This can be useful to improve performance in some situations.[/en]
+   *   [ja][/ja]
+   */
+
+  /**
    * @attribute modifier
    * @description
    *   [en]The appearance of the toolbar.[/en]
@@ -282,6 +290,8 @@ export default class ToolbarElement extends BaseElement {
     return element;
   }
 }
+
+util.defineBooleanProperties(ToolbarElement, ['static']);
 
 onsElements.Toolbar = ToolbarElement;
 customElements.define('ons-toolbar', ToolbarElement);

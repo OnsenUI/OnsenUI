@@ -442,6 +442,11 @@ declare namespace ons {
     hide(): void;
 
     visible: boolean;
+
+    /**
+     * @description Static toolbars are not animated by `ons-navigator` when pushing or popping pages. This can be useful to improve performance in some situations.
+     */
+    static: boolean;
   }
 
   interface OnsToolbarButtonElement extends HTMLElement {
