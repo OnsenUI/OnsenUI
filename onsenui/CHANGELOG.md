@@ -17,6 +17,7 @@ dev
  * ons-speed-dial: Added `ripple` property.
  * ons-list-item: Added `expandable` property.
  * ons-list-item: Added `tappable` property.
+ * ons-list-item: Added `lockOnDrag` property.
  * ons-ripple: Added `center` property.
  * ons-icon: Added `fixedWidth` property.
  * ons-icon: Added `spin` property.

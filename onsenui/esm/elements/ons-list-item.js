@@ -112,7 +112,15 @@ export default class ListItemElement extends BaseElement {
 
   /**
    * @attribute lock-on-drag
-   * @type {String}
+   * @type {Boolean}
+   * @description
+   *   [en]Prevent vertical scrolling when the user drags horizontally.[/en]
+   *   [ja]この属性があると、ユーザーがこの要素を横方向にドラッグしている時に、縦方向のスクロールが起きないようになります。[/ja]
+   */
+
+  /**
+   * @property lockOnDrag
+   * @type {Boolean}
    * @description
    *   [en]Prevent vertical scrolling when the user drags horizontally.[/en]
    *   [ja]この属性があると、ユーザーがこの要素を横方向にドラッグしている時に、縦方向のスクロールが起きないようになります。[/ja]
@@ -491,7 +499,7 @@ export default class ListItemElement extends BaseElement {
   }
 }
 
-util.defineBooleanProperties(ListItemElement, ['expanded', 'expandable', 'tappable']);
+util.defineBooleanProperties(ListItemElement, ['expanded', 'expandable', 'tappable', 'lock-on-drag']);
 
 onsElements.ListItem = ListItemElement;
 customElements.define('ons-list-item', ListItemElement);

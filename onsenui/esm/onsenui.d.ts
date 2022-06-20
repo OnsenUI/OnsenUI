@@ -1239,6 +1239,10 @@ declare namespace ons {
      * @description Makes the element react to taps.
      **/
     tappable: boolean;
+    /**
+     * @description Prevent vertical scrolling when the user drags horizontally.
+     **/
+    lockOnDrag: boolean;
   }
 
 }
