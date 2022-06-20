@@ -176,6 +176,13 @@ export default class ListItemElement extends BaseElement {
    */
 
   /**
+   * @event expand
+   * @description
+   *   [en]For expandable list items, fires when the list item is expanded or contracted.[/en]
+   *   [ja][/ja]
+   */
+
+  /**
    * @attribute animation
    * @type {String}
    * @default default
