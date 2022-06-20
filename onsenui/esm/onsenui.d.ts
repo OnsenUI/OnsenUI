@@ -1247,6 +1247,10 @@ declare namespace ons {
      * @description The animation used when showing and hiding the expandable content. Can be either `"default"` or `"none"`.
      **/
     animation: string;
+    /**
+     * @description Changes the background color when tapped. For this to work, the attribute "tappable" needs to be set. The default color is "#d9d9d9". It will display as a ripple effect on Android.
+     **/
+    tapBackgroundColor: string;
   }
 
 }

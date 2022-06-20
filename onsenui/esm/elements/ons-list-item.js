@@ -151,6 +151,14 @@ export default class ListItemElement extends BaseElement {
    */
 
   /**
+   * @property tapBackgroundColor
+   * @type {Color}
+   * @description
+   *   [en] Changes the background color when tapped. For this to work, the attribute "tappable" needs to be set. The default color is "#d9d9d9". It will display as a ripple effect on Android.[/en]
+   *   [ja][/ja]
+   */
+
+  /**
    * @attribute expandable
    * @type {Boolean}
    * @description
@@ -509,7 +517,7 @@ export default class ListItemElement extends BaseElement {
 }
 
 util.defineBooleanProperties(ListItemElement, ['expanded', 'expandable', 'tappable', 'lock-on-drag']);
-util.defineStringProperties(ListItemElement, ['animation']);
+util.defineStringProperties(ListItemElement, ['animation', 'tap-background-color']);
 
 onsElements.ListItem = ListItemElement;
 customElements.define('ons-list-item', ListItemElement);

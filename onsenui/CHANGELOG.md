@@ -19,6 +19,7 @@ dev
  * ons-list-item: Added `tappable` property.
  * ons-list-item: Added `lockOnDrag` property.
  * ons-list-item: Added `animation` property.
+ * ons-list-item: Added `tapBackgroundColor` property.
  * ons-ripple: Added `center` property.
  * ons-icon: Added `fixedWidth` property.
  * ons-icon: Added `spin` property.
