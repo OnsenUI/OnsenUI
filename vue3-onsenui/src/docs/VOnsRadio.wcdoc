@@ -5,7 +5,7 @@
 /**
  * @attribute modelValue
  * @description
- *   [en]Fired right after the event set in the modelEvent prop.[/en]
+ *   [en]Whether the radio button is checked or not.[/en]
  *   [ja][/ja]
  */
 
