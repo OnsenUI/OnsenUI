@@ -412,7 +412,7 @@ export default class ListItemElement extends BaseElement {
         this._animatorFactory = this._updateAnimatorFactory();
         break;
       case 'expanded':
-        this._animateExpansion();
+        contentReady(this, () => this._animateExpansion());
         break;
     }
   }

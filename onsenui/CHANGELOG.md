@@ -9,6 +9,7 @@ dev
 
  * ons-alert-dialog: User's onDeviceBackButton setting is no longer ignored when connecting element.
  * ons-splitter-side: Fix options.animation being ignored.
+ * ons-list-item: Wait until content is ready before expanding list item when expanded is set.
 
  ### New Features
 
