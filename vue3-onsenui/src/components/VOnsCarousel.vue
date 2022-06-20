@@ -1,7 +1,6 @@
 <template>
   <ons-carousel
-    :initial-index="index"
-    @postchange.self="$emit('update:index', $event.activeIndex)"
+    @postchange.self="$emit('update:activeIndex', $event.activeIndex)"
   >
     <div>
       <slot></slot>
@@ -19,20 +18,6 @@
   export default {
     name,
     mixins: [hasOptions, deriveEvents(name)],
-    emits: ['update:index'],
-
-    props: {
-      index: {
-        type: Number
-      }
-    },
-
-    watch: {
-      index() {
-        if (this.index !== this.$el.getActiveIndex()) {
-          this.$el.setActiveIndex(this.index, this.options);
-        }
-      }
-    }
+    emits: ['update:activeIndex'],
   };
 </script>
