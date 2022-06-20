@@ -1,5 +1,5 @@
 <template>
-  <ons-toolbar :modifier="normalizedModifier">
+  <ons-toolbar :modifier="normalizedModifier" :inline="inline || null">
     <slot></slot>
   </ons-toolbar>
 </template>
@@ -13,6 +13,9 @@
 
   export default {
     name,
-    mixins: [deriveEvents(name), modifier]
+    mixins: [deriveEvents(name), modifier],
+    props: {
+      inline: Boolean
+    }
   };
 </script>
