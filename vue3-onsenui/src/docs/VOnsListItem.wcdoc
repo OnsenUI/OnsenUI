@@ -9,3 +9,11 @@
  *   [en]For expandable list items, specifies whether the expandable content is expanded or not.[/en]
  *   [ja][/ja]
  */
+
+/**
+ * @event update:expanded
+ * @type {Boolean}
+ * @description
+ *   [en]Same as expand event. For compatability with v-model.[/en]
+ *   [ja][/ja]
+ */
