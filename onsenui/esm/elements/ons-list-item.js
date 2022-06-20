@@ -199,6 +199,15 @@ export default class ListItemElement extends BaseElement {
    *  [ja][/ja]
    */
 
+  /**
+   * @property animation
+   * @type {String}
+   * @default default
+   * @description
+   *  [en]The animation used when showing and hiding the expandable content. Can be either `"default"` or `"none"`.[/en]
+   *  [ja][/ja]
+   */
+
   constructor() {
     super();
 
@@ -500,6 +509,7 @@ export default class ListItemElement extends BaseElement {
 }
 
 util.defineBooleanProperties(ListItemElement, ['expanded', 'expandable', 'tappable', 'lock-on-drag']);
+util.defineStringProperties(ListItemElement, ['animation']);
 
 onsElements.ListItem = ListItemElement;
 customElements.define('ons-list-item', ListItemElement);

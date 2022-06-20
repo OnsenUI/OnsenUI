@@ -1243,6 +1243,10 @@ declare namespace ons {
      * @description Prevent vertical scrolling when the user drags horizontally.
      **/
     lockOnDrag: boolean;
+    /**
+     * @description The animation used when showing and hiding the expandable content. Can be either `"default"` or `"none"`.
+     **/
+    animation: string;
   }
 
 }
