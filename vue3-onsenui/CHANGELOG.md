@@ -10,6 +10,7 @@ dev
  * For v-model, `modelValue` prop and `update:modelValue` event are now used instead of `modelProp` prop and `modelEvent` event. However, the `modelEvent` *prop* is unchanged.
  * VOnsLazyRepeat: The renderItem prop should be a function that returns an *object* describing a Vue component.
  * VOnsCarousel: The `index` prop and `update:index` event have been renamed to `active-index` and `update:active-index` respectively.
+ * VOnsTabbar: The `index` prop and `update:index` event have been renamed to `active-index` and `update:active-index` respectively.
 
  ### Bug Fixes
 

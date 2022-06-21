@@ -1,8 +1,7 @@
 <template>
   <ons-tabbar
-    :activeIndex="index"
     :modifier="normalizedModifier"
-    @prechange.self="$nextTick(() => !$event.detail.canceled && $emit('update:index', $event.index))"
+    @prechange.self="$nextTick(() => !$event.detail.canceled && $emit('update:activeIndex', $event.index))"
   >
     <div class="tabbar__content">
       <div>
@@ -30,12 +29,9 @@
   export default {
     name,
     mixins: [deriveEvents(name), hasOptions, hidable, selfProvider, modifier, unrecognizedListeners(TabbarElement)],
-    emits: ['update:index'],
+    emits: ['update:activeIndex'],
 
     props: {
-      index: {
-        type: Number
-      },
       tabs: {
         type: Array,
         validator(value) {
@@ -52,13 +48,5 @@
         return tab.key || tab.label || tab.icon;
       }
     },
-
-    watch: {
-      index() {
-        if (this.index !== this.$el.getActiveTabIndex()) {
-          this.$el.setActiveTab(this.index, { reject: false, ...this.options });
-        }
-      }
-    }
   };
 </script>
