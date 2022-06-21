@@ -32,6 +32,7 @@ dev
  * ons-speed-dial-item: Added `ripple` property.
  * ons-tabbar: Added `tabBorder` property.
  * ons-toolbar: Added `static` property.
+ * ons-input: `type` property is now settable.
 
 2.12.0
 ---

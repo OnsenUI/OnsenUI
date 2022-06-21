@@ -94,6 +94,10 @@ export default class InputElement extends BaseInputElement {
     return (['checkbox', 'radio'].indexOf(type) < 0) && type || 'text';
   }
 
+  set type(value) {
+    this.setAttribute('type', value);
+  }
+
   /* Own props */
 
   _updateLabel() {
