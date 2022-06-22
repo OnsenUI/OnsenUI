@@ -22,13 +22,13 @@
 
 <script>
   import TabbarElement from 'onsenui/esm/elements/ons-tabbar.js';
-  import { deriveEvents, hasOptions, hidable, selfProvider, modifier, unrecognizedListeners } from '../mixins/index.js';
+  import { deriveEvents, hidable, selfProvider, modifier, unrecognizedListeners } from '../mixins/index.js';
 
   const name = 'v-ons-tabbar';
 
   export default {
     name,
-    mixins: [deriveEvents(name), hasOptions, hidable, selfProvider, modifier, unrecognizedListeners(TabbarElement)],
+    mixins: [deriveEvents(name), hidable, selfProvider, modifier, unrecognizedListeners(TabbarElement)],
     emits: ['update:activeIndex'],
 
     props: {

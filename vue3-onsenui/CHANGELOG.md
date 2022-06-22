@@ -11,6 +11,7 @@ dev
  * VOnsLazyRepeat: The renderItem prop should be a function that returns an *object* describing a Vue component.
  * VOnsCarousel: The `index` prop and `update:index` event have been renamed to `active-index` and `update:active-index` respectively.
  * VOnsTabbar: The `index` prop and `update:index` event have been renamed to `active-index` and `update:active-index` respectively.
+ * VOnsTabbar: The `options.animation` and `options.animationOptions` props have been renamed to `animation` and `animationOptions` respectively.
 
  ### Bug Fixes
 
