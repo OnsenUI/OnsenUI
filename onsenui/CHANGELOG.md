@@ -31,6 +31,7 @@ dev
  * ons-pull-hook: Added `fixedContent` property.
  * ons-speed-dial-item: Added `ripple` property.
  * ons-tabbar: Added `tabBorder` property.
+ * ons-tabbar: Added `animationOptions` property.
  * ons-toolbar: Added `static` property.
  * ons-input: `type` property is now settable.
 
