@@ -24,6 +24,10 @@
     "deprecated": {
       "type": "boolean",
       "required": true
+    },
+    "readonly": {
+      "type": "boolean",
+      "required": true
     }
   },
   "additionalProperties": false
