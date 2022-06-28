@@ -17,8 +17,8 @@
 
     <v-ons-tabbar
       swipeable
-      v-model:tabs="tabs"
-      v-model:index="tabbarIndex"
+      :tabs="tabs"
+      v-model:active-index="tabbarIndex"
       :visible="tabbarVisibility"
       position="auto"
       @reactive="log('reactive')"
