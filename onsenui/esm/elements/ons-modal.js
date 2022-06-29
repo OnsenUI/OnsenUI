@@ -120,13 +120,6 @@ export default class ModalElement extends BaseDialogElement {
    */
 
   /**
-   * @event dialogcancel
-   * @description
-   * [en]Fired when the modal is canceled.[/en]
-   * [ja][/ja]
-   */
-
-  /**
    * @attribute animation
    * @type {String}
    * @default default
