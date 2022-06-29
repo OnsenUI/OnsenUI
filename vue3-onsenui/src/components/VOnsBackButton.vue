@@ -1,5 +1,5 @@
 <template>
-  <ons-back-button>
+  <ons-back-button :modifier="normalizedModifier">
     <slot></slot>
   </ons-back-button>
 </template>
