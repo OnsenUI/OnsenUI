@@ -226,6 +226,14 @@ export default class SplitterSideElement extends BaseElement {
    */
 
   /**
+   * @property animationOptions
+   * @type {Object}
+   * @description
+   *  [en]Specify the animation's duration, timing and delay with an object literal. E.g. `{duration: 0.2, delay: 1, timing: 'ease-in'}`.[/en]
+   *  [ja]アニメーション時のduration, timing, delayをオブジェクトリテラルで指定します。e.g. {duration: 0.2, delay: 1, timing: 'ease-in'}[/ja]
+   */
+
+  /**
    * @attribute open-threshold
    * @type {Number}
    * @default  0.3
@@ -482,8 +490,6 @@ export default class SplitterSideElement extends BaseElement {
   }
 
   _updateAnimation(animation = this.getAttribute('animation')) {
-    const animationOptions = this.getAttribute('animation-options');
-
     if (this.parentNode) {
       this._animator && this._animator.deactivate();
       this._animator = this._animatorFactory.newAnimator({animation});
@@ -492,7 +498,7 @@ export default class SplitterSideElement extends BaseElement {
         timing: this._animator.duration,
         duration: this._animator.duration
       };
-      this._animator.updateOptions(AnimatorFactory.parseAnimationOptionsString(animationOptions));
+      this._animator.updateOptions(this.animationOptions);
     }
   }
 
@@ -563,6 +569,19 @@ export default class SplitterSideElement extends BaseElement {
       util.throw('"onSwipe" must be a function');
     }
     this._onSwipe = value;
+  }
+
+  get animationOptions() {
+    return this.hasAttribute('animation-options') ?
+      AnimatorFactory.parseAnimationOptionsString(this.getAttribute('animation-options')) : {};
+  }
+
+  set animationOptions(value) {
+    if (value === undefined || value === null) {
+      this.removeAttribute('animation-options');
+    } else {
+      this.setAttribute('animation-options', JSON.stringify(value));
+    }
   }
 
   /**

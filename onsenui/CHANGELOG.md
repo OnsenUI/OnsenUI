@@ -36,6 +36,7 @@ dev
  * ons-input: `type` property is now settable.
  * ons-navigator: Added `swipe` event.
  * ons-navigator: Added `animationOptions` property.
+ * ons-splitter-side: Added `animationOptions` property.
 
 2.12.0
 ---

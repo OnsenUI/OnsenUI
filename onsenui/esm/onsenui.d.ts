@@ -944,6 +944,10 @@ declare namespace ons {
      * @description true if the splitter side element is swipeable.
      **/
     swipeable: boolean;
+    /**
+     * @description Specify the animation's duration, timing and delay with an object literal. E.g. `{duration: 0.2, delay: 1, timing: 'ease-in'}`.
+     **/
+    animationOptions: object;
   }
 
   interface OnsLazyRepeatElement extends HTMLElement {
