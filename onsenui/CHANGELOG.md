@@ -35,6 +35,7 @@ dev
  * ons-toolbar: Added `static` property.
  * ons-input: `type` property is now settable.
  * ons-navigator: Added `swipe` event.
+ * ons-navigator: Added `animationOptions` property.
 
 2.12.0
 ---

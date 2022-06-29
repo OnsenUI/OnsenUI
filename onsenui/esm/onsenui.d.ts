@@ -798,6 +798,10 @@ declare namespace ons {
      * @description Hook called whenever the user slides the navigator.
      **/
     onSwipe?: Function;
+    /**
+     * @description Specify the animation's duration, timing and delay with an object literal. E.g. `{duration: 0.2, delay: 1, timing: 'ease-in'}`.
+     **/
+    animationOptions: object;
   }
 
   /**

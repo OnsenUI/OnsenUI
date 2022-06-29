@@ -170,6 +170,14 @@ export default class NavigatorElement extends BaseElement {
    */
 
   /**
+   * @property animationOptions
+   * @type {Object}
+   * @description
+   *  [en]Specify the animation's duration, timing and delay with an object literal. E.g. `{duration: 0.2, delay: 1, timing: 'ease-in'}`[/en]
+   *  [ja]アニメーション時のduration, timing, delayをオブジェクトリテラルで指定します。e.g. `{duration: 0.2, delay: 1, timing: 'ease-in'}`[/ja]
+   */
+
+  /**
    * @event prepush
    * @description
    *   [en]Fired just before a page is pushed.[/en]
@@ -621,7 +629,7 @@ export default class NavigatorElement extends BaseElement {
 
     this._isRunning = true;
 
-    const animationOptions = AnimatorFactory.parseAnimationOptionsString(this.getAttribute('animation-options'));
+    const animationOptions = this.animationOptions;
     options = util.extend({}, this.options || {}, {animationOptions}, options);
 
     const animator = this._animatorFactory.newAnimator(options);
@@ -727,7 +735,7 @@ export default class NavigatorElement extends BaseElement {
 
         options.animationOptions = util.extend(
           {},
-          AnimatorFactory.parseAnimationOptionsString(this.getAttribute('animation-options')),
+          this.animationOptions,
           options.animationOptions || {}
         );
 
@@ -1051,6 +1059,19 @@ export default class NavigatorElement extends BaseElement {
   }
   set options(object) {
     this._options = object;
+  }
+
+  get animationOptions() {
+    return this.hasAttribute('animation-options') ?
+      AnimatorFactory.parseAnimationOptionsString(this.getAttribute('animation-options')) : {};
+  }
+
+  set animationOptions(value) {
+    if (value === undefined || value === null) {
+      this.removeAttribute('animation-options');
+    } else {
+      this.setAttribute('animation-options', JSON.stringify(value));
+    }
   }
 
   set _isRunning(value) {
