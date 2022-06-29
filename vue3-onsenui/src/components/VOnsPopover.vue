@@ -1,18 +1,18 @@
 <template>
-  <ons-popover>
+  <ons-popover v-bind="orderedProps">
     <slot></slot>
   </ons-popover>
 </template>
 
 <script>
   import 'onsenui/esm/elements/ons-popover.js';
-  import { hidable, hasOptions, dialogCancel, deriveEvents, deriveDBB, portal } from '../mixins/index.js';
+  import { hidable, hasOptions, dialog, deriveEvents, deriveDBB, portal } from '../mixins/index.js';
 
   const name = 'v-ons-popover';
 
   export default {
     name,
-    mixins: [hidable, hasOptions, dialogCancel, deriveEvents(name), deriveDBB, portal],
+    mixins: [hidable, hasOptions, dialog, deriveEvents(name), deriveDBB, portal],
 
     props: {
       target: {

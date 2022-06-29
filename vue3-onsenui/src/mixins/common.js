@@ -63,18 +63,6 @@ const selfProvider = {
   }
 };
 
-// Common event for Dialogs
-const dialogCancel = {
-  emits: ['update:visible'],
-  mounted() {
-    this._dialogCancelHandler = () => this.$emit('update:visible', false);
-    this.$el.addEventListener('dialogcancel', this._dialogCancelHandler);
-  },
-  beforeDestroy() {
-    this.$el.removeEventListener('dialogcancel', this._dialogCancelHandler);
-  }
-};
-
 // Moves the element to a global position
 const portal = {
   mounted() {
@@ -124,4 +112,4 @@ const modifier = {
   }
 };
 
-export { hidable, hasOptions, selfProvider, dialogCancel, portal, modifier };
+export { hidable, hasOptions, selfProvider, portal, modifier };
