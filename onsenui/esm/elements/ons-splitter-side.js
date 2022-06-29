@@ -209,6 +209,20 @@ export default class SplitterSideElement extends BaseElement {
    */
 
   /**
+   * @event swipe
+   * @description
+   *   [en]Fired whenever the user slides the splitter.[/en]
+   *   [ja][/ja]
+   * @param {Object} event [en]Event object.[/en]
+   * @param {Object} event.ratio
+   *   [en]Decimal ratio (0-1).[/en]
+   *   [ja][/ja]
+   * @param {Object} event.animationOptions
+   *   [en][/en]
+   *   [ja][/ja]
+   */
+
+  /**
    * @attribute animation
    * @type {String}
    * @default  default
@@ -360,15 +374,21 @@ export default class SplitterSideElement extends BaseElement {
         element: this,
         elementHandler: this.parentElement,
         swipeMax: () => {
-          this._onSwipe && this._onSwipe(1, this._animationOpt);
+          const ratio = 1;
+          this._onSwipe && this._onSwipe(ratio, this._animationOpt);
+          util.triggerElementEvent(this, 'swipe', { ratio, animationOptions: this._animationOpt });
           this.open();
         },
         swipeMid: (distance, width) => {
-          this._onSwipe && this._onSwipe(distance/width);
+          const ratio = distance / width;
+          this._onSwipe && this._onSwipe(ratio);
+          util.triggerElementEvent(this, 'swipe', { ratio });
           this._animator.translate(distance);
         },
         swipeMin: () => {
-          this._onSwipe && this._onSwipe(0, this._animationOpt);
+          const ratio = 0;
+          this._onSwipe && this._onSwipe(ratio, this._animationOpt);
+          util.triggerElementEvent(this, 'swipe', { ratio, animationOptions: this._animationOpt });
           this.close();
         },
         getThreshold: () => Math.max(0, Math.min(1, parseFloat(this.getAttribute('open-threshold')) || 0.3)),
@@ -746,7 +766,7 @@ export default class SplitterSideElement extends BaseElement {
   }
 
   static get events() {
-    return ['preopen', 'postopen', 'preclose', 'postclose', 'modechange'];
+    return ['preopen', 'postopen', 'preclose', 'postclose', 'modechange', 'swipe'];
   }
 
   static get rewritables() {

@@ -37,6 +37,7 @@ dev
  * ons-navigator: Added `swipe` event.
  * ons-navigator: Added `animationOptions` property.
  * ons-splitter-side: Added `animationOptions` property.
+ * ons-splitter-side: Added `swipe` event.
 
 2.12.0
 ---
