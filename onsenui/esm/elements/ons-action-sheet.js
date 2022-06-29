@@ -276,10 +276,14 @@ export default class ActionSheetElement extends BaseDialogElement {
       this.appendChild(sheet);
     }
 
-    if (!this._title && this.hasAttribute('title')) {
+    if (!this._title) {
       const title = document.createElement('div');
-      title.innerHTML = this.title;
       title.classList.add('action-sheet-title');
+      if (this.title) {
+        title.innerHTML = this.title;
+      } else {
+        title.hidden = true;
+      }
       this._sheet.insertBefore(title, this._sheet.firstChild);
     }
 

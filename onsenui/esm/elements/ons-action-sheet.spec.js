@@ -52,6 +52,15 @@ describe('OnsActionSheetElement', () => {
         done();
       });
     });
+
+    it('creates the title element even when the title attribute is not set', done => {
+      const element = ons.createElement('<ons-action-sheet></ons-action-sheet>', { append: true });
+      setImmediate(() => {
+        expect(element._title).to.exist;
+        element.remove();
+        done();
+      });
+    });
   });
 
   it('provides \'modifier\' attribute', () => {
