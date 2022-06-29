@@ -237,6 +237,20 @@ export default class NavigatorElement extends BaseElement {
    *   [ja]popされて消えるページのオブジェクト。[/ja]
    */
 
+  /**
+   * @event swipe
+   * @description
+   *   [en]Fired whenever the user slides the navigator (swipe-to-pop).[/en]
+   *   [ja][/ja]
+   * @param {Object} event [en]Event object.[/en]
+   * @param {Object} event.ratio
+   *   [en]Decimal ratio (0-1).[/en]
+   *   [ja][/ja]
+   * @param {Object} event.animationOptions
+   *   [en][/en]
+   *   [ja][/ja]
+   */
+
   get animatorFactory() {
     return this._animatorFactory;
   }
@@ -300,16 +314,24 @@ export default class NavigatorElement extends BaseElement {
         getThreshold: () => Math.max(0.2, parseFloat(this.getAttribute('swipe-threshold')) || 0),
 
         swipeMax: () => {
-          this._onSwipe && this._onSwipe(1, { duration: swipeAnimator.durationSwipe, timing: swipeAnimator.timingSwipe });
+          const ratio = 1;
+          const animationOptions = { duration: swipeAnimator.durationSwipe, timing: swipeAnimator.timingSwipe };
+          this._onSwipe && this._onSwipe(ratio, animationOptions);
+          util.triggerElementEvent(this, 'swipe', { ratio, animationOptions });
           this[this.swipeMax ? 'swipeMax' : 'popPage']({ animator: swipeAnimator });
           swipeAnimator = null;
         },
         swipeMid: (distance, width) => {
-          this._onSwipe && this._onSwipe(distance/width);
+          const ratio = distance / width;
+          this._onSwipe && this._onSwipe(ratio);
+          util.triggerElementEvent(this, 'swipe', { ratio });
           swipeAnimator.translate(distance, width, this.topPage.previousElementSibling, this.topPage);
         },
         swipeMin: () => {
-          this._onSwipe && this._onSwipe(0, { duration: swipeAnimator.durationRestore, timing: swipeAnimator.timingSwipe });
+          const ratio = 0;
+          const animationOptions = { duration: swipeAnimator.durationRestore, timing: swipeAnimator.timingSwipe };
+          this._onSwipe && this._onSwipe(ratio, animationOptions);
+          util.triggerElementEvent(this, 'swipe', { ratio, animationOptions });
           swipeAnimator.restore(this.topPage.previousElementSibling, this.topPage);
           swipeAnimator = null;
         },
@@ -1075,7 +1097,7 @@ export default class NavigatorElement extends BaseElement {
   }
 
   static get events() {
-    return ['prepush', 'postpush', 'prepop', 'postpop'];
+    return ['prepush', 'postpush', 'prepop', 'postpop', 'swipe'];
   }
 
   static get rewritables() {
