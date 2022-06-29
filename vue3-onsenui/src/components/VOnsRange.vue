@@ -5,7 +5,6 @@
 </template>
 
 <script>
-  /* This file was generated automatically by 'generate-components' task in bindings/vue/gulpfile.babel.js */
   import 'onsenui/esm/elements/ons-range.js';
   import { deriveEvents, modelInputNumber, modifier } from '../mixins/index.js';
 
