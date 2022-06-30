@@ -5,7 +5,6 @@
 </template>
 
 <script>
-  /* This file was generated automatically by 'generate-components' task in bindings/vue/gulpfile.babel.js */
   import 'onsenui/esm/elements/ons-toast.js';
   import { deriveEvents, hasOptions, deriveDBB, portal, modifier } from '../mixins/index.js';
 

@@ -11,14 +11,6 @@
  */
 
 /**
- * @attribute index
- * @type {Number}
- * @description
- *   [en]If exists, specifies the current active index. It is also used as the initial index. Must be modified on `update:index` event.[/en]
- *   [ja][/ja]
- */
-
-/**
  * @attribute tabbar-style
  * @description
  *   [en]Optional style for the actual tabbar element. Accepts any Vue valid style.[/en]
@@ -26,9 +18,9 @@
  */
 
 /**
- * @event update:index
+ * @event update:activeIndex
  * @description
- *   [en]Fired right after user interaction. Useful to update `index` prop.[/en]
+ *   [en]Fired right after user interaction. Useful to update `activeIndex` prop.[/en]
  *   [ja][/ja]
  * @param {Number} event
  *   [en]New value for `index` prop.[/en]

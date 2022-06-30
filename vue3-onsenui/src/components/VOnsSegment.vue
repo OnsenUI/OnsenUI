@@ -1,5 +1,5 @@
 <template>
-  <ons-segment :active-index="index" @postchange.self="$emit('update:index', $event.index)">
+  <ons-segment @postchange.self="$emit('update:activeIndex', $event.index)">
     <slot></slot>
   </ons-segment>
 </template>
@@ -13,20 +13,6 @@
   export default {
     name,
     mixins: [deriveEvents(name)],
-    emits: ['update:index'],
-
-    props: {
-      index: {
-        type: Number
-      }
-    },
-
-    watch: {
-      index() {
-        if (this.index !== this.$el.getActiveButtonIndex()) {
-          this.$el.setActiveButton(this.index, { reject: false });
-        }
-      }
-    }
+    emits: ['update:activeIndex'],
   };
 </script>

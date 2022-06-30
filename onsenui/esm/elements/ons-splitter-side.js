@@ -209,6 +209,20 @@ export default class SplitterSideElement extends BaseElement {
    */
 
   /**
+   * @event swipe
+   * @description
+   *   [en]Fired whenever the user slides the splitter.[/en]
+   *   [ja][/ja]
+   * @param {Object} event [en]Event object.[/en]
+   * @param {Object} event.ratio
+   *   [en]Decimal ratio (0-1).[/en]
+   *   [ja][/ja]
+   * @param {Object} event.animationOptions
+   *   [en][/en]
+   *   [ja][/ja]
+   */
+
+  /**
    * @attribute animation
    * @type {String}
    * @default  default
@@ -220,6 +234,14 @@ export default class SplitterSideElement extends BaseElement {
   /**
    * @attribute animation-options
    * @type {Expression}
+   * @description
+   *  [en]Specify the animation's duration, timing and delay with an object literal. E.g. `{duration: 0.2, delay: 1, timing: 'ease-in'}`.[/en]
+   *  [ja]アニメーション時のduration, timing, delayをオブジェクトリテラルで指定します。e.g. {duration: 0.2, delay: 1, timing: 'ease-in'}[/ja]
+   */
+
+  /**
+   * @property animationOptions
+   * @type {Object}
    * @description
    *  [en]Specify the animation's duration, timing and delay with an object literal. E.g. `{duration: 0.2, delay: 1, timing: 'ease-in'}`.[/en]
    *  [ja]アニメーション時のduration, timing, delayをオブジェクトリテラルで指定します。e.g. {duration: 0.2, delay: 1, timing: 'ease-in'}[/ja]
@@ -352,15 +374,21 @@ export default class SplitterSideElement extends BaseElement {
         element: this,
         elementHandler: this.parentElement,
         swipeMax: () => {
-          this._onSwipe && this._onSwipe(1, this._animationOpt);
+          const ratio = 1;
+          this._onSwipe && this._onSwipe(ratio, this._animationOpt);
+          util.triggerElementEvent(this, 'swipe', { ratio, animationOptions: this._animationOpt });
           this.open();
         },
         swipeMid: (distance, width) => {
-          this._onSwipe && this._onSwipe(distance/width);
+          const ratio = distance / width;
+          this._onSwipe && this._onSwipe(ratio);
+          util.triggerElementEvent(this, 'swipe', { ratio });
           this._animator.translate(distance);
         },
         swipeMin: () => {
-          this._onSwipe && this._onSwipe(0, this._animationOpt);
+          const ratio = 0;
+          this._onSwipe && this._onSwipe(ratio, this._animationOpt);
+          util.triggerElementEvent(this, 'swipe', { ratio, animationOptions: this._animationOpt });
           this.close();
         },
         getThreshold: () => Math.max(0, Math.min(1, parseFloat(this.getAttribute('open-threshold')) || 0.3)),
@@ -482,8 +510,6 @@ export default class SplitterSideElement extends BaseElement {
   }
 
   _updateAnimation(animation = this.getAttribute('animation')) {
-    const animationOptions = this.getAttribute('animation-options');
-
     if (this.parentNode) {
       this._animator && this._animator.deactivate();
       this._animator = this._animatorFactory.newAnimator({animation});
@@ -492,7 +518,7 @@ export default class SplitterSideElement extends BaseElement {
         timing: this._animator.duration,
         duration: this._animator.duration
       };
-      this._animator.updateOptions(AnimatorFactory.parseAnimationOptionsString(animationOptions));
+      this._animator.updateOptions(this.animationOptions);
     }
   }
 
@@ -563,6 +589,19 @@ export default class SplitterSideElement extends BaseElement {
       util.throw('"onSwipe" must be a function');
     }
     this._onSwipe = value;
+  }
+
+  get animationOptions() {
+    return this.hasAttribute('animation-options') ?
+      AnimatorFactory.parseAnimationOptionsString(this.getAttribute('animation-options')) : {};
+  }
+
+  set animationOptions(value) {
+    if (value === undefined || value === null) {
+      this.removeAttribute('animation-options');
+    } else {
+      this.setAttribute('animation-options', JSON.stringify(value));
+    }
   }
 
   /**
@@ -727,7 +766,7 @@ export default class SplitterSideElement extends BaseElement {
   }
 
   static get events() {
-    return ['preopen', 'postopen', 'preclose', 'postclose', 'modechange'];
+    return ['preopen', 'postopen', 'preclose', 'postclose', 'modechange', 'swipe'];
   }
 
   static get rewritables() {

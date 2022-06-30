@@ -588,6 +588,28 @@ util.defineBooleanProperties = (object, attributeList) => {
 };
 
 /**
+ * Defines a string property that reflects an attribute of the same name for a
+ * given list of attributes.
+ */
+util.defineStringProperties = (object, attributeList) => {
+  attributeList.forEach(attributeName => {
+    const propertyName = util.camelize(attributeName);
+    Object.defineProperty(object.prototype, propertyName, {
+      get() {
+        return this.getAttribute(attributeName);
+      },
+      set(value) {
+        if (value === null || value === undefined) {
+          this.removeAttribute(attributeName);
+        } else {
+          this.setAttribute(attributeName, value);
+        }
+      },
+      configurable: true
+    });
+  });
+};
+/**
  * Makes a property for a listener e.g. onClick.
  *
  * Returns `onConnected` function which should be called in the element's

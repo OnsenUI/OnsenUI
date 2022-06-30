@@ -146,6 +146,7 @@ function renderProperty(property) {
     description: property.description || '',
     extensionOf: property.extensionOf,
     initonly: property.tagdict.has('initonly'),
+    readonly: property.tagdict.has('readonly'),
     deprecated: property.isDeprecated
   };
 }

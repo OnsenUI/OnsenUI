@@ -442,6 +442,11 @@ declare namespace ons {
     hide(): void;
 
     visible: boolean;
+
+    /**
+     * @description Static toolbars are not animated by `ons-navigator` when pushing or popping pages. This can be useful to improve performance in some situations.
+     */
+    static: boolean;
   }
 
   interface OnsToolbarButtonElement extends HTMLElement {
@@ -793,6 +798,10 @@ declare namespace ons {
      * @description Hook called whenever the user slides the navigator.
      **/
     onSwipe?: Function;
+    /**
+     * @description Specify the animation's duration, timing and delay with an object literal. E.g. `{duration: 0.2, delay: 1, timing: 'ease-in'}`.
+     **/
+    animationOptions: object;
   }
 
   /**
@@ -840,6 +849,10 @@ declare namespace ons {
     onSwipe?: Function;
     hideTabs: boolean;
     activeIndex: number;
+    /**
+     * @description Specify the animation's duration, timing and delay with an object literal. E.g. `{duration: 0.2, delay: 1, timing: 'ease-in'}`.
+     **/
+    animationOptions: object;
   }
 
   /**
@@ -931,6 +944,10 @@ declare namespace ons {
      * @description true if the splitter side element is swipeable.
      **/
     swipeable: boolean;
+    /**
+     * @description Specify the animation's duration, timing and delay with an object literal. E.g. `{duration: 0.2, delay: 1, timing: 'ease-in'}`.
+     **/
+    animationOptions: object;
   }
 
   interface OnsLazyRepeatElement extends HTMLElement {
@@ -1234,6 +1251,18 @@ declare namespace ons {
      * @description Makes the element react to taps.
      **/
     tappable: boolean;
+    /**
+     * @description Prevent vertical scrolling when the user drags horizontally.
+     **/
+    lockOnDrag: boolean;
+    /**
+     * @description The animation used when showing and hiding the expandable content. Can be either `"default"` or `"none"`.
+     **/
+    animation: string;
+    /**
+     * @description Changes the background color when tapped. For this to work, the attribute "tappable" needs to be set. The default color is "#d9d9d9". It will display as a ripple effect on Android.
+     **/
+    tapBackgroundColor: string;
   }
 
 }

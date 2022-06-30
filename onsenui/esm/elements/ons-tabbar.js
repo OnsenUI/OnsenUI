@@ -178,6 +178,14 @@ export default class TabbarElement extends BaseElement {
    */
 
   /**
+   * @property animationOptions
+   * @type {Object}
+   * @description
+   *  [en]Specify the animation's duration, timing and delay with an object literal. E.g. `{duration: 0.2, delay: 1, timing: 'ease-in'}`.[/en]
+   *  [ja]アニメーション時のduration, timing, delayをオブジェクトリテラルで指定します。e.g. {duration: 0.2, delay: 1, timing: 'ease-in'}[/ja]
+   */
+
+  /**
    * @attribute position
    * @initonly
    * @type {String}
@@ -527,7 +535,7 @@ export default class TabbarElement extends BaseElement {
         animation: prevTab && nextPage ? options.animation || this.getAttribute('animation') : 'none',
         animationOptions: util.extend(
           { duration: .3, timing: 'cubic-bezier(.4, .7, .5, 1)' },
-          this.hasAttribute('animation-options') ? util.animationOptionsParse(this.getAttribute('animation-options')) : {},
+          this.animationOptions,
           options.animationOptions || {}
         )
       }).then(() => {
@@ -677,6 +685,19 @@ export default class TabbarElement extends BaseElement {
 
   static get events() {
     return ['prechange', 'postchange', 'reactive', 'swipe'];
+  }
+
+  get animationOptions() {
+    return this.hasAttribute('animation-options') ?
+      util.animationOptionsParse(this.getAttribute('animation-options')) : {};
+  }
+
+  set animationOptions(value) {
+    if (value === undefined || value === null) {
+      this.removeAttribute('animation-options');
+    } else {
+      this.setAttribute('animation-options', JSON.stringify(value));
+    }
   }
 }
 

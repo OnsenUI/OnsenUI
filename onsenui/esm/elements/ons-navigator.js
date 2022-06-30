@@ -170,6 +170,14 @@ export default class NavigatorElement extends BaseElement {
    */
 
   /**
+   * @property animationOptions
+   * @type {Object}
+   * @description
+   *  [en]Specify the animation's duration, timing and delay with an object literal. E.g. `{duration: 0.2, delay: 1, timing: 'ease-in'}`[/en]
+   *  [ja]アニメーション時のduration, timing, delayをオブジェクトリテラルで指定します。e.g. `{duration: 0.2, delay: 1, timing: 'ease-in'}`[/ja]
+   */
+
+  /**
    * @event prepush
    * @description
    *   [en]Fired just before a page is pushed.[/en]
@@ -237,6 +245,20 @@ export default class NavigatorElement extends BaseElement {
    *   [ja]popされて消えるページのオブジェクト。[/ja]
    */
 
+  /**
+   * @event swipe
+   * @description
+   *   [en]Fired whenever the user slides the navigator (swipe-to-pop).[/en]
+   *   [ja][/ja]
+   * @param {Object} event [en]Event object.[/en]
+   * @param {Object} event.ratio
+   *   [en]Decimal ratio (0-1).[/en]
+   *   [ja][/ja]
+   * @param {Object} event.animationOptions
+   *   [en][/en]
+   *   [ja][/ja]
+   */
+
   get animatorFactory() {
     return this._animatorFactory;
   }
@@ -300,16 +322,24 @@ export default class NavigatorElement extends BaseElement {
         getThreshold: () => Math.max(0.2, parseFloat(this.getAttribute('swipe-threshold')) || 0),
 
         swipeMax: () => {
-          this._onSwipe && this._onSwipe(1, { duration: swipeAnimator.durationSwipe, timing: swipeAnimator.timingSwipe });
+          const ratio = 1;
+          const animationOptions = { duration: swipeAnimator.durationSwipe, timing: swipeAnimator.timingSwipe };
+          this._onSwipe && this._onSwipe(ratio, animationOptions);
+          util.triggerElementEvent(this, 'swipe', { ratio, animationOptions });
           this[this.swipeMax ? 'swipeMax' : 'popPage']({ animator: swipeAnimator });
           swipeAnimator = null;
         },
         swipeMid: (distance, width) => {
-          this._onSwipe && this._onSwipe(distance/width);
+          const ratio = distance / width;
+          this._onSwipe && this._onSwipe(ratio);
+          util.triggerElementEvent(this, 'swipe', { ratio });
           swipeAnimator.translate(distance, width, this.topPage.previousElementSibling, this.topPage);
         },
         swipeMin: () => {
-          this._onSwipe && this._onSwipe(0, { duration: swipeAnimator.durationRestore, timing: swipeAnimator.timingSwipe });
+          const ratio = 0;
+          const animationOptions = { duration: swipeAnimator.durationRestore, timing: swipeAnimator.timingSwipe };
+          this._onSwipe && this._onSwipe(ratio, animationOptions);
+          util.triggerElementEvent(this, 'swipe', { ratio, animationOptions });
           swipeAnimator.restore(this.topPage.previousElementSibling, this.topPage);
           swipeAnimator = null;
         },
@@ -599,7 +629,7 @@ export default class NavigatorElement extends BaseElement {
 
     this._isRunning = true;
 
-    const animationOptions = AnimatorFactory.parseAnimationOptionsString(this.getAttribute('animation-options'));
+    const animationOptions = this.animationOptions;
     options = util.extend({}, this.options || {}, {animationOptions}, options);
 
     const animator = this._animatorFactory.newAnimator(options);
@@ -705,7 +735,7 @@ export default class NavigatorElement extends BaseElement {
 
         options.animationOptions = util.extend(
           {},
-          AnimatorFactory.parseAnimationOptionsString(this.getAttribute('animation-options')),
+          this.animationOptions,
           options.animationOptions || {}
         );
 
@@ -1031,6 +1061,19 @@ export default class NavigatorElement extends BaseElement {
     this._options = object;
   }
 
+  get animationOptions() {
+    return this.hasAttribute('animation-options') ?
+      AnimatorFactory.parseAnimationOptionsString(this.getAttribute('animation-options')) : {};
+  }
+
+  set animationOptions(value) {
+    if (value === undefined || value === null) {
+      this.removeAttribute('animation-options');
+    } else {
+      this.setAttribute('animation-options', JSON.stringify(value));
+    }
+  }
+
   set _isRunning(value) {
     this.setAttribute('_is-running', value ? 'true' : 'false');
   }
@@ -1075,7 +1118,7 @@ export default class NavigatorElement extends BaseElement {
   }
 
   static get events() {
-    return ['prepush', 'postpush', 'prepop', 'postpop'];
+    return ['prepush', 'postpush', 'prepop', 'postpop', 'swipe'];
   }
 
   static get rewritables() {

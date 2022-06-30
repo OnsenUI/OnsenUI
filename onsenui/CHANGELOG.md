@@ -9,6 +9,7 @@ dev
 
  * ons-alert-dialog: User's onDeviceBackButton setting is no longer ignored when connecting element.
  * ons-splitter-side: Fix options.animation being ignored.
+ * ons-list-item: Wait until content is ready before expanding list item when expanded is set.
 
  ### New Features
 
@@ -16,6 +17,9 @@ dev
  * ons-speed-dial: Added `ripple` property.
  * ons-list-item: Added `expandable` property.
  * ons-list-item: Added `tappable` property.
+ * ons-list-item: Added `lockOnDrag` property.
+ * ons-list-item: Added `animation` property.
+ * ons-list-item: Added `tapBackgroundColor` property.
  * ons-ripple: Added `center` property.
  * ons-icon: Added `fixedWidth` property.
  * ons-icon: Added `spin` property.
@@ -27,6 +31,13 @@ dev
  * ons-pull-hook: Added `fixedContent` property.
  * ons-speed-dial-item: Added `ripple` property.
  * ons-tabbar: Added `tabBorder` property.
+ * ons-tabbar: Added `animationOptions` property.
+ * ons-toolbar: Added `static` property.
+ * ons-input: `type` property is now settable.
+ * ons-navigator: Added `swipe` event.
+ * ons-navigator: Added `animationOptions` property.
+ * ons-splitter-side: Added `animationOptions` property.
+ * ons-splitter-side: Added `swipe` event.
 
 2.12.0
 ---

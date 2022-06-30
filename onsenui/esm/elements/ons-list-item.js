@@ -112,7 +112,15 @@ export default class ListItemElement extends BaseElement {
 
   /**
    * @attribute lock-on-drag
-   * @type {String}
+   * @type {Boolean}
+   * @description
+   *   [en]Prevent vertical scrolling when the user drags horizontally.[/en]
+   *   [ja]この属性があると、ユーザーがこの要素を横方向にドラッグしている時に、縦方向のスクロールが起きないようになります。[/ja]
+   */
+
+  /**
+   * @property lockOnDrag
+   * @type {Boolean}
    * @description
    *   [en]Prevent vertical scrolling when the user drags horizontally.[/en]
    *   [ja]この属性があると、ユーザーがこの要素を横方向にドラッグしている時に、縦方向のスクロールが起きないようになります。[/ja]
@@ -136,6 +144,14 @@ export default class ListItemElement extends BaseElement {
 
   /**
    * @attribute tap-background-color
+   * @type {Color}
+   * @description
+   *   [en] Changes the background color when tapped. For this to work, the attribute "tappable" needs to be set. The default color is "#d9d9d9". It will display as a ripple effect on Android.[/en]
+   *   [ja][/ja]
+   */
+
+  /**
+   * @property tapBackgroundColor
    * @type {Color}
    * @description
    *   [en] Changes the background color when tapped. For this to work, the attribute "tappable" needs to be set. The default color is "#d9d9d9". It will display as a ripple effect on Android.[/en]
@@ -176,7 +192,23 @@ export default class ListItemElement extends BaseElement {
    */
 
   /**
+   * @event expand
+   * @description
+   *   [en]For expandable list items, fires when the list item is expanded or contracted.[/en]
+   *   [ja][/ja]
+   */
+
+  /**
    * @attribute animation
+   * @type {String}
+   * @default default
+   * @description
+   *  [en]The animation used when showing and hiding the expandable content. Can be either `"default"` or `"none"`.[/en]
+   *  [ja][/ja]
+   */
+
+  /**
+   * @property animation
    * @type {String}
    * @default default
    * @description
@@ -405,7 +437,7 @@ export default class ListItemElement extends BaseElement {
         this._animatorFactory = this._updateAnimatorFactory();
         break;
       case 'expanded':
-        this._animateExpansion();
+        contentReady(this, () => this._animateExpansion());
         break;
     }
   }
@@ -484,7 +516,8 @@ export default class ListItemElement extends BaseElement {
   }
 }
 
-util.defineBooleanProperties(ListItemElement, ['expanded', 'expandable', 'tappable']);
+util.defineBooleanProperties(ListItemElement, ['expanded', 'expandable', 'tappable', 'lock-on-drag']);
+util.defineStringProperties(ListItemElement, ['animation', 'tap-background-color']);
 
 onsElements.ListItem = ListItemElement;
 customElements.define('ons-list-item', ListItemElement);
