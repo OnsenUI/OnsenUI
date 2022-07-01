@@ -8,8 +8,9 @@
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore"
   },
   "dependencies": {
-    "vue": "^3.2.33",
     "onsenui": "~2.12.0",
+    "pinia": "^2.0.14",
+    "vue": "^3.2.33",
     "vue-onsenui": "3.0.0-alpha"
   },
   "devDependencies": {

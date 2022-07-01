@@ -1,6 +1,6 @@
 <template>
   <v-ons-page>
-    <v-ons-tabbar :index="0">
+    <v-ons-tabbar>
       <template v-slot:pages>
         <v-ons-page>
           <v-ons-toolbar>

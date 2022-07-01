@@ -2,7 +2,7 @@
   <v-ons-page>
     <v-ons-toolbar>
       <div class="center">
-        <v-ons-segment tabbar-id="tabbar" v-model:index="segmentIndex" style="width: 280px">
+        <v-ons-segment tabbar-id="tabbar" v-model:active-index="segmentIndex" style="width: 280px">
           <button>Page 1</button>
           <button>Page 2</button>
           <button>Page 3</button>
@@ -11,13 +11,13 @@
     </v-ons-toolbar>
 
     <!-- Comment <v-ons-tabbar> out to test this one -->
-    <!-- <v-ons-segment v-model:index="segment2Index" style="width: 280px; margin: 10px 20px;">
+    <!-- <v-ons-segment v-model:active-index="segment2Index" style="width: 280px; margin: 10px 20px;">
       <button>Label 1</button>
       <button>Label 2</button>
       <button>Label 3</button>
     </v-ons-segment> -->
 
-    <v-ons-tabbar swipeable id="tabbar" :tabs="tabs" v-model:index="tabbarIndex"></v-ons-tabbar>
+    <v-ons-tabbar swipeable id="tabbar" :tabs="tabs" v-model:active-index="tabbarIndex"></v-ons-tabbar>
   </v-ons-page>
 </template>
 

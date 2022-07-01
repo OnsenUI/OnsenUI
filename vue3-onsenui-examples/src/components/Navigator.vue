@@ -2,7 +2,7 @@
   <v-ons-page>
     <v-ons-navigator swipeable
       :page-stack="pageStack"
-      :options="{animation: 'slide'}"
+      animation="none"
       @postpush="log('postpush!')"
       @show="log('show from navigator!')"
 
