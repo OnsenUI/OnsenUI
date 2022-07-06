@@ -202,7 +202,7 @@ export default class BackButtonElement extends BaseElement {
       if (!event.defaultPrevented) {
         const navigator = util.findParent(this, 'ons-navigator');
         if (navigator) {
-          navigator.popPage(this.options);
+          navigator.popPage({...this.options, _onsBackButton: true});
         }
       }
     });

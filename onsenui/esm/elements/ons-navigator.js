@@ -326,7 +326,7 @@ export default class NavigatorElement extends BaseElement {
           const animationOptions = { duration: swipeAnimator.durationSwipe, timing: swipeAnimator.timingSwipe };
           this._onSwipe && this._onSwipe(ratio, animationOptions);
           util.triggerElementEvent(this, 'swipe', { ratio, animationOptions });
-          this[this.swipeMax ? 'swipeMax' : 'popPage']({ animator: swipeAnimator });
+          this[this.swipeMax ? 'swipeMax' : 'popPage']({ animator: swipeAnimator, _swipeToPop: true });
           swipeAnimator = null;
         },
         swipeMid: (distance, width) => {
@@ -531,7 +531,13 @@ export default class NavigatorElement extends BaseElement {
           this._isRunning = false;
 
           enterPage._show();
-          util.triggerElementEvent(this, 'postpop', {leavePage, enterPage, navigator: this});
+          util.triggerElementEvent(this, 'postpop', {
+            leavePage,
+            enterPage,
+            navigator: this,
+            _swipeToPop: !!options._swipeToPop,        // whether the pop was triggered by the user swiping
+            _onsBackButton: !!options._onsBackButton   // whether the pop was triggered by clicking ons-back-button
+          });
 
           options.callback && options.callback(enterPage);
 
