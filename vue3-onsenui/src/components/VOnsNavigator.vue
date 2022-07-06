@@ -1,12 +1,11 @@
 <template>
-  <ons-navigator @postpop.self="_checkSwipe" :options.prop="options">
+  <ons-navigator @postpop.self="_checkUserInteraction" :options.prop="options">
     <slot>
       <component
-        v-for="page in pageStack"
+        v-for="page in internalPageStack"
         :is="page"
         :key="page.key || page.name"
         v-bind="{ ...unrecognizedListeners, ...page.onsNavigatorProps }"
-        ref="children"
       ></component>
     </slot>
   </ons-navigator>
@@ -22,17 +21,19 @@
     name,
     mixins: [hasOptions, selfProvider, deriveEvents(name), deriveDBB, unrecognizedListeners(NavigatorElement)],
 
+    emits: ['update:pageStack'],
+
     props: {
       pageStack: {
         type: Array,
         required: true
-      },
-      popPage: {
-        type: Function,
-        default() {
-          this.pageStack.pop();
-        }
       }
+    },
+
+    data() {
+      return {
+        internalPageStack: this.pageStack
+      };
     },
 
     methods: {
@@ -43,8 +44,18 @@
         return Promise.resolve();
       },
       onDeviceBackButton(event) {
-        if (this.pageStack.length > 1) {
-          this.popPage();
+        if (this.internalPageStack.length > 1) {
+          const lastTopPage = this.$el.children[this.internalPageStack.length - 1];
+          const scrollElement = this._findScrollPage(lastTopPage);
+          const scrollValue = scrollElement.scrollTop || 0;
+          this._pageStackUpdate = {
+            lastTopPage,
+            lastLength: this.internalPageStack.length,
+            currentLength: this.internalPageStack.length - 1,
+            restoreScroll: () => scrollElement.scrollTop = scrollValue
+          };
+
+          this._popPage();
         } else {
           event.callParentHandler();
         }
@@ -56,7 +67,7 @@
       },
       _eachPage(start, end, cb) {
         for (let i = start; i < end; i++) {
-          cb(this.$refs.children[i].$el);
+          cb(this.$el.children[i]);
         }
       },
       _reattachPage(pageElement, position = null, restoreScroll) {
@@ -68,9 +79,9 @@
         pageElement._destroy();
         return Promise.resolve();
       },
-      _animate({ lastLength, currentLength, lastTopPage, currentTopPage, restoreScroll }) {
-        const pushedOptions = this.pageStack[this.pageStack.length - 1].onsNavigatorOptions
-          || currentTopPage.__vue__.onsNavigatorOptions
+      _animate({ lastLength, currentLength, lastTopPage, currentTopPage, currentTopPageOptions, restoreScroll }) {
+        const pushedOptions = this.internalPageStack[this.internalPageStack.length - 1].onsNavigatorOptions
+          || currentTopPageOptions
           || {};
 
         // Push
@@ -97,7 +108,7 @@
               }
             }, () => { // push failed or was canceled
               this._canceled = true;
-              this.pageStack.pop();
+              this._popPage();
             });
         }
 
@@ -113,54 +124,51 @@
         return this.$el._pushPage({ ...pushedOptions, _replacePage: true })
           .then(() => this._redetachPage(lastTopPage));
       },
-      _checkSwipe(event) {
-        if (this.$el.hasAttribute('swipeable') &&
-          event.leavePage !== this.$el.lastChild && event.leavePage === this.$refs.children[this.$refs.children.length - 1].$el
-        ) {
-          this.popPage();
+      _checkUserInteraction(event) {
+        // update the internal page stack in the case where user swiped to pop or clicked ons-back-button
+        if (event._swipeToPop || event._onsBackButton) {
+          this._popPage();
         }
+      },
+      _popPage() {
+        this.internalPageStack = this.internalPageStack.slice(0, -1);
       }
     },
 
     watch: {
       pageStack(after, before) {
-        if (this.$el.hasAttribute('swipeable') && this.$refs.children.length !== this.$el.children.length) {
-          return;
+        if (this.pageStack !== this.internalPageStack) {
+
+          const lastTopPage = this.$el.children[this.internalPageStack.length - 1];
+          const scrollElement = this._findScrollPage(lastTopPage);
+          const scrollValue = scrollElement.scrollTop || 0;
+
+          this._pageStackUpdate = {
+            lastTopPage,
+            lastLength: before.length,
+            currentLength: after.length,
+            restoreScroll: () => scrollElement.scrollTop = scrollValue
+          };
+
+          this.internalPageStack = this.pageStack;
         }
-
-        // watcher triggered by undoing a canceled push or pop
-        if (this._canceled) {
-          this._canceled = null;
-          return;
-        }
-
-        const propWasMutated = after === before; // Can be mutated or replaced
-        const lastTopPage = this.$refs.children[this.$refs.children.length - 1].$el;
-        const scrollElement = this._findScrollPage(lastTopPage);
-        const scrollValue = scrollElement.scrollTop || 0;
-
-        this._pageStackUpdate = {
-          lastTopPage,
-          lastLength: propWasMutated ? this.$refs.children.length : before.length,
-          currentLength: !propWasMutated && after.length,
-          restoreScroll: () => scrollElement.scrollTop = scrollValue
-        };
 
         // this.$nextTick(() => { }); // Waits too long, updated() hook is faster and prevents flickerings
+      },
+      internalPageStack(after, before) {
+        this.$emit('update:pageStack', this.internalPageStack);
       }
     },
 
     updated() {
       if (this._pageStackUpdate) {
-        const currentTopComponent = this.$refs.children[this.$refs.children.length - 1];
-        let currentTopPage = currentTopComponent.$el;
-        currentTopPage.__vue__ = currentTopComponent;
-        let { lastTopPage, currentLength } = this._pageStackUpdate;
-        const { lastLength, restoreScroll } = this._pageStackUpdate;
-        currentLength = currentLength === false ? this.$refs.children.length : currentLength;
+        let currentTopPage = this.$el.children[this.internalPageStack.length - 1];
+        const currentTopPageOptions = this.internalPageStack[this.internalPageStack.length - 1].onsNavigatorOptions;
+        let { lastTopPage } = this._pageStackUpdate;
+        const { lastLength, restoreScroll, currentLength } = this._pageStackUpdate;
 
         if (currentTopPage !== lastTopPage) {
-          this._ready = this._animate({ lastLength, currentLength, lastTopPage, currentTopPage, restoreScroll });
+          this._ready = this._animate({ lastLength, currentLength, lastTopPage, currentTopPage, currentTopPageOptions, restoreScroll });
         } else if (currentLength !== lastLength) {
           currentTopPage.updateBackButton(currentLength > 1);
         }

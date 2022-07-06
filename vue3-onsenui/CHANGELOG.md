@@ -10,7 +10,10 @@ dev
  * For v-model, `modelValue` prop and `update:modelValue` event are now used instead of `modelProp` prop and `modelEvent` event. However, the `modelEvent` *prop* is unchanged.
  * The `options.animation` and `options.animationOptions` props have been renamed to `animation` and `animationOptions` for all components.
  * VOnsCarousel, VOnsTabbar, VOnsSegment: The `index` prop and `update:index` event have been renamed to `activeIndex` and `update:activeIndex`.
- * VOnsLazyRepeat: The renderItem prop should be a function that returns an *object* describing a Vue component.
+ * VOnsLazyRepeat: The `renderItem` prop should be a function that returns an *object* describing a Vue component.
+ * VOnsNavigator: The `pageStack` prop is no longer mutated directly. Instead use `v-model:pageStack` to keep the `pageStack` prop in sync.
+ * VOnsNavigator: The `pageStack` prop no longer responds to array mutatation methods (e.g. Array.prototype.pop). The whole `pageStack` value must be replaced (e.g. by using Array.prototype.slice) to trigger a visual change.
+ * VOnsNavigator: The `popPage` prop has been removed. Use `@deviceBackButton.prevent` and VOnsBackButton's `@click.prevent` to override default pop behaviour.
 
  ### Bug Fixes
 
