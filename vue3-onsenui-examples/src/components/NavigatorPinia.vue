@@ -1,31 +1,30 @@
 <template>
   <v-ons-page>
-    <v-ons-navigator swipeable :page-stack="pageStack" :pop-page="popPage"></v-ons-navigator>
+  <v-ons-navigator swipeable v-model:page-stack="pageStack"></v-ons-navigator>
   </v-ons-page>
 </template>
 
 <script>
   import { markRaw } from 'vue';
-  import { defineStore, mapActions, mapState } from 'pinia';
+  import { defineStore, mapActions, mapWritableState } from 'pinia';
 
   const usePageStackStore = defineStore('pageStack', {
     state: () => ({ pageStack: [] }),
     actions: {
       pushPage(page) {
         if (page instanceof Array) {
-          this.pageStack.push(...page.map(markRaw))
+          this.pageStack = [...this.pageStack, ...page.map(markRaw)];
         } else {
-          this.pageStack.push(markRaw(page));
+          this.pageStack = [...this.pageStack, markRaw(page)];
         }
       },
       popPage() {
         if (this.pageStack.length > 1) {
-          this.pageStack.pop();
+          this.pageStack = this.pageStack.slice(0, -1);
         }
       },
       replacePage(page) {
-        this.pageStack.pop();
-        this.pageStack.push(page);
+        this.pageStack = [...this.pageStack.slice(0, -1), markRaw(page)]
       },
       resetPageStack() {
         this.pageStack = [this.pageStack[0]];
@@ -96,7 +95,7 @@
 
 	export default {
     computed: {
-      ...mapState(usePageStackStore, ['pageStack'])
+      ...mapWritableState(usePageStackStore, ['pageStack'])
     },
     beforeMount() {
       this.pushPage(page1);
