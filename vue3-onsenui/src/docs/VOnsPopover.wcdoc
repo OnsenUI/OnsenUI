@@ -4,9 +4,9 @@
 
 /**
  * @attribute target
- * @type {Ref|String|Event|HTMLElement}
+ * @type {Ref}
  * @description
- *   [en]Target element. Can be either a Vue component reference, a CSS selector, an event object or a DOM element. It can also be provided as `options.target`.[/en]
+ *   [en]Target element. Must be a Vue ref.[/en]
  *   [ja][/ja]
  */
 
