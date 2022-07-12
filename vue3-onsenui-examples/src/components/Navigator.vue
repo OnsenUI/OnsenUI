@@ -1,14 +1,13 @@
 <template>
   <v-ons-page>
     <v-ons-navigator swipeable
-      :page-stack="pageStack"
-      animation="none"
+      v-model:page-stack="pageStack"
       @postpush="log('postpush!')"
       @show="log('show from navigator!')"
 
       @push="pageStack = [...pageStack, $event]"
       @reset="pageStack = [pageStack[0]]"
-      @pop="pageStack.pop()"
+      @pop="packStage = pageStack.slice(0, -1)"
       @replace="pageStack = [...pageStack.slice(0, -1), $event]"
     >
     </v-ons-navigator>

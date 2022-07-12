@@ -24,10 +24,7 @@
 
     computed: {
       normalizedTarget() {
-        if (this.target && this.target.__isVue) {
-          return this.target.$el;
-        }
-        return this.target;
+        return this.target.$el || this.target;
       },
       normalizedOptions() {
         if (this.target) {

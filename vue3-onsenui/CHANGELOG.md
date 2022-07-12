@@ -14,6 +14,7 @@ dev
  * VOnsNavigator: The `pageStack` prop is no longer mutated directly. Instead use `v-model:pageStack` to keep the `pageStack` prop in sync.
  * VOnsNavigator: The `pageStack` prop no longer responds to array mutatation methods (e.g. Array.prototype.pop). The whole `pageStack` value must be replaced (e.g. by using Array.prototype.slice) to trigger a visual change.
  * VOnsNavigator: The `popPage` prop has been removed. Use `@deviceBackButton.prevent` and VOnsBackButton's `@click.prevent` to override default pop behaviour.
+ * VOnsPopover: The `target` prop must be a Vue ref.
 
  ### Bug Fixes
 
