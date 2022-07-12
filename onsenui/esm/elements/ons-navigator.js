@@ -243,6 +243,12 @@ export default class NavigatorElement extends BaseElement {
    * @param {Object} event.leavePage
    *   [en]Object of the previous page.[/en]
    *   [ja]popされて消えるページのオブジェクト。[/ja]
+   * @param {Object} event.swipeToPop
+   *   [en]True if the pop was triggered by the user swiping to pop.[/en]
+   *   [ja][/ja]
+   * @param {Object} event.onsBackButton
+   *   [en]True if the pop was caused by pressing an ons-back-button.[/en]
+   *   [ja][/ja]
    */
 
   /**
@@ -326,7 +332,7 @@ export default class NavigatorElement extends BaseElement {
           const animationOptions = { duration: swipeAnimator.durationSwipe, timing: swipeAnimator.timingSwipe };
           this._onSwipe && this._onSwipe(ratio, animationOptions);
           util.triggerElementEvent(this, 'swipe', { ratio, animationOptions });
-          this[this.swipeMax ? 'swipeMax' : 'popPage']({ animator: swipeAnimator, _swipeToPop: true });
+          this[this.swipeMax ? 'swipeMax' : 'popPage']({ animator: swipeAnimator, swipeToPop: true });
           swipeAnimator = null;
         },
         swipeMid: (distance, width) => {
@@ -535,8 +541,8 @@ export default class NavigatorElement extends BaseElement {
             leavePage,
             enterPage,
             navigator: this,
-            _swipeToPop: !!options._swipeToPop,        // whether the pop was triggered by the user swiping
-            _onsBackButton: !!options._onsBackButton   // whether the pop was triggered by clicking ons-back-button
+            swipeToPop: !!options.swipeToPop,        // whether the pop was triggered by the user swiping
+            onsBackButton: !!options.onsBackButton   // whether the pop was triggered by clicking ons-back-button
           });
 
           options.callback && options.callback(enterPage);

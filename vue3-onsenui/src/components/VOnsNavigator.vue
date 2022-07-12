@@ -126,7 +126,7 @@
       },
       _checkUserInteraction(event) {
         // update the internal page stack in the case where user swiped to pop or clicked ons-back-button
-        if (event._swipeToPop || event._onsBackButton) {
+        if (event.swipeToPop || event.onsBackButton) {
           this._popPage();
         }
       },

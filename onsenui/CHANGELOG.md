@@ -2,6 +2,13 @@
 CHANGELOG
 ====
 
+dev
+---
+
+ ### New Features
+
+ * ons-navigator: Add `swipeToPop` and `onsBackButton` keys to `postpop` event for detecting what triggered the pop.
+
 2.12.1
 ---
 
