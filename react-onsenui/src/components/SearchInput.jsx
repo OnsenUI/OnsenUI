@@ -11,6 +11,11 @@ const nameMap = {
 
 const withDefaultValue = component => oneTimeProp(component, 'defaultValue', 'value');
 
+const notAttributes = [
+  'value' // value must be applied as property since attribute only works before input is touched
+];
+
+
 /**
  * @original ons-search-input
  * @category form
@@ -29,7 +34,7 @@ const withDefaultValue = component => oneTimeProp(component, 'defaultValue', 'va
  *   modifier='material'
  *   placeholder='Username' />
  */
-const SearchInput = withDefaultValue(onsCustomElement('ons-search-input', {deprecated: nameMap}));
+const SearchInput = withDefaultValue(onsCustomElement('ons-search-input', {deprecated: nameMap, notAttributes}));
 
 SearchInput.propTypes = {
   /**
