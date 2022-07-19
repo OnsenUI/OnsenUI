@@ -3,9 +3,6 @@ import ons from 'onsenui';
 import { Navigator } from 'react-onsenui';
 import Examples from './Examples';
 
-import 'onsenui/css/onsenui.css';
-import 'onsenui/css/onsen-css-components.css';
-
 class App extends React.Component {
   renderPage(route, navigator) {
     const props = route.props || {};
