@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import 'onsenui/esm/elements/ons-navigator';
 
@@ -194,7 +195,9 @@ class NavigatorClass extends React.Component {
         this.pages.pop();
         this.routes.pop();
 
-        this.forceUpdate(resolve);
+        ReactDOM.flushSync(() => { // prevents flickering caused by React 18 batching
+          this.forceUpdate(resolve);
+        });
       });
     };
 

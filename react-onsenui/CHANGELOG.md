@@ -2,6 +2,17 @@
 CHANGELOG
 ====
 
+dev
+---
+
+### New Features
+
+ * Support React 18.
+
+### Bug Fixes
+
+ * Input, SearchInput: Fix value prop being ignored after input is touched. ([#2996](https://github.com/OnsenUI/OnsenUI/issues/2996)).
+
 1.12.0
 ---
 

@@ -11,6 +11,10 @@ const nameMap = {
 
 const withDefaultValue = component => oneTimeProp(component, 'defaultValue', 'value');
 
+const notAttributes = [
+  'value' // value must be applied as property since attribute only works before input is touched
+];
+
 /**
  * @original ons-input
  * @category form
@@ -27,7 +31,7 @@ const withDefaultValue = component => oneTimeProp(component, 'defaultValue', 'va
  *   modifier='material'
  *   placeholder='Username' />
  */
-const Input = withDefaultValue(onsCustomElement('ons-input', {deprecated: nameMap}));
+const Input = withDefaultValue(onsCustomElement('ons-input', {deprecated: nameMap, notAttributes}));
 
 Input.propTypes = {
   /**
