@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import 'onsenui/esm/elements/ons-navigator';
 
@@ -11,7 +12,6 @@ class RouterNavigatorClass extends React.Component {
     super(...args);
 
     this.cancelUpdate = false;
-    this.page = null;
 
     const callback = (name, event) => {
       if (this.props[name]) {
@@ -24,6 +24,10 @@ class RouterNavigatorClass extends React.Component {
     this.onPostPop = callback.bind(this, 'onPostPop');
 
     this.ref = React.createRef();
+
+    this.state = {
+      internalStack: []
+    };
   }
 
   update(cb) {
@@ -52,15 +56,13 @@ class RouterNavigatorClass extends React.Component {
 
     const update = () => {
       return new Promise(resolve => {
-        this.pages.push(this.props.renderPage(routes[routes.length - 1]));
-        this.update(resolve);
+        this.setState({internalStack: [...this.state.internalStack, routes[routes.length - 1]]}, resolve);
       });
     };
 
     return this.ref.current._pushPage(options, update)
       .then(() => {
-        this.pages = routes.map(route => this.props.renderPage(route));
-        this.update();
+        this.setState({internalStack: [...routes]});
       });
   }
 
@@ -84,16 +86,11 @@ class RouterNavigatorClass extends React.Component {
 
     const update = () => {
       return new Promise(resolve => {
-        this.page = this.props.renderPage(route);
-        this.update(resolve);
+        this.setState({internalStack: [...this.state.internalStack, route]}, resolve);
       });
     };
 
     return this.ref.current._pushPage(options, update)
-      .then(() => {
-        this.page = null;
-        this.update();
-      });
   }
 
   isRunning() {
@@ -117,15 +114,13 @@ class RouterNavigatorClass extends React.Component {
 
     const update = () => {
       return new Promise(resolve => {
-        this.pages.push(this.props.renderPage(route));
-        this.update(resolve);
+        this.setState({internalStack: [...this.state.internalStack, route]}, resolve);
       });
     };
 
     return this.ref.current._pushPage(options, update)
       .then(() => {
-        this.pages.splice(this.pages.length - 2, 1);
-        this.update();
+        this.setState({internalStack: [...this.state.internalStack.slice(0, -2), route]});
       });
   }
 
@@ -146,8 +141,9 @@ class RouterNavigatorClass extends React.Component {
 
     const update = () => {
       return new Promise(resolve => {
-        this.pages.pop();
-        this.update(resolve);
+        ReactDOM.flushSync(() => { // prevents flickering caused by React 18 batching
+          this.setState({internalStack: this.state.internalStack.slice(0, -1)}, resolve);
+        });
       });
     };
 
@@ -176,16 +172,10 @@ class RouterNavigatorClass extends React.Component {
       throw new Error('In RouterNavigator the property routeConfig needs to be set');
     }
 
-    this.routeConfig = this.props.routeConfig;
-
-    this.pages = this.routeConfig.routeStack.map(
-      (route) => this.props.renderPage(route, this)
-    );
-
     node.swipeMax = this.props.swipePop;
     node.onDeviceBackButton = this.props.onDeviceBackButton || this._onDeviceBackButton.bind(this);
 
-    this.update();
+    this.setState({internalStack: this.props.routeConfig.routeStack});
   }
 
   componentWillUnmount() {
@@ -198,9 +188,6 @@ class RouterNavigatorClass extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    /* When the component updates we now have the page we're pushing in our routeConfig, so we no longer need to render it specially */
-    this.page = null;
-
     if (this.props.onDeviceBackButton !== undefined) {
       this.ref.current.onDeviceBackButton = this.props.onDeviceBackButton;
     }
@@ -244,7 +231,6 @@ class RouterNavigatorClass extends React.Component {
   render() {
     const {
       innerRef,
-      routeConfig,
       renderPage,
 
       // these props should not be passed down
@@ -258,9 +244,7 @@ class RouterNavigatorClass extends React.Component {
       ...rest
     } = this.props;
 
-    /* Gather pages to render and the animating page in one array so React reuses components. */
-    const pagesToRender = routeConfig.routeStack.map(route => renderPage(route));
-    pagesToRender.push(this.page);
+    const pagesToRender = this.state.internalStack.map(route => renderPage(route));
 
     if (innerRef && innerRef !== this.ref) {
       this.ref = innerRef;
