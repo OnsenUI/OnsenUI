@@ -2,7 +2,7 @@
 CHANGELOG
 ====
 
-dev
+2.12.2
 ---
 
  ### New Features
