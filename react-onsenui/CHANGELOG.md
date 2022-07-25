@@ -2,7 +2,7 @@
 CHANGELOG
 ====
 
-dev
+1.13.0
 ---
 
 ### New Features
