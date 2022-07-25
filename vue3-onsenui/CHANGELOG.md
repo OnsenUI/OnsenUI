@@ -1,7 +1,7 @@
 CHANGELOG
 ====
 
-dev
+3.0.0
 ---
 
  ### BREAKING CHANGES

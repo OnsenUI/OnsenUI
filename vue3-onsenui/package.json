@@ -1,6 +1,6 @@
 {
   "name": "vue-onsenui",
-  "version": "3.0.0-alpha",
+  "version": "3.0.0",
   "description": "Vue.js bindings for Onsen UI",
   "author": "Onsen UI Team <team@monaca.io>",
   "scripts": {
@@ -57,7 +57,7 @@
     ]
   },
   "peerDependencies": {
-    "onsenui": "~2.12.0",
+    "onsenui": "~2.12.2",
     "vue": "^3.0.6"
   },
   "devDependencies": {

@@ -11,7 +11,7 @@
     "onsenui": "~2.12.0",
     "pinia": "^2.0.14",
     "vue": "^3.2.33",
-    "vue-onsenui": "3.0.0-alpha"
+    "vue-onsenui": "^3.0.0"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^2.3.1",
