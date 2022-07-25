@@ -104,7 +104,7 @@
       log,
       push() {
         this.$emit('push', markRaw({
-          ...page2,
+          extends: page2,
           onsNavigatorProps: {
             myProp: 'This is a navigator prop'
           }

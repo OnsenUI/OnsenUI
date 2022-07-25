@@ -2,9 +2,9 @@
   <ons-navigator @postpop.self="_checkUserInteraction" :options.prop="options">
     <slot>
       <component
-        v-for="page in internalPageStack"
+        v-for="(page, index) in extendsFix"
         :is="page"
-        :key="page.key || page.name"
+        :key="index"
         v-bind="{ ...unrecognizedListeners, ...page.onsNavigatorProps }"
       ></component>
     </slot>
@@ -34,6 +34,18 @@
       return {
         internalPageStack: this.pageStack
       };
+    },
+
+    computed: {
+      extendsFix() {
+        // workaround for Vue bug where extends doesn't work with runtime template compilation
+        // https://github.com/vuejs/core/issues/6249
+        return this.internalPageStack.map(page =>
+          page.extends ?
+            {...page, template: page.extends.template} :
+            page
+        );
+      }
     },
 
     methods: {
