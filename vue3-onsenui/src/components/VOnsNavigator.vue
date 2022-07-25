@@ -2,9 +2,9 @@
   <ons-navigator @postpop.self="_checkUserInteraction" :options.prop="options">
     <slot>
       <component
-        v-for="page in internalPageStack"
+        v-for="(page, index) in internalPageStack"
         :is="page"
-        :key="page.key || page.name"
+        :key="index"
         v-bind="{ ...unrecognizedListeners, ...page.onsNavigatorProps }"
       ></component>
     </slot>
