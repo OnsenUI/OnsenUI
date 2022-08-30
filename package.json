@@ -4,6 +4,7 @@
   "private": true,
   "description": "",
   "scripts": {
+    "postinstall": "cd vue-onsenui && npm install",
     "build": "npm run --prefix onsenui build",
     "build:react": "npm run --prefix react-onsenui build",
     "build:vue": "npm run --prefix vue3-onsenui build",
