@@ -3,7 +3,10 @@
   "version": "1.13.0",
   "description": "Onsen UI - React Components for Hybrid Cordova/PhoneGap Apps with Material Design and iOS UI components",
   "scripts": {
-    "build": "cross-env NODE_ENV=production rollup -c && uglifyjs dist/react-onsenui.js --output dist/react-onsenui.min.js",
+    "build": "npm run build:rollup && npm run build:minify",
+    "build:rollup": "cross-env NODE_ENV=production rollup -c",
+    "build:minify": "uglifyjs dist/react-onsenui.js --output dist/react-onsenui.min.js",
+    "watch": "npm run build:rollup -- -w",
     "lint": "eslint 'src/**/*.{js,jsx}'",
     "prepublish": "npm run build",
     "postpublish": "npm run gen-docs",

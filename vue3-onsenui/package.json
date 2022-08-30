@@ -12,6 +12,7 @@
     "build:helper-json": "(cd ../../ && npm run build:docs) && gulp build:helper-json",
     "prepublish": "npm run build",
     "test": "gulp test",
+    "watch": "npm run build:esm -- -w",
     "lint": "eslint \"src/**/*.js\" \"src/**/*.vue\""
   },
   "main": "dist/vue-onsenui.js",
