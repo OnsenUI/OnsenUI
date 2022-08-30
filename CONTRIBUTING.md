@@ -2,7 +2,6 @@ Contributing Guide
 ==================
 
 We will happily accept contributions to Onsen UI. It can be both fixes for bugs or typos or even new features that extend Onsen UI.
-
 The basic workflow when making contributions is the following:
 
 * [Fork](https://github.com/OnsenUI/OnsenUI/fork) the repository
@@ -21,44 +20,99 @@ Please don't make changes directly to generated files like `onsenui.js` and `ons
 
 ### Components
 
-Onsen UI elements are made on top of Web Components. The source code is located in [core/src/](https://github.com/OnsenUI/OnsenUI/tree/master/core/src). This directory contains every single element in Onsen UI core and also internal functionality.
+Onsen UI elements are made on top of Web Components. The source code is located in [onsenui/esm](https://github.com/OnsenUI/OnsenUI/tree/master/onsenui/esm). This directory contains every single element in Onsen UI core and also internal functionality.
 
 ### Bindings
 
-We wrap Onsen UI core with extra libraries to make it work better with some specific frameworks. The source code of these libraries is located in [bindings](https://github.com/OnsenUI/OnsenUI/tree/master/bindings).
+We wrap Onsen UI core with extra libraries to make it work better with some specific frameworks, such as React and Vue. See [Directory Structure](#directory-structure) to find the source for a particular framework.
 
 ### Style Sheets
 
-Most of the style is defined in a separate project called `Onsen CSS Components` which is located [here](https://github.com/OnsenUI/OnsenUI/tree/master/css-components).
+Most of the style is defined in Onsen CSS Components, which is located [here](https://github.com/OnsenUI/OnsenUI/tree/master/onsenui/css/css-components-src).
 
-Changes to the style should be made by editing the files in [this directory](https://github.com/OnsenUI/OnsenUI/tree/master/css-components/src/components). These files will compile into the `onsen-css-components.css` file.
+Changes to the style should be made by editing the files in [this directory](https://github.com/OnsenUI/OnsenUI/tree/master/onsenui/css/css-components-src/components). These files will compile into the `onsen-css-components.css` file.
 
-There is also a stylesheet that is specific to the custom elements called `onsenui.css`, this file is compiled from the files in [this directory](https://github.com/OnsenUI/OnsenUI/tree/master/core/css).
+There is also a stylesheet that is specific to the custom elements called `onsenui.css`, this file is compiled from the files in [this directory](https://github.com/OnsenUI/OnsenUI/tree/master/onsenui/css/src).
+
+
+Directory Structure
+-------------------
+
+    .
+    ├── onsenui                         Onsen UI main project
+    │   ├── css                         Onsen UI core CSS and CSS components
+    │   ├── esm                         Onsen UI source
+    │   ├── examples                    Examples for main project
+    │   └── bindings
+    │       └── angular1                AngularJS bindings
+    │
+    ├── react-onsenui                   React bindings
+    ├── react-onsenui-examples          Example app for React bindings
+    │
+    ├── ngx-onsenui
+    │   └── projects
+    │       ├── ngx-onsenui             Angular 2+ bindings
+    │       └── ngx-onsenui-examples    Example app for Angular 2+ bindings
+    │
+    ├── vue3-onsenui                    Vue 3 bindings
+    ├── vue3-onsenui-examples           Example app for Vue 3 bindings
+    │
+    ├── vue-onsenui                     Vue 2 bindings
+    └── vue-onsenui-examples            Example app for Vue 2 bindings
 
 
 Development Setup
 -----------------
 
-You will need a recent version of [Node.js](https://nodejs.org/) before continuing.
+You will need a recent version of [Node.js](https://nodejs.org/) and npm 7 or later before continuing.
 
-Clone this repository and run the following commands to build the project:
+Clone this repository and run the following command:
 
     npm install
-    npm run build
 
-The files will be built and copied into **OnsenUI/build** folder.
+This installs the dependencies for Onsen UI and the framework bindings (excluding Angular 2+; see below).
 
-If you want to work with some bindings, like `vue`, you need to run the following commands:
+### Onsen UI core
 
-    cd bindings/vue3
-    npm install
-    npm run build
-
-It is also possible to serve the files for development and running examples:
+To work on the Onsen UI core, serve the examples:
 
     npm run serve
 
-* Then navigate your browser to [http://0.0.0.0:3000/examples/index.html](http://0.0.0.0:3000/examples/index.html)
+Then navigate your browser to [http://0.0.0.0:3000/examples/index.html](http://0.0.0.0:3000/examples/index.html)
+
+Any changes to the Onsen UI source in `onsenui/esm` will trigger a rebuild.
+
+To perform a full build of the Onsen UI core:
+
+    npm run build
+
+This will bundle the `onsenui/esm` source files to UMD in `onsenui/js`.
+It will also build the CSS components and core CSS in `onsenui/css`.
+
+### Bindings (React, Vue 2, Vue 3)
+
+To work on one of the framework bindings, run the relevant `watch` command to trigger a rebuild whenever the source is changed:
+
+    npm run watch:react       // or watch:vue, watch:vue3
+
+In another terminal, run the relevant `serve` command to serve the example project:
+
+    npm run serve:react       // or serve:vue, serve:vue3
+
+To perform a full build:
+
+    npm run build:react       // or build:vue, build:vue3
+
+### Bindings (Angular 2+)
+
+The Angular 2+ bindings are in a self-contained workspace created with Angular CLI.
+
+To work on the Angular 2+ bindings:
+
+    cd ngx-onsenui
+    npm install
+
+See the full instructions [here](https://github.com/OnsenUI/OnsenUI/tree/master/ngx-onsenui/README.md).
 
 
 Code Style
