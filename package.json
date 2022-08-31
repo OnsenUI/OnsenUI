@@ -28,6 +28,7 @@
     "./react-onsenui-examples",
     "./vue3-onsenui",
     "./vue3-onsenui-examples",
-    "./vue-onsenui-examples"
+    "./vue-onsenui-examples",
+    "./css-components-previewer"
   ]
 }
