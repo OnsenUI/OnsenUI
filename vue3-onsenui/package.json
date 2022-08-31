@@ -10,7 +10,7 @@
     "build:esm": "cross-env NODE_ENV=production rollup -c --configEsm",
     "build:minify": "uglifyjs dist/vue-onsenui.js -c -m --comments '/vue-onsenui/' --output dist/vue-onsenui.min.js",
     "build:helper-json": "(cd ../../ && npm run build:docs) && gulp build:helper-json",
-    "prepublish": "npm run build",
+    "prepublishOnly": "npm run build",
     "test": "gulp test",
     "watch": "npm run build:esm -- -w",
     "lint": "eslint \"src/**/*.js\" \"src/**/*.vue\""

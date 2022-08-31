@@ -11,7 +11,7 @@
     "watch": "npm run build:umd -- -w",
     "clean": "rimraf ./esm ./dist",
     "helper-json": "(cd ../../ && npm run build:docs) && gulp build:helper-json",
-    "prepublish": "npm run build"
+    "prepublishOnly": "npm run build"
   },
   "main": "dist/vue-onsenui.js",
   "files": [

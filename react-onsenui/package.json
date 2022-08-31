@@ -8,7 +8,7 @@
     "build:minify": "uglifyjs dist/react-onsenui.js --output dist/react-onsenui.min.js",
     "watch": "npm run build:rollup -- -w",
     "lint": "eslint 'src/**/*.{js,jsx}'",
-    "prepublish": "npm run build",
+    "prepublishOnly": "npm run build",
     "postpublish": "npm run gen-docs",
     "test": "karma start",
     "gen-docs": "node ./scripts/docgen.js"
