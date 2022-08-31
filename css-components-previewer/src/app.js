@@ -1,5 +1,7 @@
 import {createAppPageComponent} from './components/app-page';
 
+import './style.css';
+
 function init() {
   const components = loadComponents();
   const categories = loadCategories(components);
