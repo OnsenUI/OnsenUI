@@ -11,7 +11,7 @@
     "core-js": "^3.8.3",
     "onsenui": "~2.12.0",
     "vue": "^2.6.14",
-    "vue-onsenui": "^2.6.4"
+    "vue-onsenui": "file:../vue-onsenui"
   },
   "devDependencies": {
     "@babel/core": "^7.12.16",

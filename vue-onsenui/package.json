@@ -8,9 +8,10 @@
     "build:esm": "cross-env NODE_ENV=production rollup -c rollup.config.esm.js && cpx 'src/**/!(index.umd).js' esm",
     "build:minify": "uglifyjs dist/vue-onsenui.js -c -m --comments '/vue-onsenui/' --output dist/vue-onsenui.min.js",
     "build:umd": "cross-env NODE_ENV=production rollup -c rollup.config.umd.js",
+    "watch": "npm run build:umd -- -w",
     "clean": "rimraf ./esm ./dist",
     "helper-json": "(cd ../../ && npm run build:docs) && gulp build:helper-json",
-    "prepublish": "npm run build"
+    "prepublishOnly": "npm run build"
   },
   "main": "dist/vue-onsenui.js",
   "files": [

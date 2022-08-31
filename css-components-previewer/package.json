@@ -1,0 +1,32 @@
+{
+  "name": "",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "serve": "browser-sync start --config bs-config.js",
+    "build": "rollup -c",
+    "watch": "npm run build -- -w",
+    "clean": "rimraf ./build",
+    "prebuild": "npm run clean"
+  },
+  "dependencies": {
+    "onsenui": "~2.12.2"
+  },
+  "engines": {
+    "node": ">=0.10.0"
+  },
+  "devDependencies": {
+    "browser-sync": "^2.18.6",
+    "eco": "^1.1.0-rc-3",
+    "@onsenui/ancss": "^1.0.0",
+    "@rollup/plugin-node-resolve": "^13.3.0",
+    "cpx": "^1.5.0",
+    "connect-history-api-fallback": "^1.3.0",
+    "glob": "^7.1.2",
+    "js-yaml": "^3.10.0",
+    "rimraf": "^2.6.1",
+    "rollup": "^2.79.0",
+    "rollup-plugin-import-css": "^3.0.3",
+    "rollup-plugin-execute": "^1.1.1"
+  }
+}

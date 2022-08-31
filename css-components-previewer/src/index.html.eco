@@ -11,8 +11,7 @@
   <link rel="stylesheet" href="https://unpkg.com/onsenui/css/font_awesome/css/font-awesome.min.css">
   <link rel="stylesheet" href="https://unpkg.com/onsenui/css/ionicons/css/ionicons.min.css">
   <link rel="stylesheet" href="https://unpkg.com/onsenui/css/material-design-iconic-font/css/material-design-iconic-font.min.css">
-  <link rel="stylesheet" href="/style.css">
-
+  <link rel="stylesheet" href="/app.gen.css" />
 
 </head>
 <body ontouchstart=""> <!-- Hack to activate :active CSS selector on iOS browsers.-->

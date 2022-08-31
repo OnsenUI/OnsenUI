@@ -1,5 +1,5 @@
 {
-  "name": "vue-onsenui-examples",
+  "name": "vue3-onsenui-examples",
   "version": "0.0.0",
   "scripts": {
     "dev": "vite",
