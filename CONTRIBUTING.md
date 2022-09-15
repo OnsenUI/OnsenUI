@@ -11,6 +11,22 @@ The basic workflow when making contributions is the following:
 After you've made a pull request we will review it. If everything is fine and we like the change the contribution will be pulled into the main Onsen UI repository. In the case where there are some issues with the code or we disagree with how it's been implemented we will describe the issues in the comments so they can be corrected.
 
 
+Supported frameworks
+--------------------
+
+The following frameworks are supported by the Onsen UI core team:
+
+    Framework     | Package               | Notes
+    --------------+-----------------------+------------------------
+    React         | react-onsenui         |
+    Vue 2         | vue-onsenui@legacy    | bug fixes only
+    Vue 3         | vue-onsenui@latest    |
+    Angular       | ngx-onsenui           |
+    AngularJS     | angularjs-onsenui     | bug fixes only
+
+If you are interested in writing bindings for another framework, feel free to ask for help in the GitHub issues. Bindings for other frameworks should generally be maintained outside the OnsenUI repository.
+
+
 Source Code Structure
 ---------------------
 
@@ -269,3 +285,11 @@ Releasing new versions of bindings is relatively straightforward.
    - Inside the binding's root directory, run `npm publish`
 
 That's it! Your new binding version is released. :tada:
+
+
+Related repositories
+--------------------
+
+- [OnsenUI/onsen.io](https://github.com/OnsenUI/onsen.io): the Onsen UI website, [onsen.io]().
+- [OnsenUI/playground](https://github.com/OnsenUI/playground): the Onsen UI playground, for interactive tutorials and issue reporting, [onsen.io/playground]().
+- [OnsenUI/theme-roller](https://github.com/OnsenUI/theme-roller): the Theme Roller, for creating custom Onsen UI themes, [onsen.io/theme-roller]().
