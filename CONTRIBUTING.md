@@ -26,6 +26,21 @@ The following frameworks are supported by the Onsen UI core team:
 
 If you are interested in writing bindings for another framework, feel free to ask for help in the GitHub issues. Bindings for other frameworks should generally be maintained outside the OnsenUI repository.
 
+### Framework upgrades
+When a new version of a framework is released, we need to update the corresponding Onsen UI package to support the new framework version.
+
+For example, to upgrade react-onsenui to support React 19:
+
+  1. **Bump the framework version:** Set `react` (and related dependencies such as `react-dom`) to v19 in `react-onsenui/package.json` and `react-onsenui-examples/package.json`. Run `npm install` from the root directory to check that it installs correctly.
+
+  2. **Manually test the bindings:** Build the bindings with `npm run watch:react` and serve the examples with `npm run serve:react`. Manually check that the examples are working as expected and look for any errors in the console.
+
+  3. **Read the framework release notes:** Look for breaking changes in the React 19 release notes and anything that might affect react-onsenui.
+
+  4. **Update the CHANGELOG** in react-onsenui/CHANGELOG.md with "Support React 19".
+
+  5. **Release the package** by following the [release procedure](#release-procedure). If it is a major framework upgrade (e.g. React 18 -> 19), the package should be bumped by a minor version since this is a breaking change.
+
 
 Source Code Structure
 ---------------------
@@ -200,6 +215,10 @@ Documentation
 -------------
 
 Onsen UI's documentation is generated directly from each file's source code, using Onsen UI's own [wcdoc](https://github.com/OnsenUI/wcdoc) tool. The syntax will be familiar if you have used JSDoc before. Running this tool generates JSON files which are stored in `build/docs`. These JSON files are then used by the [onsen.io](https://github.com/OnsenUI/onsen.io) repository to generate the documentation you see on the website.
+
+### Syntax
+
+Check the existing documentation comments in [onsenui/esm/elements](https://github.com/OnsenUI/tree/master/onsenui/esm/elements) to see how documentation should be written. The exact schema of the documentation is defined in the `.schema.json` files in [onsenui/docs/wcdoc](https://github.com/OnsenUI/tree/master/onsenui/docs/wcdoc).
 
 ### Setup
 
