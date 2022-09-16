@@ -205,16 +205,16 @@ Onsen UI's documentation is generated directly from each file's source code, usi
 
 Assuming you have already set up the Onsen UI repository, the other thing you need to do is set up the [onsen.io](https://github.com/OnsenUI/onsen.io) repository. Follow the instructions in that README to get it set up, but stop when you get to the comment `Checkout and build the latest revision of Onsen UI 2`. Instead of using the version of Onsen UI from GitHub, you want to use your local repository. The easiest way to do this is to create a symlink. Assuming your Onsen UI repository is at `~/dev/onsen/OnsenUI` and your onsen.io repository is at `~/dev/onsen/onsen.io`, the command would look like this (on MacOS and Linux):
 
-    ln -s ~/dev/onsen/OnsenUI ~/dev/onsen/onsen.io/dist/v2/OnsenUI
+    ln -s ~/dev/onsen/OnsenUI/onsenui ~/dev/onsen/onsen.io/dist/v2/OnsenUI
 
 ### Modifying Documentation
 
 Once this is all set up, follow these steps to modify the documentation.
 
  1. `Onsen UI`: Modify the documentation comments in the relevant JS file
- 2. `Onsen UI`: Run `gulp build-docs`
+ 2. `Onsen UI`: Run `npm run docs`
  3. If you are changing the React docs, there are extra steps. Otherwise, skip to step 4.
-	- `Onsen UI`: Build the React Docs: `cd bindings/react && npm install && npm run gen-docs`
+	- `Onsen UI`: Build the React Docs: `npm run docs:react`
 	- `onsen.io`: Delete the React doc cache, if it exists: `rm -r .reactdoc`
  4. `onsen.io`: Run `gulp serve --lang en`
 
