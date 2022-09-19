@@ -42,6 +42,14 @@ For example, to upgrade react-onsenui to support React 19:
   5. **Release the package** by following the [release procedure](#release-procedure). If it is a major framework upgrade (e.g. React 18 -> 19), the package should be bumped by a minor version since this is a breaking change.
 
 
+Supported browsers
+------------------
+
+Onsen UI is written as ES modules in modern JavaScript. These are distributed without any transpilation. The ES modules version of Onsen UI is supported on modern browsers.
+
+For older browsers, Onsen UI is also distributed in UMD format. The ES modules are transpiled using Babel and bundled as UMD. For the exact list of browsers supported by the UMD build, see the `browserslist` key in [onsenui/package.json](https://github.com/OnsenUI/OnsenUI/blob/master/onsenui/package.json).
+
+
 Source Code Structure
 ---------------------
 
@@ -190,25 +198,29 @@ Running Tests
 
 Onsen UI has unit tests for the Web Components as well as end-to-end testing of the binding libraries using Protractor.
 
-Use the following commands to run the tests:
+Use the following commands to run the core tests (core unit tests and TypeScript tests):
 
     npm test
 
-or these commands for end-to-end testing of the binding libraries:
+### Unit tests
 
-    cd bindings/angular1
-    gulp e2e-test
+To run the unit tests, using the following command:
 
-    cd bindings/angular2
-    npm install
-    gulp e2e-test
+    npm run --prefix onsenui test:unit
 
-It will take some time the because it will download a stand-alone Selenium Server and a Chrome webdriver the first time it's executed.
+Individual test files can be run with the `--specs` flag:
 
-To run a single test or a group of tests use the `--specs` parameter and provide a comma-separated list of spec files:
+    npm run --prefix onsenui test:unit -- --specs onsenui/esm/elements/ons-navigator.spec.js
 
-    cd bindings/angular1
-    gulp e2e-test --specs test/e2e/lazyRepeat/scenarios.js
+The unit tests are written with [Mocha](https://mochajs.org/) and [Chai](https://www.chaijs.com/). To skip a test, change `it` to `it.skip`. To run only a single test, change `it` to `it.only`. See the Mocha website for further information.
+
+### Typescript tests
+
+Onsen UI has a TypeScript type definition file, [onsenui/esm/onsenui.d.ts](https://github.com/OnsenUI/OnsenUI/blob/master/onsenui/esm/onsenui.d.ts). When a new property is added to an Onsen UI component, it also needs to be added to this file.
+
+To test the type definitions:
+
+    npm run --prefix onsenui test:core-dts
 
 
 Documentation
@@ -259,6 +271,7 @@ Before starting a release, check the following:
 
 Once you have done the pre-release checks above, follow the steps below to publish the core.
  - Increase the version number
+   - Increment the minor version for a release with breaking changes, and the patch version for a release with non-breaking changes
    - `CHANGELOG.md`: Change `dev` to the new version number
    - `package.json`: Change `version` to the new version number
    - Commit and push these changes, with a commit message like: `chore(*): Bump 2.10.2`
