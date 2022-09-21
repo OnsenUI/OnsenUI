@@ -11,6 +11,45 @@ The basic workflow when making contributions is the following:
 After you've made a pull request we will review it. If everything is fine and we like the change the contribution will be pulled into the main Onsen UI repository. In the case where there are some issues with the code or we disagree with how it's been implemented we will describe the issues in the comments so they can be corrected.
 
 
+Supported frameworks
+--------------------
+
+The following frameworks are supported by the Onsen UI core team:
+
+    Framework     | Package               | Notes
+    --------------+-----------------------+------------------------
+    React         | react-onsenui         |
+    Vue 2         | vue-onsenui@legacy    | bug fixes only
+    Vue 3         | vue-onsenui@latest    |
+    Angular       | ngx-onsenui           |
+    AngularJS     | angularjs-onsenui     | bug fixes only
+
+If you are interested in writing bindings for another framework, feel free to ask for help in the GitHub issues. Bindings for other frameworks should generally be maintained outside the OnsenUI repository.
+
+### Framework upgrades
+When a new version of a framework is released, we need to update the corresponding Onsen UI package to support the new framework version.
+
+For example, to upgrade react-onsenui to support React 19:
+
+  1. **Bump the framework version:** Set `react` (and related dependencies such as `react-dom`) to v19 in `react-onsenui/package.json` and `react-onsenui-examples/package.json`. Run `npm install` from the root directory to check that it installs correctly.
+
+  2. **Manually test the bindings:** Build the bindings with `npm run watch:react` and serve the examples with `npm run serve:react`. Manually check that the examples are working as expected and look for any errors in the console.
+
+  3. **Read the framework release notes:** Look for breaking changes in the React 19 release notes and anything that might affect react-onsenui.
+
+  4. **Update the CHANGELOG** in react-onsenui/CHANGELOG.md with "Support React 19".
+
+  5. **Release the package** by following the [release procedure](#release-procedure). If it is a major framework upgrade (e.g. React 18 -> 19), the package should be bumped by a minor version since this is a breaking change.
+
+
+Supported browsers
+------------------
+
+Onsen UI is written as ES modules in modern JavaScript. These are distributed without any transpilation. The ES modules version of Onsen UI is supported on modern browsers.
+
+For older browsers, Onsen UI is also distributed in UMD format. The ES modules are transpiled using Babel and bundled as UMD. For the exact list of browsers supported by the UMD build, see the `browserslist` key in [onsenui/package.json](https://github.com/OnsenUI/OnsenUI/blob/master/onsenui/package.json).
+
+
 Source Code Structure
 ---------------------
 
@@ -159,25 +198,29 @@ Running Tests
 
 Onsen UI has unit tests for the Web Components as well as end-to-end testing of the binding libraries using Protractor.
 
-Use the following commands to run the tests:
+Use the following commands to run the core tests (core unit tests and TypeScript tests):
 
     npm test
 
-or these commands for end-to-end testing of the binding libraries:
+### Unit tests
 
-    cd bindings/angular1
-    gulp e2e-test
+To run the unit tests, using the following command:
 
-    cd bindings/angular2
-    npm install
-    gulp e2e-test
+    npm run --prefix onsenui test:unit
 
-It will take some time the because it will download a stand-alone Selenium Server and a Chrome webdriver the first time it's executed.
+Individual test files can be run with the `--specs` flag:
 
-To run a single test or a group of tests use the `--specs` parameter and provide a comma-separated list of spec files:
+    npm run --prefix onsenui test:unit -- --specs onsenui/esm/elements/ons-navigator.spec.js
 
-    cd bindings/angular1
-    gulp e2e-test --specs test/e2e/lazyRepeat/scenarios.js
+The unit tests are written with [Mocha](https://mochajs.org/) and [Chai](https://www.chaijs.com/). To skip a test, change `it` to `it.skip`. To run only a single test, change `it` to `it.only`. See the Mocha website for further information.
+
+### Typescript tests
+
+Onsen UI has a TypeScript type definition file, [onsenui/esm/onsenui.d.ts](https://github.com/OnsenUI/OnsenUI/blob/master/onsenui/esm/onsenui.d.ts). When a new property is added to an Onsen UI component, it also needs to be added to this file.
+
+To test the type definitions:
+
+    npm run --prefix onsenui test:core-dts
 
 
 Documentation
@@ -185,20 +228,24 @@ Documentation
 
 Onsen UI's documentation is generated directly from each file's source code, using Onsen UI's own [wcdoc](https://github.com/OnsenUI/wcdoc) tool. The syntax will be familiar if you have used JSDoc before. Running this tool generates JSON files which are stored in `build/docs`. These JSON files are then used by the [onsen.io](https://github.com/OnsenUI/onsen.io) repository to generate the documentation you see on the website.
 
+### Syntax
+
+Check the existing documentation comments in [onsenui/esm/elements](https://github.com/OnsenUI/tree/master/onsenui/esm/elements) to see how documentation should be written. The exact schema of the documentation is defined in the `.schema.json` files in [onsenui/docs/wcdoc](https://github.com/OnsenUI/tree/master/onsenui/docs/wcdoc).
+
 ### Setup
 
 Assuming you have already set up the Onsen UI repository, the other thing you need to do is set up the [onsen.io](https://github.com/OnsenUI/onsen.io) repository. Follow the instructions in that README to get it set up, but stop when you get to the comment `Checkout and build the latest revision of Onsen UI 2`. Instead of using the version of Onsen UI from GitHub, you want to use your local repository. The easiest way to do this is to create a symlink. Assuming your Onsen UI repository is at `~/dev/onsen/OnsenUI` and your onsen.io repository is at `~/dev/onsen/onsen.io`, the command would look like this (on MacOS and Linux):
 
-    ln -s ~/dev/onsen/OnsenUI ~/dev/onsen/onsen.io/dist/v2/OnsenUI
+    ln -s ~/dev/onsen/OnsenUI/onsenui ~/dev/onsen/onsen.io/dist/v2/OnsenUI
 
 ### Modifying Documentation
 
 Once this is all set up, follow these steps to modify the documentation.
 
  1. `Onsen UI`: Modify the documentation comments in the relevant JS file
- 2. `Onsen UI`: Run `gulp build-docs`
+ 2. `Onsen UI`: Run `npm run docs`
  3. If you are changing the React docs, there are extra steps. Otherwise, skip to step 4.
-	- `Onsen UI`: Build the React Docs: `cd bindings/react && npm install && npm run gen-docs`
+	- `Onsen UI`: Build the React Docs: `npm run docs:react`
 	- `onsen.io`: Delete the React doc cache, if it exists: `rm -r .reactdoc`
  4. `onsen.io`: Run `gulp serve --lang en`
 
@@ -224,6 +271,7 @@ Before starting a release, check the following:
 
 Once you have done the pre-release checks above, follow the steps below to publish the core.
  - Increase the version number
+   - Increment the minor version for a release with breaking changes, and the patch version for a release with non-breaking changes
    - `CHANGELOG.md`: Change `dev` to the new version number
    - `package.json`: Change `version` to the new version number
    - Commit and push these changes, with a commit message like: `chore(*): Bump 2.10.2`
@@ -269,3 +317,11 @@ Releasing new versions of bindings is relatively straightforward.
    - Inside the binding's root directory, run `npm publish`
 
 That's it! Your new binding version is released. :tada:
+
+
+Related repositories
+--------------------
+
+- [OnsenUI/onsen.io](https://github.com/OnsenUI/onsen.io): the Onsen UI website, [onsen.io]().
+- [OnsenUI/playground](https://github.com/OnsenUI/playground): the Onsen UI playground, for interactive tutorials and issue reporting, [onsen.io/playground]().
+- [OnsenUI/theme-roller](https://github.com/OnsenUI/theme-roller): the Theme Roller, for creating custom Onsen UI themes, [onsen.io/theme-roller]().
