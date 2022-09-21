@@ -12,7 +12,6 @@ class App extends React.Component {
   }
 
   render() {
-    ons.mockStatusBar();
     return (
       <Navigator
         swipeable={true}
