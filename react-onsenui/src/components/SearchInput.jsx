@@ -15,7 +15,6 @@ const notAttributes = [
   'value' // value must be applied as property since attribute only works before input is touched
 ];
 
-
 /**
  * @original ons-search-input
  * @category form
