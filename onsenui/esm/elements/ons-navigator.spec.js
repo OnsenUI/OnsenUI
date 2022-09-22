@@ -79,6 +79,13 @@ describe('OnsNavigatorElement', () => {
       });
     });
 
+    it('push none exist page', (done) => {
+      nav.pushPage('404').catch(err => {
+        expect(err).to.equal(404);
+        done();
+      });
+    });
+
     it('adds a new page to the top of the page stack using options.pageHTML', (done) => {
       nav.pushPage(null, {
         pageHTML: '<ons-page>hoge2</ons-page>',
