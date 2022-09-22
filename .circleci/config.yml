@@ -117,7 +117,10 @@ jobs:
           name: Run OnsenUI Tests
           command: npm run --prefix onsenui test
 
-      #- run: cd bindings/angular1; npm test    # TODO: make tests work again
+      - run:
+          name: Run AngularJS tests
+          command: cd onsenui/bindings/angular1; npm test
+
       #- run: cd bindings/angular2; npm test
       #- run: cd bindings/vue; npm test
       #- run:
