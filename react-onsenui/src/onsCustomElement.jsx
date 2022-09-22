@@ -10,6 +10,7 @@ const addDeprecated = (props, deprecated) => {
     ...deprecated
   };
 
+  // eslint-disable-next-line no-unused-vars
   for (const [oldName, newName] of Object.entries(nameMap)) {
     if (propsCopy[newName] === undefined && propsCopy[oldName] !== undefined) {
       propsCopy[newName] = propsCopy[oldName];
@@ -37,6 +38,7 @@ function useCustomElement(props, options = {}, ref) {
   const deprecated = options.deprecated || {};
 
   const properties = {};
+  // eslint-disable-next-line no-unused-vars
   for (const [prop, value] of Object.entries(addDeprecated(props, deprecated))) {
     const jsName = kebabize(prop);
 

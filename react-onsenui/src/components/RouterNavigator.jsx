@@ -90,7 +90,7 @@ class RouterNavigatorClass extends React.Component {
       });
     };
 
-    return this.ref.current._pushPage(options, update)
+    return this.ref.current._pushPage(options, update);
   }
 
   isRunning() {
