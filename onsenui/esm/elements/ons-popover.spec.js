@@ -2,14 +2,14 @@ import contentReady from '../ons/content-ready.js';
 
 describe('OnsPopoverElement', () => {
   let popover, target;
+  const targetElmId = 'test';
   const popoverDisplay = () => window.getComputedStyle(popover).getPropertyValue('display');
 
   beforeEach(done => {
-    popover = new ons.elements.Popover();
-    target = ons._util.createElement('<div>Target</div>');
-
-    document.body.appendChild(target);
+    popover = ons._util.createElement(`<ons-popover target="${targetElmId}">Test</ons-popover>`);
+    target = ons._util.createElement(`<div id="${targetElmId}"></div>`);
     document.body.appendChild(popover);
+    document.body.appendChild(target);
 
     contentReady(popover, done);
   });
@@ -83,6 +83,7 @@ describe('OnsPopoverElement', () => {
 
   describe('#show()', () => {
     it('throws an error when called with invalid targets', () => {
+      popover = ons._util.createElement(`<ons-popover>Test</ons-popover>`);
       expect(() => popover.show()).to.throw(Error);
       expect(() => popover.show(42)).to.throw(Error);
       expect(() => popover.show({})).to.throw(Error);
@@ -266,6 +267,27 @@ describe('OnsPopoverElement', () => {
 
       setImmediate(() => {
         expect(popover._popover.style.background).to.equal('blue');
+        done();
+      });
+    });
+  });
+
+  describe('\'target\' attribute', () => {
+    it ('works on show() as the default target', (done) => {
+      setImmediate(() => {
+        // expect(popover._popover.target).to.equal(targetElmId);
+        popover.show().then(() => {
+          window.getComputedStyle(popover).getPropertyValue('display');
+          done();
+        });
+      });
+    });
+
+    it ('works on visible as the default target', (done) => {
+      setImmediate(() => {
+        popover.visible = true;
+        expect(popover.target).to.equal(targetElmId);
+        window.getComputedStyle(popover).getPropertyValue('display');
         done();
       });
     });
