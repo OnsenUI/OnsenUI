@@ -619,13 +619,13 @@ export default class NavigatorElement extends BaseElement {
       }));
     }
 
-    return this._pushPage(options, () => new Promise(resolve => {
+    return this._pushPage(options, () => new Promise((resolve, reject) => {
       this._pageLoader.load({page, parent: this, params: options.data}, pageElement => {
         prepare(pageElement);
         resolve();
       }, error => {
         this._isRunning = false;
-        throw error;
+        reject(error);
       });
     }));
   }

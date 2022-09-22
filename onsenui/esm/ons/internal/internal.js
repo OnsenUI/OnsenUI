@@ -123,7 +123,11 @@ internal.getTemplateHTMLAsync = function(page) {
       xhr.onload = function() {
         const html = xhr.responseText;
         if (xhr.status >= 400 && xhr.status < 600) {
-          reject(html);
+          if (xhr.status === 404) {
+            reject(404);
+          } else {
+            reject(html);
+          }
         } else {
           // Refresh script tags
           const fragment = util.createFragment(html);

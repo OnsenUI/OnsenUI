@@ -30,6 +30,15 @@
       myNavigator.pushPage('page1.html', {data: {title: myNavigator.topPage.querySelector('ons-input').value}})
     };
 
+    var push404Page = function() {
+      myNavigator.pushPage('page404.html')
+        .catch(err => {
+          if (err === 404) {
+            alert('Page not found');
+          }
+        });
+    };
+
   </script>
 
 </head>
@@ -69,7 +78,11 @@
         <ons-button
           onclick="customPush()">
           Push Page
-          </ons-button>
+        </ons-button>
+        <ons-button
+          onclick="push404Page()">
+          Push 404-Page
+        </ons-button>
 
         <ons-button
           onclick="myNavigator.popPage()">
