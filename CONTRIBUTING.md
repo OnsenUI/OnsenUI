@@ -17,12 +17,12 @@ Supported frameworks
 The following frameworks are supported by the Onsen UI core team:
 
     Framework     | Package               | Notes
-    --------------+-----------------------+------------------------
+    --------------+-----------------------+-------------------------------------------------
     React         | react-onsenui         |
     Vue 2         | vue-onsenui@legacy    | bug fixes only
     Vue 3         | vue-onsenui@latest    |
     Angular       | ngx-onsenui           |
-    AngularJS     | angularjs-onsenui     | bug fixes only
+    AngularJS     | angularjs-onsenui     | bug fixes only, supports up to onsenui@2.10.10
 
 If you are interested in writing bindings for another framework, feel free to ask for help in the GitHub issues. Bindings for other frameworks should generally be maintained outside the OnsenUI repository.
 
@@ -152,6 +152,17 @@ To work on the Angular 2+ bindings:
     npm install
 
 See the full instructions [here](https://github.com/OnsenUI/OnsenUI/tree/master/ngx-onsenui/README.md).
+
+### Bindings (AngularJS)
+
+The AngularJS bindings are in a self-contained workspace. The package receives bug fixes only and is not upgraded to the latest Onsen UI version.
+
+To work on the AngularJS bindings:
+
+	cd onsenui/bindings/angular1
+	npm install
+	npm run build
+	npm run serve
 
 
 Code Style
