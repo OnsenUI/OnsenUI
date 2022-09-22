@@ -183,6 +183,22 @@ export default class PopoverElement extends BaseDialogElement {
    */
 
   /**
+   * @attribute target
+   * @type {String}
+   * @description
+   *   [en]Specifies the ID of the default element for the popover.[/en]
+   *   [ja]ポップオーバーの対象とするデフォルト要素のIDを指定します。[/ja]
+   */
+
+  /**
+   * @property target
+   * @type {String}
+   * @description
+   *   [en]Specifies the ID of the default element for the popover.[/en]
+   *   [ja]ポップオーバーの対象とするデフォルト要素のIDを指定します。[/ja]
+   */
+
+  /**
    * @attribute animation
    * @type {String}
    * @description
@@ -265,8 +281,12 @@ export default class PopoverElement extends BaseDialogElement {
   _toggleStyle(shouldShow, options = {}) {
     if (shouldShow) {
       this.style.display = 'block';
-      this._currentTarget = options.target;
-      this._positionPopover(options.target);
+      let target = options.target;
+      if (!target && this.target) {
+        target = document.getElementById(this.target);
+      }
+      this._currentTarget = target;
+      this._positionPopover(target);
     } else {
       this.style.display = 'none';
       this._clearStyles();
@@ -456,6 +476,10 @@ export default class PopoverElement extends BaseDialogElement {
       options.target = options.target.target;
     }
 
+    if (!options.target && this.target) {
+      options.target = document.getElementById(this.target);
+    }
+
     if (!(options.target instanceof HTMLElement)) {
      util.throw('Invalid target type or undefined');
     }
@@ -574,6 +598,7 @@ export default class PopoverElement extends BaseDialogElement {
 }
 
 util.defineBooleanProperties(PopoverElement, ['cover-target']);
+util.defineStringProperties(PopoverElement, ['target']);
 
 onsElements.Popover = PopoverElement;
 customElements.define('ons-popover', PopoverElement);

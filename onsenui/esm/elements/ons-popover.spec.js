@@ -271,6 +271,33 @@ describe('OnsPopoverElement', () => {
     });
   });
 
+  describe('\'target\' attribute', () => {
+    const targetElmId = 'test';
+    const popover = ons._util.createElement(`<ons-popover target="${targetElmId}">Test</ons-popover>`);
+    const target = ons._util.createElement(`<div id="${targetElmId}"></div>`);
+    document.body.appendChild(popover);
+    document.body.appendChild(target);
+
+    it ('works on show() as the default target', (done) => {
+      setImmediate(() => {
+        // expect(popover._popover.target).to.equal(targetElmId);
+        popover.show().then(() => {
+          window.getComputedStyle(popover).getPropertyValue('display');
+          done();
+        });
+      });
+    });
+
+    it ('works on visible as the default target', (done) => {
+      setImmediate(() => {
+        popover.visible = true;
+        expect(popover.target).to.equal(targetElmId);
+        window.getComputedStyle(popover).getPropertyValue('display');
+        done();
+      });
+    });
+  });
+
 
   describe('#registerAnimator()', () => {
     it('throws an error if animator is not a PopoverAnimator', () => {

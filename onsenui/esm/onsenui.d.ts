@@ -888,6 +888,10 @@ declare namespace ons {
      */
     coverTarget: boolean;
     /**
+     * @description Specifies the ID of the default element for the popover.
+     */
+    target: string;
+    /**
      * @description Retrieve the back- button handler.
      */
     onDeviceBackButton: any;
