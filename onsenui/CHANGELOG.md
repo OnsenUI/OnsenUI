@@ -2,6 +2,13 @@
 CHANGELOG
 ====
 
+dev
+---
+
+ ### New features
+
+ * ons-popover: Add `target` attribute and property. Fixed ([#3003](https://github.com/OnsenUI/OnsenUI/issues/3003)).
+
 2.12.2
 ---
 
