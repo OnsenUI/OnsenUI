@@ -5,7 +5,7 @@
     var path = '/bindings/angular1/test/e2e/backButton/index.html',
       EC = protractor.ExpectedConditions;
 
-    it('should be displayed after pushing a page', function() {
+    xit('should be displayed after pushing a page', function() {
       browser.get(path);
       browser.waitForAngular();
 
