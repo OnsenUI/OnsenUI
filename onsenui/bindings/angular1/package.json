@@ -5,7 +5,7 @@
   "author": "Onsen UI Team <team@monaca.io>",
   "main": "dist/angularjs-onsenui.js",
   "scripts": {
-    "serve": "cd ../../ && gulp serve --angular",
+    "serve": "browser-sync start --config ../../bs-config.js --startPath examples",
     "build": "gulp build",
     "prepare": "npm run build",
     "test": "gulp e2e-test"
@@ -44,6 +44,7 @@
   },
   "devDependencies": {
     "angular": "^1.7.2",
+    "browser-sync": "^2.26.13",
     "gulp": "^4.0.2",
     "gulp-chmod": "^2.0.0",
     "gulp-clean": "^0.4.0",
@@ -52,6 +53,7 @@
     "gulp-load-plugins": "^1.5.0",
     "gulp-protractor": "^4.1.1",
     "gulp-unzip": "^1.0.0",
+    "onsenui": "~2.10.0",
     "protractor": "^5.3.2",
     "rollup": "^0.62.0",
     "rollup-plugin-babel": "^3.0.7",

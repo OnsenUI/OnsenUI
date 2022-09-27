@@ -117,7 +117,10 @@ jobs:
           name: Run OnsenUI Tests
           command: npm run --prefix onsenui test
 
-      #- run: cd bindings/angular1; npm test    # TODO: make tests work again
+      - run:
+          name: Run AngularJS tests
+          command: cd onsenui/bindings/angular1; npm test
+
       #- run: cd bindings/angular2; npm test
       #- run: cd bindings/vue; npm test
       #- run:
@@ -127,7 +130,7 @@ jobs:
           name: Save test results
           command: |
             mkdir -p ~/junit
-            find . -type f -regex "./core/test/unit/.*xml" -exec cp {} ~/junit/ \;
+            find . -type f -regex "./onsenui/.*xml" -exec cp {} ~/junit/ \;
             cat ./core/test/unit/coverage/*/lcov.info | coveralls || true # Ignore if this fails.
       - store_test_results:
           path: ~/junit
