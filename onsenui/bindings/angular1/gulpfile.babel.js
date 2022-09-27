@@ -35,12 +35,12 @@ function webdriverDownload(done) {
   } else {
     const selenium = $.download('https://selenium-release.storage.googleapis.com/3.12/selenium-server-standalone-3.12.0.jar')
       .pipe(gulp.dest(destDir));
-  
+
     const chromedriver = $.download(chromeDriverUrl)
       .pipe($.unzip())
       .pipe($.chmod(755))
       .pipe(gulp.dest(destDir));
-  
+
     return mergeStream(selenium, chromedriver);
   }
 }
@@ -48,7 +48,7 @@ function webdriverDownload(done) {
 ////////////////////////////////////////
 // e2e-test (overrides parent definition)
 ////////////////////////////////////////
-function e2eTest() {
+function e2eTest(done) {
   const port = 8081;
 
   $.connect.server({
@@ -67,14 +67,16 @@ function e2eTest() {
 
   const specs = argv.specs ? argv.specs.split(',').map(s => s.trim()) : ['test/e2e/**/*js'];
 
-  return gulp.src(specs)
+  gulp.src(specs)
     .pipe($.protractor.protractor(conf))
     .on('error', function(e) {
       console.error(e);
       $.connect.serverClose();
+      done(e);
     })
     .on('end', function() {
       $.connect.serverClose();
+      done();
     });
 }
 gulp.task('e2e-test', gulp.series(webdriverDownload, e2eTest));
