@@ -278,13 +278,14 @@ Before starting a release, check the following:
  - If there are any new components, ensure they work in the Theme Roller
  - Check the [Issues](https://github.com/OnsenUI/OnsenUI/issues) and ensure there are no outstanding breaking issues
  - Check `CHANGELOG.md` and ensure that all the latest fixes and features are listed. Usually they are not because pull requests do not tend to modify the changelog. Compare it to the `git log` and add anything that is missing.
- - Merge **onsen.io** into **master**. **onsen.io** contains documentation changes for the current release of Onsen UI that were made after the release.
+ - Merge **onsen.io** `branch` into **master** `branch`. **onsen.io** contains documentation changes for the current release of Onsen UI that were made after the release.
 
 Once you have done the pre-release checks above, follow the steps below to publish the core.
  - Increase the version number
    - Increment the minor version for a release with breaking changes, and the patch version for a release with non-breaking changes
    - `CHANGELOG.md`: Change `dev` to the new version number
    - `package.json`: Change `version` to the new version number
+   - run `npm install` from the root directory
    - Commit and push these changes, with a commit message like: `chore(*): Bump 2.10.2`
  - Merge `master` into `production`, and push
    - `git checkout production && git merge master && git push`

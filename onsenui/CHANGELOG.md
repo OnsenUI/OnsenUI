@@ -2,12 +2,17 @@
 CHANGELOG
 ====
 
-dev
+2.12.3
 ---
 
- ### New features
+ ### New Features
 
  * ons-popover: Add `target` attribute and property. Fixed ([#3003](https://github.com/OnsenUI/OnsenUI/issues/3003)).
+ 
+ ### Bug Fixes
+
+ * ons-navigator: reject proper message (404) when push none existing page. Fixed ([#2964](https://github.com/OnsenUI/OnsenUI/issues/2964)).
+ * css: Use valid CSS in calc function. PR ([#2691](https://github.com/OnsenUI/OnsenUI/pull/2691))
 
 2.12.2
 ---
