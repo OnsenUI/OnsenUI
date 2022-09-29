@@ -200,24 +200,58 @@ describe('OnsListItemElement', () => {
   });
 
   describe('#_onRelease()', () => {
-    it('should restore the background color.', () => {
-      const origColor = 'rgb(250, 250, 250)';
-      const newColor = 'rgb(255, 255, 255)';
+    let origColor;
+    let newColor;
+    let elt;
+    let dummyEvent;
+    beforeEach(() => {
+      origColor = 'rgb(250, 250, 250)';
+      newColor = 'rgb(255, 255, 255)';
 
-      var elt = ons._util.createElement('<div>content</div>');
+      elt = ons._util.createElement('<div>content</div>');
 
       listItem.appendChild(elt);
 
-      const dummyEvent = {
+      dummyEvent = {
         target: elt
       };
+    });
 
+    it('should restore the background color.', () => {
       listItem.setAttribute('tappable', true);
       listItem.setAttribute('tap-background-color', newColor);
       listItem.style.backgroundColor = origColor;
       listItem._onTouch(dummyEvent);
       expect(listItem.style.backgroundColor).to.equal(newColor);
       listItem._onRelease();
+      expect(listItem.style.backgroundColor).to.equal(origColor);
+
+      listItem.removeChild(elt);
+    });
+
+    it('should not restore the background color when \'tap-background-color\` is true.', () => {
+      listItem.setAttribute('tappable', true);
+      listItem.setAttribute('tap-background-color', newColor);
+      listItem.setAttribute('keep-tap-background-color', true);
+      listItem.style.backgroundColor = origColor;
+      listItem._onTouch(dummyEvent);
+      expect(listItem.style.backgroundColor).to.equal(newColor);
+      listItem._onRelease();
+      expect(listItem.style.backgroundColor).to.equal(newColor);
+
+      listItem.removeChild(elt);
+    });
+
+    it('should restore the background color when \'clearTapBackgroundColor()\` is called.', () => {
+      listItem.setAttribute('tappable', true);
+      listItem.setAttribute('tap-background-color', newColor);
+      listItem.setAttribute('keep-tap-background-color', true);
+      listItem.style.backgroundColor = origColor;
+      listItem._onTouch(dummyEvent);
+      expect(listItem.style.backgroundColor).to.equal(newColor);
+      listItem._onRelease();
+      expect(listItem.style.backgroundColor).to.equal(newColor);
+      listItem.clearTapBackgroundColor();
       expect(listItem.style.backgroundColor).to.equal(origColor);
 
       listItem.removeChild(elt);

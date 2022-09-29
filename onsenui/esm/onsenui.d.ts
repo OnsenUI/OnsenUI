@@ -1244,6 +1244,10 @@ declare namespace ons {
      */
     hideExpansion(): void;
     /**
+     * @description Clear backgroundColor changed on tap or click. This method is helpful when `keep-tap-background-color` is `true`.
+     */
+    clearTapBackgroundColor(): void;
+    /**
      * @description For expandable list items, specifies whether the expandable content is expanded or not.
      **/
     expanded: boolean;
@@ -1259,6 +1263,10 @@ declare namespace ons {
      * @description Prevent vertical scrolling when the user drags horizontally.
      **/
     lockOnDrag: boolean;
+    /**
+     * @description Prevent from clearing the background color on `"touchmove"`, `"touchcancel"`, `"touchend"`, `"touchleave"`, `"mouseup"`, and `"mouseout"`. For this to work, the attribute "tappable" needs to be set.
+     */
+    keepTapBackgroundColor: boolean;
     /**
      * @description The animation used when showing and hiding the expandable content. Can be either `"default"` or `"none"`.
      **/
