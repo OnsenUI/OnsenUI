@@ -276,9 +276,10 @@ Before starting a release, check the following:
  - Run the tests and confirm that they are passing (`npm test`, or check [CircleCI](https://circleci.com/gh/OnsenUI/OnsenUI))
    - For a major release with fundamental changes, all components must be tested on all supported platforms
  - If there are any new components, ensure they work in the Theme Roller
- - Check the [Issues](https://github.com/OnsenUI/OnsenUI/issues) and ensure there are no outstanding breaking issues
+ - Check the [Issues](https://github.com/OnsenUI/OnsenUI/issues) and ensure there are no critical bugs left in the issue tracker
+   - Minor bugs are fine; any bugs that totally break Onsen UI for users need to be fixed before a release.
  - Check `CHANGELOG.md` and ensure that all the latest fixes and features are listed. Usually they are not because pull requests do not tend to modify the changelog. Compare it to the `git log` and add anything that is missing.
- - Merge **onsen.io** `branch` into **master** `branch`. **onsen.io** contains documentation changes for the current release of Onsen UI that were made after the release.
+ - Merge **onsen.io** `branch` into **master** `branch`. **onsen.io** contains documentation changes for the current release of Onsen UI that were made after the release. (See [here](#fixing-documentation-in-the-current-release-onsenio-branch) for an explanation of the **onsen.io** branch.)
 
 Once you have done the pre-release checks above, follow the steps below to publish the core.
  - Increase the version number
@@ -292,9 +293,9 @@ Once you have done the pre-release checks above, follow the steps below to publi
  - Tag production with the version number, and push
    - e.g. `git tag 2.10.2 && git push --tags`
  - Build Onsen UI
-   - `npm install && npm run build`
-   - This installs the dependencies and builds Onsen UI.
- - Publish to npm.
+   - `cd onsenui && npm run build`
+   - This builds Onsen UI.
+ - Publish to npm. This should be run from the `./onsenui` directory.
    - `npm publish`
 
 Then, on GitHub, create new releases for `OnsenUI` and `OnsenUI-dist`.
@@ -329,6 +330,17 @@ Releasing new versions of bindings is relatively straightforward.
    - Inside the binding's root directory, run `npm publish`
 
 That's it! Your new binding version is released. :tada:
+
+
+Fixing documentation in the current release (onsen.io branch)
+-------------------------------------------------------------
+The API documentation on the onsen.io website is generated from the documentation comments in the Onsen UI source code. The onsen.io website uses the version of Onsen UI in the **onsen.io** branch to build documentation.
+
+If there is a mistake in the current release's API documentation, commit a documentation fix to the **onsen.io** branch and rebuild the onsen.io website on Circle CI. This will update the website.
+
+If the fix also applies to the development version of Onsen UI, the commit should also be applied to the **master** branch.
+
+For example, say the current release is 2.12.2 and the upcoming release is 2.12.3, and there is a mistake in the website API documentation. First fix the documentation for 2.12.2 by applying a fix to the **onsen.io** branch. If the fix is also valid for 2.12.3, also apply the fix to the **master** branch. In this way, the website is updated for 2.12.2, and the future release of 2.12.3 will also have fixed documentation.
 
 
 Related repositories
