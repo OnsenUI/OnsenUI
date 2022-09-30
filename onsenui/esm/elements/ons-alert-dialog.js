@@ -24,6 +24,7 @@ import { AlertDialogAnimator, IOSAlertDialogAnimator, AndroidAlertDialogAnimator
 import platform from '../ons/platform.js';
 import BaseDialogElement from './base/base-dialog.js';
 import contentReady from '../ons/content-ready.js';
+import './ons-alert-dialog-button.js';
 
 const scheme = {
   '.alert-dialog': 'alert-dialog--*',

@@ -23,6 +23,7 @@ import ModifierUtil from '../../ons/internal/modifier-util.js';
 import BaseElement from './base-element.js';
 
 import '../ons-ripple.js';
+import '../ons-icon.js';
 
 export default class BaseButtonElement extends BaseElement {
 

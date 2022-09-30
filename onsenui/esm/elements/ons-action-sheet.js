@@ -24,6 +24,8 @@ import { ActionSheetAnimator, IOSActionSheetAnimator, MDActionSheetAnimator } fr
 import platform from '../ons/platform.js';
 import BaseDialogElement from './base/base-dialog.js';
 import contentReady from '../ons/content-ready.js';
+import './ons-action-sheet-button.js';
+import './ons-button.js';
 
 const scheme = {
   '.action-sheet': 'action-sheet--*',

@@ -33,6 +33,9 @@ import contentReady from '../ons/content-ready.js';
 import BaseElement from './base/base-element.js';
 import deviceBackButtonDispatcher from '../ons/internal/device-back-button-dispatcher.js';
 import {PageLoader, defaultPageLoader, instantPageLoader} from '../ons/page-loader.js';
+import './ons-page.js';
+import './ons-back-button.js';
+import './ons-button.js';
 
 const _animatorDict = {
   'default': function () { return platform.isAndroid() ? MDFadeNavigatorAnimator : IOSSlideNavigatorAnimator; },

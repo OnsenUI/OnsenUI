@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Navigator | Onsen UI</title>
+  <link rel="stylesheet" href="../../../css/src/onsenui.css">
+  <link rel="stylesheet" href="../../../css/css-components-src/onsen-css-components.css">
+
+  <!-- UMD -->
+  <!-- <script src="../../js/onsenui.js"></script> -->
+  <!-- ESM -->
+  <script type="module">
+    import ons from '../../../esm/index.js';
+    import '../../../esm/elements/ons-navigator.js';
+
+    document.addEventListener('init', function(event) {
+      console.log(event.target.id, 'init event');
+      if (event.target.id === 'page1') {
+        var title = event.target.data && event.target.data.title ? event.target.data.title : 'Custom Page';
+        event.target.querySelector('ons-toolbar div.center').textContent = title;
+      }
+    });
+    document.addEventListener('show', function(event) {
+      console.log(event.target.id, 'show event');
+    });
+    document.addEventListener('hide', function(event) {
+      console.log(event.target.id, 'hide event');
+    });
+    document.addEventListener('destroy', function(event) {
+      console.log(event.target.id, 'destroy event');
+    });
+
+    var customPush = function() {
+      myNavigator.pushPage('page1.html', {data: {title: myNavigator.topPage.querySelector('ons-input').value}})
+    };
+
+    var push404Page = function() {
+      myNavigator.pushPage('page404.html')
+        .catch(err => {
+          if (err === 404) {
+            alert('Page not found');
+          }
+        });
+    };
+
+  </script>
+
+</head>
+
+<body>
+  <ons-navigator id="myNavigator" swipeable page="page0.html"></ons-navigator>
+
+  <template id="page0.html">
+    <ons-page id="page0">
+      <ons-toolbar>
+        <div class="center">Navigator</div>
+      </ons-toolbar>
+
+      <div style="text-align: center">
+        <br>
+        <ons-button
+          onclick="myNavigator.pushPage('page1.html')">
+          Push Page 2
+        </ons-button>
+      </div>
+    </ons-page>
+  </template>
+
+  <template id="page1.html">
+    <ons-page id="page1">
+      <ons-toolbar>
+        <div class="left"><ons-back-button>Back</ons-back-button></div>
+        <div class="center"></div>
+      </ons-toolbar>
+
+      <div style="text-align: center">
+        <h1>Custom Page</h1>
+
+        <p>
+          <ons-input modifier="underbar" placeholder="Title" float></ons-input>
+        </p>
+        <ons-button
+          onclick="customPush()">
+          Push Page
+        </ons-button>
+        <ons-button
+          onclick="push404Page()">
+          Push 404-Page
+        </ons-button>
+
+        <ons-button
+          onclick="myNavigator.popPage()">
+          Pop Page
+        </ons-button>
+
+        <ons-button
+          onclick="myNavigator.resetToPage('page0.html', { pop: true })">
+          Go Home
+        </ons-button>
+      </div>
+    </ons-page>
+  </template>
+
+</body>
+</html>

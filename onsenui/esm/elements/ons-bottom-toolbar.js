@@ -20,6 +20,7 @@ import util from '../ons/util.js';
 import autoStyle from '../ons/autostyle.js';
 import ModifierUtil from '../ons/internal/modifier-util.js';
 import BaseElement from './base/base-element.js';
+import './ons-icon.js';
 
 const defaultClassName = 'bottom-bar';
 const scheme = {'': 'bottom-bar--*'};
