@@ -102,8 +102,8 @@ class Platform {
    * @method isIPhoneX
    * @signature isIPhoneX()
    * @description
-   *   [en]Returns whether the device is iPhone X, XS, XS Max, XR, 11, 11 Pro, 11 Pro Max, 12 Mini, 12, 12 Pro or 12 Pro Max.[/en]
-   *   [ja]iPhone X や XS、XS Max、XR、11、11 Pro、11 Pro Max、12 Mini、12、12 Pro、または12 Pro Max上で実行されているかどうかを返します。[/ja]
+   *   [en]Returns whether the device is iPhone X, XS, XS Max, XR, 11, 11 Pro, 11 Pro Max, 12 Mini, 12, 12 Pro or 12 Pro Max, 13 Mini, 13, 13 Pro, 13 Pro Max, 14, 14 Plus, 14 Pro, 14 Pro Max.[/en]
+   *   [ja]iPhone X や XS、XS Max、XR、11、11 Pro、11 Pro Max、12 Mini、12、12 Pro、12 Pro Max、13 Mini、13、13 Pro、13 Pro Max、14、14 Plus、14 Pro、または14 Pro Max上で実行されているかどうかを返します。[/ja]
    * @return {Boolean}
    */
   isIPhoneX() {
@@ -113,7 +113,7 @@ class Platform {
     // This works well both in iOS Safari and (UI|WK)WebView of iPhone X.
     return this.isIPhone() &&
       (
-        // X, XS, 11 Pro, 12 Mini
+        // X, XS, 11 Pro, 12 Mini, 13 Mini
         window.screen.width === 375 && window.screen.height === 812 || // portrait
         window.screen.width === 812 && window.screen.height === 375 || // landscape
 
@@ -121,13 +121,21 @@ class Platform {
         window.screen.width === 414 && window.screen.height === 896 || // portrait
         window.screen.width === 896 && window.screen.height === 414 || // landscape
 
-        // 12, 12 Pro
+        // 12, 12 Pro, 13, 13 Pro, 14
         window.screen.width === 390 && window.screen.height === 844 || // portrait
         window.screen.width === 844 && window.screen.height === 390 || // landscape
 
-        // 12 Pro Max
+        // 12 Pro Max, 13 Pro Max, 14 Plus
         window.screen.width === 428 && window.screen.height === 926 || // portrait
-        window.screen.width === 926 && window.screen.height === 428  // landscape
+        window.screen.width === 926 && window.screen.height === 428 || // landscape
+
+        // 14 Pro Max
+        window.screen.width === 430 && window.screen.height === 932 || // portrait
+        window.screen.width === 932 && window.screen.height === 430 || // landscape
+
+          // 14 Pro
+        window.screen.width === 393 && window.screen.height === 852 ||// portrait
+        window.screen.width === 852 && window.screen.height === 393 // landscape
       );
   }
 
