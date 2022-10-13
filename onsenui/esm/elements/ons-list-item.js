@@ -159,6 +159,22 @@ export default class ListItemElement extends BaseElement {
    */
 
   /**
+   * @attribute keep-tap-background-color
+   * @type {Boolean}
+   * @description
+   *  [en] Prevent from clearing the background color on `"touchmove"`, `"touchcancel"`, `"touchend"`, `"touchleave"`, `"mouseup"`, and `"mouseout"`. For this to work, the attribute "tappable" needs to be set.[/en]
+   *  [ja] この属性があると、`"touchmove"`, `"touchcancel"`, `"touchend"`, `"touchleave"`, `"mouseup"`, and `"mouseout"` イベント時に背景色がクリアされないようになります。[/ja]
+   */
+
+  /**
+   * @property keepTapBackgroundColor
+   * @type {Boolean}
+   * @description
+   *   [en] Prevent from clearing the background color on `"touchmove"`, `"touchcancel"`, `"touchend"`, `"touchleave"`, `"mouseup"`, and `"mouseout"`. For this to work, the attribute "tappable" needs to be set.[/en]
+   *   [ja] この属性があると、`"touchmove"`, `"touchcancel"`, `"touchend"`, `"touchleave"`, `"mouseup"`, and `"mouseout"` イベント時に背景色がクリアされないようになります。[/ja]
+   */
+
+  /**
    * @attribute expandable
    * @type {Boolean}
    * @description
@@ -372,6 +388,17 @@ export default class ListItemElement extends BaseElement {
     this.expanded = !this.expanded;
   }
 
+  /**
+   * @method clearTapBackgroundColor
+   * @signature clearTapBackgroundColor()
+   * @description
+   *   [en]Clear backgroundColor changed on tap or click. This method is helpful when `keep-tap-background-color` is `true`. [/en]
+   *   [ja]タップやクリックした時に効果が表示されるようになります。このメソッドは `keep-tap-background-color` が `true` のときに使用します。[/ja]
+   */
+  clearTapBackgroundColor() {
+    this._clearTapBackgroundColor();
+  }
+
   _animateExpansion() {
     // Stops the animation from running in the case where the list item should start already expanded
     const expandedAtStartup = this.expanded && this.classList.contains('list-item--expanded');
@@ -511,12 +538,18 @@ export default class ListItemElement extends BaseElement {
 
   _onRelease() {
     this.tapped = false;
-    this.style.backgroundColor = this._originalBackgroundColor || '';
+    if (!this.keepTapBackgroundColor) {
+      this._clearTapBackgroundColor();
+    }
     styler.clear(this, 'transition boxShadow');
+  }
+
+  _clearTapBackgroundColor() {
+    this.style.backgroundColor = this._originalBackgroundColor || '';
   }
 }
 
-util.defineBooleanProperties(ListItemElement, ['expanded', 'expandable', 'tappable', 'lock-on-drag']);
+util.defineBooleanProperties(ListItemElement, ['expanded', 'expandable', 'tappable', 'lock-on-drag', 'keep-tap-background-color']);
 util.defineStringProperties(ListItemElement, ['animation', 'tap-background-color']);
 
 onsElements.ListItem = ListItemElement;

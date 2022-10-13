@@ -37,6 +37,17 @@ const propTypes = {
   tapBackgroundColor: PropTypes.string,
 
   /**
+   * @name keepTapBackgroundColor
+   * @type bool
+   * @description
+   *  [en]
+   *  Prevent from clearing the background color on `"touchmove"`, `"touchcancel"`, `"touchend"`, `"touchleave"`, `"mouseup"`, and `"mouseout"`. For this to work, the attribute "tappable" needs to be set.
+   *  [/en]
+   *  [ja][/ja]
+   */
+  keepTapBackgroundColor: PropTypes.bool,
+
+  /**
    * @name lockOnDrag
    * @type bool
    * @description
