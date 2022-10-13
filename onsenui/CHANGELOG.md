@@ -2,6 +2,11 @@
 CHANGELOG
 ====
 
+2.12.4
+---
+### Bug Fixes
+ons.platform.isIPhoneX: Support iPhone 13, 13 Pro, 13 Pro Max, 14, 14 Pro, 14 Pro Max, 14 Plus. (#3030).
+
 2.12.3
 ---
 
