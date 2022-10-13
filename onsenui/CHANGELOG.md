@@ -2,6 +2,11 @@
 CHANGELOG
 ====
 
+2.12.5
+---
+### New Features
+* ons-list-item: Add `keep-tap-background-color` property ([#2626](https://github.com/OnsenUI/OnsenUI/issues/2626)).
+
 2.12.4
 ---
 ### Bug Fixes

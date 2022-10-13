@@ -2,6 +2,11 @@
 CHANGELOG
 ====
 
+1.13.1
+---
+### New Features
+* ListItem: Add `keepTapBackgroundColor` property ([#2626](https://github.com/OnsenUI/OnsenUI/issues/2626)).
+
 1.13.0
 ---
 
