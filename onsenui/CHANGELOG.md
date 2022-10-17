@@ -2,6 +2,11 @@
 CHANGELOG
 ====
 
+2.12.6
+---
+### Bug Fixes
+* onsenui.min.css: Fix relative import urls ([#3032](https://github.com/OnsenUI/OnsenUI/issues/3032)).
+
 2.12.5
 ---
 ### New Features
