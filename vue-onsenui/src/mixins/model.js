@@ -48,7 +48,7 @@ const modelInputNumber = {
   mixins: [modelInput],
   methods: {
     _onModelEvent(event) {
-      this.$emit('update:modelValue', event.target.valueAsNumber);
+      this.$emit(model.event, event.target.valueAsNumber);
     }
   }
 }
