@@ -1,6 +1,10 @@
 
 CHANGELOG
 ====
+2.12.7
+---
+### Bug Fixes
+* fix rgba with 3 parameters ([#3037](https://github.com/OnsenUI/OnsenUI/issues/3037)).
 
 2.12.6
 ---
