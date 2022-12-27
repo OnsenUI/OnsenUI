@@ -1,6 +1,13 @@
 CHANGELOG
 ====
 
+2.7.2
+---
+
+### Bug Fixes
+
+* VOnsRange: fix issue-3042 (modelInputNumber)   [#3042](https://github.com/OnsenUI/OnsenUI/issues/3042).
+
 2.7.1
 ---
 
