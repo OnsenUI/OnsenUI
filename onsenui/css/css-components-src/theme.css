@@ -5,7 +5,7 @@
   --text-color: #1f1f21;
   --sub-text-color: #999;
   --highlight-color-rgb: 0, 118, 255;
-  --highlight-color: rgba(var(--highlight-color-rgb));
+  --highlight-color: rgb(var(--highlight-color-rgb));
   --second-highlight-color: #25a6d9;
   --border-color: #ccc;
   --button-background-color: var(--highlight-color);
