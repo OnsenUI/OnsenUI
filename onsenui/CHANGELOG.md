@@ -1,6 +1,13 @@
 
 CHANGELOG
 ====
+2.12.8
+---
+### Bug Fixes
+
+* dependencies: Regenerate package-lock.json.
+
+====
 2.12.7
 ---
 ### Bug Fixes
