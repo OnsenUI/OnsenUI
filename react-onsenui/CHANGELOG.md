@@ -4,6 +4,11 @@ CHANGELOG
 
 1.13.2
 ---
+### Bug Fixes
+* Splitter: Add SplitterMask component.
+
+1.13.2
+---
 ### Misc
 * Depend on OnsenUI ~v2.12.5.
 
