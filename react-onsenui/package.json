@@ -80,7 +80,7 @@
     "webpack": "^5.69.1"
   },
   "peerDependencies": {
-    "onsenui": "~2.12.5",
+    "onsenui": "~2.12.8",
     "react": "^18.0.0",
     "react-dom": "^18.0.0"
   },
