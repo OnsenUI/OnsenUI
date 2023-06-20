@@ -42,6 +42,7 @@ import SpeedDial from './components/SpeedDial.jsx';
 import SpeedDialItem from './components/SpeedDialItem.jsx';
 import Splitter from './components/Splitter.jsx';
 import SplitterContent from './components/SplitterContent.jsx';
+import SplitterMask from './components/SplitterMask.jsx';
 import SplitterSide from './components/SplitterSide.jsx';
 import Switch from './components/Switch.jsx';
 import Tab from './components/Tab.jsx';
@@ -95,6 +96,7 @@ export {
   SpeedDialItem,
   Splitter,
   SplitterContent,
+  SplitterMask,
   SplitterSide,
   Switch,
   Tab,

@@ -2,6 +2,11 @@
 CHANGELOG
 ====
 
+1.13.3
+---
+### Bug Fixes
+* Splitter: Add SplitterMask component.
+
 1.13.2
 ---
 ### Misc
