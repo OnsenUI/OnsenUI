@@ -81,7 +81,7 @@
 @keyframes progress__dash {
   0% {
     stroke-dasharray: 10%, 241.32%;
-    stroke-dashoffset: 0;
+    stroke-dashoffset: 0%;
   }
 
   50% {
