@@ -81,24 +81,15 @@ export default class BaseDialogElement extends BaseElement {
   }
 
   show(...args) {
-    return this._setVisible(true, ...args).then(dialog => {
-      this.visible = true;
-      return dialog;
-    });
+    return this._setVisible(true, ...args);
   }
 
   hide(...args) {
-    return this._setVisible(false, ...args).then(dialog => {
-      this.visible = false;
-      return dialog;
-    });
+    return this._setVisible(false, ...args);
   }
 
   toggle(...args) {
-    return this._setVisible(!this.visible, ...args).then(dialog => {
-      this.visible = this._visible;
-      return dialog;
-    });
+    return this._setVisible(!this.visible, ...args);
   }
 
   _setVisible(shouldShow, options = {}) {
