@@ -756,8 +756,7 @@ export default class NavigatorElement extends BaseElement {
         this.topPage.updateBackButton(true);
 
         setTimeout(() => {
-          pageElement = null;
-          resolve(this.pages[index]);
+          resolve(pageElement);
         }, 1000 / 60);
       });
     });
