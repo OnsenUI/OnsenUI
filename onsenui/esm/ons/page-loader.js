@@ -72,7 +72,7 @@ export class PageLoader {
       }
       // store meta info
       if (ons) {
-        if(!ons._meta) {
+        if (!ons._meta) {
             ons._meta = {};
         }
         ons._meta.PageLoader = {
