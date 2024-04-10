@@ -1,3 +1,9 @@
+```diff
+- Patched fork of OnsenUI, as OnsenUI project seems not really to be maintained any more. 
+```
+
+You can find a list of all applied patches [here](PATCHES.md).
+
 
 <p align="center"><a href="https://onsen.io/" target="_blank"><img width="140" src="https://onsenui.github.io/art/logos/onsenui-logo-1.png"></a></p>
 
