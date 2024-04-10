@@ -70,7 +70,15 @@ export class PageLoader {
       if (!(pageElement instanceof Element)) {
         throw Error('pageElement must be an instance of Element.');
       }
-
+      // store meta info
+      if (ons) {
+        if(!ons._meta) {
+            ons._meta = {};
+        }
+        ons._meta.PageLoader = {
+            page, parent, params
+        };
+      }
       done(pageElement);
     }, error);
   }
