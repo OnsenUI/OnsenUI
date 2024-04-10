@@ -18,7 +18,7 @@ export default [
   {
     input: `${srcDir}/index.umd.js`,
     output: {
-      file: `${buildDir}/onsenui.js`,
+      file: `${buildDir}/onsenui.magynhard.js`,
       format: 'umd',
       name: 'ons',
       sourcemap: 'inline',

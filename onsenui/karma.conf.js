@@ -14,7 +14,7 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
-      'js/onsenui.js',
+      'js/onsenui.magynhard.js',
       'test/unit/setup.js',
       `test/unit/browser-${global.KARMA_BROWSER}.js`, // no error occurs even if not found
       global.KARMA_DISABLE_WARNINGS ? 'test/unit/disable-warnings.js' : null,

@@ -1,11 +1,11 @@
 {
   "name": "onsenui",
-  "version": "2.12.8",
+  "version": "2.100.1",
   "description": "HTML5 Mobile Framework & UI Components",
   "private": false,
   "scripts": {
     "build": "npm run build:umd && npm run build:css",
-    "build:umd": "rollup --config && uglifyjs js/onsenui.js -c -m --comments '/onsenui v/' --output js/onsenui.min.js",
+    "build:umd": "rollup --config && uglifyjs js/onsenui.magynhard.js -c -m --comments '/onsenui v/' --output js/onsenui.magynhard.min.js",
     "build:css": "npm run build:css:lint && npm run build:css:core && npm run build:css:components && npm run build:css:minify",
     "build:css:minify": "npm run build:css:minify:onsenui && npm run build:css:minify:onsenuicore && npm run build:css:minify:component",
     "build:css:minify:onsenui": "cleancss 'css/onsenui.css' --batch --batch-suffix '.min' --inline none --with-rebase -o css/",
@@ -23,7 +23,7 @@
     "test:unit": "node scripts/unit-test.js",
     "test:core-dts": "node scripts/core-dts-test.js"
   },
-  "main": "js/onsenui.js",
+  "main": "js/onsenui.magynhard.js",
   "module": "esm/index.js",
   "typings": "esm/onsenui.d.ts",
   "files": [
