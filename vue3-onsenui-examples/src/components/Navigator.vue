@@ -7,7 +7,7 @@
 
       @push="pageStack = [...pageStack, $event]"
       @reset="pageStack = [pageStack[0]]"
-      @pop="packStage = pageStack.slice(0, -1)"
+      @pop="pageStack = pageStack.slice(0, -1)"
       @replace="pageStack = [...pageStack.slice(0, -1), $event]"
     >
     </v-ons-navigator>
