@@ -5,7 +5,8 @@ import 'onsenui/esm/elements/ons-page';
 import onsCustomElement from '../onsCustomElement';
 
 const notAttributes = ['onInfiniteScroll', 'onDeviceBackButton'];
-const Element = onsCustomElement('ons-page', {notAttributes});
+const Element = onsCustomElement('ons-page', { notAttributes });
+const NOOP = () => null;
 
 /**
  * @original ons-page
@@ -28,17 +29,15 @@ const Element = onsCustomElement('ons-page', {notAttributes});
     <div> Page content </div>
   </Page>
  */
-const Page = React.forwardRef((props, ref) => {
-  const {
-    renderToolbar,
-    renderBottomToolbar,
-    renderModal,
-    renderFixed,
-    contentStyle,
-    children,
-    ...rest
-  } = props;
-
+const Page = React.forwardRef(({
+  renderToolbar = NOOP,
+  renderBottomToolbar = NOOP,
+  renderModal = NOOP,
+  renderFixed = NOOP,
+  contentStyle,
+  children,
+  ...rest
+}, ref) => {
   return (
     <Element
       {...rest}
@@ -49,7 +48,7 @@ const Page = React.forwardRef((props, ref) => {
       <div className='page__content' style={contentStyle}>
         {children}
       </div>
-      <div className='page__extra' style={{zIndex: 10001}}>
+      <div className='page__extra' style={{ zIndex: 10001 }}>
         {renderModal(ref)}
       </div>
       {renderFixed(ref)}
@@ -182,8 +181,6 @@ Page.propTypes = {
    */
   onDeviceBackButton: PropTypes.func
 };
-
-const NOOP = () => null;
 
 Page.defaultProps = {
   renderToolbar: NOOP,
