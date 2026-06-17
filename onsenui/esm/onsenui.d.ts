@@ -384,6 +384,13 @@ declare namespace ons {
 
   var GestureDetector: any;
 
+  /**
+   * @internal
+   * @description Internal helpers. Exposed as a named export only to satisfy the precompiled
+   *   ngx-onsenui bundle's `import { _internal } from 'onsenui'`; not part of the public API.
+   */
+  var _internal: any;
+
   interface OnsActionSheetElement extends HTMLElement {
     show(...args: any[]): any;
     hide(...args: any[]): any;
