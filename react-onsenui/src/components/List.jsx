@@ -5,6 +5,7 @@ import 'onsenui/esm/elements/ons-list';
 import onsCustomElement from '../onsCustomElement';
 
 const Element = onsCustomElement('ons-list');
+const NOOP = () => null;
 
 /**
  * @original ons-list
@@ -27,8 +28,14 @@ const Element = onsCustomElement('ons-list');
   renderFooter={this.renderFooter}
   />
  */
-const List = React.forwardRef((props, ref) => {
-  const {renderHeader, renderFooter, renderRow, dataSource, ...rest} = props;
+const List = React.forwardRef(({
+  children,
+  renderHeader = NOOP,
+  renderFooter = NOOP,
+  renderRow = NOOP,
+  dataSource = [],
+  ...rest
+}, ref) => {
 
   const rows = dataSource.map((data, index) => renderRow(data, index));
 
@@ -39,7 +46,7 @@ const List = React.forwardRef((props, ref) => {
     >
       {renderHeader()}
       {rows}
-      {props.children}
+      {children}
       {renderFooter()}
     </Element>
   );
@@ -105,9 +112,9 @@ List.propTypes = {
 
 List.defaultProps = {
   dataSource: [],
-  renderRow: () => null,
-  renderHeader: () => null,
-  renderFooter: () => null
+  renderRow: NOOP,
+  renderHeader: NOOP,
+  renderFooter: NOOP
 };
 
 export default List;
