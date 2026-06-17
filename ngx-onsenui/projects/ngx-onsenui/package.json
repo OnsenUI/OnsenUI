@@ -1,6 +1,6 @@
 {
   "name": "ngx-onsenui",
-  "version": "7.1.1-beta.0",
+  "version": "7.1.1",
   "author": "Mitsunori Kubota <mitsunori@asial.co.jp>",
   "licenses": [
     {
@@ -24,6 +24,6 @@
   "peerDependencies": {
     "@angular/common": "^7.2.0",
     "@angular/core": "^7.2.0",
-    "onsenui": "2.12.9-beta.0"
+    "onsenui": "~2.12.10"
   }
 }
